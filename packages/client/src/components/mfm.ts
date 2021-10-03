@@ -197,7 +197,7 @@ export default defineComponent({
 
 				case 'small': {
 					return h('small', {
-						style: 'opacity: 0.7;',
+						class: '_mfm_small_'
 					}, genEl(token.children));
 				}
 

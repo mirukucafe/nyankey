@@ -56,6 +56,14 @@ withDefaults(defineProps<{
 	}
 }
 
+._mfm_small_ {
+	opacity: 0.7;
+}
+
+._mfm_small_ ._mfm_small_{
+	opacity: initial;
+}
+
 @keyframes mfm-spin {
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
