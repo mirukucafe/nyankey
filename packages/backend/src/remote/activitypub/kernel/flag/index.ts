@@ -23,7 +23,8 @@ export default async (actor: CacheableRemoteUser, activity: IFlag): Promise<stri
 		targetUserHost: users[0].host,
 		reporterId: actor.id,
 		reporterHost: actor.host,
-		comment: `${activity.content}\n${JSON.stringify(uris, null, 2)}`,
+		comment: activity.content,
+		urls: uris.filter(uri => !uri.startsWith(config.url + '/users/')),
 	});
 
 	return `ok`;
