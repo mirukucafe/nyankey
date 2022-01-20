@@ -18,6 +18,13 @@
 			<Mfm :text="report.comment"/>
 		</div>
 		<hr/>
+		<div v-if="report.urls.length > 0">
+			{{ $ts.notes }}:
+			<ul>
+				<li v-for="url in report.urls"><MkUrl :url="url"/></li>
+			</ul>
+		</div>
+		<hr/>
 		<div>{{ $ts.reporter }}: <MkAcct :user="report.reporter"/></div>
 		<div v-if="report.assignee">
 			{{ $ts.moderator }}:
@@ -29,7 +36,7 @@
 				{{ $ts.forwardReport }}
 				<template #caption>{{ $ts.forwardReportIsAnonymous }}</template>
 			</MkSwitch>
-			<MkButton v-if="!report.resolved" primary @click="resolve">{{ $ts.abuseMarkAsResolved }}</MkButton>
+			<MkButton v-if="!report.resolved" class="_formBlock" style="margin-bottom: 0;" primary @click="resolve">{{ $ts.abuseMarkAsResolved }}</MkButton>
 		</div>
 	</div>
 </div>
@@ -39,6 +46,7 @@
 import MkButton from '@/components/ui/button.vue';
 import MkSwitch from '@/components/form/switch.vue';
 import MkKeyValue from '@/components/key-value.vue';
+import MkUrl from '@/components/global/url.vue';
 import { acct, userPage } from '@/filters/user';
 import * as os from '@/os';
 
