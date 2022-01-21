@@ -173,6 +173,7 @@ export interface AdminStreamTypes {
 		targetUserId: User['id'],
 		reporterId: User['id'],
 		comment: string;
+		urls: string[];
 	};
 }
 //#endregion

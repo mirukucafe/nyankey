@@ -1,4 +1,5 @@
 import * as sanitizeHtml from 'sanitize-html';
+import config from '@/config/index.js';
 import { publishAdminStream } from '@/services/stream.js';
 import { AbuseUserReports, Users } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
@@ -40,6 +41,7 @@ export const paramDef = {
 	type: 'object',
 	properties: {
 		userId: { type: 'string', format: 'misskey:id' },
+		urls: { type: 'array', items: { type: 'string' }, nullable: true, uniqueItems: true },
 		comment: { type: 'string', minLength: 1, maxLength: 2048 },
 	},
 	required: ['userId', 'comment'],
@@ -61,6 +63,11 @@ export default define(meta, paramDef, async (ps, me) => {
 		throw new ApiError(meta.errors.cannotReportAdmin);
 	}
 
+	const uri = user.host == null ? `${config.url}/users/${user.id}` : user.uri;
+	if (!ps.urls.includes(uri)) {
+		ps.urls.push(uri);
+	}
+
 	const report = await AbuseUserReports.insert({
 		id: genId(),
 		createdAt: new Date(),
@@ -69,6 +76,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		reporterId: me.id,
 		reporterHost: null,
 		comment: ps.comment,
+		urls: ps.urls,
 	}).then(x => AbuseUserReports.findOneByOrFail(x.identifiers[0]));
 
 	// Publish event to moderators
@@ -87,6 +95,7 @@ export default define(meta, paramDef, async (ps, me) => {
 				targetUserId: report.targetUserId,
 				reporterId: report.reporterId,
 				comment: report.comment,
+				urls: report.urls,
 			});
 		}
 
