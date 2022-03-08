@@ -72,9 +72,9 @@ export default define(meta, paramDef, async (ps, user) => {
 	const createdAt = new Date();
 
 	// Get votee
-	const note = await getNote(ps.noteId).catch(e => {
-		if (e.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
-		throw e;
+	const note = await getNote(ps.noteId, user).catch(err => {
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		throw err;
 	});
 
 	if (!note.hasPoll) {
