@@ -4,7 +4,7 @@ import { Resolver } from '@/remote/activitypub/resolver.js';
 import { extractDbHost } from '@/misc/convert-host.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { apLogger } from '../logger.js';
-import { IObject, isCreate, isDelete, isUpdate, isRead, isFollow, isAccept, isReject, isAdd, isRemove, isAnnounce, isLike, isUndo, isBlock, isCollectionOrOrderedCollection, isCollection, isFlag, getApId } from '../type.js';
+import { IObject, isCreate, isDelete, isUpdate, isRead, isFollow, isAccept, isReject, isAdd, isRemove, isAnnounce, isLike, isUndo, isBlock, isCollectionOrOrderedCollection, isCollection, isFlag, isMove, getApId } from '../type.js';
 import create from './create/index.js';
 import performDeleteActivity from './delete/index.js';
 import performUpdateActivity from './update/index.js';
@@ -19,6 +19,7 @@ import add from './add/index.js';
 import remove from './remove/index.js';
 import block from './block/index.js';
 import flag from './flag/index.js';
+import { move } from './move/index.js';
 
 export async function performActivity(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver): Promise<void> {
 	if (isCollectionOrOrderedCollection(activity)) {
@@ -73,6 +74,8 @@ async function performOneActivity(actor: CacheableRemoteUser, activity: IObject,
 		await block(actor, activity);
 	} else if (isFlag(activity)) {
 		await flag(actor, activity);
+	} else if (isMove(activity)) {
+		await move(actor, activity, resolver);
 	} else {
 		apLogger.warn(`unrecognized activity type: ${(activity as any).type}`);
 	}
