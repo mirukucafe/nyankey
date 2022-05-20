@@ -224,6 +224,11 @@ export type Notification = {
 	user: User;
 	userId: User['id'];
 } | {
+	type: 'move',
+	user: User;
+	userId: User['id'];
+	moveTarget: User;
+} | {
 	type: 'app';
 	header?: string | null;
 	body: string;

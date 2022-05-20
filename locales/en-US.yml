@@ -1293,6 +1293,7 @@ _notification:
   yourFollowRequestAccepted: "Your follow request was accepted"
   youWereInvitedToGroup: "{userName} invited you to a group"
   pollEnded: "Poll results have become available"
+  moved: "{name} has moved to a different account"
   emptyPushNotificationMessage: "Push notifications have been updated"
   _types:
     follow: "New followers"
@@ -1306,6 +1307,7 @@ _notification:
     receiveFollowRequest: "Received follow requests"
     followRequestAccepted: "Accepted follow requests"
     groupInvited: "Group invitations"
+    move: "Others moving accounts"
     app: "Notifications from linked apps"
   _actions:
     followBack: "followed you back"
