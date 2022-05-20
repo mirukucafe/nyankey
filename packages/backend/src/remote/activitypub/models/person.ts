@@ -376,7 +376,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
  * If the target Person is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
  * Fetch the person from the remote server, register it in FoundKey, and return it.
  */
-export async function resolvePerson(uri: string, resolver: Resolver): Promise<CacheableUser> {
+export async function resolvePerson(uri: string, resolver: Resolver, hint?: IObject): Promise<CacheableUser> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	//#region このサーバーに既に登録されていたらそれを返す
@@ -388,7 +388,7 @@ export async function resolvePerson(uri: string, resolver: Resolver): Promise<Ca
 	//#endregion
 
 	// リモートサーバーからフェッチしてきて登録
-	return await createPerson(uri, resolver);
+	return await createPerson(hint ?? uri, resolver);
 }
 
 export function analyzeAttachments(attachments: IObject | IObject[] | undefined) {
