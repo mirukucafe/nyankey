@@ -12,6 +12,8 @@ You should also include the user name that made the change.
 ## 12.x.x (unreleased)
 
 ### Improvements
+- Server: Add rate limit to i/notifications @tamaina
+- Client: Improve files page of control panel @syuilo
 
 ### Bugfixes
 - Fix GenerateVideoThumbnail failed @mei23
