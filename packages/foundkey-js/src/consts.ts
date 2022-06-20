@@ -1,5 +1,7 @@
 export const notificationTypes = ['follow', 'mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded', 'receiveFollowRequest', 'followRequestAccepted', 'groupInvited', 'app'] as const;
 
+export const noteNotificationTypes = ['mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded'] as const;
+
 export const mutedNoteReasons = ['word', 'manual', 'spam', 'other'] as const;
 
 export const ffVisibility = ['public', 'followers', 'private'] as const;

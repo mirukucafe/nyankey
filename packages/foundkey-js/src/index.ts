@@ -10,6 +10,7 @@ export {
 export {
 	permissions,
 	notificationTypes,
+	noteNotificationTypes,
 	mutedNoteReasons,
 	ffVisibility,
 } from './consts.js';
