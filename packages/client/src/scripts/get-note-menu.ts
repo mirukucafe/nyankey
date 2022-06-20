@@ -65,9 +65,33 @@ export function getNoteMenu(props: {
 		});
 	}
 
-	function toggleThreadMute(mute: boolean): void {
-		os.apiWithDialog(mute ? 'notes/thread-muting/create' : 'notes/thread-muting/delete', {
-			noteId: appearNote.id,
+	function muteThread(): void {
+		// show global settings by default
+		const includingTypes = foundkey.notificationTypes.filter(x => !$i.mutingNotificationTypes.includes(x));
+		os.popup(defineAsyncComponent(() => import('@/components/notification-setting-window.vue')), {
+			includingTypes,
+			showGlobalToggle: false,
+			message: i18n.ts.threadMuteNotificationsDesc,
+			notificationTypes: foundkey.noteNotificationTypes,
+		}, {
+			done: async (res) => {
+				const { includingTypes: value } = res;
+				let mutingNotificationTypes: string[] | undefined;
+				if (value != null) {
+					mutingNotificationTypes = foundkey.noteNotificationTypes.filter(x => !value.includes(x))
+				}
+
+				await os.apiWithDialog('notes/thread-muting/create', {
+					noteId: appearNote.id,
+					mutingNotificationTypes,
+				});
+			}
+		}, 'closed');
+	}
+
+	function unmuteThread(): void {
+		os.apiWithDialog('notes/thread-muting/delete', {
+			noteId: appearNote.id
 		});
 	}
 
@@ -251,11 +275,11 @@ export function getNoteMenu(props: {
 			statePromise.then(state => state.isMutedThread ? {
 				icon: 'fas fa-comment-slash',
 				text: i18n.ts.unmuteThread,
-				action: () => toggleThreadMute(false),
+				action: () => unmuteThread(),
 			} : {
 				icon: 'fas fa-comment-slash',
 				text: i18n.ts.muteThread,
-				action: () => toggleThreadMute(true),
+				action: () => muteThread(),
 			}),
 			appearNote.userId === $i.id ? ($i.pinnedNoteIds || []).includes(appearNote.id) ? {
 				icon: 'fas fa-thumbtack',
