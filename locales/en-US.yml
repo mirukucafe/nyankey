@@ -845,6 +845,8 @@ failedToFetchAccountInformation: "Could not fetch account information"
 rateLimitExceeded: "Rate limit exceeded"
 cropImage: "Crop image"
 cropImageAsk: "Do you want to crop this image?"
+recentNHours: "Last {n} hours"
+recentNDays: "Last {n} days"
 _emailUnavailable:
   used: "This email address is already being used"
   format: "The format of this email address is invalid"
