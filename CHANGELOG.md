@@ -18,7 +18,9 @@ You should also include the user name that made the change.
 - Add Badge Image to Push Notification #8012 @tamaina
 
 ### Bugfixes
-- Fix GenerateVideoThumbnail failed @mei23
+- Server: Fix GenerateVideoThumbnail failed @mei23
+- Server: Ensure temp directory cleanup @Johann150
+- favicons of federated instances not showing @syuilo
 
 ## 12.111.1 (2022/06/13)
 
