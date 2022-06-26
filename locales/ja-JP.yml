@@ -854,6 +854,7 @@ recommended: "推奨"
 check: "チェック"
 recentNHours: "直近{n}時間"
 recentNDays: "直近{n}日"
+isSystemAccount: "システムにより自動で作成・管理されているアカウントです。"
 
 _emailUnavailable:
   used: "既に使用されています"
