@@ -73,7 +73,7 @@
 	<MkSpacer v-else-if="tab === 'federation'" :content-max="1000" :margin-min="20">
 		<XFederation/>
 	</MkSpacer>
-	<MkSpacer v-else-if="tab === 'charts'" :content-max="1000" :margin-min="20">
+	<MkSpacer v-else-if="tab === 'charts'" :content-max="1200" :margin-min="20">
 		<MkInstanceStats :chart-limit="500" :detailed="true"/>
 	</MkSpacer>
 </MkStickyContainer>
@@ -81,6 +81,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+import XEmojis from './about.emojis.vue';
+import XFederation from './about.federation.vue';
 import { version, host } from '@/config';
 import FormLink from '@/components/form/link.vue';
 import FormSection from '@/components/form/section.vue';
@@ -113,9 +115,17 @@ const headerTabs = $computed(() => [{
 	key: 'overview',
 	title: i18n.ts.overview,
 }, {
+	key: 'emojis',
+	title: i18n.ts.customEmojis,
+	icon: 'fas fa-laugh',
+}, {
+	key: 'federation',
+	title: i18n.ts.federation,
+	icon: 'fas fa-globe',
+}, {
 	key: 'charts',
 	title: i18n.ts.charts,
-	icon: 'fas fa-chart-bar',
+	icon: 'fas fa-chart-simple',
 }]);
 
 definePageMetadata(computed(() => ({
