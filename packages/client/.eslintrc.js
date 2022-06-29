@@ -70,6 +70,7 @@ module.exports = {
 		// Vue
 		'$$': false,
 		'$ref': false,
+		'$shallowRef': false,
 		'$computed': false,
 
 		// Misskey
