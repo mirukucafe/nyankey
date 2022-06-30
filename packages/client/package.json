@@ -74,6 +74,7 @@
 		"vanilla-tilt": "1.7.2",
 		"vite": "2.9.10",
 		"vue": "3.2.37",
+		"vue-marquee-text-component": "2.0.1",
 		"vue-prism-editor": "2.0.0-alpha.2",
 		"vuedraggable": "4.0.1",
 		"websocket": "1.0.34",
