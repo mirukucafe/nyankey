@@ -11,6 +11,11 @@ You should also include the user name that made the change.
 
 ## 12.x.x (unreleased)
 
+### Changes
+- ハイライトがみつけるに統合されました
+- カスタム絵文字ページはインスタンス情報ページに統合されました
+- 連合ページはインスタンス情報ページに統合されました
+
 ### Improvements
 - Client: Fix URL-encoded routing
 - Server: Allow GET method for some endpoints @syuilo
