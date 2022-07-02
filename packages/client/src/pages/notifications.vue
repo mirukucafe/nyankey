@@ -62,7 +62,6 @@ const headerTabs = $computed(() => [{
 definePageMetadata(computed(() => ({
 	title: i18n.ts.notifications,
 	icon: 'fas fa-bell',
-	bg: 'var(--bg)',
 })));
 </script>
 

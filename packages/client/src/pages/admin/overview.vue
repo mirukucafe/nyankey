@@ -119,7 +119,6 @@ const headerTabs = $computed(() => []);
 definePageMetadata({
 	title: i18n.ts.dashboard,
 	icon: 'fas fa-tachometer-alt',
-	bg: 'var(--bg)',
 });
 </script>
 
