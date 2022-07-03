@@ -23,7 +23,7 @@ You should also include the user name that made the change.
 - Client: Improve control panel @syuilo
 - Client: Show warning in control panel when there is an unresolved abuse report @syuilo
 - Client: For notes with specified visibility, show recipients when hovering over visibility symbol. @Johann150
-- Client: Add rss-marquee widget @syuilo
+- Client: Add rss-ticker widget @syuilo
 - Client: Removing entries from a clip @futchitwo
 - Client: Poll highlights in explore page @syuilo
 - Make possible to delete an account by admin @syuilo
