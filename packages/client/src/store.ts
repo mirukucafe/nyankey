@@ -68,7 +68,6 @@ export const defaultStore = markRaw(new Storage('base', {
 			'drive',
 			'followRequests',
 			'-',
-			'featured',
 			'explore',
 			'announcements',
 			'search',
