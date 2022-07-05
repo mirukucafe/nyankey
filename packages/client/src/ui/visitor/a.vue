@@ -4,6 +4,7 @@
 		<div>
 			<h1 v-if="meta"><img v-if="meta.logoImageUrl" class="logo" :src="meta.logoImageUrl"><span v-else class="text">{{ instanceName }}</span></h1>
 			<div v-if="meta" class="about">
+				<!-- eslint-disable-next-line vue/no-v-html -->
 				<div class="desc" v-html="meta.description || $ts.introMisskey"></div>
 			</div>
 			<div class="action">
@@ -79,7 +80,9 @@ export default defineComponent({
 					this.$store.set('darkMode', !this.$store.state.darkMode);
 				},
 				's': search,
-				'h|/': this.help,
+				'h|/': () => {
+					window.open('https://misskey-hub.net/docs/keyboard-shortcut.md', '_blank');
+				},
 			};
 		},
 	},
@@ -98,27 +101,6 @@ export default defineComponent({
 				if (window.innerWidth >= DESKTOP_THRESHOLD) this.isDesktop = true;
 			}, { passive: true });
 		}
-	},
-
-	methods: {
-		setParallax(el) {
-			//new simpleParallax(el);
-		},
-
-		changePage(page) {
-			if (page == null) return;
-			if (page[symbols.PAGE_INFO]) {
-				this.pageInfo = page[symbols.PAGE_INFO];
-			}
-		},
-
-		top() {
-			window.scroll({ top: 0, behavior: 'smooth' });
-		},
-
-		help() {
-			window.open('https://misskey-hub.net/docs/keyboard-shortcut.md', '_blank');
-		},
 	},
 });
 </script>
