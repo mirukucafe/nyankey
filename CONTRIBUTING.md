@@ -22,7 +22,6 @@ Please do not close issues that are about to be resolved. It should remain open 
 branch|what it's for
 ---|---
 main|development branch
-misskey-develop|an older version of the original Misskey repository used for cherry-picking commits
 
 For a production environment you might not want to follow the `main` branch directly but instead check out one of the git tags.
 
