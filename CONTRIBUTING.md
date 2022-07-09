@@ -80,6 +80,14 @@ Thanks for your cooperation!
 
 ## Release
 
+### Fork transition
+
+**Note:**
+Since Foundkey was forked from Misskey recently, there might be some breaking changes we want to make.
+For this purpose there will be several pre-release versions of 13.0.0 (e.g. `13.0.0-0.1.0`).
+Until major version 13 is released, the below process is not in effect.
+
+### Release process
 Before a stable version is released, there should be a comment period which should usually be 7 days to give everyone the chance to comment.
 If a (critical) bug or similar is found during the comment period, the release may be postponed until a fix is found.
 For commenting, an issue should be created, and the comment period should also be announced in the `#foundkey-dev` [IRC](https://irc.akkoma.dev) channel.
