@@ -1,58 +1,41 @@
 # Contribution guide
-We're glad you're interested in contributing Misskey! In this document you will find the information you need to contribute to the project.
+We're glad you're interested in contributing to Foundkey! In this document you will find the information you need to contribute to the project.
 
-> **Note**
-> This project uses Japanese as its major language, **but you do not need to translate and write the Issues/PRs in Japanese.**
-> Also, you might receive comments on your Issue/PR in Japanese, but you do not need to reply to them in Japanese as well.\
-> The accuracy of machine translation into Japanese is not high, so it will be easier for us to understand if you write it in the original language.
-> It will also allow the reader to use the translation tool of their preference if necessary.
+The project uses English as its primary language. However due to being a fork of Misskey (which uses Japanese as its primary language) you may find things that are in Japanese.
+If you make contributions (pull requests, commits, comments in newly added code etc.) we expect that these should be in English.
+
+We won't mind if issues are not in English but we cannot guarantee we will understand you correctly.
+However it might stíll be better if you write issues in your original language if you are not confident of your English skills because we might be able to use different translators or ask people to translate if we are not sure what you mean.
+Please understand that in such cases we might edit your issue to translate it, to help us avoid duplicating issues.
 
 ## Roadmap
 See [ROADMAP.md](./ROADMAP.md)
 
 ## Issues
-Before creating an issue, please check the following:
-- To avoid duplication, please search for similar issues before creating a new issue.
-- Do not use Issues to ask questions or troubleshooting.
-	- Issues should only be used to feature requests, suggestions, and bug tracking.
-	- Please ask questions or troubleshooting in the [Misskey Forum](https://forum.misskey.io/) or [Discord](https://discord.gg/Wp8gVStHW3).
+Issues are intended for feature requests and bug tracking.
 
-> **Warning**
-> Do not close issues that are about to be resolved. It should remain open until a commit that actually resolves it is merged.
+For technical support or if you are not sure if what you are experiencing is a bug you can talk to people on the [IRC server](https://irc.akkoma.dev) in the `#foundkey` channel first.
 
-## Before implementation
-When you want to add a feature or fix a bug, **first have the design and policy reviewed in an Issue** (if it is not there, please make one). Without this step, there is a high possibility that the PR will not be merged even if it is implemented.
-
-At this point, you also need to clarify the goals of the PR you will create, and make sure that the other members of the team are aware of them.
-PRs that do not have a clear set of do's and don'ts tend to be bloated and difficult to review.
-
-Also, when you start implementation, assign yourself to the Issue (if you cannot do it yourself, ask another member to assign you). By expressing your intention to work the Issue, you can prevent conflicts in the work.
+Please do not close issues that are about to be resolved. It should remain open until a commit that actually resolves it is merged.
 
 ## Well-known branches
-- **`master`** branch is tracking the latest release and used for production purposes.
-- **`develop`** branch is where we work for the next release.
-	- When you create a PR, basically target it to this branch.
-- **`l10n_develop`** branch is reserved for localization management.
+branch|what it's for
+---|---
+main|development branch
+misskey-develop|an older version of the original Misskey repository used for cherry-picking commits
 
-## Creating a PR
-Thank you for your PR! Before creating a PR, please check the following:
-- If possible, prefix the title with a keyword that identifies the type of this PR, as shown below.
-  - `fix` / `refactor` / `feat` / `enhance` / `perf` / `chore` etc
-  - Also, make sure that the granularity of this PR is appropriate. Please do not include more than one type of change or interest in a single PR.
-- If there is an Issue which will be resolved by this PR, please include a reference to the Issue in the text.
-- Please add the summary of the changes to [`CHANGELOG.md`](/CHANGELOG.md). However, this is not necessary for changes that do not affect the users, such as refactoring.
-- Check if there are any documents that need to be created or updated due to this change.
-- If you have added a feature or fixed a bug, please add a test case if possible.
-- Please make sure that tests and Lint are passed in advance.
-  - You can run it with `npm run test` and `npm run lint`. [See more info](#testing)
-- If this PR includes UI changes, please attach a screenshot in the text.
+For a production environment you might not want to follow the `main` branch directly but instead check out one of the git tags.
 
-Thanks for your cooperation 🤗
+## Considerations to be made for all contributions
 
-## Reviewers guide
-Be willing to comment on the good points and not just the things you want fixed 💯
+This project follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
+Significant changes should be listed in the changelog (i.e. the file called `CHANGELOG.md`).
+Although Semantic Versioning talks about "the API", changes to the user interface should also be tracked.
 
-### Review perspective
+Consider if any of the existing documentation has to be updated because of your contribution.
+
+Some more points you might want to consider are:
+
 - Scope
   - Are the goals of the PR clear?
   - Is the granularity of the PR appropriate?
@@ -66,39 +49,51 @@ Be willing to comment on the good points and not just the things you want fixed 
 	- Are there any omissions or gaps?
 	- Does it check for anomalies?
 
-## Deploy
-The `/deploy` command by issue comment can be used to deploy the contents of a PR to the preview environment.
-```
-/deploy sha=<commit hash>
-```
-An actual domain will be assigned so you can test the federation.
+## Code contributions
 
-## Merge
-For now, basically only @syuilo has the authority to merge PRs into develop because he is most familiar with the codebase.
-However, minor fixes, refactoring, and urgent changes may be merged at the discretion of a contributor.
+There are two ways you can contribute:
+
+If you **have push access** to this repository, you can push stuff directly.
+But y'know, "with great power comes great responsibility" and so on.
+We most likely will not kick you out if you made a mistake, it happens to the best.
+But this of course means that the erroneous contributions may be either fixed or undone.
+
+Even if you have push access but are trying to make larger or sweeping changes, please consider also using the following way of contibuting.
+
+If you do **not have push access** you can create a pull request.
+Someone with push access should review your contribution.
+If they are satisfied that what you are doing seems like a good idea and the considerations from the section above are fulfilled, they can merge your pull request.
+Or, they might request another member to also review your changes.
+Please be patient as nobody is getting paid to do this, so it might take a bit longer.
+
+### Creating a PR
+
+- Please prefix the title with the part of Misskey you are changing, i.e. `server:` or `client:`
+- The rest of the title should roughly describe what you did.
+- Make sure that the granularity of this PR is appropriate. Please do not include more than one type of change in a single PR.
+- If there is an issue which will be resolved by this PR, please include a reference to the Issue in the text.
+- If you have added a feature or fixed a bug, please add a test case if possible.
+- Please make sure that tests and Lint are passed in advance.
+  - You can run it with `npm run test` and `npm run lint`. [See more info](#testing)
+- Don't forget to update the changelog and/or documentation as appropriate (see above).
+
+Thanks for your cooperation!
 
 ## Release
-### Release Instructions
-1. Commit version changes in the `develop` branch ([package.json](https://github.com/misskey-dev/misskey/blob/develop/package.json))
-2. Create a release PR.
-	- Into `master` from `develop` branch.
-	- The title must be in the format `Release: x.y.z`.
-		- `x.y.z` is the new version you are trying to release.
-3. Deploy and perform a simple QA check. Also verify that the tests passed.
-4. Merge it.
-5. Create a [release of GitHub](https://github.com/misskey-dev/misskey/releases)
-	- The target branch must be `master`
-	- The tag name must be the version
+
+Before a stable version is released, there should be a comment period which should usually be 7 days to give everyone the chance to comment.
+If a (critical) bug or similar is found during the comment period, the release may be postponed until a fix is found.
+For commenting, an issue should be created, and the comment period should also be announced in the `#foundkey-dev` [IRC](https://irc.akkoma.dev) channel.
+
+Pre-releases do not require as much scrutiny and can be useful for "field testing" before a stable release is made.
+
+All releases are managed as git tags. The name of the tag should be exactly identical to the version number.
+I.e. if the released version is 1.2.3, the git tag should be called "1.2.3" (and **not** "v1.2.3").
+The tag should contain the changelog section for the respective release.
 
 ## Localization (l10n)
-Misskey uses [Crowdin](https://crowdin.com/project/misskey) for localization management.
-You can improve our translations with your Crowdin account.
-Your changes in Crowdin are automatically submitted as a PR (with the title "New Crowdin translations") to the repository.
-The owner [@syuilo](https://github.com/syuilo) merges the PR into the develop branch before the next release.
 
-If your language is not listed in Crowdin, please open an issue.
-
-![Crowdin](https://d322cqt584bo4o.cloudfront.net/misskey/localized.svg)
+We have not yet set up localization management, so updating of locales can currently only be done as commits changing the respective files in the repo.
 
 ## Development
 During development, it is useful to use the `npm run dev` command.
@@ -139,7 +134,7 @@ Configuration files are located in [`/.github/workflows`](/.github/workflows).
 ## Vue
 Misskey uses Vue(v3) as its front-end framework.
 - Use TypeScript.
-- **When creating a new component, please use the Composition API (with [setup sugar](https://v3.vuejs.org/api/sfc-script-setup.html) and [ref sugar](https://github.com/vuejs/rfcs/discussions/369)) instead of the Options API.**
+- When creating a new component, please use the Composition API (with [setup sugar](https://v3.vuejs.org/api/sfc-script-setup.html) and [ref sugar](https://github.com/vuejs/rfcs/discussions/369)) instead of the Options API.
 	- Some of the existing components are implemented in the Options API, but it is an old implementation. Refactors that migrate those components to the Composition API are also welcome.
 
 ## Notes
