@@ -8,11 +8,13 @@ const yaml = require('js-yaml');
 const merge = (...args) => args.reduce((a, c) => ({
 	...a,
 	...c,
+	// this is necessary to merge "sub-objects" correctly instead of overwriting them
 	...Object.entries(a)
 		.filter(([k]) => c && typeof c[k] === 'object')
 		.reduce((a, [k, v]) => (a[k] = merge(v, c[k]), a), {})
 }), {});
 
+// For a language to be generated as a locale it has to be listed here.
 const languages = [
 	'ar-SA',
 	'cs-CZ',
@@ -40,29 +42,28 @@ const languages = [
 	'zh-TW',
 ];
 
-const primaries = {
-	'en': 'US',
-	'ja': 'JP',
-	'zh': 'CN',
-};
-
-// 何故か文字列にバックスペース文字が混入することがあり、YAMLが壊れるので取り除く
-const clean = (text) => text.replace(new RegExp(String.fromCodePoint(0x08), 'g'), '');
-
-const locales = languages.reduce((a, c) => (a[c] = yaml.load(clean(fs.readFileSync(`${__dirname}/${c}.yml`, 'utf-8'))) || {}, a), {});
+// Load the locales listed above.
+const locales = languages.reduce(
+	(acc, lang) => {
+		acc[lang] = yaml.load(
+			fs.readFileSync(`${__dirname}/${lang}.yml`, 'utf-8')
+				// Remove backspace characters, which for some reason can get mixed in with the string and break the YAML.
+				.replaceAll('\b', '')
+		) || {};
+		return acc;
+	},
+	{} // initial accumulator
+);
 
 module.exports = Object.entries(locales)
-	.reduce((a, [k ,v]) => (a[k] = (() => {
-		const [lang] = k.split('-');
-		switch (k) {
-			case 'ja-JP': return v;
-			case 'ja-KS':
-			case 'en-US': return merge(locales['ja-JP'], v);
-			default: return merge(
-				locales['ja-JP'],
-				locales['en-US'],
-				locales[`${lang}-${primaries[lang]}`] || {},
-				v
-			);
-		}
-	})(), a), {});
+	.reduce((acc, [lang, strings]) => {
+			if (k == 'en-US') {
+				acc[lang] = strings;
+			} else {
+				// all other locales fall back to en-US
+				acc[lang] = merge(locales['en-US'], strings);
+			}
+			return acc;
+		},
+		{} // initial accumulator
+	);
