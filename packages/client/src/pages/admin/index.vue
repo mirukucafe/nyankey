@@ -127,11 +127,6 @@ const menuDef = $computed(() => [{
 		to: '/admin/announcements',
 		active: props.initialPage === 'announcements',
 	}, {
-		icon: 'fas fa-audio-description',
-		text: i18n.ts.ads,
-		to: '/admin/ads',
-		active: props.initialPage === 'ads',
-	}, {
 		icon: 'fas fa-exclamation-circle',
 		text: i18n.ts.abuseReports,
 		to: '/admin/abuses',
@@ -205,7 +200,6 @@ const component = $computed(() => {
 		case 'queue': return defineAsyncComponent(() => import('./queue.vue'));
 		case 'files': return defineAsyncComponent(() => import('./files.vue'));
 		case 'announcements': return defineAsyncComponent(() => import('./announcements.vue'));
-		case 'ads': return defineAsyncComponent(() => import('./ads.vue'));
 		case 'database': return defineAsyncComponent(() => import('./database.vue'));
 		case 'abuses': return defineAsyncComponent(() => import('./abuses.vue'));
 		case 'settings': return defineAsyncComponent(() => import('./settings.vue'));

@@ -11,7 +11,7 @@
 			</template>
 
 			<template #default="{ items }">
-				<XList v-slot="{ item }" :items="items" :direction="'down'" :no-gap="false" :ad="false">
+				<XList v-slot="{ item }" :items="items" :direction="'down'" :no-gap="false">
 					<XNote :key="item.id" :note="item.note" :class="$style.note"/>
 				</XList>
 			</template>
