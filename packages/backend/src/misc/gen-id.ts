@@ -1,21 +1,23 @@
-import { ulid } from 'ulid';
-import { genAid } from './id/aid.js';
-import { genMeid } from './id/meid.js';
-import { genMeidg } from './id/meidg.js';
-import { genObjectId } from './id/object-id.js';
-import config from '@/config/index.js';
+import * as crypto from 'node:crypto';
 
-const metohd = config.id.toLowerCase();
+// AID generation
+// 8 chars: milliseconds elapsed since 2000-01-01 00:00:00.000Z encoded as base36
+// + 2 random chars
+
+const TIME2000 = 946684800000;
+let counter = crypto.randomBytes(2).readUInt16LE(0);
 
 export function genId(date?: Date): string {
 	if (!date || (date > new Date())) date = new Date();
 
-	switch (metohd) {
-		case 'aid': return genAid(date);
-		case 'meid': return genMeid(date);
-		case 'meidg': return genMeidg(date);
-		case 'ulid': return ulid(date.getTime());
-		case 'objectid': return genObjectId(date);
-		default: throw new Error('unrecognized id generation method');
-	}
+	let t = date.getTime();
+	t -= TIME2000;
+	if (t < 0) t = 0;
+	if (isNaN(t)) throw 'Failed to create AID: Invalid Date';
+	const time = t.toString(36).padStart(8, '0');
+
+	counter++;
+	const noise = counter.toString(36).padStart(2, '0').slice(-2);
+
+	return time + noise;
 }
