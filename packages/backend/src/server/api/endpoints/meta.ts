@@ -1,7 +1,7 @@
 import { IsNull, MoreThan } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
-import { Ads, Emojis, Users } from '@/models/index.js';
+import { Emojis, Users } from '@/models/index.js';
 import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
 import define from '../define.js';
 
@@ -168,30 +168,6 @@ export const meta = {
 					},
 				},
 			},
-			ads: {
-				type: 'array',
-				optional: false, nullable: false,
-				items: {
-					type: 'object',
-					optional: false, nullable: false,
-					properties: {
-						place: {
-							type: 'string',
-							optional: false, nullable: false,
-						},
-						url: {
-							type: 'string',
-							optional: false, nullable: false,
-							format: 'url',
-						},
-						imageUrl: {
-							type: 'string',
-							optional: false, nullable: false,
-							format: 'url',
-						},
-					},
-				},
-			},
 			requireSetup: {
 				type: 'boolean',
 				optional: false, nullable: false,
@@ -310,12 +286,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		},
 	});
 
-	const ads = await Ads.find({
-		where: {
-			expiresAt: MoreThan(new Date()),
-		},
-	});
-
 	const response: any = {
 		maintainerName: instance.maintainerName,
 		maintainerEmail: instance.maintainerEmail,
@@ -349,13 +319,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		emojis: await Emojis.packMany(emojis),
 		defaultLightTheme: instance.defaultLightTheme,
 		defaultDarkTheme: instance.defaultDarkTheme,
-		ads: ads.map(ad => ({
-			id: ad.id,
-			url: ad.url,
-			place: ad.place,
-			ratio: ad.ratio,
-			imageUrl: ad.imageUrl,
-		})),
 		enableEmail: instance.enableEmail,
 
 		enableTwitterIntegration: instance.enableTwitterIntegration,
