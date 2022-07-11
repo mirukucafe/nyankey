@@ -1,7 +1,6 @@
 import Bull from 'bull';
 import * as fs from 'node:fs';
 
-import { ulid } from 'ulid';
 import mime from 'mime-types';
 import archiver from 'archiver';
 import { queueLogger } from '../../logger.js';
