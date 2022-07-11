@@ -735,7 +735,6 @@ global: "Глобальна"
 sent: "Відправити"
 hashtags: "Хештеґ"
 hide: "Сховати"
-searchByGoogle: "Пошук"
 indefinitely: "Ніколи"
 _ffVisibility:
   public: "Опублікувати"

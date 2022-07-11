@@ -643,7 +643,6 @@ user: "Utilizatori"
 administration: "Gestionare"
 middle: "Mediu"
 sent: "Trimite"
-searchByGoogle: "Caută"
 _email:
   _follow:
     title: "te-a urmărit"

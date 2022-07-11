@@ -758,7 +758,6 @@ received: "Otrzymane"
 hashtags: "Hashtag"
 pubSub: "Konta Pub/Sub"
 hide: "Ukryj"
-searchByGoogle: "Szukaj"
 indefinitely: "Nigdy"
 _ffVisibility:
   public: "Publikuj"

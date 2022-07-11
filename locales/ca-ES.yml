@@ -119,7 +119,6 @@ userList: "Llistes"
 smtpUser: "Nom d'usuari"
 smtpPass: "Contrasenya"
 user: "Usuaris"
-searchByGoogle: "Cercar"
 _email:
   _follow:
     title: "t'ha seguit"

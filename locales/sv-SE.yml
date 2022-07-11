@@ -246,7 +246,6 @@ smtpUser: "Användarnamn"
 smtpPass: "Lösenord"
 clearCache: "Rensa cache"
 user: "Användare"
-searchByGoogle: "Sök"
 _email:
   _follow:
     title: "följde dig"
