@@ -59,10 +59,6 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'account',
 		default: [],
 	},
-	mutedAds: {
-		where: 'account',
-		default: [] as string[],
-	},
 
 	menu: {
 		where: 'deviceAccount',
