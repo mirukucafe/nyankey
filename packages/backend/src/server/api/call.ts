@@ -1,6 +1,6 @@
 import { performance } from 'perf_hooks';
 import Koa from 'koa';
-import { CacheableLocalUser, User } from '@/models/entities/user.js';
+import { CacheableLocalUser } from '@/models/entities/user.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { getIpHash } from '@/misc/get-ip-hash.js';
 import { limiter } from './limiter.js';

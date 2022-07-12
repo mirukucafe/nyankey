@@ -1,4 +1,3 @@
-import { URL } from 'node:url';
 import Bull from 'bull';
 import Logger from '@/services/logger.js';
 import { WebhookDeliverJobData } from '../types.js';

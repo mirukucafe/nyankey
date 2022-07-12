@@ -1,6 +1,5 @@
 import { Brackets } from 'typeorm';
 import { Followings, Users } from '@/models/index.js';
-import { USER_ACTIVE_THRESHOLD } from '@/const.js';
 import { User } from '@/models/entities/user.js';
 import define from '../../define.js';
 

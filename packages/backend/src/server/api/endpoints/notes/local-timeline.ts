@@ -1,6 +1,6 @@
 import { Brackets } from 'typeorm';
 import { fetchMeta } from '@/misc/fetch-meta.js';
-import { Notes, Users } from '@/models/index.js';
+import { Notes } from '@/models/index.js';
 import { activeUsersChart } from '@/services/chart/index.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';

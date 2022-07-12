@@ -3,7 +3,6 @@ import { db } from '@/db/postgre.js';
 
 import { Announcement } from './entities/announcement.js';
 import { AnnouncementRead } from './entities/announcement-read.js';
-import { Instance } from './entities/instance.js';
 import { Poll } from './entities/poll.js';
 import { PollVote } from './entities/poll-vote.js';
 import { Meta } from './entities/meta.js';

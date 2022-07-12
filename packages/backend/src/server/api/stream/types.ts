@@ -7,7 +7,6 @@ import { Note } from '@/models/entities/note.js';
 import { Antenna } from '@/models/entities/antenna.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { DriveFolder } from '@/models/entities/drive-folder.js';
-import { Emoji } from '@/models/entities/emoji.js';
 import { UserList } from '@/models/entities/user-list.js';
 import { MessagingMessage } from '@/models/entities/messaging-message.js';
 import { UserGroup } from '@/models/entities/user-group.js';

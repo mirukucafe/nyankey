@@ -4,7 +4,7 @@
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PathOrFileDescriptor, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import ms from 'ms';
 import Koa from 'koa';
 import Router from '@koa/router';

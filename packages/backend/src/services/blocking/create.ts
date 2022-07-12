@@ -10,7 +10,6 @@ import { User } from '@/models/entities/user.js';
 import { Blockings, Users, FollowRequests, Followings, UserListJoinings, UserLists } from '@/models/index.js';
 import { perUserFollowingChart } from '@/services/chart/index.js';
 import { genId } from '@/misc/gen-id.js';
-import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
 import { webhookDeliver } from '@/queue/index.js';
 

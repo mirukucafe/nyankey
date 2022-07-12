@@ -1,8 +1,7 @@
-import { DeepPartial, FindOptionsWhere } from 'typeorm';
+import { FindOptionsWhere } from 'typeorm';
 import { NoteReactions } from '@/models/index.js';
 import { NoteReaction } from '@/models/entities/note-reaction.js';
 import define from '../../define.js';
-import { ApiError } from '../../error.js';
 
 export const meta = {
 	tags: ['notes', 'reactions'],

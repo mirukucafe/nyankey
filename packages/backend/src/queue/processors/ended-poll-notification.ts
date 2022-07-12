@@ -1,6 +1,5 @@
 import Bull from 'bull';
-import { In } from 'typeorm';
-import { Notes, Polls, PollVotes } from '@/models/index.js';
+import { Notes, PollVotes } from '@/models/index.js';
 import { queueLogger } from '../logger.js';
 import { EndedPollNotificationJobData } from '@/queue/types.js';
 import { createNotification } from '@/services/create-notification.js';

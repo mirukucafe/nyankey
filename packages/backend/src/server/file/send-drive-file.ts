@@ -11,7 +11,7 @@ import { InternalStorage } from '@/services/drive/internal-storage.js';
 import { createTemp } from '@/misc/create-temp.js';
 import { downloadUrl } from '@/misc/download-url.js';
 import { detectType } from '@/misc/get-file-info.js';
-import { convertToWebp, convertToJpeg, convertToPng } from '@/services/drive/image-processor.js';
+import { convertToWebp, convertToPng } from '@/services/drive/image-processor.js';
 import { GenerateVideoThumbnail } from '@/services/drive/generate-video-thumbnail.js';
 import { StatusError } from '@/misc/fetch.js';
 import { FILE_TYPE_BROWSERSAFE } from '@/const.js';

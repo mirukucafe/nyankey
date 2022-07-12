@@ -1,6 +1,6 @@
 import promiseLimit from 'promise-limit';
 import { toArray, unique } from '@/prelude/array.js';
-import { CacheableUser, User } from '@/models/entities/user.js';
+import { CacheableUser } from '@/models/entities/user.js';
 import { IObject, isMention, IApMention } from '../type.js';
 import Resolver from '../resolver.js';
 import { resolvePerson } from './person.js';

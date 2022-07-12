@@ -1,6 +1,5 @@
 import Chart, { KVs } from '../core.js';
 import { User } from '@/models/entities/user.js';
-import { Users } from '@/models/index.js';
 import { name, schema } from './entities/active-users.js';
 
 const week = 1000 * 60 * 60 * 24 * 7;

@@ -1,4 +1,3 @@
-import * as fs from 'node:fs';
 import { createTempDir } from '@/misc/create-temp.js';
 import { IImage, convertToJpeg } from './image-processor.js';
 import FFmpeg from 'fluent-ffmpeg';

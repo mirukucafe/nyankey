@@ -1,5 +1,4 @@
 import { User } from '@/models/entities/user.js';
-import { id } from '@/models/id.js';
 import { UserProfiles } from '@/models/index.js';
 import { SelectQueryBuilder, Brackets } from 'typeorm';
 

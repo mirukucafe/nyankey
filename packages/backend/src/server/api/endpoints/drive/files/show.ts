@@ -1,5 +1,5 @@
 import { DriveFile } from '@/models/entities/drive-file.js';
-import { DriveFiles, Users } from '@/models/index.js';
+import { DriveFiles } from '@/models/index.js';
 import define from '../../../define.js';
 import { ApiError } from '../../../error.js';
 

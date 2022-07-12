@@ -2,7 +2,6 @@ import define from '../../../define.js';
 import { Emojis } from '@/models/index.js';
 import { In } from 'typeorm';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
-import { ApiError } from '../../../error.js';
 import { db } from '@/db/postgre.js';
 
 export const meta = {

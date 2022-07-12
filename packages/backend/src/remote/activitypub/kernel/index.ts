@@ -17,7 +17,6 @@ import flag from './flag/index.js';
 import { apLogger } from '../logger.js';
 import Resolver from '../resolver.js';
 import { toArray } from '@/prelude/array.js';
-import { Users } from '@/models/index.js';
 
 export async function performActivity(actor: CacheableRemoteUser, activity: IObject) {
 	if (isCollectionOrOrderedCollection(activity)) {

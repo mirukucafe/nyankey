@@ -1,6 +1,4 @@
 import Chart, { KVs } from '../core.js';
-import { DriveFiles } from '@/models/index.js';
-import { Not, IsNull } from 'typeorm';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { name, schema } from './entities/drive.js';
 

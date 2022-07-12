@@ -3,7 +3,6 @@ import { uploadFromUrl } from '@/services/drive/upload-from-url.js';
 import define from '../../../define.js';
 import { DriveFiles } from '@/models/index.js';
 import { publishMainStream } from '@/services/stream.js';
-import { DB_MAX_IMAGE_COMMENT_LENGTH } from '@/misc/hard-limits.js';
 
 export const meta = {
 	tags: ['drive'],

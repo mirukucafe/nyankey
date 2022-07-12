@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import { Users, UserPendings, UserProfiles } from '@/models/index.js';
+import { UserPendings, UserProfiles } from '@/models/index.js';
 import { signup } from '../common/signup.js';
 import signin from '../common/signin.js';
 

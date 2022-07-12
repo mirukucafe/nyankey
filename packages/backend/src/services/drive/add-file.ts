@@ -10,7 +10,7 @@ import { driveLogger } from './logger.js';
 import { IImage, convertSharpToJpeg, convertSharpToWebp, convertSharpToPng } from './image-processor.js';
 import { contentDisposition } from '@/misc/content-disposition.js';
 import { getFileInfo } from '@/misc/get-file-info.js';
-import { DriveFiles, DriveFolders, Users, Instances, UserProfiles } from '@/models/index.js';
+import { DriveFiles, DriveFolders, Users, UserProfiles } from '@/models/index.js';
 import { InternalStorage } from './internal-storage.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { IRemoteUser, User } from '@/models/entities/user.js';

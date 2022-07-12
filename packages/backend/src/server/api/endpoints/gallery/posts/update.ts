@@ -1,8 +1,6 @@
 import ms from 'ms';
 import define from '../../../define.js';
 import { DriveFiles, GalleryPosts } from '@/models/index.js';
-import { GalleryPost } from '@/models/entities/gallery-post.js';
-import { ApiError } from '../../../error.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 
 export const meta = {

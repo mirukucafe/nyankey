@@ -1,5 +1,5 @@
 import { publishNoteStream } from '@/services/stream.js';
-import { CacheableUser, User } from '@/models/entities/user.js';
+import { CacheableUser } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { PollVotes, NoteWatchings, Polls, Blockings } from '@/models/index.js';
 import { Not } from 'typeorm';

@@ -10,7 +10,6 @@ import semver from 'semver';
 import Logger from '@/services/logger.js';
 import loadConfig from '@/config/load.js';
 import { Config } from '@/config/types.js';
-import { lessThan } from '@/prelude/array.js';
 import { envOption } from '../env.js';
 import { showMachineInfo } from '@/misc/show-machine-info.js';
 import { db, initDb } from '../db/postgre.js';

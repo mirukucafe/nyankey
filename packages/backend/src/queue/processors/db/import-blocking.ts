@@ -5,7 +5,7 @@ import * as Acct from '@/misc/acct.js';
 import { resolveUser } from '@/remote/resolve-user.js';
 import { downloadTextFile } from '@/misc/download-text-file.js';
 import { isSelfHost, toPuny } from '@/misc/convert-host.js';
-import { Users, DriveFiles, Blockings } from '@/models/index.js';
+import { Users, DriveFiles } from '@/models/index.js';
 import { DbUserImportJobData } from '@/queue/types.js';
 import block from '@/services/blocking/create.js';
 import { IsNull } from 'typeorm';
