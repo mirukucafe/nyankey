@@ -17,8 +17,9 @@ const merge = (...args) => args.reduce((a, c) => ({
 // For a language to be generated as a locale it has to be listed here.
 const languages = [
 	'ar-SA',
+	'bn-BD',
+	'ca-ES',
 	'cs-CZ',
-	'da-DK',
 	'de-DE',
 	'en-US',
 	'es-ES',
@@ -31,13 +32,14 @@ const languages = [
 	'kn-IN',
 	'ko-KR',
 	'nl-NL',
-	'no-NO',
 	'pl-PL',
 	'pt-PT',
 	'ru-RU',
 	'sk-SK',
-	'ug-CN',
+	'sv-SE',
+	'tr-TR',
 	'uk-UA',
+	'vi-VI',
 	'zh-CN',
 	'zh-TW',
 ];
@@ -57,7 +59,7 @@ const locales = languages.reduce(
 
 module.exports = Object.entries(locales)
 	.reduce((acc, [lang, strings]) => {
-			if (k == 'en-US') {
+			if (lang == 'en-US') {
 				acc[lang] = strings;
 			} else {
 				// all other locales fall back to en-US
