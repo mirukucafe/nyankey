@@ -1,12 +1,12 @@
 import define from '../../define.js';
 import { createExportMuteJob } from '@/queue/index.js';
-import ms from 'ms';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	secure: true,
 	requireCredential: true,
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 1,
 	},
 } as const;

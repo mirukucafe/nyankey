@@ -1,8 +1,8 @@
-import ms from 'ms';
 import deleteReaction from '@/services/note/reaction/delete.js';
 import define from '../../../define.js';
 import { getNote } from '../../../common/getters.js';
 import { ApiError } from '../../../error.js';
+import { SECOND, HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['reactions', 'notes'],
@@ -12,9 +12,9 @@ export const meta = {
 	kind: 'write:reactions',
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 60,
-		minInterval: ms('3sec'),
+		minInterval: 3 * SECOND,
 	},
 
 	errors: {

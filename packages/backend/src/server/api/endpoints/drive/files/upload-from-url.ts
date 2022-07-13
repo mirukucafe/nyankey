@@ -1,14 +1,14 @@
-import ms from 'ms';
 import { uploadFromUrl } from '@/services/drive/upload-from-url.js';
 import define from '../../../define.js';
 import { DriveFiles } from '@/models/index.js';
 import { publishMainStream } from '@/services/stream.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['drive'],
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 60,
 	},
 

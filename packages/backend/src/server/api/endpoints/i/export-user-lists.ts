@@ -1,12 +1,12 @@
 import define from '../../define.js';
 import { createExportUserListsJob } from '@/queue/index.js';
-import ms from 'ms';
+import { MINUTE } from '@/const.js';
 
 export const meta = {
 	secure: true,
 	requireCredential: true,
 	limit: {
-		duration: ms('1min'),
+		duration: MINUTE,
 		max: 1,
 	},
 } as const;

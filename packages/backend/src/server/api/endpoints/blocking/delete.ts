@@ -1,15 +1,15 @@
-import ms from 'ms';
 import deleteBlocking from '@/services/blocking/delete.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
 import { getUser } from '../../common/getters.js';
 import { Blockings, Users } from '@/models/index.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['account'],
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 100,
 	},
 

@@ -1,5 +1,10 @@
 export const MAX_NOTE_TEXT_LENGTH = 3000;
 
+export const SECOND = 1000;
+export const MINUTE = 60 * SEC;
+export const HOUR = 60 * MIN;
+export const DAY = 24 * HOUR;
+
 export const USER_ONLINE_THRESHOLD = 1000 * 60 * 10; // 10min
 export const USER_ACTIVE_THRESHOLD = 1000 * 60 * 60 * 24 * 3; // 3days
 

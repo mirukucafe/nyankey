@@ -1,4 +1,3 @@
-import ms from 'ms';
 import { In } from 'typeorm';
 import create from '@/services/note/create.js';
 import { User } from '@/models/entities/user.js';
@@ -10,6 +9,7 @@ import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
 import { noteVisibilities } from '../../../../types.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -17,7 +17,7 @@ export const meta = {
 	requireCredential: true,
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 300,
 	},
 

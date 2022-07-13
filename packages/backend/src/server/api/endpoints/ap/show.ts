@@ -11,8 +11,8 @@ import { Note } from '@/models/entities/note.js';
 import { CacheableLocalUser, User } from '@/models/entities/user.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { isActor, isPost, getApId } from '@/remote/activitypub/type.js';
-import ms from 'ms';
 import { SchemaType } from '@/misc/schema.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['federation'],
@@ -20,7 +20,7 @@ export const meta = {
 	requireCredential: true,
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 30,
 	},
 

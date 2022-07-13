@@ -1,8 +1,8 @@
 import define from '../../../define.js';
-import ms from 'ms';
 import { ApiError } from '../../../error.js';
 import { MessagingMessages } from '@/models/index.js';
 import { deleteMessage } from '@/services/messages/delete.js';
+import { SECOND, HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['messaging'],
@@ -12,9 +12,9 @@ export const meta = {
 	kind: 'write:messaging',
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 300,
-		minInterval: ms('1sec'),
+		minInterval: SECOND,
 	},
 
 	errors: {

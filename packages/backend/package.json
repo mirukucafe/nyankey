@@ -69,7 +69,6 @@
 		"mime-types": "2.1.35",
 		"misskey-js": "0.0.14",
 		"mocha": "10.0.0",
-		"ms": "3.0.0-canary.1",
 		"multer": "1.4.4",
 		"nested-property": "4.0.0",
 		"node-fetch": "3.2.6",
