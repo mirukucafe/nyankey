@@ -515,7 +515,7 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		name: data.name,
 		text: data.text,
 		hasPoll: data.poll != null,
-		cw: data.cw == null ? null : data.cw,
+		cw: data.cw ?? null,
 		tags: tags.map(tag => normalizeForSearch(tag)),
 		emojis,
 		userId: user.id,
@@ -529,11 +529,11 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 
 		attachedFileTypes: data.files ? data.files.map(file => file.type) : [],
 
-		// 以下非正規化データ
-		replyUserId: data.reply ? data.reply.userId : null,
-		replyUserHost: data.reply ? data.reply.userHost : null,
-		renoteUserId: data.renote ? data.renote.userId : null,
-		renoteUserHost: data.renote ? data.renote.userHost : null,
+		// denormalized data below
+		replyUserId: data.reply?.userId,
+		replyUserHost: data.reply?.userHost,
+		renoteUserId: data.renote?.userId,
+		renoteUserHost: data.renote?.userHost,
 		userHost: user.host,
 	});
 
@@ -546,10 +546,9 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		const profiles = await UserProfiles.findBy({ userId: In(insert.mentions) });
 		insert.mentionedRemoteUsers = JSON.stringify(mentionedUsers.filter(u => Users.isRemoteUser(u)).map(u => {
 			const profile = profiles.find(p => p.userId === u.id);
-			const url = profile != null ? profile.url : null;
 			return {
 				uri: u.uri,
-				url: url == null ? undefined : url,
+				url: profile?.url,
 				username: u.username,
 				host: u.host,
 			} as IMentionedRemoteUsers[0];
