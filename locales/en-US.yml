@@ -848,6 +848,8 @@ cropImageAsk: "Do you want to crop this image?"
 recentNHours: "Last {n} hours"
 recentNDays: "Last {n} days"
 isSystemAccount: "An account created and automatically operated by the system."
+typeToConfirm: "Please enter {x} to confirm"
+deleteAccount: "Delete account"
 _emailUnavailable:
   used: "This email address is already being used"
   format: "The format of this email address is invalid"
