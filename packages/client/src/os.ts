@@ -198,12 +198,6 @@ export function modalPageWindow(path: string) {
 	}, {}, 'closed');
 }
 
-export function toast(message: string) {
-	popup(defineAsyncComponent(() => import('@/components/toast.vue')), {
-		message,
-	}, {}, 'closed');
-}
-
 export function alert(props: {
 	type?: 'error' | 'info' | 'success' | 'warning' | 'waiting' | 'question';
 	title?: string | null;
