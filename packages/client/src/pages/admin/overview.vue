@@ -35,8 +35,6 @@
 		</MkContainer>
 	</div>
 
-	<!--<XMetrics/>-->
-
 	<MkFolder style="margin: var(--margin)">
 		<template #header><i class="fas fa-info-circle"></i> {{ i18n.ts.info }}</template>
 		<div class="cfcdecdf">
@@ -67,7 +65,6 @@
 
 <script lang="ts" setup>
 import { markRaw, version as vueVersion, onMounted, onBeforeUnmount, nextTick } from 'vue';
-import XMetrics from './metrics.vue';
 import MkInstanceStats from '@/components/instance-stats.vue';
 import MkNumberDiff from '@/components/number-diff.vue';
 import MkContainer from '@/components/ui/container.vue';
