@@ -109,7 +109,7 @@ const menuDef = $computed(() => [{
 	}, {
 		icon: 'fas fa-globe',
 		text: i18n.ts.federation,
-		to: '/about#federation',
+		to: '/admin/federation',
 		active: props.initialPage === 'federation',
 	}, {
 		icon: 'fas fa-clipboard-list',
