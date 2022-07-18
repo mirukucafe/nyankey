@@ -3,7 +3,7 @@
 	"scripts": {
 		"watch": "node build.js watch",
 		"build": "node build.js",
-		"lint": "eslint --quiet src/**/*.{ts}"
+		"lint": "eslint --quiet src --ext .ts"
 	},
 	"resolutions": {},
 	"dependencies": {
