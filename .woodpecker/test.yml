@@ -6,7 +6,7 @@ clone:
       recursive: true
 
 pipeline:
-  mocha:
+  build:
     when:
       event:
         - push
@@ -17,6 +17,13 @@ pipeline:
       - git diff --exit-code yarn.lock
       - cp .woodpecker/misskey/test.yml .config
       - yarn build
+  mocha:
+    when:
+      event:
+        - push
+        - pull_request
+    image: node:18.6.0
+    commands:
       - yarn mocha
   e2e:
     when:
@@ -25,10 +32,6 @@ pipeline:
         - pull_request
     image: cypress/included:10.3.0
     commands:
-      - yarn install
-      - git diff --exit-code yarn.lock
-      - cp .woodpecker/misskey/test.yml .config
-      - yarn build
       - npm run start:test &
       - sleep 30 # wait for server to start
       - cypress run --browser chrome
