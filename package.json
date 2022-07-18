@@ -1,10 +1,9 @@
 {
-	"name": "misskey",
+	"name": "foundkey",
 	"version": "12.111.1-test.1",
-	"codename": "indigo",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/misskey-dev/misskey.git"
+		"url": "https://akkoma.dev/FoundKeyGang/FoundKey.git"
 	},
 	"private": true,
 	"scripts": {
