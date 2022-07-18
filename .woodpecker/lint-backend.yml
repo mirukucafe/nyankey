@@ -1,0 +1,17 @@
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      depth: 1 # CI does not need commit history
+      recursive: true
+
+pipeline:
+  lint:
+    when:
+      event:
+        - push
+        - pull_request
+    image: node:18.6.0
+    commands:
+      - yarn install
+      - yarn --cwd ./packages/backend lint
