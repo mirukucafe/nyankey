@@ -78,8 +78,6 @@ export const paramDef = {
 		swPublicKey: { type: 'string', nullable: true },
 		swPrivateKey: { type: 'string', nullable: true },
 		tosUrl: { type: 'string', nullable: true },
-		repositoryUrl: { type: 'string' },
-		feedbackUrl: { type: 'string' },
 		useObjectStorage: { type: 'boolean' },
 		objectStorageBaseUrl: { type: 'string', nullable: true },
 		objectStorageBucket: { type: 'string', nullable: true },
@@ -311,14 +309,6 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	if (ps.tosUrl !== undefined) {
 		set.ToSUrl = ps.tosUrl;
-	}
-
-	if (ps.repositoryUrl !== undefined) {
-		set.repositoryUrl = ps.repositoryUrl;
-	}
-
-	if (ps.feedbackUrl !== undefined) {
-		set.feedbackUrl = ps.feedbackUrl;
 	}
 
 	if (ps.useObjectStorage !== undefined) {
