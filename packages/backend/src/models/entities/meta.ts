@@ -317,20 +317,6 @@ export class Meta {
 	public ToSUrl: string | null;
 
 	@Column('varchar', {
-		length: 512,
-		default: 'https://github.com/misskey-dev/misskey',
-		nullable: false,
-	})
-	public repositoryUrl: string;
-
-	@Column('varchar', {
-		length: 512,
-		default: 'https://github.com/misskey-dev/misskey/issues/new',
-		nullable: true,
-	})
-	public feedbackUrl: string | null;
-
-	@Column('varchar', {
 		length: 8192,
 		nullable: true,
 	})

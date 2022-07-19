@@ -2,12 +2,12 @@ import { publishMainStream } from '@/services/stream.js';
 import define from '../../define.js';
 import rndstr from 'rndstr';
 import config from '@/config/index.js';
-import ms from 'ms';
 import bcrypt from 'bcryptjs';
 import { Users, UserProfiles } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
 import { ApiError } from '../../error.js';
 import { validateEmailForAccount } from '@/services/validate-email-for-account.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	requireCredential: true,
@@ -15,7 +15,7 @@ export const meta = {
 	secure: true,
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 3,
 	},
 

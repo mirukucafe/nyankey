@@ -1,13 +1,12 @@
 <script lang="ts">
 import { defineComponent, h, PropType, TransitionGroup } from 'vue';
-import MkAd from '@/components/global/ad.vue';
 import { i18n } from '@/i18n';
 import { defaultStore } from '@/store';
 
 export default defineComponent({
 	props: {
 		items: {
-			type: Array as PropType<{ id: string; createdAt: string; _shouldInsertAd_: boolean; }[]>,
+			type: Array as PropType<{ id: string; createdAt: string; }[]>,
 			required: true,
 		},
 		direction: {
@@ -21,11 +20,6 @@ export default defineComponent({
 			default: false
 		},
 		noGap: {
-			type: Boolean,
-			required: false,
-			default: false
-		},
-		ad: {
 			type: Boolean,
 			required: false,
 			default: false
@@ -78,15 +72,7 @@ export default defineComponent({
 
 				return [el, separator];
 			} else {
-				if (props.ad && item._shouldInsertAd_) {
-					return [h(MkAd, {
-						class: 'a', // advertiseの意(ブロッカー対策)
-						key: item.id + ':ad',
-						prefer: ['horizontal', 'horizontal-big'],
-					}), el];
-				} else {
-					return el;
-				}
+				return el;
 			}
 		});
 

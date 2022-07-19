@@ -1,11 +1,11 @@
 import rndstr from 'rndstr';
-import ms from 'ms';
 import { IsNull } from 'typeorm';
 import config from '@/config/index.js';
 import { Users, UserProfiles, PasswordResetRequests } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
 import { genId } from '@/misc/gen-id.js';
 import define from '../define.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['reset password'],
@@ -15,7 +15,7 @@ export const meta = {
 	description: 'Request a users password to be reset.',
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 3,
 	},
 

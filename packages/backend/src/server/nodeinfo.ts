@@ -11,10 +11,10 @@ const router = new Router();
 const nodeinfo2_1path = '/nodeinfo/2.1';
 const nodeinfo2_0path = '/nodeinfo/2.0';
 
-export const links = [/* (awaiting release) {
+export const links = [{
 	rel: 'http://nodeinfo.diaspora.software/ns/schema/2.1',
 	href: config.url + nodeinfo2_1path
-}, */{
+}, {
 	rel: 'http://nodeinfo.diaspora.software/ns/schema/2.0',
 	href: config.url + nodeinfo2_0path,
 }];
@@ -39,9 +39,9 @@ const nodeinfo2 = async () => {
 
 	return {
 		software: {
-			name: 'misskey',
+			name: 'foundkey',
 			version: config.version,
-			repository: meta.repositoryUrl,
+			repository: 'https://akkoma.dev/FoundKeyGang/FoundKey',
 		},
 		protocols: ['activitypub'],
 		services: {
@@ -64,7 +64,7 @@ const nodeinfo2 = async () => {
 			langs: meta.langs,
 			tosUrl: meta.ToSUrl,
 			repositoryUrl: meta.repositoryUrl,
-			feedbackUrl: meta.feedbackUrl,
+			feedbackUrl: 'ircs://irc.akkoma.dev/foundkey',
 			disableRegistration: meta.disableRegistration,
 			disableLocalTimeline: meta.disableLocalTimeline,
 			disableGlobalTimeline: meta.disableGlobalTimeline,

@@ -39,14 +39,6 @@ html {
 		scrollbar-color: var(--scrollbarHandle) inherit;
 		scrollbar-width: thin;
 
-		&:hover {
-			scrollbar-color: var(--scrollbarHandleHover) inherit;
-		}
-
-		&:active {
-			scrollbar-color: var(--accent) inherit;
-		}
-
 		&::-webkit-scrollbar {
 			width: 6px;
 			height: 6px;
@@ -379,6 +371,20 @@ hr {
 	background: var(--acrylicPanel);
 	-webkit-backdrop-filter: var(--blur, blur(15px));
 	backdrop-filter: var(--blur, blur(15px));
+
+	@supports not (backdrop-filter: var(--blur, blur(15px))) {
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			z-index: -1;
+			background: var(--bg);
+			opacity: .75;
+		}
+	}
 }
 
 ._formBlock {

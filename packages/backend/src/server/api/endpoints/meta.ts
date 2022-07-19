@@ -1,7 +1,7 @@
 import { IsNull, MoreThan } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
-import { Ads, Emojis, Users } from '@/models/index.js';
+import { Emojis, Users } from '@/models/index.js';
 import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
 import define from '../define.js';
 
@@ -52,16 +52,6 @@ export const meta = {
 			tosUrl: {
 				type: 'string',
 				optional: false, nullable: true,
-			},
-			repositoryUrl: {
-				type: 'string',
-				optional: false, nullable: false,
-				default: 'https://github.com/misskey-dev/misskey',
-			},
-			feedbackUrl: {
-				type: 'string',
-				optional: false, nullable: false,
-				default: 'https://github.com/misskey-dev/misskey/issues/new',
 			},
 			defaultDarkTheme: {
 				type: 'string',
@@ -161,30 +151,6 @@ export const meta = {
 							description: 'The local host is represented with `null`.',
 						},
 						url: {
-							type: 'string',
-							optional: false, nullable: false,
-							format: 'url',
-						},
-					},
-				},
-			},
-			ads: {
-				type: 'array',
-				optional: false, nullable: false,
-				items: {
-					type: 'object',
-					optional: false, nullable: false,
-					properties: {
-						place: {
-							type: 'string',
-							optional: false, nullable: false,
-						},
-						url: {
-							type: 'string',
-							optional: false, nullable: false,
-							format: 'url',
-						},
-						imageUrl: {
 							type: 'string',
 							optional: false, nullable: false,
 							format: 'url',
@@ -310,12 +276,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		},
 	});
 
-	const ads = await Ads.find({
-		where: {
-			expiresAt: MoreThan(new Date()),
-		},
-	});
-
 	const response: any = {
 		maintainerName: instance.maintainerName,
 		maintainerEmail: instance.maintainerEmail,
@@ -327,8 +287,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		description: instance.description,
 		langs: instance.langs,
 		tosUrl: instance.ToSUrl,
-		repositoryUrl: instance.repositoryUrl,
-		feedbackUrl: instance.feedbackUrl,
 		disableRegistration: instance.disableRegistration,
 		disableLocalTimeline: instance.disableLocalTimeline,
 		disableGlobalTimeline: instance.disableGlobalTimeline,
@@ -349,13 +307,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		emojis: await Emojis.packMany(emojis),
 		defaultLightTheme: instance.defaultLightTheme,
 		defaultDarkTheme: instance.defaultDarkTheme,
-		ads: ads.map(ad => ({
-			id: ad.id,
-			url: ad.url,
-			place: ad.place,
-			ratio: ad.ratio,
-			imageUrl: ad.imageUrl,
-		})),
 		enableEmail: instance.enableEmail,
 
 		enableTwitterIntegration: instance.enableTwitterIntegration,

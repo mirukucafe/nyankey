@@ -1,5 +1,5 @@
 <template>
-<XWindow ref="window" :initial-width="400" :initial-height="500" :can-resize="true" @closed="emit('closed')">
+<XWindow ref="uiWindow" :initial-width="400" :initial-height="500" :can-resize="true" @closed="emit('closed')">
 	<template #header>
 		<i class="fas fa-exclamation-circle" style="margin-right: 0.5em;"></i>
 		<I18n :src="i18n.ts.reportAbuseOf" tag="span">
@@ -40,19 +40,19 @@ const emit = defineEmits<{
 	(ev: 'closed'): void;
 }>();
 
-const window = ref<InstanceType<typeof XWindow>>();
+const uiWindow = ref<InstanceType<typeof XWindow>>();
 const comment = ref(props.initialComment || '');
 
 function send() {
 	os.apiWithDialog('users/report-abuse', {
 		userId: props.user.id,
 		comment: comment.value,
-	}, undefined).then(res => {
+	}).then(res => {
 		os.alert({
 			type: 'success',
 			text: i18n.ts.abuseReported
 		});
-		window.value?.close();
+		uiWindow.value?.close();
 		emit('closed');
 	});
 }

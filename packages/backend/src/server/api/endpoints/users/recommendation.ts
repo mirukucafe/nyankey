@@ -1,8 +1,8 @@
-import ms from 'ms';
 import { Users, Followings } from '@/models/index.js';
 import define from '../../define.js';
 import { generateMutedUserQueryForUsers } from '../../common/generate-muted-user-query.js';
 import { generateBlockedUserQuery, generateBlockQueryForUsers } from '../../common/generate-block-query.js';
+import { DAY } from '@/const.js';
 
 export const meta = {
 	tags: ['users'],
@@ -39,7 +39,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		.where('user.isLocked = FALSE')
 		.andWhere('user.isExplorable = TRUE')
 		.andWhere('user.host IS NULL')
-		.andWhere('user.updatedAt >= :date', { date: new Date(Date.now() - ms('7days')) })
+		.andWhere('user.updatedAt >= :date', { date: new Date(Date.now() - (7 * DAY)) })
 		.andWhere('user.id != :meId', { meId: me.id })
 		.orderBy('user.followersCount', 'DESC');
 

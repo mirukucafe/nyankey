@@ -5,7 +5,6 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFileSync } from 'node:fs';
-import ms from 'ms';
 import Koa from 'koa';
 import Router from '@koa/router';
 import send from 'koa-send';
@@ -27,6 +26,7 @@ import { genOpenapiSpec } from '../api/openapi/gen-spec.js';
 import { urlPreviewHandler } from './url-preview.js';
 import { manifestHandler } from './manifest.js';
 import packFeed from './feed.js';
+import { MINUTE, DAY } from '@/const.js';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
@@ -100,21 +100,21 @@ const router = new Router();
 router.get('/static-assets/(.*)', async ctx => {
 	await send(ctx as any, ctx.path.replace('/static-assets/', ''), {
 		root: staticAssets,
-		maxage: ms('7 days'),
+		maxage: 7 * DAY,
 	});
 });
 
 router.get('/client-assets/(.*)', async ctx => {
 	await send(ctx as any, ctx.path.replace('/client-assets/', ''), {
 		root: clientAssets,
-		maxage: ms('7 days'),
+		maxage: 7 * DAY,
 	});
 });
 
 router.get('/assets/(.*)', async ctx => {
 	await send(ctx as any, ctx.path.replace('/assets/', ''), {
 		root: assets,
-		maxage: ms('7 days'),
+		maxage: 7 * DAY,
 	});
 });
 
@@ -137,7 +137,7 @@ router.get('/twemoji/(.*)', async ctx => {
 
 	await send(ctx as any, path, {
 		root: `${_dirname}/../../../node_modules/@discordapp/twemoji/dist/svg/`,
-		maxage: ms('30 days'),
+		maxage: 30 * DAY,
 	});
 });
 
@@ -188,7 +188,7 @@ router.get('/twemoji-badge/(.*)', async ctx => {
 router.get(`/sw.js`, async ctx => {
 	await send(ctx as any, `/sw.js`, {
 		root: swAssets,
-		maxage: ms('10 minutes'),
+		maxage: 10 * MINUTE,
 	});
 });
 

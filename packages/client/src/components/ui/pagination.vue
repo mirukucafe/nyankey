@@ -93,14 +93,6 @@ const init = async (): Promise<void> => {
 		...params,
 		limit: props.pagination.noPaging ? (props.pagination.limit || 10) : (props.pagination.limit || 10) + 1,
 	}).then(res => {
-		for (let i = 0; i < res.length; i++) {
-			const item = res[i];
-			if (props.pagination.reversed) {
-				if (i === res.length - 2) item._shouldInsertAd_ = true;
-			} else {
-				if (i === 3) item._shouldInsertAd_ = true;
-			}
-		}
 		if (!props.pagination.noPaging && (res.length > (props.pagination.limit || 10))) {
 			res.pop();
 			items.value = props.pagination.reversed ? [...res].reverse() : res;
@@ -133,18 +125,12 @@ const fetchMore = async (): Promise<void> => {
 		limit: SECOND_FETCH_LIMIT + 1,
 		...(props.pagination.offsetMode ? {
 			offset: offset.value,
+		} : props.pagination.reversed ? {
+			sinceId: items.value[0].id,
 		} : {
-			untilId: props.pagination.reversed ? items.value[0].id : items.value[items.value.length - 1].id,
+			untilId: items.value[items.value.length - 1].id,
 		}),
 	}).then(res => {
-		for (let i = 0; i < res.length; i++) {
-			const item = res[i];
-			if (props.pagination.reversed) {
-				if (i === res.length - 9) item._shouldInsertAd_ = true;
-			} else {
-				if (i === 10) item._shouldInsertAd_ = true;
-			}
-		}
 		if (res.length > SECOND_FETCH_LIMIT) {
 			res.pop();
 			items.value = props.pagination.reversed ? [...res].reverse().concat(items.value) : items.value.concat(res);
@@ -169,8 +155,10 @@ const fetchMoreAhead = async (): Promise<void> => {
 		limit: SECOND_FETCH_LIMIT + 1,
 		...(props.pagination.offsetMode ? {
 			offset: offset.value,
+		} : props.pagination.reversed ? {
+			untilId: items.value[0].id,
 		} : {
-			sinceId: props.pagination.reversed ? items.value[0].id : items.value[items.value.length - 1].id,
+			sinceId: items.value[items.value.length - 1].id,
 		}),
 	}).then(res => {
 		if (res.length > SECOND_FETCH_LIMIT) {

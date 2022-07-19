@@ -1,15 +1,15 @@
-import ms from 'ms';
 import deleteFollowing from '@/services/following/delete.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
 import { getUser } from '../../common/getters.js';
 import { Followings, Users } from '@/models/index.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['following', 'users'],
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 100,
 	},
 

@@ -1,9 +1,9 @@
-import ms from 'ms';
 import deleteNote from '@/services/note/delete.js';
 import { Users } from '@/models/index.js';
 import define from '../../define.js';
 import { getNote } from '../../common/getters.js';
 import { ApiError } from '../../error.js';
+import { SECOND, HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -13,9 +13,9 @@ export const meta = {
 	kind: 'write:notes',
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 300,
-		minInterval: ms('1sec'),
+		minInterval: SECOND,
 	},
 
 	errors: {

@@ -1,9 +1,9 @@
-import ms from 'ms';
 import { Pages, DriveFiles } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { Page } from '@/models/entities/page.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
+import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['pages'],
@@ -13,7 +13,7 @@ export const meta = {
 	kind: 'write:pages',
 
 	limit: {
-		duration: ms('1hour'),
+		duration: HOUR,
 		max: 300,
 	},
 
