@@ -38,6 +38,7 @@ You should also include the user name that made the change.
 - Server: Ensure temp directory cleanup @Johann150
 - favicons of federated instances not showing @syuilo
 - Client: fix switch to receive email notifications @syuilo
+- Client: Page freezes when trying to open configuration page of existing webhooks @syuilo
 
 ## 12.111.1 (2022/06/13)
 
