@@ -70,7 +70,7 @@ let values: object = $ref({});
 
 const props = defineProps<{
 	title: string,
-	form: object,
+	form: Record<string, any>,
 }>();
 
 const emit = defineEmits<{
