@@ -15,8 +15,25 @@ export class AuthenticationError extends Error {
 	}
 }
 
-export default async (token: string | null): Promise<[CacheableLocalUser | null | undefined, AccessToken | null | undefined]> => {
-	if (token == null) {
+export default async (authorization: string | null | undefined, bodyToken: string | null): Promise<[CacheableLocalUser | null | undefined, AccessToken | null | undefined]> => {
+	let token: string | null = null;
+
+	// check if there is an authorization header set
+	if (authorization != null) {
+		if (bodyToken != null) {
+			throw new AuthenticationError('using multiple authorization schemes');
+		}
+
+		// check if OAuth 2.0 Bearer tokens are being used
+		// Authorization schemes are case insensitive
+		if (authorization.substring(0, 7).toLowerCase() === 'bearer ') {
+			token = authorization.substring(7);
+		} else {
+			throw new AuthenticationError('unsupported authentication scheme');
+		}
+	} else if (bodyToken != null) {
+		token = bodyToken;
+	} else {
 		return [null, null];
 	}
 
@@ -25,7 +42,7 @@ export default async (token: string | null): Promise<[CacheableLocalUser | null 
 			() => Users.findOneBy({ token }) as Promise<ILocalUser | null>);
 
 		if (user == null) {
-			throw new AuthenticationError('user not found');
+			throw new AuthenticationError('unknown token');
 		}
 
 		return [user, null];
@@ -39,7 +56,7 @@ export default async (token: string | null): Promise<[CacheableLocalUser | null 
 		});
 
 		if (accessToken == null) {
-			throw new AuthenticationError('invalid signature');
+			throw new AuthenticationError('unknown token');
 		}
 
 		AccessTokens.update(accessToken.id, {
