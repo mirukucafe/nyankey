@@ -1,6 +1,6 @@
 <template>
 <div class="_formRoot">
-	<FormRange v-model="masterVolume" :min="0" :max="1" :step="0.05" :text-converter="(v) => `${Math.floor(v * 100)}%`" class="_formBlock">
+	<FormRange v-model="masterVolume" :min="0" :max="1" :step="0.05" :text-converter="textConverter" class="_formBlock">
 		<template #label>{{ i18n.ts.masterVolume }}</template>
 	</FormRange>
 
@@ -77,6 +77,8 @@ const soundsTypes = [
 	'noizenecio/kick_gaba2',
 ];
 
+const textConverter = (v) => `${Math.floor(v * 100)}%`;
+
 async function edit(type) {
 	const { canceled, result } = await os.form(i18n.t('_sfx.' + type), {
 		type: {
@@ -90,10 +92,10 @@ async function edit(type) {
 		},
 		volume: {
 			type: 'range',
-			mim: 0,
+			min: 0,
 			max: 1,
 			step: 0.05,
-			textConverter: (v) => `${Math.floor(v * 100)}%`,
+			textConverter,
 			label: i18n.ts.volume,
 			default: sounds.value[type].volume,
 		},
