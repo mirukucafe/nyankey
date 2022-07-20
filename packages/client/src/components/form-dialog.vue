@@ -55,6 +55,7 @@
 </template>
 
 <script lang="ts" setup>
+import { } from 'vue';
 import FormInput from './form/input.vue';
 import FormTextarea from './form/textarea.vue';
 import FormSwitch from './form/switch.vue';
@@ -94,25 +95,6 @@ function cancel(): void {
 for (const item in props.form) {
 	values[item] = props.form[item].default ?? null;
 }
-
-// export default defineComponent({
-// 	components: {
-// 		XModalWindow,
-// 		FormInput,
-// 		FormTextarea,
-// 		FormSwitch,
-// 		FormSelect,
-// 		FormRange,
-// 		MkButton,
-// 		FormRadios,
-// 	},
-
-// 	created() {
-// 		for (const item in this.form) {
-// 			this.values[item] = this.form[item].default ?? null;
-// 		}
-// 	},
-// });
 </script>
 
 <style lang="scss" scoped>
