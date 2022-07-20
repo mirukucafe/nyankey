@@ -1,9 +1,9 @@
 <template>
 <div v-sticky-container class="yrzkoczt">
 	<MkTab v-model="include" class="tab">
-		<option :value="null">{{ $ts.notes }}</option>
-		<option value="replies">{{ $ts.notesAndReplies }}</option>
-		<option value="files">{{ $ts.withFiles }}</option>
+		<option :value="null">{{ i18n.ts.notes }}</option>
+		<option value="replies">{{ i18n.ts.notesAndReplies }}</option>
+		<option value="files">{{ i18n.ts.withFiles }}</option>
 	</MkTab>
 	<XNotes :no-gap="true" :pagination="pagination"/>
 </div>
@@ -15,6 +15,7 @@ import * as misskey from 'misskey-js';
 import XNotes from '@/components/notes.vue';
 import MkTab from '@/components/tab.vue';
 import * as os from '@/os';
+import { i18n } from '@/i18n';
 
 const props = defineProps<{
 	user: misskey.entities.UserDetailed;

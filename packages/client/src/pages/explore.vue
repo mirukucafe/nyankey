@@ -15,12 +15,12 @@
 			<div class="_isolated">
 				<MkInput v-model="searchQuery" :debounce="true" type="search">
 					<template #prefix><i class="fas fa-search"></i></template>
-					<template #label>{{ $ts.searchUser }}</template>
+					<template #label>{{ i18n.ts.searchUser }}</template>
 				</MkInput>
 				<MkRadios v-model="searchOrigin">
-					<option value="combined">{{ $ts.all }}</option>
-					<option value="local">{{ $ts.local }}</option>
-					<option value="remote">{{ $ts.remote }}</option>
+					<option value="combined">{{ i18n.ts.all }}</option>
+					<option value="local">{{ i18n.ts.local }}</option>
+					<option value="remote">{{ i18n.ts.remote }}</option>
 				</MkRadios>
 			</div>
 

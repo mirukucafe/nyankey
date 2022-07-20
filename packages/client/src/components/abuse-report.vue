@@ -9,7 +9,7 @@
 			</div>
 		</MkA>
 		<MkKeyValue class="_formBlock">
-			<template #key>{{ $ts.registeredDate }}</template>
+			<template #key>{{ i18n.ts.registeredDate }}</template>
 			<template #value>{{ new Date(report.targetUser.createdAt).toLocaleString() }} (<MkTime :time="report.targetUser.createdAt"/>)</template>
 		</MkKeyValue>
 	</div>
@@ -19,24 +19,24 @@
 		</div>
 		<hr/>
 		<div v-if="report.urls.length > 0">
-			{{ $ts.notes }}:
+			{{ i18n.ts.notes }}:
 			<ul>
 				<li v-for="url in report.urls"><MkUrl :url="url"/></li>
 			</ul>
 		</div>
 		<hr/>
-		<div>{{ $ts.reporter }}: <MkAcct :user="report.reporter"/></div>
+		<div>{{ i18n.ts.reporter }}: <MkAcct :user="report.reporter"/></div>
 		<div v-if="report.assignee">
-			{{ $ts.moderator }}:
+			{{ i18n.ts.moderator }}:
 			<MkAcct :user="report.assignee"/>
 		</div>
 		<div><MkTime :time="report.createdAt"/></div>
 		<div class="action">
 			<MkSwitch v-model="forward" :disabled="report.targetUser.host == null || report.resolved">
-				{{ $ts.forwardReport }}
-				<template #caption>{{ $ts.forwardReportIsAnonymous }}</template>
+				{{ i18n.ts.forwardReport }}
+				<template #caption>{{ i18n.ts.forwardReportIsAnonymous }}</template>
 			</MkSwitch>
-			<MkButton v-if="!report.resolved" class="_formBlock" style="margin-bottom: 0;" primary @click="resolve">{{ $ts.abuseMarkAsResolved }}</MkButton>
+			<MkButton v-if="!report.resolved" class="_formBlock" style="margin-bottom: 0;" primary @click="resolve">{{ i18n.ts.abuseMarkAsResolved }}</MkButton>
 		</div>
 	</div>
 </div>
@@ -49,6 +49,7 @@ import MkKeyValue from '@/components/key-value.vue';
 import MkUrl from '@/components/global/url.vue';
 import { acct, userPage } from '@/filters/user';
 import * as os from '@/os';
+import { i18n } from '@/i18n';
 
 const props = defineProps<{
 	report: any;

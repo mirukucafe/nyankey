@@ -20,7 +20,7 @@
 					<span style="margin-left: 8px; opacity: 0.7;">({{ number(job[1]) }} jobs)</span>
 				</div>
 			</div>
-			<span v-else style="opacity: 0.5;">{{ $ts.noJobs }}</span>
+			<span v-else style="opacity: 0.5;">{{ i18n.ts.noJobs }}</span>
 		</div>
 	</div>
 </div>
@@ -31,6 +31,7 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import number from '@/filters/number';
 import MkQueueChart from '@/components/queue-chart.vue';
 import * as os from '@/os';
+import { i18n } from '@/i18n';
 
 const activeSincePrevTick = ref(0);
 const active = ref(0);
