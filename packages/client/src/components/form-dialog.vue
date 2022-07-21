@@ -35,11 +35,11 @@
 				</FormSwitch>
 				<FormSelect v-else-if="form[item].type === 'enum'" v-model="values[item]" class="_formBlock">
 					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
-					<option v-for="item in form[item].enum" :key="item.value" :value="item.value">{{ item.label }}</option>
+					<option v-for="blockItem in form[item].enum" :key="blockItem.value" :value="blockItem.value">{{ blockItem.label }}</option>
 				</FormSelect>
 				<FormRadios v-else-if="form[item].type === 'radio'" v-model="values[item]" class="_formBlock">
 					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
-					<option v-for="item in form[item].options" :key="item.value" :value="item.value">{{ item.label }}</option>
+					<option v-for="blockItem in form[item].options" :key="blockItem.value" :value="blockItem.value">{{ blockItem.label }}</option>
 				</FormRadios>
 				<FormRange v-else-if="form[item].type === 'range'" v-model="values[item]" :min="form[item].min" :max="form[item].max" :step="form[item].step" :text-converter="form[item].textConverter" class="_formBlock">
 					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
@@ -54,8 +54,8 @@
 </XModalWindow>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { } from 'vue';
 import FormInput from './form/input.vue';
 import FormTextarea from './form/textarea.vue';
 import FormSwitch from './form/switch.vue';
@@ -65,63 +65,37 @@ import MkButton from './ui/button.vue';
 import FormRadios from './form/radios.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 
-export default defineComponent({
-	components: {
-		XModalWindow,
-		FormInput,
-		FormTextarea,
-		FormSwitch,
-		FormSelect,
-		FormRange,
-		MkButton,
-		FormRadios,
-	},
+let dialog = $ref<InstanceType<typeof XModalWindow>>();
+let values: object = $ref({});
 
-	props: {
-		title: {
-			type: String,
-			required: true,
-		},
-		form: {
-			type: Object,
-			required: true,
-		},
-	},
+const props = defineProps<{
+	title: string,
+	form: Record<string, any>,
+}>();
 
-	emits: ['done'],
+const emit = defineEmits<{
+	(ev: 'done', v: { result?: object, canceled?: boolean }): void,
+	(ev: 'closed'): void
+}>();
 
-	data() {
-		return {
-			values: {},
-		};
-	},
+function ok(): void {
+	emit('done', {
+		result: values,
+	});
+	dialog.close();
+}
 
-	created() {
-		for (const item in this.form) {
-			this.values[item] = this.form[item].default ?? null;
-		}
-	},
+function cancel(): void {
+	emit('done', {
+		canceled: true,
+	});
+	dialog.close();
+}
 
-	methods: {
-		ok() {
-			this.$emit('done', {
-				result: this.values,
-			});
-			this.$refs.dialog.close();
-		},
-
-		cancel() {
-			this.$emit('done', {
-				canceled: true,
-			});
-			this.$refs.dialog.close();
-		},
-	},
-});
+for (const item in props.form) {
+	values[item] = props.form[item].default ?? null;
+}
 </script>
 
 <style lang="scss" scoped>
-.xkpnjxcv {
-
-}
 </style>
