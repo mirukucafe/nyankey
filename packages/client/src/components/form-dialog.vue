@@ -74,7 +74,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-	(ev: 'done', v: { result?: object, canceled?: boolean }): void,
+	(ev: 'done', v: { result?: Record<string, any>, canceled?: boolean }): void,
 	(ev: 'closed'): void
 }>();
 
