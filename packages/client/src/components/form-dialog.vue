@@ -66,7 +66,7 @@ import FormRadios from './form/radios.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 
 let dialog = $ref<InstanceType<typeof XModalWindow>>();
-let values: object = $ref({});
+let values: Record<string, any> = $ref({});
 
 const props = defineProps<{
 	title: string,
