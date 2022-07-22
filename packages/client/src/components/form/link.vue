@@ -19,33 +19,18 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { } from 'vue';
 
-export default defineComponent({
-	props: {
-		to: {
-			type: String,
-			required: true
-		},
-		active: {
-			type: Boolean,
-			required: false
-		},
-		external: {
-			type: Boolean,
-			required: false
-		},
-		behavior: {
-			type: String,
-			required: false,
-		},
-		inline: {
-			type: Boolean,
-			required: false
-		},
-	},
-});
+type Behavior = 'window' | 'browser' | 'modalWindow';
+
+defineProps<{
+	to: string;
+	active?: boolean;
+	external?: boolean;
+	behavior?: Behavior;
+	inline?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>
