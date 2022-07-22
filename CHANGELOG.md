@@ -1,3 +1,9 @@
+# 0.0.15
+- foundkey.js forked from misskey.js
+- Added 'pollEnded' event
+- Add unreacted to NoteUpdatedEvent
+- Add comment property to DriveFile
+
 # 0.0.14
 - remove needless Object.freeze()
 
