@@ -1,137 +1,111 @@
 <template>
-	<MkModal ref="modal" @click="done(true)" @closed="$emit('closed')">
-		<div class="container">
-			<div class="fullwidth top-caption">
-				<div class="mk-dialog">
-					<header>
-						<Mfm v-if="title" class="title" :text="title"/>
-						<span class="text-count" :class="{ over: remainingLength < 0 }">{{ remainingLength }}</span>
-					</header>
-					<textarea v-model="inputValue" autofocus :placeholder="input.placeholder" @keydown="onInputKeydown"></textarea>
-					<div v-if="(showOkButton || showCancelButton)" class="buttons">
-						<MkButton inline primary :disabled="remainingLength < 0" @click="ok">{{ $ts.ok }}</MkButton>
-						<MkButton inline @click="cancel" >{{ $ts.cancel }}</MkButton>
-					</div>
+<MkModal ref="modal" @click="done(true)" @closed="$emit('closed')">
+	<div class="container">
+		<div class="fullwidth top-caption">
+			<div class="mk-dialog">
+				<header>
+					<Mfm v-if="title" class="title" :text="title"/>
+					<span class="text-count" :class="{ over: remainingLength < 0 }">{{ remainingLength }}</span>
+				</header>
+				<textarea v-model="inputValue" autofocus :placeholder="input.placeholder" @keydown="onInputKeydown"></textarea>
+				<div v-if="(showOkButton || showCancelButton)" class="buttons">
+					<MkButton inline primary :disabled="remainingLength < 0" @click="ok">{{ $ts.ok }}</MkButton>
+					<MkButton inline @click="cancel">{{ $ts.cancel }}</MkButton>
 				</div>
 			</div>
-			<div class="hdrwpsaf fullwidth">
-				<header>{{ image.name }}</header>
-				<img :src="image.url" :alt="image.comment" :title="image.comment" @click="$refs.modal.close()"/>
-				<footer>
-					<span>{{ image.type }}</span>
-					<span>{{ bytes(image.size) }}</span>
-					<span v-if="image.properties && image.properties.width">{{ number(image.properties.width) }}px × {{ number(image.properties.height) }}px</span>
-				</footer>
-			</div>
 		</div>
-	</MkModal>
+		<div class="hdrwpsaf fullwidth">
+			<header>{{ image.name }}</header>
+			<img :src="image.url" :alt="image.comment" :title="image.comment" @click="modal.close()"/>
+			<footer>
+				<span>{{ image.type }}</span>
+				<span>{{ bytes(image.size) }}</span>
+				<span v-if="image.properties && image.properties.width">{{ number(image.properties.width) }}px × {{ number(image.properties.height) }}px</span>
+			</footer>
+		</div>
+	</div>
+</MkModal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onBeforeUnmount, onMounted, computed } from 'vue';
 import { length } from 'stringz';
+import * as misskey from 'misskey-js';
 import MkModal from '@/components/ui/modal.vue';
 import MkButton from '@/components/ui/button.vue';
 import bytes from '@/filters/bytes';
 import number from '@/filters/number';
 
-export default defineComponent({
-	components: {
-		MkModal,
-		MkButton,
-	},
+type Input = {
+	placeholder?: string;
+	default?: any;
+};
 
-	props: {
-		image: {
-			type: Object,
-			required: true,
-		},
-		title: {
-			type: String,
-			required: false
-		},
-		input: {
-			required: true
-		},
-		showOkButton: {
-			type: Boolean,
-			default: true
-		},
-		showCancelButton: {
-			type: Boolean,
-			default: true
-		},
-		cancelableByBgClick: {
-			type: Boolean,
-			default: true
-		},
-	},
+const props = withDefaults(defineProps<{
+	image: misskey.entities.DriveFile;
+	title?: string;
+	input: Input;
+	showOkButton: boolean;
+	showCancelButton: boolean;
+	cancelableByBgClick: boolean;
+}>(), {
+	title: undefined,
+	showOkButton: true,
+	showCancelButton: true,
+	cancelableByBgClick: true,
+});
 
-	emits: ['done', 'closed'],
+const emit = defineEmits<{
+	(ev: 'done', v: { canceled: boolean, result?: string }): void,
+	(ev: 'closed'): void,
+}>();
 
-	data() {
-		return {
-			inputValue: this.input.default ? this.input.default : null
-		};
-	},
+let inputValue: string | undefined = $ref(props.input.default ?? undefined);
+let modal = $ref<InstanceType<typeof MkModal>>();
 
-	computed: {
-		remainingLength(): number {
-			if (typeof this.inputValue !== "string") return 512;
-			return 512 - length(this.inputValue);
-		}
-	},
+function done(canceled: boolean, result?: string): void {
+	emit('done', { canceled, result });
+	modal.close();
+}
 
-	mounted() {
-		document.addEventListener('keydown', this.onKeydown);
-	},
+async function ok(): Promise<void> {
+	if (!props.showOkButton) return;
 
-	beforeUnmount() {
-		document.removeEventListener('keydown', this.onKeydown);
-	},
+	const result = inputValue;
+	done(false, result);
+}
 
-	methods: {
-		bytes,
-		number,
+function cancel(): void {
+	done(true);
+}
 
-		done(canceled, result?) {
-			this.$emit('done', { canceled, result });
-			this.$refs.modal.close();
-		},
+function onKeydown(evt: KeyboardEvent): void {
+	if (evt.key === 'Escape') {
+		cancel();
+	}
+}
 
-		async ok() {
-			if (!this.showOkButton) return;
-
-			const result = this.inputValue;
-			this.done(false, result);
-		},
-
-		cancel() {
-			this.done(true);
-		},
-
-		onBgClick() {
-			if (this.cancelableByBgClick) {
-				this.cancel();
-			}
-		},
-
-		onKeydown(evt) {
-			if (evt.which === 27) { // ESC
-				this.cancel();
-			}
-		},
-
-		onInputKeydown(evt) {
-			if (evt.which === 13) { // Enter
-				if (evt.ctrlKey) {
-					evt.preventDefault();
-					evt.stopPropagation();
-					this.ok();
-				}
-			}
+function onInputKeydown(evt: KeyboardEvent): void {
+	if (evt.key === 'Enter') {
+		if (evt.ctrlKey) {
+			evt.preventDefault();
+			evt.stopPropagation();
+			ok();
 		}
 	}
+}
+
+const remainingLength = computed((): number => {
+	if (typeof inputValue !== 'string') return 512;
+	return 512 - length(inputValue);
+});
+
+onMounted(() => {
+	document.addEventListener('keydown', onKeydown);
+});
+
+onBeforeUnmount(() => {
+	document.removeEventListener('keydown', onKeydown);
 });
 </script>
 
