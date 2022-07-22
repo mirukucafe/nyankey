@@ -1,7 +1,7 @@
 {
-	"name": "misskey-js",
-	"version": "0.0.14",
-	"description": "Misskey SDK for JavaScript",
+	"name": "foundkey-js",
+	"version": "0.0.15",
+	"description": "Fork of misskey-js for Foundkey",
 	"main": "./built/index.js",
 	"types": "./built/index.d.ts",
 	"scripts": {
@@ -16,7 +16,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/misskey-dev/misskey.js.git"
+		"url": "git+https://akkoma.dev/norm/foundkey.js.git"
 	},
 	"devDependencies": {
 		"@microsoft/api-extractor": "^7.19.3",
