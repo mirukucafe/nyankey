@@ -1,5 +1,5 @@
 <template>
-<MkModal ref="modal" @click="done(true)" @closed="$emit('closed')">
+<MkModal ref="modal" @click="done(true)" @closed="emit('closed')">
 	<div class="container">
 		<div class="fullwidth top-caption">
 			<div class="mk-dialog">
