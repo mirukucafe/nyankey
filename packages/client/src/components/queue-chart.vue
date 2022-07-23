@@ -42,14 +42,6 @@ Chart.register(
 	Filler,
 );
 
-const alpha = (hex, a) => {
-	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)!;
-	const r = parseInt(result[1], 16);
-	const g = parseInt(result[2], 16);
-	const b = parseInt(result[3], 16);
-	return `rgba(${r}, ${g}, ${b}, ${a})`;
-};
-
 export default defineComponent({
 	props: {
 		domain: {
@@ -81,7 +73,7 @@ export default defineComponent({
 						borderWidth: 2,
 						borderJoinStyle: 'round',
 						borderColor: '#00E396',
-						backgroundColor: alpha('#00E396', 0.1),
+						backgroundColor: '#00E3961A',
 						data: []
 					}, {
 						label: 'Active',
@@ -90,7 +82,7 @@ export default defineComponent({
 						borderWidth: 2,
 						borderJoinStyle: 'round',
 						borderColor: '#00BCD4',
-						backgroundColor: alpha('#00BCD4', 0.1),
+						backgroundColor: '#00BCD41A',
 						data: []
 					}, {
 						label: 'Waiting',
@@ -99,7 +91,7 @@ export default defineComponent({
 						borderWidth: 2,
 						borderJoinStyle: 'round',
 						borderColor: '#FFB300',
-						backgroundColor: alpha('#FFB300', 0.1),
+						backgroundColor: '#FFB3001A',
 						yAxisID: 'y2',
 						data: []
 					}, {
@@ -130,7 +122,7 @@ export default defineComponent({
 							grid: {
 								display: true,
 								color: gridColor,
-								borderColor: 'rgb(0, 0, 0, 0)',
+								borderColor: '#0000',
 							},
 							ticks: {
 								display: false,
@@ -143,7 +135,7 @@ export default defineComponent({
 							stackWeight: 2,
 							grid: {
 								color: gridColor,
-								borderColor: 'rgb(0, 0, 0, 0)',
+								borderColor: '#0000',
 							},
 						},
 						y2: {
@@ -153,7 +145,7 @@ export default defineComponent({
 							stackWeight: 1,
 							grid: {
 								color: gridColor,
-								borderColor: 'rgb(0, 0, 0, 0)',
+								borderColor: '#0000',
 							},
 						},
 					},
