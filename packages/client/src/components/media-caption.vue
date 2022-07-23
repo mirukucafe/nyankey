@@ -68,7 +68,7 @@ function done(canceled: boolean, result?: string): void {
 	modal.close();
 }
 
-async function ok(): Promise<void> {
+function ok(): void {
 	if (!props.showOkButton) return;
 
 	const result = inputValue;
