@@ -13,11 +13,12 @@ const props = defineProps<{
 	hpml: Hpml;
 }>();
 
-let text = $ref(props.hpml.interpolate(props.block.text));
+let text = $ref('');
 
 watch(props.hpml.vars, () => {
-	text = props.hpml.interpolate(props.block.text);
+	text = props.hpml.interpolate(props.block.text) as string;
 }, {
 	deep: true,
+	immediate: true,
 });
 </script>
