@@ -23,6 +23,7 @@ export const paramDef = {
 		description: { type: 'string' },
 		permission: { type: 'array', uniqueItems: true, items: {
 			type: 'string',
+			// FIXME: add enum of possible permissions
 		} },
 		callbackUrl: { type: 'string', nullable: true },
 	},
@@ -34,9 +35,6 @@ export default define(meta, paramDef, async (ps, user) => {
 	// Generate secret
 	const secret = secureRndstr(32, true);
 
-	// for backward compatibility
-	const permission = unique(ps.permission.map(v => v.replace(/^(.+)(\/|-)(read|write)$/, '$3:$1')));
-
 	// Create account
 	const app = await Apps.insert({
 		id: genId(),
@@ -44,7 +42,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user ? user.id : null,
 		name: ps.name,
 		description: ps.description,
-		permission,
+		permission: ps.permission,
 		callbackUrl: ps.callbackUrl,
 		secret: secret,
 	}).then(x => Apps.findOneByOrFail(x.identifiers[0]));
