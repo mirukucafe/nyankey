@@ -19,7 +19,7 @@ const props = defineProps<{
 
 const MkUrlPreview = defineAsyncComponent(() => import('@/components/url-preview.vue'));
 
-let text: string = $ref(props.hpml.interpolate(props.block.text) ?? '');
+let text: string = $ref('');
 
 const urls = computed((): string[] => {
 	if (text) {
@@ -30,9 +30,10 @@ const urls = computed((): string[] => {
 });
 
 watch(props.hpml.vars, () => {
-	text = props.hpml.interpolate(props.block.text) ?? '';
+	text = props.hpml.interpolate(props.block.text) as string;
 }, {
 	deep: true,
+	immediate: true,
 });
 </script>
 
