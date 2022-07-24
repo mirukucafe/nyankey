@@ -15,12 +15,14 @@
 			</div>
 		</div>
 	</div>
-	<template v-if="depth < 5">
-		<MkNoteSub v-for="reply in replies" :key="reply.id" :note="reply" class="reply" :detail="true" :depth="depth + 1"/>
+	<template v-if="conversation">
+		<template v-if="depth < 5">
+			<MkNoteSub v-for="reply in replies" :key="reply.id" :note="reply" class="reply" :conversation="conversation" :depth="depth + 1"/>
+		</template>
+		<div v-else-if="replies.length > 0" class="more">
+			<MkA class="text _link" :to="notePage(note)">{{ i18n.ts.continueThread }} <i class="fas fa-angle-double-right"></i></MkA>
+		</div>
 	</template>
-	<div v-else class="more">
-		<MkA class="text _link" :to="notePage(note)">{{ i18n.ts.continueThread }} <i class="fas fa-angle-double-right"></i></MkA>
-	</div>
 </div>
 </template>
 
@@ -36,7 +38,7 @@ import { i18n } from '@/i18n';
 
 const props = withDefaults(defineProps<{
 	note: misskey.entities.Note;
-	detail?: boolean;
+	conversation?: misskey.entities.Note[];
 
 	// how many notes are in between this one and the note being viewed in detail
 	depth?: number;
@@ -45,16 +47,7 @@ const props = withDefaults(defineProps<{
 });
 
 let showContent = $ref(false);
-let replies: misskey.entities.Note[] = $ref([]);
-
-if (props.detail) {
-	os.api('notes/children', {
-		noteId: props.note.id,
-		limit: 5,
-	}).then(res => {
-		replies = res;
-	});
-}
+const replies: misskey.entities.Note[] = props.conversation?.filter(item => item.replyId === props.note.id || item.renoteId === props.note.id) ?? [];
 </script>
 
 <style lang="scss" scoped>
