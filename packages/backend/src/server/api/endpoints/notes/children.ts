@@ -72,5 +72,5 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	const notes = await query.getMany();
 
-	return await Notes.packMany(notes, user);
+	return await Notes.packMany(notes, user, { detail: false });
 });
