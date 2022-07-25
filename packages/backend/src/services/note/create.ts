@@ -345,19 +345,15 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			}
 		}
 
-		// Pack the note
-		const noteObj = await Notes.pack(note);
+		publishNotesStream(note);
 
-		publishNotesStream(noteObj);
+		const webhooks = await getActiveWebhooks().then(webhooks => webhooks.filter(x => x.userId === user.id && x.on.includes('note')));
 
-		getActiveWebhooks().then(webhooks => {
-			webhooks = webhooks.filter(x => x.userId === user.id && x.on.includes('note'));
-			for (const webhook of webhooks) {
-				webhookDeliver(webhook, 'note', {
-					note: noteObj,
-				});
-			}
-		});
+		for (const webhook of webhooks) {
+			webhookDeliver(webhook, 'note', {
+				note: await Notes.pack(note, user),
+			});
+		}
 
 		const nm = new NotificationManager(user, note);
 		const nmRelatedPromises = [];
@@ -378,12 +374,14 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 				if (!threadMuted) {
 					nm.push(data.reply.userId, 'reply');
-					publishMainStream(data.reply.userId, 'reply', noteObj);
+
+					const packedReply = await Notes.pack(note, { id: data.reply.userId });
+					publishMainStream(data.reply.userId, 'reply', packedReply);
 
 					const webhooks = (await getActiveWebhooks()).filter(x => x.userId === data.reply!.userId && x.on.includes('reply'));
 					for (const webhook of webhooks) {
 						webhookDeliver(webhook, 'reply', {
-							note: noteObj,
+							note: packedReply,
 						});
 					}
 				}
@@ -404,12 +402,13 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 			// Publish event
 			if ((user.id !== data.renote.userId) && data.renote.userHost === null) {
-				publishMainStream(data.renote.userId, 'renote', noteObj);
+				const packedRenote = await Notes.pack(note, { id: data.renote.userId });
+				publishMainStream(data.renote.userId, 'renote', packedRenote);
 
 				const webhooks = (await getActiveWebhooks()).filter(x => x.userId === data.renote!.userId && x.on.includes('renote'));
 				for (const webhook of webhooks) {
 					webhookDeliver(webhook, 'renote', {
-						note: noteObj,
+						note: packedRenote,
 					});
 				}
 			}
@@ -641,17 +640,23 @@ async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, 
 			continue;
 		}
 
-		const detailPackedNote = await Notes.pack(note, u, {
-			detail: true,
-		});
-
-		publishMainStream(u.id, 'mention', detailPackedNote);
-
-		const webhooks = (await getActiveWebhooks()).filter(x => x.userId === u.id && x.on.includes('mention'));
-		for (const webhook of webhooks) {
-			webhookDeliver(webhook, 'mention', {
-				note: detailPackedNote,
+		// note with "specified" visibility might not be visible to mentioned users
+		try {
+			const detailPackedNote = await Notes.pack(note, u, {
+				detail: true,
 			});
+
+			publishMainStream(u.id, 'mention', detailPackedNote);
+
+			const webhooks = (await getActiveWebhooks()).filter(x => x.userId === u.id && x.on.includes('mention'));
+			for (const webhook of webhooks) {
+				webhookDeliver(webhook, 'mention', {
+					note: detailPackedNote,
+				});
+			}
+		} catch (err) {
+			if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') continue;
+			throw err;
 		}
 
 		// Create notification

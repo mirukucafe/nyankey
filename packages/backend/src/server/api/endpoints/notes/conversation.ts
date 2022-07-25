@@ -40,9 +40,9 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
-	const note = await getNote(ps.noteId).catch(e => {
-		if (e.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
-		throw e;
+	const note = await getNote(ps.noteId, user).catch(err => {
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		throw err;
 	});
 
 	const conversation: Note[] = [];
@@ -50,7 +50,11 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	async function get(id: any) {
 		i++;
-		const p = await Notes.findOneBy({ id });
+		const p = await getNote(id, user).catch(e => {
+			if (e.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') return null;
+			throw e;
+		});
+
 		if (p == null) return;
 
 		if (i > ps.offset!) {
