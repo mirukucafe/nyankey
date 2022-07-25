@@ -19,42 +19,43 @@
 </section>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 
-export default defineComponent({
-	components: {
-		MkButton
-	},
-	props: ['session'],
-	computed: {
-		name(): string {
-			const el = document.createElement('div');
-			el.textContent = this.app.name;
-			return el.innerHTML;
-		},
-		app(): any {
-			return this.session.app;
-		}
-	},
-	methods: {
-		cancel() {
-			os.api('auth/deny', {
-				token: this.session.token
-			}).then(() => {
-				this.$emit('denied');
-			});
-		},
+const emit = defineEmits<{
+	(ev: 'denied'): void;
+	(ev: 'accepted'): void;
+}>();
 
-		accept() {
-			os.api('auth/accept', {
-				token: this.session.token
-			}).then(() => {
-				this.$emit('accepted');
-			});
-		}
-	}
-});
+const props = defineProps<{
+	session: {
+		app: {
+			name: string;
+			id: string;
+			description: string;
+			permission: string[];
+		};
+		token: string;
+	};
+}>();
+
+const app = props.session.app;
+
+function cancel() {
+	os.api('auth/deny', {
+		token: props.session.token,
+	}).then(() => {
+		emit('denied');
+	});
+}
+
+function accept() {
+	os.api('auth/accept', {
+		token: props.session.token,
+	}).then(() => {
+		emit('accepted');
+	});
+}
 </script>
