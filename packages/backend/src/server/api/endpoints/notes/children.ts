@@ -54,7 +54,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		.andWhere('note.id IN (SELECT id FROM note_replies(:noteId, :depth, :limit))', { noteId: ps.noteId, depth: ps.depth, limit: ps.limit })
 		.innerJoinAndSelect('note.user', 'user')
 		.leftJoinAndSelect('user.avatar', 'avatar')
-		.leftJoinAndSelect('user.banner', 'banner')
+		.leftJoinAndSelect('user.banner', 'banner');
 
 	generateVisibilityQuery(query, user);
 	if (user) {
