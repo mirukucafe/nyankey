@@ -25,6 +25,7 @@ export const AppRepository = db.getRepository(App).extend({
 		return {
 			id: app.id,
 			name: app.name,
+			description: app.description,
 			callbackUrl: app.callbackUrl,
 			permission: app.permission,
 			...(opts.includeSecret ? { secret: app.secret } : {}),
