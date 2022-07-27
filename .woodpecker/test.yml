@@ -41,7 +41,7 @@ pipeline:
 services:
   postgres:
     image: postgres:13
-    env:
+    environment:
       - POSTGRES_DB=test-misskey
       - POSTGRES_HOST_AUTH_METHOD=trust
   redis:
