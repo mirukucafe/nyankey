@@ -72,7 +72,7 @@ export default class Resolver {
 			throw new Error('Instance is blocked');
 		}
 
-		if (config.signToActivityPubGet && !this.user) {
+		if (!this.user) {
 			this.user = await getInstanceActor();
 		}
 
