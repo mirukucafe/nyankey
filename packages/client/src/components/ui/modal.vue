@@ -31,7 +31,7 @@ type ModalTypes = 'popup' | 'dialog' | 'dialog:top' | 'drawer';
 const props = withDefaults(defineProps<{
 	manualShowing?: boolean | null;
 	anchor?: { x: string; y: string; };
-	src?: HTMLElement;
+	src?: HTMLElement | null;
 	preferType?: ModalTypes | 'auto';
 	zPriority?: 'low' | 'middle' | 'high';
 	noOverlap?: boolean;
@@ -102,7 +102,7 @@ const MARGIN = 16;
 const align = () => {
 	if (props.src == null) return;
 	if (type === 'drawer') return;
-	if (type == 'dialog') return;
+	if (type === 'dialog') return;
 
 	if (content == null) return;
 
