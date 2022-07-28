@@ -1,7 +1,7 @@
 <template>
-<div class="mk-google">
+<div class="mk-search">
 	<input v-model="query" type="search" :placeholder="q">
-	<button @click="search"><i class="fas fa-search"></i> {{ $ts.search }}</button>
+	<button><i class="fas fa-search"></i> {{ $ts.search }}</button>
 </div>
 </template>
 
@@ -13,14 +13,10 @@ const props = defineProps<{
 }>();
 
 const query = ref(props.q);
-
-const search = () => {
-	window.open(`https://www.google.com/search?q=${query.value}`, '_blank');
-};
 </script>
 
 <style lang="scss" scoped>
-.mk-google {
+.mk-search {
 	display: flex;
 	margin: 8px 0;
 
