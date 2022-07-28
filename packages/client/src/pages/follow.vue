@@ -2,9 +2,10 @@
 <!-- This page does not really have any content, it is mainly processing stuff -->
 <MkLoading v-if="state == 'loading'"/>
 <MkError v-if="state == 'error'" :final="finalError" @retry="doIt"/>
+<div v-if="state == 'done'">{{ i18n.ts.done }}</div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { } from 'vue';
 import * as Acct from 'misskey-js/built/acct';
 import * as os from '@/os';
@@ -35,9 +36,10 @@ function doIt() {
 	state = 'loading';
 
 	const acct = new URL(location.href).searchParams.get('acct');
-	if (acct == null) {
+	if (acct == null || acct.trim() === '') {
 		finalError = true;
 		state = 'error';
+		return;
 	}
 
 	let promise;
@@ -45,8 +47,7 @@ function doIt() {
 	if (acct.startsWith('https://')) {
 		promise = os.api('ap/show', {
 			uri: acct,
-		});
-		promise.then(res => {
+		}).then(res => {
 			if (res.type === 'User') {
 				follow(res.object);
 			} else if (res.type === 'Note') {
@@ -59,16 +60,16 @@ function doIt() {
 					finalError = true;
 					state = 'error';
 				});
+				return;
 			}
+			state = 'done';
 		});
+		os.promiseDialog(promise, null, null, i18n.ts.fetchingAsApObject);
 	} else {
-		promise = os.api('users/show', Acct.parse(acct));
-		promise.then(user => {
-			follow(user);
-		});
+		os.api('users/show', Acct.parse(acct))
+			.then(user => follow(user))
+			.then(() => state = 'done');
 	}
-
-	os.promiseDialog(promise, null, null, i18n.ts.fetchingAsApObject);
 }
 
 doIt();
