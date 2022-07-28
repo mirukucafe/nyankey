@@ -5,11 +5,10 @@ import { Users, DriveFiles, Notes, Channels, Blockings } from '@/models/index.js
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { Note } from '@/models/entities/note.js';
 import { Channel } from '@/models/entities/channel.js';
-import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
+import { MAX_NOTE_TEXT_LENGTH, HOUR } from '@/const.js';
 import { noteVisibilities } from '../../../../types.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
-import { HOUR } from '@/const.js';
 import { getNote } from '../../common/getters.js';
 
 export const meta = {
@@ -91,7 +90,7 @@ export const paramDef = {
 	type: 'object',
 	properties: {
 		visibility: {
-			description: 'The visibility of the new note. Must be the same or more restrictive than a replied to or quoted note.'
+			description: 'The visibility of the new note. Must be the same or more restrictive than a replied to or quoted note.',
 			type: 'string',
 			enum: noteVisibilities,
 			default: 'public',
