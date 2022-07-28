@@ -78,13 +78,24 @@ export const meta = {
 			code: 'YOU_HAVE_BEEN_BLOCKED',
 			id: 'b390d7e1-8a5e-46ed-b625-06271cafd3d3',
 		},
+
+		lessRestrictiveVisibility: {
+			message: 'The visibility cannot be less restrictive than the parent note.',
+			code: 'LESS_RESTRICTIVE_VISIBILITY',
+			id: 'c8ab7a7a-8852-41e2-8b24-079bbaceb585',
+		},
 	},
 } as const;
 
 export const paramDef = {
 	type: 'object',
 	properties: {
-		visibility: { type: 'string', enum: noteVisibilities, default: 'public' },
+		visibility: {
+			description: 'The visibility of the new note. Must be the same or more restrictive than a replied to or quoted note.'
+			type: 'string',
+			enum: noteVisibilities,
+			default: 'public',
+		},
 		visibleUserIds: { type: 'array', uniqueItems: true, items: {
 			type: 'string', format: 'misskey:id',
 		} },
@@ -195,6 +206,11 @@ export default define(meta, paramDef, async (ps, user) => {
 			throw new ApiError(meta.errors.cannotReRenote);
 		}
 
+		// check that the visibility is not less restrictive
+		if (noteVisibilities.indexOf(renote.visibility) > noteVisibilities.indexOf(ps.visibility)) {
+			throw new ApiError(meta.errors.lessRestrictiveVisibility);
+		}
+
 		// Check blocking
 		if (renote.userId !== user.id) {
 			const block = await Blockings.findOneBy({
@@ -217,6 +233,11 @@ export default define(meta, paramDef, async (ps, user) => {
 
 		if (reply.renoteId && !reply.text && !reply.fileIds && !reply.hasPoll) {
 			throw new ApiError(meta.errors.cannotReplyToPureRenote);
+		}
+
+		// check that the visibility is not less restrictive
+		if (noteVisibilities.indexOf(reply.visibility) > noteVisibilities.indexOf(ps.visibility)) {
+			throw new ApiError(meta.errors.lessRestrictiveVisibility);
 		}
 
 		// Check blocking

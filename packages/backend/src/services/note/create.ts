@@ -170,11 +170,6 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		data.visibility = 'followers';
 	}
 
-	// 返信対象がpublicではないならhomeにする
-	if (data.reply && data.reply.visibility !== 'public' && data.visibility === 'public') {
-		data.visibility = 'home';
-	}
-
 	// ローカルのみをRenoteしたらローカルのみにする
 	if (data.renote && data.renote.localOnly && data.channel == null) {
 		data.localOnly = true;
