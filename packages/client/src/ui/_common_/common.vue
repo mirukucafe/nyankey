@@ -1,5 +1,6 @@
 <template>
-<component :is="popup.component"
+<component
+	:is="popup.component"
 	v-for="popup in popups"
 	:key="popup.id"
 	v-bind="popup.props"
@@ -15,56 +16,44 @@
 <div v-if="dev" id="devTicker"><span>DEV BUILD</span></div>
 </template>
 
-<script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue';
-import { popup, popups, pendingApiRequestsCount } from '@/os';
+<script lang="ts" setup>
+import { defineAsyncComponent, Ref, ref } from 'vue';
+import { swInject } from './sw-inject';
+import { popup as showPopup, popups, pendingApiRequestsCount } from '@/os';
 import { uploads } from '@/scripts/upload';
 import * as sound from '@/scripts/sound';
 import { $i } from '@/account';
-import { swInject } from './sw-inject';
 import { stream } from '@/stream';
 
-export default defineComponent({
-	components: {
-		XStreamIndicator: defineAsyncComponent(() => import('./stream-indicator.vue')),
-		XUpload: defineAsyncComponent(() => import('./upload.vue')),
-	},
+const XStreamIndicator = defineAsyncComponent(() => import('./stream-indicator.vue'));
+const XUpload = defineAsyncComponent(() => import('./upload.vue'));
+const dev: Ref<boolean> = ref(_DEV_);
 
-	setup() {
-		const onNotification = notification => {
-			if ($i.mutingNotificationTypes.includes(notification.type)) return;
+const onNotification = (notification: { type: string; id: any; }): void => {
+	if ($i?.mutingNotificationTypes.includes(notification.type)) return;
 
-			if (document.visibilityState === 'visible') {
-				stream.send('readNotification', {
-					id: notification.id
-				});
+	if (document.visibilityState === 'visible') {
+		stream.send('readNotification', {
+			id: notification.id,
+		});
 
-				popup(defineAsyncComponent(() => import('@/components/notification-toast.vue')), {
-					notification
-				}, {}, 'closed');
-			}
+		showPopup(defineAsyncComponent(() => import('@/components/notification-toast.vue')), {
+			notification
+		}, {}, 'closed');
+	}
 
-			sound.play('notification');
-		};
+	sound.play('notification');
+};
 
-		if ($i) {
-			const connection = stream.useChannel('main', null, 'UI');
-			connection.on('notification', onNotification);
+if ($i) {
+	const connection = stream.useChannel('main', null, 'UI');
+	connection.on('notification', onNotification);
 
-			//#region Listen message from SW
-			if ('serviceWorker' in navigator) {
-				swInject();
-			}
-		}
-
-		return {
-			uploads,
-			popups,
-			pendingApiRequestsCount,
-			dev: _DEV_,
-		};
-	},
-});
+	//#region Listen message from SW
+	if ('serviceWorker' in navigator) {
+		swInject();
+	}
+}
 </script>
 
 <style lang="scss">

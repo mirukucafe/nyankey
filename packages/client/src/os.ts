@@ -150,6 +150,7 @@ export const popups = ref([]) as Ref<{
 	id: any;
 	component: any;
 	props: Record<string, any>;
+	events: any[];
 }[]>;
 
 const zIndexes = {
