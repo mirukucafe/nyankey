@@ -191,4 +191,4 @@ If you encounter any problems with updating, please try the following:
 
 ----------------------------------------------------------------
 
-If you have any questions or troubles, feel free to contact us on [IRC](ircs://irc.akkoma.dev:6697/#foundkey) (`#foundkey` on `irc.akkoma.dev`, port `6697` with SSL)!
+If you have any questions or troubles, feel free to contact us on IRC (`#foundkey` on `irc.akkoma.dev`, port `6697` with SSL)!
