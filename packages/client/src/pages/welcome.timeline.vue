@@ -1,7 +1,7 @@
 <template>
 <div class="civpbkhh">
-	<div ref="scroll" class="scrollbox" v-bind:class="{ scroll: isScrolling }">
-		<div v-for="note in notes" class="note">
+	<div ref="scroll" class="scrollbox" :class="{ scroll: isScrolling }">
+		<div v-for="note in notes" :key="note.id" class="note">
 			<div class="content _panel">
 				<div class="body">
 					<MkA v-if="note.replyId" class="reply" :to="`/notes/${note.replyId}`"><i class="fas fa-reply"></i></MkA>
@@ -12,7 +12,7 @@
 					<XMediaList :media-list="note.files"/>
 				</div>
 				<div v-if="note.poll">
-					<XPoll :note="note" :readOnly="true"/>
+					<XPoll :note="note" :read-only="true"/>
 				</div>
 			</div>
 			<XReactionsViewer ref="reactionsViewer" :note="note"/>
@@ -21,37 +21,26 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onUpdated, ref, Ref } from 'vue';
+import { Note } from 'misskey-js/built/entities';
 import XReactionsViewer from '@/components/reactions-viewer.vue';
 import XMediaList from '@/components/media-list.vue';
 import XPoll from '@/components/poll.vue';
 import * as os from '@/os';
+import { $i } from '@/account';
 
-export default defineComponent({
-	components: {
-		XReactionsViewer,
-		XMediaList,
-		XPoll
-	},
+const notes: Ref<Note[]> = ref([]);
+const isScrolling = ref(false);
+const scroll: Ref<HTMLElement | null> = ref(null);
 
-	data() {
-		return {
-			notes: [],
-			isScrolling: false,
-		};
-	},
+os.api('notes/featured').then(newNotes => {
+	notes.value = newNotes;
+});
 
-	created() {
-		os.api('notes/featured').then(notes => {
-			this.notes = notes;
-		});
-	},
-
-	updated() {
-		if (this.$refs.scroll.clientHeight > window.innerHeight) {
-			this.isScrolling = true;
-		}
+onUpdated(() => {
+	if (scroll.value && scroll.value.clientHeight > window.innerHeight) {
+		isScrolling.value = true;
 	}
 });
 </script>
