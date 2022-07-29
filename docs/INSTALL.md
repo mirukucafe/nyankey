@@ -9,7 +9,8 @@ This guide describes how to install and setup FoundKey.
 *1.* Create FoundKey user
 ----------------------------------------------------------------
 Running FoundKey as root is not a good idea. Create a separate user to run FoundKey.
-In debian for exemple :
+
+In debian for example:
 
 ```sh
 adduser --disabled-password --disabled-login foundkey
@@ -19,15 +20,17 @@ adduser --disabled-password --disabled-login foundkey
 ----------------------------------------------------------------
 FoundKey requires the following packages to run:
 
-#### Dependencies :package:
+### Dependencies :package:
 * **[Node.js](https://nodejs.org/en/)** (16.x)
 * **[PostgreSQL](https://www.postgresql.org/)** (12.x / 13.x is preferred)
 * **[Redis](https://redis.io/)**
+
+The following are needed to compile native npm modules:
 * A C/C++ compiler toolchain like **GCC** or **Clang**.
 * **[Python](https://python.org/)** (3.x)
 
-##### Optional
-* [Yarn](https://yarnpkg.com/) - *Optional but recommended for security reasons. If you won't install it, use `npx yarn` instead of `yarn`.*
+### Optional
+* [Yarn](https://yarnpkg.com/) - *If you decide not to install it, use `npx yarn` instead of `yarn`.*
 * [FFmpeg](https://www.ffmpeg.org/)
 
 To install the dependiencies on Debian (or derivatives like Ubuntu) you can use the following commands:
@@ -39,7 +42,7 @@ apt install build-essential python3 nodejs postgresql redis
 apt install ffmpeg
 corepack enable # for yarn
 ```
-Other OSes will have different package names and package managers to install the dependencies.
+You will need to adapt this for whichever OS you are using to host FoundKey.
 
 *3.* Install FoundKey
 ----------------------------------------------------------------
@@ -49,7 +52,7 @@ Other OSes will have different package names and package managers to install the
 
 2. Clone the FoundKey repository
 
-	`git clone --recursive https://akkoma.dev/FoundKeyGang/FoundKey`
+	`git clone --recursive https://akkoma.dev/FoundKeyGang/FoundKey foundkey`
 
 3. Navigate to the repository
 
@@ -61,11 +64,13 @@ Other OSes will have different package names and package managers to install the
 
 *4.* Configure FoundKey
 ----------------------------------------------------------------
-1. Copy the `.config/example.yml` and rename it to `default.yml`.
+1. Copy `.config/example.yml` to `.config/default.yml`.
 
 	`cp .config/example.yml .config/default.yml`
 
-2. Edit `default.yml`
+2. Edit `default.yml` with a text editor
+	- Make sure you set the PostgreSQL and Redis settings correctly.
+	- Use a strong password for the PostgreSQL user and take note of it since it'll be needed later.
 
 *5.* Build FoundKey
 ----------------------------------------------------------------
@@ -102,20 +107,16 @@ grant all privileges on database foundkey to foundkey;
 2. Run the database initialisation
 	`yarn run init`
 
-*7.* That is it.
+*7.* Running FoundKey
 ----------------------------------------------------------------
 Well done! Now, you can begin using FoundKey.
 
-### Launch normally
-Just `NODE_ENV=production npm start`. GLHF!
+### Launching manually
+Run `NODE_ENV=production npm start` to launch FoundKey manually. To stop the server, use Ctrl-C.
 
 ### Launch with systemd
 
-1. Create a systemd service here
-
-	`/etc/systemd/system/foundkey.service`
-
-2. Edit it, and paste this and save:
+1. Run `systemctl --edit --full --force foundkey.service`, and paste the following:
 
 ```ini
 [Unit]
@@ -137,13 +138,10 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-3. Reload systemd and enable the foundkey service.
+2. Save the file, then enable and start FoundKey.
 
-	`systemctl daemon-reload ; systemctl enable foundkey`
+	`systemctl enable --now foundkey`
 
-4. Start the foundkey service.
-
-	`systemctl start foundkey`
 
 You can check if the service is running with `systemctl status foundkey`.
 
