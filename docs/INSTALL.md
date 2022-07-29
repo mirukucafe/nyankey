@@ -1,32 +1,27 @@
-FoundKey Setup and Installation Guide
-================================================================
+# FoundKey Setup and Installation Guide
 
-We thank you for your interest in setting up your FoundKey server!
-This guide describes how to install and setup FoundKey.
+This guide will assume that you have administrative rights, either as root or a user with sudo permissions. If you are using a non-root user, prefix the commands with `sudo` except when you are logged into the foundkey user with `su`.
 
-----------------------------------------------------------------
+This guide will also assume you're using Debian or a derivative like Ubuntu. If you are using another OS, you will need to adapt the comamnds and package names to match those that your OS uses.
 
-*1.* Create FoundKey user
-----------------------------------------------------------------
+## Create FoundKey user
 Running FoundKey as root is not a good idea. Create a separate user to run FoundKey.
-
-In debian for example:
 
 ```sh
 adduser --disabled-password --disabled-login foundkey
 ```
 
-*2.* Install dependencies
-----------------------------------------------------------------
+## Install dependencies
 FoundKey requires the following packages to run:
 
 ### Dependencies :package:
-* **[Node.js](https://nodejs.org/en/)** (16.x)
-* **[PostgreSQL](https://www.postgresql.org/)** (12.x / 13.x is preferred)
+* **[Node.js](https://nodejs.org/en/)** (16.x/18.x)
+* **[PostgreSQL](https://www.postgresql.org/)** (12.x minimum; 13.x+ is preferred)
 * **[Redis](https://redis.io/)**
 
 The following are needed to compile native npm modules:
-* A C/C++ compiler toolchain like **GCC** or **Clang**.
+* A C/C++ compiler like **GCC** or **Clang**
+* Build tools like **make**
 * **[Python](https://python.org/)** (3.x)
 
 ### Optional
@@ -42,11 +37,9 @@ apt install build-essential python3 nodejs postgresql redis
 apt install ffmpeg
 corepack enable # for yarn
 ```
-You will need to adapt this for whichever OS you are using to host FoundKey.
 
-*3.* Install FoundKey
-----------------------------------------------------------------
-1. Connect to the `foundkey` user
+## Install FoundKey
+1. Login to the `foundkey` user
 
 	`su - foundkey`
 
@@ -62,8 +55,7 @@ You will need to adapt this for whichever OS you are using to host FoundKey.
 
 	`yarn install`
 
-*4.* Configure FoundKey
-----------------------------------------------------------------
+## Configure FoundKey
 1. Copy `.config/example.yml` to `.config/default.yml`.
 
 	`cp .config/example.yml .config/default.yml`
@@ -72,8 +64,7 @@ You will need to adapt this for whichever OS you are using to host FoundKey.
 	- Make sure you set the PostgreSQL and Redis settings correctly.
 	- Use a strong password for the PostgreSQL user and take note of it since it'll be needed later.
 
-*5.* Build FoundKey
-----------------------------------------------------------------
+## Build FoundKey
 
 Build foundkey with the following:
 
@@ -85,13 +76,10 @@ If you're still encountering errors about some modules, use node-gyp:
 2. `npx node-gyp build`
 3. `NODE_ENV=production yarn build`
 
-*6.* Init DB
-----------------------------------------------------------------
-1. Create the appropriate PostgreSQL users with respective passwords,
-	and empty database as named in the configuration file.
-	Make sure the database connection also works correctly when run from the
-	user that will later run FoundKey, or it could cause problems later.
-	The encoding of the database should be UTF-8.
+## Setting up the database
+Create the appropriate PostgreSQL users with respective passwords, and empty database as named in the configuration file.
+	
+Make sure the database connection also works correctly when run from the user that will later run FoundKey, or it could cause problems later. The encoding of the database should be UTF-8.
 
 ```sh
 sudo -u postgres psql
@@ -104,19 +92,18 @@ grant all privileges on database foundkey to foundkey;
 \q
 ```
 
-2. Run the database initialisation
+Next, initialize the database:
 	`yarn run init`
 
-*7.* Running FoundKey
-----------------------------------------------------------------
-Well done! Now, you can begin using FoundKey.
+## Running FoundKey
+You can either run FoundKey manually or use the system service manager to start FoundKey automatically on startup.
 
 ### Launching manually
 Run `NODE_ENV=production npm start` to launch FoundKey manually. To stop the server, use Ctrl-C.
 
 ### Launch with systemd
 
-1. Run `systemctl --edit --full --force foundkey.service`, and paste the following:
+Run `systemctl --edit --full --force foundkey.service`, and paste the following:
 
 ```ini
 [Unit]
@@ -138,16 +125,16 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-2. Save the file, then enable and start FoundKey.
-
-	`systemctl enable --now foundkey`
-
+Save the file, then enable and start FoundKey.
+```sh
+systemctl enable --now foundkey
+```
 
 You can check if the service is running with `systemctl status foundkey`.
 
 ### Launch with OpenRC
 
-1. Copy the following text to `/etc/init.d/foundkey`:
+Copy the following text to `/etc/init.d/foundkey`:
 
 ```sh
 #!/sbin/openrc-run
@@ -173,24 +160,40 @@ depend() {
 }
 ```
 
-2. Set the service to start on boot
+Mark the script as executable and enable the service to start on boot:
 
-	`rc-update add foundkey`
+```sh
+chmod +x /etc/init.d/foundkey
+rc-update add foundkey
+```
 
-3. Start the FoundKey service
+Start the FoundKey service:
 
-	`rc-service foundkey start`
+```sh
+rc-service foundkey start
+```
 
 You can check if the service is running with `rc-service foundkey status`.
 
-### How to update your FoundKey server to the latest version
-1. `git pull`
-2. `git submodule update --init`
-3. `yarn install`
-4. `NODE_ENV=production yarn build`
-5. `yarn migrate`
-6. Restart your FoundKey process to apply changes
-7. Enjoy
+### Updating FoundKey
+Use git to pull in the latest changes and rerun the build and migration commands:
+
+```sh
+git pull
+git submodule update --init
+yarn install
+NODE_ENV=production yarn build
+yarn migrate
+```
+
+Then restart FoundKey if it's still running.
+```sh
+# Systemd
+systemctl restart foundkey
+
+# OpenRC
+rc-service foundkey restart
+```
 
 If you encounter any problems with updating, please try the following:
 1. `yarn clean` or `yarn cleanall`
@@ -198,4 +201,4 @@ If you encounter any problems with updating, please try the following:
 
 ----------------------------------------------------------------
 
-If you have any questions or troubles, feel free to contact us on IRC (`#foundkey` on `irc.akkoma.dev`, port `6697` with SSL)!
+If you have any questions or troubles, feel free to contact us on IRC: `#foundkey` on `irc.akkoma.dev`, port `6697` with SSL
