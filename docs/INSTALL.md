@@ -33,7 +33,7 @@ FoundKey requires the following packages to run:
 To install the dependiencies on Debian (or derivatives like Ubuntu) you can use the following commands:
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-apt install build-essential python nodejs postgresql redis
+apt install build-essential python3 nodejs postgresql redis
 
 # Optional dependencies
 apt install ffmpeg
