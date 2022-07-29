@@ -24,6 +24,7 @@ FoundKey requires the following packages to run:
 * **[PostgreSQL](https://www.postgresql.org/)** (12.x / 13.x is preferred)
 * **[Redis](https://redis.io/)**
 * A C/C++ compiler toolchain like **GCC** or **Clang**.
+* **[Python](https://python.org/)** (3.x)
 
 ##### Optional
 * [Yarn](https://yarnpkg.com/) - *Optional but recommended for security reasons. If you won't install it, use `npx yarn` instead of `yarn`.*
@@ -32,7 +33,7 @@ FoundKey requires the following packages to run:
 To install the dependiencies on Debian (or derivatives like Ubuntu) you can use the following commands:
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-apt install build-essential nodejs postgresql redis
+apt install build-essential python nodejs postgresql redis
 
 # Optional dependencies
 apt install ffmpeg
@@ -72,8 +73,6 @@ Other OSes will have different package names and package managers to install the
 Build foundkey with the following:
 
 `NODE_ENV=production yarn build`
-
-If you're on Debian, you will need to install the `build-essential`, `python` package.
 
 If you're still encountering errors about some modules, use node-gyp:
 
