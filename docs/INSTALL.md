@@ -77,16 +77,16 @@ If you're still encountering errors about some modules, use node-gyp:
 	user that will later run FoundKey, or it could cause problems later.
 	The encoding of the database should be UTF-8.
 
-	```sh
-	sudo -u postgres psql
-	```
+```sh
+sudo -u postgres psql
+```
 
-	```sql
-	create database foundkey with encoding = 'UTF8';
-	create user foundkey with encrypted password '{YOUR_PASSWORD}';
-	grant all privileges on database foundkey to foundkey;
-	\q
-	```
+```sql
+create database foundkey with encoding = 'UTF8';
+create user foundkey with encrypted password '{YOUR_PASSWORD}';
+grant all privileges on database foundkey to foundkey;
+\q
+```
 
 2. Run the database initialisation
 	`yarn run init`
@@ -106,27 +106,25 @@ Just `NODE_ENV=production npm start`. GLHF!
 
 2. Edit it, and paste this and save:
 
-	
-	```ini
-	[Unit]
-	Description=FoundKey daemon
+```ini
+[Unit]
+Description=FoundKey daemon
 
-	[Service]
-	Type=simple
-	User=foundkey
-	ExecStart=/usr/bin/npm start
-	WorkingDirectory=/home/foundkey/foundkey
-	Environment="NODE_ENV=production"
-	TimeoutSec=60
-	StandardOutput=syslog
-	StandardError=syslog
-	SyslogIdentifier=foundkey
-	Restart=always
+[Service]
+Type=simple
+User=foundkey
+ExecStart=/usr/bin/npm start
+WorkingDirectory=/home/foundkey/foundkey
+Environment="NODE_ENV=production"
+TimeoutSec=60
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=foundkey
+Restart=always
 
-	[Install]
-	WantedBy=multi-user.target
-	```
-	
+[Install]
+WantedBy=multi-user.target
+```
 
 3. Reload systemd and enable the foundkey service.
 
@@ -142,29 +140,29 @@ You can check if the service is running with `systemctl status foundkey`.
 
 1. Copy the following text to `/etc/init.d/foundkey`:
 
-	```sh
-	#!/sbin/openrc-run
+```sh
+#!/sbin/openrc-run
 
-	name=foundkey
-	description="FoundKey daemon"
+name=foundkey
+description="FoundKey daemon"
 
-	command="/usr/bin/npm"
-	command_args="start"
-	command_user="foundkey"
+command="/usr/bin/npm"
+command_args="start"
+command_user="foundkey"
 
-	supervisor="supervise-daemon"
-	supervise_daemon_args=" -d /home/foundkey/foundkey -e NODE_ENV=\"production\""
+supervisor="supervise-daemon"
+supervise_daemon_args=" -d /home/foundkey/foundkey -e NODE_ENV=\"production\""
 
-	pidfile="/run/${RC_SVCNAME}.pid"
+pidfile="/run/${RC_SVCNAME}.pid"
 
-	depend() {
-		need net
-		use logger
+depend() {
+	need net
+	use logger
 
-		# alternatively, uncomment if using nginx reverse proxy
-		#use logger nginx
-	}
-	```
+	# alternatively, uncomment if using nginx reverse proxy
+	#use logger nginx
+}
+```
 
 2. Set the service to start on boot
 
