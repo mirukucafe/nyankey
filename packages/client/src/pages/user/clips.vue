@@ -9,40 +9,25 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { watch } from 'vue';
 import MkPagination from '@/components/ui/pagination.vue';
 
-export default defineComponent({
-	components: {
-		MkPagination,
-	},
+const props = defineProps<{
+	user: Record<string, any>;
+}>();
 
-	props: {
-		user: {
-			type: Object,
-			required: true
-		},
+const pagination = {
+	endpoint: 'users/clips',
+	limit: 20,
+	params: {
+		userId: props.user.id,
 	},
+};
 
-	data() {
-		return {
-			pagination: {
-				endpoint: 'users/clips' as const,
-				limit: 20,
-				params: {
-					userId: this.user.id,
-				}
-			},
-		};
-	},
+let list = $ref();
 
-	watch: {
-		user() {
-			this.$refs.list.reload();
-		}
-	},
-});
+watch(props.user, () => list.reload());
 </script>
 
 <style lang="scss" scoped>
