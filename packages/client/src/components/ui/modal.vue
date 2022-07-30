@@ -31,7 +31,7 @@ type ModalTypes = 'popup' | 'dialog' | 'dialog:top' | 'drawer';
 const props = withDefaults(defineProps<{
 	manualShowing?: boolean | null;
 	anchor?: { x: string; y: string; };
-	src?: HTMLElement | null;
+	src?: HTMLElement;
 	preferType?: ModalTypes | 'auto';
 	zPriority?: 'low' | 'middle' | 'high';
 	noOverlap?: boolean;
