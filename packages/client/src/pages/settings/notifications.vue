@@ -21,15 +21,15 @@ import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
 async function readAllUnreadNotes() {
-	await os.api('i/read-all-unread-notes');
+	await os.apiWithDialog('i/read-all-unread-notes');
 }
 
 async function readAllMessagingMessages() {
-	await os.api('i/read-all-messaging-messages');
+	await os.apiWithDialog('i/read-all-messaging-messages');
 }
 
 async function readAllNotifications() {
-	await os.api('notifications/mark-all-as-read');
+	await os.apiWithDialog('notifications/mark-all-as-read');
 }
 
 function configure() {
