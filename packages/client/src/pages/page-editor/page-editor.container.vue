@@ -30,7 +30,7 @@ import { i18n } from '@/i18n';
 
 const emit = defineEmits<{
 	(ev: 'toggle', v: boolean): void;
-	(ev: 'remove"): void;
+	(ev: 'remove'): void;
 }>();
 
 const props = withDefaults(defineProps<{
