@@ -13,6 +13,7 @@ import { Users, Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { makePaginationQuery } from '../api/common/make-pagination-query.js';
 import { setResponseType } from '../activitypub.js';
+import { isPureRenote } from '@/misc/renote.js';
 
 export default async (ctx: Router.RouterContext) => {
 	const userId = ctx.params.user;
@@ -99,10 +100,10 @@ export default async (ctx: Router.RouterContext) => {
  * @param note Note
  */
 export async function packActivity(note: Note): Promise<any> {
-	if (note.renoteId && note.text == null && !note.hasPoll && (note.fileIds == null || note.fileIds.length === 0)) {
+	if (isPureRenote(note)) {
 		const renote = await Notes.findOneByOrFail({ id: note.renoteId });
 		return renderAnnounce(renote.uri ? renote.uri : `${config.url}/notes/${renote.id}`, note);
+	} else {
+		return renderCreate(await renderNote(note, false), note);
 	}
-
-	return renderCreate(await renderNote(note, false), note);
 }

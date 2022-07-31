@@ -10,6 +10,7 @@ import { noteVisibilities } from '../../../../types.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
 import { getNote } from '../../common/getters.js';
+import { isPureRenote } from '@/misc/renote.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -201,7 +202,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			throw e;
 		});
 
-		if (renote.renoteId && !renote.text && !renote.fileIds && !renote.hasPoll) {
+		if (isPureRenote(renote)) {
 			throw new ApiError(meta.errors.cannotReRenote);
 		}
 
@@ -230,7 +231,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			throw e;
 		});
 
-		if (reply.renoteId && !reply.text && !reply.fileIds && !reply.hasPoll) {
+		if (isPureRenote(reply)) {
 			throw new ApiError(meta.errors.cannotReplyToPureRenote);
 		}
 

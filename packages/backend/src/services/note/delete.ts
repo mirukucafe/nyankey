@@ -14,6 +14,7 @@ import { deliverToFollowers, deliverToUser } from '@/remote/activitypub/deliver-
 import { countSameRenotes } from '@/misc/count-same-renotes.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import { deliverToRelays } from '../relay.js';
+import { isPureRenote } from '@/misc/renote.js';
 
 /**
  * 投稿を削除します。
@@ -43,7 +44,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 			let renote: Note | null = null;
 
 			// if deletd note is renote
-			if (note.renoteId && note.text == null && !note.hasPoll && (note.fileIds == null || note.fileIds.length === 0)) {
+			if (isPureRenote(note)) {
 				renote = await Notes.findOneBy({
 					id: note.renoteId,
 				});
