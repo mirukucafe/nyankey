@@ -33,7 +33,7 @@ import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
 
 const emit = defineEmits<{
-	(ev: 'change', v: any): void;
+	(ev: 'change', v: Event): void;
 	(ev: 'keydown', v: KeyboardEvent): void;
 	(ev: 'enter'): void;
 	(ev: 'update:modelValue', v: string): void;
@@ -77,7 +77,7 @@ const focus = (): void => {
 	inputEl?.focus();
 };
 
-const onInput = (evt: HTMLInputEvent): void => {
+const onInput = (evt: Event): void => {
 	changed = true;
 	emit('change', evt);
 };

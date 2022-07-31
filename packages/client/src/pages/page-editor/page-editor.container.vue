@@ -37,8 +37,8 @@ const props = withDefaults(defineProps<{
 	expanded?: boolean;
 	removable?: boolean;
 	draggable?: boolean;
-	error?: { arg: integer; expect: string; actual: string; };
-	warn?: { slot: integer; };
+	error?: { arg: number; expect: string; actual: string; };
+	warn?: { slot: number; };
 }>(), {
 	expanded: true,
 	removable: true,
