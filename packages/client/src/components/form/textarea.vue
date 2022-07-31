@@ -12,7 +12,7 @@
 			:readonly="readonly"
 			:placeholder="placeholder"
 			:pattern="pattern"
-			:autocomplete="autocomplete"
+			:autocomplete="autocomplete ? 'on' : 'off'"
 			:spellcheck="spellcheck"
 			@focus="focused = true"
 			@blur="focused = false"
@@ -62,34 +62,40 @@ const props = withDefaults(defineProps<{
 	manualSave: false,
 });
 
-const { modelValue, autofocus } = toRefs(props);
+const { modelValue } = toRefs(props);
 // modelValue is read only, so a separate ref is needed.
 const v = $ref(modelValue.value);
 
-const focused = $ref(false);
-const changed = $ref(false);
-const invalid = $ref(false);
-const filled = computed(() => modelValue.value !== '' && modelValue.value != null);
-const inputEl = $ref(null);
+let focused = $ref(false);
+let changed = $ref(false);
+let invalid = $ref(false);
+let inputEl: HTMLTextAreaElement | null = $ref(null);
 
-const focus = () => inputEl.focus();
-const onInput = evt => {
+const filled = computed(() => modelValue.value !== '' && modelValue.value != null);
+
+const focus = (): void => {
+	inputEl?.focus();
+};
+
+const onInput = (evt: HTMLInputEvent): void => {
 	changed = true;
 	emit('change', evt);
 };
-const onKeydown = (evt: KeyboardEvent) => {
+
+const onKeydown = (evt: KeyboardEvent): void => {
 	emit('keydown', evt);
 	if (evt.code === 'Enter') {
 		emit('enter');
 	}
 };
-const updated = () => {
+
+const updated = (): void => {
 	changed = false;
 	emit('update:modelValue', v);
 };
 const debouncedUpdated = debounce(1000, updated);
 
-watch(modelValue, newValue => {
+watch(modelValue, () => {
 	if (!props.manualSave) {
 		if (props.debounce) {
 			debouncedUpdated();
@@ -98,15 +104,12 @@ watch(modelValue, newValue => {
 		}
 	}
 
-	invalid = inputEl.validity.badInput;
+	invalid = inputEl?.validity.badInput ?? false;
 });
-
 
 onMounted(() => {
 	nextTick(() => {
-		if (props.autofocus) {
-			inputEl.focus();
-		}
+		if (props.autofocus) focus();
 	});
 });
 </script>
