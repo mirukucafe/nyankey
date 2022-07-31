@@ -510,27 +510,6 @@ _charts:
   federation: "Federace"
 _timelines:
   home: "Domů"
-_pages:
-  blocks:
-    image: "Obrázky"
-  script:
-    categories:
-      list: "Seznamy"
-    blocks:
-      _join:
-        arg1: "Seznamy"
-      _randomPick:
-        arg1: "Seznamy"
-      _dailyRandomPick:
-        arg1: "Seznamy"
-      _seedRandomPick:
-        arg2: "Seznamy"
-      _pick:
-        arg1: "Seznamy"
-      _listLen:
-        arg1: "Seznamy"
-    types:
-      array: "Seznamy"
 _notification:
   youWereFollowed: "Máte nového následovníka"
   youWereInvitedToGroup: "Pozvat do skupiny"
