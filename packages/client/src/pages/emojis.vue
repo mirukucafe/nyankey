@@ -2,7 +2,7 @@
 <MkStickyContainer>
 	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
 	<div :class="$style.root">
-		<XCategory v-if="tab === 'category'"/>
+		<XCategory/>
 	</div>
 </MkStickyContainer>
 </template>
@@ -13,8 +13,6 @@ import XCategory from './emojis.category.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
-
-const tab = ref('category');
 
 function menu(ev) {
 	os.popupMenu([{
