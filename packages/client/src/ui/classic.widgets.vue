@@ -1,66 +1,58 @@
 <template>
 <div class="ddiqwdnk">
-	<XWidgets class="widgets" :edit="editMode" :widgets="$store.reactiveState.widgets.value.filter(w => w.place === place)" @add-widget="addWidget" @remove-widget="removeWidget" @update-widget="updateWidget" @update-widgets="updateWidgets" @exit="editMode = false"/>
+	<XWidgets class="widgets" :edit="editMode" :widgets="defaultStore.reactiveState.widgets.value.filter(w => w.place === place)" @add-widget="addWidget" @remove-widget="removeWidget" @update-widget="updateWidget" @update-widgets="updateWidgets" @exit="editMode = false"/>
 
-	<button v-if="editMode" class="_textButton edit" style="font-size: 0.9em;" @click="editMode = false"><i class="fas fa-check"></i> {{ $ts.editWidgetsExit }}</button>
-	<button v-else class="_textButton edit" style="font-size: 0.9em;" @click="editMode = true"><i class="fas fa-pencil-alt"></i> {{ $ts.editWidgets }}</button>
+	<button v-if="editMode" class="_textButton edit" style="font-size: 0.9em;" @click="editMode = false"><i class="fas fa-check"></i> {{ i81n.ts.editWidgetsExit }}</button>
+	<button v-else class="_textButton edit" style="font-size: 0.9em;" @click="editMode = true"><i class="fas fa-pencil-alt"></i> {{ i18n.ts.editWidgets }}</button>
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+<script lang="ts" setup>
+import { defineAsyncComponent, onMounted } from 'vue';
 import XWidgets from '@/components/widgets.vue';
+import { defaultStore } from '@/store';
+import { i18n } from '@/i18n';
 
-export default defineComponent({
-	components: {
-		XWidgets
-	},
+const emit = defineEmits<{
+	(ev: 'mounted'): void;
+}>();
 
-	props: {
-		place: {
-			type: String,
-		}
-	},
+const props = defineProps<{
+	place: {
+		type: string;
+	};
+}>();
 
-	emits: ['mounted'],
+let editMode: boolean = $ref(false);
 
-	data() {
-		return {
-			editMode: false,
-		};
-	},
+onMounted(() => {
+	emit('mounted');
+}
 
-	mounted() {
-		this.$emit('mounted', this.$el);
-	},
+function addWidget(widget) {
+	defaultStore.set('widgets', [{
+		...widget,
+		place: props.place,
+	}, ...defaultStore.state.widgets]);
+}
 
-	methods: {
-		addWidget(widget) {
-			this.$store.set('widgets', [{
-				...widget,
-				place: this.place,
-			}, ...this.$store.state.widgets]);
-		},
+function removeWidget(widget) {
+	defaultStore.set('widgets', defaultStore.state.widgets.filter(w => w.id !== widget.id));
+}
 
-		removeWidget(widget) {
-			this.$store.set('widgets', this.$store.state.widgets.filter(w => w.id !== widget.id));
-		},
+function updateWidget({ id, data }) {
+	defaultStore.set('widgets', defaultStore.state.widgets.map(w => w.id === id ? {
+		...w,
+		data,
+	} : w));
+}
 
-		updateWidget({ id, data }) {
-			this.$store.set('widgets', this.$store.state.widgets.map(w => w.id === id ? {
-				...w,
-				data,
-			} : w));
-		},
-
-		updateWidgets(widgets) {
-			this.$store.set('widgets', [
-				...this.$store.state.widgets.filter(w => w.place !== this.place),
-				...widgets
-			]);
-		}
-	}
-});
+function updateWidgets(widgets) {
+	defaultStore.set('widgets', [
+		...defaultStore.state.widgets.filter(w => w.place !== props.place),
+		...widgets
+	]);
+}
 </script>
 
 <style lang="scss" scoped>
