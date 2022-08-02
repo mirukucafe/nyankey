@@ -1,79 +1,45 @@
 <template>
-<transition :name="$store.state.animation ? 'fade' : ''" mode="out-in">
-	<div v-if="pending">
+<transition :name="defaultStore.state.animation ? 'fade' : ''" mode="out-in">
+	<div v-if="state == 'pending'">
 		<MkLoading/>
 	</div>
-	<div v-else-if="resolved">
+	<div v-else-if="state == 'resolved'">
 		<slot :result="result"></slot>
 	</div>
 	<div v-else>
-		<div class="wszdbhzo">
-			<div><i class="fas fa-exclamation-triangle"></i> {{ $ts.somethingHappened }}</div>
-			<MkButton inline class="retry" @click="retry"><i class="fas fa-redo-alt"></i> {{ $ts.retry }}</MkButton>
-		</div>
+		<MkError @retry="process"/>
 	</div>
 </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { watch } from 'vue';
 import MkButton from '@/components/ui/button.vue';
+import { defaultStore } from '@/store';
 
-export default defineComponent({
-	components: {
-		MkButton
-	},
+const props = defineProps<{
+	p: () => Promise<any>;
+}>();
 
-	props: {
-		p: {
-			type: Function as PropType<() => Promise<any>>,
-			required: true,
-		}
-	},
+let state: 'pending' | 'resolved' | 'rejected' = $ref('pending');
+let result = $ref(null);
 
-	setup(props, context) {
-		const pending = ref(true);
-		const resolved = ref(false);
-		const rejected = ref(false);
-		const result = ref(null);
+const process = () => {
+	// this might be a retry so reset the state
+	state = 'pending';
 
-		const process = () => {
-			if (props.p == null) {
-				return;
-			}
-			const promise = props.p();
-			pending.value = true;
-			resolved.value = false;
-			rejected.value = false;
-			promise.then((_result) => {
-				pending.value = false;
-				resolved.value = true;
-				result.value = _result;
-			});
-			promise.catch(() => {
-				pending.value = false;
-				rejected.value = true;
-			});
-		};
+	props.p?.().then((_result) => {
+		result = _result;
+		state = 'resolved';
+	}, () => {
+		state = 'rejected';
+	});
+};
 
-		watch(() => props.p, () => {
-			process();
-		}, {
-			immediate: true
-		});
-
-		const retry = () => {
-			process();
-		};
-
-		return {
-			pending,
-			resolved,
-			rejected,
-			result,
-			retry,
-		};
-	}
+watch(() => props.p, () => {
+	process();
+}, {
+	immediate: true
 });
 </script>
 
