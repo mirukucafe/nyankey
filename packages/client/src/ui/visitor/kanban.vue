@@ -1,22 +1,22 @@
-<!-- eslint-disable vue/no-v-html -->
 <template>
-<div class="rwqkcmrc" :style="{ backgroundImage: transparent ? 'none' : `url(${ $instance.backgroundImageUrl })` }">
+<div class="rwqkcmrc" :style="{ backgroundImage: transparent ? 'none' : `url(${ instance.backgroundImageUrl })` }">
 	<div class="back" :class="{ transparent }"></div>
 	<div class="contents">
 		<div class="wrapper">
-			<h1 v-if="meta" :class="{ full }">
-				<MkA to="/" class="link"><img v-if="meta.logoImageUrl" class="logo" :src="meta.logoImageUrl" alt="logo"><span v-else class="text">{{ instanceName }}</span></MkA>
+			<h1 v-if="instance" :class="{ full }">
+				<MkA to="/" class="link"><img v-if="instance.logoImageUrl" class="logo" :src="instance.logoImageUrl" alt="logo"><span v-else class="text">{{ instanceName }}</span></MkA>
 			</h1>
 			<template v-if="full">
-				<div v-if="meta" class="about">
-					<div class="desc" v-html="meta.description || $ts.introMisskey"></div>
+				<div v-if="instance" class="about">
+					<!-- eslint-disable-next-line vue/no-v-html -->
+					<div class="desc" v-html="instance.description || i18n.ts.introMisskey"></div>
 				</div>
 				<div class="action">
-					<button class="_buttonPrimary" @click="signup()">{{ $ts.signup }}</button>
-					<button class="_button" @click="signin()">{{ $ts.login }}</button>
+					<button class="_buttonPrimary" @click="signup()">{{ i18n.ts.signup }}</button>
+					<button class="_button" @click="signin()">{{ i18n.ts.login }}</button>
 				</div>
 				<div class="announcements panel">
-					<header>{{ $ts.announcements }}</header>
+					<header>{{ i18n.ts.announcements }}</header>
 					<MkPagination v-slot="{items}" :pagination="announcements" class="list">
 						<section v-for="announcement in items" :key="announcement.id" class="item">
 							<div class="title">{{ announcement.title }}</div>
@@ -37,73 +37,42 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, defineAsyncComponent } from 'vue';
+<script lang="ts" setup>
+import { } from 'vue';
 import { host, instanceName } from '@/config';
 import * as os from '@/os';
 import MkPagination from '@/components/ui/pagination.vue';
 import XSigninDialog from '@/components/signin-dialog.vue';
 import XSignupDialog from '@/components/signup-dialog.vue';
-import MkButton from '@/components/ui/button.vue';
+import { i18n } from '@/i18n';
+import { instance } from '@/instance';
 
-export default defineComponent({
-	components: {
-		MkPagination,
-		MkButton,
-	},
-
-	props: {
-		full: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		transparent: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		poweredBy: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-	},
-
-	data() {
-		return {
-			host,
-			instanceName,
-			pageInfo: null,
-			meta: null,
-			narrow: window.innerWidth < 1280,
-			announcements: {
-				endpoint: 'announcements',
-				limit: 10,
-			},
-		};
-	},
-
-	created() {
-		os.api('meta', { detail: true }).then(meta => {
-			this.meta = meta;
-		});
-	},
-
-	methods: {
-		signin() {
-			os.popup(XSigninDialog, {
-				autoSet: true
-			}, {}, 'closed');
-		},
-
-		signup() {
-			os.popup(XSignupDialog, {
-				autoSet: true
-			}, {}, 'closed');
-		}
-	}
+withDefaults(defineProps<{
+	full?: boolean;
+	transparent?: boolean;
+	poweredBy?: boolean;
+}>(), {
+	full: false,
+	transparent: false,
+	poweredBy: false,
 });
+
+const announcements = {
+	endpoint: 'announcements',
+	limit: 10,
+};
+
+function signin(): void {
+	os.popup(XSigninDialog, {
+		autoSet: true,
+	}, {}, 'closed');
+}
+
+function signup(): void {
+	os.popup(XSignupDialog, {
+		autoSet: true,
+	}, {}, 'closed');
+}
 </script>
 
 <style lang="scss" scoped>
