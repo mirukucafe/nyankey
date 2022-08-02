@@ -20,7 +20,7 @@ import { useCssModule } from 'vue';
 import tinycolor from 'tinycolor2';
 import { host as localHost } from '@/config';
 import { $i } from '@/account';
-import { defaultStore } fromn '@/store';
+import { defaultStore } from '@/store';
 
 const props = defineProps<{
 	username: string;
