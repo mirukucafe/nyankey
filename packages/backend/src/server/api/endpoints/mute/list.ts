@@ -33,7 +33,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
 	const query = makePaginationQuery(Mutings.createQueryBuilder('muting'), ps.sinceId, ps.untilId)
-		.andWhere(`muting.muterId = :meId`, { meId: me.id });
+		.andWhere('muting.muterId = :meId', { meId: me.id });
 
 	const mutings = await query
 		.take(ps.limit)

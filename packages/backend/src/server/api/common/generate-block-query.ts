@@ -14,11 +14,11 @@ export function generateBlockedUserQuery(q: SelectQueryBuilder<any>, me: { id: U
 	q
 		.andWhere(`note.userId NOT IN (${ blockingQuery.getQuery() })`)
 		.andWhere(new Brackets(qb => { qb
-			.where(`note.replyUserId IS NULL`)
+			.where('note.replyUserId IS NULL')
 			.orWhere(`note.replyUserId NOT IN (${ blockingQuery.getQuery() })`);
 		}))
 		.andWhere(new Brackets(qb => { qb
-			.where(`note.renoteUserId IS NULL`)
+			.where('note.renoteUserId IS NULL')
 			.orWhere(`note.renoteUserId NOT IN (${ blockingQuery.getQuery() })`);
 		}));
 

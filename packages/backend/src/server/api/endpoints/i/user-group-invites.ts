@@ -44,7 +44,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const query = makePaginationQuery(UserGroupInvitations.createQueryBuilder('invitation'), ps.sinceId, ps.untilId)
-		.andWhere(`invitation.userId = :meId`, { meId: user.id })
+		.andWhere('invitation.userId = :meId', { meId: user.id })
 		.leftJoinAndSelect('invitation.userGroup', 'user_group');
 
 	const invitations = await query

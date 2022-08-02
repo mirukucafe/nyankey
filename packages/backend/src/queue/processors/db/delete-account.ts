@@ -42,7 +42,7 @@ export async function deleteAccount(job: Bull.Job<DbUserDeleteJobData>): Promise
 			await Notes.delete(notes.map(note => note.id));
 		}
 
-		logger.succ(`All of notes deleted`);
+		logger.succ('All of notes deleted');
 	}
 
 	{ // Delete files
@@ -71,15 +71,15 @@ export async function deleteAccount(job: Bull.Job<DbUserDeleteJobData>): Promise
 			}
 		}
 
-		logger.succ(`All of files deleted`);
+		logger.succ('All of files deleted');
 	}
 
 	{ // Send email notification
 		const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 		if (profile.email && profile.emailVerified) {
 			sendEmail(profile.email, 'Account deleted',
-				`Your account has been deleted.`,
-				`Your account has been deleted.`);
+				'Your account has been deleted.',
+				'Your account has been deleted.');
 		}
 	}
 

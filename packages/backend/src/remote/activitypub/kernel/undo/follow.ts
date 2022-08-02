@@ -10,11 +10,11 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 
 	const followee = await dbResolver.getUserFromApId(activity.object);
 	if (followee == null) {
-		return `skip: followee not found`;
+		return 'skip: followee not found';
 	}
 
 	if (followee.host != null) {
-		return `skip: フォロー解除しようとしているユーザーはローカルユーザーではありません`;
+		return 'skip: フォロー解除しようとしているユーザーはローカルユーザーではありません';
 	}
 
 	const req = await FollowRequests.findOneBy({
@@ -29,13 +29,13 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 
 	if (req) {
 		await cancelRequest(followee, actor);
-		return `ok: follow request canceled`;
+		return 'ok: follow request canceled';
 	}
 
 	if (following) {
 		await unfollow(actor, followee);
-		return `ok: unfollowed`;
+		return 'ok: unfollowed';
 	}
 
-	return `skip: リクエストもフォローもされていない`;
+	return 'skip: リクエストもフォローもされていない';
 };

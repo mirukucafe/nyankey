@@ -12,11 +12,11 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 	const follower = await dbResolver.getUserFromApId(activity.actor);
 
 	if (follower == null) {
-		return `skip: follower not found`;
+		return 'skip: follower not found';
 	}
 
 	if (!Users.isLocalUser(follower)) {
-		return `skip: follower is not a local user`;
+		return 'skip: follower is not a local user';
 	}
 
 	// relay
@@ -26,5 +26,5 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 	}
 
 	await remoteReject(actor, follower);
-	return `ok`;
+	return 'ok';
 };

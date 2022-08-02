@@ -29,7 +29,7 @@ export const meta = {
 export const paramDef = {
 	type: 'object',
 	properties: {
-		name: { type: 'string', default: "Untitled", maxLength: 200 },
+		name: { type: 'string', default: 'Untitled', maxLength: 200 },
 		parentId: { type: 'string', format: 'misskey:id', nullable: true },
 	},
 	required: [],

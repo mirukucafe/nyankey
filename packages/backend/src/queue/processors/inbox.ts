@@ -69,12 +69,12 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 
 	// それでもわからなければ終了
 	if (authUser == null) {
-		return `skip: failed to resolve user`;
+		return 'skip: failed to resolve user';
 	}
 
 	// publicKey がなくても終了
 	if (authUser.key == null) {
-		return `skip: failed to resolve user publicKey`;
+		return 'skip: failed to resolve user publicKey';
 	}
 
 	// HTTP-Signatureの検証
@@ -98,18 +98,18 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 			// keyIdからLD-Signatureのユーザーを取得
 			authUser = await dbResolver.getAuthUserFromKeyId(activity.signature.creator);
 			if (authUser == null) {
-				return `skip: LD-Signatureのユーザーが取得できませんでした`;
+				return 'skip: LD-Signatureのユーザーが取得できませんでした';
 			}
 
 			if (authUser.key == null) {
-				return `skip: LD-SignatureのユーザーはpublicKeyを持っていませんでした`;
+				return 'skip: LD-SignatureのユーザーはpublicKeyを持っていませんでした';
 			}
 
 			// LD-Signature検証
 			const ldSignature = new LdSignature();
 			const verified = await ldSignature.verifyRsaSignature2017(activity, authUser.key.keyPem).catch(() => false);
 			if (!verified) {
-				return `skip: LD-Signatureの検証に失敗しました`;
+				return 'skip: LD-Signatureの検証に失敗しました';
 			}
 
 			// もう一度actorチェック
@@ -153,5 +153,5 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 
 	// アクティビティを処理
 	await perform(authUser.user, activity);
-	return `ok`;
+	return 'ok';
 };

@@ -22,7 +22,7 @@ module.exports = {
 		'eol-last': ['error', 'always'],
 		'semi': ['error', 'always'],
 		'semi-spacing': ['error', { 'before': false, 'after': true }],
-		'quotes': ['warn', 'single'],
+		'quotes': ['error', 'single', { 'avoidEscape': true }],
 		'comma-dangle': ['warn', 'always-multiline'],
 		'keyword-spacing': ['error', {
 			'before': true,
@@ -76,6 +76,7 @@ module.exports = {
 		'import/no-default-export': ['warn'],
 		'import/order': ['warn', {
 			'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-		}]
+		}],
+		'object-shorthand': ['warn', 'consistent-as-needed'],
 	},
 };

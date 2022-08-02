@@ -73,9 +73,9 @@ export default define(meta, paramDef, async (ps) => {
 	const q = makePaginationQuery(Emojis.createQueryBuilder('emoji'), ps.sinceId, ps.untilId);
 
 	if (ps.host == null) {
-		q.andWhere(`emoji.host IS NOT NULL`);
+		q.andWhere('emoji.host IS NOT NULL');
 	} else {
-		q.andWhere(`emoji.host = :host`, { host: toPuny(ps.host) });
+		q.andWhere('emoji.host = :host', { host: toPuny(ps.host) });
 	}
 
 	if (ps.query) {

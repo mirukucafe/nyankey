@@ -9,13 +9,13 @@ export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<str
 	const blockee = await dbResolver.getUserFromApId(activity.object);
 
 	if (blockee == null) {
-		return `skip: blockee not found`;
+		return 'skip: blockee not found';
 	}
 
 	if (blockee.host != null) {
-		return `skip: ブロック解除しようとしているユーザーはローカルユーザーではありません`;
+		return 'skip: ブロック解除しようとしているユーザーはローカルユーザーではありません';
 	}
 
 	await unblock(await Users.findOneByOrFail({ id: actor.id }), blockee);
-	return `ok`;
+	return 'ok';
 };

@@ -55,26 +55,26 @@ export default define(meta, paramDef, async (ps, user) => {
 			.orderBy('message.createdAt', 'DESC');
 
 		if (ps.group) {
-			query.where(`message.groupId IN (:...groups)`, { groups: groups });
+			query.where('message.groupId IN (:...groups)', { groups: groups });
 
 			if (found.length > 0) {
-				query.andWhere(`message.groupId NOT IN (:...found)`, { found: found });
+				query.andWhere('message.groupId NOT IN (:...found)', { found: found });
 			}
 		} else {
 			query.where(new Brackets(qb => { qb
-				.where(`message.userId = :userId`, { userId: user.id })
-				.orWhere(`message.recipientId = :userId`, { userId: user.id });
+				.where('message.userId = :userId', { userId: user.id })
+				.orWhere('message.recipientId = :userId', { userId: user.id });
 			}));
-			query.andWhere(`message.groupId IS NULL`);
+			query.andWhere('message.groupId IS NULL');
 
 			if (found.length > 0) {
-				query.andWhere(`message.userId NOT IN (:...found)`, { found: found });
-				query.andWhere(`message.recipientId NOT IN (:...found)`, { found: found });
+				query.andWhere('message.userId NOT IN (:...found)', { found: found });
+				query.andWhere('message.recipientId NOT IN (:...found)', { found: found });
 			}
 
 			if (mute.length > 0) {
-				query.andWhere(`message.userId NOT IN (:...mute)`, { mute: mute.map(m => m.muteeId) });
-				query.andWhere(`message.recipientId NOT IN (:...mute)`, { mute: mute.map(m => m.muteeId) });
+				query.andWhere('message.userId NOT IN (:...mute)', { mute: mute.map(m => m.muteeId) });
+				query.andWhere('message.recipientId NOT IN (:...mute)', { mute: mute.map(m => m.muteeId) });
 			}
 		}
 

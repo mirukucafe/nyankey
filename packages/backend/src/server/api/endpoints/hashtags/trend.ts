@@ -68,12 +68,12 @@ export default define(meta, paramDef, async () => {
 	now.setMinutes(Math.round(now.getMinutes() / 5) * 5, 0, 0);
 
 	const tagNotes = await Notes.createQueryBuilder('note')
-		.where(`note.createdAt > :date`, { date: new Date(now.getTime() - rangeA) })
+		.where('note.createdAt > :date', { date: new Date(now.getTime() - rangeA) })
 		.andWhere(new Brackets(qb => { qb
-			.where(`note.visibility = 'public'`)
-			.orWhere(`note.visibility = 'home'`);
+			.where("note.visibility = 'public'")
+			.orWhere("note.visibility = 'home'");
 		}))
-		.andWhere(`note.tags != '{}'`)
+		.andWhere("note.tags != '{}'")
 		.select(['note.tags', 'note.userId'])
 		.cache(60000) // 1 min
 		.getMany();

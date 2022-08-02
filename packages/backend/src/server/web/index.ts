@@ -185,8 +185,8 @@ router.get('/twemoji-badge/(.*)', async ctx => {
 });
 
 // ServiceWorker
-router.get(`/sw.js`, async ctx => {
-	await send(ctx as any, `/sw.js`, {
+router.get('/sw.js', async ctx => {
+	await send(ctx as any, '/sw.js', {
 		root: swAssets,
 		maxage: 10 * MINUTE,
 	});

@@ -94,8 +94,8 @@ export async function insertFollowingDoc(followee: { id: User['id']; host: User[
 		Users.pack(followee.id, follower, {
 			detail: true,
 		}).then(async packed => {
-			publishUserEvent(follower.id, 'follow', packed as Packed<"UserDetailedNotMe">);
-			publishMainStream(follower.id, 'follow', packed as Packed<"UserDetailedNotMe">);
+			publishUserEvent(follower.id, 'follow', packed as Packed<'UserDetailedNotMe'>);
+			publishMainStream(follower.id, 'follow', packed as Packed<'UserDetailedNotMe'>);
 
 			const webhooks = (await getActiveWebhooks()).filter(x => x.userId === follower.id && x.on.includes('follow'));
 			for (const webhook of webhooks) {

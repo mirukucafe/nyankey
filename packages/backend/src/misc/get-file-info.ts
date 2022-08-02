@@ -58,7 +58,7 @@ export async function getFileInfo(path: string): Promise<FileInfo> {
 
 		// うまく判定できない画像は octet-stream にする
 		if (!imageSize) {
-			warnings.push(`cannot detect image dimensions`);
+			warnings.push('cannot detect image dimensions');
 			type = TYPE_OCTET_STREAM;
 		} else if (imageSize.wUnits === 'px') {
 			width = imageSize.width;
@@ -67,7 +67,7 @@ export async function getFileInfo(path: string): Promise<FileInfo> {
 
 			// 制限を超えている画像は octet-stream にする
 			if (imageSize.width > 16383 || imageSize.height > 16383) {
-				warnings.push(`image dimensions exceeds limits`);
+				warnings.push('image dimensions exceeds limits');
 				type = TYPE_OCTET_STREAM;
 			}
 		} else {

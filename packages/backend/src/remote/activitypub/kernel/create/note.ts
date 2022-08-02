@@ -14,12 +14,12 @@ export default async function(resolver: Resolver, actor: CacheableRemoteUser, no
 
 	if (typeof note === 'object') {
 		if (actor.uri !== note.attributedTo) {
-			return `skip: actor.uri !== note.attributedTo`;
+			return 'skip: actor.uri !== note.attributedTo';
 		}
 
 		if (typeof note.id === 'string') {
 			if (extractDbHost(actor.uri) !== extractDbHost(note.id)) {
-				return `skip: host in actor.uri !== note.id`;
+				return 'skip: host in actor.uri !== note.id';
 			}
 		}
 	}

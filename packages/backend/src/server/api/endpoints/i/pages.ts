@@ -33,7 +33,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const query = makePaginationQuery(Pages.createQueryBuilder('page'), ps.sinceId, ps.untilId)
-		.andWhere(`page.userId = :meId`, { meId: user.id });
+		.andWhere('page.userId = :meId', { meId: user.id });
 
 	const pages = await query
 		.take(ps.limit)

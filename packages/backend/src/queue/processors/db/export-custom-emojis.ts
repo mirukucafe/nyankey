@@ -16,7 +16,7 @@ import { IsNull } from 'typeorm';
 const logger = queueLogger.createSubLogger('export-custom-emojis');
 
 export async function exportCustomEmojis(job: Bull.Job, done: () => void): Promise<void> {
-	logger.info(`Exporting custom emojis ...`);
+	logger.info('Exporting custom emojis ...');
 
 	const user = await Users.findOneBy({ id: job.data.user.id });
 	if (user == null) {

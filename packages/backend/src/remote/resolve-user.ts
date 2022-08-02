@@ -67,7 +67,7 @@ export async function resolveUser(username: string, host: string | null): Promis
 			// validate uri
 			const uri = new URL(self.href);
 			if (uri.hostname !== host) {
-				throw new Error(`Invalid uri`);
+				throw new Error('Invalid uri');
 			}
 
 			await Users.update({

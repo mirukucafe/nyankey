@@ -14,7 +14,7 @@ export default async (actor: CacheableRemoteUser, activity: IFlag): Promise<stri
 	const users = await Users.findBy({
 		id: In(userIds),
 	});
-	if (users.length < 1) return `skip`;
+	if (users.length < 1) return 'skip';
 
 	await AbuseUserReports.insert({
 		id: genId(),
@@ -27,5 +27,5 @@ export default async (actor: CacheableRemoteUser, activity: IFlag): Promise<stri
 		urls: uris.filter(uri => !uri.startsWith(config.url + '/users/')),
 	});
 
-	return `ok`;
+	return 'ok';
 };

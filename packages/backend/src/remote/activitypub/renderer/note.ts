@@ -139,7 +139,7 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 		_misskey_content: text,
 		source: {
 			content: text,
-			mediaType: "text/x.misskeymarkdown",
+			mediaType: 'text/x.misskeymarkdown',
 		},
 		_misskey_quote: quote,
 		quoteUrl: quote,

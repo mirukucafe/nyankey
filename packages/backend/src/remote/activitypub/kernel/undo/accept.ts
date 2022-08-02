@@ -9,7 +9,7 @@ export default async (actor: CacheableRemoteUser, activity: IAccept): Promise<st
 
 	const follower = await dbResolver.getUserFromApId(activity.object);
 	if (follower == null) {
-		return `skip: follower not found`;
+		return 'skip: follower not found';
 	}
 
 	const following = await Followings.findOneBy({
@@ -19,8 +19,8 @@ export default async (actor: CacheableRemoteUser, activity: IAccept): Promise<st
 
 	if (following) {
 		await unfollow(follower, actor);
-		return `ok: unfollowed`;
+		return 'ok: unfollowed';
 	}
 
-	return `skip: フォローされていない`;
+	return 'skip: フォローされていない';
 };

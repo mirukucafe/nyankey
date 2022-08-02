@@ -32,7 +32,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
 	const query = makePaginationQuery(Followings.createQueryBuilder('following'), ps.sinceId, ps.untilId)
-		.andWhere(`following.followerHost = :host`, { host: ps.host });
+		.andWhere('following.followerHost = :host', { host: ps.host });
 
 	const followings = await query
 		.take(ps.limit)

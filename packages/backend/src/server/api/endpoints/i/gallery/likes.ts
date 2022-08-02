@@ -44,7 +44,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const query = makePaginationQuery(GalleryLikes.createQueryBuilder('like'), ps.sinceId, ps.untilId)
-		.andWhere(`like.userId = :meId`, { meId: user.id })
+		.andWhere('like.userId = :meId', { meId: user.id })
 		.leftJoinAndSelect('like.post', 'post');
 
 	const likes = await query

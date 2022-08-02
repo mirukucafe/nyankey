@@ -17,5 +17,5 @@ export default async (actor: CacheableRemoteUser, activity: ILike) => {
 		throw e;
 	});
 
-	return `ok`;
+	return 'ok';
 };

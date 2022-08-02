@@ -32,7 +32,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		.set({
 			reads: (() => `array_append("reads", '${user.id}')`) as any,
 		})
-		.where(`groupId = :groupId`, { groupId: j.userGroupId })
+		.where('groupId = :groupId', { groupId: j.userGroupId })
 		.andWhere('userId != :userId', { userId: user.id })
 		.andWhere('NOT (:userId = ANY(reads))', { userId: user.id })
 		.execute()));

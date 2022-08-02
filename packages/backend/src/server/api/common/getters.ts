@@ -9,7 +9,7 @@ import { generateVisibilityQuery } from './generate-visibility-query.js';
  */
 export async function getNote(noteId: Note['id'], me: { id: User['id'] } | null) {
 	const query = Notes.createQueryBuilder('note')
-		.where("note.id = :id", {
+		.where('note.id = :id', {
 			id: noteId,
 		});
 

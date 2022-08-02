@@ -7,7 +7,7 @@ import { publishUserEvent } from '@/services/stream.js';
 const logger = queueLogger.createSubLogger('check-expired-mutings');
 
 export async function checkExpiredMutings(job: Bull.Job<Record<string, unknown>>, done: any): Promise<void> {
-	logger.info(`Checking expired mutings...`);
+	logger.info('Checking expired mutings...');
 
 	const expired = await Mutings.createQueryBuilder('muting')
 		.where('muting.expiresAt IS NOT NULL')
@@ -25,6 +25,6 @@ export async function checkExpiredMutings(job: Bull.Job<Record<string, unknown>>
 		}
 	}
 
-	logger.succ(`All expired mutings checked.`);
+	logger.succ('All expired mutings checked.');
 	done();
 }

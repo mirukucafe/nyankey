@@ -6,7 +6,7 @@ import { Packed } from './schema.js';
  */
 export const getNoteSummary = (note: Packed<'Note'>): string => {
 	if (note.deletedAt) {
-		return `(❌⛔)`;
+		return '(❌⛔)';
 	}
 
 	let summary = '';
@@ -25,7 +25,7 @@ export const getNoteSummary = (note: Packed<'Note'>): string => {
 
 	// 投票が添付されているとき
 	if (note.poll) {
-		summary += ` (📊)`;
+		summary += ' (📊)';
 	}
 
 	// 返信のとき

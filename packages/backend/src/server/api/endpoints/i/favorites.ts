@@ -33,7 +33,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const query = makePaginationQuery(NoteFavorites.createQueryBuilder('favorite'), ps.sinceId, ps.untilId)
-		.andWhere(`favorite.userId = :meId`, { meId: user.id })
+		.andWhere('favorite.userId = :meId', { meId: user.id })
 		.leftJoinAndSelect('favorite.note', 'note');
 
 	const favorites = await query

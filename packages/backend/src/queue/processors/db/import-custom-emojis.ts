@@ -15,7 +15,7 @@ const logger = queueLogger.createSubLogger('import-custom-emojis');
 
 // TODO: 名前衝突時の動作を選べるようにする
 export async function importCustomEmojis(job: Bull.Job<DbUserImportJobData>, done: any): Promise<void> {
-	logger.info(`Importing custom emojis ...`);
+	logger.info('Importing custom emojis ...');
 
 	const file = await DriveFiles.findOneBy({
 		id: job.data.fileId,

@@ -8,13 +8,13 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 	const followee = await dbResolver.getUserFromApId(activity.object);
 
 	if (followee == null) {
-		return `skip: followee not found`;
+		return 'skip: followee not found';
 	}
 
 	if (followee.host != null) {
-		return `skip: フォローしようとしているユーザーはローカルユーザーではありません`;
+		return 'skip: フォローしようとしているユーザーはローカルユーザーではありません';
 	}
 
 	await follow(actor, followee, activity.id);
-	return `ok`;
+	return 'ok';
 };

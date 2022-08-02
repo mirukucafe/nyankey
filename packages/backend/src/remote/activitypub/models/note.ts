@@ -131,7 +131,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver, s
 	const reply: Note | null = note.inReplyTo
 		? await resolveNote(note.inReplyTo, resolver).then(x => {
 			if (x == null) {
-				logger.warn(`Specified inReplyTo, but nout found`);
+				logger.warn('Specified inReplyTo, but nout found');
 				throw new Error('inReplyTo not found');
 			} else {
 				return x;

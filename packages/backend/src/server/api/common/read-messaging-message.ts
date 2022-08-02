@@ -124,7 +124,7 @@ export async function readGroupMessagingMessage(
 	} else {
 		// そのグループにおいて未読がなければイベント発行
 		const unreadExist = await MessagingMessages.createQueryBuilder('message')
-			.where(`message.groupId = :groupId`, { groupId: groupId })
+			.where('message.groupId = :groupId', { groupId: groupId })
 			.andWhere('message.userId != :userId', { userId: userId })
 			.andWhere('NOT (:userId = ANY(message.reads))', { userId: userId })
 			.andWhere('message.createdAt > :joinedAt', { joinedAt: joining.createdAt }) // 自分が加入する前の会話については、未読扱いしない

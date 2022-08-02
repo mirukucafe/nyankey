@@ -6,8 +6,8 @@ export function generateVisibilityQuery(q: SelectQueryBuilder<any>, me?: { id: U
 	// This code must always be synchronized with the checks in Notes.isVisibleForMe.
 	if (me == null) {
 		q.andWhere(new Brackets(qb => { qb
-			.where(`note.visibility = 'public'`)
-			.orWhere(`note.visibility = 'home'`);
+			.where("note.visibility = 'public'")
+			.orWhere("note.visibility = 'home'");
 		}));
 	} else {
 		const followingQuery = Followings.createQueryBuilder('following')
@@ -17,8 +17,8 @@ export function generateVisibilityQuery(q: SelectQueryBuilder<any>, me?: { id: U
 		q.andWhere(new Brackets(qb => { qb
 			// 公開投稿である
 			.where(new Brackets(qb => { qb
-				.where(`note.visibility = 'public'`)
-				.orWhere(`note.visibility = 'home'`);
+				.where("note.visibility = 'public'")
+				.orWhere("note.visibility = 'home'");
 			}))
 			// または 自分自身
 			.orWhere('note.userId = :meId')
@@ -27,7 +27,7 @@ export function generateVisibilityQuery(q: SelectQueryBuilder<any>, me?: { id: U
 			.orWhere(':meId = ANY(note.mentions)')
 			.orWhere(new Brackets(qb => { qb
 				// または フォロワー宛ての投稿であり、
-				.where(`note.visibility = 'followers'`)
+				.where("note.visibility = 'followers'")
 				.andWhere(new Brackets(qb => { qb
 					// 自分がフォロワーである
 					.where(`note.userId IN (${ followingQuery.getQuery() })`)
