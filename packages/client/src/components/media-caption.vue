@@ -9,8 +9,8 @@
 				</header>
 				<textarea v-model="inputValue" autofocus :placeholder="input.placeholder" @keydown="onInputKeydown"></textarea>
 				<div v-if="(showOkButton || showCancelButton)" class="buttons">
-					<MkButton inline primary :disabled="remainingLength < 0" @click="ok">{{ $ts.ok }}</MkButton>
-					<MkButton inline @click="cancel">{{ $ts.cancel }}</MkButton>
+					<MkButton inline primary :disabled="remainingLength < 0" @click="ok">{{ i18n.ts.ok }}</MkButton>
+					<MkButton inline @click="cancel">{{ i18n.ts.cancel }}</MkButton>
 				</div>
 			</div>
 		</div>
@@ -35,6 +35,7 @@ import MkModal from '@/components/ui/modal.vue';
 import MkButton from '@/components/ui/button.vue';
 import bytes from '@/filters/bytes';
 import number from '@/filters/number';
+import { i18n } from '@/i18n';
 
 type Input = {
 	placeholder?: string;

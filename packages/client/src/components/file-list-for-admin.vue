@@ -15,14 +15,14 @@
 				</div>
 				<div>
 					<MkAcct v-if="file.user" :user="file.user"/>
-					<div v-else>{{ $ts.system }}</div>
+					<div v-else>{{ i18n.ts.system }}</div>
 				</div>
 				<div>
 					<span style="margin-right: 1em;">{{ file.type }}</span>
 					<span>{{ bytes(file.size) }}</span>
 				</div>
 				<div>
-					<span>{{ $ts.registeredDate }}: <MkTime :time="file.createdAt" mode="detail"/></span>
+					<span>{{ i18n.ts.registeredDate }}: <MkTime :time="file.createdAt" mode="detail"/></span>
 				</div>
 			</div>
 		</MkA>

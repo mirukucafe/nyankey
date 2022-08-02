@@ -8,7 +8,7 @@
 	@click="cancel()"
 	@ok="ok()"
 	@close="cancel()"
-	@closed="$emit('closed')"
+	@closed="emit('closed')"
 >
 	<template #header>
 		{{ title }}
@@ -18,15 +18,15 @@
 		<div class="xkpnjxcv _formRoot">
 			<template v-for="item in Object.keys(form).filter(item => !form[item].hidden)">
 				<FormInput v-if="form[item].type === 'number'" v-model="values[item]" type="number" :step="form[item].step || 1" class="_formBlock">
-					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
+					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ i18n.ts.optional }})</span></template>
 					<template v-if="form[item].description" #caption>{{ form[item].description }}</template>
 				</FormInput>
 				<FormInput v-else-if="form[item].type === 'string' && !form[item].multiline" v-model="values[item]" type="text" class="_formBlock">
-					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
+					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ i18n.ts.optional }})</span></template>
 					<template v-if="form[item].description" #caption>{{ form[item].description }}</template>
 				</FormInput>
 				<FormTextarea v-else-if="form[item].type === 'string' && form[item].multiline" v-model="values[item]" class="_formBlock">
-					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
+					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ i18n.ts.optional }})</span></template>
 					<template v-if="form[item].description" #caption>{{ form[item].description }}</template>
 				</FormTextarea>
 				<FormSwitch v-else-if="form[item].type === 'boolean'" v-model="values[item]" class="_formBlock">
@@ -34,15 +34,15 @@
 					<template v-if="form[item].description" #caption>{{ form[item].description }}</template>
 				</FormSwitch>
 				<FormSelect v-else-if="form[item].type === 'enum'" v-model="values[item]" class="_formBlock">
-					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
+					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ i18n.ts.optional }})</span></template>
 					<option v-for="blockItem in form[item].enum" :key="blockItem.value" :value="blockItem.value">{{ blockItem.label }}</option>
 				</FormSelect>
 				<FormRadios v-else-if="form[item].type === 'radio'" v-model="values[item]" class="_formBlock">
-					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
+					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ i18n.ts.optional }})</span></template>
 					<option v-for="blockItem in form[item].options" :key="blockItem.value" :value="blockItem.value">{{ blockItem.label }}</option>
 				</FormRadios>
 				<FormRange v-else-if="form[item].type === 'range'" v-model="values[item]" :min="form[item].min" :max="form[item].max" :step="form[item].step" :text-converter="form[item].textConverter" class="_formBlock">
-					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ $ts.optional }})</span></template>
+					<template #label><span v-text="form[item].label || item"></span><span v-if="form[item].required === false"> ({{ i18n.ts.optional }})</span></template>
 					<template v-if="form[item].description" #caption>{{ form[item].description }}</template>
 				</FormRange>
 				<MkButton v-else-if="form[item].type === 'button'" class="_formBlock" @click="form[item].action($event, values)">
@@ -64,6 +64,7 @@ import FormRange from './form/range.vue';
 import MkButton from './ui/button.vue';
 import FormRadios from './form/radios.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
+import { i18n } from '@/i18n';
 
 let dialog = $ref<InstanceType<typeof XModalWindow>>();
 let values: Record<string, any> = $ref({});

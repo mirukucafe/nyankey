@@ -1,5 +1,5 @@
 <template>
-<transition :name="$store.state.animation ? 'zoom' : ''" appear>
+<transition :name="defaultStore.state.animation ? 'zoom' : ''" appear>
 	<div class="mjndxjcg">
 		<img src="https://xn--931a.moe/assets/error.jpg" class="_ghost"/>
 		<p><i class="fas fa-exclamation-triangle"></i> {{ i18n.ts.somethingHappened }}</p>
@@ -11,6 +11,7 @@
 <script lang="ts" setup>
 import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
+import { defaultSTore } from '@/store';
 
 const emit = defineEmits<{
 	(ev: 'retry'): void;

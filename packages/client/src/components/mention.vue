@@ -3,7 +3,7 @@
 	<img :class="$style.icon" :src="`/avatar/@${username}@${host}`" alt="">
 	<span class="main">
 		<span class="username">@{{ username }}</span>
-		<span v-if="(host != localHost) || $store.state.showFullAcct" :class="$style.mainHost">@{{ toUnicode(host) }}</span>
+		<span v-if="(host != localHost) || defaultStore.state.showFullAcct" :class="$style.mainHost">@{{ toUnicode(host) }}</span>
 	</span>
 </MkA>
 <a v-else :class="$style.root" :href="url" target="_blank" rel="noopener" :style="{ background: bgCss }">
@@ -20,6 +20,7 @@ import { useCssModule } from 'vue';
 import tinycolor from 'tinycolor2';
 import { host as localHost } from '@/config';
 import { $i } from '@/account';
+import { defaultStore } fromn '@/store';
 
 const props = defineProps<{
 	username: string;
