@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
-import { defaultSTore } from '@/store';
+import { defaultStore } from '@/store';
 
 const emit = defineEmits<{
 	(ev: 'retry'): void;
