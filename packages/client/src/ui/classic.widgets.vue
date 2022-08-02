@@ -27,7 +27,7 @@ let editMode: boolean = $ref(false);
 
 onMounted(() => {
 	emit('mounted');
-}
+});
 
 function addWidget(widget) {
 	defaultStore.set('widgets', [{
