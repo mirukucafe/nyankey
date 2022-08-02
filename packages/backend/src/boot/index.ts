@@ -17,7 +17,7 @@ const ev = new Xev();
 /**
  * Init process
  */
-export default async function() {
+export default async function(): void {
 	process.title = `Misskey (${cluster.isPrimary ? 'master' : 'worker'})`;
 
 	if (cluster.isPrimary || envOption.disableClustering) {
@@ -68,7 +68,9 @@ if (!envOption.quiet) {
 process.on('uncaughtException', err => {
 	try {
 		logger.error(err);
-	} catch { }
+	} catch {
+		// if that fails too there is nothing we can do
+	}
 });
 
 // Dying away...
