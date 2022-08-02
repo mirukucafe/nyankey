@@ -5,6 +5,9 @@
 # Intelij-IDEA
 /.idea
 
+# nano
+.swp
+
 # Node.js
 node_modules
 report.*.json
