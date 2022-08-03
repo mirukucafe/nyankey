@@ -79,7 +79,7 @@ export default defineComponent({
 			const headerHeight = this.showHeader ? this.$refs.header.offsetHeight : 0;
 			this.$el.style.minHeight = `${headerHeight}px`;
 			if (showBody) {
-				this.$el.style.flexBasis = `auto`;
+				this.$el.style.flexBasis = 'auto';
 			} else {
 				this.$el.style.flexBasis = `${headerHeight}px`;
 			}

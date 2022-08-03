@@ -109,7 +109,7 @@ export function physics(container: HTMLElement) {
 	render.mouse = mouse;
 
 	for (const objEl of objEls) {
-		objEl.style.position = `absolute`;
+		objEl.style.position = 'absolute';
 		objEl.style.top = 0;
 		objEl.style.left = 0;
 		objEl.style.margin = 0;

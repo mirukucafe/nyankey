@@ -88,11 +88,11 @@ export default defineComponent({
 		},
 
 		async describe(file) {
-			os.popup(defineAsyncComponent(() => import("@/components/media-caption.vue")), {
+			os.popup(defineAsyncComponent(() => import('@/components/media-caption.vue')), {
 				title: this.$ts.describeFile,
 				input: {
 					placeholder: this.$ts.inputNewDescription,
-					default: file.comment !== null ? file.comment : "",
+					default: file.comment !== null ? file.comment : '',
 				},
 				image: file
 			}, {
