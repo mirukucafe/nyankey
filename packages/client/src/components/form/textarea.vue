@@ -95,7 +95,7 @@ const updated = (): void => {
 };
 const debouncedUpdated = debounce(1000, updated);
 
-watch(modelValue, () => {
+watch($$(v), () => {
 	if (!props.manualSave) {
 		if (props.debounce) {
 			debouncedUpdated();
