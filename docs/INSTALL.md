@@ -4,13 +4,6 @@ This guide will assume that you have administrative rights, either as root or a 
 
 This guide will also assume you're using Debian or a derivative like Ubuntu. If you are using another OS, you will need to adapt the comamnds and package names to match those that your OS uses.
 
-## Create FoundKey user
-Running FoundKey as root is not a good idea. Create a separate user to run FoundKey.
-
-```sh
-adduser --disabled-password --disabled-login foundkey
-```
-
 ## Install dependencies
 FoundKey requires the following packages to run:
 
@@ -36,6 +29,13 @@ apt install build-essential python3 nodejs postgresql redis
 # Optional dependencies
 apt install ffmpeg
 corepack enable # for yarn
+```
+
+## Create FoundKey user
+Create a separate non-root user to run FoundKey:
+
+```sh
+adduser --disabled-password --disabled-login foundkey
 ```
 
 ## Install FoundKey
