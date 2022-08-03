@@ -4,12 +4,12 @@ import renderFollow from '@/remote/activitypub/renderer/follow.js';
 import renderUndo from '@/remote/activitypub/renderer/undo.js';
 import renderReject from '@/remote/activitypub/renderer/reject.js';
 import { deliver, webhookDeliver } from '@/queue/index.js';
-import Logger from '../logger.js';
-import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
-import { User } from '@/models/entities/user.js';
 import { Followings, Users, Instances } from '@/models/index.js';
 import { instanceChart, perUserFollowingChart } from '@/services/chart/index.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
+import { User } from '@/models/entities/user.js';
+import Logger from '../logger.js';
+import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 
 const logger = new Logger('following/delete');
 

@@ -1,7 +1,7 @@
 import { addPinned } from '@/services/i/pin.js';
+import { Users } from '@/models/index.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
-import { Users } from '@/models/index.js';
 
 export const meta = {
 	tags: ['account', 'notes'],

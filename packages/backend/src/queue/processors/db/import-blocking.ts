@@ -1,14 +1,14 @@
 import Bull from 'bull';
+import { IsNull } from 'typeorm';
 
-import { queueLogger } from '../../logger.js';
 import * as Acct from '@/misc/acct.js';
-import { resolveUser } from '@/remote/resolve-user.js';
-import { downloadTextFile } from '@/misc/download-text-file.js';
 import { isSelfHost, toPuny } from '@/misc/convert-host.js';
+import { downloadTextFile } from '@/misc/download-text-file.js';
 import { Users, DriveFiles } from '@/models/index.js';
 import { DbUserImportJobData } from '@/queue/types.js';
+import { resolveUser } from '@/remote/resolve-user.js';
 import block from '@/services/blocking/create.js';
-import { IsNull } from 'typeorm';
+import { queueLogger } from '../../logger.js';
 
 const logger = queueLogger.createSubLogger('import-blocking');
 

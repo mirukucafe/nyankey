@@ -1,10 +1,10 @@
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
-import { getUser } from '../../../common/getters.js';
 import { DriveFiles, UserGroups, UserGroupJoinings, Blockings } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
 import { UserGroup } from '@/models/entities/user-group.js';
 import { createMessage } from '@/services/messages/create.js';
+import define from '../../../define.js';
+import { ApiError } from '../../../error.js';
+import { getUser } from '../../../common/getters.js';
 
 export const meta = {
 	tags: ['messaging'],

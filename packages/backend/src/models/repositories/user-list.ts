@@ -1,7 +1,7 @@
 import { db } from '@/db/postgre.js';
+import { Packed } from '@/misc/schema.js';
 import { UserList } from '@/models/entities/user-list.js';
 import { UserListJoinings } from '../index.js';
-import { Packed } from '@/misc/schema.js';
 
 export const UserListRepository = db.getRepository(UserList).extend({
 	async pack(

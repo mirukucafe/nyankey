@@ -1,9 +1,9 @@
 import create from '@/services/blocking/create.js';
+import { Blockings, NoteWatchings, Users } from '@/models/index.js';
+import { HOUR } from '@/const.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
 import { getUser } from '../../common/getters.js';
-import { Blockings, NoteWatchings, Users } from '@/models/index.js';
-import { HOUR } from '@/const.js';
 
 export const meta = {
 	tags: ['account'],

@@ -1,10 +1,10 @@
 import create from '@/services/following/create.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { getUser } from '../../common/getters.js';
 import { Followings, Users } from '@/models/index.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { HOUR } from '@/const.js';
+import define from '../../define.js';
+import { ApiError } from '../../error.js';
+import { getUser } from '../../common/getters.js';
 
 export const meta = {
 	tags: ['following', 'users'],

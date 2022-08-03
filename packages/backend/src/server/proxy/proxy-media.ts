@@ -7,8 +7,8 @@ import { downloadUrl } from '@/misc/download-url.js';
 import { detectType } from '@/misc/get-file-info.js';
 import { StatusError } from '@/misc/fetch.js';
 import { FILE_TYPE_BROWSERSAFE } from '@/const.js';
-import { serverLogger } from '../index.js';
 import { isMimeImage } from '@/misc/is-mime-image.js';
+import { serverLogger } from '../index.js';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function proxyMedia(ctx: Koa.Context) {

@@ -1,7 +1,7 @@
 import { In } from 'typeorm';
 import { Notes } from '@/models/index.js';
 import config from '@/config/index.js';
-import es from '../../../../db/elasticsearch.js';
+import es from '@/db/elasticsearch.js';
 import define from '../../define.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';

@@ -1,8 +1,8 @@
 import { UserProfiles } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
-import { sendEmail } from './send-email.js';
 import { I18n } from '@/misc/i18n.js';
 import * as Acct from '@/misc/acct.js';
+import { sendEmail } from './send-email.js';
 // TODO
 //const locales = await import('../../../../locales/index.js');
 

@@ -3,20 +3,19 @@ import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
 import renderAccept from '@/remote/activitypub/renderer/accept.js';
 import renderReject from '@/remote/activitypub/renderer/reject.js';
-import { deliver } from '@/queue/index.js';
-import createFollowRequest from './requests/create.js';
-import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
-import Logger from '../logger.js';
+import { deliver, webhookDeliver } from '@/queue/index.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { User } from '@/models/entities/user.js';
 import { Followings, Users, FollowRequests, Blockings, Instances, UserProfiles } from '@/models/index.js';
 import { instanceChart, perUserFollowingChart } from '@/services/chart/index.js';
 import { genId } from '@/misc/gen-id.js';
-import { createNotification } from '../create-notification.js';
 import { isDuplicateKeyValueError } from '@/misc/is-duplicate-key-value-error.js';
 import { Packed } from '@/misc/schema.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
-import { webhookDeliver } from '@/queue/index.js';
+import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
+import Logger from '../logger.js';
+import { createNotification } from '../create-notification.js';
+import createFollowRequest from './requests/create.js';
 
 const logger = new Logger('following/create');
 

@@ -1,12 +1,12 @@
 import * as http from 'node:http';
+import { EventEmitter } from 'events';
+import { ParsedUrlQuery } from 'querystring';
 import * as websocket from 'websocket';
 
-import MainStreamConnection from './stream/index.js';
-import { ParsedUrlQuery } from 'querystring';
-import authenticate from './authenticate.js';
-import { EventEmitter } from 'events';
-import { subsdcriber as redisClient } from '../../db/redis.js';
+import { subsdcriber as redisClient } from '@/db/redis.js';
 import { Users } from '@/models/index.js';
+import MainStreamConnection from './stream/index.js';
+import authenticate from './authenticate.js';
 
 export const initializeStreamingServer = (server: http.Server) => {
 	// Init websocket server

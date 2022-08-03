@@ -1,7 +1,7 @@
-import define from '../../define.js';
 import { ClipNotes, Clips } from '@/models/index.js';
-import { ApiError } from '../../error.js';
 import { genId } from '@/misc/gen-id.js';
+import define from '../../define.js';
+import { ApiError } from '../../error.js';
 import { getNote } from '../../common/getters.js';
 
 export const meta = {

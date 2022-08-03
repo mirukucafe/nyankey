@@ -1,8 +1,8 @@
 import { db } from '@/db/postgre.js';
-import { Apps } from '../index.js';
 import { AuthSession } from '@/models/entities/auth-session.js';
-import { awaitAll } from '@/prelude/await-all.js';
 import { User } from '@/models/entities/user.js';
+import { awaitAll } from '@/prelude/await-all.js';
+import { Apps } from '../index.js';
 
 export const AuthSessionRepository = db.getRepository(AuthSession).extend({
 	async pack(

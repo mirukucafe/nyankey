@@ -1,3 +1,4 @@
+import { Not } from 'typeorm';
 import { CacheableUser, User } from '@/models/entities/user.js';
 import { UserGroup } from '@/models/entities/user-group.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
@@ -6,7 +7,6 @@ import { genId } from '@/misc/gen-id.js';
 import { MessagingMessage } from '@/models/entities/messaging-message.js';
 import { publishMessagingStream, publishMessagingIndexStream, publishMainStream, publishGroupMessagingStream } from '@/services/stream.js';
 import { pushNotification } from '@/services/push-notification.js';
-import { Not } from 'typeorm';
 import { Note } from '@/models/entities/note.js';
 import renderNote from '@/remote/activitypub/renderer/note.js';
 import renderCreate from '@/remote/activitypub/renderer/create.js';

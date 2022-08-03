@@ -10,13 +10,13 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { toPuny, extractDbHost } from '@/misc/convert-host.js';
 import { getApId } from '@/remote/activitypub/type.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
-import { InboxJobData } from '../types.js';
 import DbResolver from '@/remote/activitypub/db-resolver.js';
 import { resolvePerson } from '@/remote/activitypub/models/person.js';
 import { LdSignature } from '@/remote/activitypub/misc/ld-signature.js';
 import { StatusError } from '@/misc/fetch.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { UserPublickey } from '@/models/entities/user-publickey.js';
+import { InboxJobData } from '../types.js';
 
 const logger = new Logger('inbox');
 

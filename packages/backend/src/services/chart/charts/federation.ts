@@ -1,7 +1,7 @@
-import Chart, { KVs } from '../core.js';
 import { Followings, Instances } from '@/models/index.js';
-import { name, schema } from './entities/federation.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
+import Chart, { KVs } from '../core.js';
+import { name, schema } from './entities/federation.js';
 
 /**
  * フェデレーションに関するチャート

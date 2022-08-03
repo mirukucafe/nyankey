@@ -1,8 +1,8 @@
-import define from '../../define.js';
 import { Apps } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { unique } from '@/prelude/array.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
+import define from '../../define.js';
 
 export const meta = {
 	tags: ['app'],

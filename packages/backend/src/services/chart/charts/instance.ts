@@ -1,8 +1,8 @@
-import Chart, { KVs } from '../core.js';
 import { DriveFiles, Followings, Users, Notes } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { Note } from '@/models/entities/note.js';
 import { toPuny } from '@/misc/convert-host.js';
+import Chart, { KVs } from '../core.js';
 import { name, schema } from './entities/instance.js';
 
 /**

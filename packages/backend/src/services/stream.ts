@@ -1,4 +1,4 @@
-import { redisClient } from '../db/redis.js';
+import { redisClient } from '@/db/redis.js';
 import { User } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { UserList } from '@/models/entities/user-list.js';

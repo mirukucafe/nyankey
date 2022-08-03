@@ -1,7 +1,7 @@
-import define from '../../../define.js';
 import { DriveFiles, GalleryPosts } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { HOUR } from '@/const.js';
+import define from '../../../define.js';
 
 export const meta = {
 	tags: ['gallery'],

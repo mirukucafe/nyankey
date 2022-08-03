@@ -1,5 +1,5 @@
-import define from '../../../define.js';
 import { removeRelay } from '@/services/relay.js';
+import define from '../../../define.js';
 
 export const meta = {
 	tags: ['admin'],

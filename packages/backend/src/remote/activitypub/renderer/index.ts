@@ -1,9 +1,9 @@
-import config from '@/config/index.js';
 import { v4 as uuid } from 'uuid';
-import { IActivity } from '../type.js';
-import { LdSignature } from '../misc/ld-signature.js';
+import config from '@/config/index.js';
 import { getUserKeypair } from '@/misc/keypair-store.js';
 import { User } from '@/models/entities/user.js';
+import { IActivity } from '../type.js';
+import { LdSignature } from '../misc/ld-signature.js';
 
 export const renderActivity = (x: any): IActivity | null => {
 	if (x == null) return null;

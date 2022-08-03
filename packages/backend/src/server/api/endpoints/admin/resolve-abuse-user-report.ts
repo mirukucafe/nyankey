@@ -1,9 +1,9 @@
-import define from '../../define.js';
 import { AbuseUserReports, Users } from '@/models/index.js';
 import { getInstanceActor } from '@/services/instance-actor.js';
 import { deliver } from '@/queue/index.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import { renderFlag } from '@/remote/activitypub/renderer/flag.js';
+import define from '../../define.js';
 
 export const meta = {
 	tags: ['admin'],

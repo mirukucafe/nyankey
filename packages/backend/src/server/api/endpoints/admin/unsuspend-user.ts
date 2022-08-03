@@ -1,7 +1,7 @@
-import define from '../../define.js';
 import { Users } from '@/models/index.js';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
 import { doPostUnsuspend } from '@/services/unsuspend-user.js';
+import define from '../../define.js';
 
 export const meta = {
 	tags: ['admin'],

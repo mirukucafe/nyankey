@@ -1,6 +1,6 @@
 import { Webhooks } from '@/models/index.js';
 import { Webhook } from '@/models/entities/webhook.js';
-import { subsdcriber } from '../db/redis.js';
+import { subsdcriber } from '@/db/redis.js';
 
 let webhooksFetched = false;
 let webhooks: Webhook[] = [];

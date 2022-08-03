@@ -1,10 +1,10 @@
 import * as fs from 'node:fs';
 import Ajv from 'ajv';
 import { CacheableLocalUser, ILocalUser } from '@/models/entities/user.js';
-import { IEndpointMeta } from './endpoints.js';
-import { ApiError } from './error.js';
 import { Schema, SchemaType } from '@/misc/schema.js';
 import { AccessToken } from '@/models/entities/access-token.js';
+import { IEndpointMeta } from './endpoints.js';
+import { ApiError } from './error.js';
 
 export type Response = Record<string, any> | void;
 

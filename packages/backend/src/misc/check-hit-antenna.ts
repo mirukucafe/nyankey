@@ -2,8 +2,8 @@ import { Antenna } from '@/models/entities/antenna.js';
 import { Note } from '@/models/entities/note.js';
 import { User } from '@/models/entities/user.js';
 import { UserListJoinings, UserGroupJoinings, Blockings } from '@/models/index.js';
-import { getFullApAccount } from './convert-host.js';
 import * as Acct from '@/misc/acct.js';
+import { getFullApAccount } from './convert-host.js';
 import { Packed } from './schema.js';
 import { Cache } from './cache.js';
 

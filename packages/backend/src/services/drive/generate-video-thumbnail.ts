@@ -1,6 +1,6 @@
+import FFmpeg from 'fluent-ffmpeg';
 import { createTempDir } from '@/misc/create-temp.js';
 import { IImage, convertToJpeg } from './image-processor.js';
-import FFmpeg from 'fluent-ffmpeg';
 
 export async function GenerateVideoThumbnail(source: string): Promise<IImage> {
 	const [dir, cleanup] = await createTempDir();

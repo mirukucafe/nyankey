@@ -1,8 +1,8 @@
-import { createSystemUser } from './create-system-user.js';
+import { IsNull } from 'typeorm';
 import { ILocalUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import { Cache } from '@/misc/cache.js';
-import { IsNull } from 'typeorm';
+import { createSystemUser } from './create-system-user.js';
 
 const ACTOR_USERNAME = 'instance.actor' as const;
 

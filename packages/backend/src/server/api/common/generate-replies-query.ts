@@ -1,5 +1,5 @@
-import { User } from '@/models/entities/user.js';
 import { Brackets, SelectQueryBuilder } from 'typeorm';
+import { User } from '@/models/entities/user.js';
 
 export function generateRepliesQuery(q: SelectQueryBuilder<any>, me?: Pick<User, 'id' | 'showTimelineReplies'> | null) {
 	if (me == null) {

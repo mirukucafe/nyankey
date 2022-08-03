@@ -1,6 +1,6 @@
-import define from '../../define.js';
 import { Users } from '@/models/index.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
+import define from '../../define.js';
 
 export const meta = {
 	requireCredential: false,

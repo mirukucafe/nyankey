@@ -3,7 +3,7 @@ import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
 import renderUndo from '@/remote/activitypub/renderer/undo.js';
 import { renderBlock } from '@/remote/activitypub/renderer/block.js';
-import { deliver } from '@/queue/index.js';
+import { deliver, webhookDeliver } from '@/queue/index.js';
 import renderReject from '@/remote/activitypub/renderer/reject.js';
 import { Blocking } from '@/models/entities/blocking.js';
 import { User } from '@/models/entities/user.js';
@@ -11,7 +11,6 @@ import { Blockings, Users, FollowRequests, Followings, UserListJoinings, UserLis
 import { perUserFollowingChart } from '@/services/chart/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
-import { webhookDeliver } from '@/queue/index.js';
 
 export default async function(blocker: User, blockee: User) {
 	await Promise.all([

@@ -1,6 +1,6 @@
-import define from '../../../define.js';
 import { deleteFile } from '@/services/drive/delete-file.js';
 import { DriveFiles } from '@/models/index.js';
+import define from '../../../define.js';
 
 export const meta = {
 	tags: ['admin'],

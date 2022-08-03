@@ -1,5 +1,5 @@
-import Chart, { KVs } from '../core.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
+import Chart, { KVs } from '../core.js';
 import { name, schema } from './entities/drive.js';
 
 /**

@@ -1,12 +1,12 @@
 import { uploadFromUrl } from '@/services/drive/upload-from-url.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import Resolver from '../resolver.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
-import { apLogger } from '../logger.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { DriveFiles } from '@/models/index.js';
 import { truncate } from '@/misc/truncate.js';
 import { DB_MAX_IMAGE_COMMENT_LENGTH } from '@/misc/hard-limits.js';
+import Resolver from '../resolver.js';
+import { apLogger } from '../logger.js';
 
 const logger = apLogger;
 

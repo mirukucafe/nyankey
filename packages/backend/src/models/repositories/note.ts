@@ -1,16 +1,16 @@
 import { In } from 'typeorm';
 import * as mfm from 'mfm-js';
-import { Note } from '@/models/entities/note.js';
-import { User } from '@/models/entities/user.js';
-import { Users, PollVotes, DriveFiles, NoteReactions, Followings, Polls, Channels } from '../index.js';
-import { Packed } from '@/misc/schema.js';
-import { nyaize } from '@/misc/nyaize.js';
-import { awaitAll } from '@/prelude/await-all.js';
-import { convertLegacyReaction, convertLegacyReactions, decodeReaction } from '@/misc/reaction-lib.js';
-import { NoteReaction } from '@/models/entities/note-reaction.js';
-import { aggregateNoteEmojis, populateEmojis, prefetchEmojis } from '@/misc/populate-emojis.js';
 import { db } from '@/db/postgre.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
+import { nyaize } from '@/misc/nyaize.js';
+import { aggregateNoteEmojis, populateEmojis, prefetchEmojis } from '@/misc/populate-emojis.js';
+import { convertLegacyReaction, convertLegacyReactions, decodeReaction } from '@/misc/reaction-lib.js';
+import { Packed } from '@/misc/schema.js';
+import { Note } from '@/models/entities/note.js';
+import { NoteReaction } from '@/models/entities/note-reaction.js';
+import { User } from '@/models/entities/user.js';
+import { awaitAll } from '@/prelude/await-all.js';
+import { Users, PollVotes, DriveFiles, NoteReactions, Followings, Polls, Channels } from '../index.js';
 
 async function populatePoll(note: Note, meId: User['id'] | null) {
 	const poll = await Polls.findOneByOrFail({ noteId: note.id });

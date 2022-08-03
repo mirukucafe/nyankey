@@ -1,5 +1,5 @@
-import define from '../../define.js';
 import { UserGroupInvitations } from '@/models/index.js';
+import define from '../../define.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';
 
 export const meta = {

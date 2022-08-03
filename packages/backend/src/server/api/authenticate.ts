@@ -1,10 +1,10 @@
-import isNativeToken from './common/is-native-token.js';
 import { CacheableLocalUser, ILocalUser } from '@/models/entities/user.js';
 import { Users, AccessTokens, Apps } from '@/models/index.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { Cache } from '@/misc/cache.js';
 import { App } from '@/models/entities/app.js';
 import { localUserByIdCache, localUserByNativeTokenCache } from '@/services/user-cache.js';
+import isNativeToken from './common/is-native-token.js';
 
 const appCache = new Cache<App>(Infinity);
 

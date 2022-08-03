@@ -1,6 +1,6 @@
 import Limiter from 'ratelimiter';
 import Logger from '@/services/logger.js';
-import { redisClient } from '../../db/redis.js';
+import { redisClient } from '@/db/redis.js';
 import { IEndpointMeta } from './endpoints.js';
 
 const logger = new Logger('limiter');

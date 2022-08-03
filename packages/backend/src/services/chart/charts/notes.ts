@@ -1,7 +1,7 @@
-import Chart, { KVs } from '../core.js';
-import { Notes } from '@/models/index.js';
 import { Not, IsNull } from 'typeorm';
+import { Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
+import Chart, { KVs } from '../core.js';
 import { name, schema } from './entities/notes.js';
 
 /**

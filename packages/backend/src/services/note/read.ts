@@ -1,8 +1,8 @@
+import { Not, IsNull, In } from 'typeorm';
 import { publishMainStream } from '@/services/stream.js';
 import { Note } from '@/models/entities/note.js';
 import { User } from '@/models/entities/user.js';
 import { NoteUnreads, AntennaNotes, Users, Followings, ChannelFollowings } from '@/models/index.js';
-import { Not, IsNull, In } from 'typeorm';
 import { Channel } from '@/models/entities/channel.js';
 import { checkHitAntenna } from '@/misc/check-hit-antenna.js';
 import { getAntennas } from '@/misc/antenna-cache.js';

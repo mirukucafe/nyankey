@@ -1,7 +1,7 @@
-import { Users, Followings } from '@/models/index.js';
-import { ILocalUser, IRemoteUser, User } from '@/models/entities/user.js';
-import { deliver } from '@/queue/index.js';
 import { IsNull, Not } from 'typeorm';
+import { ILocalUser, IRemoteUser, User } from '@/models/entities/user.js';
+import { Users, Followings } from '@/models/index.js';
+import { deliver } from '@/queue/index.js';
 
 //#region types
 interface IRecipe {

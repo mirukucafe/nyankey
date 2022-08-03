@@ -1,9 +1,9 @@
 import { db } from '@/db/postgre.js';
-import { Users } from '../index.js';
-import { Following } from '@/models/entities/following.js';
-import { awaitAll } from '@/prelude/await-all.js';
 import { Packed } from '@/misc/schema.js';
+import { Following } from '@/models/entities/following.js';
 import { User } from '@/models/entities/user.js';
+import { awaitAll } from '@/prelude/await-all.js';
+import { Users } from '../index.js';
 
 type LocalFollowerFollowing = Following & {
 	followerHost: null;

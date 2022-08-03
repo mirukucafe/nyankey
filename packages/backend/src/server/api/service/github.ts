@@ -9,7 +9,7 @@ import { publishMainStream } from '@/services/stream.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import { ILocalUser } from '@/models/entities/user.js';
-import { redisClient } from '../../../db/redis.js';
+import { redisClient } from '@/db/redis.js';
 import signin from '../common/signin.js';
 
 function getUserToken(ctx: Koa.BaseContext): string | null {

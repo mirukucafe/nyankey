@@ -1,6 +1,6 @@
-import define from '../../define.js';
 import { Instances } from '@/models/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
+import define from '../../define.js';
 
 export const meta = {
 	tags: ['federation'],

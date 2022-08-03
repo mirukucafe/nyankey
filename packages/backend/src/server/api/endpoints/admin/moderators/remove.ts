@@ -1,6 +1,6 @@
-import define from '../../../define.js';
 import { Users } from '@/models/index.js';
 import { publishInternalEvent } from '@/services/stream.js';
+import define from '../../../define.js';
 
 export const meta = {
 	tags: ['admin'],

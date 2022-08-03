@@ -3,10 +3,10 @@ import renderFollow from '@/remote/activitypub/renderer/follow.js';
 import renderAccept from '@/remote/activitypub/renderer/accept.js';
 import { deliver } from '@/queue/index.js';
 import { publishMainStream } from '@/services/stream.js';
-import { insertFollowingDoc } from '../create.js';
 import { User, CacheableUser } from '@/models/entities/user.js';
 import { FollowRequests, Users } from '@/models/index.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
+import { insertFollowingDoc } from '../create.js';
 
 export default async function(followee: { id: User['id']; host: User['host']; uri: User['host']; inbox: User['inbox']; sharedInbox: User['sharedInbox']; }, follower: CacheableUser) {
 	const request = await FollowRequests.findOneBy({

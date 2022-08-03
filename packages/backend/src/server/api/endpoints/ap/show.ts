@@ -1,10 +1,8 @@
-import define from '../../define.js';
 import config from '@/config/index.js';
 import { createPerson } from '@/remote/activitypub/models/person.js';
 import { createNote } from '@/remote/activitypub/models/note.js';
 import DbResolver from '@/remote/activitypub/db-resolver.js';
 import Resolver from '@/remote/activitypub/resolver.js';
-import { ApiError } from '../../error.js';
 import { extractDbHost } from '@/misc/convert-host.js';
 import { Users, Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
@@ -13,6 +11,8 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { isActor, isPost, getApId } from '@/remote/activitypub/type.js';
 import { SchemaType } from '@/misc/schema.js';
 import { HOUR } from '@/const.js';
+import define from '../../define.js';
+import { ApiError } from '../../error.js';
 
 export const meta = {
 	tags: ['federation'],

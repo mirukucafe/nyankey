@@ -1,7 +1,7 @@
 import config from '@/config/index.js';
-import define from '../../define.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
+import define from '../../define.js';
 
 export const meta = {
 	tags: ['meta'],

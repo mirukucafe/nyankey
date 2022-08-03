@@ -1,8 +1,8 @@
-import define from '../../define.js';
 import { genId } from '@/misc/gen-id.js';
 import { Antennas, UserLists, UserGroupJoinings } from '@/models/index.js';
-import { ApiError } from '../../error.js';
 import { publishInternalEvent } from '@/services/stream.js';
+import define from '../../define.js';
+import { ApiError } from '../../error.js';
 
 export const meta = {
 	tags: ['antennas'],

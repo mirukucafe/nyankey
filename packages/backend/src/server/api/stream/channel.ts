@@ -1,8 +1,8 @@
-import Connection from '.';
 import { Note } from '@/models/entities/note.js';
 import { Notes } from '@/models/index.js';
 import { Packed } from '@/misc/schema.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
+import Connection from '.';
 
 /**
  * Stream channel

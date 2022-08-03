@@ -1,6 +1,6 @@
+import { Brackets, SelectQueryBuilder } from 'typeorm';
 import { User } from '@/models/entities/user.js';
 import { Followings } from '@/models/index.js';
-import { Brackets, SelectQueryBuilder } from 'typeorm';
 
 export function generateVisibilityQuery(q: SelectQueryBuilder<any>, me?: { id: User['id'] } | null) {
 	// This code must always be synchronized with the checks in Notes.isVisibleForMe.

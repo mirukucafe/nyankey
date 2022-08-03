@@ -1,8 +1,8 @@
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
 import { MessagingMessages } from '@/models/index.js';
 import { deleteMessage } from '@/services/messages/delete.js';
 import { SECOND, HOUR } from '@/const.js';
+import define from '../../../define.js';
+import { ApiError } from '../../../error.js';
 
 export const meta = {
 	tags: ['messaging'],

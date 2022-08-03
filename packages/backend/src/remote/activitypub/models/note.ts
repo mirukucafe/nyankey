@@ -1,32 +1,32 @@
 import promiseLimit from 'promise-limit';
 
 import config from '@/config/index.js';
-import Resolver from '../resolver.js';
 import post from '@/services/note/create.js';
-import { resolvePerson } from './person.js';
-import { resolveImage } from './image.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import { htmlToMfm } from '../misc/html-to-mfm.js';
-import { extractApHashtags } from './tag.js';
 import { unique, toArray, toSingle } from '@/prelude/array.js';
-import { extractPollFromQuestion } from './question.js';
 import vote from '@/services/note/polls/vote.js';
-import { apLogger } from '../logger.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { deliverQuestionUpdate } from '@/services/note/polls/update.js';
 import { extractDbHost, toPuny } from '@/misc/convert-host.js';
 import { Emojis, Polls, MessagingMessages } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
-import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { genId } from '@/misc/gen-id.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { createMessage } from '@/services/messages/create.js';
-import { parseAudience } from '../audience.js';
-import { extractApMentions } from './mention.js';
-import DbResolver from '../db-resolver.js';
 import { StatusError } from '@/misc/fetch.js';
+import { parseAudience } from '../audience.js';
+import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
+import DbResolver from '../db-resolver.js';
+import Resolver from '../resolver.js';
+import { htmlToMfm } from '../misc/html-to-mfm.js';
+import { apLogger } from '../logger.js';
+import { resolvePerson } from './person.js';
+import { resolveImage } from './image.js';
+import { extractApHashtags } from './tag.js';
+import { extractPollFromQuestion } from './question.js';
+import { extractApMentions } from './mention.js';
 
 const logger = apLogger;
 

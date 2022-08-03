@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
-import define from '../../../define.js';
 import { UserProfiles } from '@/models/index.js';
+import define from '../../../define.js';
 
 export const meta = {
 	requireCredential: true,

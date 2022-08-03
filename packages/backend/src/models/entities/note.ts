@@ -1,8 +1,8 @@
 import { Entity, Index, JoinColumn, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import { noteVisibilities } from '@/types.js';
+import { id } from '../id.js';
 import { User } from './user.js';
 import { DriveFile } from './drive-file.js';
-import { id } from '../id.js';
-import { noteVisibilities } from '../../types.js';
 import { Channel } from './channel.js';
 
 @Entity()

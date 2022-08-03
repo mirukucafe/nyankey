@@ -1,3 +1,4 @@
+import { URL } from 'node:url';
 import { DOMWindow, JSDOM } from 'jsdom';
 import fetch from 'node-fetch';
 import tinycolor from 'tinycolor2';
@@ -6,7 +7,6 @@ import { Instance } from '@/models/entities/instance.js';
 import { Instances } from '@/models/index.js';
 import { getFetchInstanceMetadataLock } from '@/misc/app-lock.js';
 import Logger from './logger.js';
-import { URL } from 'node:url';
 
 const logger = new Logger('metadata', 'cyan');
 

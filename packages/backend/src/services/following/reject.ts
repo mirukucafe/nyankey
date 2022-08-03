@@ -5,8 +5,8 @@ import { deliver, webhookDeliver } from '@/queue/index.js';
 import { publishMainStream, publishUserEvent } from '@/services/stream.js';
 import { ILocalUser, IRemoteUser } from '@/models/entities/user.js';
 import { Users, FollowRequests, Followings } from '@/models/index.js';
-import { decrementFollowing } from './delete.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
+import { decrementFollowing } from './delete.js';
 
 type Local = ILocalUser | {
 	id: ILocalUser['id'];

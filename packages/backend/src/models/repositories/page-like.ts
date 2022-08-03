@@ -1,7 +1,7 @@
 import { db } from '@/db/postgre.js';
 import { PageLike } from '@/models/entities/page-like.js';
-import { Pages } from '../index.js';
 import { User } from '@/models/entities/user.js';
+import { Pages } from '../index.js';
 
 export const PageLikeRepository = db.getRepository(PageLike).extend({
 	async pack(

@@ -1,8 +1,8 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import { IRead, getApId } from '../type.js';
 import { isSelfHost, extractDbHost } from '@/misc/convert-host.js';
 import { MessagingMessages } from '@/models/index.js';
-import { readUserMessagingMessage } from '../../../server/api/common/read-messaging-message.js';
+import { readUserMessagingMessage } from '@/server/api/common/read-messaging-message.js';
+import { IRead, getApId } from '../type.js';
 
 export const performReadActivity = async (actor: CacheableRemoteUser, activity: IRead): Promise<string> => {
 	const id = await getApId(activity.object);

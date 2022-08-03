@@ -1,7 +1,7 @@
-import define from '../../define.js';
+import { Brackets } from 'typeorm';
 import { MessagingMessage } from '@/models/entities/messaging-message.js';
 import { MessagingMessages, Mutings, UserGroupJoinings } from '@/models/index.js';
-import { Brackets } from 'typeorm';
+import define from '../../define.js';
 
 export const meta = {
 	tags: ['messaging'],

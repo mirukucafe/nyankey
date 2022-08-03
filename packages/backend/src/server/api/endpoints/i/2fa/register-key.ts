@@ -1,9 +1,9 @@
-import bcrypt from 'bcryptjs';
-import define from '../../../define.js';
-import { UserProfiles, AttestationChallenges } from '@/models/index.js';
 import { promisify } from 'node:util';
 import * as crypto from 'node:crypto';
+import bcrypt from 'bcryptjs';
+import { UserProfiles, AttestationChallenges } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
+import define from '../../../define.js';
 import { hash } from '../../../2fa.js';
 
 const randomBytes = promisify(crypto.randomBytes);

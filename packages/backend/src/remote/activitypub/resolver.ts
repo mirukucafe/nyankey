@@ -4,10 +4,7 @@ import { ILocalUser } from '@/models/entities/user.js';
 import { getInstanceActor } from '@/services/instance-actor.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { extractDbHost, isSelfHost } from '@/misc/convert-host.js';
-import { signedGet } from './request.js';
-import { IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
 import { Notes, NoteReactions, Polls, Users } from '@/models/index.js';
-import { parseUri } from './db-resolver.js';
 import renderNote from '@/remote/activitypub/renderer/note.js';
 import { renderLike } from '@/remote/activitypub/renderer/like.js';
 import { renderPerson } from '@/remote/activitypub/renderer/person.js';
@@ -15,6 +12,9 @@ import renderQuestion from '@/remote/activitypub/renderer/question.js';
 import renderCreate from '@/remote/activitypub/renderer/create.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
+import { signedGet } from './request.js';
+import { IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
+import { parseUri } from './db-resolver.js';
 
 export default class Resolver {
 	private history: Set<string>;

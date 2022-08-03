@@ -1,9 +1,9 @@
-import Channel from '../channel.js';
 import { Users } from '@/models/index.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { User } from '@/models/entities/user.js';
-import { StreamMessages } from '../types.js';
 import { Packed } from '@/misc/schema.js';
+import { StreamMessages } from '../types.js';
+import Channel from '../channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'channel';

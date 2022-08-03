@@ -1,8 +1,8 @@
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
 import { Channels, ChannelFollowings } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { publishUserEvent } from '@/services/stream.js';
+import define from '../../define.js';
+import { ApiError } from '../../error.js';
 
 export const meta = {
 	tags: ['channels'],

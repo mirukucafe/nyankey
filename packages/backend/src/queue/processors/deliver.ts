@@ -10,8 +10,8 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { toPuny } from '@/misc/convert-host.js';
 import { Cache } from '@/misc/cache.js';
 import { Instance } from '@/models/entities/instance.js';
-import { DeliverJobData } from '../types.js';
 import { StatusError } from '@/misc/fetch.js';
+import { DeliverJobData } from '../types.js';
 
 const logger = new Logger('deliver');
 

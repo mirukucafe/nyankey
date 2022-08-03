@@ -1,6 +1,6 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import { ILike, getApId } from '../type.js';
 import create from '@/services/note/reaction/create.js';
+import { ILike, getApId } from '../type.js';
 import { fetchNote, extractEmojis } from '../models/note.js';
 
 export default async (actor: CacheableRemoteUser, activity: ILike) => {

@@ -1,6 +1,6 @@
 import { URL } from 'node:url';
-import define from '../../../define.js';
 import { addRelay } from '@/services/relay.js';
+import define from '../../../define.js';
 import { ApiError } from '../../../error.js';
 
 export const meta = {

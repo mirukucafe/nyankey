@@ -1,8 +1,8 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import accept from '@/services/following/requests/accept.js';
+import { relayAccepted } from '@/services/relay.js';
 import { IFollow } from '../../type.js';
 import DbResolver from '../../db-resolver.js';
-import { relayAccepted } from '@/services/relay.js';
 
 export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<string> => {
 	// ※ activityはこっちから投げたフォローリクエストなので、activity.actorは存在するローカルユーザーである必要がある

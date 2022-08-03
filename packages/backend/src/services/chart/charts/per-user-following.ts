@@ -1,7 +1,7 @@
-import Chart, { KVs } from '../core.js';
-import { Followings, Users } from '@/models/index.js';
 import { Not, IsNull } from 'typeorm';
+import { Followings, Users } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
+import Chart, { KVs } from '../core.js';
 import { name, schema } from './entities/per-user-following.js';
 
 /**

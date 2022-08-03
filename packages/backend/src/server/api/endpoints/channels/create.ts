@@ -1,8 +1,8 @@
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
 import { Channels, DriveFiles } from '@/models/index.js';
 import { Channel } from '@/models/entities/channel.js';
 import { genId } from '@/misc/gen-id.js';
+import define from '../../define.js';
+import { ApiError } from '../../error.js';
 
 export const meta = {
 	tags: ['channels'],

@@ -1,13 +1,13 @@
 import { URL } from 'node:url';
-import webFinger from './webfinger.js';
-import config from '@/config/index.js';
-import { createPerson, updatePerson } from './activitypub/models/person.js';
-import { remoteLogger } from './logger.js';
 import chalk from 'chalk';
+import { IsNull } from 'typeorm';
+import config from '@/config/index.js';
+import { toPuny } from '@/misc/convert-host.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
-import { toPuny } from '@/misc/convert-host.js';
-import { IsNull } from 'typeorm';
+import webFinger from './webfinger.js';
+import { createPerson, updatePerson } from './activitypub/models/person.js';
+import { remoteLogger } from './logger.js';
 
 const logger = remoteLogger.createSubLogger('resolve-user');
 

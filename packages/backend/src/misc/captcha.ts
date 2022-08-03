@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
 import { URLSearchParams } from 'node:url';
-import { getAgentByUrl } from './fetch.js';
+import fetch from 'node-fetch';
 import config from '@/config/index.js';
+import { getAgentByUrl } from './fetch.js';
 
 export async function verifyRecaptcha(secret: string, response: string) {
 	const result = await getCaptchaResponse('https://www.recaptcha.net/recaptcha/api/siteverify', secret, response).catch(e => {

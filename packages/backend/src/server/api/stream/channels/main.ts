@@ -1,5 +1,5 @@
-import Channel from '../channel.js';
 import { isInstanceMuted, isUserFromMutedInstance } from '@/misc/is-instance-muted.js';
+import Channel from '../channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'main';

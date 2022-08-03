@@ -1,8 +1,8 @@
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
 import { Webhooks } from '@/models/index.js';
 import { publishInternalEvent } from '@/services/stream.js';
 import { webhookEventTypes } from '@/models/entities/webhook.js';
+import define from '../../../define.js';
+import { ApiError } from '../../../error.js';
 
 export const meta = {
 	tags: ['webhooks'],

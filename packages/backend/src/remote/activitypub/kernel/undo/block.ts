@@ -1,8 +1,8 @@
-import { IBlock } from '../../type.js';
 import unblock from '@/services/blocking/delete.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import DbResolver from '../../db-resolver.js';
 import { Users } from '@/models/index.js';
+import { IBlock } from '../../type.js';
+import DbResolver from '../../db-resolver.js';
 
 export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<string> => {
 	const dbResolver = new DbResolver();

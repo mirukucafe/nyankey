@@ -1,7 +1,6 @@
-import bcrypt from 'bcryptjs';
 import { promisify } from 'node:util';
+import bcrypt from 'bcryptjs';
 import * as cbor from 'cbor';
-import define from '../../../define.js';
 import {
 	UserProfiles,
 	UserSecurityKeys,
@@ -9,8 +8,9 @@ import {
 	Users,
 } from '@/models/index.js';
 import config from '@/config/index.js';
-import { procedures, hash } from '../../../2fa.js';
 import { publishMainStream } from '@/services/stream.js';
+import define from '../../../define.js';
+import { procedures, hash } from '../../../2fa.js';
 
 const cborDecodeFirst = promisify(cbor.decodeFirst) as any;
 const rpIdHashReal = hash(Buffer.from(config.hostname, 'utf-8'));

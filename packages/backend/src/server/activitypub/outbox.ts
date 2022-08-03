@@ -11,9 +11,9 @@ import { countIf } from '@/prelude/array.js';
 import * as url from '@/prelude/url.js';
 import { Users, Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
+import { isPureRenote } from '@/misc/renote.js';
 import { makePaginationQuery } from '../api/common/make-pagination-query.js';
 import { setResponseType } from '../activitypub.js';
-import { isPureRenote } from '@/misc/renote.js';
 
 export default async (ctx: Router.RouterContext) => {
 	const userId = ctx.params.user;

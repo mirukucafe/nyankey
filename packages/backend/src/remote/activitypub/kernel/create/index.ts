@@ -1,9 +1,9 @@
-import Resolver from '../../resolver.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import createNote from './note.js';
+import { toArray, concat, unique } from '@/prelude/array.js';
+import Resolver from '../../resolver.js';
 import { ICreate, getApId, isPost, getApType } from '../../type.js';
 import { apLogger } from '../../logger.js';
-import { toArray, concat, unique } from '@/prelude/array.js';
+import createNote from './note.js';
 
 const logger = apLogger;
 

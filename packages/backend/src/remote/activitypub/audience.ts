@@ -1,9 +1,9 @@
-import { ApObject, getApIds } from './type.js';
-import Resolver from './resolver.js';
-import { resolvePerson } from './models/person.js';
-import { unique, concat } from '@/prelude/array.js';
 import promiseLimit from 'promise-limit';
 import { CacheableRemoteUser, CacheableUser } from '@/models/entities/user.js';
+import { unique, concat } from '@/prelude/array.js';
+import { resolvePerson } from './models/person.js';
+import Resolver from './resolver.js';
+import { ApObject, getApIds } from './type.js';
 
 type Visibility = 'public' | 'home' | 'followers' | 'specified';
 

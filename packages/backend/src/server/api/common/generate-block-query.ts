@@ -1,6 +1,6 @@
+import { Brackets, SelectQueryBuilder } from 'typeorm';
 import { User } from '@/models/entities/user.js';
 import { Blockings } from '@/models/index.js';
-import { Brackets, SelectQueryBuilder } from 'typeorm';
 
 // ここでいうBlockedは被Blockedの意
 export function generateBlockedUserQuery(q: SelectQueryBuilder<any>, me: { id: User['id'] }) {

@@ -1,8 +1,8 @@
-import Channel from '../channel.js';
 import { checkWordMute } from '@/misc/check-word-mute.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { isInstanceMuted } from '@/misc/is-instance-muted.js';
 import { Packed } from '@/misc/schema.js';
+import Channel from '../channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'homeTimeline';

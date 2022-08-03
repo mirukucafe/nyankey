@@ -4,7 +4,6 @@ import { dirname } from 'node:path';
 import Koa from 'koa';
 import send from 'koa-send';
 import rename from 'rename';
-import { serverLogger } from '../index.js';
 import { contentDisposition } from '@/misc/content-disposition.js';
 import { DriveFiles } from '@/models/index.js';
 import { InternalStorage } from '@/services/drive/internal-storage.js';
@@ -15,6 +14,7 @@ import { convertToWebp, convertToPng } from '@/services/drive/image-processor.js
 import { GenerateVideoThumbnail } from '@/services/drive/generate-video-thumbnail.js';
 import { StatusError } from '@/misc/fetch.js';
 import { FILE_TYPE_BROWSERSAFE } from '@/const.js';
+import { serverLogger } from '../index.js';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);

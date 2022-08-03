@@ -1,7 +1,7 @@
-import define from '../../../define.js';
-import { Users } from '@/models/index.js';
-import { signup } from '../../../common/signup.js';
 import { IsNull } from 'typeorm';
+import { Users } from '@/models/index.js';
+import define from '../../../define.js';
+import { signup } from '../../../common/signup.js';
 
 export const meta = {
 	tags: ['admin'],

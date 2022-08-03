@@ -22,11 +22,11 @@ import { Users, Notes, UserProfiles, Pages, Channels, Clips, GalleryPosts } from
 import * as Acct from '@/misc/acct.js';
 import { getNoteSummary } from '@/misc/get-note-summary.js';
 import { queues } from '@/queue/queues.js';
+import { MINUTE, DAY } from '@/const.js';
 import { genOpenapiSpec } from '../api/openapi/gen-spec.js';
 import { urlPreviewHandler } from './url-preview.js';
 import { manifestHandler } from './manifest.js';
 import packFeed from './feed.js';
-import { MINUTE, DAY } from '@/const.js';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);

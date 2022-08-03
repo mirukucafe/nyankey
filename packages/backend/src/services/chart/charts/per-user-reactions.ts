@@ -1,7 +1,7 @@
-import Chart, { KVs } from '../core.js';
 import { User } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { Users } from '@/models/index.js';
+import Chart, { KVs } from '../core.js';
 import { name, schema } from './entities/per-user-reactions.js';
 
 /**

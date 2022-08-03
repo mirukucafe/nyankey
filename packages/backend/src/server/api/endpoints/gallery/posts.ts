@@ -1,6 +1,6 @@
+import { GalleryPosts } from '@/models/index.js';
 import define from '../../define.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { GalleryPosts } from '@/models/index.js';
 
 export const meta = {
 	tags: ['gallery'],

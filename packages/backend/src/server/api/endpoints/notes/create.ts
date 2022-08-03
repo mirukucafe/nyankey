@@ -6,11 +6,11 @@ import { DriveFile } from '@/models/entities/drive-file.js';
 import { Note } from '@/models/entities/note.js';
 import { Channel } from '@/models/entities/channel.js';
 import { MAX_NOTE_TEXT_LENGTH, HOUR } from '@/const.js';
+import { isPureRenote } from '@/misc/renote.js';
 import { noteVisibilities } from '../../../../types.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
 import { getNote } from '../../common/getters.js';
-import { isPureRenote } from '@/misc/renote.js';
 
 export const meta = {
 	tags: ['notes'],

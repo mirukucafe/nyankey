@@ -4,8 +4,8 @@ import config from '@/config/index.js';
 import { Users, UserProfiles, PasswordResetRequests } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
 import { genId } from '@/misc/gen-id.js';
-import define from '../define.js';
 import { HOUR } from '@/const.js';
+import define from '../define.js';
 
 export const meta = {
 	tags: ['reset password'],

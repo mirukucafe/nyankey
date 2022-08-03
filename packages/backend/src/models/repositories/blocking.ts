@@ -1,9 +1,9 @@
 import { db } from '@/db/postgre.js';
-import { Users } from '../index.js';
-import { Blocking } from '@/models/entities/blocking.js';
-import { awaitAll } from '@/prelude/await-all.js';
 import { Packed } from '@/misc/schema.js';
+import { Blocking } from '@/models/entities/blocking.js';
 import { User } from '@/models/entities/user.js';
+import { awaitAll } from '@/prelude/await-all.js';
+import { Users } from '../index.js';
 
 export const BlockingRepository = db.getRepository(Blocking).extend({
 	async pack(

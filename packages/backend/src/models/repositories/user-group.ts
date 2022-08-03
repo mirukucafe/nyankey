@@ -1,7 +1,7 @@
 import { db } from '@/db/postgre.js';
+import { Packed } from '@/misc/schema.js';
 import { UserGroup } from '@/models/entities/user-group.js';
 import { UserGroupJoinings } from '../index.js';
-import { Packed } from '@/misc/schema.js';
 
 export const UserGroupRepository = db.getRepository(UserGroup).extend({
 	async pack(

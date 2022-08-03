@@ -1,16 +1,16 @@
 import { URL } from 'node:url';
 import * as mfm from 'mfm-js';
-import renderImage from './image.js';
-import renderKey from './key.js';
 import config from '@/config/index.js';
 import { ILocalUser } from '@/models/entities/user.js';
-import { toHtml } from '../../../mfm/to-html.js';
-import { getEmojis } from './note.js';
-import renderEmoji from './emoji.js';
-import { IIdentifier } from '../models/identifier.js';
-import renderHashtag from './hashtag.js';
+import { toHtml } from '@/mfm/to-html.js';
 import { DriveFiles, UserProfiles } from '@/models/index.js';
 import { getUserKeypair } from '@/misc/keypair-store.js';
+import { IIdentifier } from '../models/identifier.js';
+import renderImage from './image.js';
+import renderKey from './key.js';
+import { getEmojis } from './note.js';
+import renderEmoji from './emoji.js';
+import renderHashtag from './hashtag.js';
 
 export async function renderPerson(user: ILocalUser) {
 	const id = `${config.url}/users/${user.id}`;

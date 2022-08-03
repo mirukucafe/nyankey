@@ -1,7 +1,7 @@
 import { db } from '@/db/postgre.js';
 import { FollowRequest } from '@/models/entities/follow-request.js';
-import { Users } from '../index.js';
 import { User } from '@/models/entities/user.js';
+import { Users } from '../index.js';
 
 export const FollowRequestRepository = db.getRepository(FollowRequest).extend({
 	async pack(

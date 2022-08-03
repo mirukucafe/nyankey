@@ -1,9 +1,9 @@
 import { db } from '@/db/postgre.js';
-import { Users } from '../index.js';
-import { Muting } from '@/models/entities/muting.js';
-import { awaitAll } from '@/prelude/await-all.js';
 import { Packed } from '@/misc/schema.js';
+import { Muting } from '@/models/entities/muting.js';
 import { User } from '@/models/entities/user.js';
+import { awaitAll } from '@/prelude/await-all.js';
+import { Users } from '../index.js';
 
 export const MutingRepository = db.getRepository(Muting).extend({
 	async pack(

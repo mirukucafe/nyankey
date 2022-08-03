@@ -1,8 +1,8 @@
+import { Notes, Channels } from '@/models/index.js';
+import { activeUsersChart } from '@/services/chart/index.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
-import { Notes, Channels } from '@/models/index.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { activeUsersChart } from '@/services/chart/index.js';
 
 export const meta = {
 	tags: ['notes', 'channels'],

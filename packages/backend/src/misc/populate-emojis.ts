@@ -1,12 +1,12 @@
 import { In, IsNull } from 'typeorm';
+import config from '@/config/index.js';
 import { Emojis } from '@/models/index.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { Note } from '@/models/entities/note.js';
+import { query } from '@/prelude/url.js';
 import { Cache } from './cache.js';
 import { isSelfHost, toPunyNullable } from './convert-host.js';
 import { decodeReaction } from './reaction-lib.js';
-import config from '@/config/index.js';
-import { query } from '@/prelude/url.js';
 
 const cache = new Cache<Emoji | null>(1000 * 60 * 60 * 12);
 

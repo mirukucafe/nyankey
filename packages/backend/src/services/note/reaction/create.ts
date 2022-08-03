@@ -1,3 +1,4 @@
+import { IsNull, Not } from 'typeorm';
 import { publishNoteStream } from '@/services/stream.js';
 import { renderLike } from '@/remote/activitypub/renderer/like.js';
 import DeliverManager from '@/remote/activitypub/deliver-manager.js';
@@ -6,14 +7,13 @@ import { toDbReaction, decodeReaction } from '@/misc/reaction-lib.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { NoteReactions, Users, NoteWatchings, Notes, Emojis, Blockings } from '@/models/index.js';
-import { IsNull, Not } from 'typeorm';
 import { perUserReactionsChart } from '@/services/chart/index.js';
 import { genId } from '@/misc/gen-id.js';
-import { createNotification } from '../../create-notification.js';
-import deleteReaction from './delete.js';
 import { isDuplicateKeyValueError } from '@/misc/is-duplicate-key-value-error.js';
 import { NoteReaction } from '@/models/entities/note-reaction.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
+import { createNotification } from '../../create-notification.js';
+import deleteReaction from './delete.js';
 
 export default async (user: { id: User['id']; host: User['host']; }, note: Note, reaction?: string) => {
 	// Check blocking
