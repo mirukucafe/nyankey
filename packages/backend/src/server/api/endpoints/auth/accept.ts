@@ -67,7 +67,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			appId: session.appId,
 			userId: user.id,
 			token: accessToken,
-			hash: hash,
+			hash,
 		});
 	}
 

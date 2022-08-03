@@ -44,7 +44,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		description: ps.description,
 		permission: ps.permission,
 		callbackUrl: ps.callbackUrl,
-		secret: secret,
+		secret,
 	}).then(x => Apps.findOneByOrFail(x.identifiers[0]));
 
 	return await Apps.pack(app, null, {

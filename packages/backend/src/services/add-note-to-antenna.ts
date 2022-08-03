@@ -14,7 +14,7 @@ export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: {
 		id: genId(),
 		antennaId: antenna.id,
 		noteId: note.id,
-		read: read,
+		read,
 	});
 
 	publishAntennaStream(antenna.id, 'note', note);

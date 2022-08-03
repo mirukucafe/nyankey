@@ -40,6 +40,6 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	return {
 		capacity: 1024 * 1024 * instance.localDriveCapacityMb,
-		usage: usage,
+		usage,
 	};
 });

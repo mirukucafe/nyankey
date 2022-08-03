@@ -184,7 +184,7 @@ router.get('/dc/cb', async ctx => {
 		}
 
 		const profile = await UserProfiles.createQueryBuilder()
-			.where('"integrations"->\'discord\'->>\'id\' = :id', { id: id })
+			.where('"integrations"->\'discord\'->>\'id\' = :id', { id })
 			.andWhere('"userHost" IS NULL')
 			.getOne();
 
@@ -197,12 +197,12 @@ router.get('/dc/cb', async ctx => {
 			integrations: {
 				...profile.integrations,
 				discord: {
-					id: id,
-					accessToken: accessToken,
-					refreshToken: refreshToken,
-					expiresDate: expiresDate,
-					username: username,
-					discriminator: discriminator,
+					id,
+					accessToken,
+					refreshToken,
+					expiresDate,
+					username,
+					discriminator,
 				},
 			},
 		});
@@ -264,12 +264,12 @@ router.get('/dc/cb', async ctx => {
 			integrations: {
 				...profile.integrations,
 				discord: {
-					accessToken: accessToken,
-					refreshToken: refreshToken,
-					expiresDate: expiresDate,
-					id: id,
-					username: username,
-					discriminator: discriminator,
+					accessToken,
+					refreshToken,
+					expiresDate,
+					id,
+					username,
+					discriminator,
 				},
 			},
 		});

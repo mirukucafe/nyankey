@@ -79,11 +79,11 @@ export default class FederationChart extends Chart<typeof schema> {
 		]);
 
 		return {
-			'sub': sub,
-			'pub': pub,
-			'pubsub': pubsub,
-			'subActive': subActive,
-			'pubActive': pubActive,
+			sub,
+			pub,
+			pubsub,
+			subActive,
+			pubActive,
 		};
 	}
 

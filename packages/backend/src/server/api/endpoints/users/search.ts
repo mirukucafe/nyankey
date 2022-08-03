@@ -46,7 +46,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			.where('user.usernameLower LIKE :username', { username: ps.query.replace('@', '').toLowerCase() + '%' })
 			.andWhere(new Brackets(qb => { qb
 				.where('user.updatedAt IS NULL')
-				.orWhere('user.updatedAt > :activeThreshold', { activeThreshold: activeThreshold });
+				.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 			}))
 			.andWhere('user.isSuspended = FALSE');
 
@@ -73,7 +73,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			}))
 			.andWhere(new Brackets(qb => { qb
 				.where('user.updatedAt IS NULL')
-				.orWhere('user.updatedAt > :activeThreshold', { activeThreshold: activeThreshold });
+				.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 			}))
 			.andWhere('user.isSuspended = FALSE');
 
@@ -104,7 +104,7 @@ export default define(meta, paramDef, async (ps, me) => {
 				.where(`user.id IN (${ profQuery.getQuery() })`)
 				.andWhere(new Brackets(qb => { qb
 					.where('user.updatedAt IS NULL')
-					.orWhere('user.updatedAt > :activeThreshold', { activeThreshold: activeThreshold });
+					.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 				}))
 				.andWhere('user.isSuspended = FALSE')
 				.setParameters(profQuery.getParameters());

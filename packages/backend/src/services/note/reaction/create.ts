@@ -103,7 +103,7 @@ export default async (user: { id: User['id']; host: User['host']; }, note: Note,
 		createNotification(note.userId, 'reaction', {
 			notifierId: user.id,
 			noteId: note.id,
-			reaction: reaction,
+			reaction,
 		});
 	}
 
@@ -116,7 +116,7 @@ export default async (user: { id: User['id']; host: User['host']; }, note: Note,
 			createNotification(watcher.userId, 'reaction', {
 				notifierId: user.id,
 				noteId: note.id,
-				reaction: reaction,
+				reaction,
 			});
 		}
 	});

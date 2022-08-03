@@ -51,7 +51,7 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 			where: [{
 				hash: token.toLowerCase(), // app
 			}, {
-				token: token, // miauth
+				token, // miauth
 			}],
 		});
 

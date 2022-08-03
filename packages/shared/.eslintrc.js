@@ -77,6 +77,6 @@ module.exports = {
 		'import/order': ['warn', {
 			'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
 		}],
-		'object-shorthand': ['warn', 'consistent-as-needed'],
+		'object-shorthand': ['warn', 'always'],
 	},
 };

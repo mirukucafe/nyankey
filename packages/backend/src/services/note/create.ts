@@ -72,7 +72,7 @@ class NotificationManager {
 			}
 		} else {
 			this.queue.push({
-				reason: reason,
+				reason,
 				target: notifiee,
 			});
 		}

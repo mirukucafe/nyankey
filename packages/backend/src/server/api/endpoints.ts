@@ -718,7 +718,7 @@ export interface IEndpoint {
 
 const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
 	return {
-		name: name,
+		name,
 		exec: ep.default,
 		meta: ep.meta || {},
 		params: ep.paramDef,

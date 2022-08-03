@@ -79,7 +79,7 @@ export async function readGroupMessagingMessage(
 
 	// check joined
 	const joining = await UserGroupJoinings.findOneBy({
-		userId: userId,
+		userId,
 		userGroupId: groupId,
 	});
 
@@ -111,7 +111,7 @@ export async function readGroupMessagingMessage(
 	// Publish event
 	publishGroupMessagingStream(groupId, 'read', {
 		ids: reads,
-		userId: userId,
+		userId,
 	});
 	publishMessagingIndexStream(userId, 'read', reads);
 
@@ -122,9 +122,9 @@ export async function readGroupMessagingMessage(
 	} else {
 		// そのグループにおいて未読がなければイベント発行
 		const unreadExist = await MessagingMessages.createQueryBuilder('message')
-			.where('message.groupId = :groupId', { groupId: groupId })
-			.andWhere('message.userId != :userId', { userId: userId })
-			.andWhere('NOT (:userId = ANY(message.reads))', { userId: userId })
+			.where('message.groupId = :groupId', { groupId })
+			.andWhere('message.userId != :userId', { userId })
+			.andWhere('NOT (:userId = ANY(message.reads))', { userId })
 			.andWhere('message.createdAt > :joinedAt', { joinedAt: joining.createdAt }) // 自分が加入する前の会話については、未読扱いしない
 			.getOne().then(x => x != null);
 

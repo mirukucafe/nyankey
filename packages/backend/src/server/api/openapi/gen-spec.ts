@@ -25,7 +25,7 @@ export function genOpenapiSpec() {
 		paths: {} as any,
 
 		components: {
-			schemas: schemas,
+			schemas,
 
 			securitySchemes: {
 				ApiKeyAuth: {

@@ -41,7 +41,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	const emoji = await Emojis.insert({
 		id: genId(),
 		updatedAt: new Date(),
-		name: name,
+		name,
 		category: null,
 		host: null,
 		aliases: [],

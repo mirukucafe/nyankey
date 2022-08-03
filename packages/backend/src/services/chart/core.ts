@@ -266,9 +266,7 @@ export default abstract class Chart<T extends Schema> {
 			new Error('not happen') as never;
 
 		return repository.findOne({
-			where: group ? {
-				group: group,
-			} : {},
+			where: group ? { group } : {},
 			order: {
 				date: -1,
 			},
@@ -294,7 +292,7 @@ export default abstract class Chart<T extends Schema> {
 		// 現在(=今のHour or Day)のログ
 		const currentLog = await repository.findOneBy({
 			date: Chart.dateToTimestamp(current),
-			...(group ? { group: group } : {}),
+			...(group ? { group } : {}),
 		}) as RawRecord<T> | undefined;
 
 		// ログがあればそれを返して終了
@@ -333,8 +331,8 @@ export default abstract class Chart<T extends Schema> {
 		try {
 			// ロック内でもう1回チェックする
 			const currentLog = await repository.findOneBy({
-				date: date,
-				...(group ? { group: group } : {}),
+				date,
+				...(group ? { group } : {}),
 			}) as RawRecord<T> | undefined;
 
 			// ログがあればそれを返して終了
@@ -348,8 +346,8 @@ export default abstract class Chart<T extends Schema> {
 
 			// 新規ログ挿入
 			log = await repository.insert({
-				date: date,
-				...(group ? { group: group } : {}),
+				date,
+				...(group ? { group } : {}),
 				...columns,
 			}).then(x => repository.findOneByOrFail(x.identifiers[0])) as RawRecord<T>;
 
@@ -582,7 +580,7 @@ export default abstract class Chart<T extends Schema> {
 		let logs = await repository.find({
 			where: {
 				date: Between(Chart.dateToTimestamp(gt), Chart.dateToTimestamp(lt)),
-				...(group ? { group: group } : {}),
+				...(group ? { group } : {}),
 			},
 			order: {
 				date: -1,
@@ -594,9 +592,7 @@ export default abstract class Chart<T extends Schema> {
 			// もっとも新しいログを持ってくる
 			// (すくなくともひとつログが無いと隙間埋めできないため)
 			const recentLog = await repository.findOne({
-				where: group ? {
-					group: group,
-				} : {},
+				where: group ? { group } : {},
 				order: {
 					date: -1,
 				},
@@ -613,7 +609,7 @@ export default abstract class Chart<T extends Schema> {
 			const outdatedLog = await repository.findOne({
 				where: {
 					date: LessThan(Chart.dateToTimestamp(gt)),
-					...(group ? { group: group } : {}),
+					...(group ? { group } : {}),
 				},
 				order: {
 					date: -1,

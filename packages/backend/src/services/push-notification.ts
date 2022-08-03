@@ -47,9 +47,7 @@ export async function pushNotification<T extends keyof pushNotificationsTypes>(u
 		meta.swPrivateKey);
 
 	// Fetch
-	const subscriptions = await SwSubscriptions.findBy({
-		userId: userId,
-	});
+	const subscriptions = await SwSubscriptions.findBy({ userId });
 
 	for (const subscription of subscriptions) {
 		const pushSubscription = {
@@ -73,7 +71,7 @@ export async function pushNotification<T extends keyof pushNotificationsTypes>(u
 
 			if (err.statusCode === 410) {
 				SwSubscriptions.delete({
-					userId: userId,
+					userId,
 					endpoint: subscription.endpoint,
 					auth: subscription.auth,
 					publickey: subscription.publickey,

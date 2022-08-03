@@ -68,7 +68,7 @@ export const DriveFileRepository = db.getRepository(DriveFile).extend({
 
 		const { sum } = await this
 			.createQueryBuilder('file')
-			.where('file.userId = :id', { id: id })
+			.where('file.userId = :id', { id })
 			.andWhere('file.isLink = FALSE')
 			.select('SUM(file.size)', 'sum')
 			.getRawOne();

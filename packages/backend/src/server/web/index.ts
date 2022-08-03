@@ -479,7 +479,7 @@ router.get('/_info_card_', async ctx => {
 	await ctx.render('info-card', {
 		version: config.version,
 		host: config.host,
-		meta: meta,
+		meta,
 		originalUsersCount: await Users.countBy({ host: IsNull() }),
 		originalNotesCount: await Notes.countBy({ userHost: IsNull() }),
 	});

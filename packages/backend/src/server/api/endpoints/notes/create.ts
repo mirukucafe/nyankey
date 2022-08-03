@@ -274,7 +274,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	// 投稿を作成
 	const note = await create(user, {
 		createdAt: new Date(),
-		files: files,
+		files,
 		poll: ps.poll ? {
 			choices: ps.poll.choices,
 			multiple: ps.poll.multiple || false,

@@ -2,14 +2,14 @@ import { SelectQueryBuilder } from 'typeorm';
 
 export function makePaginationQuery<T>(q: SelectQueryBuilder<T>, sinceId?: string, untilId?: string, sinceDate?: number, untilDate?: number) {
 	if (sinceId && untilId) {
-		q.andWhere(`${q.alias}.id > :sinceId`, { sinceId: sinceId });
-		q.andWhere(`${q.alias}.id < :untilId`, { untilId: untilId });
+		q.andWhere(`${q.alias}.id > :sinceId`, { sinceId });
+		q.andWhere(`${q.alias}.id < :untilId`, { untilId });
 		q.orderBy(`${q.alias}.id`, 'DESC');
 	} else if (sinceId) {
-		q.andWhere(`${q.alias}.id > :sinceId`, { sinceId: sinceId });
+		q.andWhere(`${q.alias}.id > :sinceId`, { sinceId });
 		q.orderBy(`${q.alias}.id`, 'ASC');
 	} else if (untilId) {
-		q.andWhere(`${q.alias}.id < :untilId`, { untilId: untilId });
+		q.andWhere(`${q.alias}.id < :untilId`, { untilId });
 		q.orderBy(`${q.alias}.id`, 'DESC');
 	} else if (sinceDate && untilDate) {
 		q.andWhere(`${q.alias}.createdAt > :sinceDate`, { sinceDate: new Date(sinceDate) });

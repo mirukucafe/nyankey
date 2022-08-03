@@ -176,7 +176,7 @@ router.get('/gh/cb', async ctx => {
 		}
 
 		const link = await UserProfiles.createQueryBuilder()
-			.where('"integrations"->\'github\'->>\'id\' = :id', { id: id })
+			.where('"integrations"->\'github\'->>\'id\' = :id', { id })
 			.andWhere('"userHost" IS NULL')
 			.getOne();
 
@@ -239,9 +239,9 @@ router.get('/gh/cb', async ctx => {
 			integrations: {
 				...profile.integrations,
 				github: {
-					accessToken: accessToken,
-					id: id,
-					login: login,
+					accessToken,
+					id,
+					login,
 				},
 			},
 		});

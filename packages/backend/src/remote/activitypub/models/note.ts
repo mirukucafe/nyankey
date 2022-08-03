@@ -77,8 +77,8 @@ export async function createNote(value: string | IObject, resolver?: Resolver, s
 			resolver: {
 				history: resolver.getHistory(),
 			},
-			value: value,
-			object: object,
+			value,
+			object,
 		});
 		throw new Error('invalid note');
 	}

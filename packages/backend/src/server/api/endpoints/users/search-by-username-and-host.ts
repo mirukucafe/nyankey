@@ -71,7 +71,7 @@ export default define(meta, paramDef, async (ps, me) => {
 				.andWhere('user.usernameLower LIKE :username', { username: ps.username.toLowerCase() + '%' })
 				.andWhere(new Brackets(qb => { qb
 					.where('user.updatedAt IS NULL')
-					.orWhere('user.updatedAt > :activeThreshold', { activeThreshold: activeThreshold });
+					.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 				}));
 
 			query.setParameters(followingQuery.getParameters());

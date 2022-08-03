@@ -26,12 +26,12 @@ import {
 class Publisher {
 	private publish = (channel: StreamChannels, type: string | null, value?: any): void => {
 		const message = type == null ? value : value == null ?
-			{ type: type, body: null } :
-			{ type: type, body: value };
+			{ type, body: null } :
+			{ type, body: value };
 
 		redisClient.publish(config.host, JSON.stringify({
-			channel: channel,
-			message: message,
+			channel,
+			message,
 		}));
 	};
 

@@ -107,7 +107,7 @@ export function deliver(user: ThinUser, content: unknown, to: string | null) {
 
 export function inbox(activity: IActivity, signature: httpSignature.IParsedSignature) {
 	const data = {
-		activity: activity,
+		activity,
 		signature,
 	};
 
@@ -124,7 +124,7 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 
 export function createDeleteDriveFilesJob(user: ThinUser) {
 	return dbQueue.add('deleteDriveFiles', {
-		user: user,
+		user,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -133,7 +133,7 @@ export function createDeleteDriveFilesJob(user: ThinUser) {
 
 export function createExportCustomEmojisJob(user: ThinUser) {
 	return dbQueue.add('exportCustomEmojis', {
-		user: user,
+		user,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -142,7 +142,7 @@ export function createExportCustomEmojisJob(user: ThinUser) {
 
 export function createExportNotesJob(user: ThinUser) {
 	return dbQueue.add('exportNotes', {
-		user: user,
+		user,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -151,7 +151,7 @@ export function createExportNotesJob(user: ThinUser) {
 
 export function createExportFollowingJob(user: ThinUser, excludeMuting = false, excludeInactive = false) {
 	return dbQueue.add('exportFollowing', {
-		user: user,
+		user,
 		excludeMuting,
 		excludeInactive,
 	}, {
@@ -162,7 +162,7 @@ export function createExportFollowingJob(user: ThinUser, excludeMuting = false, 
 
 export function createExportMuteJob(user: ThinUser) {
 	return dbQueue.add('exportMute', {
-		user: user,
+		user,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -171,7 +171,7 @@ export function createExportMuteJob(user: ThinUser) {
 
 export function createExportBlockingJob(user: ThinUser) {
 	return dbQueue.add('exportBlocking', {
-		user: user,
+		user,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -180,7 +180,7 @@ export function createExportBlockingJob(user: ThinUser) {
 
 export function createExportUserListsJob(user: ThinUser) {
 	return dbQueue.add('exportUserLists', {
-		user: user,
+		user,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -189,8 +189,8 @@ export function createExportUserListsJob(user: ThinUser) {
 
 export function createImportFollowingJob(user: ThinUser, fileId: DriveFile['id']) {
 	return dbQueue.add('importFollowing', {
-		user: user,
-		fileId: fileId,
+		user,
+		fileId,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -199,8 +199,8 @@ export function createImportFollowingJob(user: ThinUser, fileId: DriveFile['id']
 
 export function createImportMutingJob(user: ThinUser, fileId: DriveFile['id']) {
 	return dbQueue.add('importMuting', {
-		user: user,
-		fileId: fileId,
+		user,
+		fileId,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -209,8 +209,8 @@ export function createImportMutingJob(user: ThinUser, fileId: DriveFile['id']) {
 
 export function createImportBlockingJob(user: ThinUser, fileId: DriveFile['id']) {
 	return dbQueue.add('importBlocking', {
-		user: user,
-		fileId: fileId,
+		user,
+		fileId,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -219,8 +219,8 @@ export function createImportBlockingJob(user: ThinUser, fileId: DriveFile['id'])
 
 export function createImportUserListsJob(user: ThinUser, fileId: DriveFile['id']) {
 	return dbQueue.add('importUserLists', {
-		user: user,
-		fileId: fileId,
+		user,
+		fileId,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -229,8 +229,8 @@ export function createImportUserListsJob(user: ThinUser, fileId: DriveFile['id']
 
 export function createImportCustomEmojisJob(user: ThinUser, fileId: DriveFile['id']) {
 	return dbQueue.add('importCustomEmojis', {
-		user: user,
-		fileId: fileId,
+		user,
+		fileId,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,
@@ -239,7 +239,7 @@ export function createImportCustomEmojisJob(user: ThinUser, fileId: DriveFile['i
 
 export function createDeleteAccountJob(user: ThinUser, opts: { soft?: boolean; } = {}) {
 	return dbQueue.add('deleteAccount', {
-		user: user,
+		user,
 		soft: opts.soft,
 	}, {
 		removeOnComplete: true,
@@ -249,7 +249,7 @@ export function createDeleteAccountJob(user: ThinUser, opts: { soft?: boolean; }
 
 export function createDeleteObjectStorageFileJob(key: string) {
 	return objectStorageQueue.add('deleteFile', {
-		key: key,
+		key,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,

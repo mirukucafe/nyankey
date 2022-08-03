@@ -76,9 +76,9 @@ export async function exportCustomEmojis(job: Bull.Job, done: () => void): Promi
 		}
 
 		const content = JSON.stringify({
-			fileName: fileName,
-			downloaded: downloaded,
-			emoji: emoji,
+			fileName,
+			downloaded,
+			emoji,
 		});
 		const isFirst = customEmojis.indexOf(emoji) === 0;
 

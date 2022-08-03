@@ -19,7 +19,7 @@ export async function insertNoteUnread(userId: User['id'], note: Note, params: {
 
 	// スレッドミュート
 	const threadMute = await NoteThreadMutings.findOneBy({
-		userId: userId,
+		userId,
 		threadId: note.threadId || note.id,
 	});
 	if (threadMute) return;
@@ -27,7 +27,7 @@ export async function insertNoteUnread(userId: User['id'], note: Note, params: {
 	const unread = {
 		id: genId(),
 		noteId: note.id,
-		userId: userId,
+		userId,
 		isSpecified: params.isSpecified,
 		isMentioned: params.isMentioned,
 		noteChannelId: note.channelId,

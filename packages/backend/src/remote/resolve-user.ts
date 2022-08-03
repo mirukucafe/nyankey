@@ -72,7 +72,7 @@ export async function resolveUser(username: string, host: string | null): Promis
 
 			await Users.update({
 				usernameLower,
-				host: host,
+				host,
 			}, {
 				uri: self.href,
 			});

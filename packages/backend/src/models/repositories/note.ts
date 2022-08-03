@@ -172,7 +172,7 @@ export const NoteRepository = db.getRepository(Note).extend({
 			user: Users.pack(note.user ?? note.userId, me, {
 				detail: false,
 			}),
-			text: text,
+			text,
 			cw: note.cw,
 			visibility: note.visibility,
 			localOnly: note.localOnly || undefined,

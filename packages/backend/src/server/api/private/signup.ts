@@ -80,7 +80,7 @@ export default async (ctx: Koa.Context) => {
 			createdAt: new Date(),
 			code,
 			email: emailAddress,
-			username: username,
+			username,
 			password: hash,
 		});
 

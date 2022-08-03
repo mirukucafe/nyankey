@@ -23,8 +23,8 @@ export async function createNotification(
 	const notification = await Notifications.insert({
 		id: genId(),
 		createdAt: new Date(),
-		notifieeId: notifieeId,
-		type: type,
+		notifieeId,
+		type,
 		// 相手がこの通知をミュートしているようなら、既読を予めつけておく
 		isRead: isMuted,
 		...data,

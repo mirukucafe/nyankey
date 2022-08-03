@@ -102,7 +102,7 @@ export class LdSignature {
 			const document = await this.fetchDocument(url);
 			return {
 				contextUrl: null,
-				document: document,
+				document,
 				documentUrl: url,
 			};
 		};

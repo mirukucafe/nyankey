@@ -45,7 +45,7 @@ export default async function(user: CacheableUser, note: Note, choice: number) {
 		createdAt: new Date(),
 		noteId: note.id,
 		userId: user.id,
-		choice: choice,
+		choice,
 	});
 
 	// Increment votes count
@@ -53,7 +53,7 @@ export default async function(user: CacheableUser, note: Note, choice: number) {
 	await Polls.query(`UPDATE poll SET votes[${index}] = votes[${index}] + 1 WHERE "noteId" = '${poll.noteId}'`);
 
 	publishNoteStream(note.id, 'pollVoted', {
-		choice: choice,
+		choice,
 		userId: user.id,
 	});
 
@@ -61,7 +61,7 @@ export default async function(user: CacheableUser, note: Note, choice: number) {
 	createNotification(note.userId, 'pollVote', {
 		notifierId: user.id,
 		noteId: note.id,
-		choice: choice,
+		choice,
 	});
 
 	// Fetch watchers
@@ -74,7 +74,7 @@ export default async function(user: CacheableUser, note: Note, choice: number) {
 			createNotification(watcher.userId, 'pollVote', {
 				notifierId: user.id,
 				noteId: note.id,
-				choice: choice,
+				choice,
 			});
 		}
 	});

@@ -55,10 +55,10 @@ export default define(meta, paramDef, async (ps, user) => {
 			.orderBy('message.createdAt', 'DESC');
 
 		if (ps.group) {
-			query.where('message.groupId IN (:...groups)', { groups: groups });
+			query.where('message.groupId IN (:...groups)', { groups });
 
 			if (found.length > 0) {
-				query.andWhere('message.groupId NOT IN (:...found)', { found: found });
+				query.andWhere('message.groupId NOT IN (:...found)', { found });
 			}
 		} else {
 			query.where(new Brackets(qb => { qb
@@ -68,8 +68,8 @@ export default define(meta, paramDef, async (ps, user) => {
 			query.andWhere('message.groupId IS NULL');
 
 			if (found.length > 0) {
-				query.andWhere('message.userId NOT IN (:...found)', { found: found });
-				query.andWhere('message.recipientId NOT IN (:...found)', { found: found });
+				query.andWhere('message.userId NOT IN (:...found)', { found });
+				query.andWhere('message.recipientId NOT IN (:...found)', { found });
 			}
 
 			if (mute.length > 0) {

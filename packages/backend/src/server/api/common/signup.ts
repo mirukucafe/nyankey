@@ -81,7 +81,7 @@ export async function signup(opts: {
 		account = await transactionalEntityManager.save(new User({
 			id: genId(),
 			createdAt: new Date(),
-			username: username,
+			username,
 			usernameLower: username.toLowerCase(),
 			host: toPunyNullable(host),
 			token: secret,

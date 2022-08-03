@@ -35,9 +35,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 	}
 
 	if (!quiet) {
-		publishNoteStream(note.id, 'deleted', {
-			deletedAt: deletedAt,
-		});
+		publishNoteStream(note.id, 'deleted', { deletedAt });
 
 		//#region ローカルの投稿なら削除アクティビティを配送
 		if (Users.isLocalUser(user) && !note.localOnly) {

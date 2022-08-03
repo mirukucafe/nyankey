@@ -36,7 +36,7 @@ export async function createSystemUser(username: string) {
 		account = await transactionalEntityManager.insert(User, {
 			id: genId(),
 			createdAt: new Date(),
-			username: username,
+			username,
 			usernameLower: username.toLowerCase(),
 			host: null,
 			token: secret,

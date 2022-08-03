@@ -118,7 +118,7 @@ export default async (ctx: Koa.Context) => {
 		const verified = (speakeasy as any).totp.verify({
 			secret: profile.twoFactorSecret,
 			encoding: 'base32',
-			token: token,
+			token,
 			window: 2,
 		});
 

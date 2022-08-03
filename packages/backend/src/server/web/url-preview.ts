@@ -29,7 +29,7 @@ export const urlPreviewHandler = async (ctx: Koa.Context) => {
 
 	try {
 		const summary = meta.summalyProxy ? await getJson(`${meta.summalyProxy}?${query({
-			url: url,
+			url,
 			lang: lang ?? 'ja-JP',
 		})}`) : await summaly.default(url, {
 			followRedirects: false,

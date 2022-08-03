@@ -109,7 +109,7 @@ function serialize(note: Note, poll: Poll | null = null): Record<string, unknown
 		fileIds: note.fileIds,
 		replyId: note.replyId,
 		renoteId: note.renoteId,
-		poll: poll,
+		poll,
 		cw: note.cw,
 		visibility: note.visibility,
 		visibleUserIds: note.visibleUserIds,

@@ -29,7 +29,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const verified = (speakeasy as any).totp.verify({
 		secret: profile.twoFactorTempSecret,
 		encoding: 'base32',
-		token: token,
+		token,
 	});
 
 	if (!verified) {

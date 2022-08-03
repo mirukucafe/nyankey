@@ -7,7 +7,7 @@ export async function insertModerationLog(moderator: { id: User['id'] }, type: s
 		id: genId(),
 		createdAt: new Date(),
 		userId: moderator.id,
-		type: type,
+		type,
 		info: info || {},
 	});
 }

@@ -37,7 +37,5 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	await db.queryResultCache!.remove(['meta_emojis']);
 
-	insertModerationLog(me, 'deleteEmoji', {
-		emoji: emoji,
-	});
+	insertModerationLog(me, 'deleteEmoji', { emoji });
 });

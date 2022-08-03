@@ -54,8 +54,8 @@ export async function uploadFromUrl({
 		return driveFile!;
 	} catch (e) {
 		logger.error(`Failed to create drive file: ${e}`, {
-			url: url,
-			e: e,
+			url,
+			e,
 		});
 		throw e;
 	} finally {

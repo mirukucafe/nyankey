@@ -62,14 +62,14 @@ export default async function(
 	if ((readMentions.length > 0) || (readSpecifiedNotes.length > 0) || (readChannelNotes.length > 0)) {
 		// Remove the record
 		await NoteUnreads.delete({
-			userId: userId,
+			userId,
 			noteId: In([...readMentions.map(n => n.id), ...readSpecifiedNotes.map(n => n.id), ...readChannelNotes.map(n => n.id)]),
 		});
 
 		// TODO: ↓まとめてクエリしたい
 
 		NoteUnreads.countBy({
-			userId: userId,
+			userId,
 			isMentioned: true,
 		}).then(mentionsCount => {
 			if (mentionsCount === 0) {
@@ -79,7 +79,7 @@ export default async function(
 		});
 
 		NoteUnreads.countBy({
-			userId: userId,
+			userId,
 			isSpecified: true,
 		}).then(specifiedCount => {
 			if (specifiedCount === 0) {
@@ -89,7 +89,7 @@ export default async function(
 		});
 
 		NoteUnreads.countBy({
-			userId: userId,
+			userId,
 			noteChannelId: Not(IsNull()),
 		}).then(channelNoteCount => {
 			if (channelNoteCount === 0) {

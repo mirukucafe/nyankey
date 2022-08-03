@@ -244,7 +244,7 @@ export default class Connection {
 	 */
 	public sendMessageToWs(type: string, payload: any) {
 		this.wsConnection.send(JSON.stringify({
-			type: type,
+			type,
 			body: payload,
 		}));
 	}
@@ -267,9 +267,7 @@ export default class Connection {
 		ch.init(params);
 
 		if (pong) {
-			this.sendMessageToWs('connected', {
-				id: id,
-			});
+			this.sendMessageToWs('connected', { id });
 		}
 	}
 

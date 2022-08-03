@@ -22,7 +22,7 @@ export default class Logger {
 	constructor(domain: string, color?: string, store = true) {
 		this.domain = {
 			name: domain,
-			color: color,
+			color,
 		};
 		this.store = store;
 
