@@ -11,28 +11,28 @@
 
 		<div v-if="tab === 'settings'">
 			<div class="_formRoot">
-				<MkInput v-model="title" class="_formBlock">
+				<MkInput v-model="title" :readonly="readonly" class="_formBlock">
 					<template #label>{{ $ts._pages.title }}</template>
 				</MkInput>
 
-				<MkInput v-model="summary" class="_formBlock">
+				<MkInput v-model="summary" :readonly="readonly" class="_formBlock">
 					<template #label>{{ $ts._pages.summary }}</template>
 				</MkInput>
 
-				<MkInput v-model="name" class="_formBlock">
+				<MkInput v-model="name" :readonly="readonly" class="_formBlock">
 					<template #prefix>{{ url }}/@{{ author.username }}/pages/</template>
 					<template #label>{{ $ts._pages.url }}</template>
 				</MkInput>
 
-				<MkSwitch v-model="alignCenter" class="_formBlock">{{ $ts._pages.alignCenter }}</MkSwitch>
+				<MkSwitch v-model="alignCenter" :disabled="readonly" class="_formBlock">{{ $ts._pages.alignCenter }}</MkSwitch>
 
-				<MkSelect v-model="font" class="_formBlock">
+				<MkSelect v-model="font" :readonly="readonly" class="_formBlock">
 					<template #label>{{ $ts._pages.font }}</template>
 					<option value="serif">{{ $ts._pages.fontSerif }}</option>
 					<option value="sans-serif">{{ $ts._pages.fontSansSerif }}</option>
 				</MkSelect>
 
-				<MkSwitch v-model="hideTitleWhenPinned" class="_formBlock">{{ $ts._pages.hideTitleWhenPinned }}</MkSwitch>
+				<MkSwitch v-model="hideTitleWhenPinned" :disabled="readonly" class="_formBlock">{{ $ts._pages.hideTitleWhenPinned }}</MkSwitch>
 
 				<div class="eyeCatch">
 					<MkButton v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage"><i class="fas fa-plus"></i> {{ $ts._pages.eyeCatchingImageSet }}</MkButton>
@@ -45,7 +45,7 @@
 		</div>
 
 		<div v-else-if="tab === 'contents'">
-			<textarea v-model="text"/>
+			<MkTextarea v-model="text" :readonly="readonly"/>
 		</div>
 	</MkSpacer>
 </MkStickyContainer>
@@ -57,6 +57,7 @@ import MkButton from '@/components/ui/button.vue';
 import MkSelect from '@/components/form/select.vue';
 import MkSwitch from '@/components/form/switch.vue';
 import MkInput from '@/components/form/input.vue';
+import MkTextarea from '@/components/form/textarea.vue';
 import { url } from '@/config';
 import * as os from '@/os';
 import { selectFile } from '@/scripts/select-file';
@@ -253,6 +254,8 @@ definePageMetadata(computed(() => {
 
 <style lang="scss" scoped>
 .jqqmcavi {
+	margin-bottom: 1em;
+
 	> .button {
 		& + .button {
 			margin-left: 8px;
