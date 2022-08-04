@@ -27,6 +27,7 @@ export const meta = {
 				format: 'id',
 			},
 			inbox: {
+				description: 'URL of the inbox, must be a https scheme URL',
 				type: 'string',
 				optional: false, nullable: false,
 				format: 'url',
@@ -56,7 +57,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	try {
-		if (new URL(ps.inbox).protocol !== 'https:') throw 'https only';
+		if (new URL(ps.inbox).protocol !== 'https:') throw new Error('https only');
 	} catch {
 		throw new ApiError(meta.errors.invalidUrl);
 	}

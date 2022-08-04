@@ -55,7 +55,7 @@ export async function importFollowing(job: Bull.Job<DbUserImportJobData>, done: 
 			}
 
 			if (target == null) {
-				throw `cannot resolve user: @${username}@${host}`;
+				throw new Error(`cannot resolve user: @${username}@${host}`);
 			}
 
 			// skip myself

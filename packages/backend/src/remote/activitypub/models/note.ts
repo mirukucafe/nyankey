@@ -189,7 +189,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver, s
 		quote = results.filter((x): x is { status: 'ok', res: Note | null } => x.status === 'ok').map(x => x.res).find(x => x);
 		if (!quote) {
 			if (results.some(x => x.status === 'temperror')) {
-				throw 'quote resolve failed';
+				throw new Error('quote resolve failed');
 			}
 		}
 	}
@@ -276,7 +276,7 @@ export async function resolveNote(value: string | IObject, resolver?: Resolver):
 
 	// ブロックしてたら中断
 	const meta = await fetchMeta();
-	if (meta.blockedHosts.includes(extractDbHost(uri))) throw { statusCode: 451 };
+	if (meta.blockedHosts.includes(extractDbHost(uri))) throw new StatusError('host blocked', 451, `host ${extractDbHost(uri)} is blocked`);
 
 	const unlock = await getApLock(uri);
 

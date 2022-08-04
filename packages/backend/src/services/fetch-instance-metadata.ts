@@ -94,14 +94,14 @@ async function fetchNodeinfo(instance: Instance): Promise<NodeInfo> {
 		const wellknown = await getJson('https://' + instance.host + '/.well-known/nodeinfo')
 			.catch(e => {
 				if (e.statusCode === 404) {
-					throw 'No nodeinfo provided';
+					throw new Error('No nodeinfo provided');
 				} else {
-					throw e.statusCode || e.message;
+					throw new Error(e.statusCode || e.message);
 				}
 			}) as Record<string, unknown>;
 
 		if (wellknown.links == null || !Array.isArray(wellknown.links)) {
-			throw 'No wellknown links';
+			throw new Error('No wellknown links');
 		}
 
 		const links = wellknown.links as any[];
@@ -112,19 +112,19 @@ async function fetchNodeinfo(instance: Instance): Promise<NodeInfo> {
 		const link = lnik2_1 || lnik2_0 || lnik1_0;
 
 		if (link == null) {
-			throw 'No nodeinfo link provided';
+			throw new Error('No nodeinfo link provided');
 		}
 
 		const info = await getJson(link.href)
 			.catch(e => {
-				throw e.statusCode || e.message;
+				throw new Error(e.statusCode || e.message);
 			});
 
 		logger.succ(`Successfuly fetched nodeinfo of ${instance.host}`);
 
 		return info as NodeInfo;
 	} catch (e) {
-		logger.error(`Failed to fetch nodeinfo of ${instance.host}: ${e}`);
+		logger.error(`Failed to fetch nodeinfo of ${instance.host}: ${e.message}`);
 
 		throw e;
 	}

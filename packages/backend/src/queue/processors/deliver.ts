@@ -89,7 +89,7 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 			}
 
 			// 5xx etc.
-			throw `${res.statusCode} ${res.statusMessage}`;
+			throw new Error(`${res.statusCode} ${res.statusMessage}`);
 		} else {
 			// DNS error, socket error, timeout ...
 			throw res;

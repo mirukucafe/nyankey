@@ -85,7 +85,7 @@ export class LdSignature {
 
 	private getLoader() {
 		return async (url: string): Promise<any> => {
-			if (!url.match('^https?\:\/\/')) throw `Invalid URL ${url}`;
+			if (!url.match('^https?\:\/\/')) throw new Error(`Invalid URL ${url}`);
 
 			if (this.preLoad) {
 				if (url in CONTEXTS) {
@@ -118,7 +118,7 @@ export class LdSignature {
 			agent: u => u.protocol === 'http:' ? httpAgent : httpsAgent,
 		}).then(res => {
 			if (!res.ok) {
-				throw `${res.status} ${res.statusText}`;
+				throw new Error(`${res.status} ${res.statusText}`);
 			} else {
 				return res.json();
 			}

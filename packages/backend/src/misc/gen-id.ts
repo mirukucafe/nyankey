@@ -13,7 +13,7 @@ export function genId(date?: Date): string {
 	let t = date.getTime();
 	t -= TIME2000;
 	if (t < 0) t = 0;
-	if (isNaN(t)) throw 'Failed to create AID: Invalid Date';
+	if (isNaN(t)) throw new Error('Failed to create AID: Invalid Date');
 	const time = t.toString(36).padStart(8, '0');
 
 	counter++;

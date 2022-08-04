@@ -68,7 +68,7 @@ async function unFollowAll(follower: User) {
 		});
 
 		if (followee == null) {
-			throw `Cant find followee ${following.followeeId}`;
+			throw new Error(`Cant find followee ${following.followeeId}`);
 		}
 
 		await deleteFollowing(follower, followee, true);

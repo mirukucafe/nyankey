@@ -62,7 +62,7 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 				if (e.isClientError) {
 					return `skip: Ignored deleted actors on both ends ${activity.actor} - ${e.statusCode}`;
 				}
-				throw `Error in actor ${activity.actor} - ${e.statusCode || e}`;
+				throw new Error(`Error in actor ${activity.actor} - ${e.statusCode || e}`);
 			}
 		}
 	}

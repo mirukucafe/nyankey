@@ -56,7 +56,7 @@ export async function importMuting(job: Bull.Job<DbUserImportJobData>, done: any
 			}
 
 			if (target == null) {
-				throw `cannot resolve user: @${username}@${host}`;
+				throw new Error(`cannot resolve user: @${username}@${host}`);
 			}
 
 			// skip myself

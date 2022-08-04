@@ -47,7 +47,7 @@ export async function removeRelay(inbox: string) {
 	});
 
 	if (relay == null) {
-		throw 'relay not found';
+		throw new Error('relay not found');
 	}
 
 	const relayActor = await getRelayActor();
