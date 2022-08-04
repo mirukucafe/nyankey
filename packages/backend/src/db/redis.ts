@@ -12,7 +12,7 @@ export function createConnection() {
 	});
 }
 
-export const subsdcriber = createConnection();
-subsdcriber.subscribe(config.host);
+export const subscriber = createConnection();
+subscriber.subscribe(config.host);
 
 export const redisClient = createConnection();

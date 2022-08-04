@@ -1,6 +1,6 @@
 import { Webhooks } from '@/models/index.js';
 import { Webhook } from '@/models/entities/webhook.js';
-import { subsdcriber } from '@/db/redis.js';
+import { subscriber } from '@/db/redis.js';
 
 let webhooksFetched = false;
 let webhooks: Webhook[] = [];
@@ -16,7 +16,7 @@ export async function getActiveWebhooks() {
 	return webhooks;
 }
 
-subsdcriber.on('message', async (_, data) => {
+subscriber.on('message', async (_, data) => {
 	const obj = JSON.parse(data);
 
 	if (obj.channel === 'internal') {

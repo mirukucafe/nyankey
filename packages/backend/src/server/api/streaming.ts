@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import { ParsedUrlQuery } from 'querystring';
 import * as websocket from 'websocket';
 
-import { subsdcriber as redisClient } from '@/db/redis.js';
+import { subscriber as redisClient } from '@/db/redis.js';
 import { Users } from '@/models/index.js';
 import MainStreamConnection from './stream/index.js';
 import authenticate from './authenticate.js';

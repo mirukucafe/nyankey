@@ -1,14 +1,14 @@
 import { CacheableLocalUser, CacheableUser, ILocalUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import { Cache } from '@/misc/cache.js';
-import { subsdcriber } from '@/db/redis.js';
+import { subscriber } from '@/db/redis.js';
 
 export const userByIdCache = new Cache<CacheableUser>(Infinity);
 export const localUserByNativeTokenCache = new Cache<CacheableLocalUser | null>(Infinity);
 export const localUserByIdCache = new Cache<CacheableLocalUser>(Infinity);
 export const uriPersonCache = new Cache<CacheableUser | null>(Infinity);
 
-subsdcriber.on('message', async (_, data) => {
+subscriber.on('message', async (_, data) => {
 	const obj = JSON.parse(data);
 
 	if (obj.channel === 'internal') {

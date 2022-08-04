@@ -1,6 +1,6 @@
 import { Antennas } from '@/models/index.js';
 import { Antenna } from '@/models/entities/antenna.js';
-import { subsdcriber } from '@/db/redis.js';
+import { subscriber } from '@/db/redis.js';
 
 let antennasFetched = false;
 let antennas: Antenna[] = [];
@@ -14,7 +14,7 @@ export async function getAntennas() {
 	return antennas;
 }
 
-subsdcriber.on('message', async (_, data) => {
+subscriber.on('message', async (_, data) => {
 	const obj = JSON.parse(data);
 
 	if (obj.channel === 'internal') {
