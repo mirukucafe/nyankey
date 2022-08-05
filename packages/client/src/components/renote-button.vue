@@ -63,7 +63,8 @@ export default defineComponent({
 				icon: 'fas fa-retweet',
 				action: () => {
 					os.api('notes/create', {
-						renoteId: props.note.id
+						renoteId: props.note.id,
+						visibility: props.note.visibility,
 					});
 				}
 			}, {
