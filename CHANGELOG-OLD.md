@@ -15,8 +15,6 @@ You should also include the user name that made the change.
 - ハイライトがみつけるに統合されました
 - カスタム絵文字ページはインスタンス情報ページに統合されました
 - 連合ページはインスタンス情報ページに統合されました
-- Remove ads @Johann150
-- Simplify ID generation: Only the `aid` generation algorithm will be supported going forward. @Johann150
 
 ### Improvements
 - Client: Fix URL-encoded routing
@@ -34,10 +32,6 @@ You should also include the user name that made the change.
 - Server: Improve performance
 - Server: Supports IPv6 on Redis transport. @mei23  
   IPv4/IPv6 is used by default. You can tune this behavior via `redis.family`.
-- Backend: Improve mutes and blocks @toast
-- Hide metadata of private notes @Johann150
-- Add padding to pages @norm
-- Emoji picker is now case-insensitive @Johann150
 
 ### Bugfixes
 - Server: Fix GenerateVideoThumbnail failed @mei23
