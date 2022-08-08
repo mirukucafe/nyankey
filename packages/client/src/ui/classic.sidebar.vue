@@ -78,7 +78,7 @@ watch(iconOnly, () => {
 });
 
 onMounted(() => {
-	if (sidebar && sidebar.parentElement) {
+	if (sidebar?.parentElement) {
 		const sticky = new StickySidebar(sidebar.parentElement, 16);
 		window.addEventListener('scroll', () => {
 			sticky.calc(window.scrollY);
