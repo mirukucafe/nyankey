@@ -1,6 +1,6 @@
 {
 	"name": "foundkey",
-	"version": "12.111.1-test.1",
+	"version": "13.0.0-preview.1",
 	"repository": {
 		"type": "git",
 		"url": "https://akkoma.dev/FoundKeyGang/FoundKey.git"
