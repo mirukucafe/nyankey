@@ -3,7 +3,7 @@
 	<button v-if="$i" v-click-anime class="item _button account" @click="openAccountMenuWrapper">
 		<MkAvatar :user="$i" class="avatar"/><MkAcct class="text" :user="$i"/>
 	</button>
-	<div class="post" data-cy-open-post-form @click="post">
+	<div class="post" data-cy-open-post-form @click="() => { os.post(); }">
 		<MkButton class="button" gradate full rounded>
 			<i class="fas fa-pencil-alt fa-fw"></i><span v-if="!iconOnly" class="text">{{ i18n.ts.note }}</span>
 		</MkButton>
@@ -20,7 +20,7 @@
 		</component>
 	</template>
 	<div class="divider"></div>
-	<MkA v-if="adminOrModerator" v-click-anime class="item" active-class="active" to="/admin" :behavior="settingsWindowed ? 'modalWindow' : null">
+	<MkA v-if="iAmModerator" v-click-anime class="item" active-class="active" to="/admin" :behavior="settingsWindowed ? 'modalWindow' : null">
 		<i class="fas fa-door-open fa-fw"></i><span class="text">{{ i18n.ts.controlPanel }}</span>
 	</MkA>
 	<button v-click-anime class="item _button" @click="more">
@@ -43,7 +43,7 @@
 import { defineAsyncComponent, watch, defineEmits, onMounted, nextTick } from 'vue';
 import * as os from '@/os';
 import { menuDef } from '@/menu';
-import { openAccountMenu, $i } from '@/account';
+import { openAccountMenu, $i, iAmModerator } from '@/account';
 import MkButton from '@/components/ui/button.vue';
 import { StickySidebar } from '@/scripts/sticky-sidebar';
 import { defaultStore } from '@/store';
@@ -61,15 +61,12 @@ const otherNavItemIndicated = $computed(() => {
 	}
 	return false;
 });
-const adminOrModerator = $computed(() => $i && ($i.isAdmin || $i.isModerator));
 
 const emit = defineEmits<{
 	(ev: 'change-view-mode'): void;
 }>();
 
-watch(() => defaultStore.reactiveState.menuDisplay.value, () => {
-	calcViewState();
-});
+watch(defaultStore.reactiveState.menuDisplay, calcViewState);
 
 watch(iconOnly, () => {
 	nextTick(() => {
@@ -90,12 +87,10 @@ function calcViewState(): void {
 	iconOnly = (window.innerWidth <= 1400) || (defaultStore.state.menuDisplay === 'sideIcon');
 	settingsWindowed = (window.innerWidth > 1400);
 }
+window.addEventListener('resize', calcViewState);
+calcViewState();
 
-function post(): void {
-	os.post();
-}
-
-function more(ev: { currentTarget: any; target: any; }): void {
+function more(ev: MouseEvent): void {
 	os.popup(defineAsyncComponent(() => import('@/components/launch-pad.vue')), {
 		src: ev.currentTarget ?? ev.target,
 	}, {}, 'closed');
@@ -106,9 +101,6 @@ function openAccountMenuWrapper(ev: MouseEvent): void {
 		withExtraOperation: true,
 	}, ev);
 }
-
-window.addEventListener('resize', calcViewState);
-calcViewState();
 </script>
 
 <style lang="scss" scoped>
