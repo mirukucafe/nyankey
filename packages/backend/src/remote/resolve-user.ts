@@ -2,7 +2,7 @@ import { URL } from 'node:url';
 import chalk from 'chalk';
 import { IsNull } from 'typeorm';
 import config from '@/config/index.js';
-import { toPuny } from '@/misc/convert-host.js';
+import { isSelfHost, toPuny } from '@/misc/convert-host.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import webFinger from './webfinger.js';
@@ -11,7 +11,7 @@ import { remoteLogger } from './logger.js';
 
 const logger = remoteLogger.createSubLogger('resolve-user');
 
-export async function resolveUser(username: string, host: string | null): Promise<User> {
+export async function resolveUser(username: string, idnHost: string | null): Promise<User> {
 	const usernameLower = username.toLowerCase();
 
 	if (host == null) {
@@ -25,9 +25,7 @@ export async function resolveUser(username: string, host: string | null): Promis
 		});
 	}
 
-	host = toPuny(host);
-
-	if (config.host === host) {
+	if (isSelfHost(idnHost)) {
 		logger.info(`return local user: ${usernameLower}`);
 		return await Users.findOneBy({ usernameLower, host: IsNull() }).then(u => {
 			if (u == null) {
@@ -38,6 +36,8 @@ export async function resolveUser(username: string, host: string | null): Promis
 		});
 	}
 
+	// `idnHost` can not be null here because that would have branched off with `isSelfHost`.
+	const host = toPuny(idnHost!);
 	const user = await Users.findOneBy({ usernameLower, host }) as IRemoteUser | null;
 
 	const acctLower = `${usernameLower}@${host}`;

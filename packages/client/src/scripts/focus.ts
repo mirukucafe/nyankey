@@ -1,6 +1,7 @@
-export function focusPrev(el: Element | null, self = false, scroll = true) {
-	if (el == null) return;
-	if (!self) el = el.previousElementSibling;
+export function focusPrev(_el: Element | null, self = false, scroll = true) {
+	if (_el == null) return;
+	const el = self ? _el : _el.previousElementSibling;
+
 	if (el) {
 		if (el.hasAttribute('tabindex')) {
 			(el as HTMLElement).focus({
@@ -12,9 +13,10 @@ export function focusPrev(el: Element | null, self = false, scroll = true) {
 	}
 }
 
-export function focusNext(el: Element | null, self = false, scroll = true) {
-	if (el == null) return;
-	if (!self) el = el.nextElementSibling;
+export function focusNext(_el: Element | null, self = false, scroll = true) {
+	if (_el == null) return;
+	const el = self ? _el : _el.nextElementSibling;
+
 	if (el) {
 		if (el.hasAttribute('tabindex')) {
 			(el as HTMLElement).focus({

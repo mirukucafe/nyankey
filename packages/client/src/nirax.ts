@@ -25,9 +25,7 @@ type ParsedPath = (string | {
 function parsePath(path: string): ParsedPath {
 	const res = [] as ParsedPath;
 
-	path = path.substring(1);
-
-	for (const part of path.split('/')) {
+	for (const part of path.substring(1).split('/')) {
 		if (part.includes(':')) {
 			const prefix = part.substring(0, part.indexOf(':'));
 			const placeholder = part.substring(part.indexOf(':') + 1);
@@ -81,9 +79,10 @@ export class Router extends EventEmitter<{
 		this.navigate(currentPath, null, true);
 	}
 
-	public resolve(path: string): { route: RouteDef; props: Map<string, string>; } | null {
+	public resolve(_path: string): { route: RouteDef; props: Map<string, string>; } | null {
 		let queryString: string | null = null;
 		let hash: string | null = null;
+		let path: string = _path;
 		if (path[0] === '/') path = path.substring(1);
 		if (path.includes('#')) {
 			hash = path.substring(path.indexOf('#') + 1);
@@ -180,11 +179,11 @@ export class Router extends EventEmitter<{
 		}
 
 		const isSamePath = beforePath === path;
-		if (isSamePath && key == null) key = this.currentKey;
+
 		this.currentComponent = res.route.component;
 		this.currentProps = res.props;
 		this.currentRoute.value = res.route;
-		this.currentKey = this.currentRoute.value.globalCacheKey ?? key ?? Date.now().toString();
+		this.currentKey = this.currentRoute.value.globalCacheKey ?? key ?? (isSamePath ? this.currentKey : null) ?? Date.now().toString();
 
 		if (!initial) {
 			this.emit('change', {

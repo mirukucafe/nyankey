@@ -53,7 +53,5 @@ export const attachLdSignature = async (activity: any, user: { id: User['id']; h
 
 	const ldSignature = new LdSignature();
 	ldSignature.debug = false;
-	activity = await ldSignature.signRsaSignature2017(activity, keypair.privateKey, `${config.url}/users/${user.id}#main-key`);
-
-	return activity;
+	return await ldSignature.signRsaSignature2017(activity, keypair.privateKey, `${config.url}/users/${user.id}#main-key`);
 };

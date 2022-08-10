@@ -47,10 +47,9 @@ export default class Logger {
 		return logger;
 	}
 
-	private log(level: Level, message: string, data?: Record<string, any> | null, important = false, subDomains: Domain[] = [], store = true): void {
+	private log(level: Level, message: string, data?: Record<string, any> | null, important = false, subDomains: Domain[] = [], _store = true): void {
 		if (envOption.quiet) return;
-		if (!this.store) store = false;
-		if (level === 'debug') store = false;
+		const store = _store && this.store && (level !== 'debug');
 
 		if (this.parentLogger) {
 			this.parentLogger.log(level, message, data, important, [this.domain].concat(subDomains), store);
@@ -95,9 +94,8 @@ export default class Logger {
 		}
 	}
 
-	public error(x: string | Error, data?: Record<string, any> | null, important = false): void { // 実行を継続できない状況で使う
+	public error(x: string | Error, data?: Record<string, any> = {}, important = false): void { // 実行を継続できない状況で使う
 		if (x instanceof Error) {
-			data = data || {};
 			data.e = x;
 			this.log('error', x.toString(), data, important);
 		} else if (typeof x === 'object') {

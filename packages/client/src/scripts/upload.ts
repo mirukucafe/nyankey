@@ -33,7 +33,7 @@ export function uploadFile(
 	name?: string,
 	keepOriginal: boolean = defaultStore.state.keepOriginalUploading
 ): Promise<Misskey.entities.DriveFile> {
-	if (folder && typeof folder === 'object') folder = folder.id;
+	const folderId = typeof folder === 'string' ? folder : folder.id;
 
 	return new Promise((resolve, reject) => {
 		const id = Math.random().toString();
@@ -73,7 +73,7 @@ export function uploadFile(
 			formData.append('force', 'true');
 			formData.append('file', resizedImage || file);
 			formData.append('name', ctx.name);
-			if (folder) formData.append('folderId', folder);
+			if (folderId) formData.append('folderId', folderId);
 
 			const xhr = new XMLHttpRequest();
 			xhr.open('POST', apiUrl + '/drive/files/create', true);

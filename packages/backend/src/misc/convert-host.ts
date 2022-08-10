@@ -2,11 +2,11 @@ import { URL } from 'node:url';
 import { toASCII } from 'punycode';
 import config from '@/config/index.js';
 
-export function getFullApAccount(username: string, host: string | null) {
+export function getFullApAccount(username: string, host: string | null): string {
 	return host ? `${username}@${toPuny(host)}` : `${username}@${toPuny(config.host)}`;
 }
 
-export function isSelfHost(host: string) {
+export function isSelfHost(host: string | null): boolean {
 	if (host == null) return true;
 	return toPuny(config.host) === toPuny(host);
 }

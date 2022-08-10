@@ -17,7 +17,8 @@ type Action = {
 	allowRepeat: boolean;
 };
 
-const parseKeymap = (keymap: Keymap) => Object.entries(keymap).map(([patterns, callback]): Action => {
+const parseKeymap = (keymap: Keymap) => Object.entries(keymap).map(([_patterns, callback]): Action => {
+	let patterns = _patterns;
 	const result = {
 		patterns: [],
 		callback,

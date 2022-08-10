@@ -134,14 +134,12 @@ export async function fetchPerson(uri: string, resolver?: Resolver): Promise<Cac
 /**
  * Personを作成します。
  */
-export async function createPerson(uri: string, resolver?: Resolver): Promise<User> {
+export async function createPerson(uri: string, resolver?: Resolver = new Resolver()): Promise<User> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	if (uri.startsWith(config.url)) {
 		throw new StatusError('cannot resolve local user', 400, 'cannot resolve local user');
 	}
-
-	if (resolver == null) resolver = new Resolver();
 
 	const object = await resolver.resolve(uri) as any;
 
@@ -283,7 +281,7 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
  * @param resolver Resolver
  * @param hint Hint of Person object (この値が正当なPersonの場合、Remote resolveをせずに更新に利用します)
  */
-export async function updatePerson(uri: string, resolver?: Resolver | null, hint?: IObject): Promise<void> {
+export async function updatePerson(uri: string, resolver?: Resolver = new Resolver(), hint?: IObject): Promise<void> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	// URIがこのサーバーを指しているならスキップ
@@ -298,8 +296,6 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 		return;
 	}
 	//#endregion
-
-	if (resolver == null) resolver = new Resolver();
 
 	const object = hint || await resolver.resolve(uri);
 
@@ -405,8 +401,7 @@ export async function resolvePerson(uri: string, resolver?: Resolver): Promise<C
 	//#endregion
 
 	// リモートサーバーからフェッチしてきて登録
-	if (resolver == null) resolver = new Resolver();
-	return await createPerson(uri, resolver);
+	return await createPerson(uri, resolver ?? new Resolver());
 }
 
 const services: {
@@ -419,10 +414,11 @@ const services: {
 
 const $discord = (id: string, name: string) => {
 	if (typeof name !== 'string') {
-		name = 'unknown#0000';
+		return { id, username: 'unknown', discriminator: '0000' };
+	} else {
+		const [username, discriminator] = name.split('#');
+		return { id, username, discriminator };
 	}
-	const [username, discriminator] = name.split('#');
-	return { id, username, discriminator };
 };
 
 function addService(target: { [x: string]: any }, source: IApPropertyValue) {

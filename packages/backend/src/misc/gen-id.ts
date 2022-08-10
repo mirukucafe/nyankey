@@ -7,10 +7,8 @@ import * as crypto from 'node:crypto';
 const TIME2000 = 946684800000;
 let counter = crypto.randomBytes(2).readUInt16LE(0);
 
-export function genId(date?: Date): string {
-	if (!date || (date > new Date())) date = new Date();
-
-	let t = date.getTime();
+export function genId(date?: Date = new Date()): string {
+	let t = Math.min(date, new Date());
 	t -= TIME2000;
 	if (t < 0) t = 0;
 	if (isNaN(t)) throw new Error('Failed to create AID: Invalid Date');

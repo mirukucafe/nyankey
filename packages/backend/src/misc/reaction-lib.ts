@@ -54,10 +54,10 @@ export function convertLegacyReactions(reactions: Record<string, number>) {
 	return _reactions2;
 }
 
-export async function toDbReaction(reaction?: string | null, reacterHost?: string | null): Promise<string> {
+export async function toDbReaction(reaction?: string | null, idnReacterHost?: string | null): Promise<string> {
 	if (reaction == null) return await getFallbackReaction();
 
-	reacterHost = toPunyNullable(reacterHost);
+	const reacterHost = toPunyNullable(idnReacterHost);
 
 	// 文字列タイプのリアクションを絵文字に変換
 	if (Object.keys(legacies).includes(reaction)) return legacies[reaction];
@@ -124,8 +124,8 @@ export function decodeReaction(str: string): DecodedReaction {
 	};
 }
 
-export function convertLegacyReaction(reaction: string): string {
-	reaction = decodeReaction(reaction).reaction;
+export function convertLegacyReaction(_reaction: string): string {
+	const reaction = decodeReaction(_reaction).reaction;
 	if (Object.keys(legacies).includes(reaction)) return legacies[reaction];
 	return reaction;
 }

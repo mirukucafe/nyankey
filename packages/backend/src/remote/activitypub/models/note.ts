@@ -65,9 +65,7 @@ export async function fetchNote(object: string | IObject): Promise<Note | null> 
 /**
  * Noteを作成します。
  */
-export async function createNote(value: string | IObject, resolver?: Resolver, silent = false): Promise<Note | null> {
-	if (resolver == null) resolver = new Resolver();
-
+export async function createNote(value: string | IObject, resolver?: Resolver = new Resolver(), silent = false): Promise<Note | null> {
 	const object: any = await resolver.resolve(value);
 
 	const entryUri = getApId(value);
@@ -302,8 +300,8 @@ export async function resolveNote(value: string | IObject, resolver?: Resolver):
 	}
 }
 
-export async function extractEmojis(tags: IObject | IObject[], host: string): Promise<Emoji[]> {
-	host = toPuny(host);
+export async function extractEmojis(tags: IObject | IObject[], idnHost: string): Promise<Emoji[]> {
+	const host = toPuny(idnHost);
 
 	if (!tags) return [];
 

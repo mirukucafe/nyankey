@@ -308,8 +308,7 @@ function paste(event: ClipboardEvent) {
 	}
 }
 
-function done(query?: any): boolean | void {
-	if (query == null) query = q.value;
+function done(query?: any = q.value): boolean | void {
 	if (query == null || typeof query !== 'string') return;
 
 	const q2 = query.replace(/:/g, '');

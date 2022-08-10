@@ -6,8 +6,8 @@ import { Cache } from '@/misc/cache.js';
 
 const cache = new Cache<Instance>(1000 * 60 * 60);
 
-export async function registerOrFetchInstanceDoc(host: string): Promise<Instance> {
-	host = toPuny(host);
+export async function registerOrFetchInstanceDoc(idnHost: string): Promise<Instance> {
+	const host = toPuny(idnHost);
 
 	const cached = cache.get(host);
 	if (cached) return cached;

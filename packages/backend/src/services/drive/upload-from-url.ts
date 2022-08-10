@@ -36,12 +36,6 @@ export async function uploadFromUrl({
 		name = null;
 	}
 
-	// If the comment is same as the name, skip comment
-	// (image.name is passed in when receiving attachment)
-	if (comment !== null && name === comment) {
-		comment = null;
-	}
-
 	// Create temp file
 	const [path, cleanup] = await createTemp();
 
@@ -49,7 +43,20 @@ export async function uploadFromUrl({
 		// write content at URL to temp file
 		await downloadUrl(url, path);
 
-		const driveFile = await addFile({ user, path, name, comment, folderId, force, isLink, url, uri, sensitive });
+		const driveFile = await addFile({
+			user,
+			path,
+			name,
+			// If the comment is same as the name, skip comment
+			// (image.name is passed in when receiving attachment)
+			comment: name === comment ? null : comment,
+			folderId,
+			force,
+			isLink,
+			url,
+			uri,
+			sensitive,
+		});
 		logger.succ(`Got: ${driveFile.id}`);
 		return driveFile!;
 	} catch (e) {

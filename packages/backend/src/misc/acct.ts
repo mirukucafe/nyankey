@@ -4,8 +4,11 @@ export type Acct = {
 };
 
 export function parse(acct: string): Acct {
-	if (acct.startsWith('@')) acct = acct.substr(1);
-	const split = acct.split('@', 2);
+	const split = acct.split('@');
+	if (split[0].length == 0) {
+		// there was an initial at
+		split.shift();
+	}
 	return { username: split[0], host: split[1] || null };
 }
 

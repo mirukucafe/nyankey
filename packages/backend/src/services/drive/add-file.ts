@@ -256,9 +256,12 @@ export async function generateAlts(path: string, type: string, generateWeb: bool
 /**
  * Upload to ObjectStorage
  */
-async function upload(key: string, stream: fs.ReadStream | Buffer, type: string, filename?: string) {
-	if (type === 'image/apng') type = 'image/png';
-	if (!FILE_TYPE_BROWSERSAFE.includes(type)) type = 'application/octet-stream';
+async function upload(key: string, stream: fs.ReadStream | Buffer, _type: string, filename?: string) {
+	const type = (_type === 'image/apng')
+		? 'image/png'
+		: (FILE_TYPE_BROWSERSAFE.includes(_type))
+			? _type
+			: 'application/octet-stream';
 
 	const meta = await fetchMeta();
 

@@ -135,8 +135,9 @@ export async function readGroupMessagingMessage(
 }
 
 export async function deliverReadActivity(user: { id: User['id']; host: null; }, recipient: IRemoteUser, messages: MessagingMessage | MessagingMessage[]) {
-	messages = toArray(messages).filter(x => x.uri);
-	const contents = messages.map(x => renderReadActivity(user, x));
+	const contents = toArray(messages)
+		.filter(x => x.uri)
+		.map(x => renderReadActivity(user, x));
 
 	if (contents.length > 1) {
 		const collection = orderedCollection(null, contents.length, undefined, undefined, contents);

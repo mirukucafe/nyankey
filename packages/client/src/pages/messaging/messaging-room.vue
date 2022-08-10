@@ -209,8 +209,8 @@ function onMessage(message) {
 
 function onRead(x) {
 	if (user) {
-		if (!Array.isArray(x)) x = [x];
-		for (const id of x) {
+		// ensure x is an array or turn it into one
+		for (const id of [x].flat()) {
 			if (pagingComponent.items.some(y => y.id === id)) {
 				const exist = pagingComponent.items.map(y => y.id).indexOf(id);
 				pagingComponent.items[exist] = {

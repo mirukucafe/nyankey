@@ -400,18 +400,18 @@ function chooseFolder(folderToChoose: Misskey.entities.DriveFolder) {
 	}
 }
 
-function move(target?: Misskey.entities.DriveFolder) {
+function move(target?: string | Misskey.entities.DriveFolder) {
 	if (!target) {
 		goRoot();
 		return;
-	} else if (typeof target === 'object') {
-		target = target.id;
 	}
+
+	const targetId = typeof target === 'string' ? target : target.id;
 
 	fetching.value = true;
 
 	os.api('drive/folders/show', {
-		folderId: target
+		folderId: targetId,
 	}).then(folderToMove => {
 		folder.value = folderToMove;
 		hierarchyFolders.value = [];

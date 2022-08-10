@@ -5,9 +5,7 @@ import Resolver from '../resolver.js';
 import { IObject, IQuestion, isQuestion } from '../type.js';
 import { apLogger } from '../logger.js';
 
-export async function extractPollFromQuestion(source: string | IObject, resolver?: Resolver): Promise<IPoll> {
-	if (resolver == null) resolver = new Resolver();
-
+export async function extractPollFromQuestion(source: string | IObject, resolver?: Resolver = new Resolver()): Promise<IPoll> {
 	const question = await resolver.resolve(source);
 
 	if (!isQuestion(question)) {
