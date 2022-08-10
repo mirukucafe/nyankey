@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, watch, defineEmits, onMounted, nextTick } from 'vue';
+import { defineAsyncComponent, watch, onMounted, nextTick } from 'vue';
 import * as os from '@/os';
 import { menuDef } from '@/menu';
 import { openAccountMenu, $i, iAmModerator } from '@/account';
