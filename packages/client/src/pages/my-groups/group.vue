@@ -3,17 +3,17 @@
 	<transition :name="$store.state.animation ? 'zoom' : ''" mode="out-in">
 		<div v-if="group" class="_section">
 			<div class="_content" style="display: flex; gap: var(--margin); flex-wrap: wrap;">
-				<MkButton inline @click="invite()">{{ $ts.invite }}</MkButton>
-				<MkButton inline @click="renameGroup()">{{ $ts.rename }}</MkButton>
-				<MkButton inline @click="transfer()">{{ $ts.transfer }}</MkButton>
-				<MkButton inline @click="deleteGroup()">{{ $ts.delete }}</MkButton>
+				<MkButton inline @click="invite()">{{ i18n.ts.invite }}</MkButton>
+				<MkButton inline @click="renameGroup()">{{ i18n.ts.rename }}</MkButton>
+				<MkButton inline @click="transfer()">{{ i18n.ts.transfer }}</MkButton>
+				<MkButton inline @click="deleteGroup()">{{ i18n.ts.delete }}</MkButton>
 			</div>
 		</div>
 	</transition>
 
 	<transition :name="$store.state.animation ? 'zoom' : ''" mode="out-in">
 		<div v-if="group" class="_section members _gap">
-			<div class="_title">{{ $ts.members }}</div>
+			<div class="_title">{{ i18n.ts.members }}</div>
 			<div class="_content">
 				<div class="users">
 					<div v-for="user in users" :key="user.id" class="user _panel">
@@ -33,113 +33,91 @@
 </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue';
+<script lang="ts" setup>
+import { computed } from 'vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
-import * as symbols from '@/symbols';
+import { definePageMetadata } from '@/scripts/page-metadata';
+import { i18n } from '@/i18n';
+import { mainRouter } from '@/router';
 
-export default defineComponent({
-	components: {
-		MkButton
-	},
+const props = defineProps<{
+	groupId: string;
+}>();
 
-	props: {
-		groupId: {
-			type: String,
-			required: true,
-		},
-	},
+let group = $ref(null);
+let users = $ref([]);
 
-	data() {
-		return {
-			[symbols.PAGE_INFO]: computed(() => this.group ? {
-				title: this.group.name,
-				icon: 'fas fa-users',
-			} : null),
-			group: null,
-			users: [],
-		};
-	},
+watch(props.groupId, fetch, { immediate: true });
 
-	watch: {
-		groupId: 'fetch',
-	},
+definePageMetadata(computed(() => group ? {
+	title: group.name,
+	icon: 'fas fa-users',
+} : null));
 
-	created() {
-		this.fetch();
-	},
+function fetch(): void {
+	os.api('users/groups/show', { groupId: props.groupId })
+	.then(fetchedGroup => {
+		group = fetchedGroup;
+		os.api('users/show', { userIds: group.userIds })
+		.then(fetchedUsers => users = fetchedUsers);
+	});
+}
 
-	methods: {
-		fetch() {
-			os.api('users/groups/show', {
-				groupId: this.groupId
-			}).then(group => {
-				this.group = group;
-				os.api('users/show', {
-					userIds: this.group.userIds
-				}).then(users => {
-					this.users = users;
-				});
-			});
-		},
+function invite(): void {
+	os.selectUser().then(user => {
+		os.apiWithDialog('users/groups/invite', {
+			groupId: group.id,
+			userId: user.id,
+		});
+	});
+}
 
-		invite() {
-			os.selectUser().then(user => {
-				os.apiWithDialog('users/groups/invite', {
-					groupId: this.group.id,
-					userId: user.id
-				});
-			});
-		},
+function removeUser(user): void {
+	os.api('users/groups/pull', {
+		groupId: group.id,
+		userId: user.id,
+	}).then(() => {
+		users = users.filter(x => x.id !== user.id);
+	});
+}
 
-		removeUser(user) {
-			os.api('users/groups/pull', {
-				groupId: this.group.id,
-				userId: user.id
-			}).then(() => {
-				this.users = this.users.filter(x => x.id !== user.id);
-			});
-		},
+async function renameGroup(): void {
+	const { canceled, result: name } = await os.inputText({
+		title: i18n.ts.groupName,
+		default: group.name,
+	});
+	if (canceled) return;
 
-		async renameGroup() {
-			const { canceled, result: name } = await os.inputText({
-				title: this.$ts.groupName,
-				default: this.group.name
-			});
-			if (canceled) return;
+	await os.api('users/groups/update', {
+		groupId: group.id,
+		name,
+	});
 
-			await os.api('users/groups/update', {
-				groupId: this.group.id,
-				name: name
-			});
+	group.name = name;
+}
 
-			this.group.name = name;
-		},
+function transfer(): void {
+	os.selectUser().then(user => {
+		os.apiWithDialog('users/groups/transfer', {
+			groupId: group.id,
+			userId: user.id,
+		});
+	});
+}
 
-		transfer() {
-			os.selectUser().then(user => {
-				os.apiWithDialog('users/groups/transfer', {
-					groupId: this.group.id,
-					userId: user.id
-				});
-			});
-		},
+async function deleteGroup() {
+	const { canceled } = await os.confirm({
+		type: 'warning',
+		text: i18n.t('removeAreYouSure', { x: group.name }),
+	});
+	if (canceled) return;
 
-		async deleteGroup() {
-			const { canceled } = await os.confirm({
-				type: 'warning',
-				text: this.$t('removeAreYouSure', { x: this.group.name }),
-			});
-			if (canceled) return;
-
-			await os.apiWithDialog('users/groups/delete', {
-				groupId: this.group.id
-			});
-			this.$router.push('/my/groups');
-		}
-	}
-});
+	await os.apiWithDialog('users/groups/delete', {
+		groupId: group.id,
+	});
+	mainRouter.push('/my/groups');
+}
 </script>
 
 <style lang="scss" scoped>
