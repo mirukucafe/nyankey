@@ -86,11 +86,11 @@ const token = ref(null);
 function register() {
 	os.inputText({
 		title: i18n.ts.password,
-		type: 'password'
+		type: 'password',
 	}).then(({ canceled, result: password }) => {
 		if (canceled) return;
 		os.api('i/2fa/register', {
-			password: password
+			password,
 		}).then(data => {
 			twoFactorData.value = data;
 		});
@@ -100,11 +100,11 @@ function register() {
 function unregister() {
 	os.inputText({
 		title: i18n.ts.password,
-		type: 'password'
+		type: 'password',
 	}).then(({ canceled, result: password }) => {
 		if (canceled) return;
 		os.api('i/2fa/unregister', {
-			password: password
+			password,
 		}).then(() => {
 			usePasswordLessLogin.value = false;
 			updatePasswordLessLogin();
@@ -117,7 +117,7 @@ function unregister() {
 
 function submit() {
 	os.api('i/2fa/done', {
-		token: token.value
+		token: token.value,
 	}).then(() => {
 		os.success();
 		$i!.twoFactorEnabled = true;
@@ -137,7 +137,7 @@ function registerKey() {
 		challengeId: registration.value.challengeId,
 		// we convert each 16 bits to a string to serialise
 		clientDataJSON: stringify(registration.value.credential.response.clientDataJSON),
-		attestationObject: hexify(registration.value.credential.response.attestationObject)
+		attestationObject: hexify(registration.value.credential.response.attestationObject),
 	}).then(key => {
 		registration.value = null;
 		key.lastUsed = new Date();
@@ -148,12 +148,12 @@ function registerKey() {
 function unregisterKey(key) {
 	os.inputText({
 		title: i18n.ts.password,
-		type: 'password'
+		type: 'password',
 	}).then(({ canceled, result: password }) => {
 		if (canceled) return;
 		return os.api('i/2fa/remove-key', {
 			password,
-			credentialId: key.id
+			credentialId: key.id,
 		}).then(() => {
 			usePasswordLessLogin.value = false;
 			updatePasswordLessLogin();
@@ -166,11 +166,11 @@ function unregisterKey(key) {
 function addSecurityKey() {
 	os.inputText({
 		title: i18n.ts.password,
-		type: 'password'
+		type: 'password',
 	}).then(({ canceled, result: password }) => {
 		if (canceled) return;
 		os.api('i/2fa/register-key', {
-			password
+			password,
 		}).then(reg => {
 			registration.value = {
 				password,
@@ -180,7 +180,7 @@ function addSecurityKey() {
 					challenge: byteify(reg!.challenge, 'base64'),
 					rp: {
 						id: hostname,
-						name: 'Misskey'
+						name: 'Misskey',
 					},
 					user: {
 						id: byteify($i!.id, 'ascii'),
@@ -189,12 +189,12 @@ function addSecurityKey() {
 					},
 					pubKeyCredParams: [{ alg: -7, type: 'public-key' }],
 					timeout: 60000,
-					attestation: 'direct'
+					attestation: 'direct',
 				},
-				saving: true
+				saving: true,
 			};
 			return navigator.credentials.create({
-				publicKey: registration.value.publicKeyOptions
+				publicKey: registration.value.publicKeyOptions,
 			});
 		}).then(credential => {
 			registration.value.credential = credential;
@@ -210,7 +210,7 @@ function addSecurityKey() {
 
 async function updatePasswordLessLogin() {
 	await os.api('i/2fa/password-less', {
-		value: !!usePasswordLessLogin.value
+		value: !!usePasswordLessLogin.value,
 	});
 }
 </script>

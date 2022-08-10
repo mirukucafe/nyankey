@@ -15,13 +15,13 @@ export default defineComponent({
 		warn: {
 			type: Boolean,
 			required: false,
-			default: false
+			default: false,
 		},
 	},
 	data() {
 		return {
 		};
-	}
+	},
 });
 </script>
 

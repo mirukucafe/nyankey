@@ -43,7 +43,7 @@ export const useWidgetPropsManager = <F extends Form & Record<string, { default:
 	};
 	watch(widgetProps, () => {
 		mergeProps();
-	}, { deep: true, immediate: true, });
+	}, { deep: true, immediate: true });
 
 	const save = throttle(3000, () => {
 		emit('updateProps', widgetProps);

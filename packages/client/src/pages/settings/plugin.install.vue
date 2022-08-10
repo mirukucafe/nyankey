@@ -34,8 +34,8 @@ function installPlugin({ id, meta, ast, token }) {
 		id,
 		active: true,
 		configData: {},
-		token: token,
-		ast: ast,
+		token,
+		ast,
 	}));
 }
 
@@ -89,7 +89,7 @@ async function install() {
 				const { name, permissions } = result;
 				const { token } = await os.api('miauth/gen-token', {
 					session: null,
-					name: name,
+					name,
 					permission: permissions,
 				});
 				res(token);

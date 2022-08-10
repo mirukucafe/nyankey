@@ -22,14 +22,14 @@ export function physics(container: HTMLElement) {
 
 	// create renderer
 	const render = Matter.Render.create({
-		engine: engine,
+		engine,
 		//element: document.getElementById('debug'),
 		options: {
 			width: containerWidth,
 			height: containerHeight,
 			background: 'transparent', // transparent to hide
 			wireframeBackground: 'transparent', // transparent to hide
-		}
+		},
 	});
 
 	// Disable to hide debug
@@ -43,7 +43,7 @@ export function physics(container: HTMLElement) {
 	const ground = Matter.Bodies.rectangle(containerCenterX, containerHeight + (groundThickness / 2), containerWidth, groundThickness, {
 		isStatic: true,
 		restitution: 0.1,
-		friction: 2
+		friction: 2,
 	});
 
 	//const wallRight = Matter.Bodies.rectangle(window.innerWidth+50, window.innerHeight/2, 100, window.innerHeight, wallopts);
@@ -68,8 +68,8 @@ export function physics(container: HTMLElement) {
 				top + (objEl.offsetHeight / 2),
 				Math.max(objEl.offsetWidth, objEl.offsetHeight) / 2,
 				{
-					restitution: 0.5
-				}
+					restitution: 0.5,
+				},
 			);
 		} else {
 			const style = window.getComputedStyle(objEl);
@@ -80,8 +80,8 @@ export function physics(container: HTMLElement) {
 				objEl.offsetHeight,
 				{
 					chamfer: { radius: parseInt(style.borderRadius || '0', 10) },
-					restitution: 0.5
-				}
+					restitution: 0.5,
+				},
 			);
 		}
 		objEl.id = obj.id;
@@ -94,13 +94,13 @@ export function physics(container: HTMLElement) {
 
 	const mouse = Matter.Mouse.create(container);
 	const mouseConstraint = Matter.MouseConstraint.create(engine, {
-		mouse: mouse,
+		mouse,
 		constraint: {
 			stiffness: 0.1,
 			render: {
-				visible: false
-			}
-		}
+				visible: false,
+			},
+		},
 	});
 
 	Matter.World.add(engine.world, mouseConstraint);
@@ -147,6 +147,6 @@ export function physics(container: HTMLElement) {
 			stop = true;
 			Matter.Runner.stop(runner);
 			window.clearInterval(intervalId);
-		}
+		},
 	};
 }

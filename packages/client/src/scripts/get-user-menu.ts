@@ -29,7 +29,7 @@ export function getUserMenu(user) {
 		});
 		if (canceled) return;
 		os.apiWithDialog('users/lists/push', {
-			listId: listId,
+			listId,
 			userId: user.id,
 		});
 	}
@@ -51,7 +51,7 @@ export function getUserMenu(user) {
 		});
 		if (canceled) return;
 		os.apiWithDialog('users/groups/invite', {
-			groupId: groupId,
+			groupId,
 			userId: user.id,
 		});
 	}
@@ -129,7 +129,7 @@ export function getUserMenu(user) {
 
 	function reportAbuse() {
 		os.popup(defineAsyncComponent(() => import('@/components/abuse-report-window.vue')), {
-			user: user,
+			user,
 		}, {}, 'closed');
 	}
 

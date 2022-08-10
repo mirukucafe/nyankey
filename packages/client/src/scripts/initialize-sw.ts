@@ -17,7 +17,7 @@ export async function initializeSw() {
 			// SEE: https://developer.mozilla.org/en-US/docs/Web/API/PushManager/subscribe#Parameters
 			registration.pushManager.subscribe({
 				userVisibleOnly: true,
-				applicationServerKey: urlBase64ToUint8Array(instance.swPublickey)
+				applicationServerKey: urlBase64ToUint8Array(instance.swPublickey),
 			})
 			.then(subscription => {
 				function encode(buffer: ArrayBuffer | null) {
@@ -28,7 +28,7 @@ export async function initializeSw() {
 				api('sw/register', {
 					endpoint: subscription.endpoint,
 					auth: encode(subscription.getKey('auth')),
-					publickey: encode(subscription.getKey('p256dh'))
+					publickey: encode(subscription.getKey('p256dh')),
 				});
 			})
 			// When subscribe failed

@@ -59,10 +59,10 @@ let connection2;
 if (props.src === 'antenna') {
 	endpoint = 'antennas/notes';
 	query = {
-		antennaId: props.antenna
+		antennaId: props.antenna,
 	};
 	connection = stream.useChannel('antenna', {
-		antennaId: props.antenna
+		antennaId: props.antenna,
 	});
 	connection.on('note', prepend);
 } else if (props.src === 'home') {
@@ -92,7 +92,7 @@ if (props.src === 'antenna') {
 } else if (props.src === 'directs') {
 	endpoint = 'notes/mentions';
 	query = {
-		visibility: 'specified'
+		visibility: 'specified',
 	};
 	const onNote = note => {
 		if (note.visibility === 'specified') {
@@ -104,10 +104,10 @@ if (props.src === 'antenna') {
 } else if (props.src === 'list') {
 	endpoint = 'notes/user-list-timeline';
 	query = {
-		listId: props.list
+		listId: props.list,
 	};
 	connection = stream.useChannel('userList', {
-		listId: props.list
+		listId: props.list,
 	});
 	connection.on('note', prepend);
 	connection.on('userAdded', onUserAdded);
@@ -115,16 +115,16 @@ if (props.src === 'antenna') {
 } else if (props.src === 'channel') {
 	endpoint = 'channels/timeline';
 	query = {
-		channelId: props.channel
+		channelId: props.channel,
 	};
 	connection = stream.useChannel('channel', {
-		channelId: props.channel
+		channelId: props.channel,
 	});
 	connection.on('note', prepend);
 }
 
 const pagination = {
-	endpoint: endpoint,
+	endpoint,
 	limit: 10,
 	params: query,
 };

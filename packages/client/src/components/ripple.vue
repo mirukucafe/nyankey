@@ -2,7 +2,8 @@
 <div class="vswabwbm" :style="{ zIndex, top: `${y - 64}px`, left: `${x - 64}px` }" :class="{ active }">
 	<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
 		<circle fill="none" cx="64" cy="64">
-			<animate attributeName="r"
+			<animate
+				attributeName="r"
 				begin="0s" dur="0.5s"
 				values="4; 32"
 				calcMode="spline"
@@ -10,7 +11,8 @@
 				keySplines="0.165, 0.84, 0.44, 1"
 				repeatCount="1"
 			/>
-			<animate attributeName="stroke-width"
+			<animate
+				attributeName="stroke-width"
 				begin="0s" dur="0.5s"
 				values="16; 0"
 				calcMode="spline"
@@ -21,7 +23,8 @@
 		</circle>
 		<g fill="none" fill-rule="evenodd">
 			<circle v-for="(particle, i) in particles" :key="i" :fill="particle.color">
-				<animate attributeName="r"
+				<animate
+					attributeName="r"
 					begin="0s" dur="0.8s"
 					:values="`${particle.size}; 0`"
 					calcMode="spline"
@@ -29,7 +32,8 @@
 					keySplines="0.165, 0.84, 0.44, 1"
 					repeatCount="1"
 				/>
-				<animate attributeName="cx"
+				<animate
+					attributeName="cx"
 					begin="0s" dur="0.8s"
 					:values="`${particle.xA}; ${particle.xB}`"
 					calcMode="spline"
@@ -37,7 +41,8 @@
 					keySplines="0.3, 0.61, 0.355, 1"
 					repeatCount="1"
 				/>
-				<animate attributeName="cy"
+				<animate
+					attributeName="cy"
 					begin="0s" dur="0.8s"
 					:values="`${particle.yA}; ${particle.yB}`"
 					calcMode="spline"
@@ -59,17 +64,17 @@ export default defineComponent({
 	props: {
 		x: {
 			type: Number,
-			required: true
+			required: true,
 		},
 		y: {
 			type: Number,
-			required: true
+			required: true,
 		},
 		particle: {
 			type: Boolean,
 			required: false,
 			default: true,
-		}
+		},
 	},
 	emits: ['end'],
 	setup(props, context) {
@@ -88,7 +93,7 @@ export default defineComponent({
 					yA: origin + (Math.cos(angle) * pos),
 					xB: origin + (Math.sin(angle) * (pos + velocity)),
 					yB: origin + (Math.cos(angle) * (pos + velocity)),
-					color: colors[Math.floor(Math.random() * colors.length)]
+					color: colors[Math.floor(Math.random() * colors.length)],
 				});
 			}
 		}

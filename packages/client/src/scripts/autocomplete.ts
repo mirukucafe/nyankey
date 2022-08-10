@@ -160,14 +160,14 @@ export class Autocomplete {
 			const { dispose } = await popup(defineAsyncComponent(() => import('@/components/autocomplete.vue')), {
 				textarea: this.textarea,
 				close: this.close,
-				type: type,
+				type,
 				q: _q,
 				x: _x,
 				y: _y,
 			}, {
 				done: (res) => {
 					this.complete(res);
-				}
+				},
 			});
 
 			this.suggestion = {

@@ -5,7 +5,7 @@ export function focusPrev(_el: Element | null, self = false, scroll = true) {
 	if (el) {
 		if (el.hasAttribute('tabindex')) {
 			(el as HTMLElement).focus({
-				preventScroll: !scroll
+				preventScroll: !scroll,
 			});
 		} else {
 			focusPrev(el.previousElementSibling, true);
@@ -20,7 +20,7 @@ export function focusNext(_el: Element | null, self = false, scroll = true) {
 	if (el) {
 		if (el.hasAttribute('tabindex')) {
 			(el as HTMLElement).focus({
-				preventScroll: !scroll
+				preventScroll: !scroll,
 			});
 		} else {
 			focusPrev(el.nextElementSibling, true);

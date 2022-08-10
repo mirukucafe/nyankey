@@ -179,8 +179,8 @@ function saveDraft() {
 		updatedAt: new Date(),
 		// eslint-disable-next-line id-denylist
 		data: {
-			text: text,
-			file: file,
+			text,
+			file,
 		},
 	};
 

@@ -56,7 +56,7 @@ const pagination = {
 	params: computed(() => ({
 		type: (type && type !== '') ? type : null,
 		userId: (userId && userId !== '') ? userId : null,
-		origin: origin,
+		origin,
 		hostname: (searchHost && searchHost !== '') ? searchHost : null,
 	})),
 };

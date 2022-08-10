@@ -69,18 +69,18 @@ async function save() {
 	if (props.postId) {
 		await os.apiWithDialog('gallery/posts/update', {
 			postId: props.postId,
-			title: title,
-			description: description,
+			title,
+			description,
 			fileIds: files.map(file => file.id),
-			isSensitive: isSensitive,
+			isSensitive,
 		});
 		router.push(`/gallery/${props.postId}`);
 	} else {
 		const created = await os.apiWithDialog('gallery/posts/create', {
-			title: title,
-			description: description,
+			title,
+			description,
 			fileIds: files.map(file => file.id),
-			isSensitive: isSensitive,
+			isSensitive,
 		});
 		router.push(`/gallery/${created.id}`);
 	}

@@ -6,7 +6,7 @@ import MkError from '@/pages/_error_.vue';
 import { ui } from '@/config';
 
 const page = (loader: AsyncComponentLoader<any>) => defineAsyncComponent({
-	loader: loader,
+	loader,
 	loadingComponent: MkLoading,
 	errorComponent: MkError,
 });

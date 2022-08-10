@@ -76,9 +76,9 @@ fetchChannel();
 
 function save() {
 	const params = {
-		name: name,
-		description: description,
-		bannerId: bannerId,
+		name,
+		description,
+		bannerId,
 	};
 
 	if (props.channelId) {

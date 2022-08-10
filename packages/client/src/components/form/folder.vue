@@ -23,7 +23,7 @@
 const props = withDefaults(defineProps<{
 	defaultOpen: boolean;
 }>(), {
-  defaultOpen: false,
+	defaultOpen: false,
 });
 
 let opened = $ref(props.defaultOpen);

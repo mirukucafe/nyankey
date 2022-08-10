@@ -4,23 +4,27 @@
 		:points="pointsNote"
 		fill="none"
 		stroke-width="1"
-		stroke="#41ddde"/>
+		stroke="#41ddde"
+	/>
 	<polyline
 		:points="pointsReply"
 		fill="none"
 		stroke-width="1"
-		stroke="#f7796c"/>
+		stroke="#f7796c"
+	/>
 	<polyline
 		:points="pointsRenote"
 		fill="none"
 		stroke-width="1"
-		stroke="#a1de41"/>
+		stroke="#a1de41"
+	/>
 	<polyline
 		:points="pointsTotal"
 		fill="none"
 		stroke-width="1"
 		stroke="#555"
-		stroke-dasharray="2 2"/>
+		stroke-dasharray="2 2"
+	/>
 </svg>
 </template>
 

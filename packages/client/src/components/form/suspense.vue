@@ -28,7 +28,7 @@ const process = () => {
 	// this might be a retry so reset the state
 	state = 'pending';
 
-	props.p?.().then((_result) => {
+	props.p().then((_result) => {
 		result = _result;
 		state = 'resolved';
 	}, () => {
@@ -39,7 +39,7 @@ const process = () => {
 watch(() => props.p, () => {
 	process();
 }, {
-	immediate: true
+	immediate: true,
 });
 </script>
 

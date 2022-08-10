@@ -1,5 +1,6 @@
 <template>
-<MkWindow ref="window"
+<MkWindow
+	ref="window"
 	:initial-width="null"
 	:initial-height="null"
 	:can-resize="false"

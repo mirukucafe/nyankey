@@ -13,20 +13,20 @@ import * as os from '@/os';
 
 export default defineComponent({
 	components: {
-		MkUrlPreview
+		MkUrlPreview,
 	},
 
 	props: {
 		url: {
 			type: String,
-			required: true
+			required: true,
 		},
 		source: {
-			required: true
+			required: true,
 		},
 		showing: {
 			type: Boolean,
-			required: true
+			required: true,
 		},
 	},
 

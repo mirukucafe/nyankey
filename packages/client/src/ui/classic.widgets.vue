@@ -50,7 +50,7 @@ function updateWidget({ id, data }) {
 function updateWidgets(widgets) {
 	defaultStore.set('widgets', [
 		...defaultStore.state.widgets.filter(w => w.place !== props.place),
-		...widgets
+		...widgets,
 	]);
 }
 </script>

@@ -8,9 +8,9 @@
 
 <script lang="ts" setup>
 import { onMounted, onBeforeUnmount } from 'vue';
-import contains from '@/scripts/contains';
 import MkMenu from './menu.vue';
 import { MenuItem } from './types/menu.vue';
+import contains from '@/scripts/contains';
 import * as os from '@/os';
 
 const props = defineProps<{

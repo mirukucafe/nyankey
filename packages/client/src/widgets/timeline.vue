@@ -21,8 +21,8 @@
 
 <script lang="ts" setup>
 import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
-import { GetFormResultType } from '@/scripts/form';
 import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { GetFormResultType } from '@/scripts/form';
 import * as os from '@/os';
 import MkContainer from '@/components/ui/container.vue';
 import XTimeline from '@/components/timeline.vue';
@@ -82,7 +82,7 @@ const choose = async (ev) => {
 	menuOpened.value = true;
 	const [antennas, lists] = await Promise.all([
 		os.api('antennas/list'),
-		os.api('users/lists/list')
+		os.api('users/lists/list'),
 	]);
 	const antennaItems = antennas.map(antenna => ({
 		text: antenna.name,
@@ -90,7 +90,7 @@ const choose = async (ev) => {
 		action: () => {
 			widgetProps.antenna = antenna;
 			setSrc('antenna');
-		}
+		},
 	}));
 	const listItems = lists.map(list => ({
 		text: list.name,
@@ -98,24 +98,24 @@ const choose = async (ev) => {
 		action: () => {
 			widgetProps.list = list;
 			setSrc('list');
-		}
+		},
 	}));
 	os.popupMenu([{
 		text: i18n.ts._timelines.home,
 		icon: 'fas fa-home',
-		action: () => { setSrc('home'); }
+		action: () => { setSrc('home'); },
 	}, {
 		text: i18n.ts._timelines.local,
 		icon: 'fas fa-comments',
-		action: () => { setSrc('local'); }
+		action: () => { setSrc('local'); },
 	}, {
 		text: i18n.ts._timelines.social,
 		icon: 'fas fa-share-alt',
-		action: () => { setSrc('social'); }
+		action: () => { setSrc('social'); },
 	}, {
 		text: i18n.ts._timelines.global,
 		icon: 'fas fa-globe',
-		action: () => { setSrc('global'); }
+		action: () => { setSrc('global'); },
 	}, antennaItems.length > 0 ? null : undefined, ...antennaItems, listItems.length > 0 ? null : undefined, ...listItems], ev.currentTarget ?? ev.target).then(() => {
 		menuOpened.value = false;
 	});

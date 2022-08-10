@@ -37,7 +37,7 @@ async function create() {
 		title: i18n.ts.enterListName,
 	});
 	if (canceled) return;
-	await os.apiWithDialog('users/lists/create', { name: name });
+	await os.apiWithDialog('users/lists/create', { name });
 	pagingComponent.reload();
 }
 

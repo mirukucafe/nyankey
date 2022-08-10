@@ -82,7 +82,7 @@ function requestRender() {
 		captcha.value.render(captchaEl.value, {
 			sitekey: props.sitekey,
 			theme: defaultStore.state.darkMode ? 'dark' : 'light',
-			callback: callback,
+			callback,
 			'expired-callback': callback,
 			'error-callback': callback,
 		});

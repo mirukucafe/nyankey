@@ -28,13 +28,13 @@ import * as os from '@/os';
 export default defineComponent({
 	components: {
 		XDraggable: defineAsyncComponent(() => import('vuedraggable').then(x => x.default)),
-		XSection, XText, XImage, XButton, XTextarea, XTextInput, XTextareaInput, XNumberInput, XSwitch, XIf, XPost, XCounter, XRadioButton, XCanvas, XNote
+		XSection, XText, XImage, XButton, XTextarea, XTextInput, XTextareaInput, XNumberInput, XSwitch, XIf, XPost, XCounter, XRadioButton, XCanvas, XNote,
 	},
 
 	props: {
 		modelValue: {
 			type: Array,
-			required: true
+			required: true,
 		},
 		hpml: {
 			required: true,
@@ -50,8 +50,8 @@ export default defineComponent({
 			},
 			set(value) {
 				this.$emit('update:modelValue', value);
-			}
-		}
+			},
+		},
 	},
 
 	methods: {
@@ -60,7 +60,7 @@ export default defineComponent({
 			const newValue = [
 				...this.blocks.slice(0, i),
 				v,
-				...this.blocks.slice(i + 1)
+				...this.blocks.slice(i + 1),
 			];
 			this.$emit('update:modelValue', newValue);
 		},
@@ -69,10 +69,10 @@ export default defineComponent({
 			const i = this.blocks.findIndex(x => x.id === el.id);
 			const newValue = [
 				...this.blocks.slice(0, i),
-				...this.blocks.slice(i + 1)
+				...this.blocks.slice(i + 1),
 			];
 			this.$emit('update:modelValue', newValue);
 		},
-	}
+	},
 });
 </script>

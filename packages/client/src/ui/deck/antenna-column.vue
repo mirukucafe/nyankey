@@ -11,9 +11,9 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import XColumn from './column.vue';
+import { updateColumn, Column } from './deck-store';
 import XTimeline from '@/components/timeline.vue';
 import * as os from '@/os';
-import { updateColumn, Column } from './deck-store';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{
@@ -39,13 +39,13 @@ async function setAntenna() {
 	const { canceled, result: antenna } = await os.select({
 		title: i18n.ts.selectAntenna,
 		items: antennas.map(x => ({
-			value: x, text: x.name
+			value: x, text: x.name,
 		})),
-		default: props.column.antennaId
+		default: props.column.antennaId,
 	});
 	if (canceled) return;
 	updateColumn(props.column.id, {
-		antennaId: antenna.id
+		antennaId: antenna.id,
 	});
 }
 /*

@@ -1,5 +1,5 @@
 const address = new URL(location.href);
-const siteName = (document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement)?.content;
+const siteName = (document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement).content;
 
 export const host = address.host;
 export const hostname = address.hostname;

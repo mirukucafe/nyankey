@@ -31,9 +31,9 @@ import { onMounted } from 'vue';
 import XForm from './auth.form.vue';
 import MkSignin from '@/components/signin.vue';
 import * as os from '@/os';
-import { login } from '@/account';
+import { login , $i } from '@/account';
 import { i18n } from '@/i18n';
-import { $i } from '@/account';
+
 import { query, appendQuery } from '@/scripts/url';
 
 const props = defineProps<{

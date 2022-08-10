@@ -80,8 +80,8 @@ const search = () => {
 		return;
 	}
 	os.api('users/search-by-username-and-host', {
-		username: username,
-		host: host,
+		username,
+		host,
 		limit: 10,
 		detail: false,
 	}).then(_users => {

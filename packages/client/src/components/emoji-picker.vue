@@ -4,7 +4,8 @@
 	<div ref="emojis" class="emojis">
 		<section class="result">
 			<div v-if="searchResultCustom.length > 0">
-				<button v-for="emoji in searchResultCustom"
+				<button
+					v-for="emoji in searchResultCustom"
 					:key="emoji.id"
 					class="_button"
 					:title="emoji.name"
@@ -16,7 +17,8 @@
 				</button>
 			</div>
 			<div v-if="searchResultUnicode.length > 0">
-				<button v-for="emoji in searchResultUnicode"
+				<button
+					v-for="emoji in searchResultUnicode"
 					:key="emoji.name"
 					class="_button"
 					:title="emoji.name"
@@ -31,7 +33,8 @@
 		<div v-if="tab === 'index'" class="index">
 			<section v-if="showPinned">
 				<div>
-					<button v-for="emoji in pinned"
+					<button
+						v-for="emoji in pinned"
 						:key="emoji"
 						class="_button"
 						tabindex="0"
@@ -45,7 +48,8 @@
 			<section>
 				<header class="_acrylic"><i class="far fa-clock fa-fw"></i> {{ i18n.ts.recentUsed }}</header>
 				<div>
-					<button v-for="emoji in recentlyUsedEmojis"
+					<button
+						v-for="emoji in recentlyUsedEmojis"
 						:key="emoji"
 						class="_button"
 						@click="chosen(emoji, $event)"
@@ -76,6 +80,7 @@
 <script lang="ts" setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import * as Misskey from 'misskey-js';
+import XSection from './emoji-picker.section.vue';
 import { emojilist, UnicodeEmojiDef, unicodeEmojiCategories as categories } from '@/scripts/emojilist';
 import { getStaticImageUrl } from '@/scripts/get-static-image-url';
 import Ripple from '@/components/ripple.vue';
@@ -83,7 +88,6 @@ import * as os from '@/os';
 import { isTouchUsing } from '@/scripts/touch';
 import { deviceKind } from '@/scripts/device-kind';
 import { emojiCategories, instance } from '@/instance';
-import XSection from './emoji-picker.section.vue';
 import { i18n } from '@/i18n';
 import { defaultStore } from '@/store';
 
@@ -266,7 +270,7 @@ watch(q, () => {
 function focus() {
 	if (!['smartphone', 'tablet'].includes(deviceKind) && !isTouchUsing) {
 		search.value?.focus({
-			preventScroll: true
+			preventScroll: true,
 		});
 	}
 }

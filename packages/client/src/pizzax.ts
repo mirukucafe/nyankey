@@ -117,8 +117,8 @@ export class Storage<T extends StateDef> {
 				localStorage.setItem(this.keyForLocalStorage + '::cache::' + $i.id, JSON.stringify(cache));
 				api('i/registry/set', {
 					scope: ['client', this.key],
-					key: key,
-					value: value,
+					key,
+					value,
 				});
 				break;
 			}

@@ -24,11 +24,11 @@
 
 <script lang="ts" setup>
 import { watch } from 'vue';
+import XEmoji from './emojis.emoji.vue';
 import MkInput from '@/components/form/input.vue';
 import MkFolder from '@/components/ui/folder.vue';
 import { i18n } from '@/i18n';
 import { emojiCategories, instance } from '@/instance';
-import XEmoji from './emojis.emoji.vue';
 
 let q: string = $ref('');
 let searchEmojis: null | Record<string, any>[] = $ref(null);

@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import {  } from 'vue';
+import { } from 'vue';
 import MkModal from '@/components/ui/modal.vue';
 import { menuDef } from '@/menu';
 import { instanceName } from '@/config';

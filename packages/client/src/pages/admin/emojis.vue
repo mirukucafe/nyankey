@@ -137,7 +137,7 @@ const add = async (ev: MouseEvent) => {
 
 const edit = (emoji) => {
 	os.popup(defineAsyncComponent(() => import('./emoji-edit-dialog.vue')), {
-		emoji: emoji,
+		emoji,
 	}, {
 		done: result => {
 			if (result.updated) {

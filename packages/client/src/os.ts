@@ -137,9 +137,9 @@ export function promiseDialog<T extends Promise<any>>(
 
 	// NOTE: dynamic importすると挙動がおかしくなる(showingの変更が伝播しない)
 	popup(MkWaitingDialog, {
-		success: success,
-		showing: showing,
-		text: text,
+		success,
+		showing,
+		text,
 	}, {}, 'closed');
 
 	return promise;
@@ -354,7 +354,7 @@ export function success() {
 		}, 1000);
 		popup(defineAsyncComponent(() => import('@/components/waiting-dialog.vue')), {
 			success: true,
-			showing: showing,
+			showing,
 		}, {
 			done: () => resolve(),
 		}, 'closed');
@@ -366,7 +366,7 @@ export function waiting() {
 		const showing = ref(true);
 		popup(defineAsyncComponent(() => import('@/components/waiting-dialog.vue')), {
 			success: false,
-			showing: showing,
+			showing,
 		}, {
 			done: () => resolve(),
 		}, 'closed');

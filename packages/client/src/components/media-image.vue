@@ -37,8 +37,8 @@ let hide = $ref(true);
 const url = (props.raw || defaultStore.state.loadRawImages)
 	? props.image.url
 	: defaultStore.state.disableShowingAnimatedImages
-			? getStaticImageUrl(props.image.thumbnailUrl)
-			: props.image.thumbnailUrl;
+		? getStaticImageUrl(props.image.thumbnailUrl)
+		: props.image.thumbnailUrl;
 
 // Plugin:register_note_view_interruptor を使って書き換えられる可能性があるためwatchする
 watch(() => props.image, () => {

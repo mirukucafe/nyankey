@@ -75,9 +75,9 @@ const pagination = {
 	endpoint: 'admin/show-users' as const,
 	limit: 10,
 	params: computed(() => ({
-		sort: sort,
-		state: state,
-		origin: origin,
+		sort,
+		state,
+		origin,
 		username: searchUsername,
 		hostname: searchHost,
 	})),
@@ -103,8 +103,8 @@ async function addUser() {
 	if (canceled2) return;
 
 	os.apiWithDialog('admin/accounts/create', {
-		username: username,
-		password: password,
+		username,
+		password,
 	}).then(res => {
 		paginationComponent.reload();
 	});

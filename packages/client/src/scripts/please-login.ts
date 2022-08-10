@@ -8,7 +8,7 @@ export function pleaseLogin(path?: string) {
 
 	popup(defineAsyncComponent(() => import('@/components/signin-dialog.vue')), {
 		autoSet: true,
-		message: i18n.ts.signinRequired
+		message: i18n.ts.signinRequired,
 	}, {
 		cancelled: () => {
 			if (path) {

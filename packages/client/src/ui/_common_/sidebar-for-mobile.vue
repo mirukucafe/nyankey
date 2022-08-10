@@ -53,11 +53,11 @@ export default defineComponent({
 		});
 
 		return {
-			host: host,
+			host,
 			accounts: [],
 			connection: null,
 			menu,
-			menuDef: menuDef,
+			menuDef,
 			otherMenuItemIndicated,
 			post: os.post,
 			search,

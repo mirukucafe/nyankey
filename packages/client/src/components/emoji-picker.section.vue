@@ -4,7 +4,8 @@
 		<i class="toggle fa-fw" :class="shown ? 'fas fa-chevron-down' : 'fas fa-chevron-up'"></i> <slot></slot> ({{ emojis.length }})
 	</header>
 	<div v-if="shown">
-		<button v-for="emoji in emojis"
+		<button
+			v-for="emoji in emojis"
 			:key="emoji"
 			class="_button"
 			@click="emit('chosen', emoji, $event)"

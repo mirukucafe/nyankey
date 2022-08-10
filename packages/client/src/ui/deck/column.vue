@@ -1,13 +1,15 @@
 <template>
 <!-- sectionを利用しているのは、deck.vue側でcolumnに対してfirst-of-typeを効かせるため -->
-<section v-hotkey="keymap" class="dnpfarvg _panel _narrow_"
+<section
+	v-hotkey="keymap" class="dnpfarvg _panel _narrow_"
 	:class="{ paged: isMainColumn, naked, active, isStacked, draghover, dragging, dropready }"
 	:style="{ '--deckColumnHeaderHeight': deckStore.reactiveState.columnHeaderHeight.value + 'px' }"
 	@dragover.prevent.stop="onDragover"
 	@dragleave="onDragleave"
 	@drop.prevent.stop="onDrop"
 >
-	<header :class="{ indicated }"
+	<header
+		:class="{ indicated }"
 		draggable="true"
 		@click="goTop"
 		@dragstart="onDragstart"
@@ -39,9 +41,9 @@ export type DeckFunc = {
 </script>
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, provide, watch } from 'vue';
+import { updateColumn, swapLeftColumn, swapRightColumn, swapUpColumn, swapDownColumn, stackLeftColumn, popRightColumn, removeColumn, swapColumn, Column , deckStore } from './deck-store';
+
 import * as os from '@/os';
-import { updateColumn, swapLeftColumn, swapRightColumn, swapUpColumn, swapDownColumn, stackLeftColumn, popRightColumn, removeColumn, swapColumn, Column } from './deck-store';
-import { deckStore } from './deck-store';
 import { i18n } from '@/i18n';
 
 provide('shouldHeaderThin', true);
@@ -105,7 +107,7 @@ function onOtherDragEnd() {
 function toggleActive() {
 	if (!props.isStacked) return;
 	updateColumn(props.column.id, {
-		active: !props.column.active
+		active: !props.column.active,
 	});
 }
 
@@ -118,65 +120,65 @@ function getMenu() {
 				name: {
 					type: 'string',
 					label: i18n.ts.name,
-					default: props.column.name
+					default: props.column.name,
 				},
 				width: {
 					type: 'number',
 					label: i18n.ts.width,
-					default: props.column.width
+					default: props.column.width,
 				},
 				flexible: {
 					type: 'boolean',
 					label: i18n.ts.flexible,
-					default: props.column.flexible
-				}
+					default: props.column.flexible,
+				},
 			});
 			if (canceled) return;
 			updateColumn(props.column.id, result);
-		}
+		},
 	}, null, {
 		icon: 'fas fa-arrow-left',
 		text: i18n.ts._deck.swapLeft,
 		action: () => {
 			swapLeftColumn(props.column.id);
-		}
+		},
 	}, {
 		icon: 'fas fa-arrow-right',
 		text: i18n.ts._deck.swapRight,
 		action: () => {
 			swapRightColumn(props.column.id);
-		}
+		},
 	}, props.isStacked ? {
 		icon: 'fas fa-arrow-up',
 		text: i18n.ts._deck.swapUp,
 		action: () => {
 			swapUpColumn(props.column.id);
-		}
+		},
 	} : undefined, props.isStacked ? {
 		icon: 'fas fa-arrow-down',
 		text: i18n.ts._deck.swapDown,
 		action: () => {
 			swapDownColumn(props.column.id);
-		}
+		},
 	} : undefined, null, {
 		icon: 'fas fa-window-restore',
 		text: i18n.ts._deck.stackLeft,
 		action: () => {
 			stackLeftColumn(props.column.id);
-		}
+		},
 	}, props.isStacked ? {
 		icon: 'fas fa-window-maximize',
 		text: i18n.ts._deck.popRight,
 		action: () => {
 			popRightColumn(props.column.id);
-		}
+		},
 	} : undefined, null, {
 		icon: 'fas fa-trash-alt',
 		text: i18n.ts.remove,
 		danger: true,
 		action: () => {
 			removeColumn(props.column.id);
-		}
+		},
 	}];
 	return items;
 }
@@ -188,7 +190,7 @@ function onContextmenu(ev: MouseEvent) {
 function goTop() {
 	body.scrollTo({
 		top: 0,
-		behavior: 'smooth'
+		behavior: 'smooth',
 	});
 }
 

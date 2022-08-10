@@ -23,12 +23,12 @@ export default defineComponent({
 	props: {
 		page: {
 			type: Object,
-			required: true
+			required: true,
 		},
 	},
 	methods: {
-		userName
-	}
+		userName,
+	},
 });
 </script>
 

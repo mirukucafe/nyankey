@@ -1,5 +1,6 @@
 <template>
-<div v-size="{ max: [310, 500] }" class="gafaadew"
+<div
+	v-size="{ max: [310, 500] }" class="gafaadew"
 	:class="{ modal, _popup: modal }"
 	@dragover.stop="onDragover"
 	@dragenter="onDragenter"
@@ -68,6 +69,8 @@ import * as misskey from 'misskey-js';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode/';
+import * as Acct from 'misskey-js/built/acct';
+import { throttle } from 'throttle-debounce';
 import XNoteSimple from './note-simple.vue';
 import XNotePreview from './note-preview.vue';
 import XPostFormAttaches from './post-form-attaches.vue';
@@ -75,14 +78,12 @@ import XPollEditor from './poll-editor.vue';
 import { host, url } from '@/config';
 import { erase, unique } from '@/scripts/array';
 import { extractMentions } from '@/scripts/extract-mentions';
-import * as Acct from 'misskey-js/built/acct';
 import { formatTimeString } from '@/scripts/format-time-string';
 import { Autocomplete } from '@/scripts/autocomplete';
 import * as os from '@/os';
 import { stream } from '@/stream';
 import { selectFiles } from '@/scripts/select-file';
 import { defaultStore, notePostInterruptors, postFormActions } from '@/store';
-import { throttle } from 'throttle-debounce';
 import MkInfo from '@/components/ui/info.vue';
 import { i18n } from '@/i18n';
 import { instance } from '@/instance';
@@ -181,7 +182,7 @@ const placeholder = $computed((): string => {
 			i18n.ts._postForm._placeholders.c,
 			i18n.ts._postForm._placeholders.d,
 			i18n.ts._postForm._placeholders.e,
-			i18n.ts._postForm._placeholders.f
+			i18n.ts._postForm._placeholders.f,
 		];
 		return xs[Math.floor(Math.random() * xs.length)];
 	}
@@ -238,10 +239,10 @@ if (props.reply && props.reply.text != null) {
 
 	for (const x of extractMentions(ast)) {
 		const mention = x.host ?
-											`@${x.username}@${toASCII(x.host)}` :
-											(otherHost == null || otherHost === host) ?
-												`@${x.username}` :
-												`@${x.username}@${toASCII(otherHost)}`;
+			`@${x.username}@${toASCII(x.host)}` :
+			(otherHost == null || otherHost === host) ?
+				`@${x.username}` :
+				`@${x.username}@${toASCII(otherHost)}`;
 
 		// 自分は除外
 		if ($i.username === x.username && (x.host == null || x.host === host)) continue;
@@ -263,7 +264,7 @@ if (props.reply && ['home', 'followers', 'specified'].includes(props.reply.visib
 	visibility = props.reply.visibility;
 	if (props.reply.visibility === 'specified') {
 		os.api('users/show', {
-			userIds: props.reply.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.reply.userId)
+			userIds: props.reply.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.reply.userId),
 		}).then(users => {
 			users.forEach(pushVisibleUser);
 		});
@@ -399,7 +400,7 @@ function setVisibility() {
 			if (defaultStore.state.rememberNoteVisibility) {
 				defaultStore.set('localOnly', localOnly);
 			}
-		}
+		},
 	}, 'closed');
 }
 
@@ -516,14 +517,14 @@ function saveDraft() {
 	draftData[draftKey] = {
 		updatedAt: new Date(),
 		data: {
-			text: text,
-			useCw: useCw,
-			cw: cw,
-			visibility: visibility,
-			localOnly: localOnly,
-			files: files,
-			poll: poll
-		}
+			text,
+			useCw,
+			cw,
+			visibility,
+			localOnly,
+			files,
+			poll,
+		},
 	};
 
 	localStorage.setItem('drafts', JSON.stringify(draftData));
@@ -544,10 +545,10 @@ async function post() {
 		replyId: props.reply ? props.reply.id : undefined,
 		renoteId: props.renote ? props.renote.id : quoteId ? quoteId : undefined,
 		channelId: props.channel ? props.channel.id : undefined,
-		poll: poll,
+		poll,
 		cw: useCw ? cw || '' : undefined,
-		localOnly: localOnly,
-		visibility: visibility,
+		localOnly,
+		visibility,
 		visibleUserIds: visibility === 'specified' ? visibleUsers.map(u => u.id) : undefined,
 	};
 
@@ -612,11 +613,11 @@ function showActions(ev) {
 		text: action.title,
 		action: () => {
 			action.handler({
-				text: text
+				text,
 			}, (key, value) => {
 				if (key === 'text') { text = value; }
 			});
-		}
+		},
 	})), ev.currentTarget ?? ev.target);
 }
 

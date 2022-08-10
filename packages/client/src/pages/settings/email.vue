@@ -64,7 +64,7 @@ const saveEmailAddress = () => {
 	}).then(({ canceled, result: password }) => {
 		if (canceled) return;
 		os.apiWithDialog('i/update-email', {
-			password: password,
+			password,
 			email: emailAddress.value,
 		});
 	});

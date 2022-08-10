@@ -8,8 +8,8 @@
 
 <script lang="ts" setup>
 import { } from 'vue';
-import { GetFormResultType } from '@/scripts/form';
 import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { GetFormResultType } from '@/scripts/form';
 import MkContainer from '@/components/ui/container.vue';
 import MkAnalogClock from '@/components/analog-clock.vue';
 
@@ -24,11 +24,11 @@ const widgetPropsDef = {
 		type: 'radio' as const,
 		default: 0.1,
 		options: [{
-			value: 0.1, label: 'thin'
+			value: 0.1, label: 'thin',
 		}, {
-			value: 0.2, label: 'medium'
+			value: 0.2, label: 'medium',
 		}, {
-			value: 0.3, label: 'thick'
+			value: 0.3, label: 'thick',
 		}],
 	},
 };

@@ -1,5 +1,6 @@
 <template>
-<div class="rghtznwe"
+<div
+	class="rghtznwe"
 	:class="{ draghover }"
 	draggable="true"
 	:title="title"
@@ -123,7 +124,7 @@ function onDrop(ev: DragEvent) {
 		emit('removeFile', file.id);
 		os.api('drive/files/update', {
 			fileId: file.id,
-			folderId: props.folder.id
+			folderId: props.folder.id,
 		});
 	}
 	//#endregion
@@ -139,7 +140,7 @@ function onDrop(ev: DragEvent) {
 		emit('removeFolder', folder.id);
 		os.api('drive/folders/update', {
 			folderId: folder.id,
-			parentId: props.folder.id
+			parentId: props.folder.id,
 		}).then(() => {
 			// noop
 		}).catch(err => {
@@ -147,13 +148,13 @@ function onDrop(ev: DragEvent) {
 				case 'detected-circular-definition':
 					os.alert({
 						title: i18n.ts.unableToProcess,
-						text: i18n.ts.circularReferenceFolder
+						text: i18n.ts.circularReferenceFolder,
 					});
 					break;
 				default:
 					os.alert({
 						type: 'error',
-						text: i18n.ts.somethingHappened
+						text: i18n.ts.somethingHappened,
 					});
 			}
 		});
@@ -186,19 +187,19 @@ function rename() {
 	os.inputText({
 		title: i18n.ts.renameFolder,
 		placeholder: i18n.ts.inputNewFolderName,
-		default: props.folder.name
+		default: props.folder.name,
 	}).then(({ canceled, result: name }) => {
 		if (canceled) return;
 		os.api('drive/folders/update', {
 			folderId: props.folder.id,
-			name: name
+			name,
 		});
 	});
 }
 
 function deleteFolder() {
 	os.api('drive/folders/delete', {
-		folderId: props.folder.id
+		folderId: props.folder.id,
 	}).then(() => {
 		if (defaultStore.state.uploadFolder === props.folder.id) {
 			defaultStore.set('uploadFolder', null);
@@ -209,13 +210,13 @@ function deleteFolder() {
 				os.alert({
 					type: 'error',
 					title: i18n.ts.unableToDelete,
-					text: i18n.ts.hasChildFilesOrFolders
+					text: i18n.ts.hasChildFilesOrFolders,
 				});
 				break;
 			default:
 				os.alert({
 					type: 'error',
-					text: i18n.ts.unableToDelete
+					text: i18n.ts.unableToDelete,
 				});
 		}
 	});
@@ -231,10 +232,10 @@ function onContextmenu(ev: MouseEvent) {
 		icon: 'fas fa-window-restore',
 		action: () => {
 			os.popup(defineAsyncComponent(() => import('./drive-window.vue')), {
-				initialFolder: props.folder
+				initialFolder: props.folder,
 			}, {
 			}, 'closed');
-		}
+		},
 	}, null, {
 		text: i18n.ts.rename,
 		icon: 'fas fa-i-cursor',

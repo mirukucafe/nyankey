@@ -14,8 +14,8 @@
 
 <script lang="ts" setup>
 import { onUnmounted, ref, watch } from 'vue';
-import { GetFormResultType } from '@/scripts/form';
 import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { GetFormResultType } from '@/scripts/form';
 
 const name = 'digitalClock';
 

@@ -38,7 +38,7 @@ const onNotification = (notification: { type: string; id: any; }): void => {
 		});
 
 		showPopup(defineAsyncComponent(() => import('@/components/notification-toast.vue')), {
-			notification
+			notification,
 		}, {}, 'closed');
 	}
 

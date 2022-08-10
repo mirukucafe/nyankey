@@ -54,10 +54,10 @@ export default defineComponent({
 
 	data() {
 		return {
-			host: host,
+			host,
 			accounts: [],
 			connection: null,
-			menuDef: menuDef,
+			menuDef,
 			settingsWindowed: false,
 		};
 	},
@@ -113,7 +113,7 @@ export default defineComponent({
 				withExtraOperation: true,
 			}, ev);
 		},
-	}
+	},
 });
 </script>
 

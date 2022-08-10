@@ -116,7 +116,7 @@ function acceptInvite(invitation): void {
 
 function rejectInvite(invitation): void {
 	os.api('users/groups/invitations/reject', {
-		invitationId: invitation.id
+		invitationId: invitation.id,
 	}).then(() => {
 		invitations.reload();
 	});

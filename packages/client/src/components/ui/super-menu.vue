@@ -30,7 +30,7 @@ export default defineComponent({
 	props: {
 		def: {
 			type: Array,
-			required: true
+			required: true,
 		},
 		grid: {
 			type: Boolean,

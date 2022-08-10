@@ -152,14 +152,14 @@ function getSaveOptions() {
 	return {
 		title: title.trim(),
 		name: name.trim(),
-		summary: summary,
-		font: font,
-		script: script,
-		hideTitleWhenPinned: hideTitleWhenPinned,
-		alignCenter: alignCenter,
-		content: content,
-		variables: variables,
-		eyeCatchingImageId: eyeCatchingImageId,
+		summary,
+		font,
+		script,
+		hideTitleWhenPinned,
+		alignCenter,
+		content,
+		variables,
+		eyeCatchingImageId,
 	};
 }
 
@@ -214,7 +214,7 @@ function del() {
 	}).then(({ canceled }) => {
 		if (canceled) return;
 		os.api('pages/delete', {
-			pageId: pageId,
+			pageId,
 		}).then(() => {
 			os.alert({
 				type: 'success',
@@ -436,9 +436,9 @@ definePageMetadata(computed(() => {
 		title = i18n.ts._pages.readPage;
 	}
 	return {
-		title: title,
+		title,
 		icon: 'fas fa-pencil-alt',
-		};
+	};
 }));
 </script>
 

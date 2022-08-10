@@ -85,7 +85,7 @@ function save() {
 		isExplorable: !!isExplorable,
 		hideOnlineStatus: !!hideOnlineStatus,
 		publicReactions: !!publicReactions,
-		ffVisibility: ffVisibility,
+		ffVisibility,
 	});
 }
 

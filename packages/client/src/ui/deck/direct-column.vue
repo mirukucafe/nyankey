@@ -9,8 +9,8 @@
 <script lang="ts" setup>
 import { } from 'vue';
 import XColumn from './column.vue';
-import XNotes from '@/components/notes.vue';
 import { Column } from './deck-store';
+import XNotes from '@/components/notes.vue';
 
 defineProps<{
 	column: Column;
@@ -25,7 +25,7 @@ const pagination = {
 	endpoint: 'notes/mentions' as const,
 	limit: 10,
 	params: {
-		visibility: 'specified'
+		visibility: 'specified',
 	},
 };
 </script>

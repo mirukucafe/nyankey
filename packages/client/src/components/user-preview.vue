@@ -40,21 +40,21 @@ import * as os from '@/os';
 
 export default defineComponent({
 	components: {
-		MkFollowButton
+		MkFollowButton,
 	},
 
 	props: {
 		showing: {
 			type: Boolean,
-			required: true
+			required: true,
 		},
 		q: {
 			type: String,
-			required: true
+			required: true,
 		},
 		source: {
-			required: true
-		}
+			required: true,
+		},
 	},
 
 	emits: ['closed', 'mouseover', 'mouseleave'],
@@ -94,8 +94,8 @@ export default defineComponent({
 	},
 
 	methods: {
-		userPage
-	}
+		userPage,
+	},
 });
 </script>
 

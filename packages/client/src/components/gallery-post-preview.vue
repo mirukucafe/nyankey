@@ -22,17 +22,17 @@ import * as os from '@/os';
 
 export default defineComponent({
 	components: {
-		ImgWithBlurhash
+		ImgWithBlurhash,
 	},
 	props: {
 		post: {
 			type: Object,
-			required: true
+			required: true,
 		},
 	},
 	methods: {
-		userName
-	}
+		userName,
+	},
 });
 </script>
 

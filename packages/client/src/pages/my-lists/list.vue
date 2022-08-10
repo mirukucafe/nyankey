@@ -94,7 +94,7 @@ async function renameList() {
 
 	await os.api('users/lists/update', {
 		listId: list.id,
-		name: name,
+		name,
 	});
 
 	list.name = name;

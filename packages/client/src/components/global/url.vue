@@ -59,7 +59,7 @@ export default defineComponent({
 			pathname: safeURIDecode(url.pathname),
 			query: safeURIDecode(url.search),
 			hash: safeURIDecode(url.hash),
-			self: self,
+			self,
 			attr: self ? 'to' : 'href',
 			target: self ? null : '_blank',
 			el,

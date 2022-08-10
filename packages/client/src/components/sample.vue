@@ -77,7 +77,7 @@ function openDrive(): void {
 function openMenu(ev): void {
 	os.popupMenu([{
 		type: 'label',
-		text: 'Fruits'
+		text: 'Fruits',
 	}, {
 		text: 'Create some apples',
 		action: (): void => {},

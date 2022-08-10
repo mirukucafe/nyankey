@@ -21,13 +21,13 @@ const props = defineProps<{
 const instance = props.instance ?? {
 	faviconUrl: '/favicon.ico',
 	name: instanceName,
-	themeColor: (document.querySelector('meta[name="theme-color-orig"]') as HTMLMetaElement)?.content
+	themeColor: (document.querySelector('meta[name="theme-color-orig"]') as HTMLMetaElement).content,
 };
 
 const themeColor = instance.themeColor ?? '#777777';
 
 const bg = {
-	background: `linear-gradient(90deg, ${themeColor}, ${themeColor}00)`
+	background: `linear-gradient(90deg, ${themeColor}, ${themeColor}00)`,
 };
 </script>
 

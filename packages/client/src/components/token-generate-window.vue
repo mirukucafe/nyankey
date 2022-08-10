@@ -1,5 +1,6 @@
 <template>
-<XModalWindow ref="dialog"
+<XModalWindow
+	ref="dialog"
 	:width="400"
 	:height="450"
 	:with-ok-button="true"
@@ -30,12 +31,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { permissions } from 'misskey-js';
-import XModalWindow from '@/components/ui/modal-window.vue';
 import MkInput from './form/input.vue';
 import MkTextarea from './form/textarea.vue';
 import MkSwitch from './form/switch.vue';
 import MkButton from './ui/button.vue';
 import MkInfo from './ui/info.vue';
+import XModalWindow from '@/components/ui/modal-window.vue';
 
 export default defineComponent({
 	components: {
@@ -51,23 +52,23 @@ export default defineComponent({
 		title: {
 			type: String,
 			required: false,
-			default: null
+			default: null,
 		},
 		information: {
 			type: String,
 			required: false,
-			default: null
+			default: null,
 		},
 		initialName: {
 			type: String,
 			required: false,
-			default: null
+			default: null,
 		},
 		initialPermissions: {
 			type: Array,
 			required: false,
-			default: null
-		}
+			default: null,
+		},
 	},
 
 	emits: ['done', 'closed'],
@@ -76,7 +77,7 @@ export default defineComponent({
 		return {
 			name: this.initialName,
 			permissions: {},
-			kinds: permissions
+			kinds: permissions,
 		};
 	},
 
@@ -96,7 +97,7 @@ export default defineComponent({
 		ok() {
 			this.$emit('done', {
 				name: this.name,
-				permissions: Object.keys(this.permissions).filter(p => this.permissions[p])
+				permissions: Object.keys(this.permissions).filter(p => this.permissions[p]),
 			});
 			this.$refs.dialog.close();
 		},
@@ -111,7 +112,7 @@ export default defineComponent({
 			for (const p in this.permissions) {
 				this.permissions[p] = true;
 			}
-		}
-	}
+		},
+	},
 });
 </script>

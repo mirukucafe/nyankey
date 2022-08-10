@@ -1,5 +1,6 @@
 <template>
-<button v-if="canRenote"
+<button
+	v-if="canRenote"
 	ref="buttonRef"
 	class="eddddedb _button canRenote"
 	@click="renote()"
@@ -41,7 +42,7 @@ export default defineComponent({
 		useTooltip(buttonRef, async (showing) => {
 			const renotes = await os.api('notes/renotes', {
 				noteId: props.note.id,
-				limit: 11
+				limit: 11,
 			});
 
 			const users = renotes.map(x => x.user);
@@ -52,7 +53,7 @@ export default defineComponent({
 				showing,
 				users,
 				count: props.count,
-				targetElement: buttonRef.value
+				targetElement: buttonRef.value,
 			}, {}, 'closed');
 		});
 
@@ -66,7 +67,7 @@ export default defineComponent({
 						renoteId: props.note.id,
 						visibility: props.note.visibility,
 					});
-				}
+				},
 			}, {
 				text: i18n.ts.quote,
 				icon: 'fas fa-quote-right',
@@ -74,9 +75,9 @@ export default defineComponent({
 					os.post({
 						renote: props.note,
 					});
-				}
+				},
 			}], buttonRef.value, {
-				viaKeyboard
+				viaKeyboard,
 			});
 		};
 

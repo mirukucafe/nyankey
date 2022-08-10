@@ -4,7 +4,8 @@
 	<div class="ujigsodd">
 		<MkLoading v-if="fetching"/>
 		<div v-if="!fetching && images.length > 0" class="stream">
-			<MkA v-for="image in images"
+			<MkA
+				v-for="image in images"
 				:key="image.id"
 				class="img"
 				:to="notePage(image.note)"
@@ -51,7 +52,7 @@ onMounted(() => {
 			for (const file of note.files) {
 				images.push({
 					note,
-					file
+					file,
 				});
 			}
 		}

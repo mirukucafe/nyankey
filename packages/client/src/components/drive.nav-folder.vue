@@ -1,5 +1,6 @@
 <template>
-<div class="drylbebk"
+<div
+	class="drylbebk"
 	:class="{ draghover }"
 	@click="onClick"
 	@dragover.prevent.stop="onDragover"
@@ -94,7 +95,7 @@ function onDrop(ev: DragEvent) {
 		emit('removeFile', file.id);
 		os.api('drive/files/update', {
 			fileId: file.id,
-			folderId: props.folder ? props.folder.id : null
+			folderId: props.folder ? props.folder.id : null,
 		});
 	}
 	//#endregion
@@ -108,7 +109,7 @@ function onDrop(ev: DragEvent) {
 		emit('removeFolder', folder.id);
 		os.api('drive/folders/update', {
 			folderId: folder.id,
-			parentId: props.folder ? props.folder.id : null
+			parentId: props.folder ? props.folder.id : null,
 		});
 	}
 	//#endregion

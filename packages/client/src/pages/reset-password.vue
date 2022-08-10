@@ -32,7 +32,7 @@ let password = $ref('');
 async function save() {
 	await os.apiWithDialog('reset-password', {
 		token: props.token,
-		password: password,
+		password,
 	});
 	mainRouter.push('/');
 }

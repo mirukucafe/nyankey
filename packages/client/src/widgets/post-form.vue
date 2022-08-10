@@ -4,8 +4,8 @@
 
 <script lang="ts" setup>
 import { } from 'vue';
-import { GetFormResultType } from '@/scripts/form';
 import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { GetFormResultType } from '@/scripts/form';
 import XPostForm from '@/components/post-form.vue';
 
 const name = 'postForm';

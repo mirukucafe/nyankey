@@ -1,5 +1,6 @@
 <template>
-<div class="ncvczrfv"
+<div
+	class="ncvczrfv"
 	:class="{ isSelected }"
 	draggable="true"
 	:title="title"
@@ -33,8 +34,8 @@
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from 'vue';
 import * as Misskey from 'misskey-js';
-import copyToClipboard from '@/scripts/copy-to-clipboard';
 import MkDriveFileThumbnail from './drive-file-thumbnail.vue';
+import copyToClipboard from '@/scripts/copy-to-clipboard';
 import bytes from '@/filters/bytes';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
@@ -63,31 +64,31 @@ function getMenu() {
 	return [{
 		text: i18n.ts.rename,
 		icon: 'fas fa-i-cursor',
-		action: rename
+		action: rename,
 	}, {
 		text: props.file.isSensitive ? i18n.ts.unmarkAsSensitive : i18n.ts.markAsSensitive,
 		icon: props.file.isSensitive ? 'fas fa-eye' : 'fas fa-eye-slash',
-		action: toggleSensitive
+		action: toggleSensitive,
 	}, {
 		text: i18n.ts.describeFile,
 		icon: 'fas fa-i-cursor',
-		action: describe
+		action: describe,
 	}, null, {
 		text: i18n.ts.copyUrl,
 		icon: 'fas fa-link',
-		action: copyUrl
+		action: copyUrl,
 	}, {
 		type: 'a',
 		href: props.file.url,
 		target: '_blank',
 		text: i18n.ts.download,
 		icon: 'fas fa-download',
-		download: props.file.name
+		download: props.file.name,
 	}, null, {
 		text: i18n.ts.delete,
 		icon: 'fas fa-trash-alt',
 		danger: true,
-		action: deleteFile
+		action: deleteFile,
 	}];
 }
 
@@ -127,7 +128,7 @@ function rename() {
 		if (canceled) return;
 		os.api('drive/files/update', {
 			fileId: props.file.id,
-			name: name
+			name,
 		});
 	});
 }
@@ -139,23 +140,23 @@ function describe() {
 			placeholder: i18n.ts.inputNewDescription,
 			default: props.file.comment != null ? props.file.comment : '',
 		},
-		image: props.file
+		image: props.file,
 	}, {
 		done: result => {
 			if (!result || result.canceled) return;
 			let comment = result.result;
 			os.api('drive/files/update', {
 				fileId: props.file.id,
-				comment: comment.length === 0 ? null : comment
+				comment: comment.length === 0 ? null : comment,
 			});
-		}
+		},
 	}, 'closed');
 }
 
 function toggleSensitive() {
 	os.api('drive/files/update', {
 		fileId: props.file.id,
-		isSensitive: !props.file.isSensitive
+		isSensitive: !props.file.isSensitive,
 	});
 }
 
@@ -176,7 +177,7 @@ async function deleteFile() {
 
 	if (canceled) return;
 	os.api('drive/files/delete', {
-		fileId: props.file.id
+		fileId: props.file.id,
 	});
 }
 </script>

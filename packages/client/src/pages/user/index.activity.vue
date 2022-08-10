@@ -36,8 +36,8 @@ function showMenu(ev: MouseEvent) {
 		active: true,
 		action: () => {
 			chartSrc = 'per-user-notes';
-		}
-	}/*, {
+		},
+	},/*, {
 		text: i18n.ts.following,
 		action: () => {
 			chartSrc = 'per-user-following';

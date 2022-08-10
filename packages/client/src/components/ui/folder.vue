@@ -8,7 +8,8 @@
 			<template v-else><i class="fas fa-angle-down"></i></template>
 		</button>
 	</header>
-	<transition :name="$store.state.animation ? 'folder-toggle' : ''"
+	<transition
+		:name="$store.state.animation ? 'folder-toggle' : ''"
 		@enter="enter"
 		@after-enter="afterEnter"
 		@leave="leave"
@@ -32,12 +33,12 @@ export default defineComponent({
 		expanded: {
 			type: Boolean,
 			required: false,
-			default: true
+			default: true,
 		},
 		persistKey: {
 			type: String,
 			required: false,
-			default: null
+			default: null,
 		},
 	},
 	data() {
@@ -51,7 +52,7 @@ export default defineComponent({
 			if (this.persistKey) {
 				localStorage.setItem(localStoragePrefix + this.persistKey, this.showBody ? 't' : 'f');
 			}
-		}
+		},
 	},
 	mounted() {
 		function getParentBg(el: Element | null): string {
@@ -91,7 +92,7 @@ export default defineComponent({
 		afterLeave(el) {
 			el.style.height = null;
 		},
-	}
+	},
 });
 </script>
 

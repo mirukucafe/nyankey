@@ -16,24 +16,24 @@ export default defineComponent({
 	props: {
 		emoji: {
 			type: String,
-			required: true
+			required: true,
 		},
 		normal: {
 			type: Boolean,
 			required: false,
-			default: false
+			default: false,
 		},
 		noStyle: {
 			type: Boolean,
 			required: false,
-			default: false
+			default: false,
 		},
 		customEmojis: {
-			required: false
+			required: false,
 		},
 		isReaction: {
 			type: Boolean,
-			default: false
+			default: false,
 		},
 	},
 
