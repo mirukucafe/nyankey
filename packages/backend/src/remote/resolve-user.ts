@@ -14,7 +14,7 @@ const logger = remoteLogger.createSubLogger('resolve-user');
 export async function resolveUser(username: string, idnHost: string | null): Promise<User> {
 	const usernameLower = username.toLowerCase();
 
-	if (host == null) {
+	if (idnHost == null) {
 		logger.info(`return local user: ${usernameLower}`);
 		return await Users.findOneBy({ usernameLower, host: IsNull() }).then(u => {
 			if (u == null) {
