@@ -9,8 +9,8 @@ const retryDelay = 100;
 
 const lock: (key: string, timeout?: number) => Promise<() => void>
 	= redisClient
-	? promisify(redisLock(redisClient, retryDelay))
-	: async () => () => { };
+		? promisify(redisLock(redisClient, retryDelay))
+		: async () => () => { };
 
 /**
  * Get AP Object lock

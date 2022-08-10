@@ -679,12 +679,12 @@ async function extractMentionedUsers(user: { host: User['host']; }, tokens: mfm.
 	const mentions = extractMentions(tokens);
 
 	let mentionedUsers = (await Promise.all(mentions.map(m =>
-		resolveUser(m.username, m.host || user.host).catch(() => null)
+		resolveUser(m.username, m.host || user.host).catch(() => null),
 	))).filter(x => x != null) as User[];
 
 	// Drop duplicate users
 	mentionedUsers = mentionedUsers.filter((u, i, self) =>
-		i === self.findIndex(u2 => u.id === u2.id)
+		i === self.findIndex(u2 => u.id === u2.id),
 	);
 
 	return mentionedUsers;

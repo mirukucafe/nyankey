@@ -21,7 +21,7 @@ export async function parseAudience(actor: CacheableRemoteUser, to?: ApObject, c
 
 	const limit = promiseLimit<CacheableUser | null>(2);
 	const mentionedUsers = (await Promise.all(
-		others.map(id => limit(() => resolvePerson(id, resolver).catch(() => null)))
+		others.map(id => limit(() => resolvePerson(id, resolver).catch(() => null))),
 	)).filter((x): x is CacheableUser => x != null);
 
 	if (toGroups.public.length > 0) {

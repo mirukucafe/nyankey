@@ -10,7 +10,7 @@ import { UsedUsername } from '@/models/entities/used-username.js';
 import { db } from '@/db/postgre.js';
 import generateNativeUserToken from '../server/api/common/generate-native-user-token.js';
 
-export async function createSystemUser(username: string) {
+export async function createSystemUser(username: string): Promise<User> {
 	const password = uuid();
 
 	// Generate hash of password

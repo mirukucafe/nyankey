@@ -16,7 +16,7 @@ export const NotificationRepository = db.getRepository(Notification).extend({
 			_hintForEachNotes_?: {
 				myReactions: Map<Note['id'], NoteReaction | null>;
 			};
-		}
+		},
 	): Promise<Packed<'Notification'>> {
 		const notification = typeof src === 'object' ? src : await this.findOneByOrFail({ id: src });
 		const token = notification.appAccessTokenId ? await AccessTokens.findOneByOrFail({ id: notification.appAccessTokenId }) : null;
@@ -85,7 +85,7 @@ export const NotificationRepository = db.getRepository(Notification).extend({
 
 	async packMany(
 		notifications: Notification[],
-		meId: User['id']
+		meId: User['id'],
 	) {
 		if (notifications.length === 0) return [];
 

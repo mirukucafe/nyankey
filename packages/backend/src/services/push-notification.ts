@@ -29,7 +29,7 @@ function truncateNotification(notification: Packed<'Notification'>): any {
 				reply: undefined,
 				renote: undefined,
 				user: undefined as any, // 通知を受け取ったユーザーである場合が多いのでこれも捨てる
-			}
+			},
 		};
 	}
 

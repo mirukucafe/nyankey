@@ -6,7 +6,7 @@ import { Notes } from '../index.js';
 export const NoteFavoriteRepository = db.getRepository(NoteFavorite).extend({
 	async pack(
 		src: NoteFavorite['id'] | NoteFavorite,
-		me?: { id: User['id'] } | null | undefined
+		me?: { id: User['id'] } | null | undefined,
 	) {
 		const favorite = typeof src === 'object' ? src : await this.findOneByOrFail({ id: src });
 
@@ -21,7 +21,7 @@ export const NoteFavoriteRepository = db.getRepository(NoteFavorite).extend({
 
 	packMany(
 		favorites: any[],
-		me: { id: User['id'] }
+		me: { id: User['id'] },
 	) {
 		return Promise.allSettled(favorites.map(x => this.pack(x, me)))
 		.then(promises => promises.flatMap(result => result.status === 'fulfilled' ? [result.value] : []));

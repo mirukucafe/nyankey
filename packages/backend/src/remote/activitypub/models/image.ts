@@ -35,7 +35,7 @@ export async function createImage(actor: CacheableRemoteUser, value: any): Promi
 		uri: image.url,
 		sensitive: image.sensitive,
 		isLink: !instance.cacheRemoteFiles,
-		comment: truncate(image.name, DB_MAX_IMAGE_COMMENT_LENGTH)
+		comment: truncate(image.name, DB_MAX_IMAGE_COMMENT_LENGTH),
 	});
 
 	if (file.isLink) {

@@ -55,6 +55,6 @@ export const schemas = {
 	},
 
 	...Object.fromEntries(
-		Object.entries(refs).map(([key, schema]) => [key, convertSchemaToOpenApiSchema(schema)])
+		Object.entries(refs).map(([key, schema]) => [key, convertSchemaToOpenApiSchema(schema)]),
 	),
 };

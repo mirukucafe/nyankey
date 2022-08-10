@@ -64,7 +64,7 @@ export async function signup(opts: {
 				passphrase: undefined,
 			},
 		} as any, (err, publicKey, privateKey) =>
-			err ? rej(err) : res([publicKey, privateKey])
+			err ? rej(err) : res([publicKey, privateKey]),
 		));
 
 	let account!: User;

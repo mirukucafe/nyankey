@@ -235,7 +235,7 @@ async function getSiteName(info: NodeInfo | null, doc: DOMWindow['document'] | n
 	}
 
 	if (manifest) {
-		return manifest?.name || manifest?.short_name;
+		return manifest.name || manifest.short_name;
 	}
 
 	return null;
@@ -261,7 +261,7 @@ async function getDescription(info: NodeInfo | null, doc: DOMWindow['document'] 
 	}
 
 	if (manifest) {
-		return manifest?.name || manifest?.short_name;
+		return manifest.name || manifest.short_name;
 	}
 
 	return null;

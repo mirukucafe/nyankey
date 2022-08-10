@@ -1,6 +1,6 @@
-import * as http from 'node:http';
 import { EventEmitter } from 'events';
 import { ParsedUrlQuery } from 'querystring';
+import * as http from 'node:http';
 import * as websocket from 'websocket';
 
 import { subscriber as redisClient } from '@/db/redis.js';
@@ -8,13 +8,13 @@ import { Users } from '@/models/index.js';
 import MainStreamConnection from './stream/index.js';
 import authenticate from './authenticate.js';
 
-export const initializeStreamingServer = (server: http.Server) => {
+export const initializeStreamingServer = (server: http.Server): void => {
 	// Init websocket server
 	const ws = new websocket.server({
 		httpServer: server,
 	});
 
-	ws.on('request', async (request) => {
+	ws.on('request', async (request): Promise<void> => {
 		const q = request.resourceURL.query as ParsedUrlQuery;
 
 		const [user, app] = await authenticate(request.httpRequest.headers.authorization, q.i)

@@ -161,19 +161,19 @@ export const packedUserDetailedNotMeOnlySchema = {
 			type: 'array',
 			nullable: false, optional: false,
 			items: {
-					type: 'object',
-					nullable: false, optional: false,
-					properties: {
-						name: {
-							type: 'string',
-							nullable: false, optional: false,
-						},
-						value: {
-							type: 'string',
-							nullable: false, optional: false,
-						},
+				type: 'object',
+				nullable: false, optional: false,
+				properties: {
+					name: {
+						type: 'string',
+						nullable: false, optional: false,
 					},
-					maxLength: 4,
+					value: {
+						type: 'string',
+						nullable: false, optional: false,
+					},
+				},
+				maxLength: 4,
 			},
 		},
 		followersCount: {

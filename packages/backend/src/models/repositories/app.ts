@@ -12,7 +12,7 @@ export const AppRepository = db.getRepository(App).extend({
 			detail?: boolean,
 			includeSecret?: boolean,
 			includeProfileImageIds?: boolean
-		}
+		},
 	): Promise<Packed<'App'>> {
 		const opts = Object.assign({
 			detail: false,

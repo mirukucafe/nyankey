@@ -5,7 +5,7 @@ import { GalleryPosts } from '../index.js';
 export const GalleryLikeRepository = db.getRepository(GalleryLike).extend({
 	async pack(
 		src: GalleryLike['id'] | GalleryLike,
-		me?: any
+		me?: any,
 	) {
 		const like = typeof src === 'object' ? src : await this.findOneByOrFail({ id: src });
 
@@ -17,7 +17,7 @@ export const GalleryLikeRepository = db.getRepository(GalleryLike).extend({
 
 	packMany(
 		likes: any[],
-		me: any
+		me: any,
 	) {
 		return Promise.all(likes.map(x => this.pack(x, me)));
 	},

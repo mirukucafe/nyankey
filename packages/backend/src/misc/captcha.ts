@@ -9,7 +9,7 @@ export async function verifyRecaptcha(secret: string, response: string) {
 	});
 
 	if (result.success !== true) {
-		const errorCodes = result['error-codes'] ? result['error-codes']?.join(', ') : '';
+		const errorCodes = result['error-codes'] ? result['error-codes'].join(', ') : '';
 		throw new Error(`recaptcha-failed: ${errorCodes}`);
 	}
 }
@@ -20,7 +20,7 @@ export async function verifyHcaptcha(secret: string, response: string) {
 	});
 
 	if (result.success !== true) {
-		const errorCodes = result['error-codes'] ? result['error-codes']?.join(', ') : '';
+		const errorCodes = result['error-codes'] ? result['error-codes'].join(', ') : '';
 		throw new Error(`hcaptcha-failed: ${errorCodes}`);
 	}
 }

@@ -76,7 +76,7 @@ export const FollowingRepository = db.getRepository(Following).extend({
 		opts?: {
 			populateFollowee?: boolean;
 			populateFollower?: boolean;
-		}
+		},
 	) {
 		return Promise.all(followings.map(x => this.pack(x, me, opts)));
 	},

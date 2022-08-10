@@ -123,7 +123,7 @@ export default class Resolver {
 				if (parsed.rest == null || !/^\w+$/.test(parsed.rest)) throw new Error('resolveLocal: invalid follow URI');
 
 				return Promise.all(
-					[parsed.id, parsed.rest].map(id => Users.findOneByOrFail({ id }))
+					[parsed.id, parsed.rest].map(id => Users.findOneByOrFail({ id })),
 				)
 				.then(([follower, followee]) => renderActivity(renderFollow(follower, followee, url)));
 			default:

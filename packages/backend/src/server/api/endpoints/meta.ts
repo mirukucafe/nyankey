@@ -1,4 +1,4 @@
-import { IsNull, MoreThan } from 'typeorm';
+import { IsNull } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Emojis, Users } from '@/models/index.js';

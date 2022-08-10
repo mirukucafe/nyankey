@@ -57,7 +57,7 @@ export const meta = {
 			message: 'Invalid Regular Expression.',
 			code: 'INVALID_REGEXP',
 			id: '0d786918-10df-41cd-8f33-8dec7d9a89a5',
-		}
+		},
 	},
 
 	res: {
@@ -77,7 +77,8 @@ export const paramDef = {
 		lang: { type: 'string', enum: [null, ...Object.keys(langmap)], nullable: true },
 		avatarId: { type: 'string', format: 'misskey:id', nullable: true },
 		bannerId: { type: 'string', format: 'misskey:id', nullable: true },
-		fields: { type: 'array',
+		fields: {
+			type: 'array',
 			minItems: 0,
 			maxItems: 16,
 			items: {

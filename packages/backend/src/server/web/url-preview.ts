@@ -8,7 +8,7 @@ import { getJson } from '@/misc/fetch.js';
 
 const logger = new Logger('url-preview');
 
-export const urlPreviewHandler = async (ctx: Koa.Context) => {
+export const urlPreviewHandler = async (ctx: Koa.Context): Promise<void> => {
 	const url = ctx.query.url;
 	if (typeof url !== 'string') {
 		ctx.status = 400;

@@ -11,7 +11,7 @@ export const MessagingMessageRepository = db.getRepository(MessagingMessage).ext
 		options?: {
 			populateRecipient?: boolean,
 			populateGroup?: boolean,
-		}
+		},
 	): Promise<Packed<'MessagingMessage'>> {
 		const opts = options || {
 			populateRecipient: true,

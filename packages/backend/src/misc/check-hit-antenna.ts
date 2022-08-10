@@ -65,7 +65,7 @@ export async function checkHitAntenna(antenna: Antenna, note: (Note | Packed<'No
 			and.every(keyword =>
 				antenna.caseSensitive
 					? note.text!.includes(keyword)
-					: note.text!.toLowerCase().includes(keyword.toLowerCase())
+					: note.text!.toLowerCase().includes(keyword.toLowerCase()),
 			));
 
 		if (!matched) return false;
@@ -83,7 +83,7 @@ export async function checkHitAntenna(antenna: Antenna, note: (Note | Packed<'No
 			and.every(keyword =>
 				antenna.caseSensitive
 					? note.text!.includes(keyword)
-					: note.text!.toLowerCase().includes(keyword.toLowerCase())
+					: note.text!.toLowerCase().includes(keyword.toLowerCase()),
 			));
 
 		if (matched) return false;

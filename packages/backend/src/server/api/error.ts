@@ -16,7 +16,7 @@ export class ApiError extends Error {
 			kind: 'server',
 			httpStatusCode: 500,
 		},
-		info?: any | null | undefined
+		info?: any | null | undefined,
 	) {
 		super(e.message);
 		this.message = e.message;

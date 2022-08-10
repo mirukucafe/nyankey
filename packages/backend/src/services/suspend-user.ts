@@ -7,7 +7,7 @@ import { User } from '@/models/entities/user.js';
 import { Users, Followings } from '@/models/index.js';
 import { publishInternalEvent } from '@/services/stream.js';
 
-export async function doPostSuspend(user: { id: User['id']; host: User['host'] }) {
+export async function doPostSuspend(user: { id: User['id']; host: User['host'] }): Promise<void> {
 	publishInternalEvent('userChangeSuspendedState', { id: user.id, isSuspended: true });
 
 	if (Users.isLocalUser(user)) {

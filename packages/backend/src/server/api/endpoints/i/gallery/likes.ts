@@ -27,7 +27,7 @@ export const meta = {
 					ref: 'GalleryPost',
 				},
 			},
-		}
+		},
 	},
 } as const;
 

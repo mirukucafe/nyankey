@@ -58,7 +58,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	}
 
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'),
-			ps.sinceId, ps.untilId, ps.sinceDate, ps.untilDate)
+		ps.sinceId, ps.untilId, ps.sinceDate, ps.untilDate)
 		.innerJoin(AntennaNotes.metadata.targetName, 'antennaNote', 'antennaNote.noteId = note.id')
 		.innerJoinAndSelect('note.user', 'user')
 		.leftJoinAndSelect('user.avatar', 'avatar')

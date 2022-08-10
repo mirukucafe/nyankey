@@ -52,7 +52,7 @@ export class AbuseUserReport {
 	public resolved: boolean;
 
 	@Column('boolean', {
-		default: false
+		default: false,
 	})
 	public forwarded: boolean;
 

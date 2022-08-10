@@ -127,7 +127,7 @@ export default define(meta, paramDef, async () => {
 			.andWhere('note.createdAt > :gt', { gt: new Date(now.getTime() - (interval * (i + 1))) })
 			.cache(60000) // 1 min
 			.getRawOne()
-			.then(x => parseInt(x.count, 10))
+			.then(x => parseInt(x.count, 10)),
 		)));
 	}
 
@@ -140,7 +140,7 @@ export default define(meta, paramDef, async () => {
 		.andWhere('note.createdAt > :gt', { gt: new Date(now.getTime() - rangeA) })
 		.cache(60000 * 60) // 60 min
 		.getRawOne()
-		.then(x => parseInt(x.count, 10))
+		.then(x => parseInt(x.count, 10)),
 	));
 
 	const stats = hots.map((tag, i) => ({

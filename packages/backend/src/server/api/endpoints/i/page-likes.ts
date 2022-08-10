@@ -26,7 +26,7 @@ export const meta = {
 					ref: 'Page',
 				},
 			},
-		}
+		},
 	},
 } as const;
 

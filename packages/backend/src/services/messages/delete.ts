@@ -7,12 +7,12 @@ import renderDelete from '@/remote/activitypub/renderer/delete.js';
 import renderTombstone from '@/remote/activitypub/renderer/tombstone.js';
 import { deliver } from '@/queue/index.js';
 
-export async function deleteMessage(message: MessagingMessage) {
+export async function deleteMessage(message: MessagingMessage): Promise<void> {
 	await MessagingMessages.delete(message.id);
-	postDeleteMessage(message);
+	await postDeleteMessage(message);
 }
 
-async function postDeleteMessage(message: MessagingMessage) {
+async function postDeleteMessage(message: MessagingMessage): Promise<void> {
 	if (message.recipientId) {
 		const user = await Users.findOneByOrFail({ id: message.userId });
 		const recipient = await Users.findOneByOrFail({ id: message.recipientId });

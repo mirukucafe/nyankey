@@ -18,7 +18,7 @@ export default async function(
 	info?: {
 		following: Set<User['id']>;
 		followingChannels: Set<Channel['id']>;
-	}
+	},
 ) {
 	const following = info?.following ? info.following : new Set<string>((await Followings.find({
 		where: {

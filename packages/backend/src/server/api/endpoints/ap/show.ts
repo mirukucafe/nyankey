@@ -47,8 +47,8 @@ export const meta = {
 						type: 'object',
 						optional: false, nullable: false,
 						ref: 'UserDetailedNotMe',
-					}
-				}
+					},
+				},
 			},
 			{
 				type: 'object',
@@ -62,9 +62,9 @@ export const meta = {
 						type: 'object',
 						optional: false, nullable: false,
 						ref: 'Note',
-					}
-				}
-			}
+					},
+				},
+			},
 		],
 	},
 } as const;

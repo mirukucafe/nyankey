@@ -37,7 +37,7 @@ export function genOpenapiSpec() {
 				Bearer: {
 					type: 'http',
 					scheme: 'bearer',
-				}
+				},
 			},
 		},
 	};

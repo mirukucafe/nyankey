@@ -47,7 +47,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		DriveFiles.findOneBy({
 			id: fileId,
 			userId: user.id,
-		})
+		}),
 	))).filter((file): file is DriveFile => file != null);
 
 	if (files.length === 0) {

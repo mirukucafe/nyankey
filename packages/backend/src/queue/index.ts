@@ -21,9 +21,9 @@ import { ThinUser } from './types.js';
 
 function renderError(e: Error): any {
 	return {
-		stack: e?.stack,
-		message: e?.message,
-		name: e?.name,
+		stack: e.stack,
+		message: e.message,
+		name: e.name,
 	};
 }
 

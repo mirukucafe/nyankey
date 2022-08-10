@@ -7,7 +7,7 @@ import { Apps } from '../index.js';
 export const AuthSessionRepository = db.getRepository(AuthSession).extend({
 	async pack(
 		src: AuthSession['id'] | AuthSession,
-		me?: { id: User['id'] } | null | undefined
+		me?: { id: User['id'] } | null | undefined,
 	) {
 		const session = typeof src === 'object' ? src : await this.findOneByOrFail({ id: src });
 

@@ -18,7 +18,7 @@ import orderedCollection from '@/remote/activitypub/renderer/ordered-collection.
 export async function readUserMessagingMessage(
 	userId: User['id'],
 	otherpartyId: User['id'],
-	messageIds: MessagingMessage['id'][]
+	messageIds: MessagingMessage['id'][],
 ) {
 	if (messageIds.length === 0) return;
 
@@ -58,7 +58,7 @@ export async function readUserMessagingMessage(
 				recipientId: userId,
 				isRead: false,
 			},
-			take: 1
+			take: 1,
 		});
 
 		if (!count) {
@@ -73,7 +73,7 @@ export async function readUserMessagingMessage(
 export async function readGroupMessagingMessage(
 	userId: User['id'],
 	groupId: UserGroup['id'],
-	messageIds: MessagingMessage['id'][]
+	messageIds: MessagingMessage['id'][],
 ) {
 	if (messageIds.length === 0) return;
 

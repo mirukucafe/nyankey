@@ -8,7 +8,7 @@ import { Users } from '../index.js';
 export const BlockingRepository = db.getRepository(Blocking).extend({
 	async pack(
 		src: Blocking['id'] | Blocking,
-		me?: { id: User['id'] } | null | undefined
+		me?: { id: User['id'] } | null | undefined,
 	): Promise<Packed<'Blocking'>> {
 		const blocking = typeof src === 'object' ? src : await this.findOneByOrFail({ id: src });
 
@@ -24,7 +24,7 @@ export const BlockingRepository = db.getRepository(Blocking).extend({
 
 	packMany(
 		blockings: any[],
-		me: { id: User['id'] }
+		me: { id: User['id'] },
 	) {
 		return Promise.all(blockings.map(x => this.pack(x, me)));
 	},

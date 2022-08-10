@@ -10,7 +10,7 @@ const urlRegexFull = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+$/;
 export function fromHtml(html: string, hashtagNames?: string[]): string {
 	const dom = parse5.parseFragment(
 		// some AP servers like Pixelfed use br tags as well as newlines
-		html.replace(/<br\s?\/?>\r?\n/gi, '\n')
+		html.replace(/<br\s?\/?>\r?\n/gi, '\n'),
 	);
 
 	let text = '';

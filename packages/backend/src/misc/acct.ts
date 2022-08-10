@@ -5,7 +5,7 @@ export type Acct = {
 
 export function parse(acct: string): Acct {
 	const split = acct.split('@');
-	if (split[0].length == 0) {
+	if (split[0].length === 0) {
 		// there was an initial at
 		split.shift();
 	}

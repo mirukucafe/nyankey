@@ -9,7 +9,7 @@ import { sendEmailNotification } from './send-email-notification.js';
 export async function createNotification(
 	notifieeId: User['id'],
 	type: Notification['type'],
-	data: Partial<Notification>
+	data: Partial<Notification>,
 ) {
 	if (data.notifierId && (notifieeId === data.notifierId)) {
 		return null;

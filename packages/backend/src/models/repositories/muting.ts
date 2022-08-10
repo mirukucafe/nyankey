@@ -8,7 +8,7 @@ import { Users } from '../index.js';
 export const MutingRepository = db.getRepository(Muting).extend({
 	async pack(
 		src: Muting['id'] | Muting,
-		me?: { id: User['id'] } | null | undefined
+		me?: { id: User['id'] } | null | undefined,
 	): Promise<Packed<'Muting'>> {
 		const muting = typeof src === 'object' ? src : await this.findOneByOrFail({ id: src });
 
@@ -25,7 +25,7 @@ export const MutingRepository = db.getRepository(Muting).extend({
 
 	packMany(
 		mutings: any[],
-		me: { id: User['id'] }
+		me: { id: User['id'] },
 	) {
 		return Promise.all(mutings.map(x => this.pack(x, me)));
 	},

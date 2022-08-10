@@ -1,4 +1,3 @@
-import { Brackets } from 'typeorm';
 import { Notes } from '@/models/index.js';
 import define from '../../define.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';

@@ -21,7 +21,7 @@ import { deliverToRelays } from '../relay.js';
  * @param user 投稿者
  * @param note 投稿
  */
-export default async function(user: { id: User['id']; uri: User['uri']; host: User['host']; }, note: Note, quiet = false) {
+export default async function(user: { id: User['id']; uri: User['uri']; host: User['host']; }, note: Note, quiet = false): Promise<void> {
 	const deletedAt = new Date();
 
 	// この投稿を除く指定したユーザーによる指定したノートのリノートが存在しないとき
@@ -83,7 +83,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 	});
 }
 
-async function findCascadingNotes(note: Note) {
+async function findCascadingNotes(note: Note): Promise<Note[]> {
 	const cascadingNotes: Note[] = [];
 
 	const recursive = async (noteId: string) => {
@@ -105,7 +105,7 @@ async function findCascadingNotes(note: Note) {
 	return cascadingNotes.filter(note => note.userHost === null); // filter out non-local users
 }
 
-async function getMentionedRemoteUsers(note: Note) {
+async function getMentionedRemoteUsers(note: Note): Promise<IRemoteUser[]> {
 	const where = [] as any[];
 
 	// mention / reply / dm

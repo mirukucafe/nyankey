@@ -42,5 +42,5 @@ export const NoteReactionRepository = db.getRepository(NoteReaction).extend({
 
 		// filter out rejected promises, only keep fulfilled values
 		return reactions.flatMap(result => result.status === 'fulfilled' ? [result.value] : []);
-	}
+	},
 });

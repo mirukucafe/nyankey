@@ -9,7 +9,7 @@ export const DriveFolderRepository = db.getRepository(DriveFolder).extend({
 		src: DriveFolder['id'] | DriveFolder,
 		options?: {
 			detail: boolean
-		}
+		},
 	): Promise<Packed<'DriveFolder'>> {
 		const opts = Object.assign({
 			detail: false,
