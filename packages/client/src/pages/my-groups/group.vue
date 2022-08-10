@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { definePageMetadata } from '@/scripts/page-metadata';
