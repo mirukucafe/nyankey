@@ -1,7 +1,7 @@
 <template>
 <div class="_formRoot">
 	<div class="llvierxe" :style="{ backgroundImage: $i.bannerUrl ? `url(${ $i.bannerUrl })` : null }">
-		<div class="avatar _acrylic">
+		<div class="avatar _panel">
 			<MkAvatar class="avatar" :user="$i" :disable-link="true" @click="changeAvatar"/>
 			<MkButton primary class="avatarEdit" @click="changeAvatar">{{ i18n.ts._profile.changeAvatar }}</MkButton>
 		</div>

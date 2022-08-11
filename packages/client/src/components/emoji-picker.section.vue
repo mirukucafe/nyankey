@@ -1,6 +1,6 @@
 <template>
 <section>
-	<header class="_acrylic" @click="shown = !shown">
+	<header class="_panel" @click="shown = !shown">
 		<i class="toggle fa-fw" :class="shown ? 'fas fa-chevron-down' : 'fas fa-chevron-up'"></i> <slot></slot> ({{ emojis.length }})
 	</header>
 	<div v-if="shown">

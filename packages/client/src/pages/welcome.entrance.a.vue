@@ -15,7 +15,7 @@
 		</div>
 		<div class="main">
 			<img :src="$instance.iconUrl || $instance.faviconUrl || '/favicon.ico'" alt="" class="icon"/>
-			<button class="_button _acrylic menu" @click="showMenu"><i class="fas fa-ellipsis-h"></i></button>
+			<button class="_button _panel menu" @click="showMenu"><i class="fas fa-ellipsis-h"></i></button>
 			<div class="fg">
 				<h1>
 					<!-- 背景色によってはロゴが見えなくなるのでとりあえず無効に -->
@@ -272,9 +272,7 @@ function showMenu(ev) {
 			left: 0;
 			right: 0;
 			margin: auto;
-			background: var(--acrylicPanel);
-			-webkit-backdrop-filter: var(--blur, blur(15px));
-			backdrop-filter: var(--blur, blur(15px));
+			background: var(--panel);
 			border-radius: 999px;
 			overflow: clip;
 			width: 800px;

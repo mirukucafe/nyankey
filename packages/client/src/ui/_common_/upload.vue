@@ -1,5 +1,5 @@
 <template>
-<div class="mk-uploader _acrylic" :style="{ zIndex }">
+<div class="mk-uploader _panel" :style="{ zIndex }">
 	<ol v-if="uploads.length > 0">
 		<li v-for="ctx in uploads" :key="ctx.id">
 			<div class="img" :style="{ backgroundImage: `url(${ ctx.img })` }"></div>
