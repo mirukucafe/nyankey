@@ -380,6 +380,7 @@ export default defineComponent({
 	position: fixed;
 	top: 0;
 	left: 0;
+	background: var(--panel);
 
 	> .body {
 		overflow: hidden;
@@ -403,10 +404,6 @@ export default defineComponent({
 			flex-shrink: 0;
 			user-select: none;
 			height: var(--height);
-			background: var(--windowHeader);
-			-webkit-backdrop-filter: var(--blur, blur(15px));
-			backdrop-filter: var(--blur, blur(15px));
-			//border-bottom: solid 1px var(--divider);
 			font-size: 95%;
 			font-weight: bold;
 
@@ -447,7 +444,6 @@ export default defineComponent({
 		> .body {
 			flex: 1;
 			overflow: auto;
-			background: var(--panel);
 		}
 	}
 

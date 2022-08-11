@@ -118,6 +118,7 @@ function onContextmenu(ev: MouseEvent) {
 	flex-direction: column;
 	contain: content;
 	border-radius: var(--radius);
+	background: var(--bg);
 
 	--root-margin: 24px;
 
@@ -136,9 +137,6 @@ function onContextmenu(ev: MouseEvent) {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		background: var(--windowHeader);
-		-webkit-backdrop-filter: var(--blur, blur(15px));
-		backdrop-filter: var(--blur, blur(15px));
 
 		> button {
 			height: $height;
@@ -171,7 +169,6 @@ function onContextmenu(ev: MouseEvent) {
 
 	> .body {
 		overflow: auto;
-		background: var(--bg);
 	}
 }
 </style>
