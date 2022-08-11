@@ -57,8 +57,6 @@ import { Clip } from '@/models/entities/clip.js';
 import { ClipNote } from '@/models/entities/clip-note.js';
 import { Antenna } from '@/models/entities/antenna.js';
 import { AntennaNote } from '@/models/entities/antenna-note.js';
-import { PromoNote } from '@/models/entities/promo-note.js';
-import { PromoRead } from '@/models/entities/promo-read.js';
 import { Relay } from '@/models/entities/relay.js';
 import { MutedNote } from '@/models/entities/muted-note.js';
 import { Channel } from '@/models/entities/channel.js';
@@ -159,8 +157,6 @@ export const entities = [
 	ClipNote,
 	Antenna,
 	AntennaNote,
-	PromoNote,
-	PromoRead,
 	Relay,
 	MutedNote,
 	Channel,
