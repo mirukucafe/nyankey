@@ -239,7 +239,6 @@ export function inputText(props: {
 	text?: string | null;
 	placeholder?: string | null;
 	default?: string | null;
-	allowEmpty?: boolean;
 }): Promise<{ canceled: true; result: undefined; } | {
 	canceled: false; result: string;
 }> {

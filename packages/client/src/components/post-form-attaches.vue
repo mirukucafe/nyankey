@@ -66,7 +66,6 @@ async function rename(file: DriveFile): Promise<void> {
 	const { canceled, result } = await os.inputText({
 		title: i18n.ts.enterFileName,
 		default: file.name,
-		allowEmpty: false,
 	});
 	if (canceled) return;
 	os.api('drive/files/update', {
