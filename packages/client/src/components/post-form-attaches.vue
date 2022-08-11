@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineAsyncComponent, defineEmits, computed } from 'vue';
+import { defineAsyncComponent, computed } from 'vue';
 import { DriveFile } from 'misskey-js/built/entities';
 import MkDriveFileThumbnail from './drive-file-thumbnail.vue';
 import * as os from '@/os';
@@ -105,19 +105,19 @@ function showFileMenu(file: DriveFile, ev: MouseEvent): void {
 	menu = os.popupMenu([{
 		text: i18n.ts.renameFile,
 		icon: 'fas fa-i-cursor',
-		action: (): void => { rename(file); },
+		action: () => { rename(file); },
 	}, {
 		text: file.isSensitive ? i18n.ts.unmarkAsSensitive : i18n.ts.markAsSensitive,
 		icon: file.isSensitive ? 'fas fa-eye-slash' : 'fas fa-eye',
-		action: (): void => { toggleSensitive(file); },
+		action: () => { toggleSensitive(file); },
 	}, {
 		text: i18n.ts.describeFile,
 		icon: 'fas fa-i-cursor',
-		action: (): void => { describe(file); },
+		action: () => { describe(file); },
 	}, {
 		text: i18n.ts.attachCancel,
 		icon: 'fas fa-times-circle',
-		action: (): void => { detachMedia(file.id); },
+		action: () => { detachMedia(file.id); },
 	}], ev.currentTarget ?? ev.target).then(() => menu = null);
 }
 </script>
