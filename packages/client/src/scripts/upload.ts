@@ -29,11 +29,11 @@ const mimeTypeMap = {
 
 export function uploadFile(
 	file: File,
-	folder?: any,
+	folder?: string | Record<string, any>,
 	name?: string,
 	keepOriginal: boolean = defaultStore.state.keepOriginalUploading,
 ): Promise<Misskey.entities.DriveFile> {
-	const folderId = typeof folder === 'string' ? folder : folder.id;
+	const folderId = typeof folder === 'string' ? folder : folder?.id;
 
 	return new Promise((resolve, reject) => {
 		const id = Math.random().toString();
