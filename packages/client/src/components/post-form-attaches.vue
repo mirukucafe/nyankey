@@ -56,7 +56,7 @@ function detachMedia(id: string): void {
 function toggleSensitive(file: DriveFile): void {
 	os.api('drive/files/update', {
 		fileId: file.id,
-		isSensitive: !file.isSensitive,,
+		isSensitive: !file.isSensitive,
 	}).then(() => {
 		emit('changeSensitive', file, !file.isSensitive);
 	});
