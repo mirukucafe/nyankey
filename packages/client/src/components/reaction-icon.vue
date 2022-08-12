@@ -10,6 +10,6 @@ withDefaults(defineProps<{
 	customEmojis?: Record<string, any>[]; // TODO
 	noStyle?: boolean;
 }>(), {
-	customEmojis: [];
+	customEmojis: [],
 });
 </script>
