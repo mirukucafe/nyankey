@@ -63,6 +63,7 @@ export type Source = {
 
 	mediaProxy?: string;
 	proxyRemoteFiles?: boolean;
+	internalStoragePath?: string;
 };
 
 /**

@@ -120,9 +120,13 @@ redis:
 # Proxy remote files (default: false)
 #proxyRemoteFiles: true
 
-#allowedPrivateNetworks: [
-#  '127.0.0.1/32'
-#]
+# Storage path for files if stored locally (absolute path)
+# default is to store it in ./files in the directory misskey is located in
+#internalStoragePath: '/etc/misskey/files'
 
 # Upload or download file size limits (bytes)
 #maxFileSize: 262144000
+
+#allowedPrivateNetworks: [
+#  '127.0.0.1/32'
+#]

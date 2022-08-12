@@ -8,7 +8,7 @@ const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
 
 export class InternalStorage {
-	private static readonly path = Path.resolve(_dirname, '../../../../../files');
+	private static readonly path = config.internalStoragePath || Path.resolve(_dirname, '../../../../../files');
 
 	public static resolvePath = (key: string) => Path.resolve(InternalStorage.path, key);
 
