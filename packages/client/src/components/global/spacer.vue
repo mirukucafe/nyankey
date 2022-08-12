@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, onMounted, onUnmounted, ref } from 'vue';
+import { inject, onMounted, onUnmounted } from 'vue';
 import { deviceKind } from '@/scripts/device-kind';
 
 const props = withDefaults(defineProps<{
@@ -40,7 +40,7 @@ const adjust = (rect: { width: number; height: number; }) => {
 };
 
 onMounted(() => {
-	ro = new ResizeObserver((entries) => {
+	ro = new ResizeObserver(() => {
 		/* iOSが対応していない
 		adjust({
 			width: entries[0].borderBoxSize[0].inlineSize,

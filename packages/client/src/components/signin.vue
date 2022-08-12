@@ -69,7 +69,6 @@ let password = $ref('');
 let token = $ref('');
 let host = $ref(toUnicode(configHost));
 let totpLogin = $ref(false);
-let credential = $ref(null);
 let challengeData = $ref(null);
 let queryingKey = $ref(false);
 let hCaptchaResponse = $ref(null);

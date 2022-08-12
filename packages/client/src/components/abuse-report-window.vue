@@ -43,12 +43,12 @@ const emit = defineEmits<{
 const uiWindow = ref<InstanceType<typeof XWindow>>();
 const comment = ref('');
 
-function send() {
+function send(): void {
 	os.apiWithDialog('users/report-abuse', {
 		userId: props.user.id,
 		urls: props.urls || [],
 		comment: comment.value,
-	}).then(res => {
+	}).then(() => {
 		os.alert({
 			type: 'success',
 			text: i18n.ts.abuseReported,

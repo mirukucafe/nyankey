@@ -9,7 +9,7 @@
 			</div>
 		</div>
 		<div class="tabs">
-			<button v-for="tab in tabs" :ref="(el) => tabRefs[tab.key] = el" v-tooltip="tab.title" class="tab _button" :class="{ active: tab.key != null && tab.key === props.tab }" @mousedown="(ev) => onTabMousedown(tab, ev)" @click="(ev) => onTabClick(tab, ev)">
+			<button v-for="tab in tabs" :ref="(el) => tabRefs[tab.key] = el" v-tooltip="tab.title" class="tab _button" :class="{ active: tab.key != null && tab.key === props.tab }" @mousedown="() => onTabMousedown(tab)" @click="(ev) => onTabClick(tab, ev)">
 				<i v-if="tab.icon" class="icon" :class="tab.icon"></i>
 				<span v-if="!tab.iconOnly" class="title">{{ tab.title }}</span>
 			</button>
@@ -28,13 +28,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref, inject, watch, nextTick } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
 import tinycolor from 'tinycolor2';
 import { popupMenu } from '@/os';
-import { url } from '@/config';
 import { scrollToTop } from '@/scripts/scroll';
 import MkButton from '@/components/ui/button.vue';
-import { i18n } from '@/i18n';
 import { globalEvents } from '@/events';
 import { injectPageMetadata } from '@/scripts/page-metadata';
 
@@ -68,7 +66,6 @@ const el = ref<HTMLElement>(null);
 const tabRefs = {};
 const tabHighlightEl = $ref<HTMLElement | null>(null);
 const bg = ref(null);
-const height = ref(0);
 const hasTabs = computed(() => {
 	return props.tabs && props.tabs.length > 0;
 });
@@ -96,7 +93,7 @@ const onClick = () => {
 	scrollToTop(el.value, { behavior: 'smooth' });
 };
 
-function onTabMousedown(tab: Tab, ev: MouseEvent): void {
+function onTabMousedown(tab: Tab): void {
 	// ユーザビリティの観点からmousedown時にはonClickは呼ばない
 	if (tab.key) {
 		emit('update:tab', tab.key);

@@ -5,11 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-import { inject } from 'vue';
 import * as os from '@/os';
 import copyToClipboard from '@/scripts/copy-to-clipboard';
 import { url } from '@/config';
-import { popout as popout_ } from '@/scripts/popout';
 import { i18n } from '@/i18n';
 import { useRouter } from '@/router';
 
@@ -67,32 +65,15 @@ function onContextmenu(ev) {
 	}], ev);
 }
 
-function openWindow() {
-	os.pageWindow(props.to);
-}
-
-function modalWindow() {
-	os.modalPageWindow(props.to);
-}
-
-function popout() {
-	popout_(props.to);
-}
-
 function nav() {
 	if (props.behavior === 'browser') {
 		location.href = props.to;
-		return;
+	} else if (props.behavior === 'window') {
+		os.pageWindow(props.to);
+	} else if (props.behavior === 'modalWindow') {
+		os.modalPageWindow(props.to);
+	} else {
+		router.push(props.to);
 	}
-
-	if (props.behavior) {
-		if (props.behavior === 'window') {
-			return openWindow();
-		} else if (props.behavior === 'modalWindow') {
-			return modalWindow();
-		}
-	}
-
-	router.push(props.to);
 }
 </script>

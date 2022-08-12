@@ -97,7 +97,7 @@ export default defineComponent({
 		};
 
 		calcOmit();
-		new ResizeObserver((entries, observer) => {
+		new ResizeObserver(() => {
 			calcOmit();
 		}).observe(this.$refs.content);
 	},

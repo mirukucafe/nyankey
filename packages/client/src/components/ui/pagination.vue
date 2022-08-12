@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ComputedRef, isRef, markRaw, onActivated, onDeactivated, Ref, ref, watch } from 'vue';
+import { computed, ComputedRef, isRef, onActivated, onDeactivated, ref, watch } from 'vue';
 import * as misskey from 'misskey-js';
 import * as os from '@/os';
 import { onScrollTop, isTopVisible, getScrollPosition, getScrollContainer } from '@/scripts/scroll';
@@ -105,7 +105,7 @@ const init = async (): Promise<void> => {
 		offset.value = res.length;
 		error.value = false;
 		fetching.value = false;
-	}, err => {
+	}, () => {
 		error.value = true;
 		fetching.value = false;
 	});
@@ -142,7 +142,7 @@ const fetchMore = async (): Promise<void> => {
 		}
 		offset.value += res.length;
 		moreFetching.value = false;
-	}, err => {
+	}, () => {
 		moreFetching.value = false;
 	});
 };
@@ -172,7 +172,7 @@ const fetchMoreAhead = async (): Promise<void> => {
 		}
 		offset.value += res.length;
 		moreFetching.value = false;
-	}, err => {
+	}, () => {
 		moreFetching.value = false;
 	});
 };

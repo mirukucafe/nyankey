@@ -12,9 +12,9 @@ import { } from 'vue';
 import MkTooltip from './ui/tooltip.vue';
 import XReactionIcon from './reaction-icon.vue';
 
-const props = defineProps<{
+defineProps<{
 	reaction: string;
-	emojis: any[]; // TODO
+	emojis: Record<string, any>[]; // TODO
 	targetElement: HTMLElement;
 }>();
 

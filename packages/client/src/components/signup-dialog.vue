@@ -10,7 +10,7 @@
 
 	<div class="_monolithic_">
 		<div class="_section">
-			<XSignup :auto-set="autoSet" @signup="onSignup" @signupEmailPending="onSignupEmailPending"/>
+			<XSignup :auto-set="autoSet" @signup="onSignup" @signup-email-pending="onSignupEmailPending"/>
 		</div>
 	</div>
 </XModalWindow>
@@ -22,7 +22,7 @@ import XSignup from './signup.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 import { i18n } from '@/i18n';
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
 	autoSet?: boolean;
 }>(), {
 	autoSet: false,
@@ -35,12 +35,12 @@ const emit = defineEmits<{
 
 const dialog = $ref<InstanceType<typeof XModalWindow>>();
 
-function onSignup(res) {
+function onSignup(res): void {
 	emit('done', res);
 	dialog.close();
 }
 
-function onSignupEmailPending() {
+function onSignupEmailPending(): void {
 	dialog.close();
 }
 </script>

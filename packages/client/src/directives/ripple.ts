@@ -2,7 +2,7 @@ import Ripple from '@/components/ripple.vue';
 import { popup } from '@/os';
 
 export default {
-	mounted(el, binding, vn) {
+	mounted(el, binding) {
 		// 明示的に false であればバインドしない
 		if (binding.value === false) return;
 

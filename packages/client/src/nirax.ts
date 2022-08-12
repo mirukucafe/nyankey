@@ -1,7 +1,7 @@
 // NIRAX --- A lightweight router
 
 import { EventEmitter } from 'eventemitter3';
-import { Ref, Component, ref, shallowRef, ShallowRef } from 'vue';
+import { Component, shallowRef, ShallowRef } from 'vue';
 import { pleaseLogin } from '@/scripts/please-login';
 import { safeURIDecode } from '@/scripts/safe-uri-decode';
 
@@ -165,7 +165,6 @@ export class Router extends EventEmitter<{
 
 	private navigate(path: string, key: string | null | undefined, initial = false) {
 		const beforePath = this.currentPath;
-		const beforeRoute = this.currentRoute.value;
 		this.currentPath = path;
 
 		const res = this.resolve(this.currentPath);

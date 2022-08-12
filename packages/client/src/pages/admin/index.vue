@@ -32,7 +32,7 @@ import { instance } from '@/instance';
 import * as os from '@/os';
 import { lookupUser } from '@/scripts/lookup-user';
 import { useRouter } from '@/router';
-import { definePageMetadata, provideMetadataReceiver, setPageMetadata } from '@/scripts/page-metadata';
+import { definePageMetadata, provideMetadataReceiver } from '@/scripts/page-metadata';
 
 const isEmpty = (x: string | null) => x == null || x === '';
 
@@ -293,10 +293,6 @@ const lookup = (ev) => {
 		},
 	}], ev.currentTarget ?? ev.target);
 };
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(INFO);
 

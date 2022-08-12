@@ -1,9 +1,7 @@
 import { Directive } from 'vue';
 
 export default {
-	mounted(src, binding, vn) {
-		//const query = binding.value;
-
+	mounted(src) {
 		const header = src.children[0];
 		const body = src.children[1];
 		const currentStickyTop = getComputedStyle(src).getPropertyValue('--stickyTop') || '0px';

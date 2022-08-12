@@ -17,13 +17,12 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent, markRaw, onUnmounted, onMounted, computed, ref } from 'vue';
+import { onUnmounted, onMounted, computed, ref } from 'vue';
 import { notificationTypes } from 'misskey-js';
 import MkPagination, { Paging } from '@/components/ui/pagination.vue';
 import XNotification from '@/components/notification.vue';
 import XList from '@/components/date-separated-list.vue';
 import XNote from '@/components/note.vue';
-import * as os from '@/os';
 import { stream } from '@/stream';
 import { $i } from '@/account';
 import { i18n } from '@/i18n';
@@ -45,7 +44,7 @@ const pagination: Paging = {
 	})),
 };
 
-const onNotification = (notification) => {
+const onNotification = (notification): void => {
 	const isMuted = props.includeTypes ? !props.includeTypes.includes(notification.type) : $i.mutingNotificationTypes.includes(notification.type);
 	if (isMuted || document.visibilityState === 'visible') {
 		stream.send('readNotification', {

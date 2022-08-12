@@ -38,14 +38,6 @@ function onClick() {
 	emit('move', props.folder);
 }
 
-function onMouseover() {
-	hover.value = true;
-}
-
-function onMouseout() {
-	hover.value = false;
-}
-
 function onDragover(ev: DragEvent) {
 	if (!ev.dataTransfer) return;
 

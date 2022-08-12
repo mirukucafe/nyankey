@@ -18,7 +18,7 @@ export function install(plugin) {
 			return new Promise(ok => {
 				inputText({
 					title: q,
-				}).then(({ canceled, result: a }) => {
+				}).then(({ result: a }) => {
 					ok(a);
 				});
 			});
@@ -26,8 +26,7 @@ export function install(plugin) {
 		out: (value) => {
 			console.log(value);
 		},
-		log: (type, params) => {
-		},
+		log: (type, params) => {},
 	});
 
 	initPlugin({ plugin, aiscript });

@@ -21,7 +21,7 @@
 		<div v-if="report.urls.length > 0">
 			{{ i18n.ts.notes }}:
 			<ul>
-				<li v-for="url in report.urls"><MkUrl :url="url"/></li>
+				<li v-for="url in report.urls" :key="url"><MkUrl :url="url"/></li>
 			</ul>
 		</div>
 		<hr/>
@@ -47,12 +47,11 @@ import MkButton from '@/components/ui/button.vue';
 import MkSwitch from '@/components/form/switch.vue';
 import MkKeyValue from '@/components/key-value.vue';
 import MkUrl from '@/components/global/url.vue';
-import { acct, userPage } from '@/filters/user';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{
-	report: any;
+	report: Record<string, any>;
 }>();
 
 const emit = defineEmits<{
@@ -61,7 +60,7 @@ const emit = defineEmits<{
 
 let forward = $ref(props.report.forwarded);
 
-function resolve() {
+function resolve(): void {
 	os.apiWithDialog('admin/resolve-abuse-user-report', {
 		forward,
 		reportId: props.report.id,

@@ -13,7 +13,7 @@
   id-denylist violation when setting it. This is causing about 60+ lint issues.
   As this is part of Chart.js's API it makes sense to disable the check here.
 */
-import { onMounted, ref, watch, PropType, onUnmounted } from 'vue';
+import { onMounted, ref, watch, PropType } from 'vue';
 import {
 	Chart,
 	ArcElement,
@@ -173,7 +173,7 @@ const render = () => {
 	// フォントカラー
 	Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--fg');
 
-	const maxes = chartData.series.map((x, i) => Math.max(...x.data.map(d => d.y)));
+	const maxes = chartData.series.map((x) => Math.max(...x.data.map(d => d.y)));
 
 	chartInstance = new Chart(chartEl.value, {
 		type: props.bar ? 'bar' : 'line',
@@ -315,7 +315,7 @@ const render = () => {
 		},
 		plugins: [{
 			id: 'vLine',
-			beforeDraw(chart, args, options) {
+			beforeDraw(chart) {
 				if (chart.tooltip._active && chart.tooltip._active.length) {
 					const activePoint = chart.tooltip._active[0];
 					const ctx = chart.ctx;
@@ -335,10 +335,6 @@ const render = () => {
 			},
 		}],
 	});
-};
-
-const exportData = () => {
-	// TODO
 };
 
 const fetchFederationChart = async (): Promise<typeof chartData> => {

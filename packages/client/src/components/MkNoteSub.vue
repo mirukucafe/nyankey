@@ -33,16 +33,16 @@ import XNoteHeader from './note-header.vue';
 import MkNoteSubNoteContent from './sub-note-content.vue';
 import XCwButton from './cw-button.vue';
 import { notePage } from '@/filters/note';
-import * as os from '@/os';
 import { i18n } from '@/i18n';
 
 const props = withDefaults(defineProps<{
 	note: misskey.entities.Note;
-	conversation?: misskey.entities.Note[];
+	conversation?: misskey.entities.Note[] | null;
 
 	// how many notes are in between this one and the note being viewed in detail
 	depth?: number;
 }>(), {
+	conversation: null,
 	depth: 1,
 });
 

@@ -19,10 +19,9 @@
 import { ref } from 'vue';
 import MkUserInfo from '@/components/user-info.vue';
 import MkPagination, { Paging } from '@/components/ui/pagination.vue';
-import { userPage } from '@/filters/user';
 import { i18n } from '@/i18n';
 
-const props = defineProps<{
+defineProps<{
 	pagination: Paging;
 	noGap?: boolean;
 }>();

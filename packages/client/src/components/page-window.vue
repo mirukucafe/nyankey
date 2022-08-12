@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ComputedRef, inject, provide } from 'vue';
+import { ComputedRef, provide } from 'vue';
 import RouterView from './global/router-view.vue';
 import XWindow from '@/components/ui/window.vue';
 import { popout as _popout } from '@/scripts/popout';
@@ -34,7 +34,7 @@ import * as os from '@/os';
 import { mainRouter, routes } from '@/router';
 import { Router } from '@/nirax';
 import { i18n } from '@/i18n';
-import { PageMetadata, provideMetadataReceiver, setPageMetadata } from '@/scripts/page-metadata';
+import { PageMetadata, provideMetadataReceiver } from '@/scripts/page-metadata';
 
 const props = defineProps<{
 	initialPath: string;
@@ -107,10 +107,6 @@ const contextmenu = $computed(() => ([{
 		copyToClipboard(url + router.getCurrentPath());
 	},
 }]));
-
-function menu(ev) {
-	os.popupMenu(contextmenu, ev.currentTarget ?? ev.target);
-}
 
 function back() {
 	history.pop();

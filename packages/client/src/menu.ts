@@ -194,7 +194,7 @@ export const menuDef = reactive({
 	reload: {
 		title: 'reload',
 		icon: 'fas fa-refresh',
-		action: (ev) => {
+		action: () => {
 			location.reload();
 		},
 	},

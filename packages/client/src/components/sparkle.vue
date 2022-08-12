@@ -65,7 +65,6 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue';
-import * as os from '@/os';
 
 export default defineComponent({
 	setup() {
@@ -78,7 +77,7 @@ export default defineComponent({
 		let ro: ResizeObserver | undefined;
 
 		onMounted(() => {
-			ro = new ResizeObserver((entries, observer) => {
+			ro = new ResizeObserver(() => {
 				width.value = el.value?.offsetWidth + 64;
 				height.value = el.value?.offsetHeight + 64;
 			});

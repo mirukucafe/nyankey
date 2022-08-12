@@ -3,8 +3,6 @@
 	v-size="{ max: [310, 500] }" class="gafaadew"
 	:class="{ modal, _popup: modal }"
 	@dragover.stop="onDragover"
-	@dragenter="onDragenter"
-	@dragleave="onDragleave"
 	@drop.stop="onDrop"
 >
 	<header>
@@ -141,8 +139,6 @@ let visibleUsers = $ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
 }
-let autocomplete = $ref(null);
-let draghover = $ref(false);
 let quoteId = $ref(null);
 let hasNotSpecifiedMentions = $ref(false);
 let recentHashtags = $ref(JSON.parse(localStorage.getItem('hashtags') || '[]'));
@@ -337,10 +333,6 @@ function togglePoll() {
 	}
 }
 
-function addTag(tag: string) {
-	insertTextAtCursor(textareaEl, ` #${tag} `);
-}
-
 function focus() {
 	if (textareaEl) {
 		textareaEl.focus();
@@ -438,7 +430,7 @@ function onCompositionUpdate(ev: CompositionEvent) {
 	typing();
 }
 
-function onCompositionEnd(ev: CompositionEvent) {
+function onCompositionEnd() {
 	imeText = '';
 }
 
@@ -478,22 +470,11 @@ function onDragover(ev) {
 	const isDriveFile = ev.dataTransfer.types[0] === _DATA_TRANSFER_DRIVE_FILE_;
 	if (isFile || isDriveFile) {
 		ev.preventDefault();
-		draghover = true;
 		ev.dataTransfer.dropEffect = ev.dataTransfer.effectAllowed === 'all' ? 'copy' : 'move';
 	}
 }
 
-function onDragenter(ev) {
-	draghover = true;
-}
-
-function onDragleave(ev) {
-	draghover = false;
-}
-
 function onDrop(ev): void {
-	draghover = false;
-
 	// ファイルだったら
 	if (ev.dataTransfer.files.length > 0) {
 		ev.preventDefault();

@@ -1,7 +1,7 @@
 import { Directive } from 'vue';
 
 export default {
-	mounted(src, binding, vn) {
+	mounted(src) {
 		const getBgColor = (el: HTMLElement) => {
 			const style = window.getComputedStyle(el);
 			if (style.backgroundColor && !['rgba(0, 0, 0, 0)', 'rgba(0,0,0,0)', 'transparent'].includes(style.backgroundColor)) {

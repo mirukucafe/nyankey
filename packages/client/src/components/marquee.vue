@@ -47,7 +47,7 @@ export default {
 	},
 	render({
 		$slots, $style, $props: {
-			duration, repeat, paused, reverse,
+			repeat, paused, reverse,
 		},
 	}) {
 		return h('div', { class: [$style.wrap] }, [

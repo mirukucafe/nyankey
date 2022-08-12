@@ -10,7 +10,7 @@ const end = isTouchUsing ? 'touchend' : 'mouseleave';
 const delay = 100;
 
 export default {
-	mounted(el: HTMLElement, binding, vn) {
+	mounted(el: HTMLElement, binding) {
 		const self = (el as any)._tooltipDirective_ = {} as any;
 
 		self.text = binding.value as string;
@@ -84,7 +84,7 @@ export default {
 		self.text = binding.value as string;
 	},
 
-	unmounted(el, binding, vn) {
+	unmounted(el) {
 		const self = el._tooltipDirective_;
 		window.clearInterval(self.checkTimer);
 	},

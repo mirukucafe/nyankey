@@ -34,15 +34,14 @@ import * as misskey from 'misskey-js';
 import { ColdDeviceStorage } from '@/store';
 import { i18n } from '@/i18n';
 
-const props = withDefaults(defineProps<{
+defineProps<{
 	media: misskey.entities.DriveFile;
-}>(), {
-});
+}>();
 
 const audioEl = $ref<HTMLAudioElement | null>();
 let hide = $ref(true);
 
-function volumechange() {
+function volumechange(): void {
 	if (audioEl) ColdDeviceStorage.set('mediaVolume', audioEl.volume);
 }
 

@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import { } from 'vue';
 
-const props = defineProps<{
+defineProps<{
 	text: string;
 }>();
 </script>

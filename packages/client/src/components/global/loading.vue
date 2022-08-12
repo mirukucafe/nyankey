@@ -20,7 +20,7 @@ import { useCssModule } from 'vue';
 
 useCssModule();
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
 	inline?: boolean;
 	colored?: boolean;
 	mini?: boolean;

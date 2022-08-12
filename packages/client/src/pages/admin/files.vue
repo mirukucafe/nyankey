@@ -33,14 +33,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineAsyncComponent } from 'vue';
-import * as Acct from 'misskey-js/built/acct';
+import { computed } from 'vue';
 import XHeader from './_header_.vue';
-import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
 import MkSelect from '@/components/form/select.vue';
 import MkFileListForAdmin from '@/components/file-list-for-admin.vue';
-import bytes from '@/filters/bytes';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
@@ -104,8 +101,6 @@ const headerActions = $computed(() => [{
 	icon: 'fas fa-trash-alt',
 	handler: clear,
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.files,

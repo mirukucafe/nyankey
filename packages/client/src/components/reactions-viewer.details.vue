@@ -21,11 +21,11 @@ import { } from 'vue';
 import MkTooltip from './ui/tooltip.vue';
 import XReactionIcon from './reaction-icon.vue';
 
-const props = defineProps<{
+defineProps<{
 	reaction: string;
-	users: any[]; // TODO
+	users: Record<string, any>[]; // TODO
 	count: number;
-	emojis: any[]; // TODO
+	emojis: Record<string, any>[]; // TODO
 	targetElement: HTMLElement;
 }>();
 

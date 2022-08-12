@@ -113,7 +113,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import * as mfm from 'mfm-js';
 import * as misskey from 'misskey-js';
 import MkNoteSub from './MkNoteSub.vue';
@@ -186,7 +186,7 @@ const directReplies = ref<misskey.entities.Note[]>([]);
 
 const keymap = {
 	'r': () => reply(true),
-	'e|a|plus': () => react(true),
+	'e|a|plus': () => react(),
 	'q': () => renoteButton.value.renote(true),
 	'esc': blur,
 	'm|o': () => menu(true),
@@ -209,7 +209,7 @@ function reply(viaKeyboard = false): void {
 	});
 }
 
-function react(viaKeyboard = false): void {
+function react(): void {
 	pleaseLogin();
 	blur();
 	reactionPicker.show(reactButton.value, reaction => {

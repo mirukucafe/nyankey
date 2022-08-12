@@ -8,7 +8,7 @@
 import { } from 'vue';
 import XValue from './object-view.value.vue';
 
-const props = defineProps<{
+defineProps<{
 	value: Record<string, unknown>;
 }>();
 </script>

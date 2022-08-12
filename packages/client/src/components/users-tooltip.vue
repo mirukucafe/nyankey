@@ -14,8 +14,8 @@
 import { } from 'vue';
 import MkTooltip from './ui/tooltip.vue';
 
-const props = defineProps<{
-	users: any[]; // TODO
+defineProps<{
+	users: Record<string, any>[]; // TODO
 	count: number;
 	targetElement: HTMLElement;
 }>();

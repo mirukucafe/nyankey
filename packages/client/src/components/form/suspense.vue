@@ -14,7 +14,6 @@
 
 <script lang="ts" setup>
 import { watch } from 'vue';
-import MkButton from '@/components/ui/button.vue';
 import { defaultStore } from '@/store';
 
 const props = defineProps<{

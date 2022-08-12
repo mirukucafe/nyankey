@@ -74,7 +74,7 @@ watch([steppedRawValue, containerEl], calcThumbPosition);
 let ro: ResizeObserver | undefined;
 
 onMounted(() => {
-	ro = new ResizeObserver((entries, observer) => {
+	ro = new ResizeObserver(() => {
 		calcThumbPosition();
 	});
 	ro.observe(containerEl.value);

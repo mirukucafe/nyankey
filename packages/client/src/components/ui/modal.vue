@@ -217,9 +217,9 @@ const onOpened = () => {
 
 	// モーダルコンテンツにマウスボタンが押され、コンテンツ外でマウスボタンが離されたときにモーダルバックグラウンドクリックと判定させないためにマウスイベントを監視しフラグ管理する
 	const el = content!.children[0];
-	el.addEventListener('mousedown', ev => {
+	el.addEventListener('mousedown', () => {
 		contentClicking = true;
-		window.addEventListener('mouseup', ev => {
+		window.addEventListener('mouseup', () => {
 			// click イベントより先に mouseup イベントが発生するかもしれないのでちょっと待つ
 			window.setTimeout(() => {
 				contentClicking = false;
@@ -242,7 +242,7 @@ onMounted(() => {
 	}, { immediate: true });
 
 	nextTick(() => {
-		new ResizeObserver((entries, observer) => {
+		new ResizeObserver(() => {
 			align();
 		}).observe(content!);
 	});

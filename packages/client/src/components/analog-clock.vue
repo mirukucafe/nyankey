@@ -83,7 +83,7 @@ const graduations = computed(() => {
 	return angles;
 });
 
-function tick() {
+function tick(): void {
 	now.value = new Date();
 }
 

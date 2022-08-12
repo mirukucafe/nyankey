@@ -31,17 +31,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
 import * as Acct from 'misskey-js/built/acct';
-import MkSwitch from '@/components/ui/switch.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkDriveFileThumbnail from '@/components/drive-file-thumbnail.vue';
 import bytes from '@/filters/bytes';
-import * as os from '@/os';
 import { i18n } from '@/i18n';
 
-const props = defineProps<{
-	pagination: any;
+defineProps<{
+	pagination: Record<string, any>;
 	viewMode: 'grid' | 'list';
 }>();
 </script>

@@ -23,7 +23,7 @@ import XNoteHeader from './note-header.vue';
 import MkNoteSubNoteContent from './sub-note-content.vue';
 import XCwButton from './cw-button.vue';
 
-const props = defineProps<{
+defineProps<{
 	note: misskey.entities.Note;
 	pinned?: boolean;
 }>();

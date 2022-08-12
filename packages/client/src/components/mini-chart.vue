@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onUnmounted, watch } from 'vue';
+import { watch } from 'vue';
 import { v4 as uuid } from 'uuid';
 import tinycolor from 'tinycolor2';
 import { useInterval } from '@/scripts/use-interval';
@@ -42,7 +42,6 @@ let polylinePoints = $ref('');
 let polygonPoints = $ref('');
 let headX = $ref<number | null>(null);
 let headY = $ref<number | null>(null);
-let clock = $ref<number | null>(null);
 const accent = tinycolor(getComputedStyle(document.documentElement).getPropertyValue('--accent'));
 const color = accent.toRgbString();
 

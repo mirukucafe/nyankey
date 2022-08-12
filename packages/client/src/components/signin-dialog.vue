@@ -18,7 +18,7 @@ import MkSignin from './signin.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 import { i18n } from '@/i18n';
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
 	autoSet?: boolean;
 	message?: string,
 }>(), {
@@ -34,12 +34,12 @@ const emit = defineEmits<{
 
 const dialog = $ref<InstanceType<typeof XModalWindow>>();
 
-function onClose() {
+function onClose(): void {
 	emit('cancelled');
 	dialog.close();
 }
 
-function onLogin(res) {
+function onLogin(res): void {
 	emit('done', res);
 	dialog.close();
 }

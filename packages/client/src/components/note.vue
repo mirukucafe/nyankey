@@ -80,7 +80,7 @@
 				<button v-if="appearNote.myReaction == null" ref="reactButton" class="button _button" @click="react()">
 					<i class="fas fa-plus"></i>
 				</button>
-				<button v-if="appearNote.myReaction != null" ref="reactButton" class="button _button reacted" @click="undoReact(appearNote)">
+				<button v-if="appearNote.myReaction != null" ref="reactButton" class="button _button reacted" @click="undoReact()">
 					<i class="fas fa-minus"></i>
 				</button>
 				<button ref="menuButton" class="button _button" @click="menu()">
@@ -102,7 +102,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onMounted, onUnmounted, reactive, ref, Ref } from 'vue';
+import { inject, onMounted, ref, Ref } from 'vue';
 import * as mfm from 'mfm-js';
 import * as misskey from 'misskey-js';
 import MkNoteSub from './MkNoteSub.vue';
@@ -178,7 +178,7 @@ const showTicker = (defaultStore.state.instanceTicker === 'always') || (defaultS
 
 const keymap = {
 	'r': () => reply(true),
-	'e|a|plus': () => react(true),
+	'e|a|plus': () => react(),
 	'q': () => renoteButton.value.renote(true),
 	'up|k|shift+tab': focusBefore,
 	'down|j|tab': focusAfter,
@@ -203,7 +203,7 @@ function reply(viaKeyboard = false): void {
 	});
 }
 
-function react(viaKeyboard = false): void {
+function react(): void {
 	pleaseLogin();
 	blur();
 	reactionPicker.show(reactButton.value, reaction => {
@@ -216,11 +216,10 @@ function react(viaKeyboard = false): void {
 	});
 }
 
-function undoReact(note): void {
-	const oldReaction = note.myReaction;
-	if (!oldReaction) return;
+function undoReact(): void {
+	if (!appearNote.myReaction) return;
 	os.api('notes/reactions/delete', {
-		noteId: note.id,
+		noteId: appearNote.id,
 	});
 }
 

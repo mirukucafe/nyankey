@@ -20,7 +20,7 @@
 import { onMounted, onUnmounted } from 'vue';
 import MkModal from './modal.vue';
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
 	withOkButton: boolean;
 	okButtonDisabled: boolean;
 	width: number;
@@ -63,7 +63,7 @@ const onKeydown = (evt) => {
 	}
 };
 
-const ro = new ResizeObserver((entries, observer) => {
+const ro = new ResizeObserver(() => {
 	bodyWidth = rootEl.offsetWidth;
 	bodyHeight = rootEl.offsetHeight - headerEl.offsetHeight;
 });

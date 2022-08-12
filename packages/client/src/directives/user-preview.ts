@@ -99,7 +99,7 @@ export class UserPreview {
 }
 
 export default {
-	mounted(el: HTMLElement, binding, vn) {
+	mounted(el: HTMLElement, binding) {
 		if (binding.value == null) return;
 
 		// TODO: 新たにプロパティを作るのをやめMapを使う
@@ -109,7 +109,7 @@ export default {
 		self.preview = new UserPreview(el, binding.value);
 	},
 
-	unmounted(el, binding, vn) {
+	unmounted(el, binding) {
 		if (binding.value == null) return;
 
 		const self = el._userPreviewDirective_;

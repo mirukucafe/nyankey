@@ -23,7 +23,6 @@ import XImage from './media-image.vue';
 import XVideo from './media-video.vue';
 import * as os from '@/os';
 import { FILE_TYPE_BROWSERSAFE } from '@/const';
-import { defaultStore } from '@/store';
 
 const props = defineProps<{
 	mediaList: misskey.entities.DriveFile[];
@@ -31,7 +30,6 @@ const props = defineProps<{
 }>();
 
 const gallery = ref(null);
-const pswpZIndex = os.claimZIndex('middle');
 
 onMounted(() => {
 	const lightbox = new PhotoSwipeLightbox({
@@ -183,7 +181,6 @@ const previewable = (file: misskey.entities.DriveFile): boolean => {
 <style lang="scss">
 .pswp {
 	// なぜか機能しない
-  //z-index: v-bind(pswpZIndex);
 	z-index: 2000000;
 }
 </style>

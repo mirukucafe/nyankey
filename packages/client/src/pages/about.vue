@@ -80,8 +80,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
-import { version, instanceName , host } from '@/config';
+import { computed } from 'vue';
+import { version, host } from '@/config';
 import FormLink from '@/components/form/link.vue';
 import FormSection from '@/components/form/section.vue';
 import FormSuspense from '@/components/form/suspense.vue';

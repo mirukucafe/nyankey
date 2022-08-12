@@ -207,11 +207,9 @@ export function alert(props: {
 	title?: string | null;
 	text?: string | null;
 }): Promise<void> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), props, {
-			done: result => {
-				resolve();
-			},
+			done: resolve,
 		}, 'closed');
 	});
 }
@@ -221,7 +219,7 @@ export function confirm(props: {
 	title?: string | null;
 	text?: string | null;
 }): Promise<{ canceled: boolean }> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), {
 			...props,
 			showCancelButton: true,
@@ -242,7 +240,7 @@ export function inputText(props: {
 }): Promise<{ canceled: true; result: undefined; } | {
 	canceled: false; result: string;
 }> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), {
 			title: props.title,
 			text: props.text,
@@ -267,7 +265,7 @@ export function inputNumber(props: {
 }): Promise<{ canceled: true; result: undefined; } | {
 	canceled: false; result: number;
 }> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), {
 			title: props.title,
 			text: props.text,
@@ -292,7 +290,7 @@ export function inputDate(props: {
 }): Promise<{ canceled: true; result: undefined; } | {
 	canceled: false; result: Date;
 }> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), {
 			title: props.title,
 			text: props.text,
@@ -329,7 +327,7 @@ export function select<C = any>(props: {
 })): Promise<{ canceled: true; result: undefined; } | {
 	canceled: false; result: C;
 }> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), {
 			title: props.title,
 			text: props.text,
@@ -347,7 +345,7 @@ export function select<C = any>(props: {
 }
 
 export function success() {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const showing = ref(true);
 		window.setTimeout(() => {
 			showing.value = false;
@@ -362,7 +360,7 @@ export function success() {
 }
 
 export function waiting() {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const showing = ref(true);
 		popup(defineAsyncComponent(() => import('@/components/waiting-dialog.vue')), {
 			success: false,
@@ -374,7 +372,7 @@ export function waiting() {
 }
 
 export function form(title, form) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/form-dialog.vue')), { title, form }, {
 			done: result => {
 				resolve(result);
@@ -384,7 +382,7 @@ export function form(title, form) {
 }
 
 export async function selectUser() {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/user-select-dialog.vue')), {}, {
 			ok: user => {
 				resolve(user);
@@ -394,7 +392,7 @@ export async function selectUser() {
 }
 
 export async function selectDriveFile(multiple: boolean) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/drive-select-dialog.vue')), {
 			type: 'file',
 			multiple,
@@ -409,7 +407,7 @@ export async function selectDriveFile(multiple: boolean) {
 }
 
 export async function selectDriveFolder(multiple: boolean) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/drive-select-dialog.vue')), {
 			type: 'folder',
 			multiple,
@@ -424,7 +422,7 @@ export async function selectDriveFolder(multiple: boolean) {
 }
 
 export async function pickEmoji(src: HTMLElement | null, opts) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/emoji-picker-dialog.vue')), {
 			src,
 			...opts,
@@ -439,7 +437,7 @@ export async function pickEmoji(src: HTMLElement | null, opts) {
 export async function cropImage(image: Misskey.entities.DriveFile, options: {
 	aspectRatio: number;
 }): Promise<Misskey.entities.DriveFile> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/cropper-dialog.vue')), {
 			file: image,
 			aspectRatio: options.aspectRatio,
@@ -510,7 +508,7 @@ export function popupMenu(items: MenuItem[] | Ref<MenuItem[]>, src?: HTMLElement
 	width?: number;
 	viaKeyboard?: boolean;
 }) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		let dispose;
 		popup(defineAsyncComponent(() => import('@/components/ui/popup-menu.vue')), {
 			items,
@@ -531,7 +529,7 @@ export function popupMenu(items: MenuItem[] | Ref<MenuItem[]>, src?: HTMLElement
 
 export function contextMenu(items: MenuItem[] | Ref<MenuItem[]>, ev: MouseEvent) {
 	ev.preventDefault();
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		let dispose;
 		popup(defineAsyncComponent(() => import('@/components/ui/context-menu.vue')), {
 			items,
@@ -548,7 +546,7 @@ export function contextMenu(items: MenuItem[] | Ref<MenuItem[]>, ev: MouseEvent)
 }
 
 export function post(props: Record<string, any> = {}) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		// NOTE: MkPostFormDialogをdynamic importするとiOSでテキストエリアに自動フォーカスできない
 		// NOTE: ただ、dynamic importしない場合、MkPostFormDialogインスタンスが使いまわされ、
 		//       Vueが渡されたコンポーネントに内部的に__propsというプロパティを生やす影響で、
@@ -570,7 +568,7 @@ export const deckGlobalEvents = new EventEmitter();
 
 /*
 export function checkExistence(fileData: ArrayBuffer): Promise<any> {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const data = new FormData();
 		data.append('md5', getMD5(fileData));
 

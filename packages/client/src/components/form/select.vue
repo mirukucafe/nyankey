@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, nextTick, ref, watch, computed, toRefs, VNode, useSlots } from 'vue';
+import { onMounted, nextTick, ref, watch, computed, toRefs, VNode, useSlots } from 'vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { useInterval } from '@/scripts/use-interval';
@@ -58,7 +58,6 @@ const v = ref(modelValue.value);
 const focused = ref(false);
 const changed = ref(false);
 const invalid = ref(false);
-const filled = computed(() => v.value !== '' && v.value != null);
 const inputEl = ref(null);
 const prefixEl = ref(null);
 const suffixEl = ref(null);
@@ -83,7 +82,7 @@ watch(modelValue, newValue => {
 	v.value = newValue;
 });
 
-watch(v, newValue => {
+watch(v, () => {
 	if (!props.manualSave) {
 		updated();
 	}
@@ -117,7 +116,7 @@ onMounted(() => {
 	});
 });
 
-const onClick = (ev: MouseEvent) => {
+const onClick = () => {
 	focused.value = true;
 
 	const menu = [];

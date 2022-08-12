@@ -34,7 +34,6 @@ import XModalWindow from '@/components/ui/modal-window.vue';
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
 import * as os from '@/os';
-import { unique } from '@/scripts/array';
 import { i18n } from '@/i18n';
 import { emojiCategories } from '@/instance';
 

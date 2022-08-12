@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, nextTick, onMounted, onUnmounted, watch } from 'vue';
+import { inject, onUnmounted, watch } from 'vue';
 import { Router } from '@/nirax';
 import { defaultStore } from '@/store';
 
@@ -29,7 +29,7 @@ let currentPageComponent = $shallowRef(router.getCurrentComponent());
 let currentPageProps = $ref(router.getCurrentProps());
 let key = $ref(router.getCurrentKey());
 
-function onChange({ route, props: newProps, key: newKey }) {
+function onChange({ route, props: newProps, key: newKey }): void {
 	currentPageComponent = route.component;
 	currentPageProps = newProps;
 	key = newKey;
