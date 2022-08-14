@@ -20,13 +20,13 @@ const props = withDefaults(defineProps<{
 });
 
 const _time = typeof props.time === 'string' ? new Date(props.time) : props.time;
-const absolute = (): string => {
+const absolute = ((): string => {
 	switch (props.format) {
 		case 'date': return _time.toLocaleDateString();
 		case 'time': return _time.toLocaleTimeString();
 		default: return _time.toLocaleString();
 	}
-}();
+})();
 
 let now = $ref(new Date());
 const relative = $computed(() => {
