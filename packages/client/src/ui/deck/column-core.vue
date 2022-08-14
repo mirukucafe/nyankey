@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XMainColumn from './main-column.vue';
 import XTlColumn from './tl-column.vue';
 import XAntennaColumn from './antenna-column.vue';

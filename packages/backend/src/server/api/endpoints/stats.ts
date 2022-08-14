@@ -1,6 +1,5 @@
 import { IsNull } from 'typeorm';
 import { Instances, NoteReactions, Notes, Users } from '@/models/index.js';
-import { } from '@/services/chart/index.js';
 import define from '../define.js';
 
 export const meta = {

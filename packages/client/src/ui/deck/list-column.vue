@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XColumn from './column.vue';
 import { updateColumn, Column } from './deck-store';
 import XTimeline from '@/components/timeline.vue';

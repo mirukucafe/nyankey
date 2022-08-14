@@ -36,7 +36,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import * as mfm from 'mfm-js';
 import * as Misskey from 'misskey-js';
 import { extractUrlFromMfm } from '@/scripts/extract-url-from-mfm';

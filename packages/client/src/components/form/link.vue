@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 
 type Behavior = 'window' | 'browser' | 'modalWindow';
 

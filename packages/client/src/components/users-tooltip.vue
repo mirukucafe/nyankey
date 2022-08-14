@@ -11,7 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MkTooltip from './ui/tooltip.vue';
 
 defineProps<{

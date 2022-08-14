@@ -25,7 +25,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import FormSwitch from '@/components/form/switch.vue';
 import FormInput from '@/components/form/input.vue';
 import FormButton from '@/components/ui/button.vue';

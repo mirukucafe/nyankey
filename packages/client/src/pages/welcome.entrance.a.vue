@@ -46,7 +46,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import { toUnicode } from 'punycode/';
 import XTimeline from './welcome.timeline.vue';
 import MarqueeText from '@/components/marquee.vue';

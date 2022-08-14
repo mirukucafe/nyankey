@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MkSignin from './signin.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 import { i18n } from '@/i18n';

@@ -53,7 +53,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import FormSwitch from '@/components/form/switch.vue';
 import FormSelect from '@/components/form/select.vue';
 import FormSection from '@/components/form/section.vue';

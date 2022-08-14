@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import { host, instanceName } from '@/config';
 import * as os from '@/os';
 import MkPagination from '@/components/ui/pagination.vue';

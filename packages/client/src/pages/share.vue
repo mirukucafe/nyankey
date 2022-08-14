@@ -25,7 +25,6 @@
 <script lang="ts" setup>
 // SPECIFICATION: https://misskey-hub.net/docs/features/share-form.html
 
-import { } from 'vue';
 import { noteVisibilities } from 'misskey-js';
 import * as Acct from 'misskey-js/built/acct';
 import * as Misskey from 'misskey-js';

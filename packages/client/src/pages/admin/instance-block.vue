@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XHeader from './_header_.vue';
 import FormButton from '@/components/ui/button.vue';
 import FormTextarea from '@/components/form/textarea.vue';

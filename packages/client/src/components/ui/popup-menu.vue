@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MkModal from './modal.vue';
 import MkMenu from './menu.vue';
 import { MenuItem } from '@/types/menu';

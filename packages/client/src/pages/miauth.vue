@@ -37,7 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MkSignin from '@/components/signin.vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';

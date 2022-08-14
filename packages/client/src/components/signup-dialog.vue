@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XSignup from './signup.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 import { i18n } from '@/i18n';

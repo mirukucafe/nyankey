@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MkTooltip from './ui/tooltip.vue';
 import XReactionIcon from './reaction-icon.vue';
 

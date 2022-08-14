@@ -28,7 +28,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkTab from '@/components/tab.vue';
 import FormInfo from '@/components/ui/info.vue';

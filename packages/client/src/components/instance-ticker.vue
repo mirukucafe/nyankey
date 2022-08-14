@@ -6,7 +6,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import { instanceName } from '@/config';
 
 const props = defineProps<{

@@ -34,7 +34,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import FormInput from '@/components/form/input.vue';
 import FormSection from '@/components/form/section.vue';
 import FormSwitch from '@/components/form/switch.vue';

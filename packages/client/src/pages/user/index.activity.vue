@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import * as misskey from 'misskey-js';
 import MkContainer from '@/components/ui/container.vue';
 import MkChart from '@/components/chart.vue';

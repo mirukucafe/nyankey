@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XColumn from './column.vue';
 import { addColumnWidget, Column, removeColumnWidget, setColumnWidgets, updateColumnWidget } from './deck-store';
 import XWidgets from '@/components/widgets.vue';

@@ -8,7 +8,6 @@ import config from '@/config/index.js';
 import { createTemp, createTempDir } from '@/misc/create-temp.js';
 import { downloadUrl } from '@/misc/download-url.js';
 import { Users, Emojis } from '@/models/index.js';
-import { } from '@/queue/types.js';
 import { addFile } from '@/services/drive/add-file.js';
 import { queueLogger } from '../../logger.js';
 

@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import * as misskey from 'misskey-js';
 import XNoteHeader from './note-header.vue';
 import MkNoteSubNoteContent from './sub-note-content.vue';

@@ -33,7 +33,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XBotProtection from './bot-protection.vue';
 import XHeader from './_header_.vue';
 import FormFolder from '@/components/form/folder.vue';

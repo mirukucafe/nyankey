@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import MfmCore from '@/components/mfm';
 
 withDefaults(defineProps<{

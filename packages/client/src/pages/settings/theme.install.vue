@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import JSON5 from 'json5';
 import FormTextarea from '@/components/form/textarea.vue';
 import FormButton from '@/components/ui/button.vue';

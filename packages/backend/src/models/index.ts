@@ -1,4 +1,3 @@
-import { } from 'typeorm';
 import { db } from '@/db/postgre.js';
 
 import { Announcement } from './entities/announcement.js';

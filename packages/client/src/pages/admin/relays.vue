@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XHeader from './_header_.vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';

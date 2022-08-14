@@ -7,7 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import MkContainer from '@/components/ui/container.vue';

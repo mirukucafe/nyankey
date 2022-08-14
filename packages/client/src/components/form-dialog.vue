@@ -55,7 +55,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import FormInput from './form/input.vue';
 import FormTextarea from './form/textarea.vue';
 import FormSwitch from './form/switch.vue';

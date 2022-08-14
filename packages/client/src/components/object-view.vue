@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XValue from './object-view.value.vue';
 
 defineProps<{

@@ -22,7 +22,6 @@
 
 <script lang="ts" setup>
 /* eslint-disable vue/no-mutating-props */
-import { } from 'vue';
 import XContainer from '../page-editor.container.vue';
 import MkInput from '@/components/form/input.vue';
 

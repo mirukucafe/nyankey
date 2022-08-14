@@ -111,7 +111,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import * as misskey from 'misskey-js';
 import MkChart from '@/components/chart.vue';
 import MkObjectView from '@/components/object-view.vue';

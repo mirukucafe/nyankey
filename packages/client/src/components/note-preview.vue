@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 
 defineProps<{
 	text: string;

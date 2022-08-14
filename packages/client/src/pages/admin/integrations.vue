@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import XTwitter from './integrations.twitter.vue';
 import XGithub from './integrations.github.vue';
 import XDiscord from './integrations.discord.vue';

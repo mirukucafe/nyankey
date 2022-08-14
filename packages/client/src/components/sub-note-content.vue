@@ -21,7 +21,6 @@
 </template>
 
 <script lang="ts" setup>
-import { } from 'vue';
 import * as misskey from 'misskey-js';
 import XPoll from './poll.vue';
 import XMediaList from './media-list.vue';
