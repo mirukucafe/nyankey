@@ -256,7 +256,6 @@ remoteUserCaution: "Les informations de ce compte risqueraient d’être incompl
 activity: "Activité"
 images: "Images"
 birthday: "Date de naissance"
-yearsOld: "{age} ans"
 registeredDate: "Inscrit le"
 location: "Localisation"
 theme: "Thème"

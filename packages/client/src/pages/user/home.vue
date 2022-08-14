@@ -51,11 +51,11 @@
 						</dl>
 						<dl v-if="user.birthday" class="field">
 							<dt class="name"><i class="fas fa-birthday-cake fa-fw"></i> {{ i18n.ts.birthday }}</dt>
-							<dd class="value">{{ user.birthday.replace('-', '/').replace('-', '/') }} ({{ $t('yearsOld', { age }) }})</dd>
+							<dd class="value"><MkTime format="date" mode="detail" :time="user.birthday"/></dd>
 						</dl>
 						<dl class="field">
 							<dt class="name"><i class="fas fa-calendar-alt fa-fw"></i> {{ i18n.ts.registeredDate }}</dt>
-							<dd class="value">{{ new Date(user.createdAt).toLocaleString() }} (<MkTime :time="user.createdAt"/>)</dd>
+							<dd class="value"><MkTime mode="detail" :time="user.createdAt"/></dd>
 						</dl>
 					</div>
 					<div v-if="user.fields.length > 0" class="fields">

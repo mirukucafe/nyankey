@@ -258,7 +258,6 @@ remoteUserCaution: "এই ব্যাবহারকারী রিমোট 
 activity: "কার্যকলাপ"
 images: "ছবি"
 birthday: "জন্মদিন"
-yearsOld: "{age} বছর"
 registeredDate: "যোগদানের তারিখ"
 location: "অবস্থান"
 theme: "থিম"

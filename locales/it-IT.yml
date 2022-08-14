@@ -254,7 +254,6 @@ remoteUserCaution: "Può darsi che le informazioni siano incomplete perché ques
 activity: "Attività"
 images: "Immagini"
 birthday: "Compleanno"
-yearsOld: "{age}Anni"
 registeredDate: "Iscrizione a.."
 location: "Posizione"
 theme: "Tema"

@@ -259,7 +259,6 @@ remoteUserCaution: "Diese Informationen sind möglicherweise unvollständig, da 
 activity: "Aktivität"
 images: "Bilder"
 birthday: "Geburtstag"
-yearsOld: "{age} Jahre alt"
 registeredDate: "Registrationsdatum"
 location: "Ort"
 theme: "Farbschema"
