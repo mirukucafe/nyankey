@@ -51,7 +51,7 @@
 						</dl>
 						<dl v-if="user.birthday" class="field">
 							<dt class="name"><i class="fas fa-birthday-cake fa-fw"></i> {{ i18n.ts.birthday }}</dt>
-							<dd class="value"><MkTime format="date" mode="detail" :time="user.birthday"/></dd>
+							<dd class="value"><MkTime format="date" mode="detail" :time="user.birthday" :utc="true"/></dd>
 						</dl>
 						<dl class="field">
 							<dt class="name"><i class="fas fa-calendar-alt fa-fw"></i> {{ i18n.ts.registeredDate }}</dt>
