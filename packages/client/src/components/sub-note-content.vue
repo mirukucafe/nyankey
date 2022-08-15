@@ -1,5 +1,5 @@
 <template>
-<div class="wrmlmaau" :class="{ collapsed }">
+<div class="wrmlmaau" :class="{ collapsed, isLong }">
 	<div class="body">
 		<span v-if="note.deletedAt" style="opacity: 0.5">({{ i18n.ts.deleted }})</span>
 		<MkA v-if="note.replyId" class="reply" :to="`/notes/${note.replyId}`"><i class="fas fa-reply"></i></MkA>
@@ -14,8 +14,11 @@
 		<summary>{{ i18n.ts.poll }}</summary>
 		<XPoll :note="note"/>
 	</details>
-	<button v-if="collapsed" class="fade _button" @click="collapsed = false">
+	<button v-if="isLong && collapsed" class="fade _button" @click="collapsed = false">
 		<span>{{ i18n.ts.showMore }}</span>
+	</button>
+	<button v-if="isLong && !collapsed" class="showLess _button" @click="collapsed = true">
+		<span>{{ i18n.ts.showLess }}</span>
 	</button>
 </div>
 </template>
@@ -30,11 +33,14 @@ const props = defineProps<{
 	note: misskey.entities.Note;
 }>();
 
-const collapsed = $ref(
+
+const isLong = (
 	props.note.cw == null && props.note.text != null && (
 		(props.note.text.split('\n').length > 9) ||
 		(props.note.text.length > 500)
-	));
+	)
+);
+const collapsed = $ref(props.note.cw == null && isLong);
 </script>
 
 <style lang="scss" scoped>
@@ -81,6 +87,24 @@ const collapsed = $ref(
 				> span {
 					background: var(--panelHighlight);
 				}
+			}
+		}
+	}
+
+	&.isLong {
+		> .showLess {
+			width: 100%;
+			margin-top: 1em;
+			position: sticky;
+			bottom: 1em;
+
+			> span {
+				display: inline-block;
+				background: var(--panel);
+				padding: 6px 10px;
+				font-size: 0.8em;
+				border-radius: 999px;
+				box-shadow: 0 0 7px 7px var(--bg);
 			}
 		}
 	}
