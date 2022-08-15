@@ -9,22 +9,26 @@
 <script lang="ts" setup>
 import { onUnmounted } from 'vue';
 import { i18n } from '@/i18n';
+import { lang } from '@/config';
 
 const props = withDefaults(defineProps<{
 	time: Date | string;
 	format?: 'both' | 'date' | 'time';
 	mode?: 'relative' | 'absolute' | 'detail';
+	utc?: boolean;
 }>(), {
 	format: 'both',
 	mode: 'relative',
+	utc: false,
 });
 
 const _time = typeof props.time === 'string' ? new Date(props.time) : props.time;
 const absolute = ((): string => {
+	const options = props.utc ? { timeZone: 'UTC' } : {};
 	switch (props.format) {
-		case 'date': return _time.toLocaleDateString();
-		case 'time': return _time.toLocaleTimeString();
-		default: return _time.toLocaleString();
+		case 'date': return _time.toLocaleDateString(lang ?? 'en-US', options);
+		case 'time': return _time.toLocaleTimeString(lang ?? 'en-US', options);
+		default: return _time.toLocaleString(lang ?? 'en-US', options);
 	}
 })();
 
