@@ -30,8 +30,7 @@
 	</FormSwitch>
 
 	<FormSection>
-		<FormSwitch v-model="rememberNoteVisibility" class="_formBlock" @update:modelValue="save()">{{ i18n.ts.rememberNoteVisibility }}</FormSwitch>
-		<FormFolder v-if="!rememberNoteVisibility" class="_formBlock">
+		<FormFolder class="_formBlock">
 			<template #label>{{ i18n.ts.defaultNoteVisibility }}</template>
 			<template v-if="defaultNoteVisibility === 'public'" #suffix>{{ i18n.ts._visibility.public }}</template>
 			<template v-else-if="defaultNoteVisibility === 'home'" #suffix>{{ i18n.ts._visibility.home }}</template>
@@ -73,7 +72,6 @@ let ffVisibility = $ref($i.ffVisibility);
 
 let defaultNoteVisibility = $computed(defaultStore.makeGetterSetter('defaultNoteVisibility'));
 let defaultNoteLocalOnly = $computed(defaultStore.makeGetterSetter('defaultNoteLocalOnly'));
-let rememberNoteVisibility = $computed(defaultStore.makeGetterSetter('rememberNoteVisibility'));
 let keepCw = $computed(defaultStore.makeGetterSetter('keepCw'));
 
 function save() {

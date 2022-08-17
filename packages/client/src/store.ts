@@ -23,10 +23,6 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'account',
 		default: false,
 	},
-	rememberNoteVisibility: {
-		where: 'account',
-		default: false,
-	},
 	defaultNoteVisibility: {
 		where: 'account',
 		default: 'public',
@@ -74,14 +70,6 @@ export const defaultStore = markRaw(new Storage('base', {
 			'-',
 			'ui',
 		],
-	},
-	visibility: {
-		where: 'deviceAccount',
-		default: 'public' as 'public' | 'home' | 'followers' | 'specified',
-	},
-	localOnly: {
-		where: 'deviceAccount',
-		default: false,
 	},
 	widgets: {
 		where: 'deviceAccount',
