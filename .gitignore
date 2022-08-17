@@ -5,6 +5,9 @@
 # Intelij-IDEA
 /.idea
 
+# Sublime Text
+/*.sublime-*
+
 # nano
 .swp
 
