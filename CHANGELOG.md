@@ -19,6 +19,7 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 ### Removed
 - Okteto config and Helm chart
 - Client: acrylic styling
+- Client: Twitter embeds, the standard URL preview is used instead.
 
 ### Fixed
 - Server: Blocking remote accounts
