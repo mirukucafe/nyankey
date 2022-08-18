@@ -23,6 +23,9 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 ### Fixed
 - Server: Blocking remote accounts
 
+### Security
+- Server: Update `multer` dependency to resolve [CVE-2022-24434](https://nvd.nist.gov/vuln/detail/CVE-2022-24434)
+
 ## 13.0.0-preview1 - 2022-08-05
 ### Added
 - Server: Replies can now be fetched recursively.
