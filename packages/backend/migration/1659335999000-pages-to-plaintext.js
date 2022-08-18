@@ -19,16 +19,16 @@ export class pagesToPlaintext1659335999000 {
 		async function convertBlock(block) {
 			switch (block.type) {
 				case 'note':
-					if (block.note) return noteUrl(block.note);
+					if (block.note) return await noteUrl(block.note);
 					else break;
 				case 'section':
-					return block.children.map(convertBlock).join('\n');
+					return (await Promise.all(block.children.map(convertBlock))).join('\n');
 				case 'text':
 					return block.text;
 				case 'textarea':
 					return '```\n' + block.text + '```';
 				case 'image':
-					if (block.fileId) return '![image](' + fileUrl(block.fileId) + ')';
+					if (block.fileId) return '![image](' + await fileUrl(block.fileId) + ')';
 					else break;
 				case 'if': // no idea how to convert these
 				case 'post': // new note form, why?
@@ -48,9 +48,10 @@ export class pagesToPlaintext1659335999000 {
 
 		await queryRunner.query(`SELECT id, "content" FROM "page"`)
 		.then(pages => Promise.all(pages.map(page => {
-			let text = page.content.map(convertBlock).join('\n');
-
-			return queryRunner.query(`UPDATE "page" SET "text" = $1 WHERE "id" = $2`, [text, page.id]);
+			return Promise.all(page.content.map(convertBlock))
+			.then(texts => {
+				queryRunner.query(`UPDATE "page" SET "text" = $1 WHERE "id" = $2`, [texts.join('\n'), page.id]);
+			});
 		})));
 
 		await queryRunner.query(`ALTER TABLE "page" DROP COLUMN "content"`);
