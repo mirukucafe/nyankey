@@ -33,7 +33,7 @@ function calc(src: Element) {
 }
 
 export default {
-	mounted(src) {
+	mounted(src, binding) {
 		const resize = new ResizeObserver(() => {
 			calc(src);
 		});
