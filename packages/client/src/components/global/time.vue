@@ -68,7 +68,7 @@ const relative = $computed(() => {
 	return i18n.ts._ago.future;
 });
 
-function tick() {
+function tick(): void {
 	// TODO: パフォーマンス向上のため、このコンポーネントが画面内に表示されている場合のみ更新する
 	now = new Date();
 
