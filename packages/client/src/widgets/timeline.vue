@@ -20,13 +20,12 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, reactive, ref, watch } from 'vue';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { ref } from 'vue';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import * as os from '@/os';
 import MkContainer from '@/components/ui/container.vue';
 import XTimeline from '@/components/timeline.vue';
-import { $i } from '@/account';
 import { i18n } from '@/i18n';
 
 const name = 'timeline';
@@ -63,7 +62,7 @@ type WidgetProps = GetFormResultType<typeof widgetPropsDef>;
 //const props = defineProps<WidgetComponentProps<WidgetProps>>();
 //const emit = defineEmits<WidgetComponentEmits<WidgetProps>>();
 const props = defineProps<{ widget?: Widget<WidgetProps>; }>();
-const emit = defineEmits<{ (ev: 'updateProps', props: WidgetProps); }>();
+const emit = defineEmits<{ (ev: 'updateProps', widgetProps: WidgetProps); }>();
 
 const { widgetProps, configure, save } = useWidgetPropsManager(name,
 	widgetPropsDef,
@@ -73,12 +72,12 @@ const { widgetProps, configure, save } = useWidgetPropsManager(name,
 
 const menuOpened = ref(false);
 
-const setSrc = (src) => {
+const setSrc = (src): void => {
 	widgetProps.src = src;
 	save();
 };
 
-const choose = async (ev) => {
+const choose = async (ev): Promise<void> => {
 	menuOpened.value = true;
 	const [antennas, lists] = await Promise.all([
 		os.api('antennas/list'),

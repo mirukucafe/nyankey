@@ -33,7 +33,6 @@ const props = defineProps<{
 	note: misskey.entities.Note;
 }>();
 
-
 const isLong = (
 	props.note.cw == null && props.note.text != null && (
 		(props.note.text.split('\n').length > 9) ||
