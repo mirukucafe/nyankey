@@ -75,21 +75,10 @@ export class Page {
 	@JoinColumn()
 	public eyeCatchingImage: DriveFile | null;
 
-	@Column('jsonb', {
-		default: [],
-	})
-	public content: Record<string, any>[];
-
-	@Column('jsonb', {
-		default: [],
-	})
-	public variables: Record<string, any>[];
-
-	@Column('varchar', {
-		length: 16384,
+	@Column('text', {
 		default: '',
 	})
-	public script: string;
+	public text: string;
 
 	/**
 	 * public ... 公開

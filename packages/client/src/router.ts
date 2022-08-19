@@ -12,7 +12,7 @@ const page = (loader: AsyncComponentLoader<any>) => defineAsyncComponent({
 
 export const routes = [{
 	path: '/@:initUser/pages/:initPageName/view-source',
-	component: page(() => import('./pages/page-editor/page-editor.vue')),
+	component: page(() => import('./pages/page-editor.vue')),
 }, {
 	path: '/@:username/pages/:pageName',
 	component: page(() => import('./pages/page.vue')),
@@ -121,11 +121,11 @@ export const routes = [{
 	component: page(() => import('./pages/tag.vue')),
 }, {
 	path: '/pages/new',
-	component: page(() => import('./pages/page-editor/page-editor.vue')),
+	component: page(() => import('./pages/page-editor.vue')),
 	loginRequired: true,
 }, {
 	path: '/pages/edit/:initPageId',
-	component: page(() => import('./pages/page-editor/page-editor.vue')),
+	component: page(() => import('./pages/page-editor.vue')),
 	loginRequired: true,
 }, {
 	path: '/pages',

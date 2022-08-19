@@ -15,6 +15,11 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 ### Changed
 - Client: Use consistent date formatting based on language setting
 - Client: Add threshold to reduce occurances of "future" timestamps
+- Pages have been considerably simplified, several of the very complex features have been removed.
+  Pages are now MFM only.
+  **For admins:** There is a migration in place to convert page contents to text, but not everything can be migrated.
+  You might want to check if you have any more complex pages on your instance and ask users to migrate them by hand.
+  Or generally advise all users to simplify their pages to only text.
 
 ### Removed
 - Okteto config and Helm chart

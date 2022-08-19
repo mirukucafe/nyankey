@@ -147,25 +147,6 @@ _profile:
 _exportOrImport:
   followingList: "Seguint"
   userLists: "Llistes"
-_pages:
-  script:
-    categories:
-      list: "Llistes"
-    blocks:
-      _join:
-        arg1: "Llistes"
-      _randomPick:
-        arg1: "Llistes"
-      _dailyRandomPick:
-        arg1: "Llistes"
-      _seedRandomPick:
-        arg2: "Llistes"
-      _pick:
-        arg1: "Llistes"
-      _listLen:
-        arg1: "Llistes"
-    types:
-      array: "Llistes"
 _notification:
   youWereFollowed: "t'ha seguit"
   _types:

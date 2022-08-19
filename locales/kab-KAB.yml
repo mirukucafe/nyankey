@@ -88,28 +88,6 @@ _pages:
   fontSerif: "Serif"
   fontSansSerif: "Sans Serif"
   eyeCatchingImageRemove: "Kkes tugna i d-ijebden"
-  selectType: "Fren anaw"
-  contentBlocks: "Agbur"
-  inputBlocks: "Anekcum"
-  specialBlocks: "Uzzig"
-  script:
-    categories:
-      list: "Tibdarin"
-    blocks:
-      _join:
-        arg1: "Tibdarin"
-      _randomPick:
-        arg1: "Tibdarin"
-      _dailyRandomPick:
-        arg1: "Tibdarin"
-      _seedRandomPick:
-        arg2: "Tibdarin"
-      _pick:
-        arg1: "Tibdarin"
-      _listLen:
-        arg1: "Tibdarin"
-    types:
-      array: "Tibdarin"
 _notification:
   youWereFollowed: "Yeṭṭafaṛ-ik·em-id"
   _types:

@@ -43,19 +43,13 @@ export const paramDef = {
 		title: { type: 'string' },
 		name: { type: 'string', minLength: 1 },
 		summary: { type: 'string', nullable: true },
-		content: { type: 'array', items: {
-			type: 'object', additionalProperties: true,
-		} },
-		variables: { type: 'array', items: {
-			type: 'object', additionalProperties: true,
-		} },
-		script: { type: 'string' },
+		text: { type: 'string', minLength: 1 },
 		eyeCatchingImageId: { type: 'string', format: 'misskey:id', nullable: true },
 		font: { type: 'string', enum: ['serif', 'sans-serif'], default: 'sans-serif' },
 		alignCenter: { type: 'boolean', default: false },
 		hideTitleWhenPinned: { type: 'boolean', default: false },
 	},
-	required: ['title', 'name', 'content', 'variables', 'script'],
+	required: ['title', 'name', 'text'],
 } as const;
 
 // eslint-disable-next-line import/no-default-export
@@ -88,9 +82,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		title: ps.title,
 		name: ps.name,
 		summary: ps.summary,
-		content: ps.content,
-		variables: ps.variables,
-		script: ps.script,
+		text: ps.text,
 		eyeCatchingImageId: eyeCatchingImage ? eyeCatchingImage.id : null,
 		userId: user.id,
 		visibility: 'public',

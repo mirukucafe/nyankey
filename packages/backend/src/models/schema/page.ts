@@ -29,12 +29,8 @@ export const packedPageSchema = {
 			type: 'string',
 			optional: false, nullable: true,
 		},
-		content: {
-			type: 'array',
-			optional: false, nullable: false,
-		},
-		variables: {
-			type: 'array',
+		text: {
+			type: 'string',
 			optional: false, nullable: false,
 		},
 		userId: {
