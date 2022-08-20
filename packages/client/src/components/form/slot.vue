@@ -8,12 +8,10 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-
-});
+<script lang="ts" setup>
+function focus(): void {
+	window.focus();
+}
 </script>
 
 <style lang="scss" scoped>
