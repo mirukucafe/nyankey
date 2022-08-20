@@ -4,7 +4,7 @@
 		<div v-for="item in items" :key="item.id" :to="`/clips/${item.id}`" class="item _panel _gap afdcfbfb">
 			<div class="header">
 				<MkAvatar class="avatar" :user="user"/>
-				<MkReactionIcon class="reaction" :reaction="item.type" :custom-emojis="item.note.emojis" :no-style="true"/>
+				<MkEmoji class="reaction" :emoji="item.type" :custom-emojis="item.note.emojis" :is-reaction="true" :normal="true" :no-style="true"/>
 				<MkTime :time="item.createdAt" class="createdAt"/>
 			</div>
 			<MkNote :key="item.id" :note="item.note"/>
@@ -18,7 +18,6 @@ import { computed } from 'vue';
 import * as misskey from 'misskey-js';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkNote from '@/components/note.vue';
-import MkReactionIcon from '@/components/reaction-icon.vue';
 
 const props = defineProps<{
 	user: misskey.entities.User;

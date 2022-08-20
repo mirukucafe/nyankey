@@ -16,11 +16,13 @@
 			<i v-else-if="notification.type === 'pollVote'" class="fas fa-poll-h"></i>
 			<i v-else-if="notification.type === 'pollEnded'" class="fas fa-poll-h"></i>
 			<!-- notification.reaction が null になることはまずないが、ここでoptional chaining使うと一部ブラウザで刺さるので念の為 -->
-			<XReactionIcon
+			<MkEmoji
 				v-else-if="notification.type === 'reaction'"
 				ref="reactionRef"
-				:reaction="notification.reaction ? notification.reaction.replace(/^:(\w+):$/, ':$1@.:') : notification.reaction"
+				:emoji="notification.reaction ? notification.reaction.replace(/^:(\w+):$/, ':$1@.:') : notification.reaction"
 				:custom-emojis="notification.note.emojis"
+				:is-reaction="true"
+				:normal="true"
 				:no-style="true"
 			/>
 		</div>
@@ -75,7 +77,6 @@
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import * as misskey from 'misskey-js';
-import XReactionIcon from './reaction-icon.vue';
 import MkFollowButton from './follow-button.vue';
 import XReactionTooltip from './reaction-tooltip.vue';
 import { getNoteSummary } from '@/scripts/get-note-summary';
