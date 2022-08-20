@@ -1,19 +1,16 @@
 <template>
-<MkModal ref="modal" :prefer-type="'dialog:top'" @click="$refs.modal.close()" @closed="$emit('closed')">
-	<MkPostForm v-bind="$attrs" @posted="$refs.modal.close()" @cancel="$refs.modal.close()" @esc="$refs.modal.close()"/>
+<MkModal ref="modal" :prefer-type="'dialog:top'" @click="modal.close()" @closed="emit('closed')">
+	<MkPostForm v-bind="$attrs" @posted="modal.close()" @cancel="modal.close()" @esc="modal.close()"/>
 </MkModal>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import MkModal from '@/components/ui/modal.vue';
 import MkPostForm from '@/components/post-form.vue';
 
-export default defineComponent({
-	components: {
-		MkModal,
-		MkPostForm,
-	},
-	emits: ['closed'],
-});
+const emit = defineEmits<{
+	(ev: 'closed'): void;
+}>();
+
+let modal: InstanceType<typeof MkModal> = $ref();
 </script>
