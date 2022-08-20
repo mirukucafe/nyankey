@@ -1,6 +1,6 @@
 <template>
 <component
-	:is="self ? 'MkA' : 'a'" ref="el" class="ieqqeuvs _link" :[attr]="self ? url.substr(local.length) : url" :rel="rel" :target="target"
+	:is="self ? 'MkA' : 'a'" ref="el" class="ieqqeuvs _link" :[attr]="self ? url.slice(local.length) : url" :rel="rel" :target="target"
 	@contextmenu.stop="() => {}"
 >
 	<template v-if="!self">
@@ -11,60 +11,47 @@
 	<template v-if="pathname === '/' && self">
 		<span class="self">{{ hostname }}</span>
 	</template>
-	<span v-if="pathname != ''" class="pathname">{{ self ? pathname.substr(1) : pathname }}</span>
+	<span v-if="pathname != ''" class="pathname">{{ self ? pathname.slice(1) : pathname }}</span>
 	<span class="query">{{ query }}</span>
 	<span class="hash">{{ hash }}</span>
 	<i v-if="target === '_blank'" class="fas fa-external-link-square-alt icon"></i>
 </component>
 </template>
 
-<script lang="ts">
-import { defineAsyncComponent, defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { defineAsyncComponent } from 'vue';
 import { toUnicode as decodePunycode } from 'punycode/';
 import { url as local } from '@/config';
 import * as os from '@/os';
 import { useTooltip } from '@/scripts/use-tooltip';
 import { safeURIDecode } from '@/scripts/safe-uri-decode';
 
-export default defineComponent({
-	props: {
-		url: {
-			type: String,
-			required: true,
-		},
-		rel: {
-			type: String,
-			required: false,
-			default: null,
-		},
-	},
-	setup(props) {
-		const self = props.url.startsWith(local);
-		const url = new URL(props.url);
-		const el = ref();
-		
-		useTooltip(el, (showing) => {
-			os.popup(defineAsyncComponent(() => import('@/components/url-preview-popup.vue')), {
-				showing,
-				url: props.url,
-				source: el.value,
-			}, {}, 'closed');
-		});
+const props = withDefaults(defineProps<{
+	url: string;
+	rel?: string | null;
+}>(), {
+	rel: null,
+});
 
-		return {
-			local,
-			schema: url.protocol,
-			hostname: decodePunycode(url.hostname),
-			port: url.port,
-			pathname: safeURIDecode(url.pathname),
-			query: safeURIDecode(url.search),
-			hash: safeURIDecode(url.hash),
-			self,
-			attr: self ? 'to' : 'href',
-			target: self ? null : '_blank',
-			el,
-		};
-	},
+const self = props.url.startsWith(local);
+const url = new URL(props.url);
+let el: HTMLElement | null = $ref(null);
+
+let schema = $ref(url.protocol);
+let hostname = $ref(decodePunycode(url.hostname));
+let port = $ref(url.port);
+let pathname = $ref(safeURIDecode(url.pathname));
+let query = $ref(safeURIDecode(url.search));
+let hash = $ref(safeURIDecode(url.hash));
+let attr = $ref(self ? 'to' : 'href');
+let target = $ref(self ? null : '_blank');
+
+useTooltip($$(el), (showing) => {
+	os.popup(defineAsyncComponent(() => import('@/components/url-preview-popup.vue')), {
+		showing,
+		url: props.url,
+		source: el,
+	}, {}, 'closed');
 });
 </script>
 
