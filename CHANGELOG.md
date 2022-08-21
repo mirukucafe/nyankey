@@ -26,6 +26,8 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 - Client: acrylic styling
 - Client: Twitter embeds, the standard URL preview is used instead.
 - Promotion entities and endpoints
+- Server: The configuration item `signToActivityPubGet` has been removed and will be ignored if set explicitly.
+  Foundkey will now work as if it was set to `true`.
 
 ### Fixed
 - Server: Blocking remote accounts
