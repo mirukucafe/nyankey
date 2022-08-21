@@ -76,9 +76,7 @@ export default class Resolver {
 			this.user = await getInstanceActor();
 		}
 
-		const object = (this.user
-			? await signedGet(value, this.user)
-			: await getJson(value, 'application/activity+json, application/ld+json')) as IObject;
+		const object = await signedGet(value, this.user);
 
 		if (object == null || (
 			Array.isArray(object['@context']) ?
