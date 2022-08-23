@@ -26,10 +26,10 @@ const props = withDefaults(defineProps<{
 	defaultOpen: false,
 });
 
-let opened = $ref(props.defaultOpen);
-let openedAtLeastOnce = $ref(props.defaultOpen);
+let opened: boolean = $ref(props.defaultOpen);
+let openedAtLeastOnce: boolean = $ref(props.defaultOpen);
 
-const toggle = () => {
+const toggle = (): void => {
 	opened = !opened;
 	if (opened) {
 		openedAtLeastOnce = true;
