@@ -39,8 +39,6 @@ import { onScrollTop, isTopVisible, getScrollPosition, getScrollContainer } from
 import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
 
-const SECOND_FETCH_LIMIT = 30;
-
 export type Paging<E extends keyof misskey.Endpoints = keyof misskey.Endpoints> = {
 	endpoint: E;
 	limit: number;
@@ -59,6 +57,8 @@ export type Paging<E extends keyof misskey.Endpoints = keyof misskey.Endpoints> 
 
 	offsetMode?: boolean;
 };
+
+const SECOND_FETCH_LIMIT = 30;
 
 const props = withDefaults(defineProps<{
 	pagination: Paging;
@@ -228,8 +228,8 @@ const prepend = (item: Item): void => {
 		} else {
 			queue.value.push(item);
 			onScrollTop(rootEl.value, () => {
-				for (const item of queue.value) {
-					prepend(item);
+				for (const queueItem of queue.value) {
+					prepend(queueItem);
 				}
 				queue.value = [];
 			});
@@ -241,7 +241,7 @@ const append = (item: Item): void => {
 	items.value.push(item);
 };
 
-const removeItem = (finder: (item: Item) => boolean) => {
+const removeItem = (finder: (item: Item) => boolean): void => {
 	const i = items.value.findIndex(finder);
 	items.value.splice(i, 1);
 };
