@@ -109,7 +109,7 @@ export function toHtml(nodes: mfm.MfmNode[] | null, mentionedRemoteUsers: IMenti
 			const a = doc.createElement('a');
 			const { username, host, acct } = node.props;
 			const remoteUserInfo = mentionedRemoteUsers.find(remoteUser => remoteUser.username === username && remoteUser.host === host);
-			a.href = remoteUserInfo ? (remoteUserInfo.url ? remoteUserInfo.url : remoteUserInfo.uri) : `${config.url}/${acct}`;
+			a.href = remoteUserInfo?.url ?? remoteUserInfo?.uri ?? `${config.url}/${acct}`;
 			a.className = 'u-url mention';
 			a.textContent = acct;
 			return a;
