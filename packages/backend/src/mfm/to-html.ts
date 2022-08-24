@@ -106,13 +106,18 @@ export function toHtml(nodes: mfm.MfmNode[] | null, mentionedRemoteUsers: IMenti
 		},
 
 		mention(node) {
+			// Mastodon microformat: span.h-card > a.u-url.mention
 			const a = doc.createElement('a');
 			const { username, host, acct } = node.props;
 			const remoteUserInfo = mentionedRemoteUsers.find(remoteUser => remoteUser.username === username && remoteUser.host === host);
 			a.href = remoteUserInfo?.url ?? remoteUserInfo?.uri ?? `${config.url}/${acct}`;
 			a.className = 'u-url mention';
 			a.textContent = acct;
-			return a;
+
+			const card = doc.createElement('span');
+			card.className = 'h-card';
+			card.appendChild(a);
+			return card;
 		},
 
 		quote(node) {
