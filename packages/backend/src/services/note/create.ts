@@ -15,7 +15,7 @@ import { insertNoteUnread } from '@/services/note/unread.js';
 import { extractMentions } from '@/misc/extract-mentions.js';
 import { extractCustomEmojisFromMfm } from '@/misc/extract-custom-emojis-from-mfm.js';
 import { extractHashtags } from '@/misc/extract-hashtags.js';
-import { Note, IMentionedRemoteUsers } from '@/models/entities/note.js';
+import { Note } from '@/models/entities/note.js';
 import { Mutings, Users, NoteWatchings, Notes, Instances, UserProfiles, MutedNotes, Channels, ChannelFollowings, NoteThreadMutings } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { App } from '@/models/entities/app.js';
@@ -537,16 +537,6 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 	// Append mentions data
 	if (mentionedUsers.length > 0) {
 		insert.mentions = mentionedUsers.map(u => u.id);
-		const profiles = await UserProfiles.findBy({ userId: In(insert.mentions) });
-		insert.mentionedRemoteUsers = JSON.stringify(mentionedUsers.filter(u => Users.isRemoteUser(u)).map(u => {
-			const profile = profiles.find(p => p.userId === u.id);
-			return {
-				uri: u.uri,
-				url: profile?.url,
-				username: u.username,
-				host: u.host,
-			} as IMentionedRemoteUsers[0];
-		}));
 	}
 
 	// 投稿を作成

@@ -155,11 +155,6 @@ export class Note {
 	})
 	public mentions: User['id'][];
 
-	@Column('text', {
-		default: '[]',
-	})
-	public mentionedRemoteUsers: string;
-
 	@Column('varchar', {
 		length: 128, array: true, default: '{}',
 	})
@@ -233,10 +228,3 @@ export class Note {
 		}
 	}
 }
-
-export type IMentionedRemoteUsers = {
-	uri: string;
-	url?: string;
-	username: string;
-	host: string;
-}[];

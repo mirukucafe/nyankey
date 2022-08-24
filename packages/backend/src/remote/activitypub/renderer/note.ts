@@ -1,6 +1,6 @@
 import { In, IsNull } from 'typeorm';
 import config from '@/config/index.js';
-import { Note, IMentionedRemoteUsers } from '@/models/entities/note.js';
+import { Note } from '@/models/entities/note.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { DriveFiles, Notes, Users, Emojis, Polls } from '@/models/index.js';
 import { Emoji } from '@/models/entities/emoji.js';
@@ -55,27 +55,30 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 
 	const attributedTo = `${config.url}/users/${note.userId}`;
 
-	const mentions = (JSON.parse(note.mentionedRemoteUsers) as IMentionedRemoteUsers).map(x => x.uri);
+	const mentionedUsers = note.mentions.length > 0 ? await Users.findBy({
+		id: In(note.mentions),
+	}) : [];
+
+	const mentionUris = mentionedUsers
+		// only remote users
+		.filter(user => Users.isRemoteUser(user))
+		.map(user => user.uri);
 
 	let to: string[] = [];
 	let cc: string[] = [];
 
 	if (note.visibility === 'public') {
 		to = ['https://www.w3.org/ns/activitystreams#Public'];
-		cc = [`${attributedTo}/followers`].concat(mentions);
+		cc = [`${attributedTo}/followers`].concat(mentionUris);
 	} else if (note.visibility === 'home') {
 		to = [`${attributedTo}/followers`];
-		cc = ['https://www.w3.org/ns/activitystreams#Public'].concat(mentions);
+		cc = ['https://www.w3.org/ns/activitystreams#Public'].concat(mentionUris);
 	} else if (note.visibility === 'followers') {
 		to = [`${attributedTo}/followers`];
-		cc = mentions;
+		cc = mentionUris;
 	} else {
-		to = mentions;
+		to = mentionUris;
 	}
-
-	const mentionedUsers = note.mentions.length > 0 ? await Users.findBy({
-		id: In(note.mentions),
-	}) : [];
 
 	const hashtagTags = (note.tags || []).map(tag => renderHashtag(tag));
 	const mentionTags = mentionedUsers.map(u => renderMention(u));

@@ -93,11 +93,6 @@ export async function createMessage(user: { id: User['id']; host: User['host']; 
 			userId: message.userId,
 			visibility: 'specified',
 			mentions: [ recipientUser.id ],
-			mentionedRemoteUsers: JSON.stringify([ recipientUser ].map(u => ({
-				uri: u.uri,
-				username: u.username,
-				host: u.host,
-			}))),
 		} as Note;
 
 		const activity = renderActivity(renderCreate(await renderNote(note, false, true), note));
