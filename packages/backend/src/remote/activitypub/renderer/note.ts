@@ -5,7 +5,7 @@ import { DriveFile } from '@/models/entities/drive-file.js';
 import { DriveFiles, Notes, Users, Emojis, Polls } from '@/models/index.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { Poll } from '@/models/entities/poll.js';
-import toHtml from '../misc/get-note-html.js';
+import { toHtml } from '@/mfm/to-html.js';
 import renderEmoji from './emoji.js';
 import renderMention from './mention.js';
 import renderHashtag from './hashtag.js';
@@ -97,9 +97,7 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 
 	const summary = note.cw === '' ? String.fromCharCode(0x200B) : note.cw;
 
-	const content = toHtml(Object.assign({}, note, {
-		text: apText,
-	}));
+	const content = await toHtml(apText, note.mentions);
 
 	const emojis = await getEmojis(note.emojis);
 	const apemojis = emojis.map(emoji => renderEmoji(emoji));
@@ -112,7 +110,7 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 
 	const asPoll = poll ? {
 		type: 'Question',
-		content: toHtml(Object.assign({}, note, { text })),
+		content: await toHtml(text, note.mentions),
 		[poll.expiresAt && poll.expiresAt < new Date() ? 'closed' : 'endTime']: poll.expiresAt,
 		[poll.multiple ? 'anyOf' : 'oneOf']: poll.choices.map((text, i) => ({
 			type: 'Note',

@@ -1,5 +1,4 @@
 import { URL } from 'node:url';
-import * as mfm from 'mfm-js';
 import config from '@/config/index.js';
 import { ILocalUser } from '@/models/entities/user.js';
 import { toHtml } from '@/mfm/to-html.js';
@@ -66,7 +65,7 @@ export async function renderPerson(user: ILocalUser) {
 		url: `${config.url}/@${user.username}`,
 		preferredUsername: user.username,
 		name: user.name,
-		summary: profile.description ? toHtml(mfm.parse(profile.description)) : null,
+		summary: profile.description ? await toHtml(profile.description) : null,
 		icon: avatar ? renderImage(avatar) : null,
 		image: banner ? renderImage(banner) : null,
 		tag,
