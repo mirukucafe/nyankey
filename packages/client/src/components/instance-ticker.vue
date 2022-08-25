@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { instanceName } from '@/config';
+import { instanceName, version, software } from '@/config';
 
 const props = defineProps<{
 	instance?: {
@@ -24,8 +24,8 @@ const instance = props.instance ?? {
 	faviconUrl: '/favicon.ico',
 	name: instanceName,
 	themeColor: (document.querySelector('meta[name="theme-color-orig"]') as HTMLMetaElement).content,
-	softwareName: 'misskey',
-	softwareVersion: '',
+	softwareName: software,
+	softwareVersion: version,
 };
 
 const themeColor = instance.themeColor ?? '#777777';
