@@ -10,6 +10,7 @@ export const lang = localStorage.getItem('lang');
 export const langs = _LANGS_;
 export const locale = JSON.parse(localStorage.getItem('locale'));
 export const version = _VERSION_;
-export const instanceName = siteName === 'Misskey' ? host : siteName;
+export const software = _SOFTWARE_;
+export const instanceName = siteName === 'FoundKey' ? host : siteName;
 export const ui = localStorage.getItem('ui');
 export const debug = localStorage.getItem('debug') === 'true';

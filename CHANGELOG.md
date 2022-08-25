@@ -9,6 +9,7 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 
 ## Unreleased
 ### Added
+- Client: Show instance info in ticker
 - Client: Readded group pages
 - Client: add re-collapsing to quoted notes
 
