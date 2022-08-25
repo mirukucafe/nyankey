@@ -10,10 +10,10 @@ import { instanceName } from '@/config';
 
 const props = defineProps<{
 	instance?: {
-		faviconUrl?: string
-		name: string
-		themeColor?: string
-	}
+		faviconUrl?: string;
+		name: string;
+		themeColor?: string;
+	};
 }>();
 
 // if no instance data is given, this is for the local instance
