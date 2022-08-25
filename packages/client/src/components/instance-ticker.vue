@@ -37,6 +37,8 @@ const bg = {
 	height: $height;
 	border-radius: 4px 0 0 4px;
 	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	color: #fff;
 	text-shadow: /* .866 ≈ sin(60deg) */
 		1px 0 1px #000,
