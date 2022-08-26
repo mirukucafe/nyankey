@@ -19,4 +19,4 @@ pipeline:
         - pull_request
     image: node:18.6.0
     commands:
-      - yarn workspaces foundkey-js run lint
+      - yarn workspace foundkey-js run lint
