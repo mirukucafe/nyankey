@@ -1,4 +1,6 @@
 {
+	"name": "sw",
+	"version": "13.0.0-preview1",
 	"private": true,
 	"scripts": {
 		"watch": "node build.js watch",

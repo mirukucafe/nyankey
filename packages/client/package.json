@@ -1,4 +1,6 @@
 {
+	"name": "client",
+	"version": "13.0.0-preview1",
 	"private": true,
 	"scripts": {
 		"watch": "vite build --watch --mode development",
@@ -38,7 +40,7 @@
 		"idb-keyval": "6.2.0",
 		"insert-text-at-cursor": "0.3.0",
 		"json5": "2.2.1",
-		"katex": "0.15.6",
+		"katex": "0.16.0",
 		"matter-js": "0.18.0",
 		"mfm-js": "0.22.1",
 		"misskey-js": "0.0.14",

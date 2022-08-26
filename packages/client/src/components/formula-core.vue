@@ -19,5 +19,5 @@ const compiledFormula = computed(() => katex.renderToString(props.formula, {
 </script>
 
 <style>
-@import "../../node_modules/katex/dist/katex.min.css";
+@import "katex/dist/katex.min.css";
 </style>
