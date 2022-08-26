@@ -132,6 +132,8 @@ Full releases should also remove any pre-release CHANGELOG sections.
 ## Localization (l10n)
 
 We have not yet set up localization management, so updating of locales can currently only be done as commits changing the respective files in the repo.
+Localization files are found in `/locales/` and are YAML files using the `yml` file extension.
+The file name consists of the [IETF BCP 47](https://www.rfc-editor.org/info/bcp47) language code.
 
 ## Development
 During development, it is useful to use the `npm run dev` command.
@@ -165,15 +167,18 @@ npx cross-env TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT="./
 ### e2e tests
 TODO
 
-## Continuous integration
-Misskey uses GitHub Actions for executing automated tests.
-Configuration files are located in [`/.github/workflows`](/.github/workflows).
+## Continuous integration (CI)
+
+Foundkey uses Woodpecker for executing automated tests and lints.
+CI runs can be found at [ci.akkoma.dev](https://ci.akkoma.dev/FoundKeyGang/FoundKey)
+Configuration files are located in `/.woodpecker/`.
 
 ## Vue
 Misskey uses Vue(v3) as its front-end framework.
-- Use TypeScript.
+- Use TypeScript functionality.
+	- Use the type only variant of `defineProps` and `defineEmits`.
 - When creating a new component, please use the Composition API (with [setup sugar](https://v3.vuejs.org/api/sfc-script-setup.html) and [ref sugar](https://github.com/vuejs/rfcs/discussions/369)) instead of the Options API.
-	- Some of the existing components are implemented in the Options API, but it is an old implementation. Refactors that migrate those components to the Composition API are also welcome.
+	- Some of the existing components are implemented in the Options API, but it is an old implementation. Refactors that migrate those components to the Composition API are welcome.
 	  You might be able to use this shell command to find components that have not yet been refactored: `find packages/client/src -name '*.vue' | xargs grep '<script' | grep -v 'setup'`
 
 ## Notes
@@ -181,12 +186,15 @@ Misskey uses Vue(v3) as its front-end framework.
 
 Just execute `yarn` to fix it.
 
-### INSERTするときにはsaveではなくinsertを使用する
-#6441
+### Use `insert` instead of `save` to create new objects
+When using `save`, you may accidentally update an existing item, because `save` circumvents uniqueness constraints.
 
-### placeholder
-SQLをクエリビルダで組み立てる際、使用するプレースホルダは重複してはならない
-例えば
+See also <https://github.com/misskey-dev/misskey/issues/6441>.
+
+### typeorm placeholders
+The names of placeholders used in queries must be unique in each query.
+
+For example
 ``` ts
 query.andWhere(new Brackets(qb => {
 	for (const type of ps.fileType) {
@@ -194,8 +202,8 @@ query.andWhere(new Brackets(qb => {
 	}
 }));
 ```
-と書くと、ループ中で`type`というプレースホルダが複数回使われてしまいおかしくなる
-だから次のようにする必要がある
+would mean that `type` is used multiple times because it is used in a loop.
+This is incorrect. instead you would need to do something like the following:
 ```ts
 query.andWhere(new Brackets(qb => {
 	for (const type of ps.fileType) {
@@ -205,82 +213,79 @@ query.andWhere(new Brackets(qb => {
 }));
 ```
 
-### Not `null` in TypeORM
+### `null` (JS/TS) and `NULL` (SQL)
+#### in TypeORM FindOptions
+Using the JavaScript/TypeScript `null` constant is not supported in Typeorm. Instead you need to use the special `Null()` function Typeorm provides.
+It can also be combined with other similar TypeORM functions.
+
+For example to make a condition similar to SQL `IS NOT NULL`, do the following:
 ```ts
-const foo = await Foos.findOne({
-	bar: Not(null)
-});
-```
-のようなクエリ(`bar`が`null`ではない)は期待通りに動作しない。
-次のようにします:
-```ts
+import { IsNull, Not } from 'typeorm';
+
 const foo = await Foos.findOne({
 	bar: Not(IsNull())
 });
 ```
 
-### `null` in SQL
-SQLを発行する際、パラメータが`null`になる可能性のある場合はSQL文を出し分けなければならない
-例えば
+#### in SQL queries or `QueryBuilder`s
+In SQL statements, you need to have separate statements for cases where parameters may be `null`.
+
+Take for example this snippet:
 ``` ts
 query.where('file.folderId = :folderId', { folderId: ps.folderId });
 ```
-という処理で、`ps.folderId`が`null`だと結果的に`file.folderId = null`のようなクエリが発行されてしまい、これは正しいSQLではないので期待した結果が得られない
-だから次のようにする必要がある
+If `ps.folderId === null`, the resulting query would be `file.folderId = null` which is incorrect and might produce unexpected results.
+
+What you need to do instead is something like the following:
 ``` ts
-if (ps.folderId) {
+if (ps.folderId != null) {
 	query.where('file.folderId = :folderId', { folderId: ps.folderId });
 } else {
 	query.where('file.folderId IS NULL');
 }
 ```
 
-### `[]` in SQL
-SQLを発行する際、`IN`のパラメータが`[]`(空の配列)になる可能性のある場合はSQL文を出し分けなければならない
-例えば
+### Empty array handling in TypeORM FindOptions
+If you are using the `In` function in `FindOptions`, there must be different behaviour if it may receive empty arrays.
+
 ``` ts
 const users = await Users.find({
 	id: In(userIds)
 });
 ```
-という処理で、`userIds`が`[]`だと結果的に`user.id IN ()`のようなクエリが発行されてしまい、これは正しいSQLではないので期待した結果が得られない
-だから次のようにする必要がある
+This would produce erroneous SQL, i.e. `user.id IN ()`.
+To fix this you would need separate handling for an empty array, for example like this:
 ``` ts
 const users = userIds.length > 0 ? await Users.find({
 	id: In(userIds)
 }) : [];
 ```
 
-### 配列のインデックス in SQL
-SQLでは配列のインデックスは**1始まり**。
-`[a, b, c]`の `a`にアクセスしたいなら`[0]`ではなく`[1]`と書く
+### Array indexing in SQL
+PostgreSQL array indices **start at 1**.
 
-### null IN
-nullが含まれる可能性のあるカラムにINするときは、そのままだとおかしくなるのでORなどでnullのハンドリングをしよう。
+### `NULL IN ...`
+When `IN` is performed on a column that may contain `NULL` values, use `OR` or similar to handle `NULL` values.
 
-### `undefined`にご用心
-MongoDBの時とは違い、findOneでレコードを取得する時に対象レコードが存在しない場合 **`undefined`** が返ってくるので注意。
-MongoDBは`null`で返してきてたので、その感覚で`if (x === null)`とか書くとバグる。代わりに`if (x == null)`と書いてください
-
-### Migration作成方法
-packages/backendで:
+### creating migrations
+In `packages/backend`, run:
 ```sh
 npx typeorm migration:generate -d ormconfig.js -o <migration name>
 ```
 
-- 生成後、ファイルをmigration下に移してください
-- 作成されたスクリプトは不必要な変更を含むため除去してください
+After generating (and potentially editing) the file, move it to the `packages/backend/migration` folder.
 
-### コネクションには`markRaw`せよ
-**Vueのコンポーネントのdataオプションとして**misskey.jsのコネクションを設定するとき、必ず`markRaw`でラップしてください。インスタンスが不必要にリアクティブ化されることで、misskey.js内の処理で不具合が発生するとともに、パフォーマンス上の問題にも繋がる。なお、Composition APIを使う場合はこの限りではない(リアクティブ化はマニュアルなため)。
+### `markRaw` for connections
+When setting up a foundkey-js streaming connection as a data option to a Vue component, be sure to wrap it in `markRaw`.
+Unnecessarily reactivating a connection causes problems with processing in foundkey-js and leads to performance issues.
+This does not apply when using the Composition API since reactivation is manual.
 
-### JSONのimportに気を付けよう
-TypeScriptでjsonをimportすると、tscでコンパイルするときにそのjsonファイルも一緒にdistディレクトリに吐き出されてしまう。この挙動により、意図せずファイルの書き換えが発生することがあるので、jsonをimportするときは書き換えられても良いものかどうか確認すること。書き換えされて欲しくない場合は、importで読み込むのではなく、`fs.readFileSync`などの関数を使って読み込むようにすればよい。
+### JSON imports
+If you import json in TypeScript, the json file will be spit out together with the TypeScript file into the dist directory when compiling with tsc. This behavior may cause unintentional rewriting of files, so when importing json files, be sure to check whether the files are allowed to be rewritten or not. If you do not want the file to be rewritten, you should make sure that the file can be rewritten by importing the json file. If you do not want the file to be rewritten, use functions such as `fs.readFileSync` to read the file instead of importing it.
 
-### コンポーネントのスタイル定義でmarginを持たせない
-コンポーネント自身がmarginを設定するのは問題の元となることはよく知られている
-marginはそのコンポーネントを使う側が設定する
+### Component style definitions do not have a `margin`
+Setting the `margin` of a component may be confusing.
+Instead, it should always be the user of a component that sets a `margin`.
 
-## その他
-### HTMLのクラス名で follow という単語は使わない
-広告ブロッカーで誤ってブロックされる
+### Do not use the word "follow" in HTML class names
+This has caused things to be blocked by an ad blocker in the past.
