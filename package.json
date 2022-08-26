@@ -6,6 +6,7 @@
 		"url": "https://akkoma.dev/FoundKeyGang/FoundKey.git"
 	},
 	"private": true,
+	"workspaces": ["packages/*"],
 	"scripts": {
 		"postinstall": "node ./scripts/install-packages.js",
 		"build": "node ./scripts/build.js",
