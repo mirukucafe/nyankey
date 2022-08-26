@@ -3871,6 +3871,7 @@ __metadata:
     file-type: 17.1.2
     fluent-ffmpeg: 2.1.2
     form-data: ^4.0.0
+    foundkey-js: "workspace:*"
     got: 12.1.0
     hpagent: 0.1.2
     ioredis: 4.28.5
@@ -4943,6 +4944,7 @@ __metadata:
     eslint-plugin-vue: ^9.1.1
     eventemitter3: 4.0.7
     feed: 4.2.2
+    foundkey-js: "workspace:*"
     idb-keyval: 6.2.0
     insert-text-at-cursor: 0.3.0
     json5: 2.2.1
@@ -7851,7 +7853,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"foundkey-js@workspace:packages/foundkey-js":
+"foundkey-js@workspace:*, foundkey-js@workspace:packages/foundkey-js":
   version: 0.0.0-use.local
   resolution: "foundkey-js@workspace:packages/foundkey-js"
   dependencies:
@@ -16143,6 +16145,7 @@ __metadata:
   dependencies:
     esbuild: ^0.14.13
     eslint: ^8.20.0
+    foundkey-js: "workspace:*"
     idb-keyval: ^6.0.3
   languageName: unknown
   linkType: soft

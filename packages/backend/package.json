@@ -50,6 +50,7 @@
 		"feed": "4.2.2",
 		"file-type": "17.1.2",
 		"fluent-ffmpeg": "2.1.2",
+		"foundkey-js": "workspace:*",
 		"got": "12.1.0",
 		"hpagent": "0.1.2",
 		"ioredis": "4.28.5",

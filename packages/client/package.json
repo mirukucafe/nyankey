@@ -38,6 +38,7 @@
 		"escape-regexp": "0.0.1",
 		"eventemitter3": "4.0.7",
 		"feed": "4.2.2",
+		"foundkey-js": "workspace:*",
 		"idb-keyval": "6.2.0",
 		"insert-text-at-cursor": "0.3.0",
 		"json5": "2.2.1",

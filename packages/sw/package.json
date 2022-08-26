@@ -9,6 +9,7 @@
 	},
 	"dependencies": {
 		"esbuild": "^0.14.13",
+		"foundkey-js": "workspace:*",
 		"idb-keyval": "^6.0.3"
 	},
 	"devDependencies": {
