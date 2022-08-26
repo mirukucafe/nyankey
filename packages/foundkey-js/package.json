@@ -2,6 +2,7 @@
 	"name": "foundkey-js",
 	"version": "13.0.0-preview1",
 	"description": "Fork of misskey-js for Foundkey",
+	"type": "module",
 	"main": "./built/index.js",
 	"types": "./built/index.d.ts",
 	"scripts": {
