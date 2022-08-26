@@ -65,6 +65,31 @@ If they are satisfied that what you are doing seems like a good idea and the con
 Or, they might request another member to also review your changes.
 Please be patient as nobody is getting paid to do this, so it might take a bit longer.
 
+### Changelog Trailer
+
+To keep track of changes that should go into the CHANGELOG, we use a standard [trailer](https://git-scm.com/docs/git-interpret-trailers).
+For single-commits that should be included in the changeset, include the trailer directly.
+For multiple commits, the merge commit (in case of a branch) or an empty final commit should include the trailer.
+
+Valid values for the trailer are: "Added", "Changed", "Removed", "Fixed", "Security".
+For breaking changes, include a "BREAKING:" in the summary.
+Any additional notes should go into the commit body.
+
+If you forget to include it, you can create an empty commit after the fact with it (`--allow-empty`).
+Try not to include invalid values in the trailer.
+
+Here is an example complete breaking commit with notes.
+
+```
+BREAKING: client: remove rooms
+
+Rooms were removed by syuilo some time ago.
+This commit is an example of what the changelog trailer usage is like.
+Admins should ensure to run migrations on startup, else foundkey will fail to start.
+
+Changelog: Removed
+```
+
 ### Creating a PR
 
 - Please prefix the title with the part of Misskey you are changing, i.e. `server:` or `client:`
@@ -84,8 +109,8 @@ Thanks for your cooperation!
 
 **Note:**
 Since Foundkey was forked from Misskey recently, there might be some breaking changes we want to make.
-For this purpose there will be several pre-release versions of 13.0.0 (e.g. `13.0.0-0.1.0`).
-Until major version 13 is released, the below process is not in effect.
+For this purpose there will be several pre-release versions of 13.0.0 (e.g. `13.0.0-preview1`).
+Until major version 13 is released, the below process is not fully in effect.
 
 ### Release process
 Before a stable version is released, there should be a comment period which should usually be 7 days to give everyone the chance to comment.
@@ -94,9 +119,15 @@ For commenting, an issue should be created, and the comment period should also b
 
 Pre-releases do not require as much scrutiny and can be useful for "field testing" before a stable release is made.
 
-All releases are managed as git tags. The name of the tag should be exactly identical to the version number.
-I.e. if the released version is 1.2.3, the git tag should be called "1.2.3" (and **not** "v1.2.3").
-The tag should contain the changelog section for the respective release.
+All releases are managed as git tags.
+If the released version is 1.2.3, the git tag should be "v1.2.3".
+Pre-releases are marked "previewN".
+The first pre-release for 1.2.3 should be tagged "v1.2.3-preview1".
+The tag should be a "lightweight" tag (not annotated) of the commit that modifies the CHANGELOG and package.json version.
+
+To generate the changelog, we use a standard shortlog command: `git shortlog --format='%h %s' --group=trailer:changelog LAST_TAG..`.
+The person performing the release process should build the next CHANGELOG section based on this output, not use it as-is.
+Full releases should also remove any pre-release CHANGELOG sections.
 
 ## Localization (l10n)
 
