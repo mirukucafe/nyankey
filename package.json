@@ -6,9 +6,11 @@
 		"url": "https://akkoma.dev/FoundKeyGang/FoundKey.git"
 	},
 	"private": true,
-	"workspaces": ["packages/*"],
+	"workspaces": [
+		"packages/*"
+	],
 	"scripts": {
-		"build": "node ./scripts/build.js",
+		"build": "yarn workspaces foreach run build",
 		"start": "yarn workspace backend run start",
 		"start:test": "yarn workspace backend run start:test",
 		"init": "yarn migrate",
@@ -17,7 +19,7 @@
 		"gulp": "gulp build",
 		"watch": "yarn dev",
 		"dev": "node ./scripts/dev.js",
-		"lint": "node ./scripts/lint.js",
+		"lint": "yarn workspaces foreach run lint",
 		"cy:open": "cypress open --browser --e2e --config-file=cypress.config.ts",
 		"cy:run": "cypress run",
 		"e2e": "start-server-and-test start:test http://localhost:61812 cy:run",
@@ -45,5 +47,6 @@
 		"cypress": "10.3.0",
 		"start-server-and-test": "1.14.0",
 		"typescript": "4.7.4"
-	}
+	},
+	"packageManager": "yarn@3.2.3"
 }
