@@ -6,7 +6,7 @@
 	"main": "./built/index.js",
 	"types": "./built/index.d.ts",
 	"scripts": {
-		"prepare": "yarn build",
+		"prepack": "yarn build",
 		"build": "yarn run tsc",
 		"tsc": "tsc",
 		"tsd": "tsd",
