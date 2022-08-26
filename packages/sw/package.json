@@ -10,8 +10,7 @@
 	"resolutions": {},
 	"dependencies": {
 		"esbuild": "^0.14.13",
-		"idb-keyval": "^6.0.3",
-		"misskey-js": "0.0.14"
+		"idb-keyval": "^6.0.3"
 	},
 	"devDependencies": {
 		"eslint": "^8.20.0"
