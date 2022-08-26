@@ -9,6 +9,9 @@
 		"watch": "node watch.mjs",
 		"lint": "eslint src --ext .ts",
 		"mocha": "cross-env NODE_ENV=test TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT=\"./test/tsconfig.json\" mocha",
+		"migrate": "npx typeorm migration:run -d ormconfig.js",
+		"start": "node --experimental-json-modules ./built/index.js",
+		"start:test": "cross-env NODE_ENV=test node --experimental-json-modules ./built/index.js",
 		"test": "npm run mocha"
 	},
 	"resolutions": {
