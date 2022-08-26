@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 
 withDefaults(defineProps<{
 	user: misskey.entities.User;

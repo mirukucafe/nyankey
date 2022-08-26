@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{

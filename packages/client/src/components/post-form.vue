@@ -63,11 +63,11 @@
 <script lang="ts" setup>
 import { inject, watch, nextTick, onMounted, defineAsyncComponent } from 'vue';
 import * as mfm from 'mfm-js';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode/';
-import * as Acct from 'misskey-js/built/acct';
+import * as Acct from 'foundkey-js/built/acct';
 import { throttle } from 'throttle-debounce';
 import XNoteSimple from './note-simple.vue';
 import XNotePreview from './note-preview.vue';

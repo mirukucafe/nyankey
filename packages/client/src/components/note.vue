@@ -103,7 +103,7 @@
 <script lang="ts" setup>
 import { inject, onMounted, ref, Ref } from 'vue';
 import * as mfm from 'mfm-js';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkNoteSub from './MkNoteSub.vue';
 import XNoteHeader from './note-header.vue';
 import XNoteSimple from './note-simple.vue';

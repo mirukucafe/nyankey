@@ -1,5 +1,5 @@
 import { defineAsyncComponent, reactive } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import { showSuspendedDialog } from './scripts/show-suspended-dialog';
 import { i18n } from './i18n';
 import { del, get, set } from '@/scripts/idb-proxy';

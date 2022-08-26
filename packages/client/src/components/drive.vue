@@ -89,7 +89,7 @@
 
 <script lang="ts" setup>
 import { nextTick, onActivated, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import * as Misskey from 'misskey-js';
+import * as Misskey from 'foundkey-js';
 import XNavFolder from './drive.nav-folder.vue';
 import XFolder from './drive.folder.vue';
 import XFile from './drive.file.vue';

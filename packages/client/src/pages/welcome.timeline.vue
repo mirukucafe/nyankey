@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { onUpdated, ref, Ref } from 'vue';
-import { Note } from 'misskey-js/built/entities';
+import { Note } from 'foundkey-js/built/entities';
 import XReactionsViewer from '@/components/reactions-viewer.vue';
 import XMediaList from '@/components/media-list.vue';
 import XPoll from '@/components/poll.vue';

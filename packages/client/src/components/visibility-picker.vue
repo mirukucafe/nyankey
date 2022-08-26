@@ -44,7 +44,7 @@
 
 <script lang="ts" setup>
 import { nextTick, watch } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkModal from '@/components/ui/modal.vue';
 import { i18n } from '@/i18n';
 

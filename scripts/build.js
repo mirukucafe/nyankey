@@ -9,6 +9,14 @@ const execa = require('execa');
 		stderr: process.stderr,
 	});
 
+	console.log('building packages/foundkey-js ...');
+
+	await execa('npm', ['run', 'build'], {
+		cwd: __dirname + '/../packages/foundkey-js',
+		stdout: process.stdout,
+		stderr: process.stderr,
+	});
+
 	console.log('building packages/client ...');
 
 	await execa('npm', ['run', 'build'], {

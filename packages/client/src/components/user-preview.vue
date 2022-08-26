@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import * as Acct from 'misskey-js/built/acct';
+import * as Acct from 'foundkey-js/built/acct';
 import MkFollowButton from './follow-button.vue';
 import { userPage } from '@/filters/user';
 import * as os from '@/os';

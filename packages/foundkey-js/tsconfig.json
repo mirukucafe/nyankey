@@ -2,18 +2,20 @@
 	"$schema": "http://json.schemastore.org/tsconfig",
 	"compilerOptions": {
 		"target": "es2020",
-		"module": "commonjs",
+		"module": "es2020",
 		"declaration": true,
 		"declarationMap": true,
 		"sourceMap": true,
 		"outDir": "./built/",
 		"removeComments": true,
+		"skipLibCheck": true,
 		"strict": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
 		"experimentalDecorators": true,
 		"noImplicitReturns": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"moduleResolution": "node"
 	},
 	"include": [
 		"src/**/*"

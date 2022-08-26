@@ -9,6 +9,14 @@ const execa = require('execa');
 		stderr: process.stderr,
 	});
 
+	console.log('installing dependencies of packages/foundkey-js ...');
+
+	await execa('yarn', ['install'], {
+		cwd: __dirname + '/../packages/foundkey-js',
+		stdout: process.stdout,
+		stderr: process.stderr,
+	});
+
 	console.log('installing dependencies of packages/client ...');
 
 	await execa('yarn', ['install'], {

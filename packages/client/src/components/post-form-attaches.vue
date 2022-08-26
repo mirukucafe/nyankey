@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { defineAsyncComponent, computed } from 'vue';
-import { DriveFile } from 'misskey-js/built/entities';
+import { DriveFile } from 'foundkey-js/built/entities';
 import MkDriveFileThumbnail from './drive-file-thumbnail.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';

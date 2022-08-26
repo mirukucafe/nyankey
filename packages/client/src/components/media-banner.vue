@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import { ColdDeviceStorage } from '@/store';
 import { i18n } from '@/i18n';
 

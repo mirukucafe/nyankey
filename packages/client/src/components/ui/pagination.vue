@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { computed, ComputedRef, isRef, onActivated, onDeactivated, ref, watch } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import * as os from '@/os';
 import { onScrollTop, isTopVisible, getScrollPosition, getScrollContainer } from '@/scripts/scroll';
 import MkButton from '@/components/ui/button.vue';

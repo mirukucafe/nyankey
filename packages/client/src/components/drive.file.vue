@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from 'vue';
-import * as Misskey from 'misskey-js';
+import * as Misskey from 'foundkey-js';
 import MkDriveFileThumbnail from './drive-file-thumbnail.vue';
 import copyToClipboard from '@/scripts/copy-to-clipboard';
 import bytes from '@/filters/bytes';
