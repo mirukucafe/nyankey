@@ -10,7 +10,7 @@
 		"packages/*"
 	],
 	"scripts": {
-		"build": "yarn workspace foundkey-js build && yarn workspaces foreach --exclude foundkey-js run build",
+		"build": "yarn workspaces foreach --topological run build",
 		"start": "yarn workspace backend run start",
 		"start:test": "yarn workspace backend run start:test",
 		"init": "yarn migrate",
