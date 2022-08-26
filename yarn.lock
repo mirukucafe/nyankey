@@ -415,6 +415,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bull-board/api@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "@bull-board/api@npm:4.2.2"
+  dependencies:
+    redis-info: ^3.0.8
+  checksum: 547174f63d611a568303ad261d3f41a57f632ea2067e8ab900bad90dbc9790a45af8229765350ef47a2eba4300656e8cc792bdcef94003a531f4eabeb4982876
+  languageName: node
+  linkType: hard
+
 "@bull-board/koa@npm:4.0.0":
   version: 4.0.0
   resolution: "@bull-board/koa@npm:4.0.0"
@@ -2226,7 +2235,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/oauth@npm:0.9.1":
+"@types/oauth@npm:0.9.1, @types/oauth@npm:^0.9.1":
   version: 0.9.1
   resolution: "@types/oauth@npm:0.9.1"
   dependencies:
@@ -3788,6 +3797,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "backend@workspace:packages/backend"
   dependencies:
+    "@bull-board/api": ^4.2.2
     "@bull-board/koa": 4.0.0
     "@discordapp/twemoji": 14.0.2
     "@elastic/elasticsearch": 7.11.0
@@ -3823,7 +3833,7 @@ __metadata:
     "@types/node": 18.0.0
     "@types/node-fetch": 3.0.3
     "@types/nodemailer": 6.4.4
-    "@types/oauth": 0.9.1
+    "@types/oauth": ^0.9.1
     "@types/pug": 2.0.6
     "@types/punycode": 2.1.0
     "@types/qrcode": 1.4.2

@@ -19,6 +19,7 @@
 		"lodash": "^4.17.21"
 	},
 	"dependencies": {
+		"@bull-board/api": "^4.2.2",
 		"@bull-board/koa": "4.0.0",
 		"@discordapp/twemoji": "14.0.2",
 		"@elastic/elasticsearch": "7.11.0",
@@ -150,7 +151,7 @@
 		"@types/node": "18.0.0",
 		"@types/node-fetch": "3.0.3",
 		"@types/nodemailer": "6.4.4",
-		"@types/oauth": "0.9.1",
+		"@types/oauth": "^0.9.1",
 		"@types/pug": "2.0.6",
 		"@types/punycode": "2.1.0",
 		"@types/qrcode": "1.4.2",
