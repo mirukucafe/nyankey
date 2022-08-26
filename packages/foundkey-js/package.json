@@ -1,6 +1,6 @@
 {
 	"name": "foundkey-js",
-	"version": "0.0.15",
+	"version": "13.0.0-preview1",
 	"description": "Fork of misskey-js for Foundkey",
 	"main": "./built/index.js",
 	"types": "./built/index.d.ts",
@@ -13,10 +13,6 @@
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
 		"jest": "jest --coverage --detectOpenHandles",
 		"test": "npm run jest && npm run tsd"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://akkoma.dev/norm/foundkey.js.git"
 	},
 	"devDependencies": {
 		"@microsoft/api-extractor": "^7.19.3",
