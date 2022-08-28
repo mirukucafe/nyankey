@@ -31,6 +31,7 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
   Foundkey will now work as if it was set to `true`.
 
 ### Fixed
+- Client: Notifications for ended polls can now be turned off
 - Server: Blocking remote accounts
 
 ### Security
