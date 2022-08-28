@@ -258,6 +258,7 @@ remoteUserCaution: "Informasi ini mungkin tidak mutakhir, karena pengguna ini be
 activity: "Aktivitas"
 images: "Gambar"
 birthday: "Tanggal lahir"
+yearsOld: "{age} tahun"
 registeredDate: "Bergabung pada"
 location: "Lokasi"
 theme: "Tema"

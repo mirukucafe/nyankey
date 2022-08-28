@@ -253,6 +253,7 @@ remoteUserCaution: "Te informacje mogą nie być aktualne, ponieważ użytkownik
 activity: "Aktywność"
 images: "Zdjęcia"
 birthday: "Data urodzenia"
+yearsOld: "{age} lat"
 registeredDate: "Zarejestrowano"
 location: "Lokalizacja"
 theme: "Motywy"

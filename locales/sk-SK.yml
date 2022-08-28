@@ -258,6 +258,7 @@ remoteUserCaution: "Tieto informácie nemusia byť aktuálne, keďže používat
 activity: "Aktivita"
 images: "Obrázky"
 birthday: "Dátum narodenia"
+yearsOld: "{age} rokov"
 registeredDate: "Dátum registrácie"
 location: "Lokalita"
 theme: "Téma"

@@ -244,6 +244,7 @@ remoteUserCaution: "Aangezien deze gebruiker van een externe server afkomstig is
 activity: "Activiteit"
 images: "Afbeeldingen"
 birthday: "Geboortedatum"
+yearsOld: "{age} jaar"
 registeredDate: "Inschrijvingsdatum"
 location: "Locatie"
 theme: "Thema's"
