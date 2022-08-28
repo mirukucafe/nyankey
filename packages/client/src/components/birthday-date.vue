@@ -1,8 +1,9 @@
 <template>
-<MkTime format="date" mode="absolute" :time="birthday" :utc="true"/> ({{ $t('yearsOld', { age }) }})
+<MkTime format="date" mode="absolute" :time="birthday" :utc="true"/> ({{ i18n.t('yearsOld', { age }) }})
 </template>
 <script lang="ts" setup>
 import MkTime from '@/components/global/time.vue';
+import { i18n } from '@/i18n';
 
 const props = defineProps<{
 	birthday: Date | string;
