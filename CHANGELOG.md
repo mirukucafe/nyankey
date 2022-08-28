@@ -32,6 +32,7 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 
 ### Fixed
 - Client: Notifications for ended polls can now be turned off
+- Client: Emoji picker should load faster now
 - Server: Blocking remote accounts
 
 ### Security
