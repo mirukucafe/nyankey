@@ -1,5 +1,5 @@
 <template>
-<div class="hpaizdrt" :style="bg" v-tooltip="instance.softwareName + ' ' + instance.softwareVersion">
+<div v-tooltip="instance.softwareName + ' ' + instance.softwareVersion" class="hpaizdrt" :style="bg">
 	<img v-if="instance.faviconUrl" class="icon" :src="instance.faviconUrl"/>
 	<span class="name">{{ instance.name }}</span>
 	<span v-if="instance.softwareName" class="software">{{ instance.softwareName }}</span>
