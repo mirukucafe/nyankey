@@ -42,10 +42,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.0.9 - 2021-11-11
 ### Changed
-- add list of api permission
+- Update Note type
 
 ### Added
-- Update Note type
+- add list of api permission
 
 ## 0.0.8 - 2021-10-17
 ### Changed
