@@ -18,14 +18,11 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, computed, inject, onMounted, onUnmounted, watch } from 'vue';
-import calcAge from 's-age';
+import { defineAsyncComponent, computed, watch } from 'vue';
 import * as Acct from 'foundkey-js/built/acct';
 import * as misskey from 'foundkey-js';
-import { getScrollPosition } from '@/scripts/scroll';
 import { getUserMenu } from '@/scripts/get-user-menu';
-import number from '@/filters/number';
-import { userPage, acct as getAcct } from '@/filters/user';
+import { acct as getAcct } from '@/filters/user';
 import * as os from '@/os';
 import { useRouter } from '@/router';
 import { definePageMetadata } from '@/scripts/page-metadata';

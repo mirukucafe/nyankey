@@ -108,21 +108,17 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, computed, inject, onMounted, onUnmounted, watch } from 'vue';
-import calcAge from 's-age';
+import { defineAsyncComponent, onMounted, onUnmounted } from 'vue';
 import * as misskey from 'foundkey-js';
 import XUserTimeline from './index.timeline.vue';
 import XNote from '@/components/note.vue';
 import MkFollowButton from '@/components/follow-button.vue';
-import MkContainer from '@/components/ui/container.vue';
-import MkFolder from '@/components/ui/folder.vue';
 import MkRemoteCaution from '@/components/remote-caution.vue';
-import MkTab from '@/components/tab.vue';
 import MkInfo from '@/components/ui/info.vue';
 import { getScrollPosition } from '@/scripts/scroll';
 import { getUserMenu } from '@/scripts/get-user-menu';
 import number from '@/filters/number';
-import { userPage, acct as getAcct } from '@/filters/user';
+import { userPage } from '@/filters/user';
 import * as os from '@/os';
 import { useRouter } from '@/router';
 import { i18n } from '@/i18n';
@@ -148,10 +144,6 @@ const style = $computed(() => {
 	return {
 		backgroundImage: `url(${ props.user.bannerUrl })`,
 	};
-});
-
-const age = $computed(() => {
-	return calcAge(props.user.birthday);
 });
 
 function menu(ev) {

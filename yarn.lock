@@ -3928,7 +3928,6 @@ __metadata:
     require-all: 3.0.0
     rndstr: 1.0.0
     rss-parser: 3.12.0
-    s-age: 1.1.2
     sanitize-html: 2.7.0
     semver: 7.3.7
     sharp: 0.29.3
@@ -4974,7 +4973,6 @@ __metadata:
     reflect-metadata: 0.1.13
     rndstr: 1.0.0
     rollup: 2.75.7
-    s-age: 1.1.2
     sass: 1.53.0
     seedrandom: 3.0.5
     start-server-and-test: 1.14.0
@@ -15048,13 +15046,6 @@ __metadata:
   dependencies:
     tslib: ~2.1.0
   checksum: e63adb8808ea6c299a020d56d2af92bcf71efe641adf838499932e29b8f5fd5ff00873653ad48ba3ecf6c9fc11c3c595acf995e8d456f9d8cb85c7d37a1fd72e
-  languageName: node
-  linkType: hard
-
-"s-age@npm:1.1.2":
-  version: 1.1.2
-  resolution: "s-age@npm:1.1.2"
-  checksum: cc073977a1ba2c0b78551bbf29f356f1b11b6e47a1786196f2a2990a46627aef424d41fdabbb65974d3bbec168c16e2be4da4f66f6c3b9fad859a14aa162bc7a
   languageName: node
   linkType: hard
 
