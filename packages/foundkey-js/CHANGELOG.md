@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Changed
 - foundkey-js is now part of the main FoundKey repo
+- BREAKING: foundkey-js now uses ES2020 modules. Ensure that your version of Node supports them.
 
 ## 0.0.15 - 2022-07-22
 ### Changed
