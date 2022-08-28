@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkNote from '@/components/note.vue';
 

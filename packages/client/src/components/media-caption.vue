@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, computed } from 'vue';
 import { length } from 'stringz';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkModal from '@/components/ui/modal.vue';
 import MkButton from '@/components/ui/button.vue';
 import bytes from '@/filters/bytes';

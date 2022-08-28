@@ -1,4 +1,4 @@
-import * as Misskey from 'misskey-js';
+import * as Misskey from 'foundkey-js';
 
 export type swMessageOrderType = 'post' | 'push';
 

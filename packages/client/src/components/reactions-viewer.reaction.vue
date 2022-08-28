@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import XDetails from '@/components/reactions-viewer.details.vue';
 import * as os from '@/os';
 import { useTooltip } from '@/scripts/use-tooltip';

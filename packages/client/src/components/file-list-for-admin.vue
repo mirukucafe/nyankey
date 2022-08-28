@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as Acct from 'misskey-js/built/acct';
+import * as Acct from 'foundkey-js/built/acct';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkDriveFileThumbnail from '@/components/drive-file-thumbnail.vue';
 import bytes from '@/filters/bytes';

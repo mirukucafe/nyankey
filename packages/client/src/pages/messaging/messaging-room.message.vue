@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import * as mfm from 'mfm-js';
-import * as Misskey from 'misskey-js';
+import * as Misskey from 'foundkey-js';
 import { extractUrlFromMfm } from '@/scripts/extract-url-from-mfm';
 import MkUrlPreview from '@/components/url-preview.vue';
 import * as os from '@/os';

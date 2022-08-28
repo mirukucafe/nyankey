@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { notificationTypes } from 'misskey-js';
+import { notificationTypes } from 'foundkey-js';
 import XNotifications from '@/components/notifications.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';

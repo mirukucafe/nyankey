@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { permissions } from 'misskey-js';
+import { permissions } from 'foundkey-js';
 import MkInput from './form/input.vue';
 import MkTextarea from './form/textarea.vue';
 import MkSwitch from './form/switch.vue';

@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import JSON5 from 'json5';
-import { Endpoints } from 'misskey-js';
+import { Endpoints } from 'foundkey-js';
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
 import MkTextarea from '@/components/form/textarea.vue';

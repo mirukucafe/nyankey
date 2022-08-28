@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { notificationTypes } from 'misskey-js';
+import { notificationTypes } from 'foundkey-js';
 import MkSwitch from './form/switch.vue';
 import MkInfo from './ui/info.vue';
 import MkButton from './ui/button.vue';

@@ -102,7 +102,7 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, defineComponent, watch } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkChart from '@/components/chart.vue';
 import MkObjectView from '@/components/object-view.vue';
 import FormTextarea from '@/components/form/textarea.vue';

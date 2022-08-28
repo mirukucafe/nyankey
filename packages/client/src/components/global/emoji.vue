@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { CustomEmoji } from 'misskey-js/built/entities';
+import { CustomEmoji } from 'foundkey-js/built/entities';
 import { getStaticImageUrl } from '@/scripts/get-static-image-url';
 import { char2filePath } from '@/scripts/twemoji-base';
 import { defaultStore } from '@/store';

@@ -1,15 +1,16 @@
 {
+	"name": "sw",
+	"version": "13.0.0-preview1",
 	"private": true,
 	"scripts": {
 		"watch": "node build.js watch",
 		"build": "node build.js",
 		"lint": "eslint src --ext .ts"
 	},
-	"resolutions": {},
 	"dependencies": {
 		"esbuild": "^0.14.13",
-		"idb-keyval": "^6.0.3",
-		"misskey-js": "0.0.14"
+		"foundkey-js": "workspace:*",
+		"idb-keyval": "^6.0.3"
 	},
 	"devDependencies": {
 		"eslint": "^8.20.0"

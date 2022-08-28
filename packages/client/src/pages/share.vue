@@ -25,9 +25,9 @@
 <script lang="ts" setup>
 // SPECIFICATION: https://misskey-hub.net/docs/features/share-form.html
 
-import { noteVisibilities } from 'misskey-js';
-import * as Acct from 'misskey-js/built/acct';
-import * as Misskey from 'misskey-js';
+import { noteVisibilities } from 'foundkey-js';
+import * as Acct from 'foundkey-js/built/acct';
+import * as Misskey from 'foundkey-js';
 import MkButton from '@/components/ui/button.vue';
 import XPostForm from '@/components/post-form.vue';
 import * as os from '@/os';

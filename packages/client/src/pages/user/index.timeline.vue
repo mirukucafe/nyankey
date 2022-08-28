@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import XNotes from '@/components/notes.vue';
 import MkTab from '@/components/tab.vue';
 import * as os from '@/os';

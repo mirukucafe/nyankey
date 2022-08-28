@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkVisibility from '@/components/visibility.vue';
 import { notePage } from '@/filters/note';
 import { userPage } from '@/filters/user';

@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { onUnmounted, onMounted, computed, ref } from 'vue';
-import { notificationTypes } from 'misskey-js';
+import { notificationTypes } from 'foundkey-js';
 import MkPagination, { Paging } from '@/components/ui/pagination.vue';
 import XNotification from '@/components/notification.vue';
 import XList from '@/components/date-separated-list.vue';

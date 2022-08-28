@@ -1,8 +1,8 @@
 import { URL } from 'node:url';
 import * as parse5 from 'parse5';
-import * as TreeAdapter from '../../node_modules/parse5/dist/tree-adapters/default.js';
+import * as TreeAdapter from 'parse5/dist/tree-adapters/default';
 
-const treeAdapter = TreeAdapter.defaultTreeAdapter;
+const treeAdapter = parse5.defaultTreeAdapter;
 
 const urlRegex = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+/;
 const urlRegexFull = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+$/;
@@ -26,7 +26,7 @@ export function fromHtml(html: string, hashtagNames?: string[]): string {
 		if (!treeAdapter.isElementNode(node)) return '';
 		if (node.nodeName === 'br') return '\n';
 
-		if (node.childNodes) {
+		if (node.childNodes.length > 0) {
 			return node.childNodes.map(n => getText(n)).join('');
 		}
 
@@ -34,14 +34,14 @@ export function fromHtml(html: string, hashtagNames?: string[]): string {
 	}
 
 	function appendChildren(childNodes: TreeAdapter.ChildNode[]): void {
-		if (childNodes) {
+		if (childNodes.length > 0) {
 			for (const n of childNodes) {
 				analyze(n);
 			}
 		}
 	}
 
-	function analyze(node: TreeAdapter.Node) {
+	function analyze(node: TreeAdapter.Node): void {
 		if (treeAdapter.isTextNode(node)) {
 			text += node.value;
 			return;

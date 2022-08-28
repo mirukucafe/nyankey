@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { Note } from 'misskey-js/built/entities';
+import { Note } from 'foundkey-js/built/entities';
 import XDetails from '@/components/users-tooltip.vue';
 import { pleaseLogin } from '@/scripts/please-login';
 import * as os from '@/os';

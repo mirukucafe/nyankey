@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import MkButton from '@/components/ui/button.vue';
 import { version } from '@/config';
 import * as os from '@/os';

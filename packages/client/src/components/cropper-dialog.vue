@@ -27,7 +27,7 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import * as misskey from 'misskey-js';
+import * as misskey from 'foundkey-js';
 import Cropper from 'cropperjs';
 import tinycolor from 'tinycolor2';
 import XModalWindow from '@/components/ui/modal-window.vue';
