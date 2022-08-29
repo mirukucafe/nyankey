@@ -241,6 +241,7 @@ remoteUserCaution: "Tyto informace nemusí být aktuální jelikož uživatel je
 activity: "Aktivita"
 images: "Obrázky"
 birthday: "Datum narození"
+yearsOld: "{age} let"
 registeredDate: "Datum registrace"
 location: "Lokace"
 theme: "Vzhled"

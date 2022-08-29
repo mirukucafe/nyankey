@@ -254,6 +254,7 @@ remoteUserCaution: "هذه المعلومات قد لا تكون مكتملة ب
 activity: "النشاط"
 images: "الصور"
 birthday: "تاريخ الميلاد"
+yearsOld: "{age} سنة"
 registeredDate: "انضم في"
 location: "الموقع الجغرافي"
 theme: "المظهر"

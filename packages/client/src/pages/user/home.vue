@@ -51,7 +51,7 @@
 						</dl>
 						<dl v-if="user.birthday" class="field">
 							<dt class="name"><i class="fas fa-birthday-cake fa-fw"></i> {{ i18n.ts.birthday }}</dt>
-							<dd class="value"><MkTime format="date" mode="detail" :time="user.birthday" :utc="true"/></dd>
+							<dd class="value"><MkBirthdayDate :birthday="user.birthday"/></dd>
 						</dl>
 						<dl class="field">
 							<dt class="name"><i class="fas fa-calendar-alt fa-fw"></i> {{ i18n.ts.registeredDate }}</dt>
@@ -112,6 +112,7 @@ import { defineAsyncComponent, onMounted, onUnmounted } from 'vue';
 import * as misskey from 'foundkey-js';
 import XUserTimeline from './index.timeline.vue';
 import XNote from '@/components/note.vue';
+import MkBirthdayDate from '@/components/birthday-date.vue';
 import MkFollowButton from '@/components/follow-button.vue';
 import MkRemoteCaution from '@/components/remote-caution.vue';
 import MkInfo from '@/components/ui/info.vue';

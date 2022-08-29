@@ -258,6 +258,7 @@ remoteUserCaution: "由于此用户来自其它实例，显示的信息可能不
 activity: "活动"
 images: "图片"
 birthday: "生日"
+yearsOld: "{age}岁"
 registeredDate: "注册于"
 location: "位置"
 theme: "主题"

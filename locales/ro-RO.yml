@@ -258,6 +258,7 @@ remoteUserCaution: "Deoarece acest utilizator este dintr-o instanță externă, 
 activity: "Activitate"
 images: "Imagini"
 birthday: "Zi de naștere"
+yearsOld: "{age} ani"
 registeredDate: "Data înregistrării"
 location: "Locație"
 theme: "Teme"

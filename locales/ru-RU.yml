@@ -258,6 +258,7 @@ remoteUserCaution: "Это пользователь с другого сайта
 activity: "Активность"
 images: "Изображения"
 birthday: "День рождения"
+yearsOld: "Возраст: {age}"
 registeredDate: "Дата регистрации"
 location: "Местоположение"
 theme: "Тема"
