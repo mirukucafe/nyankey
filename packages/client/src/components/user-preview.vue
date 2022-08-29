@@ -1,6 +1,6 @@
 <template>
 <transition :name="$store.state.animation ? 'popup' : ''" appear @after-leave="$emit('closed')">
-	<div v-if="showing" class="fxxzrfni _popup _shadow" :style="{ zIndex, top: top + 'px', left: left + 'px' }" @mouseover="() => { $emit('mouseover'); }" @mouseleave="() => { $emit('mouseleave'); }">
+	<div v-if="showing" class="fxxzrfni _popup _shadow" :style="{ zIndex, top: top + 'px', left: left + 'px' }" @mouseover="() => { emit('mouseover'); }" @mouseleave="() => { emit('mouseleave'); }">
 		<div v-if="fetched" class="info">
 			<div class="banner" :style="user.bannerUrl ? `background-image: url(${user.bannerUrl})` : ''"></div>
 			<MkAvatar class="avatar" :user="user" :disable-preview="true" :show-indicator="true"/>
@@ -31,71 +31,55 @@
 </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onMounted } from 'vue';
 import * as Acct from 'foundkey-js/built/acct';
+import { UserDetailed } from 'foundkey-js/built/entities';
 import MkFollowButton from './follow-button.vue';
 import { userPage } from '@/filters/user';
 import * as os from '@/os';
+import { $i } from '@/account';
 
-export default defineComponent({
-	components: {
-		MkFollowButton,
-	},
+const props = defineProps<{
+	showing: boolean;
+	q: UserDetailed | string;
+	source: HTMLElement;
+}>();
 
-	props: {
-		showing: {
-			type: Boolean,
-			required: true,
-		},
-		q: {
-			type: String,
-			required: true,
-		},
-		source: {
-			required: true,
-		},
-	},
+const emit = defineEmits<{
+	(ev: 'closed'): void;
+	(ev: 'mouseover'): void;
+	(ev: 'mouseleave'): void;
+}>();
 
-	emits: ['closed', 'mouseover', 'mouseleave'],
+let user: UserDetailed = $ref();
+let fetched = $ref(false);
+let top = $ref(0);
+let left = $ref(0);
+let zIndex = $ref(os.claimZIndex('middle'));
 
-	data() {
-		return {
-			user: null,
-			fetched: false,
-			top: 0,
-			left: 0,
-			zIndex: os.claimZIndex('middle'),
-		};
-	},
+onMounted(() => {
+	if (typeof props.q === 'object') {
+		user = props.q;
+		fetched = true;
+	} else {
+		const query = props.q.startsWith('@') ?
+			Acct.parse(props.q.slice(1)) :
+			{ userId: props.q };
 
-	mounted() {
-		if (typeof this.q === 'object') {
-			this.user = this.q;
-			this.fetched = true;
-		} else {
-			const query = this.q.startsWith('@') ?
-				Acct.parse(this.q.substr(1)) :
-				{ userId: this.q };
+		os.api('users/show', query).then(result => {
+			if (!props.showing) return;
+			user = result;
+			fetched = true;
+		});
+	}
 
-			os.api('users/show', query).then(user => {
-				if (!this.showing) return;
-				this.user = user;
-				this.fetched = true;
-			});
-		}
+	const rect = props.source.getBoundingClientRect();
+	const x = ((rect.left + (props.source.offsetWidth / 2)) - (300 / 2)) + window.pageXOffset;
+	const y = rect.top + props.source.offsetHeight + window.pageYOffset;
 
-		const rect = this.source.getBoundingClientRect();
-		const x = ((rect.left + (this.source.offsetWidth / 2)) - (300 / 2)) + window.pageXOffset;
-		const y = rect.top + this.source.offsetHeight + window.pageYOffset;
-
-		this.top = y;
-		this.left = x;
-	},
-
-	methods: {
-		userPage,
-	},
+	top = y;
+	left = x;
 });
 </script>
 
