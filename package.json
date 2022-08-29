@@ -10,7 +10,7 @@
 		"packages/*"
 	],
 	"scripts": {
-		"build": "yarn workspaces foreach --topological run build",
+		"build": "yarn workspaces foreach --topological run build && yarn run gulp",
 		"start": "yarn workspace backend run start",
 		"start:test": "yarn workspace backend run start:test",
 		"init": "yarn migrate",
