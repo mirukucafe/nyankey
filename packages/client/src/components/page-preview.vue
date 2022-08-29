@@ -14,21 +14,12 @@
 </MkA>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { userName } from '@/filters/user';
 
-export default defineComponent({
-	props: {
-		page: {
-			type: Object,
-			required: true,
-		},
-	},
-	methods: {
-		userName,
-	},
-});
+defineProps<{
+	page: Record<string, any>;
+}>();
 </script>
 
 <style lang="scss" scoped>
