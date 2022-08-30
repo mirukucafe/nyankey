@@ -16,7 +16,7 @@
 			</div>
 		</button>
 		<button key="followers" :disabled="disabled['followers']" class="_button" :class="{ active: v === 'followers' }" data-index="3" @click="choose('followers')">
-			<div><i class="fas fa-unlock"></i></div>
+			<div><i class="fas fa-lock"></i></div>
 			<div>
 				<span>{{ i18n.ts._visibility.followers }}</span>
 				<span>{{ i18n.ts._visibility.followersDescription }}</span>
