@@ -37,6 +37,7 @@ For older Misskey versions, see [CHANGELOG-OLD.md](./CHANGELOG-OLD.md).
 
 ### Security
 - Server: Update `multer` dependency to resolve [CVE-2022-24434](https://nvd.nist.gov/vuln/detail/CVE-2022-24434)
+- Server: Update `file-type`, `got`, and `sharp` dependencies to fix various security issues
 
 ## 13.0.0-preview1 - 2022-08-05
 ### Added
