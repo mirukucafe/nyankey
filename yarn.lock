@@ -3878,11 +3878,11 @@ __metadata:
     eslint-plugin-import: ^2.26.0
     execa: 6.1.0
     feed: 4.2.2
-    file-type: ^18.0.0
+    file-type: 18.0.0
     fluent-ffmpeg: 2.1.2
     form-data: ^4.0.0
     foundkey-js: "workspace:*"
-    got: ^12.3.1
+    got: 12.3.1
     hpagent: 0.1.2
     ioredis: 4.28.5
     ip-cidr: 3.0.10
@@ -3930,7 +3930,7 @@ __metadata:
     rss-parser: 3.12.0
     sanitize-html: 2.7.0
     semver: 7.3.7
-    sharp: ^0.30.7
+    sharp: 0.30.7
     speakeasy: 2.0.0
     strict-event-emitter-types: 2.0.0
     stringz: 2.1.0
@@ -7585,7 +7585,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-type@npm:^18.0.0":
+"file-type@npm:18.0.0":
   version: 18.0.0
   resolution: "file-type@npm:18.0.0"
   dependencies:
@@ -8449,7 +8449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:^12.3.1":
+"got@npm:12.3.1":
   version: 12.3.1
   resolution: "got@npm:12.3.1"
   dependencies:
@@ -15285,7 +15285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.30.7":
+"sharp@npm:0.30.7":
   version: 0.30.7
   resolution: "sharp@npm:0.30.7"
   dependencies:
