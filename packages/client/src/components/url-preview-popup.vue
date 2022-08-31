@@ -24,7 +24,7 @@ const props = defineProps<{
 
 let top = $ref(0);
 let left = $ref(0);
-const zIndex = os.claimZInde('middle');
+const zIndex = os.claimZIndex('middle');
 
 onMounted((): void => {
 	const rect = props.source.getBoundingClientRect();
