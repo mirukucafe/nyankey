@@ -1,47 +1,37 @@
-# misskey.js
-**Strongly-typed official Misskey SDK for browsers/Node.js.**
+# foundkey-js
+`foundkey-js` is a fork of [misskey-js](https://github.com/misskey-dev/misskey.js) that is more up to date.
 
-[![Test](https://github.com/misskey-dev/misskey.js/actions/workflows/test.yml/badge.svg)](https://github.com/misskey-dev/misskey.js/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/misskey-dev/misskey.js/branch/develop/graph/badge.svg?token=PbrTtk3nVD)](https://codecov.io/gh/misskey-dev/misskey.js)
+The following is provided:
+- User authentication
+- API requests
+- Streaming
+- Utility functions
+- Various Misskey type definitions
 
-[![NPM](https://nodei.co/npm/misskey-js.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/misskey-js)
-
-JavaScript(TypeScript)用の公式MisskeySDKです。ブラウザ/Node.js上で動作します。
-
-以下が提供されています:
-- ユーザー認証
-- APIリクエスト
-- ストリーミング
-- ユーティリティ関数
-- Misskeyの各種型定義
-
-対応するMisskeyのバージョンは12以上です。
+This library is designed to work with FoundKey. It should also work with Misskey 12+ but compatibility is not guaranteed.
 
 ## Install
-```
-npm i misskey-js
-```
+This package is not currently published to npmjs.
 
 # Usage
-インポートは以下のようにまとめて行うと便利です。
-
+To use `foundkey-js` in your code, use the following import:
 ``` ts
-import * as Misskey from 'misskey-js';
+import * as Misskey from 'foundkey-js';
 ```
 
-便宜上、以後のコード例は上記のように`* as Misskey`としてインポートしている前提のものになります。
+For convenience, the following code examples are based on the assumption that the code is imported as `* as Misskey` as shown above.
 
-ただし、このインポート方法だとTree-Shakingできなくなるので、コードサイズが重要なユースケースでは以下のような個別インポートをお勧めします。
+However, since tree-shaking is not possible with this import method, we recommend the following individual import for use cases where code size is important.
 
 ``` ts
-import { api as misskeyApi } from 'misskey-js';
+import { api as misskeyApi } from 'foundkey-js';
 ```
 
 ## Authenticate
 todo
 
 ## API request
-APIを利用する際は、利用するサーバーの情報とアクセストークンを与えて`APIClient`クラスのインスタンスを初期化し、そのインスタンスの`request`メソッドを呼び出してリクエストを行います。
+When using the API, initialize an instance of the `APIClient` class by providing information on the server to be used and an access token, and make a request by calling the `request` method of the instance.
 
 ``` ts
 const cli = new Misskey.api.APIClient({
@@ -52,12 +42,14 @@ const cli = new Misskey.api.APIClient({
 const meta = await cli.request('meta', { detail: true });
 ```
 
-`request`の第一引数には呼び出すエンドポイント名、第二引数にはパラメータオブジェクトを渡します。レスポンスはPromiseとして返ります。
+The first argument of `request` is the name of the endpoint to call, and the second argument is a parameter object. The response is returned as a Promise.
 
 ## Streaming
-misskey.jsのストリーミングでは、二つのクラスが提供されます。
-ひとつは、ストリーミングのコネクション自体を司る`Stream`クラスと、もうひとつはストリーミング上のチャンネルの概念を表す`Channel`クラスです。
-ストリーミングを利用する際は、まず`Stream`クラスのインスタンスを初期化し、その後で`Stream`インスタンスのメソッドを利用して`Channel`クラスのインスタンスを取得する形になります。
+Two classes are provided for streaming in `foundkey-js`.
+
+One is the `Stream` class, which handles the streaming connection itself, and the other is the `Channel` class, which represents the concept of a channel on the streaming.
+
+When using streaming, you first initialize an instance of the `Stream` class, and then use the methods of the `Stream` instance to get an instance of the `Channel` class.
 
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
@@ -67,19 +59,19 @@ mainChannel.on('notification', notification => {
 });
 ```
 
-コネクションが途切れても自動で再接続されます。
+If a connection is lost, it is automatically reconnected.
 
-### チャンネルへの接続
-チャンネルへの接続は`Stream`クラスの`useChannel`メソッドを使用します。
+### Connecting to a channel
+Connection to a channel is made using the `useChannel` method of the `Stream` class.
 
-パラメータなし
+No parameters
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
 
 const mainChannel = stream.useChannel('main');
 ```
 
-パラメータあり
+With parameters
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
 
@@ -88,8 +80,8 @@ const messagingChannel = stream.useChannel('messaging', {
 });
 ```
 
-### チャンネルから切断
-`Channel`クラスの`dispose`メソッドを呼び出します。
+### Disconnect from a channel
+Call the `dispose` method of the `Channel` class.
 
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
@@ -99,8 +91,8 @@ const mainChannel = stream.useChannel('main');
 mainChannel.dispose();
 ```
 
-### メッセージの受信
-`Channel`クラスはEventEmitterを継承しており、メッセージがサーバーから受信されると受け取ったイベント名でペイロードをemitします。
+### Receiving messages
+The `Channel` class inherits from EventEmitter and when a message is received from the server, it emits a payload with the name of the event received.
 
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
@@ -110,8 +102,8 @@ mainChannel.on('notification', notification => {
 });
 ```
 
-### メッセージの送信
-`Channel`クラスの`send`メソッドを使用してメッセージをサーバーに送信することができます。
+### Sending messages
+Messages can be sent to the server using the `send` method of the `Channel` class.
 
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
@@ -124,8 +116,8 @@ messagingChannel.send('read', {
 });
 ```
 
-### コネクション確立イベント
-`Stream`クラスの`_connected_`イベントが利用可能です。
+### `_connected_` event
+The `_connected_` event of the `Stream` class is available.
 
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
@@ -134,8 +126,8 @@ stream.on('_connected_', () => {
 });
 ```
 
-### コネクション切断イベント
-`Stream`クラスの`_disconnected_`イベントが利用可能です。
+### `_disconnected_` event
+The `_disconnected_` event of the `Stream` class is available.
 
 ``` ts
 const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
@@ -144,15 +136,9 @@ stream.on('_disconnected_', () => {
 });
 ```
 
-### コネクションの状態
-`Stream`クラスの`state`プロパティで確認できます。
+### Connection state
+You can check the `state` property of the `Stream` class.
 
-- `initializing`: 接続確立前
-- `connected`: 接続完了
-- `reconnecting`: 再接続中
-
----
-
-<div align="center">
-	<a href="https://github.com/misskey-dev/misskey/blob/develop/CONTRIBUTING.md"><img src="https://raw.githubusercontent.com/misskey-dev/assets/main/i-want-you.png" width="300"></a>
-</div>
+- `initializing`: before connection is established
+- `connected`: connected.
+- `reconnecting`: reconnecting.
