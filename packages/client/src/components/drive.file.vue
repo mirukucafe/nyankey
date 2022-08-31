@@ -40,6 +40,7 @@ import bytes from '@/filters/bytes';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { $i } from '@/account';
+import { MenuItem } from '@/types/menu';
 
 const props = withDefaults(defineProps<{
 	file: Misskey.entities.DriveFile;
@@ -60,7 +61,7 @@ const isDragging = ref(false);
 
 const title = computed(() => `${props.file.name}\n${props.file.type} ${bytes(props.file.size)}`);
 
-function getMenu() {
+function getMenu(): MenuItem[] {
 	return [{
 		text: i18n.ts.rename,
 		icon: 'fas fa-i-cursor',
@@ -92,7 +93,7 @@ function getMenu() {
 	}];
 }
 
-function onClick(ev: MouseEvent) {
+function onClick(ev: MouseEvent): void {
 	if (props.selectMode) {
 		emit('chosen', props.file);
 	} else {
@@ -100,11 +101,11 @@ function onClick(ev: MouseEvent) {
 	}
 }
 
-function onContextmenu(ev: MouseEvent) {
+function onContextmenu(ev: MouseEvent): void {
 	os.contextMenu(getMenu(), ev);
 }
 
-function onDragstart(ev: DragEvent) {
+function onDragstart(ev: DragEvent): void {
 	if (ev.dataTransfer) {
 		ev.dataTransfer.effectAllowed = 'move';
 		ev.dataTransfer.setData(_DATA_TRANSFER_DRIVE_FILE_, JSON.stringify(props.file));
@@ -114,12 +115,12 @@ function onDragstart(ev: DragEvent) {
 	emit('dragstart');
 }
 
-function onDragend() {
+function onDragend(): void {
 	isDragging.value = false;
 	emit('dragend');
 }
 
-function rename() {
+function rename(): void {
 	os.inputText({
 		title: i18n.ts.renameFile,
 		placeholder: i18n.ts.inputNewFileName,
@@ -133,12 +134,12 @@ function rename() {
 	});
 }
 
-function describe() {
+function describe(): void {
 	os.popup(defineAsyncComponent(() => import('@/components/media-caption.vue')), {
 		title: i18n.ts.describeFile,
 		input: {
 			placeholder: i18n.ts.inputNewDescription,
-			default: props.file.comment != null ? props.file.comment : '',
+			default: props.file.comment ?? '',
 		},
 		image: props.file,
 	}, {
@@ -153,23 +154,19 @@ function describe() {
 	}, 'closed');
 }
 
-function toggleSensitive() {
+function toggleSensitive(): void {
 	os.api('drive/files/update', {
 		fileId: props.file.id,
 		isSensitive: !props.file.isSensitive,
 	});
 }
 
-function copyUrl() {
+function copyUrl(): void {
 	copyToClipboard(props.file.url);
 	os.success();
 }
-/*
-function addApp() {
-	alert('not implemented yet');
-}
-*/
-async function deleteFile() {
+
+async function deleteFile(): Promise<void> {
 	const { canceled } = await os.confirm({
 		type: 'warning',
 		text: i18n.t('driveFileDeleteConfirm', { name: props.file.name }),
