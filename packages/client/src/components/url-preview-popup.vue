@@ -6,9 +6,9 @@
 </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { onMounted } from 'vue';
-import MkUrlPreview from './url-preview.vue';
+import MkUrlPreview from '@/components/url-preview.vue';
 import * as os from '@/os';
 
 const emit = defineEmits<{
