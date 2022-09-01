@@ -1,5 +1,5 @@
 # FoundKey
-FoundKey is a free and open source microblogging server compatible with ActivityPub. FoundKey improves upon the Misskey codebase, improving on maintainability and behaviour, while also bringing in useful features.
+FoundKey is a free and open source microblogging server compatible with ActivityPub. Forked from Misskey, FoundKey improves on maintainability and behaviour, while also bringing in useful features.
 
 See the [changelog](./CHANGELOG.md) and [roadmap](./ROADMAP.md) for more on what's changed and future plans.
 
