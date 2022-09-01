@@ -112,6 +112,8 @@ const {
 	reactionPickerSize,
 	reactionPickerWidth,
 	reactionPickerHeight,
+	maxCustomEmojiPicker,
+	maxUnicodeEmojiPicker,
 	disableShowingAnimatedImages,
 	recentlyUsedEmojis,
 } = defaultStore.reactiveState;
@@ -150,8 +152,8 @@ watch(q, () => {
 		return;
 	}
 	
-	searchResultCustom.value = emojiSearch(instance.emojis, 10, query);
-	searchResultUnicode.value = emojiSearch(emojilist, 10, query);
+	searchResultCustom.value = emojiSearch(instance.emojis, maxCustomEmojiPicker.value, query);
+	searchResultUnicode.value = emojiSearch(emojilist, maxUnicodeEmojiPicker.value, query);
 });
 
 function focus() {

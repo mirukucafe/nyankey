@@ -987,6 +987,10 @@ _serverDisconnectedBehavior:
   reload: "Automatically reload"
   dialog: "Show warning dialog"
   quiet: "Show unobtrusive warning"
+maxCustomEmojiPicker: "Maximum suggested custom emoji in picker"
+maxCustomEmojiPickerDescription: "0 for unlimited"
+maxUnicodeEmojiPicker: "Maximum suggested unicode emoji in picker"
+maxUnicodeEmojiPickerDescription: "0 for unlimited"
 _channel:
   create: "Create channel"
   edit: "Edit channel"
