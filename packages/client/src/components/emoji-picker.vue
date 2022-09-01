@@ -142,8 +142,18 @@ function emojiSearch<Type>(src: Type[], max: number, query: string): Type[] {
 	return matches.slice(0, max);
 }
 
-watch(q, () => {
+let queryTimeoutId = -1;
+const queryCallback = (query) => {
 	if (emojis.value) emojis.value.scrollTop = 0;
+	searchResultCustom.value = emojiSearch(instance.emojis, maxCustomEmojiPicker.value, query);
+	searchResultUnicode.value = emojiSearch(emojilist, maxUnicodeEmojiPicker.value, query);
+	queryTimeoutId = -1;
+}
+watch(q, () => {
+	if(queryTimeoutId >= 0) {
+		clearTimeout(queryTimeoutId);
+		queryTimeoutId = -1;
+	}
 
 	const query = q.value;
 	if (query == null || query === '') {
@@ -151,9 +161,8 @@ watch(q, () => {
 		searchResultUnicode.value = [];
 		return;
 	}
-	
-	searchResultCustom.value = emojiSearch(instance.emojis, maxCustomEmojiPicker.value, query);
-	searchResultUnicode.value = emojiSearch(emojilist, maxUnicodeEmojiPicker.value, query);
+
+	queryTimeoutId = setTimeout(queryCallback, 300, query);
 });
 
 function focus() {
