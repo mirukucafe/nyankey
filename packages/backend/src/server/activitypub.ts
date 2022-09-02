@@ -206,16 +206,19 @@ router.get('/emojis/:emoji', async ctx => {
 
 // like
 router.get('/likes/:like', async ctx => {
-	const reaction = await NoteReactions.findOneBy({ id: ctx.params.like });
+	const note = await Notes.findOneBy({
+		id: reaction.noteId,
+		visibility: In(['public' as const, 'home' as const]),
+	});
 
-	if (reaction == null) {
+	if (note == null) {
 		ctx.status = 404;
 		return;
 	}
 
-	const note = await Notes.findOneBy({ id: reaction.noteId });
+	const reaction = await NoteReactions.findOneBy({ id: ctx.params.like });
 
-	if (note == null) {
+	if (reaction == null) {
 		ctx.status = 404;
 		return;
 	}
