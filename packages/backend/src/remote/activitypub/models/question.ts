@@ -35,10 +35,10 @@ export async function extractPollFromQuestion(source: string | IObject, resolver
 
 /**
  * Update votes of Question
- * @param uri URI of AP Question object
+ * @param value AP Question object or its id
  * @returns true if updated
  */
-export async function updateQuestion(value: any) {
+export async function updateQuestion(value: string | IObject) {
 	const uri = typeof value === 'string' ? value : value.id;
 
 	// URIがこのサーバーを指しているならスキップ
