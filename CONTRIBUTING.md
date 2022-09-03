@@ -1,58 +1,40 @@
 # Contribution guide
-We're glad you're interested in contributing Misskey! In this document you will find the information you need to contribute to the project.
+We're glad you're interested in contributing to Foundkey! In this document you will find the information you need to contribute to the project.
 
-> **Note**
-> This project uses Japanese as its major language, **but you do not need to translate and write the Issues/PRs in Japanese.**
-> Also, you might receive comments on your Issue/PR in Japanese, but you do not need to reply to them in Japanese as well.\
-> The accuracy of machine translation into Japanese is not high, so it will be easier for us to understand if you write it in the original language.
-> It will also allow the reader to use the translation tool of their preference if necessary.
+The project uses English as its primary language. However due to being a fork of Misskey (which uses Japanese as its primary language) you may find things that are in Japanese.
+If you make contributions (pull requests, commits, comments in newly added code etc.) we expect that these should be in English.
+
+We won't mind if issues are not in English but we cannot guarantee we will understand you correctly.
+However it might stíll be better if you write issues in your original language if you are not confident of your English skills because we might be able to use different translators or ask people to translate if we are not sure what you mean.
+Please understand that in such cases we might edit your issue to translate it, to help us avoid duplicating issues.
 
 ## Roadmap
 See [ROADMAP.md](./ROADMAP.md)
 
 ## Issues
-Before creating an issue, please check the following:
-- To avoid duplication, please search for similar issues before creating a new issue.
-- Do not use Issues to ask questions or troubleshooting.
-	- Issues should only be used to feature requests, suggestions, and bug tracking.
-	- Please ask questions or troubleshooting in the [Misskey Forum](https://forum.misskey.io/) or [Discord](https://discord.gg/Wp8gVStHW3).
+Issues are intended for feature requests and bug tracking.
 
-> **Warning**
-> Do not close issues that are about to be resolved. It should remain open until a commit that actually resolves it is merged.
+For technical support or if you are not sure if what you are experiencing is a bug you can talk to people on the [IRC server](https://irc.akkoma.dev) in the `#foundkey` channel first.
 
-## Before implementation
-When you want to add a feature or fix a bug, **first have the design and policy reviewed in an Issue** (if it is not there, please make one). Without this step, there is a high possibility that the PR will not be merged even if it is implemented.
-
-At this point, you also need to clarify the goals of the PR you will create, and make sure that the other members of the team are aware of them.
-PRs that do not have a clear set of do's and don'ts tend to be bloated and difficult to review.
-
-Also, when you start implementation, assign yourself to the Issue (if you cannot do it yourself, ask another member to assign you). By expressing your intention to work the Issue, you can prevent conflicts in the work.
+Please do not close issues that are about to be resolved. It should remain open until a commit that actually resolves it is merged.
 
 ## Well-known branches
-- **`master`** branch is tracking the latest release and used for production purposes.
-- **`develop`** branch is where we work for the next release.
-	- When you create a PR, basically target it to this branch.
-- **`l10n_develop`** branch is reserved for localization management.
+branch|what it's for
+---|---
+main|development branch
 
-## Creating a PR
-Thank you for your PR! Before creating a PR, please check the following:
-- If possible, prefix the title with a keyword that identifies the type of this PR, as shown below.
-  - `fix` / `refactor` / `feat` / `enhance` / `perf` / `chore` etc
-  - Also, make sure that the granularity of this PR is appropriate. Please do not include more than one type of change or interest in a single PR.
-- If there is an Issue which will be resolved by this PR, please include a reference to the Issue in the text.
-- Please add the summary of the changes to [`CHANGELOG.md`](/CHANGELOG.md). However, this is not necessary for changes that do not affect the users, such as refactoring.
-- Check if there are any documents that need to be created or updated due to this change.
-- If you have added a feature or fixed a bug, please add a test case if possible.
-- Please make sure that tests and Lint are passed in advance.
-  - You can run it with `npm run test` and `npm run lint`. [See more info](#testing)
-- If this PR includes UI changes, please attach a screenshot in the text.
+For a production environment you might not want to follow the `main` branch directly but instead check out one of the git tags.
 
-Thanks for your cooperation 🤗
+## Considerations to be made for all contributions
 
-## Reviewers guide
-Be willing to comment on the good points and not just the things you want fixed 💯
+This project follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
+Significant changes should be listed in the changelog (i.e. the file called `CHANGELOG.md`).
+Although Semantic Versioning talks about "the API", changes to the user interface should also be tracked.
 
-### Review perspective
+Consider if any of the existing documentation has to be updated because of your contribution.
+
+Some more points you might want to consider are:
+
 - Scope
   - Are the goals of the PR clear?
   - Is the granularity of the PR appropriate?
@@ -66,39 +48,92 @@ Be willing to comment on the good points and not just the things you want fixed 
 	- Are there any omissions or gaps?
 	- Does it check for anomalies?
 
-## Deploy
-The `/deploy` command by issue comment can be used to deploy the contents of a PR to the preview environment.
-```
-/deploy sha=<commit hash>
-```
-An actual domain will be assigned so you can test the federation.
+## Code contributions
 
-## Merge
-For now, basically only @syuilo has the authority to merge PRs into develop because he is most familiar with the codebase.
-However, minor fixes, refactoring, and urgent changes may be merged at the discretion of a contributor.
+There are two ways you can contribute:
+
+If you **have push access** to this repository, you can push stuff directly.
+But y'know, "with great power comes great responsibility" and so on.
+We most likely will not kick you out if you made a mistake, it happens to the best.
+But this of course means that the erroneous contributions may be either fixed or undone.
+
+Even if you have push access but are trying to make larger or sweeping changes, please consider also using the following way of contibuting.
+
+If you do **not have push access** you can create a pull request.
+Someone with push access should review your contribution.
+If they are satisfied that what you are doing seems like a good idea and the considerations from the section above are fulfilled, they can merge your pull request.
+Or, they might request another member to also review your changes.
+Please be patient as nobody is getting paid to do this, so it might take a bit longer.
+
+### Changelog Trailer
+
+To keep track of changes that should go into the CHANGELOG, we use a standard [trailer](https://git-scm.com/docs/git-interpret-trailers).
+For single-commits that should be included in the changeset, include the trailer directly.
+For multiple commits, the merge commit (in case of a branch) or an empty final commit should include the trailer.
+
+Valid values for the trailer are: "Added", "Changed", "Removed", "Fixed", "Security".
+For breaking changes, include a "BREAKING:" in the summary.
+Any additional notes should go into the commit body.
+
+If you forget to include it, you can create an empty commit after the fact with it (`--allow-empty`).
+Try not to include invalid values in the trailer.
+
+Here is an example complete breaking commit with notes.
+
+```
+BREAKING: client: remove rooms
+
+Rooms were removed by syuilo some time ago.
+This commit is an example of what the changelog trailer usage is like.
+Admins should ensure to run migrations on startup, else foundkey will fail to start.
+
+Changelog: Removed
+```
+
+### Creating a PR
+
+- Please prefix the title with the part of Misskey you are changing, i.e. `server:` or `client:`
+- The rest of the title should roughly describe what you did.
+- Make sure that the granularity of this PR is appropriate. Please do not include more than one type of change in a single PR.
+- If there is an issue which will be resolved by this PR, please include a reference to the Issue in the text.
+- If you have added a feature or fixed a bug, please add a test case if possible.
+- Please make sure that tests and Lint are passed in advance.
+  - You can run it with `npm run test` and `npm run lint`. [See more info](#testing)
+- Don't forget to update the changelog and/or documentation as appropriate (see above).
+
+Thanks for your cooperation!
 
 ## Release
-### Release Instructions
-1. Commit version changes in the `develop` branch ([package.json](https://github.com/misskey-dev/misskey/blob/develop/package.json))
-2. Create a release PR.
-	- Into `master` from `develop` branch.
-	- The title must be in the format `Release: x.y.z`.
-		- `x.y.z` is the new version you are trying to release.
-3. Deploy and perform a simple QA check. Also verify that the tests passed.
-4. Merge it.
-5. Create a [release of GitHub](https://github.com/misskey-dev/misskey/releases)
-	- The target branch must be `master`
-	- The tag name must be the version
+
+### Fork transition
+
+**Note:**
+Since Foundkey was forked from Misskey recently, there might be some breaking changes we want to make.
+For this purpose there will be several pre-release versions of 13.0.0 (e.g. `13.0.0-preview1`).
+Until major version 13 is released, the below process is not fully in effect.
+
+### Release process
+Before a stable version is released, there should be a comment period which should usually be 7 days to give everyone the chance to comment.
+If a (critical) bug or similar is found during the comment period, the release may be postponed until a fix is found.
+For commenting, an issue should be created, and the comment period should also be announced in the `#foundkey-dev` [IRC](https://irc.akkoma.dev) channel.
+
+Pre-releases do not require as much scrutiny and can be useful for "field testing" before a stable release is made.
+
+All releases are managed as git tags.
+If the released version is 1.2.3, the git tag should be "v1.2.3".
+Pre-releases are marked "previewN".
+The first pre-release for 1.2.3 should be tagged "v1.2.3-preview1".
+The tag should be a "lightweight" tag (not annotated) of the commit that modifies the CHANGELOG and package.json version.
+
+To generate the changelog, we use a standard shortlog command: `git shortlog --format='%h %s' --group=trailer:changelog LAST_TAG..`.
+The person performing the release process should build the next CHANGELOG section based on this output, not use it as-is.
+Full releases should also remove any pre-release CHANGELOG sections.
 
 ## Localization (l10n)
-Misskey uses [Crowdin](https://crowdin.com/project/misskey) for localization management.
-You can improve our translations with your Crowdin account.
-Your changes in Crowdin are automatically submitted as a PR (with the title "New Crowdin translations") to the repository.
-The owner [@syuilo](https://github.com/syuilo) merges the PR into the develop branch before the next release.
 
-If your language is not listed in Crowdin, please open an issue.
-
-![Crowdin](https://d322cqt584bo4o.cloudfront.net/misskey/localized.svg)
+We have not yet set up localization management, so updating of locales can currently only be done as commits changing the respective files in the repo.
+Localization files are found in `/locales/` and are YAML files using the `yml` file extension.
+The file name consists of the [IETF BCP 47](https://www.rfc-editor.org/info/bcp47) language code.
 
 ## Development
 During development, it is useful to use the `npm run dev` command.
@@ -132,27 +167,34 @@ npx cross-env TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT="./
 ### e2e tests
 TODO
 
-## Continuous integration
-Misskey uses GitHub Actions for executing automated tests.
-Configuration files are located in [`/.github/workflows`](/.github/workflows).
+## Continuous integration (CI)
+
+Foundkey uses Woodpecker for executing automated tests and lints.
+CI runs can be found at [ci.akkoma.dev](https://ci.akkoma.dev/FoundKeyGang/FoundKey)
+Configuration files are located in `/.woodpecker/`.
 
 ## Vue
 Misskey uses Vue(v3) as its front-end framework.
-- Use TypeScript.
-- **When creating a new component, please use the Composition API (with [setup sugar](https://v3.vuejs.org/api/sfc-script-setup.html) and [ref sugar](https://github.com/vuejs/rfcs/discussions/369)) instead of the Options API.**
-	- Some of the existing components are implemented in the Options API, but it is an old implementation. Refactors that migrate those components to the Composition API are also welcome.
+- Use TypeScript functionality.
+	- Use the type only variant of `defineProps` and `defineEmits`.
+- When creating a new component, please use the Composition API (with [setup sugar](https://v3.vuejs.org/api/sfc-script-setup.html) and [ref sugar](https://github.com/vuejs/rfcs/discussions/369)) instead of the Options API.
+	- Some of the existing components are implemented in the Options API, but it is an old implementation. Refactors that migrate those components to the Composition API are welcome.
+	  You might be able to use this shell command to find components that have not yet been refactored: `find packages/client/src -name '*.vue' | xargs grep '<script' | grep -v 'setup'`
 
 ## Notes
 ### How to resolve conflictions occurred at yarn.lock?
 
 Just execute `yarn` to fix it.
 
-### INSERTするときにはsaveではなくinsertを使用する
-#6441
+### Use `insert` instead of `save` to create new objects
+When using `save`, you may accidentally update an existing item, because `save` circumvents uniqueness constraints.
 
-### placeholder
-SQLをクエリビルダで組み立てる際、使用するプレースホルダは重複してはならない
-例えば
+See also <https://github.com/misskey-dev/misskey/issues/6441>.
+
+### typeorm placeholders
+The names of placeholders used in queries must be unique in each query.
+
+For example
 ``` ts
 query.andWhere(new Brackets(qb => {
 	for (const type of ps.fileType) {
@@ -160,8 +202,8 @@ query.andWhere(new Brackets(qb => {
 	}
 }));
 ```
-と書くと、ループ中で`type`というプレースホルダが複数回使われてしまいおかしくなる
-だから次のようにする必要がある
+would mean that `type` is used multiple times because it is used in a loop.
+This is incorrect. instead you would need to do something like the following:
 ```ts
 query.andWhere(new Brackets(qb => {
 	for (const type of ps.fileType) {
@@ -171,82 +213,79 @@ query.andWhere(new Brackets(qb => {
 }));
 ```
 
-### Not `null` in TypeORM
+### `null` (JS/TS) and `NULL` (SQL)
+#### in TypeORM FindOptions
+Using the JavaScript/TypeScript `null` constant is not supported in Typeorm. Instead you need to use the special `Null()` function Typeorm provides.
+It can also be combined with other similar TypeORM functions.
+
+For example to make a condition similar to SQL `IS NOT NULL`, do the following:
 ```ts
-const foo = await Foos.findOne({
-	bar: Not(null)
-});
-```
-のようなクエリ(`bar`が`null`ではない)は期待通りに動作しない。
-次のようにします:
-```ts
+import { IsNull, Not } from 'typeorm';
+
 const foo = await Foos.findOne({
 	bar: Not(IsNull())
 });
 ```
 
-### `null` in SQL
-SQLを発行する際、パラメータが`null`になる可能性のある場合はSQL文を出し分けなければならない
-例えば
+#### in SQL queries or `QueryBuilder`s
+In SQL statements, you need to have separate statements for cases where parameters may be `null`.
+
+Take for example this snippet:
 ``` ts
 query.where('file.folderId = :folderId', { folderId: ps.folderId });
 ```
-という処理で、`ps.folderId`が`null`だと結果的に`file.folderId = null`のようなクエリが発行されてしまい、これは正しいSQLではないので期待した結果が得られない
-だから次のようにする必要がある
+If `ps.folderId === null`, the resulting query would be `file.folderId = null` which is incorrect and might produce unexpected results.
+
+What you need to do instead is something like the following:
 ``` ts
-if (ps.folderId) {
+if (ps.folderId != null) {
 	query.where('file.folderId = :folderId', { folderId: ps.folderId });
 } else {
 	query.where('file.folderId IS NULL');
 }
 ```
 
-### `[]` in SQL
-SQLを発行する際、`IN`のパラメータが`[]`(空の配列)になる可能性のある場合はSQL文を出し分けなければならない
-例えば
+### Empty array handling in TypeORM FindOptions
+If you are using the `In` function in `FindOptions`, there must be different behaviour if it may receive empty arrays.
+
 ``` ts
 const users = await Users.find({
 	id: In(userIds)
 });
 ```
-という処理で、`userIds`が`[]`だと結果的に`user.id IN ()`のようなクエリが発行されてしまい、これは正しいSQLではないので期待した結果が得られない
-だから次のようにする必要がある
+This would produce erroneous SQL, i.e. `user.id IN ()`.
+To fix this you would need separate handling for an empty array, for example like this:
 ``` ts
 const users = userIds.length > 0 ? await Users.find({
 	id: In(userIds)
 }) : [];
 ```
 
-### 配列のインデックス in SQL
-SQLでは配列のインデックスは**1始まり**。
-`[a, b, c]`の `a`にアクセスしたいなら`[0]`ではなく`[1]`と書く
+### Array indexing in SQL
+PostgreSQL array indices **start at 1**.
 
-### null IN
-nullが含まれる可能性のあるカラムにINするときは、そのままだとおかしくなるのでORなどでnullのハンドリングをしよう。
+### `NULL IN ...`
+When `IN` is performed on a column that may contain `NULL` values, use `OR` or similar to handle `NULL` values.
 
-### `undefined`にご用心
-MongoDBの時とは違い、findOneでレコードを取得する時に対象レコードが存在しない場合 **`undefined`** が返ってくるので注意。
-MongoDBは`null`で返してきてたので、その感覚で`if (x === null)`とか書くとバグる。代わりに`if (x == null)`と書いてください
-
-### Migration作成方法
-packages/backendで:
+### creating migrations
+In `packages/backend`, run:
 ```sh
 npx typeorm migration:generate -d ormconfig.js -o <migration name>
 ```
 
-- 生成後、ファイルをmigration下に移してください
-- 作成されたスクリプトは不必要な変更を含むため除去してください
+After generating (and potentially editing) the file, move it to the `packages/backend/migration` folder.
 
-### コネクションには`markRaw`せよ
-**Vueのコンポーネントのdataオプションとして**misskey.jsのコネクションを設定するとき、必ず`markRaw`でラップしてください。インスタンスが不必要にリアクティブ化されることで、misskey.js内の処理で不具合が発生するとともに、パフォーマンス上の問題にも繋がる。なお、Composition APIを使う場合はこの限りではない(リアクティブ化はマニュアルなため)。
+### `markRaw` for connections
+When setting up a foundkey-js streaming connection as a data option to a Vue component, be sure to wrap it in `markRaw`.
+Unnecessarily reactivating a connection causes problems with processing in foundkey-js and leads to performance issues.
+This does not apply when using the Composition API since reactivation is manual.
 
-### JSONのimportに気を付けよう
-TypeScriptでjsonをimportすると、tscでコンパイルするときにそのjsonファイルも一緒にdistディレクトリに吐き出されてしまう。この挙動により、意図せずファイルの書き換えが発生することがあるので、jsonをimportするときは書き換えられても良いものかどうか確認すること。書き換えされて欲しくない場合は、importで読み込むのではなく、`fs.readFileSync`などの関数を使って読み込むようにすればよい。
+### JSON imports
+If you import json in TypeScript, the json file will be spit out together with the TypeScript file into the dist directory when compiling with tsc. This behavior may cause unintentional rewriting of files, so when importing json files, be sure to check whether the files are allowed to be rewritten or not. If you do not want the file to be rewritten, you should make sure that the file can be rewritten by importing the json file. If you do not want the file to be rewritten, use functions such as `fs.readFileSync` to read the file instead of importing it.
 
-### コンポーネントのスタイル定義でmarginを持たせない
-コンポーネント自身がmarginを設定するのは問題の元となることはよく知られている
-marginはそのコンポーネントを使う側が設定する
+### Component style definitions do not have a `margin`
+Setting the `margin` of a component may be confusing.
+Instead, it should always be the user of a component that sets a `margin`.
 
-## その他
-### HTMLのクラス名で follow という単語は使わない
-広告ブロッカーで誤ってブロックされる
+### Do not use the word "follow" in HTML class names
+This has caused things to be blocked by an ad blocker in the past.
