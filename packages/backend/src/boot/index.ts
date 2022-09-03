@@ -17,7 +17,7 @@ const ev = new Xev();
 /**
  * Init process
  */
-export default async function(): void {
+export default async function(): Promise<void> {
 	process.title = `Misskey (${cluster.isPrimary ? 'master' : 'worker'})`;
 
 	if (cluster.isPrimary || envOption.disableClustering) {

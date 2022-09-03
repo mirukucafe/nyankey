@@ -49,7 +49,7 @@ function greet(): void {
 /**
  * Init master process
  */
-export async function masterMain(): void {
+export async function masterMain(): Promise<void> {
 	let config!: Config;
 
 	// initialize app
@@ -141,7 +141,7 @@ async function connectDb(): Promise<void> {
 	}
 }
 
-async function spawnWorkers(limit = 1): void {
+async function spawnWorkers(limit = 1): Promise<void> {
 	const workers = Math.min(limit, os.cpus().length);
 	bootLogger.info(`Starting ${workers} worker${workers === 1 ? '' : 's'}...`);
 	await Promise.all([...Array(workers)].map(spawnWorker));
