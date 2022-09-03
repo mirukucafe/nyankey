@@ -16,7 +16,14 @@
 		</div>
 		<div class="hdrwpsaf fullwidth">
 			<header>{{ file.name }}</header>
-			<img :src="file.url" @click="modal.close()"/>
+			<img v-if="file.type.startsWidth('image/')" :src="file.url" @click="modal.close()"/>
+			<video v-else-if="file.type.startsWidth('video/')" controls>
+				<source :src="file.url" :type="file.type">
+			</video>
+			<audio v-else-if="file.type.startsWidth('audio/')" controls>
+				<source :src="file.url" :type="file.type">
+			</audio>
+			<a v-else :href="file.url">{{ file.url }}</a>
 			<footer>
 				<span>{{ file.type }}</span>
 				<span>{{ bytes(file.size) }}</span>
