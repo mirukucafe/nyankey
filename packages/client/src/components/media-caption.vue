@@ -15,12 +15,12 @@
 			</div>
 		</div>
 		<div class="hdrwpsaf fullwidth">
-			<header>{{ image.name }}</header>
-			<img :src="image.url" :alt="image.comment" :title="image.comment" @click="modal.close()"/>
+			<header>{{ file.name }}</header>
+			<img :src="file.url" @click="modal.close()"/>
 			<footer>
-				<span>{{ image.type }}</span>
-				<span>{{ bytes(image.size) }}</span>
-				<span v-if="image.properties && image.properties.width">{{ number(image.properties.width) }}px × {{ number(image.properties.height) }}px</span>
+				<span>{{ file.type }}</span>
+				<span>{{ bytes(file.size) }}</span>
+				<span v-if="file.properties?.width">{{ number(file.properties.width) }}px × {{ number(file.properties.height) }}px</span>
 			</footer>
 		</div>
 	</div>
@@ -43,7 +43,7 @@ type Input = {
 };
 
 const props = withDefaults(defineProps<{
-	image: misskey.entities.DriveFile;
+	file: misskey.entities.DriveFile;
 	title?: string;
 	input: Input;
 	showOkButton: boolean;

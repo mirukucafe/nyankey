@@ -141,7 +141,7 @@ function describe(): void {
 			placeholder: i18n.ts.inputNewDescription,
 			default: props.file.comment ?? '',
 		},
-		image: props.file,
+		file: props.file,
 	}, {
 		done: result => {
 			if (!result || result.canceled) return;
