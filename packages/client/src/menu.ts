@@ -107,6 +107,20 @@ export const menuDef = reactive({
 			os.popupMenu(items, ev.currentTarget ?? ev.target);
 		},
 	},
+	mentions: {
+		title: 'mentions',
+		icon: 'fas fa-at',
+		show: computed(() => $i != null),
+		indicated: computed(() => $i != null && $i.hasUnreadMentions),
+		to: '/my/notifications#mentions',
+	},
+	messages: {
+		title: 'directNotes',
+		icon: 'fas fa-envelope',
+		show: computed(() => $i != null),
+		indicated: computed(() => $i != null && $i.hasUnreadSpecifiedNotes),
+		to: '/my/notifications#directNotes',
+	},
 	favorites: {
 		title: 'favorites',
 		icon: 'fas fa-star',
