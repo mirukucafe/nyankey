@@ -15,12 +15,19 @@
 			</div>
 		</div>
 		<div class="hdrwpsaf fullwidth">
-			<header>{{ image.name }}</header>
-			<img :src="image.url" :alt="image.comment" :title="image.comment" @click="modal.close()"/>
+			<header>{{ file.name }}</header>
+			<img v-if="file.type.startsWidth('image/')" :src="file.url" @click="modal.close()"/>
+			<video v-else-if="file.type.startsWidth('video/')" controls>
+				<source :src="file.url" :type="file.type">
+			</video>
+			<audio v-else-if="file.type.startsWidth('audio/')" controls>
+				<source :src="file.url" :type="file.type">
+			</audio>
+			<a v-else :href="file.url">{{ file.url }}</a>
 			<footer>
-				<span>{{ image.type }}</span>
-				<span>{{ bytes(image.size) }}</span>
-				<span v-if="image.properties && image.properties.width">{{ number(image.properties.width) }}px × {{ number(image.properties.height) }}px</span>
+				<span>{{ file.type }}</span>
+				<span>{{ bytes(file.size) }}</span>
+				<span v-if="file.properties?.width">{{ number(file.properties.width) }}px × {{ number(file.properties.height) }}px</span>
 			</footer>
 		</div>
 	</div>
@@ -43,7 +50,7 @@ type Input = {
 };
 
 const props = withDefaults(defineProps<{
-	image: misskey.entities.DriveFile;
+	file: misskey.entities.DriveFile;
 	title?: string;
 	input: Input;
 	showOkButton: boolean;

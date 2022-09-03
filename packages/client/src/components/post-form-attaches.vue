@@ -84,7 +84,7 @@ async function describe(file: DriveFile): Promise<void> {
 			placeholder: i18n.ts.inputNewDescription,
 			default: file.comment ?? '',
 		},
-		image: file,
+		file,
 	}, {
 		done: result => {
 			if (!result || result.canceled) return;
