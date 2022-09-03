@@ -28,7 +28,7 @@ For a production environment you might not want to follow the `main` branch dire
 ## Considerations to be made for all contributions
 
 This project follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
-Significant changes should be listed in the changelog (i.e. the file called `CHANGELOG.md`).
+Significant changes should be listed in the changelog (i.e. the file called `CHANGELOG.md`, see also section "Changelog Trailer" below).
 Although Semantic Versioning talks about "the API", changes to the user interface should also be tracked.
 
 Consider if any of the existing documentation has to be updated because of your contribution.
@@ -36,8 +36,8 @@ Consider if any of the existing documentation has to be updated because of your 
 Some more points you might want to consider are:
 
 - Scope
-  - Are the goals of the PR clear?
-  - Is the granularity of the PR appropriate?
+	- Are the goals of the PR clear?
+	- Is the granularity of the PR appropriate?
 - Security
 	- Does merging this PR create a vulnerability?
 - Performance
@@ -50,20 +50,26 @@ Some more points you might want to consider are:
 
 ## Code contributions
 
-There are two ways you can contribute:
+There are different "rules" of how you can contribute, depending on your access privileges to the repository.
 
-If you **have push access** to this repository, you can push stuff directly.
-But y'know, "with great power comes great responsibility" and so on.
-We most likely will not kick you out if you made a mistake, it happens to the best.
-But this of course means that the erroneous contributions may be either fixed or undone.
+### Without push access
 
-Even if you have push access but are trying to make larger or sweeping changes, please consider also using the following way of contibuting.
-
-If you do **not have push access** you can create a pull request.
+If you do not have push access, you have to create a pull request to get your changes into Foundkey.
 Someone with push access should review your contribution.
 If they are satisfied that what you are doing seems like a good idea and the considerations from the section above are fulfilled, they can merge your pull request.
 Or, they might request another member to also review your changes.
 Please be patient as nobody is getting paid to do this, so it might take a bit longer.
+
+### With push access
+
+You can push stuff directly to any branch.
+But y'know, "with great power comes great responsibility" and so on, be sensible.
+We most likely will not kick you out if you made a mistake, it happens to the best.
+But this of course means that the erroneous contributions may be either fixed or undone.
+
+Alternatively, you can also proceed as for "without push access" above.
+In this case it will be assumed that you wish for a review of the changes you want to make.
+Instead of having someone else merge the pull request when they have approved your changes, you can also merge yourself if you think the given feedback is sufficient.
 
 ### Changelog Trailer
 
