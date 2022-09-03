@@ -148,6 +148,16 @@ export const menuDef = reactive({
 		icon: 'fas fa-satellite-dish',
 		to: '/channels',
 	},
+	federation: {
+		title: 'federation',
+		icon: 'fas fa-globe',
+		to: '/about#federation',
+	},
+	emojis: {
+		title: 'emojis',
+		icon: 'fas fa-laugh',
+		to: '/about#emojis',
+	},
 	ui: {
 		title: 'switchUi',
 		icon: 'fas fa-columns',
