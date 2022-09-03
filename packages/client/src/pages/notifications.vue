@@ -2,14 +2,14 @@
 <MkStickyContainer>
 	<template #header><MkPageHeader v-model:tab="tab" :actions="headerActions" :tabs="headerTabs"/></template>
 	<MkSpacer :content-max="800">
-		<div v-if="tab === 'all' || tab === 'unread'">
-			<XNotifications class="notifications" :include-types="includeTypes" :unread-only="unreadOnly"/>
-		</div>
-		<div v-else-if="tab === 'mentions'">
+		<div v-if="tab === 'mentions'">
 			<XNotes :pagination="mentionsPagination"/>
 		</div>
 		<div v-else-if="tab === 'directNotes'">
 			<XNotes :pagination="directNotesPagination"/>
+		</div>
+		<div v-else>
+			<XNotifications class="notifications" :include-types="includeTypes" :unread-only="unreadOnly"/>
 		</div>
 	</MkSpacer>
 </MkStickyContainer>
@@ -24,13 +24,29 @@ import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
+const headerTabs = $computed(() => [{
+	key: 'all',
+	title: i18n.ts.all,
+}, {
+	key: 'unread',
+	title: i18n.ts.unread,
+}, {
+	key: 'mentions',
+	title: i18n.ts.mentions,
+	icon: 'fas fa-at',
+}, {
+	key: 'directNotes',
+	title: i18n.ts.directNotes,
+	icon: 'fas fa-envelope',
+}]);
+
 const props = withDefaults(defineProps<{
 	initialTab?: string;
 }>(), {
 	initialTab: 'all',
 });
 
-let tab = $ref(props.initialTab);
+let tab = $ref(headerTabs.some(({ key }) => key === props.initialTab) ? props.initialTab : 'all');
 let includeTypes = $ref<string[] | null>(null);
 let unreadOnly = $computed(() => tab === 'unread');
 
@@ -47,7 +63,7 @@ const directNotesPagination = {
 	},
 };
 
-function setFilter(ev) {
+function setFilter(ev: Event): void {
 	const typeItems = notificationTypes.map(t => ({
 		text: i18n.t(`_notification._types.${t}`),
 		active: includeTypes && includeTypes.includes(t),
@@ -65,34 +81,18 @@ function setFilter(ev) {
 	os.popupMenu(items, ev.currentTarget ?? ev.target);
 }
 
-const headerActions = $computed(() => [tab === 'all' ? {
+const headerActions = $computed(() => tab === 'all' ? [{
 	text: i18n.ts.filter,
 	icon: 'fas fa-filter',
 	highlighted: includeTypes != null,
 	handler: setFilter,
-} : undefined, tab === 'all' ? {
+},{
 	text: i18n.ts.markAllAsRead,
 	icon: 'fas fa-check',
 	handler: () => {
 		os.apiWithDialog('notifications/mark-all-as-read');
 	},
-} : undefined].filter(x => x !== undefined));
-
-const headerTabs = $computed(() => [{
-	key: 'all',
-	title: i18n.ts.all,
-}, {
-	key: 'unread',
-	title: i18n.ts.unread,
-}, {
-	key: 'mentions',
-	title: i18n.ts.mentions,
-	icon: 'fas fa-at',
-}, {
-	key: 'directNotes',
-	title: i18n.ts.directNotes,
-	icon: 'fas fa-envelope',
-}]);
+}] : []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.notifications,
