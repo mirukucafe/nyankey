@@ -16,8 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { onUnmounted } from 'vue';
+import { DriveFile } from 'foundkey-js/built/entities';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import { stream } from '@/stream';
 import { getStaticImageUrl } from '@/scripts/get-static-image-url';
@@ -44,8 +45,12 @@ type WidgetProps = GetFormResultType<typeof widgetPropsDef>;
 // 現時点ではvueの制限によりimportしたtypeをジェネリックに渡せない
 //const props = defineProps<WidgetComponentProps<WidgetProps>>();
 //const emit = defineEmits<WidgetComponentEmits<WidgetProps>>();
-const props = defineProps<{ widget?: Widget<WidgetProps>; }>();
-const emit = defineEmits<{ (ev: 'updateProps', props: WidgetProps); }>();
+const props = defineProps<{
+	widget?: Widget<WidgetProps>;
+}>();
+const emit = defineEmits<{
+	(ev: 'updateProps', widgetProps: WidgetProps);
+}>();
 
 const { widgetProps, configure } = useWidgetPropsManager(name,
 	widgetPropsDef,
@@ -54,17 +59,17 @@ const { widgetProps, configure } = useWidgetPropsManager(name,
 );
 
 const connection = stream.useChannel('main');
-const images = ref([]);
-const fetching = ref(true);
+let images: DriveFile[] = $ref([]);
+let fetching = $ref(false);
 
-const onDriveFileCreated = (file) => {
+const onDriveFileCreated = (file: DriveFile): void => {
 	if (/^image\/.+$/.test(file.type)) {
-		images.value.unshift(file);
-		if (images.value.length > 9) images.value.pop();
+		images.unshift(file);
+		if (images.length > 9) images.pop();
 	}
 };
 
-const thumbnail = (image: any): string => {
+const thumbnail = (image: DriveFile): string => {
 	return defaultStore.state.disableShowingAnimatedImages
 		? getStaticImageUrl(image.thumbnailUrl)
 		: image.thumbnailUrl;
@@ -74,8 +79,8 @@ os.api('drive/stream', {
 	type: 'image/*',
 	limit: 9,
 }).then(res => {
-	images.value = res;
-	fetching.value = false;
+	images = res;
+	fetching = false;
 });
 
 connection.on('driveFileCreated', onDriveFileCreated);
