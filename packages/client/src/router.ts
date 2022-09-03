@@ -161,6 +161,7 @@ export const routes = [{
 }, {
 	path: '/my/notifications',
 	component: page(() => import('./pages/notifications.vue')),
+	hash: 'initialTab',
 	loginRequired: true,
 }, {
 	path: '/my/favorites',
