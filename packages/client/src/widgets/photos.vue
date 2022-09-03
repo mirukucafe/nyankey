@@ -60,7 +60,7 @@ const { widgetProps, configure } = useWidgetPropsManager(name,
 
 const connection = stream.useChannel('main');
 let images: DriveFile[] = $ref([]);
-let fetching = $ref(false);
+let fetching = $ref(true);
 
 const onDriveFileCreated = (file: DriveFile): void => {
 	if (/^image\/.+$/.test(file.type)) {
