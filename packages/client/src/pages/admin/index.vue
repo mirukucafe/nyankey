@@ -185,12 +185,10 @@ const menuDef = $computed(() => [{
 }]);
 
 const component = $computed(() => {
-	if (props.initialPage == null) return null;
 	switch (props.initialPage) {
 		case 'overview': return defineAsyncComponent(() => import('./overview.vue'));
 		case 'users': return defineAsyncComponent(() => import('./users.vue'));
 		case 'emojis': return defineAsyncComponent(() => import('./emojis.vue'));
-		//case 'federation': return defineAsyncComponent(() => import('../federation.vue'));
 		case 'queue': return defineAsyncComponent(() => import('./queue.vue'));
 		case 'files': return defineAsyncComponent(() => import('./files.vue'));
 		case 'announcements': return defineAsyncComponent(() => import('./announcements.vue'));
@@ -204,6 +202,7 @@ const component = $computed(() => {
 		case 'integrations': return defineAsyncComponent(() => import('./integrations.vue'));
 		case 'instance-block': return defineAsyncComponent(() => import('./instance-block.vue'));
 		case 'proxy-account': return defineAsyncComponent(() => import('./proxy-account.vue'));
+		default: return null;
 	}
 });
 
