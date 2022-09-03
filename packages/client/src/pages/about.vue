@@ -95,22 +95,6 @@ import number from '@/filters/number';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
-const props = withDefaults(defineProps<{
-	initialTab?: string;
-}>(), {
-	initialTab: 'overview',
-});
-
-let stats = $ref(null);
-let tab = $ref(props.initialTab);
-
-const initStats = () => os.api('stats', {
-}).then((res) => {
-	stats = res;
-});
-
-const headerActions = $computed(() => []);
-
 const headerTabs = $computed(() => [{
 	key: 'overview',
 	title: i18n.ts.overview,
@@ -127,6 +111,22 @@ const headerTabs = $computed(() => [{
 	title: i18n.ts.charts,
 	icon: 'fas fa-chart-simple',
 }]);
+
+const props = withDefaults(defineProps<{
+	initialTab?: string;
+}>(), {
+	initialTab: 'overview',
+});
+
+let stats = $ref(null);
+let tab = $ref(headerTabs.some(({ key }) => key === props.initialTab) ? props.initialTab : 'overview');
+
+const initStats = () => os.api('stats', {
+}).then((res) => {
+	stats = res;
+});
+
+const headerActions = $computed(() => []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.instanceInfo,
