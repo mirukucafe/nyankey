@@ -35,6 +35,15 @@
 			<option value="dialog">{{ i18n.ts._serverDisconnectedBehavior.dialog }}</option>
 			<option value="quiet">{{ i18n.ts._serverDisconnectedBehavior.quiet }}</option>
 		</FormSelect>
+
+		<FormRange v-model="maxCustomEmojiPicker" :min="0" :max="24" :step="1" class="_formBlock">
+			<template #label>{{ i18n.ts.maxCustomEmojiPicker }}</template>
+			<template #caption>{{ i18n.ts.maxCustomEmojiPickerDescription }}</template>
+		</FormRange>
+		<FormRange v-model="maxUnicodeEmojiPicker" :min="0" :max="24" :step="1" class="_formBlock">
+			<template #label>{{ i18n.ts.maxUnicodeEmojiPicker }}</template>
+			<template #caption>{{ i18n.ts.maxUnicodeEmojiPickerDescription }}</template>
+		</FormRange>
 	</FormSection>
 
 	<FormSection>
@@ -124,6 +133,8 @@ async function reloadAsk() {
 
 const overridedDeviceKind = computed(defaultStore.makeGetterSetter('overridedDeviceKind'));
 const serverDisconnectedBehavior = computed(defaultStore.makeGetterSetter('serverDisconnectedBehavior'));
+const maxCustomEmojiPicker = computed(defaultStore.makeGetterSetter('maxCustomEmojiPicker'));
+const maxUnicodeEmojiPicker = computed(defaultStore.makeGetterSetter('maxUnicodeEmojiPicker'));
 const reduceAnimation = computed(defaultStore.makeGetterSetter('animation', v => !v, v => !v));
 const useBlurEffectForModal = computed(defaultStore.makeGetterSetter('useBlurEffectForModal'));
 const useBlurEffect = computed(defaultStore.makeGetterSetter('useBlurEffect'));

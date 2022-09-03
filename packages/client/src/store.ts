@@ -108,6 +108,14 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'device',
 		default: 'quiet' as 'quiet' | 'reload' | 'dialog',
 	},
+	maxCustomEmojiPicker: {
+		where: 'device',
+		default: 10,
+	},
+	maxUnicodeEmojiPicker: {
+		where: 'device',
+		default: 10,
+	},
 	nsfw: {
 		where: 'device',
 		default: 'respect' as 'respect' | 'force' | 'ignore',
