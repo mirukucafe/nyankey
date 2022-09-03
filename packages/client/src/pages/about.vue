@@ -73,7 +73,7 @@
 	<MkSpacer v-else-if="tab === 'federation'" :content-max="1000" :margin-min="20">
 		<XFederation/>
 	</MkSpacer>
-	<MkSpacer v-else-if="tab === 'charts'" :content-max="1000" :margin-min="20">
+	<MkSpacer v-else-if="tab === 'charts'" :content-max="1200" :margin-min="20">
 		<MkInstanceStats :chart-limit="500" :detailed="true"/>
 	</MkSpacer>
 </MkStickyContainer>
@@ -81,6 +81,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+import XEmojis from './about.emojis.vue';
+import XFederation from './about.federation.vue';
 import { version, host } from '@/config';
 import FormLink from '@/components/form/link.vue';
 import FormSection from '@/components/form/section.vue';
@@ -93,6 +95,23 @@ import number from '@/filters/number';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
+const headerTabs = $computed(() => [{
+	key: 'overview',
+	title: i18n.ts.overview,
+}, {
+	key: 'emojis',
+	title: i18n.ts.customEmojis,
+	icon: 'fas fa-laugh',
+}, {
+	key: 'federation',
+	title: i18n.ts.federation,
+	icon: 'fas fa-globe',
+}, {
+	key: 'charts',
+	title: i18n.ts.charts,
+	icon: 'fas fa-chart-simple',
+}]);
+
 const props = withDefaults(defineProps<{
 	initialTab?: string;
 }>(), {
@@ -100,7 +119,7 @@ const props = withDefaults(defineProps<{
 });
 
 let stats = $ref(null);
-let tab = $ref(props.initialTab);
+let tab = $ref(headerTabs.some(({ key }) => key === props.initialTab) ? props.initialTab : 'overview');
 
 const initStats = () => os.api('stats', {
 }).then((res) => {
@@ -108,15 +127,6 @@ const initStats = () => os.api('stats', {
 });
 
 const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => [{
-	key: 'overview',
-	title: i18n.ts.overview,
-}, {
-	key: 'charts',
-	title: i18n.ts.charts,
-	icon: 'fas fa-chart-bar',
-}]);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.instanceInfo,

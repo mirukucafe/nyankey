@@ -71,12 +71,6 @@ export const routes = [{
 	path: '/explore',
 	component: page(() => import('./pages/explore.vue')),
 }, {
-	path: '/federation',
-	component: page(() => import('./pages/federation.vue')),
-}, {
-	path: '/emojis',
-	component: page(() => import('./pages/emojis.vue')),
-}, {
 	path: '/search',
 	component: page(() => import('./pages/search.vue')),
 	query: {
@@ -167,17 +161,12 @@ export const routes = [{
 }, {
 	path: '/my/notifications',
 	component: page(() => import('./pages/notifications.vue')),
+	hash: 'initialTab',
 	loginRequired: true,
 }, {
 	path: '/my/favorites',
 	component: page(() => import('./pages/favorites.vue')),
 	loginRequired: true,
-}, {
-	path: '/my/messages',
-	component: page(() => import('./pages/messages.vue')),
-}, {
-	path: '/my/mentions',
-	component: page(() => import('./pages/mentions.vue')),
 }, {
 	name: 'messaging',
 	path: '/my/messaging',

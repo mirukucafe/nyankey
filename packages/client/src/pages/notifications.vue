@@ -2,8 +2,14 @@
 <MkStickyContainer>
 	<template #header><MkPageHeader v-model:tab="tab" :actions="headerActions" :tabs="headerTabs"/></template>
 	<MkSpacer :content-max="800">
-		<div class="clupoqwt">
-			<XNotifications class="notifications" :include-types="includeTypes" :unread-only="tab === 'unread'"/>
+		<div v-if="tab === 'mentions'">
+			<XNotes :pagination="mentionsPagination"/>
+		</div>
+		<div v-else-if="tab === 'directNotes'">
+			<XNotes :pagination="directNotesPagination"/>
+		</div>
+		<div v-else>
+			<XNotifications class="notifications" :include-types="includeTypes" :unread-only="unreadOnly"/>
 		</div>
 	</MkSpacer>
 </MkStickyContainer>
@@ -13,14 +19,51 @@
 import { computed } from 'vue';
 import { notificationTypes } from 'foundkey-js';
 import XNotifications from '@/components/notifications.vue';
+import XNotes from '@/components/notes.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
-let tab = $ref('all');
-let includeTypes = $ref<string[] | null>(null);
+const headerTabs = $computed(() => [{
+	key: 'all',
+	title: i18n.ts.all,
+}, {
+	key: 'unread',
+	title: i18n.ts.unread,
+}, {
+	key: 'mentions',
+	title: i18n.ts.mentions,
+	icon: 'fas fa-at',
+}, {
+	key: 'directNotes',
+	title: i18n.ts.directNotes,
+	icon: 'fas fa-envelope',
+}]);
 
-function setFilter(ev) {
+const props = withDefaults(defineProps<{
+	initialTab?: string;
+}>(), {
+	initialTab: 'all',
+});
+
+let tab = $ref(headerTabs.some(({ key }) => key === props.initialTab) ? props.initialTab : 'all');
+let includeTypes = $ref<string[] | null>(null);
+let unreadOnly = $computed(() => tab === 'unread');
+
+const mentionsPagination = {
+	endpoint: 'notes/mentions' as const,
+	limit: 10,
+};
+
+const directNotesPagination = {
+	endpoint: 'notes/mentions' as const,
+	limit: 10,
+	params: {
+		visibility: 'specified',
+	},
+};
+
+function setFilter(ev: Event): void {
 	const typeItems = notificationTypes.map(t => ({
 		text: i18n.t(`_notification._types.${t}`),
 		active: includeTypes && includeTypes.includes(t),
@@ -38,34 +81,21 @@ function setFilter(ev) {
 	os.popupMenu(items, ev.currentTarget ?? ev.target);
 }
 
-const headerActions = $computed(() => [{
+const headerActions = $computed(() => tab === 'all' ? [{
 	text: i18n.ts.filter,
 	icon: 'fas fa-filter',
 	highlighted: includeTypes != null,
 	handler: setFilter,
-}, {
+},{
 	text: i18n.ts.markAllAsRead,
 	icon: 'fas fa-check',
 	handler: () => {
 		os.apiWithDialog('notifications/mark-all-as-read');
 	},
-}]);
-
-const headerTabs = $computed(() => [{
-	key: 'all',
-	title: i18n.ts.all,
-}, {
-	key: 'unread',
-	title: i18n.ts.unread,
-}]);
+}] : []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.notifications,
 	icon: 'fas fa-bell',
 })));
 </script>
-
-<style lang="scss" scoped>
-.clupoqwt {
-}
-</style>
