@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, onUnmounted, reactive, ref } from 'vue';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { onMounted, ref } from 'vue';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import * as os from '@/os';
 import { useInterval } from '@/scripts/use-interval';
@@ -38,8 +38,12 @@ type WidgetProps = GetFormResultType<typeof widgetPropsDef>;
 // 現時点ではvueの制限によりimportしたtypeをジェネリックに渡せない
 //const props = defineProps<WidgetComponentProps<WidgetProps>>();
 //const emit = defineEmits<WidgetComponentEmits<WidgetProps>>();
-const props = defineProps<{ widget?: Widget<WidgetProps>; }>();
-const emit = defineEmits<{ (ev: 'updateProps', props: WidgetProps); }>();
+const props = defineProps<{
+	widget?: Widget<WidgetProps>;
+}>();
+const emit = defineEmits<{
+	(ev: 'updateProps', widgetProps: WidgetProps): void;
+}>();
 
 const { widgetProps, configure, save } = useWidgetPropsManager(name,
 	widgetPropsDef,
@@ -52,7 +56,7 @@ const fetching = ref(true);
 const slideA = ref<HTMLElement>();
 const slideB = ref<HTMLElement>();
 
-const change = () => {
+const change = (): void => {
 	if (images.value.length === 0) return;
 
 	const index = Math.floor(Math.random() * images.value.length);
@@ -71,7 +75,7 @@ const change = () => {
 	}, 1000);
 };
 
-const fetch = () => {
+const fetch = (): void => {
 	fetching.value = true;
 
 	os.api('drive/files', {
@@ -87,7 +91,7 @@ const fetch = () => {
 	});
 };
 
-const choose = () => {
+const choose = (): void => {
 	os.selectDriveFolder(false).then(folder => {
 		if (folder == null) {
 			return;

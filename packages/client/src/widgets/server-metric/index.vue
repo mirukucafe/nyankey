@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref } from 'vue';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from '../widget';
+import { onUnmounted } from 'vue';
+import { ServerInfo } from 'foundkey-js/built/entities';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from '../widget';
 import XCpuMemory from './cpu-mem.vue';
 import XNet from './net.vue';
 import XCpu from './cpu.vue';
@@ -50,8 +51,12 @@ type WidgetProps = GetFormResultType<typeof widgetPropsDef>;
 // 現時点ではvueの制限によりimportしたtypeをジェネリックに渡せない
 //const props = defineProps<WidgetComponentProps<WidgetProps>>();
 //const emit = defineEmits<WidgetComponentEmits<WidgetProps>>();
-const props = defineProps<{ widget?: Widget<WidgetProps>; }>();
-const emit = defineEmits<{ (ev: 'updateProps', props: WidgetProps); }>();
+const props = defineProps<{
+	widget?: Widget<WidgetProps>;
+}>();
+const emit = defineEmits<{
+	(ev: 'updateProps', widgetProps: WidgetProps);
+}>();
 
 const { widgetProps, configure, save } = useWidgetPropsManager(name,
 	widgetPropsDef,
@@ -59,13 +64,13 @@ const { widgetProps, configure, save } = useWidgetPropsManager(name,
 	emit,
 );
 
-const meta = ref(null);
+let meta = $ref<ServerInfo | null>(null);
 
 os.api('server-info', {}).then(res => {
-	meta.value = res;
+	meta = res;
 });
 
-const toggleView = () => {
+const toggleView = (): void => {
 	if (widgetProps.view === 4) {
 		widgetProps.view = 0;
 	} else {

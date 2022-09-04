@@ -19,11 +19,10 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { ref, watch } from 'vue';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from './widget';
 import MarqueeText from '@/components/marquee.vue';
 import { GetFormResultType } from '@/scripts/form';
-import * as os from '@/os';
 import MkContainer from '@/components/ui/container.vue';
 import { useInterval } from '@/scripts/use-interval';
 
@@ -77,7 +76,7 @@ const items = ref([]);
 const fetching = ref(true);
 let key = $ref(0);
 
-const tick = () => {
+const tick = (): void => {
 	fetch(`/api/fetch-rss?url=${widgetProps.url}`, {}).then(res => {
 		res.json().then(feed => {
 			items.value = feed.items;
