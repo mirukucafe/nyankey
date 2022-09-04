@@ -65,7 +65,7 @@ const pagination = {
 	limit: 10,
 	offsetMode: true,
 	params: computed(() => ({
-		sort: sort,
+		sort,
 		host: host !== '' ? host : null,
 		...(
 			state === 'federating' ? { federating: true } :

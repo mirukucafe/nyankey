@@ -134,8 +134,8 @@ function emojiSearch<Type>(src: Type[], max: number, query: string): Type[] {
 	const match = (str: string): boolean => str && re.test(str);
 	const matches = src.filter(emoji =>
 		match(emoji.name)
-		|| emoji.aliases?.some(match)  // custom emoji
-		|| emoji.keywords?.some(match) // unicode emoji
+		|| emoji.aliases?.some(match) // custom emoji
+		|| emoji.keywords?.some(match), // unicode emoji
 	);
 	// TODO: sort matches by distance to query
 	if (max <= 0 || matches.length < max) return matches;
@@ -148,9 +148,9 @@ const queryCallback = (query) => {
 	searchResultCustom.value = emojiSearch(instance.emojis, maxCustomEmojiPicker.value, query);
 	searchResultUnicode.value = emojiSearch(emojilist, maxUnicodeEmojiPicker.value, query);
 	queryTimeoutId = -1;
-}
+};
 watch(q, () => {
-	if(queryTimeoutId >= 0) {
+	if (queryTimeoutId >= 0) {
 		clearTimeout(queryTimeoutId);
 		queryTimeoutId = -1;
 	}
