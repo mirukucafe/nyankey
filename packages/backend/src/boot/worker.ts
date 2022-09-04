@@ -4,7 +4,7 @@ import { initDb } from '@/db/postgre.js';
 /**
  * Init worker process
  */
-export async function workerMain() {
+export async function workerMain(): Promise<void> {
 	await initDb();
 
 	// start server
