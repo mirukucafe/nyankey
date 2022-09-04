@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { ref } from 'vue';
 import { AiScript, parse, utils } from '@syuilo/aiscript';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import * as os from '@/os';
 import MkContainer from '@/components/ui/container.vue';
@@ -43,8 +43,12 @@ type WidgetProps = GetFormResultType<typeof widgetPropsDef>;
 // 現時点ではvueの制限によりimportしたtypeをジェネリックに渡せない
 //const props = defineProps<WidgetComponentProps<WidgetProps>>();
 //const emit = defineEmits<WidgetComponentEmits<WidgetProps>>();
-const props = defineProps<{ widget?: Widget<WidgetProps>; }>();
-const emit = defineEmits<{ (ev: 'updateProps', props: WidgetProps); }>();
+const props = defineProps<{
+	widget?: Widget<WidgetProps>;
+}>();
+const emit = defineEmits<{
+	(ev: 'updateProps', widgetProps: WidgetProps): void;
+}>();
 
 const { widgetProps, configure } = useWidgetPropsManager(name,
 	widgetPropsDef,
@@ -58,7 +62,7 @@ const logs = ref<{
 	print: boolean;
 }[]>([]);
 
-const run = async () => {
+const run = async (): Promise<void> => {
 	logs.value = [];
 	const aiscript = new AiScript(createAiScriptEnv({
 		storageKey: 'widget',
@@ -68,7 +72,7 @@ const run = async () => {
 			return new Promise(ok => {
 				os.inputText({
 					title: q,
-				}).then(({ canceled, result: a }) => {
+				}).then(({ result: a }) => {
 					ok(a);
 				});
 			});

@@ -7,9 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue';
-import { AiScript, parse, utils } from '@syuilo/aiscript';
-import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
+import { AiScript, parse } from '@syuilo/aiscript';
+import { useWidgetPropsManager, Widget, WidgetComponentExpose } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import * as os from '@/os';
 import { createAiScriptEnv } from '@/scripts/aiscript/api';
@@ -39,8 +38,12 @@ type WidgetProps = GetFormResultType<typeof widgetPropsDef>;
 // 現時点ではvueの制限によりimportしたtypeをジェネリックに渡せない
 //const props = defineProps<WidgetComponentProps<WidgetProps>>();
 //const emit = defineEmits<WidgetComponentEmits<WidgetProps>>();
-const props = defineProps<{ widget?: Widget<WidgetProps>; }>();
-const emit = defineEmits<{ (ev: 'updateProps', props: WidgetProps); }>();
+const props = defineProps<{
+	widget?: Widget<WidgetProps>;
+}>();
+const emit = defineEmits<{
+	(ev: 'updateProps', widgetProps: WidgetProps): void;
+}>();
 
 const { widgetProps, configure } = useWidgetPropsManager(name,
 	widgetPropsDef,
@@ -48,7 +51,7 @@ const { widgetProps, configure } = useWidgetPropsManager(name,
 	emit,
 );
 
-const run = async () => {
+const run = async (): Promise<void> => {
 	const aiscript = new AiScript(createAiScriptEnv({
 		storageKey: 'widget',
 		token: $i?.token,
@@ -57,15 +60,15 @@ const run = async () => {
 			return new Promise(ok => {
 				os.inputText({
 					title: q,
-				}).then(({ canceled, result: a }) => {
+				}).then(({ result: a }) => {
 					ok(a);
 				});
 			});
 		},
-		out: (value) => {
+		out: (_value) => {
 			// nop
 		},
-		log: (type, params) => {
+		log: (_type, _params) => {
 			// nop
 		},
 	});
@@ -96,8 +99,3 @@ defineExpose<WidgetComponentExpose>({
 	id: props.widget ? props.widget.id : null,
 });
 </script>
-
-<style lang="scss" scoped>
-.mkw-button {
-}
-</style>
