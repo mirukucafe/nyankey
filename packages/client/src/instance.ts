@@ -12,7 +12,7 @@ export const instance: Misskey.entities.InstanceMetadata = reactive(instanceData
 	// TODO: set default values
 });
 
-export async function fetchInstance() {
+export async function fetchInstance(): Promise<void> {
 	const meta = await api('meta', {
 		detail: false,
 	});

@@ -163,7 +163,7 @@ export class Router extends EventEmitter<{
 		return null;
 	}
 
-	private navigate(path: string, key: string | null | undefined, initial = false) {
+	private navigate(path: string, key: string | null | undefined, initial = false): void {
 		const beforePath = this.currentPath;
 		this.currentPath = path;
 
@@ -195,23 +195,23 @@ export class Router extends EventEmitter<{
 		}
 	}
 
-	public getCurrentComponent() {
+	public getCurrentComponent(): Component | null {
 		return this.currentComponent;
 	}
 
-	public getCurrentProps() {
+	public getCurrentProps(): Map<string, string> | null {
 		return this.currentProps;
 	}
 
-	public getCurrentPath() {
+	public getCurrentPath(): string {
 		return this.currentPath;
 	}
 
-	public getCurrentKey() {
+	public getCurrentKey(): string {
 		return this.currentKey;
 	}
 
-	public push(path: string) {
+	public push(path: string): void {
 		const beforePath = this.currentPath;
 		if (path === beforePath) {
 			this.emit('same');
@@ -231,7 +231,7 @@ export class Router extends EventEmitter<{
 		});
 	}
 
-	public change(path: string, key?: string | null) {
+	public change(path: string, key?: string | null): void {
 		this.navigate(path, key);
 	}
 }
