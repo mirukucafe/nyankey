@@ -26,8 +26,8 @@
 		"mocha": "yarn workspace backend run mocha",
 		"test": "yarn mocha",
 		"format": "gulp format",
-		"clean": "node ./scripts/clean.js",
-		"clean-all": "node ./scripts/clean-all.js",
+		"clean": "yarn workspaces foreach run clean && rm -rf built/",
+		"clean-all": "yarn workspaces foreach run clean-all && rm -rf built/ node_modules/",
 		"cleanall": "yarn clean-all"
 	},
 	"dependencies": {
