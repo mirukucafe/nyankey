@@ -5,7 +5,9 @@
 	"scripts": {
 		"watch": "node build.js watch",
 		"build": "node build.js",
-		"lint": "eslint src --ext .ts"
+		"lint": "eslint src --ext .ts",
+		"clean": "rm -rf built/",
+		"clean-all": "yarn clean && rm -rf node_modules/"
 	},
 	"dependencies": {
 		"esbuild": "^0.14.13",
