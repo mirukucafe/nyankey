@@ -8,6 +8,9 @@ We won't mind if issues are not in English but we cannot guarantee we will under
 However it might stíll be better if you write issues in your original language if you are not confident of your English skills because we might be able to use different translators or ask people to translate if we are not sure what you mean.
 Please understand that in such cases we might edit your issue to translate it, to help us avoid duplicating issues.
 
+## Development platform
+FoundKey generally assumes that it is running on a Unix-like platform (e.g. Linux or macOS). If you are using Windows for development, we highly suggest using the Windows Subsystem for Linux (WSL) as the development environment. 
+
 ## Roadmap
 See [ROADMAP.md](./ROADMAP.md)
 
