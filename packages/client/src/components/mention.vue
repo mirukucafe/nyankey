@@ -1,5 +1,5 @@
 <template>
-<MkA v-if="url.startsWith('/')" v-user-preview="canonical" :class="[$style.root, { isMe }]" :to="url" :style="{ background: bgCss }">
+<MkA v-if="url.startsWith('/')" v-user-preview="canonical" :class="[$style.root, { [$style.isMe]: isMe }]" :to="url" :style="{ background: bgCss }">
 	<img :class="$style.icon" :src="`/avatar/@${username}@${host}`" alt="">
 	<span class="main">
 		<span class="username">@{{ username }}</span>
