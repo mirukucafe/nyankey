@@ -13,6 +13,7 @@ export async function readNotification(
 
 	// Update documents
 	const result = await Notifications.update({
+		notifieeId: userId,
 		id: In(notificationIds),
 		isRead: false,
 	}, {
