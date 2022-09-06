@@ -16,11 +16,11 @@
 		</div>
 		<div class="hdrwpsaf fullwidth">
 			<header>{{ file.name }}</header>
-			<img v-if="file.type.startsWidth('image/')" :src="file.url" @click="modal.close()"/>
-			<video v-else-if="file.type.startsWidth('video/')" controls>
+			<img v-if="file.type.startsWith('image/')" :src="file.url" @click="modal.close()"/>
+			<video v-else-if="file.type.startsWith('video/')" controls>
 				<source :src="file.url" :type="file.type">
 			</video>
-			<audio v-else-if="file.type.startsWidth('audio/')" controls>
+			<audio v-else-if="file.type.startsWith('audio/')" controls>
 				<source :src="file.url" :type="file.type">
 			</audio>
 			<a v-else :href="file.url">{{ file.url }}</a>
