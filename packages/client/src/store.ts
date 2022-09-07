@@ -140,10 +140,6 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'device',
 		default: false,
 	},
-	disablePagesScript: {
-		where: 'device',
-		default: false,
-	},
 	useOsNativeEmojis: {
 		where: 'device',
 		default: false,
