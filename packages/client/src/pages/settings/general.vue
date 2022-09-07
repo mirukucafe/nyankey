@@ -121,7 +121,7 @@ const lang = ref(localStorage.getItem('lang'));
 const fontSize = ref(localStorage.getItem('fontSize'));
 const useSystemFont = ref(localStorage.getItem('useSystemFont') != null);
 
-async function reloadAsk() {
+async function reloadAsk(): Promise<void> {
 	const { canceled } = await os.confirm({
 		type: 'info',
 		text: i18n.ts.reloadToApplySetting,
@@ -189,10 +189,6 @@ watch([
 ], async () => {
 	await reloadAsk();
 });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.general,
