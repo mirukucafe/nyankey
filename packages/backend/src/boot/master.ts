@@ -32,7 +32,7 @@ function greet(): void {
 		console.log(themeColor(' |     |_|___ ___| |_ ___ _ _ '));
 		console.log(themeColor(' | | | | |_ -|_ -| \'_| -_| | |'));
 		console.log(themeColor(' |_|_|_|_|___|___|_,_|___|_  |'));
-		console.log(' ' + chalk.gray(v) + themeColor('                        |___|\n'.substr(v.length)));
+		console.log(' ' + chalk.gray(v) + themeColor('                        |___|\n'.slice(v.length)));
 		//#endregion
 
 		console.log(' Misskey is an open-source decentralized microblogging platform.');
@@ -61,7 +61,7 @@ export async function masterMain(): Promise<void> {
 		config = loadConfigBoot();
 		await connectDb();
 	} catch (e) {
-		bootLogger.error('Fatal error occurred during initialization', null, true);
+		bootLogger.error('Fatal error occurred during initialization', {}, true);
 		process.exit(1);
 	}
 
@@ -87,7 +87,7 @@ function showEnvironment(): void {
 
 	if (env !== 'production') {
 		logger.warn('The environment is not in production mode.');
-		logger.warn('DO NOT USE FOR PRODUCTION PURPOSE!', null, true);
+		logger.warn('DO NOT USE FOR PRODUCTION PURPOSE!', {}, true);
 	}
 }
 
@@ -110,8 +110,9 @@ function loadConfigBoot(): Config {
 	try {
 		config = loadConfig();
 	} catch (exception) {
-		if (exception.code === 'ENOENT') {
-			configLogger.error('Configuration file not found', null, true);
+		const e = exception as Partial<NodeJS.ErrnoException> | Error;
+		if ('code' in e && e.code === 'ENOENT') {
+			configLogger.error('Configuration file not found', {}, true);
 			process.exit(1);
 		} else if (e instanceof Error) {
 			configLogger.error(e.message);
@@ -135,8 +136,8 @@ async function connectDb(): Promise<void> {
 		const v = await db.query('SHOW server_version').then(x => x[0].server_version);
 		dbLogger.succ(`Connected: v${v}`);
 	} catch (e) {
-		dbLogger.error('Cannot connect', null, true);
-		dbLogger.error(e);
+		dbLogger.error('Cannot connect', {}, true);
+		dbLogger.error(e as Error | string);
 		process.exit(1);
 	}
 }
