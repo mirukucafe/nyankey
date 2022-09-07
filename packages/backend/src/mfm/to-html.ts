@@ -8,20 +8,20 @@ import { intersperse } from '@/prelude/array.js';
 // Transforms MFM to HTML, given the MFM text and a list of user IDs that are
 // mentioned in the text. If the list of mentions is not given, all mentions
 // from the text will be extracted.
-export async function toHtml(mfmText: string, mentions?: string[]): string | null {
+export async function toHtml(mfmText: string, mentions?: string[]): Promise<string | null> {
 	const nodes = mfm.parse(mfmText);
 	if (nodes == null) {
 		return null;
 	}
 
-	const mentionedUsers = await UserProfiles.createQueryBuilder("user_profiles")
+	const mentionedUsers = await UserProfiles.createQueryBuilder('user_profiles')
 		.leftJoin('user_profile.user', 'user')
 		.select('user.username')
 		.addSelect('user.host')
 		// links should preferably use user friendly urls, only fall back to AP ids
 		.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
 		.where('userId IN (:...ids)', { ids: mentions ?? extractMentions(nodes) })
-		.getManyRaw();
+		.getMany();
 
 	const doc = new JSDOM('').window.document;
 
@@ -119,7 +119,7 @@ export async function toHtml(mfmText: string, mentions?: string[]): string | nul
 
 		mention(node) {
 			const { username, host, acct } = node.props;
-			const userInfo = mentionedUsers.find(user => user.username === username && user.host === host);
+			const userInfo = mentionedUsers.find(user => user.user?.username === username && user.userHost === host);
 			if (userInfo != null) {
 				// Mastodon microformat: span.h-card > a.u-url.mention
 				const a = doc.createElement('a');
