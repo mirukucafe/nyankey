@@ -23,13 +23,6 @@ self.addEventListener('activate', ev => {
 	);
 });
 
-self.addEventListener('fetch', ev => {
-	ev.respondWith(
-		fetch(ev.request)
-		.catch(() => new Response(`Offline. Service Worker @${_VERSION_}`, { status: 200 }))
-	);
-});
-
 self.addEventListener('push', ev => {
 	// クライアント取得
 	ev.waitUntil(self.clients.matchAll({
