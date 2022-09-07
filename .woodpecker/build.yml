@@ -6,11 +6,17 @@ clone:
       recursive: true
 
 pipeline:
-  build:
+  install:
     when:
       event:
         - pull_request
     image: node:18.6.0
     commands:
       - yarn install
+  build:
+    when:
+      event:
+        - pull_request
+    image: node:18.6.0
+    commands:
       - yarn build
