@@ -18,34 +18,25 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-	props: {
-		modelValue: {
-			required: false,
-		},
-		value: {
-			required: false,
-		},
-		disabled: {
-			type: Boolean,
-			default: false,
-		},
-	},
-	computed: {
-		checked(): boolean {
-			return this.modelValue === this.value;
-		},
-	},
-	methods: {
-		toggle() {
-			if (this.disabled) return;
-			this.$emit('update:modelValue', this.value);
-		},
-	},
+<script lang="ts" setup>
+type ValueType = string | number | symbol;
+const props = withDefaults(defineProps<{
+	modelValue?: ValueType;
+	value?: ValueType;
+	disabled?: boolean;
+}>(), {
+	disabled: false,
 });
+const emit = defineEmits<{
+	(ev: 'update:modelValue', value?: ValueType): void;
+}>();
+
+const checked = $computed(() => props.modelValue === props.value);
+
+function toggle(): void {
+	if (props.disabled) return;
+	emit('update:modelValue', props.value);
+}
 </script>
 
 <style lang="scss" scoped>
