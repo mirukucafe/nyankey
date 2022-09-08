@@ -1,6 +1,6 @@
 import { Brackets } from 'typeorm';
+import { notificationTypes } from 'foundkey-js';
 import { Notifications, Followings, Mutings, Users, UserProfiles } from '@/models/index.js';
-import { notificationTypes } from '@/types.js';
 import read from '@/services/note/read.js';
 import { readNotification } from '../../common/read-notification.js';
 import define from '../../define.js';

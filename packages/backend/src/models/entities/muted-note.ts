@@ -1,5 +1,5 @@
 import { Entity, Index, JoinColumn, Column, ManyToOne, PrimaryColumn } from 'typeorm';
-import { mutedNoteReasons } from '@/types.js';
+import { mutedNoteReasons } from 'foundkey-js';
 import { id } from '../id.js';
 import { Note } from './note.js';
 import { User } from './user.js';

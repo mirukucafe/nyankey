@@ -1,5 +1,5 @@
 import { Entity, Index, JoinColumn, ManyToOne, Column, PrimaryColumn } from 'typeorm';
-import { notificationTypes } from '@/types.js';
+import { notificationTypes } from 'foundkey-js';
 import { id } from '../id.js';
 import { User } from './user.js';
 import { Note } from './note.js';

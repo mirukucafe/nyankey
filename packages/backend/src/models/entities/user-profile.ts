@@ -1,5 +1,5 @@
 import { Entity, Column, Index, OneToOne, JoinColumn, PrimaryColumn } from 'typeorm';
-import { ffVisibility, notificationTypes } from '@/types.js';
+import { ffVisibility, notificationTypes } from 'foundkey-js';
 import { id } from '../id.js';
 import { User } from './user.js';
 import { Page } from './page.js';

@@ -1,5 +1,5 @@
 import { Entity, Index, JoinColumn, Column, PrimaryColumn, ManyToOne } from 'typeorm';
-import { noteVisibilities } from '@/types.js';
+import { noteVisibilities } from 'foundkey-js';
 import { id } from '../id.js';
 import { User } from './user.js';
 import { DriveFile } from './drive-file.js';

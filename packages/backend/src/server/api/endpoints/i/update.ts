@@ -1,5 +1,6 @@
 import RE2 from 're2';
 import * as mfm from 'mfm-js';
+import { notificationTypes } from 'foundkey-js';
 import { publishMainStream, publishUserEvent } from '@/services/stream.js';
 import acceptAllFollowRequests from '@/services/following/requests/accept-all.js';
 import { publishToFollowers } from '@/services/i/update.js';
@@ -9,7 +10,6 @@ import { updateUsertags } from '@/services/update-hashtag.js';
 import { Users, DriveFiles, UserProfiles, Pages } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
-import { notificationTypes } from '@/types.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
 import { langmap } from '@/misc/langmap.js';
 import define from '../../define.js';
