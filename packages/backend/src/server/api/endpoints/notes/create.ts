@@ -1,4 +1,5 @@
 import { In } from 'typeorm';
+import { noteVisibilities } from 'foundkey-js';
 import create from '@/services/note/create.js';
 import { User } from '@/models/entities/user.js';
 import { Users, DriveFiles, Notes, Channels, Blockings } from '@/models/index.js';
@@ -7,7 +8,6 @@ import { Note } from '@/models/entities/note.js';
 import { Channel } from '@/models/entities/channel.js';
 import { MAX_NOTE_TEXT_LENGTH, HOUR } from '@/const.js';
 import { isPureRenote } from '@/misc/renote.js';
-import { noteVisibilities } from '../../../../types.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
 import { getNote } from '../../common/getters.js';
