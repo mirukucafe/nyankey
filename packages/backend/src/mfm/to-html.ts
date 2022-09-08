@@ -14,22 +14,7 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 		return null;
 	}
 
-	const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
-		.leftJoin('user_profile.user', 'user')
-		.select('user.username')
-		.addSelect('user.host')
-		// links should preferably use user friendly urls, only fall back to AP ids
-		.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
-		.where('userId IN (:...ids)', { ids: mentions ?? extractMentions(nodes) })
-		.getMany();
-
 	const doc = new JSDOM('').window.document;
-
-	function appendChildren(children: mfm.MfmNode[], targetElement: any): void {
-		if (children) {
-			for (const child of children.map(x => (handlers as any)[x.type](x))) targetElement.appendChild(child);
-		}
-	}
 
 	const handlers: { [K in mfm.MfmNode['type']]: (node: mfm.NodeType<K>) => any } = {
 		bold(node) {
@@ -117,24 +102,34 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			return a;
 		},
 
-		mention(node) {
+		async mention(node): Promise<HTMLElement | Text> {
 			const { username, host, acct } = node.props;
-			const userInfo = mentionedUsers.find(user => user.user?.username === username && user.userHost === host);
-			if (userInfo != null) {
-				// Mastodon microformat: span.h-card > a.u-url.mention
-				const a = doc.createElement('a');
-				a.href = userInfo.url ?? `${config.url}/${acct}`;
-				a.className = 'u-url mention';
-				a.textContent = acct;
+			const ids = mentions ?? extractMentions(nodes);
+			if (ids.length > 0) {
+				const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
+					.leftJoin('user_profile.user', 'user')
+					.select('user.username')
+					.addSelect('user.host')
+					// links should preferably use user friendly urls, only fall back to AP ids
+					.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
+					.where('"userId" IN (:...ids)', { ids })
+					.getMany();
+				const userInfo = mentionedUsers.find(user => user.user?.username === username && user.userHost === host);
+				if (userInfo != null) {
+					// Mastodon microformat: span.h-card > a.u-url.mention
+					const a = doc.createElement('a');
+					a.href = userInfo.url ?? `${config.url}/${acct}`;
+					a.className = 'u-url mention';
+					a.textContent = acct;
 
-				const card = doc.createElement('span');
-				card.className = 'h-card';
-				card.appendChild(a);
-				return card;
-			} else {
-				// this user does not actually exist
-				return doc.createTextNode(acct);
+					const card = doc.createElement('span');
+					card.className = 'h-card';
+					card.appendChild(a);
+					return card;
+				}
 			}
+			// this user does not actually exist
+			return doc.createTextNode(acct);
 		},
 
 		quote(node) {
@@ -168,6 +163,12 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			return a;
 		},
 	};
+
+	function appendChildren(children: mfm.MfmNode[], targetElement: any): void {
+		if (children.length > 0) {
+			for (const child of children.map(x => (handlers as any)[x.type](x))) targetElement.appendChild(child);
+		}
+	}
 
 	appendChildren(nodes, doc.body);
 
