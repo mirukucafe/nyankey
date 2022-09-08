@@ -15,6 +15,6 @@ export async function workerMain(): Promise<void> {
 
 	if (cluster.isWorker) {
 		// Send a 'ready' message to parent process
-		process.send!('ready');
+		process.send?.('ready');
 	}
 }
