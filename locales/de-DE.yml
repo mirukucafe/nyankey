@@ -804,6 +804,7 @@ makeReactionsPublicDescription: "Jeder wird die Liste deiner gesendeten Reaktion
 classic: "Classic"
 muteThread: "Thread stummschalten"
 unmuteThread: "Threadstummschaltung aufheben"
+threadMuteNotificationsDesc: "Wähle die Benachrichtigungen, die du aus diesem Thread erhalten möchtest. Globale Benachrichtigungs-Einstellungen werden zusätzlich angewandt. Das Deaktivieren einer Benachrichtigung hat Vorrang."
 ffVisibility: "Sichtbarkeit von Gefolgten/Followern"
 ffVisibilityDescription: "Konfiguriere wer sehen kann, wem du folgst sowie wer dir folgt."
 continueThread: "Weiteren Threadverlauf anzeigen"
