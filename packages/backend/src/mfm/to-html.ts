@@ -105,26 +105,28 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 		async mention(node): Promise<HTMLElement | Text> {
 			const { username, host, acct } = node.props;
 			const ids = mentions ?? extractMentions(nodes);
-			const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
-				.leftJoin('user_profile.user', 'user')
-				.select('user.username')
-				.addSelect('user.host')
-				// links should preferably use user friendly urls, only fall back to AP ids
-				.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
-				.where('userId IN (:...ids)', { ids })
-				.getMany();
-			const userInfo = mentionedUsers.find(user => user.user?.username === username && user.userHost === host);
-			if (userInfo != null) {
-				// Mastodon microformat: span.h-card > a.u-url.mention
-				const a = doc.createElement('a');
-				a.href = userInfo.url ?? `${config.url}/${acct}`;
-				a.className = 'u-url mention';
-				a.textContent = acct;
+			if (ids.length > 0) {
+				const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
+					.leftJoin('user_profile.user', 'user')
+					.select('user.username')
+					.addSelect('user.host')
+					// links should preferably use user friendly urls, only fall back to AP ids
+					.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
+					.where('"userId" IN (:...ids)', { ids })
+					.getMany();
+				const userInfo = mentionedUsers.find(user => user.user?.username === username && user.userHost === host);
+				if (userInfo != null) {
+					// Mastodon microformat: span.h-card > a.u-url.mention
+					const a = doc.createElement('a');
+					a.href = userInfo.url ?? `${config.url}/${acct}`;
+					a.className = 'u-url mention';
+					a.textContent = acct;
 
-				const card = doc.createElement('span');
-				card.className = 'h-card';
-				card.appendChild(a);
-				return card;
+					const card = doc.createElement('span');
+					card.className = 'h-card';
+					card.appendChild(a);
+					return card;
+				}
 			}
 			// this user does not actually exist
 			return doc.createTextNode(acct);
