@@ -14,7 +14,7 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 		return null;
 	}
 
-	const mentionedUsers = await UserProfiles.createQueryBuilder('user_profiles')
+	const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
 		.leftJoin('user_profile.user', 'user')
 		.select('user.username')
 		.addSelect('user.host')
