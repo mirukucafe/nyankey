@@ -21,6 +21,6 @@ export const ffVisibility = consts.ffVisibility;
 // api extractor not supported yet
 //export * as api from './api';
 //export * as entities from './entities';
-import * as api from './api';
-import * as entities from './entities';
+import * as api from './api.js';
+import * as entities from './entities.js';
 export { api, entities };
