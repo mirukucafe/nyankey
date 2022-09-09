@@ -1,5 +1,5 @@
 import autobind from 'autobind-decorator';
-import { EventEmitter } from 'eventemitter3';
+import EventEmitter from 'eventemitter3';
 import ReconnectingWebsocket from 'reconnecting-websocket';
 import { BroadcastEvents, Channels } from './streaming.types.js';
 
