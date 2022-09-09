@@ -1,4 +1,4 @@
-import { Endpoints } from './api.types';
+import { Endpoints } from './api.types.js';
 
 const MK_API_ERROR = Symbol();
 
