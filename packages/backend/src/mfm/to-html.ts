@@ -10,44 +10,44 @@ import { intersperse } from '@/prelude/array.js';
 // from the text will be extracted.
 export async function toHtml(mfmText: string, mentions?: string[]): Promise<string | null> {
 	const nodes = mfm.parse(mfmText);
-	if (nodes == null) {
+	if (nodes.length === 0) {
 		return null;
 	}
 
 	const doc = new JSDOM('').window.document;
 
-	const handlers: { [K in mfm.MfmNode['type']]: (node: mfm.NodeType<K>) => any } = {
-		bold(node) {
+	const handlers: { [K in mfm.MfmNode['type']]: (node: mfm.NodeType<K>) => Promise<Node> } = {
+		async bold(node) {
 			const el = doc.createElement('b');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		small(node) {
+		async small(node) {
 			const el = doc.createElement('small');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		strike(node) {
+		async strike(node) {
 			const el = doc.createElement('del');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		italic(node) {
+		async italic(node) {
 			const el = doc.createElement('i');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		fn(node) {
+		async fn(node) {
 			const el = doc.createElement('i');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		blockCode(node) {
+		async blockCode(node) {
 			const pre = doc.createElement('pre');
 			const inner = doc.createElement('code');
 			inner.textContent = node.props.code;
@@ -55,21 +55,21 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			return pre;
 		},
 
-		center(node) {
+		async center(node) {
 			const el = doc.createElement('div');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		emojiCode(node) {
+		async emojiCode(node) {
 			return doc.createTextNode(`\u200B:${node.props.name}:\u200B`);
 		},
 
-		unicodeEmoji(node) {
+		async unicodeEmoji(node) {
 			return doc.createTextNode(node.props.emoji);
 		},
 
-		hashtag(node) {
+		async hashtag(node) {
 			const a = doc.createElement('a');
 			a.href = `${config.url}/tags/${node.props.hashtag}`;
 			a.textContent = `#${node.props.hashtag}`;
@@ -77,25 +77,25 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			return a;
 		},
 
-		inlineCode(node) {
+		async inlineCode(node) {
 			const el = doc.createElement('code');
 			el.textContent = node.props.code;
 			return el;
 		},
 
-		mathInline(node) {
+		async mathInline(node) {
 			const el = doc.createElement('code');
 			el.textContent = node.props.formula;
 			return el;
 		},
 
-		mathBlock(node) {
+		async mathBlock(node) {
 			const el = doc.createElement('code');
 			el.textContent = node.props.formula;
 			return el;
 		},
 
-		link(node) {
+		async link(node) {
 			const a = doc.createElement('a');
 			a.href = node.props.url;
 			appendChildren(node.children, a);
@@ -132,13 +132,13 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			return doc.createTextNode(acct);
 		},
 
-		quote(node) {
+		async quote(node) {
 			const el = doc.createElement('blockquote');
 			appendChildren(node.children, el);
 			return el;
 		},
 
-		text(node) {
+		async text(node) {
 			const el = doc.createElement('span');
 			const nodes = node.props.text.split(/\r\n|\r|\n/).map(x => doc.createTextNode(x));
 
@@ -149,14 +149,14 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			return el;
 		},
 
-		url(node) {
+		async url(node) {
 			const a = doc.createElement('a');
 			a.href = node.props.url;
 			a.textContent = node.props.url;
 			return a;
 		},
 
-		search(node) {
+		async search(node) {
 			const a = doc.createElement('a');
 			a.href = `https://www.google.com/search?q=${node.props.query}`;
 			a.textContent = node.props.content;
@@ -164,13 +164,16 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 		},
 	};
 
-	function appendChildren(children: mfm.MfmNode[], targetElement: any): void {
-		if (children.length > 0) {
-			for (const child of children.map(x => (handlers as any)[x.type](x))) targetElement.appendChild(child);
+	async function appendChildren(children: mfm.MfmNode[], targetElement: HTMLElement): Promise<void> {
+		type HandlerFunc = (node: mfm.MfmNode) => Promise<Node>;
+		const htmlChildren = await Promise.all(children.map(x => (handlers[x.type] as HandlerFunc)(x)));
+
+		for (const child of htmlChildren) {
+			targetElement.appendChild(child);
 		}
 	}
 
-	appendChildren(nodes, doc.body);
+	await appendChildren(nodes, doc.body);
 
 	return `<p>${doc.body.innerHTML}</p>`;
 }
