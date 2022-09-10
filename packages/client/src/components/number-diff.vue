@@ -4,30 +4,17 @@
 </span>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue';
+<script lang="ts" setup>
+import { computed } from 'vue';
 import number from '@/filters/number';
 
-export default defineComponent({
-	props: {
-		value: {
-			type: Number,
-			required: true,
-		},
-	},
+const props = defineProps<{
+	value: number;
+}>();
 
-	setup(props) {
-		const isPlus = computed(() => props.value > 0);
-		const isMinus = computed(() => props.value < 0);
-		const isZero = computed(() => props.value === 0);
-		return {
-			isPlus,
-			isMinus,
-			isZero,
-			number,
-		};
-	},
-});
+const isPlus = computed(() => props.value > 0);
+const isMinus = computed(() => props.value < 0);
+const isZero = computed(() => props.value === 0);
 </script>
 
 <style lang="scss" scoped>
