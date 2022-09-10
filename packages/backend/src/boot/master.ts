@@ -74,9 +74,9 @@ export async function masterMain(): Promise<void> {
 	bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, null, true);
 
 	if (!envOption.noDaemons) {
-		import('../daemons/server-stats.js').then(x => x.default());
-		import('../daemons/queue-stats.js').then(x => x.default());
-		import('../daemons/janitor.js').then(x => x.default());
+		import('../daemons/server-stats.js').then(x => x.serverStats());
+		import('../daemons/queue-stats.js').then(x => x.queueStats());
+		import('../daemons/janitor.js').then(x => x.janitor());
 	}
 }
 

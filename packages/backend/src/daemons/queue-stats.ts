@@ -8,7 +8,7 @@ const interval = 10000;
 /**
  * Report queue stats regularly
  */
-export default function() {
+export function queueStats(): void {
 	const log = [] as any[];
 
 	ev.on('requestQueueStatsLog', x => {
@@ -26,7 +26,7 @@ export default function() {
 		activeInboxJobs++;
 	});
 
-	async function tick() {
+	async function tick(): Promise<void> {
 		const deliverJobCounts = await deliverQueue.getJobCounts();
 		const inboxJobCounts = await inboxQueue.getJobCounts();
 
