@@ -1,26 +1,15 @@
-import { Endpoints } from './api.types.js';
-import Stream, { Connection } from './streaming.js';
-import { Channels } from './streaming.types.js';
-import { Acct } from './acct.js';
-import * as consts from './consts.js';
-
+export { Endpoints } from './api.types.js';
+export { default as Stream, Connection as ChannelConnection } from './streaming.js';
+export { Channels } from './streaming.types.js';
+export { Acct } from './acct.js';
 export {
-	Endpoints,
-	Stream,
-	Connection as ChannelConnection,
-	Channels,
-	Acct,
-};
-
-export const permissions = consts.permissions;
-export const notificationTypes = consts.notificationTypes;
-export const noteVisibilities = consts.noteVisibilities;
-export const mutedNoteReasons = consts.mutedNoteReasons;
-export const ffVisibility = consts.ffVisibility;
+	permissions,
+	notificationTypes,
+	noteVisibilities,
+	mutedNoteReasons,
+	ffVisibility,
+} from './consts.js';
 
 // api extractor not supported yet
-//export * as api from './api';
-//export * as entities from './entities';
-import * as api from './api.js';
-import * as entities from './entities.js';
-export { api, entities };
+export * as api from './api.js';
+export * as entities from './entities.js';
