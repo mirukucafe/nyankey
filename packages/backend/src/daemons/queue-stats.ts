@@ -9,7 +9,7 @@ const interval = 10000;
  * Report queue stats regularly
  */
 export function queueStats(): void {
-	const log = [] as any[];
+	const log: Record<string, Record<string, number>>[] = [];
 
 	ev.on('requestQueueStatsLog', x => {
 		ev.emit(`queueStatsLog:${x.id}`, log.slice(0, x.length || 50));

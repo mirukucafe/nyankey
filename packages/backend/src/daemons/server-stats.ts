@@ -13,7 +13,7 @@ const round = (num: number): number => Math.round(num * 10) / 10;
  * Report server stats regularly
  */
 export function serverStats(): void {
-	const log = [] as any[];
+	const log: Record<string, Record<string, number> | number>[] = [];
 
 	ev.on('requestServerStatsLog', x => {
 		ev.emit(`serverStatsLog:${x.id}`, log.slice(0, x.length || 50));
@@ -52,7 +52,7 @@ export function serverStats(): void {
 
 // CPU STAT
 function cpuUsage(): Promise<number> {
-	return new Promise((res, rej) => {
+	return new Promise((res) => {
 		osUtils.cpuUsage((cpuUsage) => {
 			res(cpuUsage);
 		});
