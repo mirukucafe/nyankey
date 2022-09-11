@@ -108,13 +108,13 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 			if (ids.length > 0) {
 				const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
 					.leftJoin('user_profile.user', 'user')
-					.select('user.username')
-					.addSelect('user.host')
+					.select('user.username', 'username')
+					.addSelect('user.host', 'host')
 					// links should preferably use user friendly urls, only fall back to AP ids
 					.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
 					.where('"userId" IN (:...ids)', { ids })
-					.getMany();
-				const userInfo = mentionedUsers.find(user => user.user?.username === username && user.userHost === host);
+					.getRawMany();
+				const userInfo = mentionedUsers.find(user => user.username === username && user.host === host);
 				if (userInfo != null) {
 					// Mastodon microformat: span.h-card > a.u-url.mention
 					const a = doc.createElement('a');
