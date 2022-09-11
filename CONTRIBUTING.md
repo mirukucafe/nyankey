@@ -270,6 +270,12 @@ const users = userIds.length > 0 ? await Users.find({
 }) : [];
 ```
 
+### typeorm: selecting only specific columns
+
+If you select specific columns of a table only, you will probably not be able to use the usual `getOne`, `getMany` etc.
+Instead you might want to try using `getRawOne` and `getRawMany`.
+For that, you may also want to add aliases to the columns you select, which can be done using the second parameter of `select` or `addSelect`.
+
 ### Array indexing in SQL
 PostgreSQL array indices **start at 1**.
 
