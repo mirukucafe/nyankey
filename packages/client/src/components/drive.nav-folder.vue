@@ -15,20 +15,20 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{
-	folder?: Misskey.entities.DriveFolder;
-	parentFolder: Misskey.entities.DriveFolder | null;
+	folder?: foundkey.entities.DriveFolder;
+	parentFolder: foundkey.entities.DriveFolder | null;
 }>();
 
 const emit = defineEmits<{
-	(ev: 'move', v?: Misskey.entities.DriveFolder): void;
-	(ev: 'upload', file: File, folder?: Misskey.entities.DriveFolder | null): void;
-	(ev: 'removeFile', v: Misskey.entities.DriveFile['id']): void;
-	(ev: 'removeFolder', v: Misskey.entities.DriveFolder['id']): void;
+	(ev: 'move', v?: foundkey.entities.DriveFolder): void;
+	(ev: 'upload', file: File, folder?: foundkey.entities.DriveFolder | null): void;
+	(ev: 'removeFile', v: foundkey.entities.DriveFile['id']): void;
+	(ev: 'removeFolder', v: foundkey.entities.DriveFolder['id']): void;
 }>();
 
 const hover = ref(false);

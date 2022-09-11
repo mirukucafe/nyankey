@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, computed, inject, onMounted, onUnmounted, watch } from 'vue';
 import * as Acct from 'foundkey-js/built/acct';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XFollowList from './follow-list.vue';
 import * as os from '@/os';
 import { definePageMetadata } from '@/scripts/page-metadata';
@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<{
 }>(), {
 });
 
-let user = $ref<null | misskey.entities.UserDetailed>(null);
+let user = $ref<null | foundkey.entities.UserDetailed>(null);
 let error = $ref(null);
 
 function fetchUser(): void {

@@ -1,4 +1,4 @@
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { ComputedRef, inject, isRef, onActivated, onMounted, provide, ref, Ref } from 'vue';
 
 export const setPageMetadata = Symbol('setPageMetadata');
@@ -8,8 +8,8 @@ export type PageMetadata = {
 	title: string;
 	subtitle?: string;
 	icon?: string | null;
-	avatar?: misskey.entities.User | null;
-	userName?: misskey.entities.User | null;
+	avatar?: foundkey.entities.User | null;
+	userName?: foundkey.entities.User | null;
 	bg?: string;
 };
 

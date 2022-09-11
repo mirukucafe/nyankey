@@ -11,14 +11,14 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XNotes from '@/components/notes.vue';
 import MkTab from '@/components/tab.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{
-	user: misskey.entities.UserDetailed;
+	user: foundkey.entities.UserDetailed;
 }>();
 
 const include = ref<string | null>(null);

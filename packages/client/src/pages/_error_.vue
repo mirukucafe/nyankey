@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkButton from '@/components/ui/button.vue';
 import { version } from '@/config';
 import * as os from '@/os';
@@ -34,7 +34,7 @@ withDefaults(defineProps<{
 
 let loaded = $ref(false);
 let serverIsDead = $ref(false);
-let meta = $ref<misskey.entities.LiteInstanceMetadata | null>(null);
+let meta = $ref<foundkey.entities.LiteInstanceMetadata | null>(null);
 
 os.api('meta', {
 	detail: false,

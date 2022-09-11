@@ -109,7 +109,7 @@
 
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, onUnmounted } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XUserTimeline from './index.timeline.vue';
 import XNote from '@/components/note.vue';
 import MkBirthdayDate from '@/components/birthday-date.vue';
@@ -129,7 +129,7 @@ const XPhotos = defineAsyncComponent(() => import('./index.photos.vue'));
 const XActivity = defineAsyncComponent(() => import('./index.activity.vue'));
 
 const props = withDefaults(defineProps<{
-	user: misskey.entities.UserDetailed;
+	user: foundkey.entities.UserDetailed;
 }>(), {
 });
 

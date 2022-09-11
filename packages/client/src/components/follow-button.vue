@@ -31,13 +31,13 @@
 
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 import { stream } from '@/stream';
 import { i18n } from '@/i18n';
 
 const props = withDefaults(defineProps<{
-	user: Misskey.entities.UserDetailed,
+	user: foundkey.entities.UserDetailed,
 	full?: boolean,
 	large?: boolean,
 }>(), {
@@ -57,7 +57,7 @@ if (props.user.isFollowing == null) {
 	.then(onFollowChange);
 }
 
-function onFollowChange(user: Misskey.entities.UserDetailed) {
+function onFollowChange(user: foundkey.entities.UserDetailed) {
 	if (user.id === props.user.id) {
 		isFollowing = user.isFollowing;
 		hasPendingFollowRequestFromYou = user.hasPendingFollowRequestFromYou;

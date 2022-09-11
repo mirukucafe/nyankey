@@ -8,13 +8,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { length } from 'stringz';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { concat } from '@/scripts/array';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{
 	modelValue: boolean;
-	note: misskey.entities.Note;
+	note: foundkey.entities.Note;
 }>();
 
 const emit = defineEmits<{

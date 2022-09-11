@@ -1,5 +1,5 @@
 import { reactive, ref } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { readAndCompressImage } from 'browser-image-resizer';
 import { defaultStore } from '@/store';
 import { apiUrl } from '@/config';
@@ -32,7 +32,7 @@ export function uploadFile(
 	folder?: string | Record<string, any>,
 	name?: string,
 	keepOriginal: boolean = defaultStore.state.keepOriginalUploading,
-): Promise<Misskey.entities.DriveFile> {
+): Promise<foundkey.entities.DriveFile> {
 	const folderId = typeof folder === 'string' ? folder : folder?.id;
 
 	return new Promise((resolve, reject) => {

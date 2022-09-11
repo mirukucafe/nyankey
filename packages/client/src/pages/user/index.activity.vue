@@ -14,14 +14,14 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkContainer from '@/components/ui/container.vue';
 import MkChart from '@/components/chart.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 
 const props = withDefaults(defineProps<{
-	user: misskey.entities.User;
+	user: foundkey.entities.User;
 	limit?: number;
 }>(), {
 	limit: 50,

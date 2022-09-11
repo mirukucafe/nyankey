@@ -16,11 +16,11 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import ImgWithBlurhash from '@/components/img-with-blurhash.vue';
 
 const props = defineProps<{
-	file: Misskey.entities.DriveFile;
+	file: foundkey.entities.DriveFile;
 	fit: string;
 }>();
 

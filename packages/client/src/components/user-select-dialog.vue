@@ -53,7 +53,7 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkInput from '@/components/form/input.vue';
 import FormSplit from '@/components/form/split.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
@@ -62,16 +62,16 @@ import { defaultStore } from '@/store';
 import { i18n } from '@/i18n';
 
 const emit = defineEmits<{
-	(ev: 'ok', selected: misskey.entities.UserDetailed): void;
+	(ev: 'ok', selected: foundkey.entities.UserDetailed): void;
 	(ev: 'cancel'): void;
 	(ev: 'closed'): void;
 }>();
 
 let username = $ref('');
 let host = $ref('');
-let users: misskey.entities.UserDetailed[] = $ref([]);
-let recentUsers: misskey.entities.UserDetailed[] = $ref([]);
-let selected: misskey.entities.UserDetailed | null = $ref(null);
+let users: foundkey.entities.UserDetailed[] = $ref([]);
+let recentUsers: foundkey.entities.UserDetailed[] = $ref([]);
+let selected: foundkey.entities.UserDetailed | null = $ref(null);
 let dialogEl = $ref();
 
 const search = () => {

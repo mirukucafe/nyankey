@@ -76,7 +76,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkFollowButton from './follow-button.vue';
 import XReactionTooltip from './reaction-tooltip.vue';
 import { getNoteSummary } from '@/scripts/get-note-summary';
@@ -88,7 +88,7 @@ import { stream } from '@/stream';
 import { useTooltip } from '@/scripts/use-tooltip';
 
 const props = withDefaults(defineProps<{
-	notification: misskey.entities.Notification;
+	notification: foundkey.entities.Notification;
 	withTime?: boolean;
 	full?: boolean;
 }>(), {

@@ -15,13 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkVisibility from '@/components/visibility.vue';
 import { notePage } from '@/filters/note';
 import { userPage } from '@/filters/user';
 
 defineProps<{
-	note: misskey.entities.Note;
+	note: foundkey.entities.Note;
 	pinned?: boolean;
 }>();
 </script>

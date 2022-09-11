@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XNoteHeader from './note-header.vue';
 import MkNoteSubNoteContent from './sub-note-content.vue';
 import XCwButton from './cw-button.vue';
@@ -35,8 +35,8 @@ import { notePage } from '@/filters/note';
 import { i18n } from '@/i18n';
 
 const props = withDefaults(defineProps<{
-	note: misskey.entities.Note;
-	conversation?: misskey.entities.Note[] | null;
+	note: foundkey.entities.Note;
+	conversation?: foundkey.entities.Note[] | null;
 
 	// how many notes are in between this one and the note being viewed in detail
 	depth?: number;
@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<{
 });
 
 let showContent = $ref(false);
-const replies: misskey.entities.Note[] = props.conversation?.filter(item => item.replyId === props.note.id || item.renoteId === props.note.id) ?? [];
+const replies: foundkey.entities.Note[] = props.conversation?.filter(item => item.replyId === props.note.id || item.renoteId === props.note.id) ?? [];
 </script>
 
 <style lang="scss" scoped>

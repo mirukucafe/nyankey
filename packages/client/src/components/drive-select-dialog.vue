@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XDrive from './drive.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 import number from '@/filters/number';
@@ -34,13 +34,13 @@ withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-	(ev: 'done', r?: Misskey.entities.DriveFile[]): void;
+	(ev: 'done', r?: foundkey.entities.DriveFile[]): void;
 	(ev: 'closed'): void;
 }>();
 
 const dialog = ref<InstanceType<typeof XModalWindow>>();
 
-const selected = ref<Misskey.entities.DriveFile[]>([]);
+const selected = ref<foundkey.entities.DriveFile[]>([]);
 
 function ok() {
 	emit('done', selected.value);
@@ -52,7 +52,7 @@ function cancel() {
 	dialog.value?.close();
 }
 
-function onChangeSelection(files: Misskey.entities.DriveFile[]) {
+function onChangeSelection(files: foundkey.entities.DriveFile[]) {
 	selected.value = files;
 }
 </script>

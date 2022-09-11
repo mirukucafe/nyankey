@@ -3,7 +3,7 @@
 import { Component, markRaw, Ref, ref, defineAsyncComponent } from 'vue';
 import { EventEmitter } from 'eventemitter3';
 import insertTextAtCursor from 'insert-text-at-cursor';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { apiUrl, url } from '@/config';
 import MkPostFormDialog from '@/components/post-form-dialog.vue';
 import MkWaitingDialog from '@/components/waiting-dialog.vue';
@@ -12,7 +12,7 @@ import { $i } from '@/account';
 
 export const pendingApiRequestsCount = ref(0);
 
-const apiClient = new Misskey.api.APIClient({
+const apiClient = new foundkey.api.APIClient({
 	origin: url,
 });
 
@@ -434,9 +434,9 @@ export async function pickEmoji(src: HTMLElement | null, opts) {
 	});
 }
 
-export async function cropImage(image: Misskey.entities.DriveFile, options: {
+export async function cropImage(image: foundkey.entities.DriveFile, options: {
 	aspectRatio: number;
-}): Promise<Misskey.entities.DriveFile> {
+}): Promise<foundkey.entities.DriveFile> {
 	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/cropper-dialog.vue')), {
 			file: image,

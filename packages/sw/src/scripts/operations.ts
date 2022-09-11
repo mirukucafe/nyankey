@@ -4,15 +4,15 @@
  */
 declare var self: ServiceWorkerGlobalScope;
 
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { SwMessage, swMessageOrderType } from '@/types';
 import { acct as getAcct } from '@/filters/user';
 import { getAccountFromId } from '@/scripts/get-account-from-id';
 import { getUrlWithLoginId } from '@/scripts/login-id';
 
-export const cli = new Misskey.api.APIClient({ origin, fetch: (...args) => fetch(...args) });
+export const cli = new foundkey.api.APIClient({ origin, fetch: (...args) => fetch(...args) });
 
-export async function api<E extends keyof Misskey.Endpoints>(endpoint: E, userId: string, options?: Misskey.Endpoints[E]['req']) {
+export async function api<E extends keyof foundkey.Endpoints>(endpoint: E, userId: string, options?: foundkey.Endpoints[E]['req']) {
 	const account = await getAccountFromId(userId);
 	if (!account) return;
 

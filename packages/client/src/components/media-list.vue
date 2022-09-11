@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import PhotoSwipe from 'photoswipe';
 import 'photoswipe/style.css';
@@ -25,7 +25,7 @@ import * as os from '@/os';
 import { FILE_TYPE_BROWSERSAFE } from '@/const';
 
 const props = defineProps<{
-	mediaList: misskey.entities.DriveFile[];
+	mediaList: foundkey.entities.DriveFile[];
 	raw?: boolean;
 }>();
 
@@ -92,7 +92,7 @@ onMounted(() => {
 	lightbox.init();
 });
 
-const previewable = (file: misskey.entities.DriveFile): boolean => {
+const previewable = (file: foundkey.entities.DriveFile): boolean => {
 	if (file.type === 'image/svg+xml') return true; // svgのwebpublic/thumbnailはpngなのでtrue
 	// FILE_TYPE_BROWSERSAFEに適合しないものはブラウザで表示するのに不適切
 	return (file.type.startsWith('video') || file.type.startsWith('image')) && FILE_TYPE_BROWSERSAFE.includes(file.type);

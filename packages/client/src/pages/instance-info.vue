@@ -111,7 +111,7 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkChart from '@/components/chart.vue';
 import MkObjectView from '@/components/object-view.vue';
 import FormLink from '@/components/form/link.vue';
@@ -136,8 +136,8 @@ const props = defineProps<{
 
 let tab = $ref('overview');
 let chartSrc = $ref('instance-requests');
-let meta = $ref<misskey.entities.DetailedInstanceMetadata | null>(null);
-let instance = $ref<misskey.entities.Instance | null>(null);
+let meta = $ref<foundkey.entities.DetailedInstanceMetadata | null>(null);
+let instance = $ref<foundkey.entities.Instance | null>(null);
 let suspended = $ref(false);
 let isBlocked = $ref(false);
 

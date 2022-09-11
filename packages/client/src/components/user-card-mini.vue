@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkMiniChart from '@/components/mini-chart.vue';
 import * as os from '@/os';
 import { acct } from '@/filters/user';
 
 const props = defineProps<{
-	user: misskey.entities.User;
+	user: foundkey.entities.User;
 }>();
 
 let chartValues = $ref<number[] | null>(null);

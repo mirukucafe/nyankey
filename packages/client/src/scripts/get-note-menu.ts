@@ -1,5 +1,5 @@
 import { defineAsyncComponent, Ref } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { $i } from '@/account';
 import { i18n } from '@/i18n';
 import { instance } from '@/instance';
@@ -9,12 +9,12 @@ import { url } from '@/config';
 import { noteActions } from '@/store';
 
 export function getNoteMenu(props: {
-	note: misskey.entities.Note;
+	note: foundkey.entities.Note;
 	menuButton: Ref<HTMLElement>;
 	translation: Ref<any>;
 	translating: Ref<boolean>;
 	isDeleted: Ref<boolean>;
-	currentClipPage?: Ref<misskey.entities.Clip>;
+	currentClipPage?: Ref<foundkey.entities.Clip>;
 }) {
 	const isRenote = (
 		props.note.renote != null &&
@@ -23,7 +23,7 @@ export function getNoteMenu(props: {
 		props.note.poll == null
 	);
 
-	const appearNote = isRenote ? props.note.renote as misskey.entities.Note : props.note;
+	const appearNote = isRenote ? props.note.renote as foundkey.entities.Note : props.note;
 
 	function del(): void {
 		os.confirm({

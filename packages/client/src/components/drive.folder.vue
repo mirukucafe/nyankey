@@ -29,13 +29,13 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { defaultStore } from '@/store';
 
 const props = withDefaults(defineProps<{
-	folder: Misskey.entities.DriveFolder;
+	folder: foundkey.entities.DriveFolder;
 	isSelected?: boolean;
 	selectMode?: boolean;
 }>(), {
@@ -44,11 +44,11 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-	(ev: 'chosen', v: Misskey.entities.DriveFolder): void;
-	(ev: 'move', v: Misskey.entities.DriveFolder): void;
-	(ev: 'upload', file: File, folder: Misskey.entities.DriveFolder);
-	(ev: 'removeFile', v: Misskey.entities.DriveFile['id']): void;
-	(ev: 'removeFolder', v: Misskey.entities.DriveFolder['id']): void;
+	(ev: 'chosen', v: foundkey.entities.DriveFolder): void;
+	(ev: 'move', v: foundkey.entities.DriveFolder): void;
+	(ev: 'upload', file: File, folder: foundkey.entities.DriveFolder);
+	(ev: 'removeFile', v: foundkey.entities.DriveFile['id']): void;
+	(ev: 'removeFolder', v: foundkey.entities.DriveFolder['id']): void;
 	(ev: 'dragstart'): void;
 	(ev: 'dragend'): void;
 }>();

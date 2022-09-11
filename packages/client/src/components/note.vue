@@ -103,7 +103,7 @@
 <script lang="ts" setup>
 import { inject, onMounted, ref, Ref } from 'vue';
 import * as mfm from 'mfm-js';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkNoteSub from './MkNoteSub.vue';
 import XNoteHeader from './note-header.vue';
 import XNoteSimple from './note-simple.vue';
@@ -129,7 +129,7 @@ import { getNoteMenu } from '@/scripts/get-note-menu';
 import { useNoteCapture } from '@/scripts/use-note-capture';
 
 const props = defineProps<{
-	note: misskey.entities.Note;
+	note: foundkey.entities.Note;
 	pinned?: boolean;
 }>();
 
@@ -160,7 +160,7 @@ const menuButton = ref<HTMLElement>();
 const renoteButton = ref<InstanceType<typeof XRenoteButton>>();
 const renoteTime = ref<HTMLElement>();
 const reactButton = ref<HTMLElement>();
-let appearNote = $computed(() => isRenote ? note.renote as misskey.entities.Note : note);
+let appearNote = $computed(() => isRenote ? note.renote as foundkey.entities.Note : note);
 const isMyRenote = $i && ($i.id === note.userId);
 const showContent = ref(false);
 const isLong = (appearNote.cw == null && appearNote.text != null && (
@@ -222,7 +222,7 @@ function undoReact(): void {
 	});
 }
 
-const currentClipPage = inject<Ref<misskey.entities.Clip> | null>('currentClipPage', null);
+const currentClipPage = inject<Ref<foundkey.entities.Clip> | null>('currentClipPage', null);
 
 function onContextmenu(ev: MouseEvent): void {
 	const isLink = (el: HTMLElement) => {

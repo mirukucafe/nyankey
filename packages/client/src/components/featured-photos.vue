@@ -4,10 +4,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 
-const meta = ref<Misskey.entities.DetailedInstanceMetadata>();
+const meta = ref<foundkey.entities.DetailedInstanceMetadata>();
 
 os.api('meta', { detail: true }).then(gotMeta => {
 	meta.value = gotMeta;

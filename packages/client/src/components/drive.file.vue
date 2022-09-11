@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkDriveFileThumbnail from './drive-file-thumbnail.vue';
 import copyToClipboard from '@/scripts/copy-to-clipboard';
 import bytes from '@/filters/bytes';
@@ -43,7 +43,7 @@ import { $i } from '@/account';
 import { MenuItem } from '@/types/menu';
 
 const props = withDefaults(defineProps<{
-	file: Misskey.entities.DriveFile;
+	file: foundkey.entities.DriveFile;
 	isSelected?: boolean;
 	selectMode?: boolean;
 }>(), {
@@ -52,7 +52,7 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-	(ev: 'chosen', r: Misskey.entities.DriveFile): void;
+	(ev: 'chosen', r: foundkey.entities.DriveFile): void;
 	(ev: 'dragstart'): void;
 	(ev: 'dragend'): void;
 }>();

@@ -27,7 +27,7 @@
 
 import { noteVisibilities } from 'foundkey-js';
 import * as Acct from 'foundkey-js/built/acct';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkButton from '@/components/ui/button.vue';
 import XPostForm from '@/components/post-form.vue';
 import * as os from '@/os';
@@ -44,12 +44,12 @@ let title = $ref(urlParams.get('title'));
 const text = urlParams.get('text');
 const url = urlParams.get('url');
 let initialText = $ref(null as string | null);
-let reply = $ref(null as Misskey.entities.Note | null);
-let renote = $ref(null as Misskey.entities.Note | null);
+let reply = $ref(null as foundkey.entities.Note | null);
+let renote = $ref(null as foundkey.entities.Note | null);
 let visibility = $ref(noteVisibilities.includes(visibilityQuery) ? visibilityQuery : null);
 let localOnly = $ref(localOnlyQuery === '0' ? false : localOnlyQuery === '1' ? true : null);
-let files = $ref([] as Misskey.entities.DriveFile[]);
-let visibleUsers = $ref([] as Misskey.entities.User[]);
+let files = $ref([] as foundkey.entities.DriveFile[]);
+let visibleUsers = $ref([] as foundkey.entities.User[]);
 
 async function init() {
 	let noteText = '';

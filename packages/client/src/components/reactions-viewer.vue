@@ -6,12 +6,12 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XReaction from './reactions-viewer.reaction.vue';
 import { $i } from '@/account';
 
 const props = defineProps<{
-	note: misskey.entities.Note;
+	note: foundkey.entities.Note;
 }>();
 
 const initialReactions = new Set(Object.keys(props.note.reactions));

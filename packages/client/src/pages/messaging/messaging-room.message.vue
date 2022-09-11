@@ -37,14 +37,14 @@
 
 <script lang="ts" setup>
 import * as mfm from 'mfm-js';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { extractUrlFromMfm } from '@/scripts/extract-url-from-mfm';
 import MkUrlPreview from '@/components/url-preview.vue';
 import * as os from '@/os';
 import { $i } from '@/account';
 
 const props = defineProps<{
-	message: Misskey.entities.MessagingMessage;
+	message: foundkey.entities.MessagingMessage;
 	isGroup?: boolean;
 }>();
 

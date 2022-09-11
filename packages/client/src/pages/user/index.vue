@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, computed, watch } from 'vue';
 import * as Acct from 'foundkey-js/built/acct';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { getUserMenu } from '@/scripts/get-user-menu';
 import { acct as getAcct } from '@/filters/user';
 import * as os from '@/os';
@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<{
 const router = useRouter();
 
 let tab = $ref(props.page);
-let user = $ref<null | misskey.entities.UserDetailed>(null);
+let user = $ref<null | foundkey.entities.UserDetailed>(null);
 let error = $ref(null);
 
 function fetchUser(): void {

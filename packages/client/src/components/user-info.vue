@@ -28,13 +28,13 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkFollowButton from './follow-button.vue';
 import { userPage } from '@/filters/user';
 import { i18n } from '@/i18n';
 
 defineProps<{
-	user: misskey.entities.UserDetailed;
+	user: foundkey.entities.UserDetailed;
 }>();
 </script>
 

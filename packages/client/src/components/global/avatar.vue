@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { watch } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { getStaticImageUrl } from '@/scripts/get-static-image-url';
 import { extractAvgColorFromBlurhash } from '@/scripts/extract-avg-color-from-blurhash';
 import { acct, userPage } from '@/filters/user';
@@ -19,7 +19,7 @@ import MkUserOnlineIndicator from '@/components/user-online-indicator.vue';
 import { defaultStore } from '@/store';
 
 const props = withDefaults(defineProps<{
-	user: misskey.entities.User;
+	user: foundkey.entities.User;
 	target?: string | null;
 	disableLink?: boolean;
 	disablePreview?: boolean;

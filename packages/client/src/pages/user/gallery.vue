@@ -10,12 +10,12 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkGalleryPostPreview from '@/components/gallery-post-preview.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 
 const props = withDefaults(defineProps<{
-	user: misskey.entities.User;
+	user: foundkey.entities.User;
 }>(), {
 });
 

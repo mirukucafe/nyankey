@@ -1,4 +1,4 @@
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 
 export type swMessageOrderType = 'post' | 'push';
 
@@ -12,8 +12,8 @@ export type SwMessage = {
 
 // Defined also @/services/push-notification.ts#L7-L14
 type pushNotificationDataSourceMap = {
-	notification: Misskey.entities.Notification;
-	unreadMessagingMessage: Misskey.entities.MessagingMessage;
+	notification: foundkey.entities.Notification;
+	unreadMessagingMessage: foundkey.entities.MessagingMessage;
 	readNotifications: { notificationIds: string[] };
 	readAllNotifications: undefined;
 	readAllMessagingMessages: undefined;

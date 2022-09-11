@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { i18n } from '@/i18n';
 
 const props = defineProps<{
-	user: misskey.entities.User;
+	user: foundkey.entities.User;
 }>();
 
 const text = $computed(() => {

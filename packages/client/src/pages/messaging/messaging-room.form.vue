@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
 import { onMounted, watch } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import autosize from 'autosize';
 //import insertTextAtCursor from 'insert-text-at-cursor';
 import { throttle } from 'throttle-debounce';
@@ -42,15 +42,15 @@ import { i18n } from '@/i18n';
 import { uploadFile } from '@/scripts/upload';
 
 const props = defineProps<{
-	user?: Misskey.entities.UserDetailed | null;
-	group?: Misskey.entities.UserGroup | null;
+	user?: foundkey.entities.UserDetailed | null;
+	group?: foundkey.entities.UserGroup | null;
 }>();
 
 let textEl = $ref<HTMLTextAreaElement>();
 let fileEl = $ref<HTMLInputElement>();
 
 let text = $ref<string>('');
-let file = $ref<Misskey.entities.DriveFile | null>(null);
+let file = $ref<foundkey.entities.DriveFile | null>(null);
 let sending = $ref(false);
 const typing = throttle(3000, () => {
 	stream.send('typingOnMessaging', props.user ? { partner: props.user.id } : { group: props.group?.id });

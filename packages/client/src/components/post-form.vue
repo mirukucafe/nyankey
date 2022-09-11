@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { inject, watch, nextTick, onMounted, defineAsyncComponent } from 'vue';
 import * as mfm from 'mfm-js';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import insertTextAtCursor from 'insert-text-at-cursor';
 import { length } from 'stringz';
 import { toASCII } from 'punycode/';
@@ -91,17 +91,17 @@ import { uploadFile } from '@/scripts/upload';
 const modal = inject('modal');
 
 const props = withDefaults(defineProps<{
-	reply?: misskey.entities.Note;
-	renote?: misskey.entities.Note;
+	reply?: foundkey.entities.Note;
+	renote?: foundkey.entities.Note;
 	channel?: any; // TODO
-	mention?: misskey.entities.User;
-	specified?: misskey.entities.User;
+	mention?: foundkey.entities.User;
+	specified?: foundkey.entities.User;
 	initialText?: string;
-	initialVisibility?: typeof misskey.noteVisibilities;
-	initialFiles?: misskey.entities.DriveFile[];
+	initialVisibility?: typeof foundkey.noteVisibilities;
+	initialFiles?: foundkey.entities.DriveFile[];
 	initialLocalOnly?: boolean;
-	initialVisibleUsers?: misskey.entities.User[];
-	initialNote?: misskey.entities.Note;
+	initialVisibleUsers?: foundkey.entities.User[];
+	initialNote?: foundkey.entities.Note;
 	instant?: boolean;
 	fixed?: boolean;
 	autofocus?: boolean;
@@ -134,7 +134,7 @@ let useCw = $ref(false);
 let showPreview = $ref(false);
 let cw = $ref<string | null>(null);
 let localOnly = $ref<boolean>(props.initialLocalOnly ?? defaultStore.state.rememberNoteVisibility ? defaultStore.state.localOnly : defaultStore.state.defaultNoteLocalOnly);
-let visibility = $ref(props.initialVisibility ?? (defaultStore.state.rememberNoteVisibility ? defaultStore.state.visibility : defaultStore.state.defaultNoteVisibility) as typeof misskey.noteVisibilities[number]);
+let visibility = $ref(props.initialVisibility ?? (defaultStore.state.rememberNoteVisibility ? defaultStore.state.visibility : defaultStore.state.defaultNoteVisibility) as typeof foundkey.noteVisibilities[number]);
 let visibleUsers = $ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
@@ -602,7 +602,7 @@ function showActions(ev) {
 	})), ev.currentTarget ?? ev.target);
 }
 
-let postAccount = $ref<misskey.entities.UserDetailed | null>(null);
+let postAccount = $ref<foundkey.entities.UserDetailed | null>(null);
 
 function openAccountMenu(ev: MouseEvent) {
 	openAccountMenu_({

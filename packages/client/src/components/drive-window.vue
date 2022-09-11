@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XDrive from './drive.vue';
 import XWindow from '@/components/ui/window.vue';
 import { i18n } from '@/i18n';
 
 defineProps<{
-	initialFolder?: Misskey.entities.DriveFolder;
+	initialFolder?: foundkey.entities.DriveFolder;
 }>();
 
 const emit = defineEmits<{

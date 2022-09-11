@@ -33,16 +33,16 @@
 
 <script lang="ts" setup>
 import { computed, ComputedRef, isRef, onActivated, onDeactivated, ref, watch } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 import { onScrollTop, isTopVisible, getScrollPosition, getScrollContainer } from '@/scripts/scroll';
 import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
 
-export type Paging<E extends keyof misskey.Endpoints = keyof misskey.Endpoints> = {
+export type Paging<E extends keyof foundkey.Endpoints = keyof foundkey.Endpoints> = {
 	endpoint: E;
 	limit: number;
-	params?: misskey.Endpoints[E]['req'] | ComputedRef<misskey.Endpoints[E]['req']>;
+	params?: foundkey.Endpoints[E]['req'] | ComputedRef<foundkey.Endpoints[E]['req']>;
 
 	/**
 	 * 検索APIのような、ページング不可なエンドポイントを利用する場合

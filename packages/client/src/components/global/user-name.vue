@@ -3,10 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 
 withDefaults(defineProps<{
-	user: misskey.entities.User;
+	user: foundkey.entities.User;
 	nowrap?: boolean;
 }>(), {
 	nowrap: true,

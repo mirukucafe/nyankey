@@ -89,7 +89,7 @@
 
 <script lang="ts" setup>
 import { nextTick, onActivated, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import XNavFolder from './drive.nav-folder.vue';
 import XFolder from './drive.folder.vue';
 import XFile from './drive.file.vue';
@@ -101,7 +101,7 @@ import { i18n } from '@/i18n';
 import { uploadFile, uploads } from '@/scripts/upload';
 
 const props = withDefaults(defineProps<{
-	initialFolder?: Misskey.entities.DriveFolder;
+	initialFolder?: foundkey.entities.DriveFolder;
 	type?: string;
 	multiple?: boolean;
 	select?: 'file' | 'folder' | null;
@@ -111,24 +111,24 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-	(ev: 'selected', v: Misskey.entities.DriveFile | Misskey.entities.DriveFolder): void;
-	(ev: 'change-selection', v: Misskey.entities.DriveFile[] | Misskey.entities.DriveFolder[]): void;
+	(ev: 'selected', v: foundkey.entities.DriveFile | foundkey.entities.DriveFolder): void;
+	(ev: 'change-selection', v: foundkey.entities.DriveFile[] | foundkey.entities.DriveFolder[]): void;
 	(ev: 'move-root'): void;
-	(ev: 'cd', v: Misskey.entities.DriveFolder | null): void;
-	(ev: 'open-folder', v: Misskey.entities.DriveFolder): void;
+	(ev: 'cd', v: foundkey.entities.DriveFolder | null): void;
+	(ev: 'open-folder', v: foundkey.entities.DriveFolder): void;
 }>();
 
 const loadMoreFiles = ref<InstanceType<typeof MkButton>>();
 const fileInput = ref<HTMLInputElement>();
 
-const folder = ref<Misskey.entities.DriveFolder | null>(null);
-const files = ref<Misskey.entities.DriveFile[]>([]);
-const folders = ref<Misskey.entities.DriveFolder[]>([]);
+const folder = ref<foundkey.entities.DriveFolder | null>(null);
+const files = ref<foundkey.entities.DriveFile[]>([]);
+const folders = ref<foundkey.entities.DriveFolder[]>([]);
 const moreFiles = ref(false);
 const moreFolders = ref(false);
-const hierarchyFolders = ref<Misskey.entities.DriveFolder[]>([]);
-const selectedFiles = ref<Misskey.entities.DriveFile[]>([]);
-const selectedFolders = ref<Misskey.entities.DriveFolder[]>([]);
+const hierarchyFolders = ref<foundkey.entities.DriveFolder[]>([]);
+const selectedFiles = ref<foundkey.entities.DriveFile[]>([]);
+const selectedFolders = ref<foundkey.entities.DriveFolder[]>([]);
 const uploadings = uploads;
 const connection = stream.useChannel('drive');
 const keepOriginal = ref<boolean>(defaultStore.state.keepOriginalUploading); // 外部渡しが多いので$refは使わないほうがよい
@@ -148,11 +148,11 @@ const ilFilesObserver = new IntersectionObserver(
 
 watch(folder, () => emit('cd', folder.value));
 
-function onStreamDriveFileCreated(file: Misskey.entities.DriveFile) {
+function onStreamDriveFileCreated(file: foundkey.entities.DriveFile) {
 	addFile(file, true);
 }
 
-function onStreamDriveFileUpdated(file: Misskey.entities.DriveFile) {
+function onStreamDriveFileUpdated(file: foundkey.entities.DriveFile) {
 	const current = folder.value ? folder.value.id : null;
 	if (current !== file.folderId) {
 		removeFile(file);
@@ -165,11 +165,11 @@ function onStreamDriveFileDeleted(fileId: string) {
 	removeFile(fileId);
 }
 
-function onStreamDriveFolderCreated(createdFolder: Misskey.entities.DriveFolder) {
+function onStreamDriveFolderCreated(createdFolder: foundkey.entities.DriveFolder) {
 	addFolder(createdFolder, true);
 }
 
-function onStreamDriveFolderUpdated(updatedFolder: Misskey.entities.DriveFolder) {
+function onStreamDriveFolderUpdated(updatedFolder: foundkey.entities.DriveFolder) {
 	const current = folder.value ? folder.value.id : null;
 	if (current !== updatedFolder.parentId) {
 		removeFolder(updatedFolder);
@@ -309,7 +309,7 @@ function createFolder() {
 	});
 }
 
-function renameFolder(folderToRename: Misskey.entities.DriveFolder) {
+function renameFolder(folderToRename: foundkey.entities.DriveFolder) {
 	os.inputText({
 		title: i18n.ts.renameFolder,
 		placeholder: i18n.ts.inputNewFolderName,
@@ -326,7 +326,7 @@ function renameFolder(folderToRename: Misskey.entities.DriveFolder) {
 	});
 }
 
-function deleteFolder(folderToDelete: Misskey.entities.DriveFolder) {
+function deleteFolder(folderToDelete: foundkey.entities.DriveFolder) {
 	os.api('drive/folders/delete', {
 		folderId: folderToDelete.id,
 	}).then(() => {
@@ -357,13 +357,13 @@ function onChangeFileInput() {
 	}
 }
 
-function upload(file: File, folderToUpload?: Misskey.entities.DriveFolder | null) {
+function upload(file: File, folderToUpload?: foundkey.entities.DriveFolder | null) {
 	uploadFile(file, (folderToUpload && typeof folderToUpload === 'object') ? folderToUpload.id : null, undefined, keepOriginal.value).then(res => {
 		addFile(res, true);
 	});
 }
 
-function chooseFile(file: Misskey.entities.DriveFile) {
+function chooseFile(file: foundkey.entities.DriveFile) {
 	const isAlreadySelected = selectedFiles.value.some(f => f.id === file.id);
 	if (props.multiple) {
 		if (isAlreadySelected) {
@@ -382,7 +382,7 @@ function chooseFile(file: Misskey.entities.DriveFile) {
 	}
 }
 
-function chooseFolder(folderToChoose: Misskey.entities.DriveFolder) {
+function chooseFolder(folderToChoose: foundkey.entities.DriveFolder) {
 	const isAlreadySelected = selectedFolders.value.some(f => f.id === folderToChoose.id);
 	if (props.multiple) {
 		if (isAlreadySelected) {
@@ -401,7 +401,7 @@ function chooseFolder(folderToChoose: Misskey.entities.DriveFolder) {
 	}
 }
 
-function move(target?: string | Misskey.entities.DriveFolder) {
+function move(target?: string | foundkey.entities.DriveFolder) {
 	if (!target) {
 		goRoot();
 		return;
@@ -429,7 +429,7 @@ function move(target?: string | Misskey.entities.DriveFolder) {
 	});
 }
 
-function addFolder(folderToAdd: Misskey.entities.DriveFolder, unshift = false) {
+function addFolder(folderToAdd: foundkey.entities.DriveFolder, unshift = false) {
 	const current = folder.value ? folder.value.id : null;
 	if (current !== folderToAdd.parentId) return;
 
@@ -446,7 +446,7 @@ function addFolder(folderToAdd: Misskey.entities.DriveFolder, unshift = false) {
 	}
 }
 
-function addFile(fileToAdd: Misskey.entities.DriveFile, unshift = false) {
+function addFile(fileToAdd: foundkey.entities.DriveFile, unshift = false) {
 	const current = folder.value ? folder.value.id : null;
 	if (current !== fileToAdd.folderId) return;
 
@@ -463,29 +463,29 @@ function addFile(fileToAdd: Misskey.entities.DriveFile, unshift = false) {
 	}
 }
 
-function removeFolder(folderToRemove: Misskey.entities.DriveFolder | string) {
+function removeFolder(folderToRemove: foundkey.entities.DriveFolder | string) {
 	const folderIdToRemove = typeof folderToRemove === 'object' ? folderToRemove.id : folderToRemove;
 	folders.value = folders.value.filter(f => f.id !== folderIdToRemove);
 }
 
-function removeFile(file: Misskey.entities.DriveFile | string) {
+function removeFile(file: foundkey.entities.DriveFile | string) {
 	const fileId = typeof file === 'object' ? file.id : file;
 	files.value = files.value.filter(f => f.id !== fileId);
 }
 
-function appendFile(file: Misskey.entities.DriveFile) {
+function appendFile(file: foundkey.entities.DriveFile) {
 	addFile(file);
 }
 
-function appendFolder(folderToAppend: Misskey.entities.DriveFolder) {
+function appendFolder(folderToAppend: foundkey.entities.DriveFolder) {
 	addFolder(folderToAppend);
 }
 /*
-function prependFile(file: Misskey.entities.DriveFile) {
+function prependFile(file: foundkey.entities.DriveFile) {
 	addFile(file, true);
 }
 
-function prependFolder(folderToPrepend: Misskey.entities.DriveFolder) {
+function prependFolder(folderToPrepend: foundkey.entities.DriveFolder) {
 	addFolder(folderToPrepend, true);
 }
 */
@@ -589,7 +589,7 @@ function getMenu() {
 	} : undefined, folder.value ? {
 		text: i18n.ts.deleteFolder,
 		icon: 'fas fa-trash-alt',
-		action: () => { deleteFolder(folder.value as Misskey.entities.DriveFolder); },
+		action: () => { deleteFolder(folder.value as foundkey.entities.DriveFolder); },
 	} : undefined, {
 		text: i18n.ts.createFolder,
 		icon: 'fas fa-folder-plus',

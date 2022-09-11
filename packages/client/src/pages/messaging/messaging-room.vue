@@ -51,7 +51,7 @@
 
 <script lang="ts" setup>
 import { computed, watch, onMounted, nextTick, onBeforeUnmount } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import * as Acct from 'foundkey-js/built/acct';
 import XMessage from './messaging-room.message.vue';
 import XForm from './messaging-room.form.vue';
@@ -76,10 +76,10 @@ let formEl = $ref<InstanceType<typeof XForm>>();
 let pagingComponent = $ref<InstanceType<typeof MkPagination>>();
 
 let fetching = $ref(true);
-let user: Misskey.entities.UserDetailed | null = $ref(null);
-let group: Misskey.entities.UserGroup | null = $ref(null);
-let typers: Misskey.entities.User[] = $ref([]);
-let connection: Misskey.ChannelConnection<Misskey.Channels['messaging']> | null = $ref(null);
+let user: foundkey.entities.UserDetailed | null = $ref(null);
+let group: foundkey.entities.UserGroup | null = $ref(null);
+let typers: foundkey.entities.User[] = $ref([]);
+let connection: foundkey.ChannelConnection<foundkey.Channels['messaging']> | null = $ref(null);
 let showIndicator = $ref(false);
 const {
 	animation,

@@ -37,7 +37,7 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, computed } from 'vue';
 import { length } from 'stringz';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkModal from '@/components/ui/modal.vue';
 import MkButton from '@/components/ui/button.vue';
 import bytes from '@/filters/bytes';
@@ -50,7 +50,7 @@ type Input = {
 };
 
 const props = withDefaults(defineProps<{
-	file: misskey.entities.DriveFile;
+	file: foundkey.entities.DriveFile;
 	title?: string;
 	input: Input;
 	showOkButton: boolean;

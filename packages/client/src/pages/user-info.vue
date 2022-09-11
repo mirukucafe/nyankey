@@ -102,7 +102,7 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, defineComponent, watch } from 'vue';
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import MkChart from '@/components/chart.vue';
 import MkObjectView from '@/components/object-view.vue';
 import FormTextarea from '@/components/form/textarea.vue';
@@ -129,7 +129,7 @@ const props = defineProps<{
 
 let tab = $ref('overview');
 let chartSrc = $ref('per-user-notes');
-let user = $ref<null | misskey.entities.UserDetailed>();
+let user = $ref<null | foundkey.entities.UserDetailed>();
 let init = $ref();
 let info = $ref();
 let ap = $ref(null);

@@ -1,5 +1,5 @@
 import { computed, reactive } from 'vue';
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { api } from './os';
 
 // TODO: 他のタブと永続化されたstateを同期
@@ -8,7 +8,7 @@ const instanceData = localStorage.getItem('instance');
 
 // TODO: instanceをリアクティブにするかは再考の余地あり
 
-export const instance: Misskey.entities.InstanceMetadata = reactive(instanceData ? JSON.parse(instanceData) : {
+export const instance: foundkey.entities.InstanceMetadata = reactive(instanceData ? JSON.parse(instanceData) : {
 	// TODO: set default values
 });
 

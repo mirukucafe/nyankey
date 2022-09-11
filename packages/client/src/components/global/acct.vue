@@ -6,13 +6,13 @@
 </template>
 
 <script lang="ts" setup>
-import * as misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 import { toUnicode } from 'punycode/';
 import { host as hostRaw } from '@/config';
 import { defaultStore } from '@/store';
 
 defineProps<{
-	user: misskey.entities.UserDetailed;
+	user: foundkey.entities.UserDetailed;
 	detail?: boolean;
 }>();
 
