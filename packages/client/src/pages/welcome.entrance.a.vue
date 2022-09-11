@@ -114,7 +114,7 @@ function showMenu(ev) {
 		text: i18n.ts.aboutMisskey,
 		icon: 'fas fa-info-circle',
 		action: () => {
-			os.pageWindow('/about-misskey');
+			os.pageWindow('/about-foundkey');
 		},
 	}, null, {
 		text: i18n.ts.help,

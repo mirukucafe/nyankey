@@ -53,7 +53,7 @@ router.get('/disconnect/twitter', async ctx => {
 		integrations: profile.integrations,
 	});
 
-	ctx.body = 'Twitterの連携を解除しました :v:';
+	ctx.body = 'Twitter linkage has been removed :v:';
 
 	// Publish i updated event
 	publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
@@ -146,7 +146,7 @@ router.get('/tw/cb', async ctx => {
 			.getOne();
 
 		if (link == null) {
-			ctx.throw(404, `@${result.screenName}と連携しているMisskeyアカウントはありませんでした...`);
+			ctx.throw(404, `There were no FoundKey accounts linked to @${result.screenName}...`);
 			return;
 		}
 
@@ -188,7 +188,7 @@ router.get('/tw/cb', async ctx => {
 			},
 		});
 
-		ctx.body = `Twitter: @${result.screenName} を、Misskey: @${user.username} に接続しました！`;
+		ctx.body = `Twitter: @${result.screenName} connected to FoundKey: @${user.username}!`;
 
 		// Publish i updated event
 		publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {

@@ -101,9 +101,9 @@ function validateActor(x: IObject, uri: string): IActor {
 }
 
 /**
- * Personをフェッチします。
+ * Fetches a person.
  *
- * Misskeyに対象のPersonが登録されていればそれを返します。
+ * If the target Person is registered in FoundKey, it is returned.
  */
 export async function fetchPerson(uri: string, resolver?: Resolver): Promise<CacheableUser | null> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
@@ -275,11 +275,11 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 }
 
 /**
- * Personの情報を更新します。
- * Misskeyに対象のPersonが登録されていなければ無視します。
+ * Update Person information.
+ * If the target Person is not registered in FoundKey, it is ignored.
  * @param uri URI of Person
  * @param resolver Resolver
- * @param hint Hint of Person object (この値が正当なPersonの場合、Remote resolveをせずに更新に利用します)
+ * @param hint Hint of Person object (If this value is a valid Person, it is used for updating without Remote resolve.)
  */
 export async function updatePerson(uri: string, resolver?: Resolver = new Resolver(), hint?: IObject): Promise<void> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
@@ -384,10 +384,10 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
 }
 
 /**
- * Personを解決します。
+ * Resolve Person.
  *
- * Misskeyに対象のPersonが登録されていればそれを返し、そうでなければ
- * リモートサーバーからフェッチしてMisskeyに登録しそれを返します。
+ * If the target Person is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
+ * Fetch the person from the remote server, register it in FoundKey, and return it.
  */
 export async function resolvePerson(uri: string, resolver?: Resolver): Promise<CacheableUser> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');

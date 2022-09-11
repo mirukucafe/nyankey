@@ -3,14 +3,14 @@ doctype html
 html
 	head
 		meta(charset='utf-8')
-		meta(name='application-name' content='Misskey')
-		title Flushing Misskey
+		meta(name='application-name' content='FoundKey')
+		title Flushing FoundKey
 		style
 			include ../error.css
 	#msg
 	script.
 		const msg = document.getElementById('msg');
-		const successText = `\nSuccess Flush! <a href="/">Back to Misskey</a>\n成功しました。<a href="/">Misskeyを開き直してください。</a>`;
+		const successText = `\nSuccess Flush! <a href="/">Back to FoundKey</a>\nSuccess, <a href="/">please reopen FoundKey.</a>`;
 
 		message('Start flushing.');
 
@@ -19,7 +19,7 @@ html
 				localStorage.clear();
 				message('localStorage cleared.');
 
-				const idbPromises = ['MisskeyClient', 'keyval-store'].map((name, i, arr) => new Promise((res, rej) => {
+				const idbPromises = ['FoundKeyClient', 'keyval-store'].map((name, i, arr) => new Promise((res, rej) => {
 					const delidb = indexedDB.deleteDatabase(name);
 					delidb.onsuccess = () => res(message(`indexedDB "${name}" cleared. (${i + 1}/${arr.length})`));
 					delidb.onerror = e => rej(e)

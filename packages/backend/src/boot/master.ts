@@ -26,24 +26,22 @@ const themeColor = chalk.hex('#86b300');
 
 function greet(): void {
 	if (!envOption.quiet) {
-		//#region Misskey logo
-		const v = `v${meta.version}`;
-		console.log(themeColor('  _____ _         _           '));
-		console.log(themeColor(' |     |_|___ ___| |_ ___ _ _ '));
-		console.log(themeColor(' | | | | |_ -|_ -| \'_| -_| | |'));
-		console.log(themeColor(' |_|_|_|_|___|___|_,_|___|_  |'));
-		console.log(' ' + chalk.gray(v) + themeColor('                        |___|\n'.slice(v.length)));
+		//#region FoundKey logo
+		console.log(themeColor('  ___                 _ _  __         '));
+		console.log(themeColor(' | __|__ _  _ _ _  __| | |/ /___ _  _ '));
+		console.log(themeColor(' | _/ _ \\ || | \' \\/ _` | \' </ -_) || |'));
+		console.log(themeColor(' |_|\\___/\\_,_|_||_\\__,_|_|\\_\\___|\\_, |'));
+		console.log(themeColor('                                 |__/ '));
 		//#endregion
 
-		console.log(' Misskey is an open-source decentralized microblogging platform.');
-		console.log(chalk.rgb(255, 136, 0)(' If you like Misskey, please donate to support development. https://www.patreon.com/syuilo'));
+		console.log(' FoundKey is an open-source decentralized microblogging platform.');
 
 		console.log('');
 		console.log(chalkTemplate`--- ${os.hostname()} {gray (PID: ${process.pid.toString()})} ---`);
 	}
 
-	bootLogger.info('Welcome to Misskey!');
-	bootLogger.info(`Misskey v${meta.version}`, null, true);
+	bootLogger.info('Welcome to FoundKey!');
+	bootLogger.info(`FoundKey v${meta.version}`, null, true);
 }
 
 /**
@@ -65,7 +63,7 @@ export async function masterMain(): Promise<void> {
 		process.exit(1);
 	}
 
-	bootLogger.succ('Misskey initialized');
+	bootLogger.succ('FoundKey initialized');
 
 	if (!envOption.disableClustering) {
 		await spawnWorkers(config.clusterLimit);

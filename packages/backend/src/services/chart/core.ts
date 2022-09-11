@@ -312,13 +312,13 @@ export default abstract class Chart<T extends Schema> {
 		const latest = await this.getLatestLog(group, span);
 
 		if (latest != null) {
-			// 空ログデータを作成
+			// Create empty log data
 			data = this.getNewLog(this.convertRawRecord(latest));
 		} else {
-			// ログが存在しなかったら
-			// (Misskeyインスタンスを建てて初めてのチャート更新時など)
+			// if the log did not exist.
+			// (e.g., when updating a chart for the first time after building a FoundKey instance)
 
-			// 初期ログデータを作成
+			// Create initial log data
 			data = this.getNewLog(null);
 
 			logger.info(`${this.name + (group ? `:${group}` : '')}(${span}): Initial commit created`);

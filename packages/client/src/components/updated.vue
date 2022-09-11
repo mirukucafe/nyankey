@@ -1,10 +1,10 @@
 <template>
-<MkModal ref="modal" :z-priority="'middle'" @click="$refs.modal.close()" @closed="$emit('closed')">
+<MkModal ref="modal" :z-priority="'middle'" @click="modal?.close()" @closed="emit('closed')">
 	<div class="ewlycnyt">
 		<div class="title"><MkSparkle>{{ i18n.ts.misskeyUpdated }}</MkSparkle></div>
 		<div class="version">✨{{ version }}🚀</div>
 		<MkButton full @click="whatIsNew">{{ i18n.ts.whatIsNew }}</MkButton>
-		<MkButton class="gotIt" primary full @click="$refs.modal.close()">{{ i18n.ts.gotIt }}</MkButton>
+		<MkButton class="gotIt" primary full @click="modal?.close()">{{ i18n.ts.gotIt }}</MkButton>
 	</div>
 </MkModal>
 </template>
@@ -18,10 +18,13 @@ import { version } from '@/config';
 import { i18n } from '@/i18n';
 
 const modal = ref<InstanceType<typeof MkModal>>();
+const emit = defineEmits<{
+	(ev: 'closed'): void;
+}>();
 
-const whatIsNew = () => {
-	modal.value.close();
-	window.open(`https://misskey-hub.net/docs/releases.html#_${version.replace(/\./g, '-')}`, '_blank');
+const whatIsNew = (): void => {
+	modal.value?.close();
+	window.open('https://akkoma.dev/FoundKeyGang/FoundKey/src/branch/main/CHANGELOG.md', '_blank');
 };
 </script>
 

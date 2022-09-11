@@ -66,7 +66,7 @@ export type Source = {
 };
 
 /**
- * Misskeyが自動的に(ユーザーが設定した情報から推論して)設定する情報
+ * Information that FoundKey automatically sets (by inference from information set by the user)
  */
 export type Mixin = {
 	version: string;
