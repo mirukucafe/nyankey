@@ -208,10 +208,6 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'device',
 		default: 'sideFull' as 'sideFull' | 'sideIcon' | 'top',
 	},
-	reportError: {
-		where: 'device',
-		default: false,
-	},
 	squareAvatars: {
 		where: 'device',
 		default: false,
