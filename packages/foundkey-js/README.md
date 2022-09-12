@@ -6,7 +6,7 @@ The following is provided:
 - API requests
 - Streaming
 - Utility functions
-- Various Misskey type definitions
+- Various foundkey type definitions
 
 This library is designed to work with FoundKey. It should also work with Misskey 12+ but compatibility is not guaranteed.
 
@@ -16,15 +16,15 @@ This package is not currently published to npmjs.
 # Usage
 To use `foundkey-js` in your code, use the following import:
 ``` ts
-import * as Misskey from 'foundkey-js';
+import * as foundkey from 'foundkey-js';
 ```
 
-For convenience, the following code examples are based on the assumption that the code is imported as `* as Misskey` as shown above.
+For convenience, the following code examples are based on the assumption that the code is imported as `* as foundkey` as shown above.
 
 However, since tree-shaking is not possible with this import method, we recommend the following individual import for use cases where code size is important.
 
 ``` ts
-import { api as misskeyApi } from 'foundkey-js';
+import { api as foundkeyApi } from 'foundkey-js';
 ```
 
 ## Authenticate
@@ -34,8 +34,8 @@ todo
 When using the API, initialize an instance of the `APIClient` class by providing information on the server to be used and an access token, and make a request by calling the `request` method of the instance.
 
 ``` ts
-const cli = new Misskey.api.APIClient({
-	origin: 'https://misskey.test',
+const cli = new foundkey.api.APIClient({
+	origin: 'https://foundkey.example',
 	credential: 'TOKEN',
 });
 
@@ -52,7 +52,7 @@ One is the `Stream` class, which handles the streaming connection itself, and th
 When using streaming, you first initialize an instance of the `Stream` class, and then use the methods of the `Stream` instance to get an instance of the `Channel` class.
 
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 const mainChannel = stream.useChannel('main');
 mainChannel.on('notification', notification => {
 	console.log('notification received', notification);
@@ -66,14 +66,14 @@ Connection to a channel is made using the `useChannel` method of the `Stream` cl
 
 No parameters
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 
 const mainChannel = stream.useChannel('main');
 ```
 
 With parameters
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 
 const messagingChannel = stream.useChannel('messaging', {
 	otherparty: 'xxxxxxxxxx',
@@ -84,7 +84,7 @@ const messagingChannel = stream.useChannel('messaging', {
 Call the `dispose` method of the `Channel` class.
 
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 
 const mainChannel = stream.useChannel('main');
 
@@ -95,7 +95,7 @@ mainChannel.dispose();
 The `Channel` class inherits from EventEmitter and when a message is received from the server, it emits a payload with the name of the event received.
 
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 const mainChannel = stream.useChannel('main');
 mainChannel.on('notification', notification => {
 	console.log('notification received', notification);
@@ -106,7 +106,7 @@ mainChannel.on('notification', notification => {
 Messages can be sent to the server using the `send` method of the `Channel` class.
 
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 const messagingChannel = stream.useChannel('messaging', {
 	otherparty: 'xxxxxxxxxx',
 });
@@ -120,7 +120,7 @@ messagingChannel.send('read', {
 The `_connected_` event of the `Stream` class is available.
 
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 stream.on('_connected_', () => {
 	console.log('connected');
 });
@@ -130,7 +130,7 @@ stream.on('_connected_', () => {
 The `_disconnected_` event of the `Stream` class is available.
 
 ``` ts
-const stream = new Misskey.Stream('https://misskey.test', { token: 'TOKEN' });
+const stream = new foundkey.Stream('https://foundkey.example', { token: 'TOKEN' });
 stream.on('_disconnected_', () => {
 	console.log('disconnected');
 });
