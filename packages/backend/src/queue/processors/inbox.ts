@@ -127,12 +127,17 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 		}
 	}
 
-	// activity.idがあればホストが署名者のホストであることを確認する
 	if (typeof activity.id === 'string') {
+		// Verify that activity and actor are from the same host.
 		const signerHost = extractDbHost(authUser.user.uri!);
 		const activityIdHost = extractDbHost(activity.id);
 		if (signerHost !== activityIdHost) {
 			return `skip: signerHost(${signerHost}) !== activity.id host(${activityIdHost}`;
+		}
+
+		// Verify that the id has a sane length
+		if (activity.id.length > 2048) {
+			return `skip: overly long id from ${signerHost}`;
 		}
 	}
 
