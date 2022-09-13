@@ -1,7 +1,7 @@
 <template>
 <div v-tooltip="instance.softwareName + ' ' + instance.softwareVersion" class="hpaizdrt" :style="bg">
 	<img v-if="instance.faviconUrl" class="icon" :src="instance.faviconUrl"/>
-	<span class="name">{{ instance.name }}</span>
+	<span class="name">{{ instance.name ?? host }}</span>
 	<span v-if="instance.softwareName" class="software">{{ instance.softwareName }}</span>
 </div>
 </template>
@@ -10,6 +10,8 @@
 import { instanceName, version, software } from '@/config';
 
 const props = defineProps<{
+	// null signifies localhost
+	host: string | null;
 	instance?: {
 		faviconUrl?: string;
 		name: string;
