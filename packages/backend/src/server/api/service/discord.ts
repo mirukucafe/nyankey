@@ -10,6 +10,7 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import { ILocalUser } from '@/models/entities/user.js';
 import { redisClient } from '@/db/redis.js';
+import { I18n } from '@/misc/i18n.js';
 import signin from '../common/signin.js';
 
 function getUserToken(ctx: Koa.BaseContext): string | null {
@@ -25,6 +26,8 @@ function compareOrigin(ctx: Koa.BaseContext): boolean {
 
 	return (normalizeUrl(referer) === normalizeUrl(config.url));
 }
+
+const locales = await import('../../../../../../locales/index.js').then(mod => mod.default);
 
 // Init router
 const router = new Router();
@@ -47,6 +50,8 @@ router.get('/disconnect/discord', async ctx => {
 	});
 
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
+	const locale = locales[profile.lang || 'en-US'];
+	const i18n = new I18n(locale);
 
 	delete profile.integrations.discord;
 
@@ -54,7 +59,7 @@ router.get('/disconnect/discord', async ctx => {
 		integrations: profile.integrations,
 	});
 
-	ctx.body = 'Discordの連携を解除しました :v:';
+	ctx.body = i18n.t('_services._discord.disconnected');
 
 	// Publish i updated event
 	publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
@@ -189,7 +194,7 @@ router.get('/dc/cb', async ctx => {
 			.getOne();
 
 		if (profile == null) {
-			ctx.throw(404, `@${username}#${discriminator}と連携しているMisskeyアカウントはありませんでした...`);
+			ctx.throw(404, `There were no FoundKey accounts linked to @${username}#${discriminator}...`);
 			return;
 		}
 
@@ -259,6 +264,8 @@ router.get('/dc/cb', async ctx => {
 		});
 
 		const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
+		const locale = locales[profile.lang || 'en-US'];
+		const i18n = new I18n(locale);
 
 		await UserProfiles.update(user.id, {
 			integrations: {
@@ -274,7 +281,11 @@ router.get('/dc/cb', async ctx => {
 			},
 		});
 
-		ctx.body = `Discord: @${username}#${discriminator} を、Misskey: @${user.username} に接続しました！`;
+		ctx.body = i18n.t('_services._discord.connected', {
+			username,
+			discriminator,
+			mkUsername: user.username,
+		});
 
 		// Publish i updated event
 		publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {

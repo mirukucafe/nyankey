@@ -55,10 +55,10 @@ export async function createImage(actor: CacheableRemoteUser, value: any): Promi
 }
 
 /**
- * Imageを解決します。
+ * Resolve Image.
  *
- * Misskeyに対象のImageが登録されていればそれを返し、そうでなければ
- * リモートサーバーからフェッチしてMisskeyに登録しそれを返します。
+ * If the target Image is registered in FoundKey, return it; otherwise, fetch it from the remote server and return it.
+ * Fetch the image from the remote server, register it in FoundKey and return it.
  */
 export async function resolveImage(actor: CacheableRemoteUser, value: any): Promise<DriveFile> {
 	// TODO

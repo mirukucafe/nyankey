@@ -53,9 +53,9 @@ export function validateNote(object: any, uri: string) {
 }
 
 /**
- * Noteをフェッチします。
+ * Fetch Note.
  *
- * Misskeyに対象のNoteが登録されていればそれを返します。
+ * Returns the target Note if it is registered in FoundKey.
  */
 export async function fetchNote(object: string | IObject): Promise<Note | null> {
 	const dbResolver = new DbResolver();
@@ -263,10 +263,10 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 }
 
 /**
- * Noteを解決します。
+ * Resolve Note.
  *
- * Misskeyに対象のNoteが登録されていればそれを返し、そうでなければ
- * リモートサーバーからフェッチしてMisskeyに登録しそれを返します。
+ * If the target Note is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
+ * Fetch the Note from the remote server, register it in FoundKey, and return it.
  */
 export async function resolveNote(value: string | IObject, resolver?: Resolver): Promise<Note | null> {
 	const uri = typeof value === 'string' ? value : value.id;

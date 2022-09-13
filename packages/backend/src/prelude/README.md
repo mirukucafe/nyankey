@@ -1,3 +1,3 @@
 # Prelude
-このディレクトリのコードはJavaScriptの表現能力を補うためのコードです。
-Misskey固有の処理とは独立したコードの集まりですが、Misskeyのコードを読みやすくすることを目的としています。
+The code in this directory is intended to complement the expressive capabilities of JavaScript.
+It is a collection of code that is independent of FoundKey-specific processing, but is intended to make FoundKey code easier to read.

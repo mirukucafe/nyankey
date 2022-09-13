@@ -18,7 +18,7 @@ const ev = new Xev();
  * Init process
  */
 export default async function(): Promise<void> {
-	process.title = `Misskey (${cluster.isPrimary ? 'master' : 'worker'})`;
+	process.title = `FoundKey (${cluster.isPrimary ? 'master' : 'worker'})`;
 
 	if (cluster.isPrimary || envOption.disableClustering) {
 		await masterMain();
@@ -32,8 +32,8 @@ export default async function(): Promise<void> {
 		await workerMain();
 	}
 
-	// ユニットテスト時にMisskeyが子プロセスで起動された時のため
-	// それ以外のときは process.send は使えないので弾く
+	// for when FoundKey is launched as a child process during unit testing
+	// otherwise, process.send cannot be used, so it is suppressed
 	if (process.send) {
 		process.send('ok');
 	}

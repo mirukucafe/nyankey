@@ -58,8 +58,8 @@ export const routes = [{
 	component: page(() => import('./pages/about.vue')),
 	hash: 'initialTab',
 }, {
-	path: '/about-misskey',
-	component: page(() => import('./pages/about-misskey.vue')),
+	path: '/about-foundkey',
+	component: page(() => import('./pages/about-foundkey.vue')),
 }, {
 	path: '/theme-editor',
 	component: page(() => import('./pages/theme-editor.vue')),
