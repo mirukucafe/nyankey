@@ -1,4 +1,4 @@
-FROM node:18.0.0-alpine3.15 AS base
+FROM node:18.9.0-alpine3.16 AS base
 
 ARG NODE_ENV=production
 
@@ -28,7 +28,7 @@ COPY --from=builder /misskey/node_modules ./node_modules
 COPY --from=builder /misskey/built ./built
 COPY --from=builder /misskey/packages/backend/node_modules ./packages/backend/node_modules
 COPY --from=builder /misskey/packages/backend/built ./packages/backend/built
-COPY --from=builder /misskey/packages/client/node_modules ./packages/client/node_modules
+COPY --from=builder /misskey/packages/foundkey-js/built ./packages/foundkey-js/built
 COPY . ./
 
 ENV NODE_ENV=production
