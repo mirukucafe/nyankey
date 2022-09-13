@@ -71,10 +71,6 @@
 		</FormRadios>
 	</FormSection>
 
-	<FormSection>
-		<FormSwitch v-model="aiChanMode">{{ i18n.ts.aiChanMode }}</FormSwitch>
-	</FormSection>
-
 	<FormSelect v-model="instanceTicker" class="_formBlock">
 		<template #label>{{ i18n.ts.instanceTicker }}</template>
 		<option value="none">{{ i18n.ts._instanceTicker.none }}</option>
@@ -151,7 +147,6 @@ const instanceTicker = computed(defaultStore.makeGetterSetter('instanceTicker'))
 const enableInfiniteScroll = computed(defaultStore.makeGetterSetter('enableInfiniteScroll'));
 const useReactionPickerForContextMenu = computed(defaultStore.makeGetterSetter('useReactionPickerForContextMenu'));
 const squareAvatars = computed(defaultStore.makeGetterSetter('squareAvatars'));
-const aiChanMode = computed(defaultStore.makeGetterSetter('aiChanMode'));
 
 watch(lang, () => {
 	localStorage.setItem('lang', lang.value as string);
@@ -180,7 +175,6 @@ watch([
 	useSystemFont,
 	enableInfiniteScroll,
 	squareAvatars,
-	aiChanMode,
 	showGapBetweenNotesInTimeline,
 	instanceTicker,
 	overridedDeviceKind,

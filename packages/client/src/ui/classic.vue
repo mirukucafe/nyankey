@@ -34,8 +34,6 @@
 		<XWidgets v-if="widgetsShowing" class="tray"/>
 	</transition>
 
-	<iframe v-if="$store.state.aiChanMode" ref="live2d" class="ivnzpscs" src="https://misskey-dev.github.io/mascot-web/?scale=2&y=1.4"></iframe>
-
 	<XCommon/>
 </div>
 </template>
@@ -65,7 +63,6 @@ let fullView = $ref(false);
 let globalHeaderHeight = $ref(0);
 const wallpaper = localStorage.getItem('wallpaper') != null;
 const showMenuOnTop = $computed(() => defaultStore.state.menuDisplay === 'top');
-let live2d = $ref<HTMLIFrameElement>();
 let widgetsLeft = $ref();
 let widgetsRight = $ref();
 
@@ -119,10 +116,6 @@ function onContextmenu(ev: MouseEvent) {
 	}], ev);
 }
 
-function onAiClick(ev) {
-	//if (this.live2d) this.live2d.click(ev);
-}
-
 if (window.innerWidth < 1024) {
 	localStorage.setItem('ui', 'default');
 	location.reload();
@@ -147,28 +140,6 @@ onMounted(() => {
 	window.addEventListener('resize', () => {
 		isDesktop = (window.innerWidth >= DESKTOP_THRESHOLD);
 	}, { passive: true });
-
-	if (defaultStore.state.aiChanMode) {
-		const iframeRect = live2d.getBoundingClientRect();
-		window.addEventListener('mousemove', ev => {
-			live2d.contentWindow.postMessage({
-				type: 'moveCursor',
-				body: {
-					x: ev.clientX - iframeRect.left,
-					y: ev.clientY - iframeRect.top,
-				},
-			}, '*');
-		}, { passive: true });
-		window.addEventListener('touchmove', ev => {
-			live2d.contentWindow.postMessage({
-				type: 'moveCursor',
-				body: {
-					x: ev.touches[0].clientX - iframeRect.left,
-					y: ev.touches[0].clientY - iframeRect.top,
-				},
-			}, '*');
-		}, { passive: true });
-	}
 });
 </script>
 
