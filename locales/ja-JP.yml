@@ -1452,3 +1452,13 @@ _deck:
     list: "リスト"
     mentions: "あなた宛て"
     direct: "ダイレクト"
+_services:
+  _discord:
+    connected: "Discord: @{username}#{discriminator} を、FoundKey: @{mkUsername} に接続しました！"
+    disconnected: "Discordの連携を解除しました :v:"
+  _twitter:
+    connected: "Twitter: @{twitterUserName} を、FoundKey: @{userName} に接続しました！"
+    disconnected: "Twitterの連携を解除しました :v:"
+  _github:
+    connected: "GitHub: @{login} を、FoundKey: @{userName} に接続しました！"
+    disconnected: "GitHubの連携を解除しました :v:"

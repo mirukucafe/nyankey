@@ -11,6 +11,7 @@ import { Users, UserProfiles } from '@/models/index.js';
 import { ILocalUser } from '@/models/entities/user.js';
 import { redisClient } from '@/db/redis.js';
 import signin from '../common/signin.js';
+import { I18n } from '@/misc/i18n.js';
 
 function getUserToken(ctx: Koa.BaseContext): string | null {
 	return ((ctx.headers['cookie'] || '').match(/igi=(\w+)/) || [null, null])[1];
@@ -25,6 +26,8 @@ function compareOrigin(ctx: Koa.BaseContext): boolean {
 
 	return (normalizeUrl(referer) === normalizeUrl(config.url));
 }
+
+const locales = await import('../../../../../../locales/index.js').then(mod => mod.default);
 
 // Init router
 const router = new Router();
@@ -47,6 +50,8 @@ router.get('/disconnect/github', async ctx => {
 	});
 
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
+	const locale = locales[profile.lang || 'en-US'];
+	const i18n = new I18n(locale);
 
 	delete profile.integrations.github;
 
@@ -54,7 +59,7 @@ router.get('/disconnect/github', async ctx => {
 		integrations: profile.integrations,
 	});
 
-	ctx.body = 'GitHubの連携を解除しました :v:';
+	ctx.body = i18n.t('_services._github.disconnected');
 
 	// Publish i updated event
 	publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
@@ -234,6 +239,8 @@ router.get('/gh/cb', async ctx => {
 		});
 
 		const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
+		const locale = locales[profile.lang || 'en-US'];
+		const i18n = new I18n(locale);
 
 		await UserProfiles.update(user.id, {
 			integrations: {
@@ -246,7 +253,10 @@ router.get('/gh/cb', async ctx => {
 			},
 		});
 
-		ctx.body = `GitHub: @${login} connected to FoundKey: @${user.username}!`;
+		ctx.body = i18n.t('_services._github.connected', {
+			login,
+			userName: user.username,
+		});
 
 		// Publish i updated event
 		publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {

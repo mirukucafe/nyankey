@@ -1409,3 +1409,13 @@ _deck:
     list: "List"
     mentions: "Mentions"
     direct: "Direct notes"
+_services:
+  _discord:
+    connected: "Discord: @{username}#{discriminator} connected to FoundKey: @{mkUsername}!"
+    disconnected: "Discord linkage has been removed :v:"
+  _twitter:
+    connected: "Twitter: @{twitterUserName} connected to FoundKey: @{userName}!"
+    disconnected: "Twitter linkage has been removed :v:"
+  _github:
+    connected: "GitHub: @{login} connected to FoundKey: @{userName}!"
+    disconnected: "GitHub linkage has been removed :v:"
