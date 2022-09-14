@@ -31,7 +31,7 @@ const buttonRef = ref<HTMLElement>();
 
 const canToggle = computed(() => !props.reaction.match(/@\w/) && $i);
 
-const toggleReaction = () => {
+const toggleReaction = (): void => {
 	if (!canToggle.value) return;
 
 	const oldReaction = props.note.myReaction;
