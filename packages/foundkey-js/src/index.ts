@@ -3,9 +3,13 @@ export { default as Stream, Connection as ChannelConnection } from './streaming.
 export { Channels } from './streaming.types.js';
 export { Acct } from './acct.js';
 export {
+	noteVisibilities,
+	NoteVisibility,
+	minVisibility,
+} from './visibility.js';
+export {
 	permissions,
 	notificationTypes,
-	noteVisibilities,
 	mutedNoteReasons,
 	ffVisibility,
 } from './consts.js';

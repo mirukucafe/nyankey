@@ -97,7 +97,7 @@ const props = withDefaults(defineProps<{
 	mention?: foundkey.entities.User;
 	specified?: foundkey.entities.User;
 	initialText?: string;
-	initialVisibility?: typeof foundkey.noteVisibilities;
+	initialVisibility?: foundkey.NoteVisibility;
 	initialFiles?: foundkey.entities.DriveFile[];
 	initialLocalOnly?: boolean;
 	initialVisibleUsers?: foundkey.entities.User[];
@@ -134,7 +134,7 @@ let useCw = $ref(false);
 let showPreview = $ref(false);
 let cw = $ref<string | null>(null);
 let localOnly = $ref<boolean>(props.initialLocalOnly ?? defaultStore.state.defaultNoteLocalOnly);
-let visibility = $ref(props.initialVisibility ?? defaultStore.state.defaultNoteVisibility as typeof foundkey.noteVisibilities[number]);
+let visibility = $ref(props.initialVisibility ?? defaultStore.state.defaultNoteVisibility as foundkey.NoteVisibility);
 let visibleUsers = $ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
@@ -143,21 +143,6 @@ let quoteId = $ref(null);
 let hasNotSpecifiedMentions = $ref(false);
 let recentHashtags = $ref(JSON.parse(localStorage.getItem('hashtags') || '[]'));
 let imeText = $ref('');
-
-// TODO: compat with misskey-js, should likely be moved into foundkey-js
-const visibilityScore = (a: string): number => {
-	switch (a) {
-		case 'specified':
-			return 0;
-		case 'followers':
-			return 1;
-		case 'home':
-			return 2;
-		case 'public': default:
-			return 3;
-	}
-};
-const minVisibility = (a: string, b: string): string => visibilityScore(b) > visibilityScore(a) ? a : b;
 
 const typing = throttle(3000, () => {
 	if (props.channel) {
@@ -271,7 +256,7 @@ if (props.channel) {
 }
 
 if (props.reply) {
-	visibility = minVisibility(props.reply.visibility, visibility);
+	visibility = foundkey.minVisibility(props.reply.visibility, visibility);
 	if (visibility === 'specified') {
 		os.api('users/show', {
 			userIds: props.reply.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.reply.userId),
