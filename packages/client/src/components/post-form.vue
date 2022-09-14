@@ -257,7 +257,7 @@ if (props.channel) {
 
 if (props.reply) {
 	visibility = foundkey.minVisibility(props.reply.visibility, visibility);
-	if (visibility === 'specified') {
+	if (props.reply.visibility === 'specified') {
 		os.api('users/show', {
 			userIds: props.reply.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.reply.userId),
 		}).then(users => {
@@ -266,6 +266,23 @@ if (props.reply) {
 
 		if (props.reply.userId !== $i.id) {
 			os.api('users/show', { userId: props.reply.userId }).then(user => {
+				pushVisibleUser(user);
+			});
+		}
+	}
+}
+
+if (props.renote) {
+	visibility = foundkey.minVisibility(props.renote.visibility, visibility);
+	if (props.renote.visibility === 'specified') {
+		os.api('users/show', {
+			userIds: props.renote.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.renote.userId),
+		}).then(users => {
+			users.forEach(pushVisibleUser);
+		});
+
+		if (props.renote.userId !== $i.id) {
+			os.api('users/show', { userId: props.renote.userId }).then(user => {
 				pushVisibleUser(user);
 			});
 		}
