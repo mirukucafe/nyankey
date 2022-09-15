@@ -1,13 +1,6 @@
-<!--
-## 12.x.x (unreleased)
+**This is the changelog for Misskey v12.111.1 and earlier for historical reference. Changes for FoundKey versions post-fork can be found in the current [CHANGELOG.md](./CHANGELOG.md).**
 
-### Improvements
-
-### Bugfixes
-- 
-
-You should also include the user name that made the change.
--->
+**Contributors should use [changelog trailers](./CONTRIBUTING.md#changelog-trailer) for any changes that should be noted in the current changelog.**
 
 ## 12.x.x (unreleased)
 
