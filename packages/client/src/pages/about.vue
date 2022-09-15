@@ -3,7 +3,7 @@
 	<template #header><MkPageHeader v-model:tab="tab" :actions="headerActions" :tabs="headerTabs"/></template>
 	<MkSpacer v-if="tab === 'overview'" :content-max="600" :margin-min="20">
 		<div class="_formRoot">
-			<div class="_formBlock fwhjspax" :style="{ backgroundImage: `url(${ $instance.bannerUrl })` }">
+			<div class="_formBlock fwhjspax" :style="{ backgroundImage: `url(${ instance.bannerUrl })` }">
 				<div class="content">
 					<img :src="$instance.iconUrl || $instance.faviconUrl || '/favicon.ico'" alt="" class="icon"/>
 					<div class="name">
@@ -45,11 +45,11 @@
 					<FormSplit>
 						<MkKeyValue class="_formBlock">
 							<template #key>{{ i18n.ts.users }}</template>
-							<template #value>{{ number(stats.originalUsersCount) }}</template>
+							<template #value>{{ number(stats?.originalUsersCount) }}</template>
 						</MkKeyValue>
 						<MkKeyValue class="_formBlock">
 							<template #key>{{ i18n.ts.notes }}</template>
-							<template #value>{{ number(stats.originalNotesCount) }}</template>
+							<template #value>{{ number(stats?.originalNotesCount) }}</template>
 						</MkKeyValue>
 					</FormSplit>
 				</FormSection>
@@ -81,6 +81,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+import * as foundkey from 'foundkey-js';
 import XEmojis from './about.emojis.vue';
 import XFederation from './about.federation.vue';
 import { version, host } from '@/config';
@@ -118,13 +119,12 @@ const props = withDefaults(defineProps<{
 	initialTab: 'overview',
 });
 
-let stats = $ref(null);
+let stats: foundkey.entities.Stats | null = $ref(null);
 let tab = $ref(headerTabs.some(({ key }) => key === props.initialTab) ? props.initialTab : 'overview');
 
-const initStats = () => os.api('stats', {
-}).then((res) => {
-	stats = res;
-});
+const initStats = async (): Promise<void> => {
+	stats = await os.api('stats', {});
+};
 
 const headerActions = $computed(() => []);
 

@@ -48,7 +48,7 @@ os.api('meta', {
 	serverIsDead = true;
 });
 
-function reload() {
+function reload(): void {
 	unisonReload();
 }
 
