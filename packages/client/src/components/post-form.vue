@@ -15,9 +15,9 @@
 			<span v-if="localOnly" class="local-only"><i class="fas fa-biohazard"></i></span>
 			<button ref="visibilityButton" v-tooltip="i18n.ts.visibility" class="_button visibility" :disabled="channel != null" @click="setVisibility">
 				<span v-if="visibility === 'public'"><i class="fas fa-globe"></i></span>
-				<span v-if="visibility === 'home'"><i class="fas fa-home"></i></span>
-				<span v-if="visibility === 'followers'"><i class="fas fa-unlock"></i></span>
-				<span v-if="visibility === 'specified'"><i class="fas fa-envelope"></i></span>
+				<span v-else-if="visibility === 'home'"><i class="fas fa-home"></i></span>
+				<span v-else-if="visibility === 'followers'"><i class="fas fa-unlock"></i></span>
+				<span v-else-if="visibility === 'specified'"><i class="fas fa-envelope"></i></span>
 			</button>
 			<button v-tooltip="i18n.ts.previewNoteText" class="_button preview" :class="{ active: showPreview }" @click="showPreview = !showPreview"><i class="fas fa-file-code"></i></button>
 			<button class="submit _buttonGradate" :disabled="!canPost" data-cy-open-post-form-submit @click="post">{{ submitText }}<i :class="reply ? 'fas fa-reply' : renote ? 'fas fa-quote-right' : 'fas fa-paper-plane'"></i></button>
@@ -97,7 +97,7 @@ const props = withDefaults(defineProps<{
 	mention?: foundkey.entities.User;
 	specified?: foundkey.entities.User;
 	initialText?: string;
-	initialVisibility?: typeof foundkey.noteVisibilities;
+	initialVisibility?: foundkey.NoteVisibility;
 	initialFiles?: foundkey.entities.DriveFile[];
 	initialLocalOnly?: boolean;
 	initialVisibleUsers?: foundkey.entities.User[];
@@ -133,8 +133,8 @@ let poll = $ref<{
 let useCw = $ref(false);
 let showPreview = $ref(false);
 let cw = $ref<string | null>(null);
-let localOnly = $ref<boolean>(props.initialLocalOnly ?? defaultStore.state.rememberNoteVisibility ? defaultStore.state.localOnly : defaultStore.state.defaultNoteLocalOnly);
-let visibility = $ref(props.initialVisibility ?? (defaultStore.state.rememberNoteVisibility ? defaultStore.state.visibility : defaultStore.state.defaultNoteVisibility) as typeof foundkey.noteVisibilities[number]);
+let localOnly = $ref<boolean>(props.initialLocalOnly ?? defaultStore.state.defaultNoteLocalOnly);
+let visibility = $ref(props.initialVisibility ?? defaultStore.state.defaultNoteVisibility as foundkey.NoteVisibility);
 let visibleUsers = $ref([]);
 if (props.initialVisibleUsers) {
 	props.initialVisibleUsers.forEach(pushVisibleUser);
@@ -255,9 +255,8 @@ if (props.channel) {
 	localOnly = true; // TODO: チャンネルが連合するようになった折には消す
 }
 
-// 公開以外へのリプライ時は元の公開範囲を引き継ぐ
-if (props.reply && ['home', 'followers', 'specified'].includes(props.reply.visibility)) {
-	visibility = props.reply.visibility;
+if (props.reply) {
+	visibility = foundkey.minVisibility(props.reply.visibility, visibility);
 	if (props.reply.visibility === 'specified') {
 		os.api('users/show', {
 			userIds: props.reply.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.reply.userId),
@@ -267,6 +266,23 @@ if (props.reply && ['home', 'followers', 'specified'].includes(props.reply.visib
 
 		if (props.reply.userId !== $i.id) {
 			os.api('users/show', { userId: props.reply.userId }).then(user => {
+				pushVisibleUser(user);
+			});
+		}
+	}
+}
+
+if (props.renote) {
+	visibility = foundkey.minVisibility(props.renote.visibility, visibility);
+	if (props.renote.visibility === 'specified') {
+		os.api('users/show', {
+			userIds: props.renote.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.renote.userId),
+		}).then(users => {
+			users.forEach(pushVisibleUser);
+		});
+
+		if (props.renote.userId !== $i.id) {
+			os.api('users/show', { userId: props.renote.userId }).then(user => {
 				pushVisibleUser(user);
 			});
 		}
@@ -383,15 +399,9 @@ function setVisibility() {
 	}, {
 		changeVisibility: v => {
 			visibility = v;
-			if (defaultStore.state.rememberNoteVisibility) {
-				defaultStore.set('visibility', visibility);
-			}
 		},
 		changeLocalOnly: v => {
 			localOnly = v;
-			if (defaultStore.state.rememberNoteVisibility) {
-				defaultStore.set('localOnly', localOnly);
-			}
 		},
 	}, 'closed');
 }
