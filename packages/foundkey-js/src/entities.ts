@@ -282,6 +282,7 @@ export type LiteInstanceMetadata = {
 	emojis: CustomEmoji[];
 	iconUrl: string;
 	faviconUrl: string;
+	bannerUrl: string;
 };
 
 export type DetailedInstanceMetadata = LiteInstanceMetadata & {
