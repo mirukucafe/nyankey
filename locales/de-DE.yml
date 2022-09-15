@@ -756,6 +756,7 @@ noMaintainerInformationWarning: "Betreiberinformationen sind nicht konfiguriert.
 noBotProtectionWarning: "Schutz vor Bots ist nicht konfiguriert."
 configure: "Konfigurieren"
 postToGallery: "Neuen Galeriebeitrag erstellen"
+attachmentRequired: "Mindestens 1 Anhang ist erforderlich."
 gallery: "Galerie"
 recentPosts: "Neue Beiträge"
 popularPosts: "Beliebte Beiträge"

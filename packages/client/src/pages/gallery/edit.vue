@@ -66,6 +66,14 @@ function remove(file) {
 }
 
 async function save() {
+	if (files.length === 0) {
+		os.alert({
+			type: 'error',
+			text: i18n.ts.attachmentRequired,
+		});
+		return;
+	}
+
 	if (props.postId) {
 		await os.apiWithDialog('gallery/posts/update', {
 			postId: props.postId,
