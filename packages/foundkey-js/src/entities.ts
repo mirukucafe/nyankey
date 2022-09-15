@@ -280,13 +280,8 @@ export type LiteInstanceMetadata = {
 	enableDiscordIntegration: boolean;
 	enableServiceWorker: boolean;
 	emojis: CustomEmoji[];
-	ads: {
-		id: ID;
-		ratio: number;
-		place: string;
-		url: string;
-		imageUrl: string;
-	}[];
+	iconUrl: string;
+	faviconUrl: string;
 };
 
 export type DetailedInstanceMetadata = LiteInstanceMetadata & {
