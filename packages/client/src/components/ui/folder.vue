@@ -1,6 +1,6 @@
 <template>
-<div v-size="{ max: [500] }" class="ssazuxis">
-	<header class="_button" :style="{ background: bg }" @click="showBody = !showBody">
+<div ref="folderEl" v-size="{ max: [500] }" class="ssazuxis">
+	<header class="_button" :style="{ background: bg ?? undefined }" @click="showBody = !showBody">
 		<div class="title"><slot name="header"></slot></div>
 		<div class="divider"></div>
 		<button class="_button">
@@ -11,9 +11,9 @@
 	<transition
 		:name="$store.state.animation ? 'folder-toggle' : ''"
 		@enter="enter"
-		@after-enter="afterEnter"
+		@after-enter="removeHeight"
 		@leave="leave"
-		@after-leave="afterLeave"
+		@after-leave="removeHeight"
 	>
 		<div v-show="showBody">
 			<slot></slot>
@@ -22,78 +22,62 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onMounted, watch } from 'vue';
 import tinycolor from 'tinycolor2';
 
 const localStoragePrefix = 'ui:folder:';
 
-export default defineComponent({
-	props: {
-		expanded: {
-			type: Boolean,
-			required: false,
-			default: true,
-		},
-		persistKey: {
-			type: String,
-			required: false,
-			default: null,
-		},
-	},
-	data() {
-		return {
-			bg: null,
-			showBody: (this.persistKey && localStorage.getItem(localStoragePrefix + this.persistKey)) ? localStorage.getItem(localStoragePrefix + this.persistKey) === 't' : this.expanded,
-		};
-	},
-	watch: {
-		showBody() {
-			if (this.persistKey) {
-				localStorage.setItem(localStoragePrefix + this.persistKey, this.showBody ? 't' : 'f');
-			}
-		},
-	},
-	mounted() {
-		function getParentBg(el: Element | null): string {
-			if (el == null || el.tagName === 'BODY') return 'var(--bg)';
-			const bg = el.style.background || el.style.backgroundColor;
-			if (bg) {
-				return bg;
-			} else {
-				return getParentBg(el.parentElement);
-			}
-		}
-		const rawBg = getParentBg(this.$el);
-		const bg = tinycolor(rawBg.startsWith('var(') ? getComputedStyle(document.documentElement).getPropertyValue(rawBg.slice(4, -1)) : rawBg);
-		bg.setAlpha(0.85);
-		this.bg = bg.toRgbString();
-	},
-	methods: {
-		toggleContent(show: boolean) {
-			this.showBody = show;
-		},
-
-		enter(el) {
-			const elementHeight = el.getBoundingClientRect().height;
-			el.style.height = 0;
-			el.offsetHeight; // reflow
-			el.style.height = elementHeight + 'px';
-		},
-		afterEnter(el) {
-			el.style.height = null;
-		},
-		leave(el) {
-			const elementHeight = el.getBoundingClientRect().height;
-			el.style.height = elementHeight + 'px';
-			el.offsetHeight; // reflow
-			el.style.height = 0;
-		},
-		afterLeave(el) {
-			el.style.height = null;
-		},
-	},
+const props = withDefaults(defineProps<{
+	expanded?: boolean;
+	persistKey?: string;
+}>(), {
+	expanded: true,
 });
+
+let bg: string | null = $ref(null);
+let showBody = $ref((props.persistKey && localStorage.getItem(localStoragePrefix + props.persistKey)) ? localStorage.getItem(localStoragePrefix + props.persistKey) === 't' : props.expanded);
+let folderEl: HTMLElement | null = $ref(null);
+
+watch($$(showBody), () => {
+	if (props.persistKey) {
+		localStorage.setItem(localStoragePrefix + props.persistKey, showBody ? 't' : 'f');
+	}
+});
+
+onMounted(() => {
+	function getParentBg(el: HTMLElement | null): string {
+		if (el == null || el.tagName === 'BODY') return 'var(--bg)';
+		const elBg = el.style.background || el.style.backgroundColor;
+		if (elBg) {
+			return elBg;
+		} else {
+			return getParentBg(el.parentElement);
+		}
+	}
+	const rawBg = getParentBg(folderEl);
+	const newBg = tinycolor(rawBg.startsWith('var(') ? getComputedStyle(document.documentElement).getPropertyValue(rawBg.slice(4, -1)) : rawBg);
+	newBg.setAlpha(0.85);
+	bg = newBg.toRgbString();
+});
+
+function enter(el: HTMLElement): void {
+	const elementHeight = el.getBoundingClientRect().height;
+	el.style.height = '0';
+	el.offsetHeight; // reflow
+	el.style.height = elementHeight + 'px';
+}
+
+function removeHeight(el: HTMLElement): void {
+	el.style.removeProperty('height');
+}
+
+function leave(el: HTMLElement): void {
+	const elementHeight = el.getBoundingClientRect().height;
+	el.style.height = elementHeight + 'px';
+	el.offsetHeight; // reflow
+	el.style.height = '0';
+}
 </script>
 
 <style lang="scss" scoped>
