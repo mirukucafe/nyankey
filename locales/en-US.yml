@@ -851,6 +851,7 @@ noEmailServerWarning: "Email server not configured."
 thereIsUnresolvedAbuseReportWarning: "There are unsolved reports."
 recommended: "Recommended"
 check: "Check"
+unlimited: "Unlimited"
 _emailUnavailable:
   used: "This email address is already being used"
   format: "The format of this email address is invalid"
@@ -982,9 +983,7 @@ _serverDisconnectedBehavior:
   dialog: "Show warning dialog"
   quiet: "Show unobtrusive warning"
 maxCustomEmojiPicker: "Maximum suggested custom emoji in picker"
-maxCustomEmojiPickerDescription: "0 for unlimited"
 maxUnicodeEmojiPicker: "Maximum suggested unicode emoji in picker"
-maxUnicodeEmojiPickerDescription: "0 for unlimited"
 _channel:
   create: "Create channel"
   edit: "Edit channel"
