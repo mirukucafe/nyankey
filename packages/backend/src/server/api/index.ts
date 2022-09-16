@@ -91,6 +91,11 @@ for (const endpoint of endpoints) {
 		} else {
 			router.get(`/${endpoint.name}`, async ctx => { ctx.status = 405; });
 		}
+
+		if (endpoint.meta.v2) {
+			const path = endpoint.meta.v2.alias ?? endpoint.name.replace(/-/g, '_');
+			router[endpoint.meta.v2.method](`/v2/${path}`, handler.bind(null, endpoint));
+		}
 	}
 }
 

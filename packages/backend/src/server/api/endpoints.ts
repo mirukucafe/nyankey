@@ -702,6 +702,24 @@ export interface IEndpointMeta {
 	 * 正常応答をキャッシュ (Cache-Control: public) する秒数
 	 */
 	readonly cacheSec?: number;
+
+	/**
+	 * API v2 options
+	 */
+	readonly v2?: {
+
+		/**
+		 * HTTP verb this endpoint supports
+		 */
+		readonly method: 'get' | 'put' | 'post' | 'patch' | 'delete';
+
+		/**
+		 * Path alias for v2 endpoint
+		 * 
+		 * @example (v0) /api/notes/create -> /api/v2/notes
+		 */
+		readonly alias?: string;
+	};
 }
 
 export interface IEndpoint {
