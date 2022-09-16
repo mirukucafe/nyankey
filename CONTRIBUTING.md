@@ -25,6 +25,7 @@ Please do not close issues that are about to be resolved. It should remain open 
 branch|what it's for
 ---|---
 main|development branch
+translate|managed by weblate, see [section about translation](#Translation)
 
 For a production environment you might not want to follow the `main` branch directly but instead check out one of the git tags.
 
@@ -138,9 +139,14 @@ To generate the changelog, we use a standard shortlog command: `git shortlog --f
 The person performing the release process should build the next CHANGELOG section based on this output, not use it as-is.
 Full releases should also remove any pre-release CHANGELOG sections.
 
-## Localization (l10n)
+## Translation
 
-We have not yet set up localization management, so updating of locales can currently only be done as commits changing the respective files in the repo.
+[![Translation status](http://translate.akkoma.dev/widgets/foundkey/-/svg-badge.svg)](http://translate.akkoma.dev/engage/foundkey/)
+
+<small>a.k.a. Localization (l10n) or Internationalization (i18n)</small>
+
+To translate something, we use weblate at <https://translate.akkoma.dev/foundkey/>.
+
 Localization files are found in `/locales/` and are YAML files using the `yml` file extension.
 The file name consists of the [IETF BCP 47](https://www.rfc-editor.org/info/bcp47) language code.
 
