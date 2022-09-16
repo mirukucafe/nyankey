@@ -1,7 +1,8 @@
 _lang_: "日本語"
 
 headlineMisskey: "ノートでつながるネットワーク"
-introMisskey: "ようこそ！FoundKeyは、オープンソースの分散型マイクロブログサービスです。\n「ノート」を作成して、いま起こっていることを共有したり、あなたについて皆に発信しよう📡\n「リアクション」機能で、皆のノートに素早く反応を追加することもできます👍\n新しい世界を探検しよう🚀"
+introMisskey: "ようこそ！FoundKeyは、オープンソースの分散型マイクロブログサービスです。\n「ノート」を作成して、いま起こっていることを共有したり、あなたについて皆に発信しよう\U0001F4E1\
+  \n「リアクション」機能で、皆のノートに素早く反応を追加することもできます\U0001F44D\n新しい世界を探検しよう\U0001F680"
 monthAndDay: "{month}月 {day}日"
 search: "検索"
 notifications: "通知"
@@ -479,7 +480,8 @@ showFeaturedNotesInTimeline: "タイムラインにおすすめのノートを�
 objectStorage: "オブジェクトストレージ"
 useObjectStorage: "オブジェクトストレージを使用"
 objectStorageBaseUrl: "Base URL"
-objectStorageBaseUrlDesc: "参照に使用するURL。CDNやProxyを使用している場合はそのURL、S3: 'https://<bucket>.s3.amazonaws.com'、GCS等: 'https://storage.googleapis.com/<bucket>'。"
+objectStorageBaseUrlDesc: "参照に使用するURL。CDNやProxyを使用している場合はそのURL、S3: 'https://<bucket>.s3.amazonaws.com'、GCS等:\
+  \ 'https://storage.googleapis.com/<bucket>'。"
 objectStorageBucket: "Bucket"
 objectStorageBucketDesc: "使用サービスのbucket名を指定してください。"
 objectStoragePrefix: "Prefix"
@@ -1154,7 +1156,7 @@ _tutorial:
   step6_3: "リアクションを付けるには、ノートの「+」マークをクリックして、好きなリアクションを選択します。"
   step7_1: "これで、FoundKeyの基本的な使い方の説明は終わりました。お疲れ様でした。"
   step7_2: "もっとFoundKeyについて知りたいときは、{help}を見てみてください。"
-  step7_3: "では、FoundKeyをお楽しみください🚀"
+  step7_3: "では、FoundKeyをお楽しみください\U0001F680"
 
 _2fa:
   alreadyRegistered: "既に設定は完了しています。"
@@ -1233,7 +1235,6 @@ _widgets:
   trends: "トレンド"
   clock: "時計"
   rss: "RSSリーダー"
-  rssTicker: "RSSティッカー"
   activity: "アクティビティ"
   photos: "フォト"
   digitalClock: "デジタル時計"
