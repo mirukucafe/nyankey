@@ -1,7 +1,9 @@
----
 _lang_: "Nederlands"
 headlineMisskey: "Netwerk verbonden door notities"
-introMisskey: "Welkom! FoundKey is een open source, gedecentraliseerde microblogdienst.\nMaak \"notities\" om je gedachten te delen met iedereen om je heen. 📡\nMet \"reacties\" kun je ook snel je mening geven over berichten van anderen. 👍\nLaten we een nieuwe wereld verkennen! 🚀"
+introMisskey: "Welkom! FoundKey is een open source, gedecentraliseerde microblogdienst.\n\
+  Maak \"notities\" om je gedachten te delen met iedereen om je heen. \U0001F4E1\n\
+  Met \"reacties\" kun je ook snel je mening geven over berichten van anderen. \U0001F44D\
+  \nLaten we een nieuwe wereld verkennen! \U0001F680"
 monthAndDay: "{day} {month}"
 search: "Zoeken"
 notifications: "Meldingen"
@@ -44,7 +46,8 @@ copyContent: "Kopiëren inhoud"
 copyLink: "Kopiëren link"
 delete: "Verwijderen"
 deleteAndEdit: "Verwijderen en bewerken"
-deleteAndEditConfirm: "Weet je zeker dat je deze notitie wilt verwijderen en dan bewerken? Je verliest alle reacties, herdelingen en antwoorden erop."
+deleteAndEditConfirm: "Weet je zeker dat je deze notitie wilt verwijderen en dan bewerken?\
+  \ Je verliest alle reacties, herdelingen en antwoorden erop."
 addToList: "Aan lijst toevoegen"
 sendMessage: "Verstuur bericht"
 copyUsername: "Kopiëren gebruikersnaam "
@@ -64,9 +67,11 @@ import: "Import"
 export: "Export"
 files: "Bestanden"
 download: "Downloaden"
-driveFileDeleteConfirm: "Weet je zeker dat je het bestand \"{name}\" wilt verwijderen? Notities met dit bestand als bijlage worden ook verwijderd."
+driveFileDeleteConfirm: "Weet je zeker dat je het bestand \"{name}\" wilt verwijderen?\
+  \ Notities met dit bestand als bijlage worden ook verwijderd."
 unfollowConfirm: "Weet je zeker dat je {name} wilt ontvolgen?"
-exportRequested: "Je hebt een export aangevraagd. Dit kan een tijdje duren. Het wordt toegevoegd aan je Drive zodra het is voltooid."
+exportRequested: "Je hebt een export aangevraagd. Dit kan een tijdje duren. Het wordt\
+  \ toegevoegd aan je Drive zodra het is voltooid."
 importRequested: "Je hebt een import aangevraagd. Dit kan even duren."
 lists: "Lijsten"
 noLists: "Je hebt geen lijsten"
@@ -81,7 +86,9 @@ error: "Fout"
 somethingHappened: "Er is iets misgegaan."
 retry: "Probeer opnieuw"
 pageLoadError: "Pagina laden mislukt"
-pageLoadErrorDescription: "Dit wordt normaal gesproken veroorzaakt door netwerkfouten of door de cache van de browser. Probeer de cache te wissen en probeer het na een tijdje wachten opnieuw."
+pageLoadErrorDescription: "Dit wordt normaal gesproken veroorzaakt door netwerkfouten\
+  \ of door de cache van de browser. Probeer de cache te wissen en probeer het na\
+  \ een tijdje wachten opnieuw."
 serverIsDead: "De server reageert niet. Wacht even en probeer het opnieuw."
 youShouldUpgradeClient: "Werk je client bij om deze pagina te zien."
 enterListName: "Voer de naam van de lijst in"
@@ -97,8 +104,8 @@ enterEmoji: "Voer een emoji in"
 renote: "Herdelen"
 unrenote: "Stop herdelen"
 renoted: "Herdeeld"
-cantRenote: "Dit bericht kan niet worden herdeeld"
-cantReRenote: "Een herdeling kan niet worden herdeeld"
+cantRenote: "Dit bericht kan niet worden herdeeld."
+cantReRenote: "Een herdeling kan niet worden herdeeld."
 quote: "Quote"
 pinnedNote: "Vastgemaakte notitie"
 pinned: "Vastmaken aan profielpagina"
@@ -107,7 +114,8 @@ clickToShow: "Klik om te bekijken"
 sensitive: "NSFW"
 add: "Toevoegen"
 reaction: "Reacties"
-reactionSettingDescription2: "Sleep om opnieuw te ordenen, Klik om te verwijderen, Druk op \"+\" om toe te voegen"
+reactionSettingDescription2: "Sleep om opnieuw te ordenen, Klik om te verwijderen,\
+  \ Druk op \"+\" om toe te voegen"
 attachCancel: "Verwijder bijlage"
 markAsSensitive: "Markeren als NSFW"
 unmarkAsSensitive: "Geen NSFW"
@@ -123,12 +131,17 @@ unblockConfirm: "Ben je zeker dat je deze account wil blokkeren?"
 suspendConfirm: "Ben je zeker dat je deze account wil suspenderen?"
 unsuspendConfirm: "Ben je zeker dat je deze account wil opnieuw aanstellen?"
 flagAsBot: "Markeer dit account als een robot."
-flagAsBotDescription: "Als dit account van een programma wordt beheerd, zet deze vlag aan. Het aanzetten helpt andere ontwikkelaars om bijvoorbeeld onbedoelde feedback loops te doorbreken of om FoundKey meer geschikt te maken."
+flagAsBotDescription: "Als dit account van een programma wordt beheerd, zet deze vlag\
+  \ aan. Het aanzetten helpt andere ontwikkelaars om bijvoorbeeld onbedoelde feedback\
+  \ loops te doorbreken of om FoundKey meer geschikt te maken."
 flagAsCat: "Markeer dit account als een kat."
-flagAsCatDescription: "Zet deze vlag aan als je wilt aangeven dat dit account een kat is."
+flagAsCatDescription: "Zet deze vlag aan als je wilt aangeven dat dit account een\
+  \ kat is."
 flagShowTimelineReplies: "Toon antwoorden op de tijdlijn."
-flagShowTimelineRepliesDescription: "Als je dit vlag aanzet, toont de tijdlijn ook antwoorden op andere en niet alleen jouw eigen notities."
-autoAcceptFollowed: "Accepteer verzoeken om jezelf te volgen vanzelf als je de verzoeker al volgt."
+flagShowTimelineRepliesDescription: "Als je dit vlag aanzet, toont de tijdlijn ook\
+  \ antwoorden op andere en niet alleen jouw eigen notities."
+autoAcceptFollowed: "Accepteer verzoeken om jezelf te volgen vanzelf als je de verzoeker\
+  \ al volgt."
 addAccount: "Account toevoegen"
 loginFailed: "Aanmelding mislukt."
 showOnRemote: "Toon op de externe instantie."
@@ -140,7 +153,11 @@ searchWith: "Zoeken: {q}"
 youHaveNoLists: "Je hebt geen lijsten"
 followConfirm: "Weet je zeker dat je {name} wilt volgen?"
 proxyAccount: "Proxy account"
-proxyAccountDescription: "Een proxy-account is een account dat onder bepaalde voorwaarden fungeert als externe volger voor gebruikers. Als een gebruiker bijvoorbeeld een externe gebruiker aan de lijst toevoegt, wordt de activiteit van de externe gebruiker niet aan de server geleverd als geen lokale gebruiker die gebruiker volgt, dus het proxy-account volgt in plaats daarvan."
+proxyAccountDescription: "Een proxy-account is een account dat onder bepaalde voorwaarden\
+  \ fungeert als externe volger voor gebruikers. Als een gebruiker bijvoorbeeld een\
+  \ externe gebruiker aan de lijst toevoegt, wordt de activiteit van de externe gebruiker\
+  \ niet aan de server geleverd als geen lokale gebruiker die gebruiker volgt, dus\
+  \ het proxy-account volgt in plaats daarvan."
 host: "Server"
 selectUser: "Kies een gebruiker"
 recipient: "Ontvanger"
@@ -171,11 +188,15 @@ instanceInfo: "Serverinformatie"
 statistics: "Statistieken"
 clearQueue: "Wachtrij wissen"
 clearQueueConfirmTitle: "Weet je zeker dat je de wachtrji leeg wil maken?"
-clearQueueConfirmText: "Niet-bezorgde biljetten die nog in de wachtrij staan, worden niet gefedereerd. Meestal is deze operatie niet nodig."
+clearQueueConfirmText: "Niet-bezorgde biljetten die nog in de wachtrij staan, worden\
+  \ niet gefedereerd. Meestal is deze operatie niet nodig."
 clearCachedFiles: "Cache opschonen"
-clearCachedFilesConfirm: "Weet je zeker dat je alle externe bestanden in de cache wilt verwijderen?"
+clearCachedFilesConfirm: "Weet je zeker dat je alle externe bestanden in de cache\
+  \ wilt verwijderen?"
 blockedInstances: "Geblokkeerde servers"
-blockedInstancesDescription: "Maak een lijst van de servers die moeten worden geblokkeerd, gescheiden door regeleinden. Geblokkeerde servers kunnen niet meer communiceren met deze server."
+blockedInstancesDescription: "Maak een lijst van de servers die moeten worden geblokkeerd,\
+  \ gescheiden door regeleinden. Geblokkeerde servers kunnen niet meer communiceren\
+  \ met deze server."
 muteAndBlock: "Gedempt en geblokkeerd"
 mutedUsers: "Gedempte gebruikers"
 blockedUsers: "Geblokkeerde gebruikers"
@@ -223,7 +244,9 @@ saved: "Opgeslagen"
 messaging: "Chat"
 upload: "Uploaden"
 keepOriginalUploading: "Origineel beeld behouden."
-keepOriginalUploadingDescription: "Bewaar de originele versie bij het uploaden van afbeeldingen. Indien uitgeschakeld, wordt bij het uploaden een alternatieve versie voor webpublicatie genereert."
+keepOriginalUploadingDescription: "Bewaar de originele versie bij het uploaden van\
+  \ afbeeldingen. Indien uitgeschakeld, wordt bij het uploaden een alternatieve versie\
+  \ voor webpublicatie genereert."
 fromDrive: "Van schijf"
 fromUrl: "Van  URL"
 uploadFromUrl: "Uploaden vanaf een URL"
@@ -239,7 +262,8 @@ agreeTo: "Ik stem in met {0}"
 tos: "Gebruiksvoorwaarden"
 start: "Aan de slag"
 home: "Startpagina"
-remoteUserCaution: "Aangezien deze gebruiker van een externe server afkomstig is, kan de weergegeven informatie onvolledig zijn."
+remoteUserCaution: "Aangezien deze gebruiker van een externe server afkomstig is,\
+  \ kan de weergegeven informatie onvolledig zijn."
 activity: "Activiteit"
 images: "Afbeeldingen"
 birthday: "Geboortedatum"
@@ -360,3 +384,8 @@ _deck:
     tl: "Tijdlijn"
     list: "Lijsten"
     mentions: "Vermeldingen"
+selectList: Kies een lijst
+selectAntenna: Kies een antenne
+selectWidget: Kies een widget
+editWidgets: Widgets wijzigen
+editWidgetsExit: Klaar
