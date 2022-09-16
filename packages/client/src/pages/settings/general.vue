@@ -148,11 +148,11 @@ const squareAvatars = computed(defaultStore.makeGetterSetter('squareAvatars'));
 For these two, the sliders go to 25, but 25 should be mapped to "unlimited".
 "Unlimited" is stored internally as 0 so the modulo is necessary.
 */
-let maxCustomEmojiPicker = $ref(defaultStore.state.maxCustomEmojiPicker);
+let maxCustomEmojiPicker = $ref(defaultStore.state.maxCustomEmojiPicker || 25);
 watch($$(maxCustomEmojiPicker), () => {
 	defaultStore.set('maxCustomEmojiPicker', maxCustomEmojiPicker % 25);
 });
-let maxUnicodeEmojiPicker = $ref(defaultStore.state.maxUnicodeEmojiPicker);
+let maxUnicodeEmojiPicker = $ref(defaultStore.state.maxUnicodeEmojiPicker || 25);
 watch($$(maxUnicodeEmojiPicker), () => {
 	defaultStore.set('maxUnicodeEmojiPicker', maxUnicodeEmojiPicker % 25);
 });
