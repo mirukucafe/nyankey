@@ -145,7 +145,7 @@ Full releases should also remove any pre-release CHANGELOG sections.
 
 <small>a.k.a. Localization (l10n) or Internationalization (i18n)</small>
 
-To translate text used in Foundkey, we use weblate at <https://translate.akkoma.dev/foundkey/>.
+To translate text used in Foundkey, we use weblate at <https://translate.akkoma.dev/projects/foundkey/>.
 
 Localization files are found in `/locales/` and are YAML files using the `yml` file extension.
 The file name consists of the [IETF BCP 47](https://www.rfc-editor.org/info/bcp47) language code.
