@@ -104,8 +104,8 @@ function onInputKeydown(evt: KeyboardEvent): void {
 }
 
 const remainingLength = computed((): number => {
-	if (typeof inputValue !== 'string') return 512;
-	return 512 - length(inputValue);
+	if (typeof inputValue !== 'string') return 2048;
+	return 2048 - length(inputValue);
 });
 
 onMounted(() => {
