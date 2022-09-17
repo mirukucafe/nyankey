@@ -14,25 +14,13 @@
 </MkA>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { userName } from '@/filters/user';
+<script lang="ts" setup>
+import * as foundkey from 'foundkey-js';
 import ImgWithBlurhash from '@/components/img-with-blurhash.vue';
 
-export default defineComponent({
-	components: {
-		ImgWithBlurhash,
-	},
-	props: {
-		post: {
-			type: Object,
-			required: true,
-		},
-	},
-	methods: {
-		userName,
-	},
-});
+defineProps<{
+	post: foundkey.entities.GalleryPost;
+}>();
 </script>
 
 <style lang="scss" scoped>
