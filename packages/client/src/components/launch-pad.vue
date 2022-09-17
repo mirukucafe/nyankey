@@ -86,7 +86,7 @@ function help(ev: MouseEvent) {
 		text: i18n.ts.scratchpad,
 		icon: 'fas fa-terminal',
 	}, null, {
-		text: i18n.ts.document,
+		text: i18n.ts.documentation,
 		icon: 'fas fa-question-circle',
 		action: () => {
 			window.open('https://misskey-hub.net/help.html', '_blank');
