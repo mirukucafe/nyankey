@@ -27,11 +27,79 @@ export const meta = {
 	},
 } as const;
 
+// List of permitted languages from https://www.deepl.com/docs-api/translate-text/translate-text/
 export const paramDef = {
 	type: 'object',
 	properties: {
 		noteId: { type: 'string', format: 'misskey:id' },
-		targetLang: { type: 'string' },
+		sourceLang: { 
+			type: 'string',
+			enum: [
+				'BG',
+				'CS',
+				'DA',
+				'DE',
+				'EL',
+				'EN',
+				'ES',
+				'ET',
+				'FI',
+				'FR',
+				'HU',
+				'ID',
+				'IT',
+				'JA',
+				'LT',
+				'LV',
+				'NL',
+				'PL',
+				'PT',
+				'RO',
+				'RU',
+				'SK',
+				'SL',
+				'SV',
+				'TR',
+				'UK',
+				'ZH',
+			],
+		},
+		targetLang: {
+			type: 'string',
+			enum: [
+				'BG',
+				'CS',
+				'DA',
+				'DE',
+				'EL',
+				'EN',
+				'EN-GB',
+				'EN-US',
+				'ES',
+				'ET',
+				'FI',
+				'FR',
+				'HU',
+				'ID',
+				'IT',
+				'JA',
+				'LT',
+				'LV',
+				'NL',
+				'PL',
+				'PT',
+				'PT-BR',
+				'PT-PT',
+				'RO',
+				'RU',
+				'SK',
+				'SL',
+				'SV',
+				'TR',
+				'UK',
+				'ZH',
+			],
+		},
 	},
 	required: ['noteId', 'targetLang'],
 } as const;
@@ -53,13 +121,14 @@ export default define(meta, paramDef, async (ps, user) => {
 		return 204; // TODO: 良い感じのエラー返す
 	}
 
-	let targetLang = ps.targetLang;
-	if (targetLang.includes('-')) targetLang = targetLang.split('-')[0];
+	const sourceLang = ps.sourceLang;
+	const targetLang = ps.targetLang;
 
 	const params = new URLSearchParams();
 	params.append('auth_key', instance.deeplAuthKey);
 	params.append('text', note.text);
 	params.append('target_lang', targetLang);
+	if (sourceLang) params.append('source_lang', sourceLang);
 
 	const endpoint = instance.deeplIsPro ? 'https://api.deepl.com/v2/translate' : 'https://api-free.deepl.com/v2/translate';
 
