@@ -200,6 +200,17 @@ export function genOpenapiSpec() {
 			path.get = { ...info };
 			// API Key authentication is not permitted for GET requests
 			path.get.security = path.get.security.filter(elem => !Object.prototype.hasOwnProperty.call(elem, 'ApiKeyAuth'));
+			// fix the way parameters are passed
+			delete path.get.requestBody;
+			path.get.parameters = [];
+			for (const name in schema.properties) {
+				path.get.parameters.push({
+					name,
+					in: 'query',
+					schema: schema.properties[name],
+					required: schema.required?.includes(name),
+				});
+			}
 		}
 
 		spec.paths['/' + endpoint.name] = path;
