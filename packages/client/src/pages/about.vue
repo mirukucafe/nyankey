@@ -83,7 +83,7 @@
 import { computed } from 'vue';
 import * as foundkey from 'foundkey-js';
 import XEmojis from './about.emojis.vue';
-import XFederation from './about.federation.vue';
+import XFederation from '@/components/federation.vue';
 import { version, host } from '@/config';
 import FormLink from '@/components/form/link.vue';
 import FormSection from '@/components/form/section.vue';
