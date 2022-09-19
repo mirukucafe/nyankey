@@ -4742,6 +4742,7 @@ __metadata:
     strict-event-emitter-types: 2.0.0
     stringz: 2.1.0
     syuilo-password-strength: 0.0.1
+    talisman: ^1.1.4
     textarea-caret: 3.1.0
     three: 0.142.0
     throttle-debounce: 5.0.0
@@ -8773,6 +8774,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-entities@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "html-entities@npm:1.4.0"
+  checksum: 4b73ffb9eead200f99146e4fbe70acb0af2fea136901a131fc3a782e9ef876a7cbb07dec303ca1f8804232b812249dbf3643a270c9c524852065d9224a8dcdd0
+  languageName: node
+  linkType: hard
+
 "html-escaper@npm:^2.0.0":
   version: 2.0.2
   resolution: "html-escaper@npm:2.0.2"
@@ -11447,6 +11455,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"long@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "long@npm:4.0.0"
+  checksum: 16afbe8f749c7c849db1f4de4e2e6a31ac6e617cead3bdc4f9605cb703cd20e1e9fc1a7baba674ffcca57d660a6e5b53a9e236d7b25a295d3855cca79cc06744
+  languageName: node
+  linkType: hard
+
 "lowercase-keys@npm:^2.0.0":
   version: 2.0.0
   resolution: "lowercase-keys@npm:2.0.0"
@@ -11983,6 +11998,24 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: 3bce20ea525f9477befe458ab85284b0b66c8dc3812f94155af07c827175948cdd8114852ac6c6d82009b13c1048c37f6d98743eb019651ee25c39acc8aabe7d
+  languageName: node
+  linkType: hard
+
+"mnemonist@npm:^0.38.1":
+  version: 0.38.5
+  resolution: "mnemonist@npm:0.38.5"
+  dependencies:
+    obliterator: ^2.0.0
+  checksum: 66080afc1616866beb164e230c432964d6eed467cf37ad00e9c10161b8267928124ca8f1d0ecfea86c85568acfa62d54faaf646a86968d1135189a0fdfdd6b78
+  languageName: node
+  linkType: hard
+
+"mnemonist@npm:^0.39.0":
+  version: 0.39.2
+  resolution: "mnemonist@npm:0.39.2"
+  dependencies:
+    obliterator: ^2.0.1
+  checksum: 77075ddf30c5e7ee8ccde6d09b61a2511eb324e9d04871e6cb48ede9ed1d2b002ad121314912bf1926d12ba3cb520ca2fb54c2a6c3f9d4467774af2f447907aa
   languageName: node
   linkType: hard
 
@@ -12679,6 +12712,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"obliterator@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "obliterator@npm:1.6.1"
+  checksum: 12412ce97bc9680a50ec1e865c9f106f924497f0b73c01947031079da7c9a0f5212f3a1aeea3227f7771ed4a273e42b2a2e6ff93578301c8117dbb3135770133
+  languageName: node
+  linkType: hard
+
+"obliterator@npm:^2.0.0, obliterator@npm:^2.0.1":
+  version: 2.0.4
+  resolution: "obliterator@npm:2.0.4"
+  checksum: f28ad35b6d812089315f375dc3e6e5f9bebf958ebe4b10ccd471c7115cbcf595e74bdac4783ae758e5b1f47e3096427fdb37cfa7bed566b132df92ff317b9a7c
+  languageName: node
+  linkType: hard
+
 "oblivious-set@npm:1.1.1":
   version: 1.1.1
   resolution: "oblivious-set@npm:1.1.1"
@@ -12901,6 +12948,15 @@ __metadata:
   version: 1.0.0
   resolution: "packet-reader@npm:1.0.0"
   checksum: 0b7516f0cbf3e322aad591bed29ba544220088c53943145c0d9121a6f59182ad811f7fd6785a8979a34356aca69d97653689029964c5998dc02645633d88ffd7
+  languageName: node
+  linkType: hard
+
+"pandemonium@npm:^2.0.0":
+  version: 2.3.0
+  resolution: "pandemonium@npm:2.3.0"
+  dependencies:
+    mnemonist: ^0.39.0
+  checksum: 0353f9e03ea1981189291f103ad11d886b347cdafc09631010df4e8616966b6d4854c8f658b5a4a72eae7857b31351a1cf88034ed1f948ba63905eaba5a0ad01
   languageName: node
   linkType: hard
 
@@ -16090,6 +16146,20 @@ __metadata:
   version: 0.0.1
   resolution: "syuilo-password-strength@npm:0.0.1"
   checksum: b4cdb5e3cceb058cbea85c4ec4a9586a7d2534fb357a4cd45b28a2e94eaedc0039bffdf31ebc013c3efa56996d80afaf48e46701b0b14ffd50958711ab5618f4
+  languageName: node
+  linkType: hard
+
+"talisman@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "talisman@npm:1.1.4"
+  dependencies:
+    html-entities: ^1.4.0
+    lodash: ^4.17.20
+    long: ^4.0.0
+    mnemonist: ^0.38.1
+    obliterator: ^1.6.1
+    pandemonium: ^2.0.0
+  checksum: aa94150df065f16e9cf6d153413e48317f4fd64332b6f5c17f43c49af86b141ebdb2b111c8f1b0bb04e6dd7acab9b451d8822c26739f69afba562c73a010444c
   languageName: node
   linkType: hard
 

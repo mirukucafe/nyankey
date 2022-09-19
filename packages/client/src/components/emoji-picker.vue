@@ -80,6 +80,7 @@
 <script lang="ts" setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import * as foundkey from 'foundkey-js';
+import { distance as rodistance } from 'talisman/metrics/ratcliff-obershelp';
 import XSection from './emoji-picker.section.vue';
 import { emojilist, UnicodeEmojiDef, unicodeEmojiCategories as categories } from '@/scripts/emojilist';
 import { getStaticImageUrl } from '@/scripts/get-static-image-url';
@@ -128,16 +129,34 @@ const searchResultCustom = ref<foundkey.entities.CustomEmoji[]>([]);
 const searchResultUnicode = ref<UnicodeEmojiDef[]>([]);
 const tab = ref<'index' | 'custom' | 'unicode' | 'tags'>('index');
 
-function emojiSearch<Type>(src: Type[], max: number, query: string): Type[] {
+function emojiSearch<Type extends foundkey.entities.CustomEmoji|UnicodeEmojiDef>(src: Type[], max: number, query: string): Type[] {
 	// discount fuzzy matching pattern
 	const re = new RegExp(query.split(' ').join('.*'), 'i');
-	const match = (str: string): boolean => str && re.test(str);
-	const matches = src.filter(emoji =>
-		match(emoji.name)
-		|| emoji.aliases?.some(match) // custom emoji
-		|| emoji.keywords?.some(match), // unicode emoji
-	);
-	// TODO: sort matches by distance to query
+	const match = (str: string): boolean => !!str && re.test(str);
+	const aliases = (emoji: Type): string[] => {
+		// Custom and Unicode emojis have different fields
+		if ('aliases' in emoji) {
+			return emoji.aliases;
+		}
+		if ('keywords' in emoji) {
+			return emoji.keywords;
+		}
+		return [];
+	};
+	const matches = src.filter(emoji => match(emoji.name) || aliases(emoji).some(match));
+
+	// precompute distances
+	const distances = {};
+	const joinq = query.replace(/\s+/g, '');
+	const distance = (str: string): number => rodistance(joinq, str);
+	const mindistance = (strs: string[]): number => Math.min(...strs.map(distance));
+	const distinguisher = (emoji: Type): string => 'char' in emoji ? emoji.char : emoji.id;
+	for (const emoji of matches) {
+		distances[distinguisher(emoji)] = Math.min(distance(emoji.name), mindistance(aliases(emoji)));
+	}
+
+	// sort by distance from query
+	matches.sort((a, b) => distances[distinguisher(a)] - distances[distinguisher(b)]);
 	if (max <= 0 || matches.length < max) return matches;
 	return matches.slice(0, max);
 }
