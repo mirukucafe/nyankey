@@ -9,7 +9,7 @@
 				<p>{{ i18n.ts._mfm.mentionDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_mention"/>
-					<MkTextarea v-model="preview_mention"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_mention"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 				<p>{{ i18n.ts._mfm.hashtagDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_hashtag"/>
-					<MkTextarea v-model="preview_hashtag"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_hashtag"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 				<p>{{ i18n.ts._mfm.urlDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_url"/>
-					<MkTextarea v-model="preview_url"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_url"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
 				<p>{{ i18n.ts._mfm.linkDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_link"/>
-					<MkTextarea v-model="preview_link"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_link"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 				<p>{{ i18n.ts._mfm.emojiDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_emoji"/>
-					<MkTextarea v-model="preview_emoji"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_emoji"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 				<p>{{ i18n.ts._mfm.boldDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_bold"/>
-					<MkTextarea v-model="preview_bold"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_bold"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -69,7 +69,7 @@
 				<p>{{ i18n.ts._mfm.smallDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_small"/>
-					<MkTextarea v-model="preview_small"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_small"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 				<p>{{ i18n.ts._mfm.quoteDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_quote"/>
-					<MkTextarea v-model="preview_quote"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_quote"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 				<p>{{ i18n.ts._mfm.centerDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_center"/>
-					<MkTextarea v-model="preview_center"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_center"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -99,7 +99,7 @@
 				<p>{{ i18n.ts._mfm.inlineCodeDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_inlineCode"/>
-					<MkTextarea v-model="preview_inlineCode"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_inlineCode"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -109,7 +109,7 @@
 				<p>{{ i18n.ts._mfm.blockCodeDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_blockCode"/>
-					<MkTextarea v-model="preview_blockCode"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_blockCode"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -119,7 +119,7 @@
 				<p>{{ i18n.ts._mfm.inlineMathDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_inlineMath"/>
-					<MkTextarea v-model="preview_inlineMath"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_inlineMath"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -130,7 +130,7 @@
 			<p>{{ i18n.ts._mfm.searchDescription }}</p>
 			<div class="preview">
 				<Mfm :text="preview_search"/>
-				<MkTextarea v-model="preview_search"><template #label>MFM</template></MkTextarea>
+				<MkTextarea :readonly="true" :model-value="preview_search"><template #label>MFM</template></MkTextarea>
 			</div>
 		</div>
 	</div>
@@ -141,7 +141,7 @@
 				<p>{{ i18n.ts._mfm.flipDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_flip"/>
-					<MkTextarea v-model="preview_flip"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_flip"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -151,7 +151,7 @@
 				<p>{{ i18n.ts._mfm.fontDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_font"/>
-					<MkTextarea v-model="preview_font"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_font"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 				<p>{{ i18n.ts._mfm.x2Description }}</p>
 				<div class="preview">
 					<Mfm :text="preview_x2"/>
-					<MkTextarea v-model="preview_x2"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_x2"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -171,7 +171,7 @@
 				<p>{{ i18n.ts._mfm.x3Description }}</p>
 				<div class="preview">
 					<Mfm :text="preview_x3"/>
-					<MkTextarea v-model="preview_x3"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_x3"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -181,7 +181,7 @@
 				<p>{{ i18n.ts._mfm.x4Description }}</p>
 				<div class="preview">
 					<Mfm :text="preview_x4"/>
-					<MkTextarea v-model="preview_x4"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_x4"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -191,7 +191,7 @@
 				<p>{{ i18n.ts._mfm.blurDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_blur"/>
-					<MkTextarea v-model="preview_blur"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_blur"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -201,7 +201,7 @@
 				<p>{{ i18n.ts._mfm.jellyDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_jelly"/>
-					<MkTextarea v-model="preview_jelly"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_jelly"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -211,7 +211,7 @@
 				<p>{{ i18n.ts._mfm.tadaDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_tada"/>
-					<MkTextarea v-model="preview_tada"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_tada"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -221,7 +221,7 @@
 				<p>{{ i18n.ts._mfm.jumpDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_jump"/>
-					<MkTextarea v-model="preview_jump"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_jump"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -231,7 +231,7 @@
 				<p>{{ i18n.ts._mfm.bounceDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_bounce"/>
-					<MkTextarea v-model="preview_bounce"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_bounce"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -241,7 +241,7 @@
 				<p>{{ i18n.ts._mfm.spinDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_spin"/>
-					<MkTextarea v-model="preview_spin"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_spin"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -251,7 +251,7 @@
 				<p>{{ i18n.ts._mfm.shakeDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_shake"/>
-					<MkTextarea v-model="preview_shake"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_shake"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -261,7 +261,7 @@
 				<p>{{ i18n.ts._mfm.twitchDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_twitch"/>
-					<MkTextarea v-model="preview_twitch"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_twitch"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -271,7 +271,7 @@
 				<p>{{ i18n.ts._mfm.rainbowDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_rainbow"/>
-					<MkTextarea v-model="preview_rainbow"><template #label>MFM</template></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_rainbow"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -281,7 +281,7 @@
 				<p>{{ i18n.ts._mfm.sparkleDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_sparkle"/>
-					<MkTextarea v-model="preview_sparkle"><span>MFM</span></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_sparkle"><span>MFM</span></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -291,7 +291,7 @@
 				<p>{{ i18n.ts._mfm.rotateDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_rotate"/>
-					<MkTextarea v-model="preview_rotate"><span>MFM</span></MkTextarea>
+					<MkTextarea :readonly="true" :model-value="preview_rotate"><span>MFM</span></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -300,7 +300,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 import MkTextarea from '@/components/form/textarea.vue';
 import { definePageMetadata } from '@/scripts/page-metadata';
 import { i18n } from '@/i18n';
