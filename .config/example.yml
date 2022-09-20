@@ -121,8 +121,8 @@ redis:
 #proxyRemoteFiles: true
 
 # Storage path for files if stored locally (absolute path)
-# default is to store it in ./files in the directory misskey is located in
-#internalStoragePath: '/etc/misskey/files'
+# default is to store it in ./files in the directory foundkey is located in
+#internalStoragePath: '/etc/foundkey/files'
 
 # Upload or download file size limits (bytes)
 #maxFileSize: 262144000
