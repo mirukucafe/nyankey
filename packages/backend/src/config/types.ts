@@ -1,5 +1,10 @@
 /**
- * ユーザーが設定する必要のある情報
+ * IP address family
+ */
+export type IpFamily = 'ipv4' | 'ipv6' | 'dual';
+
+/**
+ * Configuration options set up by the user
  */
 export type Source = {
 	repository_url?: string;
@@ -19,7 +24,7 @@ export type Source = {
 	redis: {
 		host: string;
 		port: number;
-		family?: number;
+		family?: number | IpFamily;
 		pass: string;
 		db?: number;
 		prefix?: string;
@@ -47,7 +52,7 @@ export type Source = {
 
 	id: string;
 
-	outgoingAddressFamily?: 'ipv4' | 'ipv6' | 'dual';
+	outgoingAddressFamily?: IpFamily;
 
 	deliverJobConcurrency?: number;
 	inboxJobConcurrency?: number;
