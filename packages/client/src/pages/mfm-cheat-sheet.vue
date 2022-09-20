@@ -9,7 +9,7 @@
 				<p>{{ i18n.ts._mfm.mentionDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_mention"/>
-					<MkTextarea :readonly="true" :model-value="preview_mention"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_mention"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 				<p>{{ i18n.ts._mfm.hashtagDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_hashtag"/>
-					<MkTextarea :readonly="true" :model-value="preview_hashtag"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_hashtag"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 				<p>{{ i18n.ts._mfm.urlDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_url"/>
-					<MkTextarea :readonly="true" :model-value="preview_url"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_url"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
 				<p>{{ i18n.ts._mfm.linkDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_link"/>
-					<MkTextarea :readonly="true" :model-value="preview_link"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_link"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,7 @@
 				<p>{{ i18n.ts._mfm.emojiDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_emoji"/>
-					<MkTextarea :readonly="true" :model-value="preview_emoji"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_emoji"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 				<p>{{ i18n.ts._mfm.boldDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_bold"/>
-					<MkTextarea :readonly="true" :model-value="preview_bold"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_bold"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -69,7 +69,7 @@
 				<p>{{ i18n.ts._mfm.smallDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_small"/>
-					<MkTextarea :readonly="true" :model-value="preview_small"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_small"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 				<p>{{ i18n.ts._mfm.quoteDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_quote"/>
-					<MkTextarea :readonly="true" :model-value="preview_quote"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_quote"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 				<p>{{ i18n.ts._mfm.centerDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_center"/>
-					<MkTextarea :readonly="true" :model-value="preview_center"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_center"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -99,7 +99,7 @@
 				<p>{{ i18n.ts._mfm.inlineCodeDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_inlineCode"/>
-					<MkTextarea :readonly="true" :model-value="preview_inlineCode"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_inlineCode"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -109,7 +109,7 @@
 				<p>{{ i18n.ts._mfm.blockCodeDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_blockCode"/>
-					<MkTextarea :readonly="true" :model-value="preview_blockCode"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_blockCode"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -119,7 +119,7 @@
 				<p>{{ i18n.ts._mfm.inlineMathDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_inlineMath"/>
-					<MkTextarea :readonly="true" :model-value="preview_inlineMath"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_inlineMath"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -130,7 +130,7 @@
 			<p>{{ i18n.ts._mfm.searchDescription }}</p>
 			<div class="preview">
 				<Mfm :text="preview_search"/>
-				<MkTextarea :readonly="true" :model-value="preview_search"><template #label>MFM</template></MkTextarea>
+				<MkTextarea v-model="preview_search"><template #label>MFM</template></MkTextarea>
 			</div>
 		</div>
 	</div>
@@ -141,7 +141,7 @@
 				<p>{{ i18n.ts._mfm.flipDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_flip"/>
-					<MkTextarea :readonly="true" :model-value="preview_flip"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_flip"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -151,7 +151,7 @@
 				<p>{{ i18n.ts._mfm.fontDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_font"/>
-					<MkTextarea :readonly="true" :model-value="preview_font"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_font"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -161,7 +161,7 @@
 				<p>{{ i18n.ts._mfm.x2Description }}</p>
 				<div class="preview">
 					<Mfm :text="preview_x2"/>
-					<MkTextarea :readonly="true" :model-value="preview_x2"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_x2"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -171,7 +171,7 @@
 				<p>{{ i18n.ts._mfm.x3Description }}</p>
 				<div class="preview">
 					<Mfm :text="preview_x3"/>
-					<MkTextarea :readonly="true" :model-value="preview_x3"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_x3"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -181,7 +181,7 @@
 				<p>{{ i18n.ts._mfm.x4Description }}</p>
 				<div class="preview">
 					<Mfm :text="preview_x4"/>
-					<MkTextarea :readonly="true" :model-value="preview_x4"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_x4"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -191,7 +191,7 @@
 				<p>{{ i18n.ts._mfm.blurDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_blur"/>
-					<MkTextarea :readonly="true" :model-value="preview_blur"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_blur"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -201,7 +201,7 @@
 				<p>{{ i18n.ts._mfm.jellyDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_jelly"/>
-					<MkTextarea :readonly="true" :model-value="preview_jelly"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_jelly"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -211,7 +211,7 @@
 				<p>{{ i18n.ts._mfm.tadaDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_tada"/>
-					<MkTextarea :readonly="true" :model-value="preview_tada"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_tada"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -221,7 +221,7 @@
 				<p>{{ i18n.ts._mfm.jumpDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_jump"/>
-					<MkTextarea :readonly="true" :model-value="preview_jump"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_jump"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -231,7 +231,7 @@
 				<p>{{ i18n.ts._mfm.bounceDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_bounce"/>
-					<MkTextarea :readonly="true" :model-value="preview_bounce"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_bounce"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -241,7 +241,7 @@
 				<p>{{ i18n.ts._mfm.spinDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_spin"/>
-					<MkTextarea :readonly="true" :model-value="preview_spin"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_spin"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -251,7 +251,7 @@
 				<p>{{ i18n.ts._mfm.shakeDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_shake"/>
-					<MkTextarea :readonly="true" :model-value="preview_shake"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_shake"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -261,7 +261,7 @@
 				<p>{{ i18n.ts._mfm.twitchDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_twitch"/>
-					<MkTextarea :readonly="true" :model-value="preview_twitch"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_twitch"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -271,7 +271,7 @@
 				<p>{{ i18n.ts._mfm.rainbowDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_rainbow"/>
-					<MkTextarea :readonly="true" :model-value="preview_rainbow"><template #label>MFM</template></MkTextarea>
+					<MkTextarea v-model="preview_rainbow"><template #label>MFM</template></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -281,7 +281,7 @@
 				<p>{{ i18n.ts._mfm.sparkleDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_sparkle"/>
-					<MkTextarea :readonly="true" :model-value="preview_sparkle"><span>MFM</span></MkTextarea>
+					<MkTextarea v-model="preview_sparkle"><span>MFM</span></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -291,7 +291,7 @@
 				<p>{{ i18n.ts._mfm.rotateDescription }}</p>
 				<div class="preview">
 					<Mfm :text="preview_rotate"/>
-					<MkTextarea :readonly="true" :model-value="preview_rotate"><span>MFM</span></MkTextarea>
+					<MkTextarea v-model="preview_rotate"><span>MFM</span></MkTextarea>
 				</div>
 			</div>
 		</div>
@@ -305,35 +305,34 @@ import { definePageMetadata } from '@/scripts/page-metadata';
 import { i18n } from '@/i18n';
 import { instance } from '@/instance';
 
-const preview_mention = '@example';
-const preview_hashtag = '#test';
-const preview_url = 'https://example.com';
-const preview_link = `[${i18n.ts._mfm.dummy}](https://example.com)`;
-const preview_emoji = instance.emojis.length ? `:${instance.emojis[0].name}:` : ':emojiname:';
-const preview_bold = `**${i18n.ts._mfm.dummy}**`;
-const preview_small = `<small>${i18n.ts._mfm.dummy}</small>`;
-const preview_center = `<center>${i18n.ts._mfm.dummy}</center>`;
-const preview_inlineCode = '`<: "Hello, world!"`';
-const preview_blockCode = '```\n~ (#i, 100) {\n\t<: ? ((i % 15) = 0) "FizzBuzz"\n\t\t.? ((i % 3) = 0) "Fizz"\n\t\t.? ((i % 5) = 0) "Buzz"\n\t\t. i\n}\n```';
-const preview_inlineMath = '\\(x= \\frac{-b\' \\pm \\sqrt{(b\')^2-ac}}{a}\\)';
-const preview_quote = `> ${i18n.ts._mfm.dummy}`;
-const preview_search = `${i18n.ts._mfm.dummy} 検索`;
-const preview_jelly = '$[jelly 🍮] $[jelly.speed=5s 🍮]';
-const preview_tada = '$[tada 🍮] $[tada.speed=5s 🍮]';
-const preview_jump = '$[jump 🍮] $[jump.speed=5s 🍮]';
-const preview_bounce = '$[bounce 🍮] $[bounce.speed=5s 🍮]';
-const preview_shake = '$[shake 🍮] $[shake.speed=5s 🍮]';
-const preview_twitch = '$[twitch 🍮] $[twitch.speed=5s 🍮]';
-const preview_spin = '$[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]\n$[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]\n$[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]\n\n$[spin.speed=5s 🍮]';
-const preview_flip = `$[flip ${i18n.ts._mfm.dummy}]\n$[flip.v ${i18n.ts._mfm.dummy}]\n$[flip.h,v ${i18n.ts._mfm.dummy}]`;
-const preview_font = `$[font.serif ${i18n.ts._mfm.dummy}]\n$[font.monospace ${i18n.ts._mfm.dummy}]\n$[font.cursive ${i18n.ts._mfm.dummy}]\n$[font.fantasy ${i18n.ts._mfm.dummy}]`;
-const preview_x2 = '$[x2 🍮]';
-const preview_x3 = '$[x3 🍮]';
-const preview_x4 = '$[x4 🍮]';
-const preview_blur = `$[blur ${i18n.ts._mfm.dummy}]`;
-const preview_rainbow = '$[rainbow 🍮] $[rainbow.speed=5s 🍮]';
-const preview_sparkle = '$[sparkle 🍮]';
-const preview_rotate = '$[rotate 🍮]';
+let preview_mention = $ref('@example');
+let preview_hashtag = $ref('#test');
+let preview_url = $ref('https://example.com');
+let preview_link = $ref(`[${i18n.ts._mfm.dummy}](https://example.com)`);
+let preview_emoji = $ref(instance.emojis.length ? `:${instance.emojis[0].name}:` : ':emojiname:');
+let preview_bold = $ref(`**${i18n.ts._mfm.dummy}**`);
+let preview_small = $ref(`<small>${i18n.ts._mfm.dummy}</small>`);
+let preview_center = $ref(`<center>${i18n.ts._mfm.dummy}</center>`);
+let preview_inlineCode = $ref('`<: "Hello, world!"`');
+let preview_blockCode = $ref('```\n~ (#i, 100) {\n\t<: ? ((i % 15) = 0) "FizzBuzz"\n\t\t.? ((i % 3) = 0) "Fizz"\n\t\t.? ((i % 5) = 0) "Buzz"\n\t\t. i\n}\n```');
+let preview_inlineMath = $ref('\\(x= \\frac{-b\' \\pm \\sqrt{(b\')^2-ac}}{a}\\)');
+let preview_quote = $ref(`> ${i18n.ts._mfm.dummy}`);
+let preview_jelly = $ref('$[jelly 🍮] $[jelly.speed=5s 🍮]');
+let preview_tada = $ref('$[tada 🍮] $[tada.speed=5s 🍮]');
+let preview_jump = $ref('$[jump 🍮] $[jump.speed=5s 🍮]');
+let preview_bounce = $ref('$[bounce 🍮] $[bounce.speed=5s 🍮]');
+let preview_shake = $ref('$[shake 🍮] $[shake.speed=5s 🍮]');
+let preview_twitch = $ref('$[twitch 🍮] $[twitch.speed=5s 🍮]');
+let preview_spin = $ref('$[spin 🍮] $[spin.left 🍮] $[spin.alternate 🍮]\n$[spin.x 🍮] $[spin.x,left 🍮] $[spin.x,alternate 🍮]\n$[spin.y 🍮] $[spin.y,left 🍮] $[spin.y,alternate 🍮]\n\n$[spin.speed=5s 🍮]');
+let preview_flip = $ref(`$[flip ${i18n.ts._mfm.dummy}]\n$[flip.v ${i18n.ts._mfm.dummy}]\n$[flip.h,v ${i18n.ts._mfm.dummy}]`);
+let preview_font = $ref(`$[font.serif ${i18n.ts._mfm.dummy}]\n$[font.monospace ${i18n.ts._mfm.dummy}]\n$[font.cursive ${i18n.ts._mfm.dummy}]\n$[font.fantasy ${i18n.ts._mfm.dummy}]`);
+let preview_x2 = $ref('$[x2 🍮]');
+let preview_x3 = $ref('$[x3 🍮]');
+let preview_x4 = $ref('$[x4 🍮]');
+let preview_blur = $ref(`$[blur ${i18n.ts._mfm.dummy}]`);
+let preview_rainbow = $ref('$[rainbow 🍮] $[rainbow.speed=5s 🍮]');
+let preview_sparkle = $ref('$[sparkle 🍮]');
+let preview_rotate = $ref('$[rotate 🍮]');
 
 definePageMetadata({
 	title: i18n.ts._mfm.cheatSheet,
