@@ -44,10 +44,10 @@ db:
   user: example-foundkey-user
   pass: example-foundkey-pass
 
-  # Whether disable Caching queries
+  # Whether to disable query caching
   #disableCache: true
 
-  # Extra Connection options
+  # Extra connection options
   #extra:
   #  ssl: true
 
@@ -93,7 +93,7 @@ redis:
 # deliverJobMaxAttempts: 12
 # inboxJobMaxAttempts: 8
 
-# IP address family used for outgoing request (ipv4, ipv6 or dual)
+# IP address family used for outgoing requests (ipv4, ipv6 or dual)
 #outgoingAddressFamily: ipv4
 
 # Syslog option
