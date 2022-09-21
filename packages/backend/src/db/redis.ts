@@ -1,25 +1,9 @@
 import Redis from 'ioredis';
 import config from '@/config/index.js';
-import { IpFamily } from '@/config/types.js';
-
-function getRedisFamily(family?: IpFamily | number): number {
-	switch (family) {
-		case 'ipv4': return 4;
-		case 'ipv6': return 6;
-		case 'dual': return 0;
-		default: return family ?? 0;
-	}
-}
+import { getRedisOptions } from '@/config/redis.js';
 
 export function createConnection(): Redis.Redis {
-	return new Redis({
-		port: config.redis.port,
-		host: config.redis.host,
-		family: getRedisFamily(config.redis.family),
-		password: config.redis.pass,
-		keyPrefix: `${config.redis.prefix}:`,
-		db: config.redis.db || 0,
-	});
+	return new Redis(getRedisOptions(`${config.redis.prefix}:`));
 }
 
 export const subscriber = createConnection();
