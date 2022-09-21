@@ -2,7 +2,7 @@
 <div class="azykntjl">
 	<div class="body">
 		<div class="left">
-			<MkA v-click-anime v-tooltip="$ts.timeline" class="item index" active-class="active" to="/" exact>
+			<MkA v-click-anime v-tooltip="i18n.ts.timeline" class="item index" active-class="active" to="/" exact>
 				<i class="fas fa-home fa-fw"></i>
 			</MkA>
 			<template v-for="item in menu">
@@ -22,7 +22,7 @@
 			</button>
 		</div>
 		<div class="right">
-			<MkA v-click-anime v-tooltip="$ts.settings" class="item" active-class="active" to="/settings" :behavior="settingsWindowed ? 'modalWindow' : null">
+			<MkA v-click-anime v-tooltip="i18n.ts.settings" class="item" active-class="active" to="/settings" :behavior="settingsWindowed ? 'modalWindow' : null">
 				<i class="fas fa-cog fa-fw"></i>
 			</MkA>
 			<button v-click-anime class="item _button account" @click="openAccountMenuWrapper">

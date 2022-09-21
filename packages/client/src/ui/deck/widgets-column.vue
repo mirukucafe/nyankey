@@ -1,5 +1,5 @@
 <template>
-<XColumn :func="{ handler: func, title: $ts.editWidgets }" :naked="true" :column="column" :is-stacked="isStacked" @parent-focus="$event => emit('parent-focus', $event)">
+<XColumn :func="{ handler: func, title: i18n.ts.editWidgets }" :naked="true" :column="column" :is-stacked="isStacked" @parent-focus="$event => emit('parent-focus', $event)">
 	<template #header><i class="fas fa-window-maximize" style="margin-right: 8px;"></i>{{ column.name }}</template>
 
 	<div class="wtdtxvec">
@@ -12,6 +12,7 @@
 import XColumn from './column.vue';
 import { addColumnWidget, Column, removeColumnWidget, setColumnWidgets, updateColumnWidget } from './deck-store';
 import XWidgets from '@/components/widgets.vue';
+import { i18n } from '@/i18n';
 
 const props = defineProps<{
 	column: Column;

@@ -8,7 +8,7 @@
 				<i v-if="relay.status === 'accepted'" class="fas fa-check icon accepted"></i>
 				<i v-else-if="relay.status === 'rejected'" class="fas fa-ban icon rejected"></i>
 				<i v-else class="fas fa-clock icon requesting"></i>
-				<span>{{ $t(`_relayStatus.${relay.status}`) }}</span>
+				<span>{{ i18n.t(`_relayStatus.${relay.status}`) }}</span>
 			</div>
 			<MkButton class="button" inline danger @click="remove(relay.inbox)"><i class="fas fa-trash-alt"></i> {{ i18n.ts.remove }}</MkButton>
 		</div>

@@ -3,42 +3,42 @@
 	<template #header><MkPageHeader v-model:tab="tab" :tabs="headerTabs"/></template>
 	<MkSpacer :content-max="700">
 		<div class="jqqmcavi">
-			<MkButton v-if="pageId" class="button" inline link :to="`/@${ author.username }/pages/${ currentName }`"><i class="fas fa-external-link-square-alt"></i> {{ $ts._pages.viewPage }}</MkButton>
-			<MkButton v-if="!readonly" inline primary class="button" @click="save"><i class="fas fa-save"></i> {{ $ts.save }}</MkButton>
-			<MkButton v-if="pageId" inline class="button" @click="duplicate"><i class="fas fa-copy"></i> {{ $ts.duplicate }}</MkButton>
-			<MkButton v-if="pageId && !readonly" inline class="button" danger @click="del"><i class="fas fa-trash-alt"></i> {{ $ts.delete }}</MkButton>
+			<MkButton v-if="pageId" class="button" inline link :to="`/@${ author.username }/pages/${ currentName }`"><i class="fas fa-external-link-square-alt"></i> {{ i18n.ts._pages.viewPage }}</MkButton>
+			<MkButton v-if="!readonly" inline primary class="button" @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</MkButton>
+			<MkButton v-if="pageId" inline class="button" @click="duplicate"><i class="fas fa-copy"></i> {{ i18n.ts.duplicate }}</MkButton>
+			<MkButton v-if="pageId && !readonly" inline class="button" danger @click="del"><i class="fas fa-trash-alt"></i> {{ i18n.ts.delete }}</MkButton>
 		</div>
 
 		<div v-if="tab === 'settings'">
 			<div class="_formRoot">
 				<MkInput v-model="title" :readonly="readonly" class="_formBlock">
-					<template #label>{{ $ts._pages.title }}</template>
+					<template #label>{{ i18n.ts._pages.title }}</template>
 				</MkInput>
 
 				<MkInput v-model="summary" :readonly="readonly" class="_formBlock">
-					<template #label>{{ $ts._pages.summary }}</template>
+					<template #label>{{ i18n.ts._pages.summary }}</template>
 				</MkInput>
 
 				<MkInput v-model="name" :readonly="readonly" class="_formBlock">
 					<template #prefix>{{ url }}/@{{ author.username }}/pages/</template>
-					<template #label>{{ $ts._pages.url }}</template>
+					<template #label>{{ i18n.ts._pages.url }}</template>
 				</MkInput>
 
-				<MkSwitch v-model="alignCenter" :disabled="readonly" class="_formBlock">{{ $ts._pages.alignCenter }}</MkSwitch>
+				<MkSwitch v-model="alignCenter" :disabled="readonly" class="_formBlock">{{ i18n.ts._pages.alignCenter }}</MkSwitch>
 
 				<MkSelect v-model="font" :readonly="readonly" class="_formBlock">
-					<template #label>{{ $ts._pages.font }}</template>
-					<option value="serif">{{ $ts._pages.fontSerif }}</option>
-					<option value="sans-serif">{{ $ts._pages.fontSansSerif }}</option>
+					<template #label>{{ i18n.ts._pages.font }}</template>
+					<option value="serif">{{ i18n.ts._pages.fontSerif }}</option>
+					<option value="sans-serif">{{ i18n.ts._pages.fontSansSerif }}</option>
 				</MkSelect>
 
-				<MkSwitch v-model="hideTitleWhenPinned" :disabled="readonly" class="_formBlock">{{ $ts._pages.hideTitleWhenPinned }}</MkSwitch>
+				<MkSwitch v-model="hideTitleWhenPinned" :disabled="readonly" class="_formBlock">{{ i18n.ts._pages.hideTitleWhenPinned }}</MkSwitch>
 
 				<div class="eyeCatch">
-					<MkButton v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage"><i class="fas fa-plus"></i> {{ $ts._pages.eyeCatchingImageSet }}</MkButton>
+					<MkButton v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage"><i class="fas fa-plus"></i> {{ i18n.ts._pages.eyeCatchingImageSet }}</MkButton>
 					<div v-else-if="eyeCatchingImage">
 						<img :src="eyeCatchingImage.url" :alt="eyeCatchingImage.name" style="max-width: 100%;"/>
-						<MkButton v-if="!readonly" @click="removeEyeCatchingImage()"><i class="fas fa-trash-alt"></i> {{ $ts._pages.eyeCatchingImageRemove }}</MkButton>
+						<MkButton v-if="!readonly" @click="removeEyeCatchingImage()"><i class="fas fa-trash-alt"></i> {{ i18n.ts._pages.eyeCatchingImageRemove }}</MkButton>
 					</div>
 				</div>
 			</div>

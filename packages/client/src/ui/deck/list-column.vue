@@ -1,5 +1,5 @@
 <template>
-<XColumn :func="{ handler: setList, title: $ts.selectList }" :column="column" :is-stacked="isStacked" @parent-focus="$event => emit('parent-focus', $event)">
+<XColumn :func="{ handler: setList, title: i18n.ts.selectList }" :column="column" :is-stacked="isStacked" @parent-focus="$event => emit('parent-focus', $event)">
 	<template #header>
 		<i class="fas fa-list-ul"></i><span style="margin-left: 8px;">{{ column.name }}</span>
 	</template>

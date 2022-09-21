@@ -184,8 +184,6 @@ import { getAccountFromId } from '@/scripts/get-account-from-id';
 		$i,
 		$store: defaultStore,
 		$instance: instance,
-		$t: i18n.t,
-		$ts: i18n.ts,
 	};
 
 	widgets(app);

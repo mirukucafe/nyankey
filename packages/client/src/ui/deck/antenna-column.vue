@@ -1,5 +1,5 @@
 <template>
-<XColumn :func="{ handler: setAntenna, title: $ts.selectAntenna }" :column="column" :is-stacked="isStacked" @parent-focus="$event => emit('parent-focus', $event)">
+<XColumn :func="{ handler: setAntenna, title: i18n.ts.selectAntenna }" :column="column" :is-stacked="isStacked" @parent-focus="$event => emit('parent-focus', $event)">
 	<template #header>
 		<i class="fas fa-satellite"></i><span style="margin-left: 8px;">{{ column.name }}</span>
 	</template>

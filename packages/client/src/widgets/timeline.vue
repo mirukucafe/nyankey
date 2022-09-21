@@ -8,7 +8,7 @@
 			<i v-else-if="widgetProps.src === 'global'" class="fas fa-globe"></i>
 			<i v-else-if="widgetProps.src === 'list'" class="fas fa-list-ul"></i>
 			<i v-else-if="widgetProps.src === 'antenna'" class="fas fa-satellite"></i>
-			<span style="margin-left: 8px;">{{ widgetProps.src === 'list' ? widgetProps.list.name : widgetProps.src === 'antenna' ? widgetProps.antenna.name : $t('_timelines.' + widgetProps.src) }}</span>
+			<span style="margin-left: 8px;">{{ widgetProps.src === 'list' ? widgetProps.list.name : widgetProps.src === 'antenna' ? widgetProps.antenna.name : i18n.t('_timelines.' + widgetProps.src) }}</span>
 			<i :class="menuOpened ? 'fas fa-angle-up' : 'fas fa-angle-down'" style="margin-left: 8px;"></i>
 		</button>
 	</template>

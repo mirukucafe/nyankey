@@ -1,5 +1,5 @@
 <template>
-<XColumn :func="{ handler: setType, title: $ts.timeline }" :column="column" :is-stacked="isStacked" :indicated="indicated" @change-active-state="onChangeActiveState" @parent-focus="$event => emit('parent-focus', $event)">
+<XColumn :func="{ handler: setType, title: i18n.ts.timeline }" :column="column" :is-stacked="isStacked" :indicated="indicated" @change-active-state="onChangeActiveState" @parent-focus="$event => emit('parent-focus', $event)">
 	<template #header>
 		<i v-if="column.tl === 'home'" class="fas fa-home"></i>
 		<i v-else-if="column.tl === 'local'" class="fas fa-comments"></i>
@@ -11,9 +11,9 @@
 	<div v-if="disabled" class="iwaalbte">
 		<p>
 			<i class="fas fa-minus-circle"></i>
-			{{ $t('disabled-timeline.title') }}
+			{{ i18n.t('disabled-timeline.title') }}
 		</p>
-		<p class="desc">{{ $t('disabled-timeline.description') }}</p>
+		<p class="desc">{{ i18n.t('disabled-timeline.description') }}</p>
 	</div>
 	<XTimeline v-else-if="column.tl" ref="timeline" :key="column.tl" :src="column.tl" @after="() => emit('loaded')" @queue="queueUpdated" @note="onNote"/>
 </XColumn>
