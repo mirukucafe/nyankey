@@ -168,9 +168,17 @@ export function getNoteMenu(props: {
 	async function translate(): Promise<void> {
 		if (props.translation.value != null) return;
 		props.translating.value = true;
+
+		let targetLang = localStorage.getItem('lang') || navigator.language;
+		targetLang = targetLang.toUpperCase();
+		if (!['EN-GB', 'EN-US', 'PT-BR', 'PT-PT'].íncludes(targetLang)) {
+			// only the language code without country code is allowed
+			targetLang = targetLang.split('-', 1)[0];
+		}
+
 		const res = await os.api('notes/translate', {
 			noteId: appearNote.id,
-			targetLang: localStorage.getItem('lang') || navigator.language,
+			targetLang,
 		});
 		props.translating.value = false;
 		props.translation.value = res;
