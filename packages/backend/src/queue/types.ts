@@ -1,8 +1,8 @@
 import httpSignature from '@peertube/http-signature';
 import { DriveFile } from '@/models/entities/drive-file.js';
-import { Note } from '@/models/entities/note';
+import { Note } from '@/models/entities/note.js';
 import { User } from '@/models/entities/user.js';
-import { Webhook } from '@/models/entities/webhook';
+import { Webhook } from '@/models/entities/webhook.js';
 import { IActivity } from '@/remote/activitypub/type.js';
 
 export type DeliverJobData = {
