@@ -12,7 +12,7 @@
 		"sourceMap": false,
 		"target": "ES2021",
 		"module": "esnext",
-		"moduleResolution": "node",
+		"moduleResolution": "Node16",
 		"allowSyntheticDefaultImports": true,
 		"removeComments": false,
 		"noLib": false,
