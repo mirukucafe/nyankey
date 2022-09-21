@@ -17,7 +17,7 @@ function getRedisFamily(family?: IpFamily | number): number {
 	}
 
 	if (typeof family !== 'undefined') {
-		logger.warn(`redis family "${family}" is invalid, defaulting to "both"`);
+		logger.warn(`redis family "${family}" is invalid, defaulting to "dual"`);
 	}
 
 	return 0;
