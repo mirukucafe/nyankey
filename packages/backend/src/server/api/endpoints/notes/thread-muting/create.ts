@@ -1,4 +1,5 @@
-import { Notes, NoteThreadMutings } from '@/models/index.js';
+import { noteNotificationTypes } from 'foundkey-js';
+import { Notes, NoteThreadMutings, NoteWatchings } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import readNote from '@/services/note/read.js';
 import define from '../../../define.js';
@@ -25,6 +26,14 @@ export const paramDef = {
 	type: 'object',
 	properties: {
 		noteId: { type: 'string', format: 'misskey:id' },
+		mutingNotificationTypes: {
+			description: 'Defines which notification types from the thread should be muted. Replies are always muted. Applies in addition to the global settings, muting takes precedence.',
+			type: 'array',
+			items: {
+				type: 'string', enum: noteNotificationTypes,
+			},
+			uniqueItems: true,
+		},
 	},
 	required: ['noteId'],
 } as const;
@@ -51,5 +60,19 @@ export default define(meta, paramDef, async (ps, user) => {
 		createdAt: new Date(),
 		threadId: note.threadId || note.id,
 		userId: user.id,
+		mutingNotificationTypes: ps.mutingNotificationTypes,
 	});
+
+	// remove all note watchings in the muted thread
+	const notesThread = Notes.createQueryBuilder("notes")
+		.select("note.id")
+		.where({
+			threadId: note.threadId ?? note.id,
+		});
+
+	await NoteWatchings.createQueryBuilder()
+		.delete()
+		.where(`"note_watching"."noteId" IN (${ notesThread.getQuery() })`)
+		.setParameters(notesThread.getParameters())
+		.execute();
 });

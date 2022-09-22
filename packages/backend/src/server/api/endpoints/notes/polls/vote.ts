@@ -1,11 +1,11 @@
-import { Not } from 'typeorm';
+import { ArrayOverlap, Not } from 'typeorm';
 import { publishNoteStream } from '@/services/stream.js';
 import { createNotification } from '@/services/create-notification.js';
 import { deliver } from '@/queue/index.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderVote from '@/remote/activitypub/renderer/vote.js';
 import { deliverQuestionUpdate } from '@/services/note/polls/update.js';
-import { PollVotes, NoteWatchings, Users, Polls, Blockings } from '@/models/index.js';
+import { PollVotes, NoteWatchings, Users, Polls, Blockings, NoteThreadMutings } from '@/models/index.js';
 import { IRemoteUser } from '@/models/entities/user.js';
 import { genId } from '@/misc/gen-id.js';
 import { getNote } from '../../../common/getters.js';
@@ -136,14 +136,24 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	// Notify
-	createNotification(note.userId, 'pollVote', {
-		notifierId: user.id,
-		noteId: note.id,
-		choice: ps.choice,
+	// check if this thread and notification type is muted
+	const threadMuted = await NoteThreadMutings.findOne({
+		userId: note.userId,
+		threadId: note.threadId || note.id,
+		mutingNotificationTypes: ArrayOverlap(['pollVote']),
 	});
+	// Notify
+	if (!threadMuted) {
+		createNotification(note.userId, 'pollVote', {
+			notifierId: user.id,
+			noteId: note.id,
+			choice: ps.choice,
+		});
+	}
 
 	// Fetch watchers
+	// checking for mutes is not necessary here, as note watchings will be
+	// deleted when a thread is muted
 	NoteWatchings.findBy({
 		noteId: note.id,
 		userId: Not(user.id),
