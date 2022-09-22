@@ -102,7 +102,7 @@ Changelog: Removed
 
 ### Creating a PR
 
-- Please prefix the title with the part of Misskey you are changing, i.e. `server:` or `client:`
+- Please prefix the title with the part of FoundKey you are changing, i.e. `server:` or `client:`
 - The rest of the title should roughly describe what you did.
 - Make sure that the granularity of this PR is appropriate. Please do not include more than one type of change in a single PR.
 - If there is an issue which will be resolved by this PR, please include a reference to the Issue in the text.
