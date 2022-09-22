@@ -14,9 +14,7 @@
 		"api-prod": "npx api-extractor run --verbose",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
 		"jest": "jest --coverage --detectOpenHandles",
-		"test": "yarn jest && yarn tsd",
-		"clean": "rm -rf built/",
-		"clean-all": "yarn clean && rm -rf node_modules/"
+		"test": "yarn jest && yarn tsd"
 	},
 	"devDependencies": {
 		"@microsoft/api-extractor": "^7.19.3",
