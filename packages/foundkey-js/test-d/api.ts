@@ -4,7 +4,7 @@ import * as foundkey from '../src';
 describe('API', () => {
 	test('success', async () => {
 		const cli = new foundkey.api.APIClient({
-			origin: 'https://misskey.test',
+			origin: 'https://foundkey.test',
 			credential: 'TOKEN'
 		});
 		const res = await cli.request('meta', { detail: true });
@@ -13,7 +13,7 @@ describe('API', () => {
 
 	test('conditional respose type (meta)', async () => {
 		const cli = new foundkey.api.APIClient({
-			origin: 'https://misskey.test',
+			origin: 'https://foundkey.test',
 			credential: 'TOKEN'
 		});
 
@@ -32,7 +32,7 @@ describe('API', () => {
 
 	test('conditional respose type (users/show)', async () => {
 		const cli = new foundkey.api.APIClient({
-			origin: 'https://misskey.test',
+			origin: 'https://foundkey.test',
 			credential: 'TOKEN'
 		});
 
