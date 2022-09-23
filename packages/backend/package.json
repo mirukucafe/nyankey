@@ -6,8 +6,6 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsc -p tsconfig.json || echo done. && tsc-alias -p tsconfig.json",
-		"clean": "rm -rf built/ tsconfig.tsbuildinfo",
-		"clean-all": "yarn clean && rm -rf node_modules/",
 		"watch": "node watch.mjs",
 		"lint": "eslint src --ext .ts",
 		"mocha": "cross-env NODE_ENV=test TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT=\"./test/tsconfig.json\" mocha",
