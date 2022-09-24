@@ -64,8 +64,8 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// remove all note watchings in the muted thread
-	const notesThread = Notes.createQueryBuilder("notes")
-		.select("note.id")
+	const notesThread = Notes.createQueryBuilder('notes')
+		.select('note.id')
 		.where({
 			threadId: note.threadId ?? note.id,
 		});
