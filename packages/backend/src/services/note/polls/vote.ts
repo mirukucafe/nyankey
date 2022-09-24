@@ -58,7 +58,7 @@ export default async function(user: CacheableUser, note: Note, choice: number) {
 	});
 
 	// check if this thread and notification type is muted
-	const muted = await NoteThreadMutings.findOne({
+	const muted = await NoteThreadMutings.findOneBy({
 		userId: note.userId,
 		threadId: note.threadId || note.id,
 		mutingNotificationTypes: ArrayOverlap(['pollVote']),
