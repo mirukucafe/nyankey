@@ -138,13 +138,13 @@ export const startServer = () => {
 	return server;
 };
 
-export default () => new Promise(resolve => {
+export default (): Promise<void> => new Promise(resolve => {
 	const server = createServer();
 
 	initializeStreamingServer(server);
 
 	server.on('error', e => {
-		switch ((e as any).code) {
+		switch ((e as NodeJS.ErrnoException).code) {
 			case 'EACCES':
 				serverLogger.error(`You do not have permission to listen on port ${config.port}.`);
 				break;
@@ -164,5 +164,5 @@ export default () => new Promise(resolve => {
 		}
 	});
 
-	server.listen(config.port, resolve);
+	server.listen(config.port, () => resolve());
 });
