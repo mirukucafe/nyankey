@@ -37,5 +37,5 @@ export class NoteThreadMuting {
 		array: true,
 		default: [],
 	})
-	public mutingNotificationTypes: typeof notificationTypes[number][];
+	public mutingNotificationTypes: typeof noteNotificationTypes[number][];
 }
