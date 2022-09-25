@@ -15,7 +15,7 @@ export class AuthenticationError extends Error {
 	}
 }
 
-export default async (authorization: string | null | undefined, bodyToken: string | null): Promise<[CacheableLocalUser | null | undefined, AccessToken | null | undefined]> => {
+export default async (authorization: string | null | undefined, bodyToken: string | null | undefined): Promise<[CacheableLocalUser | null | undefined, AccessToken | null | undefined]> => {
 	let token: string | null = null;
 
 	// check if there is an authorization header set
