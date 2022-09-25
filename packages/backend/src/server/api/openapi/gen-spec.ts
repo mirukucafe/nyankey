@@ -207,6 +207,19 @@ export function genOpenapiSpec() {
 		}
 
 		spec.paths['/' + endpoint.name] = path;
+
+		if (endpoint.meta.v2) {
+			// we need a clone of the API endpoint info because otherwise we change it by reference
+			const infoClone = structuredClone(info);
+			const route = `/v2/${endpoint.meta.v2.alias ?? endpoint.name.replace(/-/g, '_')}`;
+
+			infoClone['operationId'] = infoClone['summary'] = route;
+
+			spec.paths[route] = {
+				...spec.paths[route],
+				[endpoint.meta.v2.method]: infoClone,
+			};
+		}
 	}
 
 	return spec;
