@@ -137,7 +137,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// check if this thread and notification type is muted
-	const threadMuted = await NoteThreadMutings.findOne({
+	const threadMuted = await NoteThreadMutings.findOneBy({
 		userId: note.userId,
 		threadId: note.threadId || note.id,
 		mutingNotificationTypes: ArrayOverlap(['pollVote']),

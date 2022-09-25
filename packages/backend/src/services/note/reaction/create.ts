@@ -99,7 +99,7 @@ export default async (user: { id: User['id']; host: User['host']; }, note: Note,
 	});
 
 	// check if this thread is muted
-	const threadMuted = await NoteThreadMutings.findOne({
+	const threadMuted = await NoteThreadMutings.findOneBy({
 		userId: note.userId,
 		threadId: note.threadId || note.id,
 		mutingNotificationTypes: ArrayOverlap(['reaction']),
