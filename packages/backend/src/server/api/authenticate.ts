@@ -16,7 +16,7 @@ export class AuthenticationError extends Error {
 }
 
 export default async (authorization: string | null | undefined, bodyToken: string | null | undefined): Promise<[CacheableLocalUser | null | undefined, AccessToken | null | undefined]> => {
-	let token: string | null = null;
+	let maybeToken: string | null = null;
 
 	// check if there is an authorization header set
 	if (authorization != null) {
@@ -27,15 +27,16 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 		// check if OAuth 2.0 Bearer tokens are being used
 		// Authorization schemes are case insensitive
 		if (authorization.substring(0, 7).toLowerCase() === 'bearer ') {
-			token = authorization.substring(7);
+			maybeToken = authorization.substring(7);
 		} else {
 			throw new AuthenticationError('unsupported authentication scheme');
 		}
 	} else if (bodyToken != null) {
-		token = bodyToken;
+		maybeToken = bodyToken;
 	} else {
 		return [null, null];
 	}
+	const token: string = maybeToken;
 
 	if (isNativeToken(token)) {
 		const user = await localUserByNativeTokenCache.fetch(token,
