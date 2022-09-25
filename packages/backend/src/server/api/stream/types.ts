@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events';
-import Emitter from 'strict-event-emitter-types';
 import { Channel } from '@/models/entities/channel.js';
 import { User } from '@/models/entities/user.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
@@ -15,6 +14,7 @@ import { Signin } from '@/models/entities/signin.js';
 import { Page } from '@/models/entities/page.js';
 import { Packed } from '@/misc/schema.js';
 import { Webhook } from '@/models/entities/webhook.js';
+import type { StrictEventEmitter as Emitter } from 'strict-event-emitter-types';
 
 //#region Stream type-body definitions
 export interface InternalStreamTypes {
