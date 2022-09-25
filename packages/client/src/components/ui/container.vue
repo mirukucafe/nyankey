@@ -1,5 +1,5 @@
 <template>
-<div v-size="{ max: [380] }" class="ukygtjoj _panel" :class="{ naked, thin, hideHeader: !showHeader, scrollable, closed: !showBody }">
+<div ref="containerEl" v-size="{ max: [380] }" class="ukygtjoj _panel" :class="{ naked, thin, hideHeader: !showHeader, scrollable, closed: !showBody }">
 	<header v-if="showHeader" ref="header">
 		<div class="title"><slot name="header"></slot></div>
 		<div class="sub">
@@ -13,9 +13,9 @@
 	<transition
 		:name="$store.state.animation ? 'container-toggle' : ''"
 		@enter="enter"
-		@after-enter="afterEnter"
+		@after-enter="removeHeight"
 		@leave="leave"
-		@after-leave="afterLeave"
+		@after-leave="removeHeight"
 	>
 		<div v-show="showBody" ref="content" class="content" :class="{ omitted }">
 			<slot></slot>
@@ -27,107 +27,87 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { onMounted, watch } from 'vue';
 import { i18n } from '@/i18n';
 
-export default defineComponent({
-	props: {
-		showHeader: {
-			type: Boolean,
-			required: false,
-			default: true,
-		},
-		thin: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		naked: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		foldable: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		expanded: {
-			type: Boolean,
-			required: false,
-			default: true,
-		},
-		scrollable: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-		maxHeight: {
-			type: Number,
-			required: false,
-			default: null,
-		},
-	},
-	data() {
-		return {
-			showBody: this.expanded,
-			omitted: null,
-			ignoreOmit: false,
-		};
-	},
-	mounted() {
-		this.$watch('showBody', showBody => {
-			const headerHeight = this.showHeader ? this.$refs.header.offsetHeight : 0;
-			this.$el.style.minHeight = `${headerHeight}px`;
-			if (showBody) {
-				this.$el.style.flexBasis = 'auto';
+const props = withDefaults(defineProps<{
+	showHeader?: boolean;
+	thin?: boolean;
+	naked?: boolean;
+	foldable?: boolean;
+	expanded?: boolean;
+	scrollable?: boolean;
+	maxHeight?: number | null;
+}>(), {
+	showHeader: true,
+	thin: false,
+	naked: false,
+	foldable: false,
+	expanded: true,
+	scrollable: false,
+	maxHeight: null,
+});
+
+let showBody: boolean = $ref(props.expanded);
+let omitted: boolean = $ref(false);
+let ignoreOmit: boolean = $ref(false);
+let containerEl: HTMLElement | null = $ref(null);
+let header: HTMLElement | null = $ref(null);
+let content: HTMLElement | null = $ref(null);
+
+onMounted(() => {
+	watch($$(showBody), showBody_ => {
+		if (header && containerEl) {
+			const headerHeight = props.showHeader ? header.offsetHeight : 0;
+			containerEl.style.minHeight = `${headerHeight}px`;
+			if (showBody_) {
+				containerEl.style.flexBasis = 'auto';
 			} else {
-				this.$el.style.flexBasis = `${headerHeight}px`;
+				containerEl.style.flexBasis = `${headerHeight}px`;
 			}
-		}, {
-			immediate: true,
-		});
+		}
+	}, {
+		immediate: true,
+	});
+	if (containerEl && props.maxHeight != null) {
+		containerEl.style.setProperty('--maxHeight', props.maxHeight + 'px');
+	}
 
-		this.$el.style.setProperty('--maxHeight', this.maxHeight + 'px');
+	const calcOmit = (): void => {
+		if (omitted || ignoreOmit || props.maxHeight == null) return;
 
-		const calcOmit = () => {
-			if (this.omitted || this.ignoreOmit || this.maxHeight == null) return;
-			const height = this.$refs.content.offsetHeight;
-			this.omitted = height > this.maxHeight;
-		};
+		if (content) {
+			const height = content.offsetHeight;
+			omitted = height > props.maxHeight;
+		}
+	};
 
+	if (content) {
 		calcOmit();
 		new ResizeObserver(() => {
 			calcOmit();
-		}).observe(this.$refs.content);
-	},
-	methods: {
-		toggleContent(show: boolean) {
-			if (!this.foldable) return;
-			this.showBody = show;
-		},
-
-		enter(el) {
-			const elementHeight = el.getBoundingClientRect().height;
-			el.style.height = 0;
-			el.offsetHeight; // reflow
-			el.style.height = elementHeight + 'px';
-		},
-		afterEnter(el) {
-			el.style.height = null;
-		},
-		leave(el) {
-			const elementHeight = el.getBoundingClientRect().height;
-			el.style.height = elementHeight + 'px';
-			el.offsetHeight; // reflow
-			el.style.height = 0;
-		},
-		afterLeave(el) {
-			el.style.height = null;
-		},
-	},
+		}).observe(content);
+	}
 });
+
+function enter(el: HTMLElement): void {
+	const elementHeight = el.getBoundingClientRect().height;
+	el.style.height = '0';
+	el.offsetHeight; // reflow
+	el.style.height = elementHeight + 'px';
+}
+
+function leave(el: HTMLElement): void {
+	const elementHeight = el.getBoundingClientRect().height;
+	el.style.height = elementHeight + 'px';
+	el.offsetHeight; // reflow
+	el.style.height = '0';
+}
+
+function removeHeight(el: HTMLElement): void {
+	el.style.removeProperty('height');
+}
 </script>
 
 <style lang="scss" scoped>
@@ -239,9 +219,6 @@ export default defineComponent({
 				padding: 8px 10px;
 				font-size: 0.9em;
 			}
-		}
-
-		> .content {
 		}
 	}
 }
