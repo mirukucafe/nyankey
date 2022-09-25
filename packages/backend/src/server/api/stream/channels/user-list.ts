@@ -2,6 +2,7 @@ import { UserListJoinings, UserLists } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { Packed } from '@/misc/schema.js';
+import { Note } from '@/models/entities/note.js';
 import Channel from '../channel.js';
 
 export default class extends Channel {
@@ -11,11 +12,12 @@ export default class extends Channel {
 	private listId: string;
 	public listUsers: User['id'][] = [];
 	private listUsersClock: NodeJS.Timer;
+	private onNote: (note: Note) => Promise<void>;
 
 	constructor(id: string, connection: Channel['connection']) {
 		super(id, connection);
 		this.updateListUsers = this.updateListUsers.bind(this);
-		this.onNote = this.withPackedNote(this.onNote.bind(this));
+		this.onNote = this.withPackedNote(this.onPackedNote.bind(this));
 	}
 
 	public async init(params: any) {
@@ -48,7 +50,7 @@ export default class extends Channel {
 		this.listUsers = users.map(x => x.userId);
 	}
 
-	private async onNote(note: Packed<'Note'>) {
+	private async onPackedNote(note: Packed<'Note'>): Promise<void> {
 		if (!this.listUsers.includes(note.userId)) return;
 
 		// 流れてきたNoteがミュートしているユーザーが関わるものだったら無視する

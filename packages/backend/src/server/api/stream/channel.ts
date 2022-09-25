@@ -62,7 +62,7 @@ export default abstract class Channel {
 		});
 	}
 
-	protected withPackedNote(callback: (note: Packed<'Note'>) => void): (Note) => void {
+	protected withPackedNote(callback: (note: Packed<'Note'>) => Promise<void>): (note: Note) => Promise<void> {
 		return async (note: Note) => {
 			try {
 				// because `note` was previously JSON.stringify'ed, the fields that

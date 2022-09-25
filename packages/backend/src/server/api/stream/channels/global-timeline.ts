@@ -3,16 +3,18 @@ import { checkWordMute } from '@/misc/check-word-mute.js';
 import { isInstanceMuted } from '@/misc/is-instance-muted.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { Packed } from '@/misc/schema.js';
+import { Note } from '@/models/entities/note.js';
 import Channel from '../channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'globalTimeline';
 	public static shouldShare = true;
 	public static requireCredential = false;
+	private onNote: (note: Note) => Promise<void>;
 
 	constructor(id: string, connection: Channel['connection']) {
 		super(id, connection);
-		this.onNote = this.withPackedNote(this.onNote.bind(this));
+		this.onNote = this.withPackedNote(this.onPackedNote.bind(this));
 	}
 
 	public async init(params: any) {
@@ -25,7 +27,7 @@ export default class extends Channel {
 		this.subscriber.on('notesStream', this.onNote);
 	}
 
-	private async onNote(note: Packed<'Note'>) {
+	private async onPackedNote(note: Packed<'Note'>): Promise<void> {
 		if (note.visibility !== 'public') return;
 		if (note.channelId != null) return;
 

@@ -3,16 +3,18 @@ import { checkWordMute } from '@/misc/check-word-mute.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { isInstanceMuted } from '@/misc/is-instance-muted.js';
 import { Packed } from '@/misc/schema.js';
+import { Note } from '@/models/entities/note.js';
 import Channel from '../channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'hybridTimeline';
 	public static shouldShare = true;
 	public static requireCredential = true;
+	private onNote: (note: Note) => Promise<void>;
 
 	constructor(id: string, connection: Channel['connection']) {
 		super(id, connection);
-		this.onNote = this.withPackedNote(this.onNote.bind(this));
+		this.onNote = this.withPackedNote(this.onPackedNote.bind(this));
 	}
 
 	public async init(params: any) {
@@ -23,7 +25,7 @@ export default class extends Channel {
 		this.subscriber.on('notesStream', this.onNote);
 	}
 
-	private async onNote(note: Packed<'Note'>) {
+	private async onPackedNote(note: Packed<'Note'>): Promise<void> {
 		// チャンネルの投稿ではなく、自分自身の投稿 または
 		// チャンネルの投稿ではなく、その投稿のユーザーをフォローしている または
 		// チャンネルの投稿ではなく、全体公開のローカルの投稿 または

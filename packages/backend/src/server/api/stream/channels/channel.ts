@@ -2,6 +2,7 @@ import { Users } from '@/models/index.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { User } from '@/models/entities/user.js';
 import { Packed } from '@/misc/schema.js';
+import { Note } from '@/models/entities/note.js';
 import { StreamMessages } from '../types.js';
 import Channel from '../channel.js';
 
@@ -12,10 +13,11 @@ export default class extends Channel {
 	private channelId: string;
 	private typers: Record<User['id'], Date> = {};
 	private emitTypersIntervalId: ReturnType<typeof setInterval>;
+	private onNote: (note: Note) => Promise<void>;
 
 	constructor(id: string, connection: Channel['connection']) {
 		super(id, connection);
-		this.onNote = this.withPackedNote(this.onNote.bind(this));
+		this.onNote = this.withPackedNote(this.onPackedNote.bind(this));
 	}
 
 	public async init(params: any) {
@@ -27,7 +29,7 @@ export default class extends Channel {
 		this.emitTypersIntervalId = setInterval(this.emitTypers, 5000);
 	}
 
-	private async onNote(note: Packed<'Note'>) {
+	private async onPackedNote(note: Packed<'Note'>): Promise<void> {
 		if (note.channelId !== this.channelId) return;
 
 		// 流れてきたNoteがミュートしているユーザーが関わるものだったら無視する
