@@ -406,46 +406,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bull-board/api@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@bull-board/api@npm:4.0.0"
+"@bull-board/api@npm:4.3.1, @bull-board/api@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@bull-board/api@npm:4.3.1"
   dependencies:
     redis-info: ^3.0.8
-  checksum: 9d0da26021265c044d1b9bc0cccb728a76385e0c7ec9d7a9b3cd0f6102d971da08c2909562cb9e2635cf485d1c1d9e0d1b2ddec5f8fe0d11b2f48674fd48664a
+  checksum: 05113b1e888e79f8efecdffdc1043455fa6f8714c55a1e973d8a0a7f60cf574b00487b5b86324523ff91641784a55ff14c469edc8dd985295dcfc27cf55b4c4a
   languageName: node
   linkType: hard
 
-"@bull-board/api@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "@bull-board/api@npm:4.2.2"
+"@bull-board/koa@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@bull-board/koa@npm:4.3.1"
   dependencies:
-    redis-info: ^3.0.8
-  checksum: 547174f63d611a568303ad261d3f41a57f632ea2067e8ab900bad90dbc9790a45af8229765350ef47a2eba4300656e8cc792bdcef94003a531f4eabeb4982876
-  languageName: node
-  linkType: hard
-
-"@bull-board/koa@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@bull-board/koa@npm:4.0.0"
-  dependencies:
-    "@bull-board/api": 4.0.0
-    "@bull-board/ui": 4.0.0
+    "@bull-board/api": 4.3.1
+    "@bull-board/ui": 4.3.1
     ejs: ^3.1.7
     koa: ^2.13.1
     koa-mount: ^4.0.0
     koa-router: ^10.0.0
     koa-static: ^5.0.0
     koa-views: ^7.0.1
-  checksum: 34b567e46d9d2a1413032f89c8efe4dc30d1844c47588a1ffee2f979698ecefa9a3178c4921746b7a1ac18d999762a96e97e66c5cb031c0074dd39646bb8350f
+  checksum: 08f198cdaaa28fe8e254288a0d4c13e9cd481a97e40e5e9152fb9094cbac54459e86901da5d90c46fe2dccf310f78a50ef8763bf5980b98d33180299c64fbc3f
   languageName: node
   linkType: hard
 
-"@bull-board/ui@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@bull-board/ui@npm:4.0.0"
+"@bull-board/ui@npm:4.3.1":
+  version: 4.3.1
+  resolution: "@bull-board/ui@npm:4.3.1"
   dependencies:
-    "@bull-board/api": 4.0.0
-  checksum: 34d90de90137587e0343a2cfe236df4f7c667a6f08e0c1ea5516090c481b5acbce10ebb652b705f9eb0272b3f6a98033d160e2906b0a120bc76b3c89cf303340
+    "@bull-board/api": 4.3.1
+  checksum: 7bc4787ba8f9e3dda5cb580b4374872bc7b0870a08a504cfc2f380a39dda164ae71518e7b1921e53ff8abc4224c0861504b26b63510b6c9c9d23d647bdab54b2
   languageName: node
   linkType: hard
 
@@ -3618,8 +3609,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "backend@workspace:packages/backend"
   dependencies:
-    "@bull-board/api": ^4.2.2
-    "@bull-board/koa": 4.0.0
+    "@bull-board/api": ^4.3.1
+    "@bull-board/koa": ^4.3.1
     "@discordapp/twemoji": 14.0.2
     "@elastic/elasticsearch": 7.11.0
     "@koa/cors": 3.1.0
