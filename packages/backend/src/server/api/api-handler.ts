@@ -5,12 +5,23 @@ import authenticate, { AuthenticationError } from './authenticate.js';
 import call from './call.js';
 import { ApiError } from './error.js';
 
+function getRequestArguments(ctx: Koa.Context): Record<string, any> {
+	const args = {
+		...(ctx.params || {}),
+		...ctx.query,
+		...(ctx.request.body || {}),
+	};
+
+	// For security reasons, we drop the i parameter if it's a GET request
+	if (ctx.method === 'GET') {
+		delete args['i'];
+	}
+
+	return args;
+}
+
 export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<void> {
-	const body = ctx.is('multipart/form-data')
-		? (ctx.request as any).body
-		: ctx.method === 'GET'
-			? ctx.query
-			: ctx.request.body;
+	const body = getRequestArguments(ctx);
 
 	// Authentication
 	// for GET requests, do not even pass on the body parameter as it is considered unsafe
