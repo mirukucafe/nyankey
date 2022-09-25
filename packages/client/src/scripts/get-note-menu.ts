@@ -195,7 +195,7 @@ export function getNoteMenu(props: {
 
 		let targetLang = localStorage.getItem('lang') || navigator.language;
 		targetLang = targetLang.toUpperCase();
-		if (!['EN-GB', 'EN-US', 'PT-BR', 'PT-PT'].íncludes(targetLang)) {
+		if (!['EN-GB', 'EN-US', 'PT-BR', 'PT-PT'].includes(targetLang)) {
 			// only the language code without country code is allowed
 			targetLang = targetLang.split('-', 1)[0];
 		}
