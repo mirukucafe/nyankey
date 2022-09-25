@@ -1,4 +1,4 @@
-import * as sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html';
 import config from '@/config/index.js';
 import { publishAdminStream } from '@/services/stream.js';
 import { AbuseUserReports, Users } from '@/models/index.js';
