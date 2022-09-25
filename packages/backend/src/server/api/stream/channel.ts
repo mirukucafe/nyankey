@@ -69,14 +69,14 @@ export default abstract class Channel {
 				// were objects before are now strings and have to be restored or
 				// removed from the object
 				note.createdAt = new Date(note.createdAt);
-				delete note.reply;
-				delete note.renote;
-				delete note.user;
-				delete note.channel;
+				note.reply = null;
+				note.renote = null;
+				note.user = null;
+				note.channel = null;
 
 				const packed = await Notes.pack(note, this.user, { detail: true });
 
-				callback(packed);
+				await callback(packed);
 			} catch (err) {
 				if (err instanceof IdentifiableError && err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') {
 					// skip: note not visible to user
