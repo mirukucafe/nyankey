@@ -43,11 +43,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 
 			// if deleted note is renote
 			if (isPureRenote(note)) {
-				renote = await Notes.findOneBy({
-					// isPureRenote checks if note.renoteId is null already, so renoteId should be non-null.
-					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-					id: note.renoteId!,
-				});
+				renote = await Notes.findOneBy({ id: note.renoteId });
 			}
 
 			const content = renderActivity(renote
