@@ -54,7 +54,7 @@ const props = defineProps<{
 
 let state: 'waiting' | 'denied' | 'accepted' | 'initial' = $ref('initial');
 
-async function accept() {
+async function accept(): Promise<void> {
 	state = 'waiting';
 	await os.api('miauth/gen-token', {
 		session: props.session,
@@ -71,11 +71,11 @@ async function accept() {
 	}
 }
 
-function deny() {
+function deny(): void {
 	state = 'denied';
 }
 
-function onLogin(res) {
+function onLogin(res): void {
 	login(res.i);
 }
 </script>

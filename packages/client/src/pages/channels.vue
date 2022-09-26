@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject } from 'vue';
+import { computed } from 'vue';
 import MkChannelPreview from '@/components/channel-preview.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkButton from '@/components/ui/button.vue';
@@ -48,7 +48,7 @@ const ownedPagination = {
 	limit: 5,
 };
 
-function create() {
+function create(): void {
 	router.push('/channels/new');
 }
 

@@ -43,7 +43,7 @@ const props = defineProps<{
 
 const app = props.session.app;
 
-function cancel() {
+function cancel(): void {
 	os.api('auth/deny', {
 		token: props.session.token,
 	}).then(() => {
@@ -51,7 +51,7 @@ function cancel() {
 	});
 }
 
-function accept() {
+function accept(): void {
 	os.api('auth/accept', {
 		token: props.session.token,
 	}).then(() => {
