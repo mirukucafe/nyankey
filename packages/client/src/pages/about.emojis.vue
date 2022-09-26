@@ -33,14 +33,14 @@ import { emojiCategories, instance } from '@/instance';
 let q: string = $ref('');
 let searchEmojis: null | Record<string, any>[] = $ref(null);
 
-function search() {
+function search(): void {
 	if (q === '') {
 		searchEmojis = null;
 	} else {
-		searchEmojis = instance.emojis.filter(emoji => emoji.name.includes(this.q) || emoji.aliases.includes(this.q));
+		searchEmojis = instance.emojis.filter(emoji => emoji.name.includes(q) || emoji.aliases.includes(q));
 	}
 }
-watch(q, search);
+watch($$(q), search);
 </script>
 
 <style lang="scss" scoped>
