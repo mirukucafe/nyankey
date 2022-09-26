@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, watch } from 'vue';
+import { Antenna } from 'foundkey-js/built/entities';
 import XAntenna from './editor.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
@@ -14,23 +14,19 @@ import { definePageMetadata } from '@/scripts/page-metadata';
 
 const router = useRouter();
 
-let antenna: any = $ref(null);
+let antenna: Antenna | null = $ref(null);
 
 const props = defineProps<{
 	antennaId: string
 }>();
 
-function onAntennaUpdated() {
+function onAntennaUpdated(): void {
 	router.push('/my/antennas');
 }
 
 os.api('antennas/show', { antennaId: props.antennaId }).then((antennaResponse) => {
 	antenna = antennaResponse;
 });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.manageAntennas,
