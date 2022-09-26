@@ -197,7 +197,7 @@ Misskey uses Vue(v3) as its front-end framework.
 	  You might be able to use this shell command to find components that have not yet been refactored: `find packages/client/src -name '*.vue' | xargs grep '<script' | grep -v 'setup'`
 
 ## Notes
-### How to resolve conflictions occurred at yarn.lock?
+### How to resolve `yarn.lock` conflicts?
 
 Just execute `yarn` to fix it.
 
