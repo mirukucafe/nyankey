@@ -25,7 +25,7 @@ export const paramDef = {
 		url: { type: 'string' },
 		folderId: { type: 'string', format: 'misskey:id', nullable: true, default: null },
 		isSensitive: { type: 'boolean', default: false },
-		comment: { type: 'string', nullable: true, maxLength: 512, default: null },
+		comment: { type: 'string', nullable: true, maxLength: 2048, default: null },
 		marker: { type: 'string', nullable: true, default: null },
 		force: { type: 'boolean', default: false },
 	},

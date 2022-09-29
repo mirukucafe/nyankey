@@ -52,7 +52,7 @@ export const paramDef = {
 		folderId: { type: 'string', format: 'misskey:id', nullable: true },
 		name: { type: 'string' },
 		isSensitive: { type: 'boolean' },
-		comment: { type: 'string', nullable: true, maxLength: 512 },
+		comment: { type: 'string', nullable: true, maxLength: 2048 },
 	},
 	required: ['fileId'],
 } as const;
