@@ -698,7 +698,6 @@ _mfm:
   blur: "ぼかし"
   font: "フォント"
   rotate: "回転"
-  emojiDescription: ''
 _instanceTicker:
   none: "表示せん"
   remote: "リモートユーザーに表示"
@@ -974,12 +973,7 @@ _deck:
     list: "リスト"
     mentions: "あんた宛て"
     direct: "ダイレクト"
-_postForm:
-  quotePlaceholder: ''
 _services: {}
 visibility: ''
-createNewClip: ''
 publish: ''
-popularPosts: ''
 manageAccounts: ''
-failedToFetchAccountInformation: ''

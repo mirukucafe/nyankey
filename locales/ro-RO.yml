@@ -700,14 +700,12 @@ _mfm:
   quote: "Citează"
   emoji: "Emoji personalizat"
   search: "Caută"
-  jellyDescription: ''
 _theme:
   description: "Descriere"
   keys:
     mention: "Mențiune"
     renote: "Re-notează"
     divider: "Separator"
-    inputBorder: ''
   darken: ''
 _sfx:
   note: "Note"
@@ -755,24 +753,14 @@ _deck:
     antenna: "Antene"
     list: "Liste"
     mentions: "Mențiuni"
-rateLimitExceeded: ''
 accountInfo: ''
-makeExplorable: ''
 usageAmount: ''
-instanceBlocking: ''
 useBlurEffect: ''
-leaveGroup: ''
 unclip: ''
-_auth:
-  pleaseGoBack: ''
 _nsfw:
   respect: ''
-_time:
-  second: ''
 _2fa:
   step3: ''
-_permissions:
-  "read:page-likes": ''
 _pages:
   invalidNameTitle: ''
 _services: {}

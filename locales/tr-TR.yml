@@ -54,7 +54,6 @@ smtpPass: "Şifre"
 user: "Kullanıcı"
 _mfm:
   search: "Arama"
-  flipDescription: ''
 _sfx:
   notification: "Bildirim"
 _widgets:
@@ -66,55 +65,30 @@ _deck:
   _columns:
     notifications: "Bildirim"
     tl: "Zaman çizelgesi"
-_permissions:
-  "read:channels": ''
 _antennaSources:
   all: ''
-_poll:
-  deadlineTime: ''
 _exportOrImport:
   muteList: ''
-_notification:
-  _types:
-    receiveFollowRequest: ''
+_notification: {}
 _pages:
   viewSource: ''
 _services: {}
-nUsers: ''
 _email:
   _receiveFollowRequest:
     title: ''
-_channel:
-  notesCount: ''
 _theme:
   color: ''
-  keys:
-    modalBg: ''
 _ago:
   monthsAgo: ''
-_2fa:
-  step2: ''
 note: ''
-clickToShow: ''
 cacheRemoteFiles: ''
-perHour: ''
 preview: ''
-saved: ''
 lightThemes: ''
-unwatch: ''
 pinnedUsers: ''
-silenceConfirm: ''
 markAsReadAllNotifications: ''
-checking: ''
 regenerate: ''
-objectStorageSetPublicRead: ''
 deleteAllFilesConfirm: ''
-undeck: ''
 userSaysSomething: ''
-abuseMarkAsResolved: ''
 driveFilesCount: ''
-nNotes: ''
 clear: ''
-postToGallery: ''
 pubSub: ''
-size: ''

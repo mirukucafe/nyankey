@@ -134,12 +134,10 @@ _mfm:
   mention: "Menció"
   quote: "Citar"
   search: "Cercar"
-  tada: ''
 _theme:
   keys:
     mention: "Menció"
     renote: "Renotar"
-    buttonHoverBg: ''
   basedProp: ''
 _sfx:
   note: "Notes"
@@ -176,42 +174,22 @@ _deck:
     list: "Llistes"
     mentions: "Mencions"
 _services: {}
-_ago:
-  yearsAgo: ''
 muteThread: ''
-_gallery:
-  liked: ''
 _channel:
   following: ''
-_tutorial:
-  step3_4: ''
 _permissions:
   "write:votes": ''
-_poll:
-  choiceN: ''
 _postForm: {}
 _pages:
   created: ''
-unmute: ''
 showOnRemote: ''
-cpuAndMemory: ''
 instanceFollowers: ''
-messageRead: ''
 renameFolder: ''
-today: ''
 recaptchaSiteKey: ''
-administrator: ''
 members: ''
-tapSecurityKey: ''
 numberOfDays: ''
-chooseEmoji: ''
 addedRelays: ''
-pluginTokenRequestedDescription: ''
 other: ''
-createNewClip: ''
 contact: ''
-registry: ''
 hideOnlineStatus: ''
-previewNoteText: ''
 classic: ''
-recentNDays: ''

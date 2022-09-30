@@ -274,12 +274,10 @@ _mfm:
   quote: "Citat"
   emoji: "Anpassa emoji"
   search: "Sök"
-  tada: ''
 _theme:
   keys:
     mention: "Nämn"
     renote: "Omnotera"
-    accentDarken: ''
   alpha: ''
 _sfx:
   note: "Noter"
@@ -320,39 +318,21 @@ _deck:
     tl: "Tidslinje"
     list: "Listor"
     mentions: "Omnämningar"
-_signup:
-  almostThere: ''
 _serverDisconnectedBehavior:
   reload: ''
-_ago:
-  minutesAgo: ''
 _permissions:
   "write:account": ''
-_auth:
-  shareAccess: ''
 _poll:
   showResult: ''
-_pages:
-  editPage: ''
 _services:
   _discord:
     disconnected: ''
-home: ''
 inputNewDescription: ''
-disconnectService: ''
 antennaKeywords: ''
-registerSecurityKey: ''
 retype: ''
-youHaveNoGroups: ''
 objectStorageBucketDesc: ''
-lastUsedDate: ''
 disablePlayer: ''
-smtpConfig: ''
 abuseReports: ''
-renotesCount: ''
 showGapBetweenNotesInTimeline: ''
-inUse: ''
 selectAccount: ''
-searchResult: ''
 incorrectPassword: ''
-deleteAccount: ''

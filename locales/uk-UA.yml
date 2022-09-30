@@ -1256,8 +1256,6 @@ _deck:
     list: "Списки"
     mentions: "Згадки"
     direct: "Особисте"
-selectAccount: ''
 translate: ''
-smartphone: ''
 thereIsUnresolvedAbuseReportWarning: ''
 _services: {}

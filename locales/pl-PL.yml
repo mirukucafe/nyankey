@@ -1234,9 +1234,7 @@ _deck:
     list: "Listy"
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
-learnMore: ''
 useDrawerReactionPickerForMobile: ''
-noEmailServerWarning: ''
 _services:
   _twitter:
     connected: ''

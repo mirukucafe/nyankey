@@ -1466,5 +1466,4 @@ _deck:
     list: "Списки"
     mentions: "Упоминания"
     direct: "Личное"
-maxCustomEmojiPicker: ''
 _services: {}

@@ -494,13 +494,11 @@ _mfm:
   quote: "Citovat"
   emoji: "Vlastní emoji"
   search: "Vyhledávání"
-  jellyDescription: ''
 _theme:
   description: "Popis"
   keys:
     mention: "Zmínění"
     renote: "Přeposlat"
-    toastBg: ''
   alpha: ''
 _sfx:
   note: "Poznámky"
@@ -549,31 +547,17 @@ _deck:
     list: "Seznamy"
     mentions: "Zmínění"
 _services: {}
-_instanceCharts:
-  cacheSize: ''
 _tutorial:
   step3_1: ''
-_pages:
-  viewPage: ''
 _forgotPassword:
   ifNoEmail: ''
-_menuDisplay:
-  sideFull: ''
 _permissions:
   "read:blocks": ''
-_antennaSources:
-  users: ''
 _postForm:
   quotePlaceholder: ''
-whenServerDisconnected: ''
 messagingWithUser: ''
-newNoteRecived: ''
 undeck: ''
-abuseReported: ''
 followersCount: ''
-wide: ''
 emailNotification: ''
-accounts: ''
 whatIsNew: ''
-clickToFinishEmailVerification: ''
 confirmToUnclipAlreadyClippedNote: ''

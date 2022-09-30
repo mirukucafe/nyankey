@@ -67,7 +67,6 @@ _email:
     title: "ಹಿಂಬಾಲಿಸಿದರು"
 _mfm:
   search: "ಹುಡುಕು"
-  flipDescription: ''
 _sfx:
   notification: "ಅಧಿಸೂಚನೆಗಳು"
 _widgets:
@@ -86,52 +85,30 @@ _deck:
     notifications: "ಅಧಿಸೂಚನೆಗಳು"
     tl: "ಸಮಯಸಾಲು"
     mentions: "ಹೆಸರಿಸಿದ"
-deleteAndEdit: ''
 renote: ''
-customEmojis: ''
 federation: ''
-mutedUsers: ''
 lookup: ''
-registeredDate: ''
 avatar: ''
-enableRegistration: ''
 withFileAntenna: ''
-resetPassword: ''
 quoteAttached: ''
-signinHistory: ''
 objectStorageEndpoint: ''
-ascendingOrder: ''
 description: ''
-emptyToDisableSmtpAuth: ''
 fillAbuseReportDescription: ''
-followingCount: ''
 center: ''
-apply: ''
 enabled: ''
-troubleshooting: ''
 voteConfirm: ''
-numberOfPageCache: ''
 _poll:
   deadlineTime: ''
 _theme:
-  func: ''
   keys:
     infoBg: ''
-_tutorial:
-  step4_2: ''
 _forgotPassword:
   ifNoEmail: ''
-_channel:
-  following: ''
 _2fa:
   step2: ''
-_permissions:
-  "write:channels": ''
 _postForm:
   _placeholders:
     c: ''
-_instanceCharts:
-  cacheSizeTotal: ''
 _pages:
   fontSerif: ''
 _services: {}

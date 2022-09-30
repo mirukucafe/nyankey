@@ -335,12 +335,10 @@ _mfm:
   mention: "Vermelding"
   quote: "Quote"
   search: "Zoeken"
-  flipDescription: ''
 _theme:
   keys:
     mention: "Vermelding"
     renote: "Herdelen"
-    buttonBg: ''
   basedProp: ''
 _sfx:
   note: "Notities"
@@ -392,35 +390,19 @@ selectAntenna: Kies een antenne
 selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
-_ffVisibility:
-  followers: ''
 thisYear: ''
-enableRecaptcha: ''
 twoStepAuthentication: ''
-noMessagesYet: ''
 category: ''
-objectStorageRegionDesc: ''
 output: ''
-leaveConfirm: ''
 regexpError: ''
-reporterOrigin: ''
 receivedReactionsCount: ''
-reloadToApplySetting: ''
 inChannelSearch: ''
-accounts: ''
 whatIsNew: ''
-tablet: ''
 maxUnicodeEmojiPicker: ''
-_permissions:
-  "write:gallery-likes": ''
 _instanceTicker:
   none: ''
-_tutorial:
-  step3_3: ''
 _antennaSources:
   userList: ''
-_postForm:
-  channelPlaceholder: ''
 _pages:
   unlike: ''
 _services: {}

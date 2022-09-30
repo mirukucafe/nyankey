@@ -176,12 +176,10 @@ _mfm:
   quote: "Citar"
   emoji: "Emoji personalizado"
   search: "Pesquisar"
-  jelly: ''
 _theme:
   keys:
     mention: "Menção"
     renote: "Repostar"
-    buttonHoverBg: ''
   basedProp: ''
 _sfx:
   note: "Posts"
@@ -257,41 +255,22 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-autoAcceptFollowed: ''
 clearQueue: ''
-currentPassword: ''
 start: ''
-circularReferenceFolder: ''
 disablingTimelinesInfo: ''
-notifyAntenna: ''
 passwordLessLogin: ''
-quoteAttached: ''
 signinHistory: ''
-objectStorageEndpoint: ''
 descendingOrder: ''
-enterFileDescription: ''
 smtpSecure: ''
-abuseReported: ''
 followersCount: ''
-reloadToApplySetting: ''
 useReactionPickerForContextMenu: ''
-switch: ''
 translate: ''
-overridedDeviceKind: ''
 noEmailServerWarning: ''
-_timelines:
-  social: ''
 _nsfw:
   ignore: ''
-_tutorial:
-  step1_3: ''
 _permissions:
   "read:drive": ''
-_auth:
-  callback: ''
 _poll:
   remainingHours: ''
 _postForm: {}
-_pages:
-  nameAlreadyExists: ''
 _services: {}

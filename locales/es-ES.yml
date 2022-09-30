@@ -937,7 +937,6 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
-  x4Description: ''
 _instanceTicker:
   none: "No mostrar"
   remote: "Mostrar a usuarios remotos"
@@ -1360,5 +1359,4 @@ _deck:
     mentions: "Menciones"
     direct: "Mensaje directo"
 _services: {}
-voteConfirm: ''
 document: ''
