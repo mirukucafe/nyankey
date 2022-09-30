@@ -1,7 +1,9 @@
----
 _lang_: "Tiếng Việt"
 headlineMisskey: "Mạng xã hội liên hợp"
-introMisskey: "Xin chào! FoundKey là một nền tảng tiểu blog phi tập trung mã nguồn mở.\nViết \"tút\" để chia sẻ những suy nghĩ của bạn 📡\nBằng \"biểu cảm\", bạn có thể bày tỏ nhanh chóng cảm xúc của bạn với các tút 👍\nHãy khám phá một thế giới mới! 🚀"
+introMisskey: "Xin chào! FoundKey là một nền tảng tiểu blog phi tập trung mã nguồn\
+  \ mở.\nViết \"tút\" để chia sẻ những suy nghĩ của bạn \U0001F4E1\nBằng \"biểu cảm\"\
+  , bạn có thể bày tỏ nhanh chóng cảm xúc của bạn với các tút \U0001F44D\nHãy khám\
+  \ phá một thế giới mới! \U0001F680"
 monthAndDay: "{day} tháng {month}"
 search: "Tìm kiếm"
 notifications: "Thông báo"
@@ -44,7 +46,8 @@ copyContent: "Chép nội dung"
 copyLink: "Chép liên kết"
 delete: "Xóa"
 deleteAndEdit: "Sửa"
-deleteAndEditConfirm: "Bạn có chắc muốn sửa tút này? Những biểu cảm, lượt trả lời và đăng lại sẽ bị mất."
+deleteAndEditConfirm: "Bạn có chắc muốn sửa tút này? Những biểu cảm, lượt trả lời\
+  \ và đăng lại sẽ bị mất."
 addToList: "Thêm vào danh sách"
 sendMessage: "Gửi tin nhắn"
 copyUsername: "Chép tên người dùng"
@@ -63,9 +66,11 @@ import: "Nhập dữ liệu"
 export: "Xuất dữ liệu"
 files: "Tập tin"
 download: "Tải xuống"
-driveFileDeleteConfirm: "Bạn có chắc muốn xóa tập tin \"{name}\"? Tút liên quan cũng sẽ bị xóa theo."
+driveFileDeleteConfirm: "Bạn có chắc muốn xóa tập tin \"{name}\"? Tút liên quan cũng\
+  \ sẽ bị xóa theo."
 unfollowConfirm: "Bạn có chắc muốn ngưng theo dõi {name}?"
-exportRequested: "Đang chuẩn bị xuất tập tin. Quá trình này có thể mất ít phút. Nó sẽ được tự động thêm vào Drive sau khi hoàn thành."
+exportRequested: "Đang chuẩn bị xuất tập tin. Quá trình này có thể mất ít phút. Nó\
+  \ sẽ được tự động thêm vào Drive sau khi hoàn thành."
 importRequested: "Bạn vừa yêu cầu nhập dữ liệu. Quá trình này có thể mất ít phút."
 lists: "Danh sách"
 noLists: "Bạn chưa có danh sách nào"
@@ -80,7 +85,8 @@ error: "Lỗi"
 somethingHappened: "Xảy ra lỗi"
 retry: "Thử lại"
 pageLoadError: "Xảy ra lỗi khi tải trang."
-pageLoadErrorDescription: "Có thể là do bộ nhớ đệm của trình duyệt. Hãy thử xóa bộ nhớ đệm và thử lại sau ít phút."
+pageLoadErrorDescription: "Có thể là do bộ nhớ đệm của trình duyệt. Hãy thử xóa bộ\
+  \ nhớ đệm và thử lại sau ít phút."
 serverIsDead: "Máy chủ không phản hồi. Vui lòng thử lại sau giây lát."
 youShouldUpgradeClient: "Để xem trang này, hãy làm tươi để cập nhật ứng dụng."
 enterListName: "Đặt tên cho danh sách"
@@ -135,13 +141,19 @@ emojiUrl: "URL Emoji"
 addEmoji: "Thêm emoji"
 settingGuide: "Cài đặt đề xuất"
 cacheRemoteFiles: "Tập tin cache từ xa"
-cacheRemoteFilesDescription: "Khi tùy chọn này bị tắt, các tập tin từ xa sẽ được tải trực tiếp từ máy chủ khác. Điều này sẽ giúp giảm dung lượng lưu trữ nhưng lại tăng lưu lượng truy cập, vì hình thu nhỏ sẽ không được tạo."
+cacheRemoteFilesDescription: "Khi tùy chọn này bị tắt, các tập tin từ xa sẽ được tải\
+  \ trực tiếp từ máy chủ khác. Điều này sẽ giúp giảm dung lượng lưu trữ nhưng lại\
+  \ tăng lưu lượng truy cập, vì hình thu nhỏ sẽ không được tạo."
 flagAsBot: "Đánh dấu đây là tài khoản bot"
-flagAsBotDescription: "Bật tùy chọn này nếu tài khoản này được kiểm soát bởi một chương trình. Nếu được bật, nó sẽ được đánh dấu để các nhà phát triển khác ngăn chặn chuỗi tương tác vô tận với các bot khác và điều chỉnh hệ thống nội bộ của FoundKey để coi tài khoản này như một bot."
+flagAsBotDescription: "Bật tùy chọn này nếu tài khoản này được kiểm soát bởi một chương\
+  \ trình. Nếu được bật, nó sẽ được đánh dấu để các nhà phát triển khác ngăn chặn\
+  \ chuỗi tương tác vô tận với các bot khác và điều chỉnh hệ thống nội bộ của FoundKey\
+  \ để coi tài khoản này như một bot."
 flagAsCat: "Tài khoản này là mèo"
 flagAsCatDescription: "Bật tùy chọn này để đánh dấu tài khoản là một con mèo."
 flagShowTimelineReplies: "Hiện lượt trả lời trong bảng tin"
-flagShowTimelineRepliesDescription: "Hiện lượt trả lời của người bạn theo dõi trên tút của những người khác."
+flagShowTimelineRepliesDescription: "Hiện lượt trả lời của người bạn theo dõi trên\
+  \ tút của những người khác."
 autoAcceptFollowed: "Tự động phê duyệt theo dõi từ những người mà bạn đang theo dõi"
 addAccount: "Thêm tài khoản"
 loginFailed: "Đăng nhập không thành công"
@@ -154,7 +166,11 @@ searchWith: "Tìm kiếm: {q}"
 youHaveNoLists: "Bạn chưa có danh sách nào"
 followConfirm: "Bạn có chắc muốn theo dõi {name}？"
 proxyAccount: "Tài khoản proxy"
-proxyAccountDescription: "Tài khoản proxy là tài khoản hoạt động như một người theo dõi từ xa cho người dùng trong những điều kiện nhất định. Ví dụ: khi người dùng thêm người dùng từ xa vào danh sách, hoạt động của người dùng từ xa sẽ không được chuyển đến phiên bản nếu không có người dùng cục bộ nào theo dõi người dùng đó, vì vậy tài khoản proxy sẽ theo dõi."
+proxyAccountDescription: "Tài khoản proxy là tài khoản hoạt động như một người theo\
+  \ dõi từ xa cho người dùng trong những điều kiện nhất định. Ví dụ: khi người dùng\
+  \ thêm người dùng từ xa vào danh sách, hoạt động của người dùng từ xa sẽ không được\
+  \ chuyển đến phiên bản nếu không có người dùng cục bộ nào theo dõi người dùng đó,\
+  \ vì vậy tài khoản proxy sẽ theo dõi."
 host: "Host"
 selectUser: "Chọn người dùng"
 recipient: "Người nhận"
@@ -185,11 +201,13 @@ instanceInfo: "Thông tin máy chủ"
 statistics: "Thống kê"
 clearQueue: "Xóa hàng đợi"
 clearQueueConfirmTitle: "Bạn có chắc muốn xóa hàng đợi?"
-clearQueueConfirmText: "Mọi tút chưa được gửi còn lại trong hàng đợi sẽ không được liên hợp. Thông thường thao tác này không cần thiết."
+clearQueueConfirmText: "Mọi tút chưa được gửi còn lại trong hàng đợi sẽ không được\
+  \ liên hợp. Thông thường thao tác này không cần thiết."
 clearCachedFiles: "Xóa bộ nhớ đệm"
 clearCachedFilesConfirm: "Bạn có chắc muốn xóa sạch bộ nhớ đệm?"
 blockedInstances: "Máy chủ đã chặn"
-blockedInstancesDescription: "Danh sách những máy chủ bạn muốn chặn. Chúng sẽ không thể giao tiếp với máy chủy này nữa."
+blockedInstancesDescription: "Danh sách những máy chủ bạn muốn chặn. Chúng sẽ không\
+  \ thể giao tiếp với máy chủy này nữa."
 muteAndBlock: "Ẩn và Chặn"
 mutedUsers: "Người đã ẩn"
 blockedUsers: "Người đã chặn"
@@ -237,7 +255,8 @@ saved: "Đã lưu"
 messaging: "Trò chuyện"
 upload: "Tải lên"
 keepOriginalUploading: "Giữ hình ảnh gốc"
-keepOriginalUploadingDescription: "Giữ nguyên như hình ảnh được tải lên ban đầu. Nếu tắt, một phiên bản để hiển thị trên web sẽ được tạo khi tải lên."
+keepOriginalUploadingDescription: "Giữ nguyên như hình ảnh được tải lên ban đầu. Nếu\
+  \ tắt, một phiên bản để hiển thị trên web sẽ được tạo khi tải lên."
 fromDrive: "Từ ổ đĩa"
 fromUrl: "Từ URL"
 uploadFromUrl: "Tải lên bằng một URL"
@@ -253,7 +272,8 @@ agreeTo: "Tôi đồng ý {0}"
 tos: "Điều khoản dịch vụ"
 start: "Bắt đầu"
 home: "Trang chính"
-remoteUserCaution: "Vì người dùng này ở máy chủ khác, thông tin hiển thị có thể không đầy đủ."
+remoteUserCaution: "Vì người dùng này ở máy chủ khác, thông tin hiển thị có thể không\
+  \ đầy đủ."
 activity: "Hoạt động"
 images: "Hình ảnh"
 birthday: "Sinh nhật"
@@ -286,7 +306,8 @@ unableToDelete: "Không thể xóa"
 inputNewFileName: "Nhập tên mới cho tập tin"
 inputNewDescription: "Nhập mô tả mới"
 inputNewFolderName: "Nhập tên mới cho thư mục"
-circularReferenceFolder: "Thư mục đích là một thư mục con của thư mục bạn muốn di chuyển."
+circularReferenceFolder: "Thư mục đích là một thư mục con của thư mục bạn muốn di\
+  \ chuyển."
 hasChildFilesOrFolders: "Không thể xóa cho đến khi không còn gì trong thư mục."
 copyUrl: "Sao chép URL"
 rename: "Đổi tên"
@@ -320,7 +341,8 @@ connectService: "Kết nối"
 disconnectService: "Ngắt kết nối"
 enableLocalTimeline: "Bật bảng tin máy chủ"
 enableGlobalTimeline: "Bật bảng tin liên hợp"
-disablingTimelinesInfo: "Quản trị viên và Kiểm duyệt viên luôn có quyền truy cập mọi bảng tin, kể cả khi chúng không được bật."
+disablingTimelinesInfo: "Quản trị viên và Kiểm duyệt viên luôn có quyền truy cập mọi\
+  \ bảng tin, kể cả khi chúng không được bật."
 registration: "Đăng ký"
 enableRegistration: "Cho phép đăng ký mới"
 invite: "Mời"
@@ -332,7 +354,8 @@ bannerUrl: "URL Ảnh bìa"
 backgroundImageUrl: "URL Ảnh nền"
 basicInfo: "Thông tin cơ bản"
 pinnedUsers: "Những người thú vị"
-pinnedUsersDescription: "Liệt kê mỗi hàng một tên người dùng xuống dòng để ghim trên tab \"Khám phá\"."
+pinnedUsersDescription: "Liệt kê mỗi hàng một tên người dùng xuống dòng để ghim trên\
+  \ tab \"Khám phá\"."
 pinnedPages: "Trang đã ghim"
 pinnedPagesDescription: "Liệt kê các trang thú vị để ghim trên máy chủ."
 pinnedClipId: "ID của clip muốn ghim"
@@ -345,14 +368,17 @@ recaptcha: "reCAPTCHA"
 enableRecaptcha: "Bật reCAPTCHA"
 recaptchaSiteKey: "Khóa của trang"
 recaptchaSecretKey: "Khóa bí mật"
-avoidMultiCaptchaConfirm: "Dùng nhiều hệ thống Captcha có thể gây nhiễu giữa chúng. Bạn có muốn tắt các hệ thống Captcha khác hiện đang hoạt động không? Nếu bạn muốn chúng tiếp tục được bật, hãy nhấn hủy."
+avoidMultiCaptchaConfirm: "Dùng nhiều hệ thống Captcha có thể gây nhiễu giữa chúng.\
+  \ Bạn có muốn tắt các hệ thống Captcha khác hiện đang hoạt động không? Nếu bạn muốn\
+  \ chúng tiếp tục được bật, hãy nhấn hủy."
 antennas: "Trạm phát sóng"
 manageAntennas: "Quản lý trạm phát sóng"
 name: "Tên"
 antennaSource: "Nguồn trạm phát sóng"
 antennaKeywords: "Từ khóa để nghe"
 antennaExcludeKeywords: "Từ khóa để lọc ra"
-antennaKeywordsDescription: "Phân cách bằng dấu cách cho điều kiện AND hoặc bằng xuống dòng cho điều kiện OR."
+antennaKeywordsDescription: "Phân cách bằng dấu cách cho điều kiện AND hoặc bằng xuống\
+  \ dòng cho điều kiện OR."
 notifyAntenna: "Thông báo có tút mới"
 withFileAntenna: "Chỉ những tút có media"
 enableServiceworker: "Bật ServiceWorker"
@@ -430,7 +456,8 @@ invitationCode: "Mã mời"
 checking: "Đang kiểm tra..."
 available: "Khả dụng"
 unavailable: "Không khả dụng"
-usernameInvalidFormat: "Bạn có thể dùng viết hoa/viết thường, chữ số, và dấu gạch dưới."
+usernameInvalidFormat: "Bạn có thể dùng viết hoa/viết thường, chữ số, và dấu gạch\
+  \ dưới."
 tooShort: "Quá ngắn"
 tooLong: "Quá dài"
 weakPassword: "Mật khẩu yếu"
@@ -439,7 +466,8 @@ strongPassword: "Mật khẩu mạnh"
 passwordMatched: "Trùng khớp"
 passwordNotMatched: "Không trùng khớp"
 signinWith: "Đăng nhập bằng {x}"
-signinFailed: "Không thể đăng nhập. Vui lòng kiểm tra tên người dùng và mật khẩu của bạn."
+signinFailed: "Không thể đăng nhập. Vui lòng kiểm tra tên người dùng và mật khẩu của\
+  \ bạn."
 tapSecurityKey: "Nhấn mã bảo mật của bạn"
 or: "Hoặc"
 language: "Ngôn ngữ"
@@ -478,15 +506,21 @@ showFeaturedNotesInTimeline: "Hiện tút nổi bật trong bảng tin"
 objectStorage: "Đối tượng lưu trữ"
 useObjectStorage: "Dùng đối tượng lưu trữ"
 objectStorageBaseUrl: "Base URL"
-objectStorageBaseUrlDesc: "URL được sử dụng làm tham khảo. Chỉ định URL của CDN hoặc Proxy của bạn nếu bạn đang sử dụng. Với S3 dùng 'https://<bucket>.s3.amazonaws.com', còn GCS hoặc dịch vụ tương tự dùng 'https://storage.googleapis.com/<bucket>', etc."
+objectStorageBaseUrlDesc: "URL được sử dụng làm tham khảo. Chỉ định URL của CDN hoặc\
+  \ Proxy của bạn nếu bạn đang sử dụng. Với S3 dùng 'https://<bucket>.s3.amazonaws.com',\
+  \ còn GCS hoặc dịch vụ tương tự dùng 'https://storage.googleapis.com/<bucket>',\
+  \ etc."
 objectStorageBucket: "Bucket"
 objectStorageBucketDesc: "Nhập tên bucket dùng ở nhà cung cấp của bạn."
 objectStoragePrefix: "Tiền tố"
-objectStoragePrefixDesc: "Các tập tin sẽ được lưu trữ trong các thư mục có tiền tố này."
+objectStoragePrefixDesc: "Các tập tin sẽ được lưu trữ trong các thư mục có tiền tố\
+  \ này."
 objectStorageEndpoint: "Đầu cuối"
-objectStorageEndpointDesc: "Để trống nếu bạn đang dùng AWS S3, nếu không thì chỉ định đầu cuối là '<host>' hoặc '<host>:<port>', tùy thuộc vào nhà cung cấp dịch vụ."
+objectStorageEndpointDesc: "Để trống nếu bạn đang dùng AWS S3, nếu không thì chỉ định\
+  \ đầu cuối là '<host>' hoặc '<host>:<port>', tùy thuộc vào nhà cung cấp dịch vụ."
 objectStorageRegion: "Khu vực"
-objectStorageRegionDesc: "Nhập một khu vực cụ thể như 'xx-east-1'. Nếu nhà cung cấp dịch vụ của bạn không phân biệt giữa các khu vực, hãy để trống hoặc nhập 'us-east-1'."
+objectStorageRegionDesc: "Nhập một khu vực cụ thể như 'xx-east-1'. Nếu nhà cung cấp\
+  \ dịch vụ của bạn không phân biệt giữa các khu vực, hãy để trống hoặc nhập 'us-east-1'."
 objectStorageUseSSL: "Dùng SSL"
 objectStorageUseSSLDesc: "Tắt nếu bạn không dùng HTTPS để kết nối API"
 objectStorageUseProxy: "Kết nối thông qua Proxy"
@@ -518,18 +552,22 @@ sort: "Sắp xếp"
 ascendingOrder: "Tăng dần"
 descendingOrder: "Giảm dần"
 scratchpad: "Scratchpad"
-scratchpadDescription: "Scratchpad cung cấp môi trường cho các thử nghiệm AiScript. Bạn có thể viết, thực thi và kiểm tra kết quả tương tác với FoundKey trong đó."
+scratchpadDescription: "Scratchpad cung cấp môi trường cho các thử nghiệm AiScript.\
+  \ Bạn có thể viết, thực thi và kiểm tra kết quả tương tác với FoundKey trong đó."
 output: "Nguồn ra"
 script: "Kịch bản"
 updateRemoteUser: "Cập nhật thông tin người dùng ở máy chủ khác"
 deleteAllFiles: "Xóa toàn bộ tập tin"
 deleteAllFilesConfirm: "Bạn có chắc xóa toàn bộ tập tin?"
 removeAllFollowing: "Ngưng theo dõi tất cả mọi người"
-removeAllFollowingDescription: "Thực hiện điều này sẽ ngưng theo dõi tất cả các tài khoản khỏi {host}. Chỉ thực hiện điều này nếu máy chủ không còn tồn tại."
+removeAllFollowingDescription: "Thực hiện điều này sẽ ngưng theo dõi tất cả các tài\
+  \ khoản khỏi {host}. Chỉ thực hiện điều này nếu máy chủ không còn tồn tại."
 userSuspended: "Người này đã bị vô hiệu hóa."
 userSilenced: "Người này đã bị ẩn"
 yourAccountSuspendedTitle: "Tài khoản bị vô hiệu hóa"
-yourAccountSuspendedDescription: "Tài khoản này đã bị vô hiệu hóa do vi phạm quy tắc máy chủ hoặc điều tương tự. Liên hệ với quản trị viên nếu bạn muốn biết lý do chi tiết hơn. Vui lòng không tạo tài khoản mới."
+yourAccountSuspendedDescription: "Tài khoản này đã bị vô hiệu hóa do vi phạm quy tắc\
+  \ máy chủ hoặc điều tương tự. Liên hệ với quản trị viên nếu bạn muốn biết lý do\
+  \ chi tiết hơn. Vui lòng không tạo tài khoản mới."
 menu: "Menu"
 divider: "Phân chia"
 addItem: "Thêm mục"
@@ -568,13 +606,15 @@ permission: "Cho phép "
 enableAll: "Bật toàn bộ"
 disableAll: "Tắt toàn bộ"
 tokenRequested: "Cấp quyền truy cập vào tài khoản"
-pluginTokenRequestedDescription: "Plugin này sẽ có thể sử dụng các quyền được đặt ở đây."
+pluginTokenRequestedDescription: "Plugin này sẽ có thể sử dụng các quyền được đặt\
+  \ ở đây."
 notificationType: "Loại thông báo"
 edit: "Sửa"
 useStarForReactionFallback: "Dùng ★ nếu emoji biểu cảm không có"
 emailServer: "Email máy chủ"
 enableEmail: "Bật phân phối email"
-emailConfigInfo: "Được dùng để xác minh email của bạn lúc đăng ký hoặc nếu bạn quên mật khẩu của mình"
+emailConfigInfo: "Được dùng để xác minh email của bạn lúc đăng ký hoặc nếu bạn quên\
+  \ mật khẩu của mình"
 email: "Email"
 emailAddress: "Địa chỉ email"
 smtpConfig: "Cấu hình máy chủ SMTP"
@@ -604,10 +644,13 @@ create: "Tạo"
 notificationSetting: "Cài đặt thông báo"
 notificationSettingDesc: "Chọn loại thông báo bạn muốn hiển thị."
 useGlobalSetting: "Dùng thiết lập chung"
-useGlobalSettingDesc: "Nếu được bật, cài đặt thông báo của bạn sẽ được áp dụng. Nếu bị tắt, có thể thực hiện các thiết lập riêng lẻ."
+useGlobalSettingDesc: "Nếu được bật, cài đặt thông báo của bạn sẽ được áp dụng. Nếu\
+  \ bị tắt, có thể thực hiện các thiết lập riêng lẻ."
 other: "Khác"
 regenerateLoginToken: "Tạo lại mã đăng nhập"
-regenerateLoginTokenDescription: "Tạo lại mã nội bộ có thể dùng để đăng nhập. Thông thường hành động này là không cần thiết. Nếu được tạo lại, tất cả các thiết bị sẽ bị đăng xuất."
+regenerateLoginTokenDescription: "Tạo lại mã nội bộ có thể dùng để đăng nhập. Thông\
+  \ thường hành động này là không cần thiết. Nếu được tạo lại, tất cả các thiết bị\
+  \ sẽ bị đăng xuất."
 setMultipleBySeparatingWithSpace: "Tách nhiều mục nhập bằng dấu cách."
 fileIdOrUrl: "ID tập tin hoặc URL"
 behavior: "Thao tác"
@@ -621,13 +664,15 @@ reporter: "Người báo cáo"
 reporteeOrigin: "Bị báo cáo"
 reporterOrigin: "Máy chủ người báo cáo"
 forwardReport: "Chuyển tiếp báo cáo cho máy chủ từ xa"
-forwardReportIsAnonymous: "Thay vì tài khoản của bạn, một tài khoản hệ thống ẩn danh sẽ được hiển thị dưới dạng người báo cáo ở máy chủ từ xa."
+forwardReportIsAnonymous: "Thay vì tài khoản của bạn, một tài khoản hệ thống ẩn danh\
+  \ sẽ được hiển thị dưới dạng người báo cáo ở máy chủ từ xa."
 send: "Gửi"
 abuseMarkAsResolved: "Đánh dấu đã xử lý"
 openInNewTab: "Mở trong tab mới"
 openInSideView: "Mở trong thanh bên"
 defaultNavigationBehaviour: "Thao tác điều hướng mặc định"
-editTheseSettingsMayBreakAccount: "Việc chỉnh sửa các cài đặt này có thể làm hỏng tài khoản của bạn."
+editTheseSettingsMayBreakAccount: "Việc chỉnh sửa các cài đặt này có thể làm hỏng\
+  \ tài khoản của bạn."
 instanceTicker: "Thông tin máy chủ của tút"
 waitingFor: "Đang đợi {x}"
 random: "Ngẫu nhiên"
@@ -639,7 +684,8 @@ createNew: "Tạo mới"
 optional: "Không bắt buộc"
 createNewClip: "Tạo một ghim mới"
 public: "Công khai"
-i18nInfo: "FoundKey đang được các tình nguyện viên dịch sang nhiều thứ tiếng khác nhau. Bạn có thể hỗ trợ tại {link}."
+i18nInfo: "FoundKey đang được các tình nguyện viên dịch sang nhiều thứ tiếng khác\
+  \ nhau. Bạn có thể hỗ trợ tại {link}."
 manageAccessTokens: "Tạo mã truy cập"
 accountInfo: "Thông tin tài khoản"
 notesCount: "Số lượng tút"
@@ -658,12 +704,15 @@ no: "Từ chối"
 driveFilesCount: "Số tập tin trong Ổ đĩa"
 driveUsage: "Dung lượng ổ đĩa"
 noCrawle: "Từ chối lập chỉ mục"
-noCrawleDescription: "Không cho công cụ tìm kiếm lập chỉ mục trang hồ sơ, tút, Trang, etc."
-lockedAccountInfo: "Ghi chú của bạn sẽ hiển thị với bất kỳ ai, trừ khi bạn đặt chế độ hiển thị tút của mình thành \"Chỉ người theo dõi\"."
+noCrawleDescription: "Không cho công cụ tìm kiếm lập chỉ mục trang hồ sơ, tút, Trang,\
+  \ etc."
+lockedAccountInfo: "Ghi chú của bạn sẽ hiển thị với bất kỳ ai, trừ khi bạn đặt chế\
+  \ độ hiển thị tút của mình thành \"Chỉ người theo dõi\"."
 alwaysMarkSensitive: "Luôn đánh dấu NSFW"
 loadRawImages: "Tải ảnh gốc thay vì ảnh thu nhỏ"
 disableShowingAnimatedImages: "Không phát ảnh động"
-verificationEmailSent: "Một email xác minh đã được gửi. Vui lòng nhấn vào liên kết đính kèm để hoàn tất xác minh."
+verificationEmailSent: "Một email xác minh đã được gửi. Vui lòng nhấn vào liên kết\
+  \ đính kèm để hoàn tất xác minh."
 notSet: "Chưa đặt"
 emailVerified: "Email đã được xác minh"
 noteFavoritesCount: "Số lượng tút yêu thích"
@@ -675,14 +724,16 @@ clips: "Ghim"
 experimentalFeatures: "Tính năng thử nghiệm"
 developer: "Nhà phát triển"
 makeExplorable: "Không hiện tôi trong \"Khám phá\""
-makeExplorableDescription: "Nếu bạn tắt, tài khoản của bạn sẽ không hiện trong mục \"Khám phá\"."
+makeExplorableDescription: "Nếu bạn tắt, tài khoản của bạn sẽ không hiện trong mục\
+  \ \"Khám phá\"."
 showGapBetweenNotesInTimeline: "Hiện dải phân cách giữa các tút trên bảng tin"
 duplicate: "Tạo bản sao"
 left: "Bên trái"
 center: "Giữa"
 wide: "Rộng"
 narrow: "Thu hẹp"
-reloadToApplySetting: "Cài đặt này sẽ chỉ áp dụng sau khi tải lại trang. Tải lại ngay bây giờ?"
+reloadToApplySetting: "Cài đặt này sẽ chỉ áp dụng sau khi tải lại trang. Tải lại ngay\
+  \ bây giờ?"
 needReloadToApply: "Cần tải lại để điều này được áp dụng."
 showTitlebar: "Hiện thanh tựa đề"
 clearCache: "Xóa bộ nhớ đệm"
@@ -727,14 +778,16 @@ unlikeConfirm: "Bạn có chắc muốn bỏ thích ?"
 fullView: "Kích thước đầy đủ"
 quitFullView: "Thoát toàn màn hình"
 addDescription: "Thêm mô tả"
-userPagePinTip: "Bạn có thể hiển thị các tút ở đây bằng cách chọn \"Ghim vào hồ sơ\" từ menu của mỗi tút."
+userPagePinTip: "Bạn có thể hiển thị các tút ở đây bằng cách chọn \"Ghim vào hồ sơ\"\
+  \ từ menu của mỗi tút."
 notSpecifiedMentionWarning: "Tút này có đề cập đến những người không mong muốn"
 info: "Giới thiệu"
 userInfo: "Thông tin người dùng"
 unknown: "Chưa biết"
 onlineStatus: "Trạng thái"
 hideOnlineStatus: "Ẩn trạng thái online"
-hideOnlineStatusDescription: "Ẩn trạng thái online của bạn làm giảm sự tiện lợi của một số tính năng như tìm kiếm."
+hideOnlineStatusDescription: "Ẩn trạng thái online của bạn làm giảm sự tiện lợi của\
+  \ một số tính năng như tìm kiếm."
 online: "Online"
 active: "Hoạt động"
 offline: "Offline"
@@ -768,7 +821,8 @@ emailNotConfiguredWarning: "Chưa đặt địa chỉ email."
 ratio: "Tỷ lệ"
 previewNoteText: "Hiện xem trước"
 customCss: "Tùy chỉnh CSS"
-customCssWarn: "Chỉ sử dụng những cài đặt này nếu bạn biết rõ về nó. Việc nhập các giá trị không đúng có thể khiến máy chủ hoạt động không bình thường."
+customCssWarn: "Chỉ sử dụng những cài đặt này nếu bạn biết rõ về nó. Việc nhập các\
+  \ giá trị không đúng có thể khiến máy chủ hoạt động không bình thường."
 global: "Toàn cầu"
 squareAvatars: "Ảnh đại diện vuông"
 sent: "Gửi"
@@ -783,7 +837,8 @@ whatIsNew: "Hiện những thay đổi"
 translate: "Dịch"
 translatedFrom: "Dịch từ {x}"
 accountDeletionInProgress: "Đang xử lý việc xóa tài khoản"
-usernameInfo: "Bạn có thể sử dụng chữ cái (a ~ z, A ~ Z), chữ số (0 ~ 9) hoặc dấu gạch dưới (_). Tên người dùng không thể thay đổi sau này."
+usernameInfo: "Bạn có thể sử dụng chữ cái (a ~ z, A ~ Z), chữ số (0 ~ 9) hoặc dấu\
+  \ gạch dưới (_). Tên người dùng không thể thay đổi sau này."
 keepCw: "Giữ cảnh báo nội dung"
 pubSub: "Tài khoản Chính/Phụ"
 lastCommunication: "Lần giao tiếp cuối"
@@ -798,12 +853,14 @@ filter: "Bộ lọc"
 controlPanel: "Bảng điều khiển"
 manageAccounts: "Quản lý tài khoản"
 makeReactionsPublic: "Đặt lịch sử biểu cảm công khai"
-makeReactionsPublicDescription: "Điều này sẽ hiển thị công khai danh sách tất cả các biểu cảm trước đây của bạn."
+makeReactionsPublicDescription: "Điều này sẽ hiển thị công khai danh sách tất cả các\
+  \ biểu cảm trước đây của bạn."
 classic: "Cổ điển"
 muteThread: "Không quan tâm nữa"
 unmuteThread: "Quan tâm tút này"
 ffVisibility: "Hiển thị Theo dõi/Người theo dõi"
-ffVisibilityDescription: "Quyết định ai có thể xem những người bạn theo dõi và những người theo dõi bạn."
+ffVisibilityDescription: "Quyết định ai có thể xem những người bạn theo dõi và những\
+  \ người theo dõi bạn."
 continueThread: "Tiếp tục xem chuỗi tút"
 deleteAccountConfirm: "Điều này sẽ khiến tài khoản bị xóa vĩnh viễn. Vẫn tiếp tục?"
 incorrectPassword: "Sai mật khẩu."
@@ -845,11 +902,15 @@ _ffVisibility:
 _signup:
   almostThere: "Gần xong rồi"
   emailAddressInfo: "Hãy điền địa chỉ email của bạn. Nó sẽ không được công khai."
-  emailSent: "Một email xác minh đã được gửi đến địa chỉ email ({email}) của bạn. Vui lòng nhấn vào liên kết trong đó để hoàn tất việc tạo tài khoản."
+  emailSent: "Một email xác minh đã được gửi đến địa chỉ email ({email}) của bạn.\
+    \ Vui lòng nhấn vào liên kết trong đó để hoàn tất việc tạo tài khoản."
 _accountDelete:
   accountDelete: "Xóa tài khoản"
-  mayTakeTime: "Vì xóa tài khoản là một quá trình tốn nhiều tài nguyên nên có thể mất một khoảng thời gian để hoàn thành, tùy thuộc vào lượng nội dung bạn đã tạo và số lượng tập tin bạn đã tải lên."
-  sendEmail: "Sau khi hoàn tất việc xóa tài khoản, một email sẽ được gửi đến địa chỉ email đã đăng ký tài khoản này."
+  mayTakeTime: "Vì xóa tài khoản là một quá trình tốn nhiều tài nguyên nên có thể\
+    \ mất một khoảng thời gian để hoàn thành, tùy thuộc vào lượng nội dung bạn đã\
+    \ tạo và số lượng tập tin bạn đã tải lên."
+  sendEmail: "Sau khi hoàn tất việc xóa tài khoản, một email sẽ được gửi đến địa chỉ\
+    \ email đã đăng ký tài khoản này."
   requestAccountDelete: "Yêu cầu xóa tài khoản"
   started: "Đang bắt đầu xóa tài khoản."
   inProgress: "Đang xóa dần tài khoản."
@@ -857,9 +918,12 @@ _ad:
   back: "Quay lại"
   reduceFrequencyOfThisAd: "Hiện ít lại"
 _forgotPassword:
-  enterEmail: "Nhập địa chỉ email bạn đã sử dụng để đăng ký. Một liên kết mà bạn có thể đặt lại mật khẩu của mình sau đó sẽ được gửi đến nó."
-  ifNoEmail: "Nếu bạn không sử dụng email lúc đăng ký, vui lòng liên hệ với quản trị viên."
-  contactAdmin: "Máy chủ này không hỗ trợ sử dụng địa chỉ email, vui lòng liên hệ với quản trị viên để đặt lại mật khẩu của bạn."
+  enterEmail: "Nhập địa chỉ email bạn đã sử dụng để đăng ký. Một liên kết mà bạn có\
+    \ thể đặt lại mật khẩu của mình sau đó sẽ được gửi đến nó."
+  ifNoEmail: "Nếu bạn không sử dụng email lúc đăng ký, vui lòng liên hệ với quản trị\
+    \ viên."
+  contactAdmin: "Máy chủ này không hỗ trợ sử dụng địa chỉ email, vui lòng liên hệ\
+    \ với quản trị viên để đặt lại mật khẩu của bạn."
 _gallery:
   my: "Kho Ảnh"
   liked: "Tút Đã Thích"
@@ -892,7 +956,8 @@ _nsfw:
   force: "Ẩn mọi media"
 _mfm:
   cheatSheet: "MFM Cheatsheet"
-  intro: "MFM là ngôn ngữ phát triển độc quyền của FoundKey có thể được sử dụng ở nhiều nơi. Tại đây bạn có thể xem danh sách tất cả các cú pháp MFM có sẵn."
+  intro: "MFM là ngôn ngữ phát triển độc quyền của FoundKey có thể được sử dụng ở\
+    \ nhiều nơi. Tại đây bạn có thể xem danh sách tất cả các cú pháp MFM có sẵn."
   dummy: "FoundKey mở rộng thế giới Fediverse"
   mention: "Nhắc đến"
   mentionDescription: "Bạn có thể nhắc đến ai đó bằng cách sử dụng @tên người dùng."
@@ -911,11 +976,13 @@ _mfm:
   inlineCode: "Mã (Trong dòng)"
   inlineCodeDescription: "Hiển thị tô sáng cú pháp trong dòng cho mã (chương trình)."
   blockCode: "Mã (Khối)"
-  blockCodeDescription: "Hiển thị tô sáng cú pháp cho mã nhiều dòng (chương trình) trong một khối."
+  blockCodeDescription: "Hiển thị tô sáng cú pháp cho mã nhiều dòng (chương trình)\
+    \ trong một khối."
   inlineMath: "Toán học (Trong dòng)"
   inlineMathDescription: "Hiển thị công thức toán (KaTeX) trong dòng"
   blockMath: "Toán học (Khối)"
-  blockMathDescription: "Hiển thị công thức toán học nhiều dòng (KaTeX) trong một khối"
+  blockMathDescription: "Hiển thị công thức toán học nhiều dòng (KaTeX) trong một\
+    \ khối"
   quote: "Trích dẫn"
   quoteDescription: "Hiển thị nội dung dạng lời trích dạng."
   emoji: "Tùy chỉnh emoji"
@@ -979,15 +1046,20 @@ _menuDisplay:
   hide: "Ẩn"
 _wordMute:
   muteWords: "Ẩn từ ngữ"
-  muteWordsDescription: "Separate with spaces for an AND condition or with line breaks for an OR condition."
-  muteWordsDescription2: "Bao quanh các từ khóa bằng dấu gạch chéo để sử dụng cụm từ thông dụng."
+  muteWordsDescription: "Separate with spaces for an AND condition or with line breaks\
+    \ for an OR condition."
+  muteWordsDescription2: "Bao quanh các từ khóa bằng dấu gạch chéo để sử dụng cụm\
+    \ từ thông dụng."
   softDescription: "Ẩn các tút phù hợp điều kiện đã đặt khỏi bảng tin."
-  hardDescription: "Ngăn các tút đáp ứng các điều kiện đã đặt xuất hiện trên bảng tin. Lưu ý, những tút này sẽ không được thêm vào bảng tin ngay cả khi các điều kiện được thay đổi."
+  hardDescription: "Ngăn các tút đáp ứng các điều kiện đã đặt xuất hiện trên bảng\
+    \ tin. Lưu ý, những tút này sẽ không được thêm vào bảng tin ngay cả khi các điều\
+    \ kiện được thay đổi."
   soft: "Yếu"
   hard: "Mạnh"
   mutedNotes: "Những tút đã ẩn"
 _instanceMute:
-  instanceMuteDescription: "Thao tác này sẽ ẩn mọi tút/lượt đăng lại từ các máy chủ được liệt kê, bao gồm cả những tút  dạng trả lời từ máy chủ bị ẩn."
+  instanceMuteDescription: "Thao tác này sẽ ẩn mọi tút/lượt đăng lại từ các máy chủ\
+    \ được liệt kê, bao gồm cả những tút  dạng trả lời từ máy chủ bị ẩn."
   instanceMuteDescription2: "Tách bằng cách xuống dòng"
   title: "Ẩn tút từ những máy chủ đã liệt kê."
   heading: "Danh sách những máy chủ bị ẩn"
@@ -1019,7 +1091,8 @@ _theme:
   darken: "Độ tối"
   lighten: "Độ sáng"
   inputConstantName: "Nhập tên cho hằng số này"
-  importInfo: "Nếu bạn nhập mã theme ở đây, bạn có thể nhập mã đó vào trình chỉnh sửa theme"
+  importInfo: "Nếu bạn nhập mã theme ở đây, bạn có thể nhập mã đó vào trình chỉnh\
+    \ sửa theme"
   deleteConstantConfirm: "Bạn có chắc muốn xóa hằng số {const} không?"
   keys:
     accent: "Màu phụ"
@@ -1091,36 +1164,54 @@ _time:
 _tutorial:
   title: "Cách dùng FoundKey"
   step1_1: "Xin chào!"
-  step1_2: "Trang này gọi là \"bảng tin\". Nó hiện \"tút\" từ những người mà bạn \"theo dõi\" theo thứ tự thời gian."
-  step1_3: "Bảng tin của bạn đang trống, bởi vì bạn chưa đăng tút nào hoặc chưa theo dõi ai."
-  step2_1: "Hãy hoàn thành việc thiết lập hồ sơ của bạn trước khi viết tút hoặc theo dõi bất kỳ ai."
-  step2_2: "Cung cấp một số thông tin giới thiệu bạn là ai sẽ giúp người khác dễ dàng biết được họ muốn đọc tút hay theo dõi bạn."
+  step1_2: "Trang này gọi là \"bảng tin\". Nó hiện \"tút\" từ những người mà bạn \"\
+    theo dõi\" theo thứ tự thời gian."
+  step1_3: "Bảng tin của bạn đang trống, bởi vì bạn chưa đăng tút nào hoặc chưa theo\
+    \ dõi ai."
+  step2_1: "Hãy hoàn thành việc thiết lập hồ sơ của bạn trước khi viết tút hoặc theo\
+    \ dõi bất kỳ ai."
+  step2_2: "Cung cấp một số thông tin giới thiệu bạn là ai sẽ giúp người khác dễ dàng\
+    \ biết được họ muốn đọc tút hay theo dõi bạn."
   step3_1: "Hoàn thành thiết lập hồ sơ của bạn?"
-  step3_2: "Sau đó, hãy thử đăng một tút tiếp theo. Bạn có thể làm như vậy bằng cách nhấn vào nút có biểu tượng bút chì trên màn hình."
+  step3_2: "Sau đó, hãy thử đăng một tút tiếp theo. Bạn có thể làm như vậy bằng cách\
+    \ nhấn vào nút có biểu tượng bút chì trên màn hình."
   step3_3: "Nhập nội dung vào khung soạn thảo và nhấn nút đăng ở góc trên."
   step3_4: "Chưa biết nói gì? Thử \"Tôi mới tham gia FoundKey\"!"
   step4_1: "Đăng xong tút đầu tiên của bạn?"
   step4_2: "De! Tút đầu tiên của bạn đã hiện trên bảng tin."
-  step5_1: "Bây giờ, hãy thử làm cho bảng tin của bạn sinh động hơn bằng cách theo dõi những người khác."
-  step5_2: "{feature} sẽ hiển thị cho bạn các tút nổi bật trên máy chủ này. {explore} sẽ cho phép bạn tìm thấy những người dùng thú vị. Hãy thử tìm những người bạn muốn theo dõi ở đó!"
-  step5_3: "Để theo dõi những người dùng khác, hãy nhấn vào ảnh đại diện của họ và nhấn nút \"Theo dõi\" trên hồ sơ của họ."
-  step5_4: "Nếu người dùng khác có biểu tượng ổ khóa bên cạnh tên của họ, có thể mất một khoảng thời gian để người dùng đó phê duyệt yêu cầu theo dõi của bạn theo cách thủ công."
-  step6_1: "Bạn sẽ có thể xem tút của những người dùng khác trên bảng tin của mình ngay bây giờ."
-  step6_2: "Bạn cũng có thể đặt \"biểu cảm\" trên tút của người khác để phản hồi nhanh chúng."
-  step6_3: "Để đính kèm \"biểu cảm\", hãy nhấn vào dấu \"+\" trên tút của người dùng khác rồi chọn biểu tượng cảm xúc mà bạn muốn dùng."
+  step5_1: "Bây giờ, hãy thử làm cho bảng tin của bạn sinh động hơn bằng cách theo\
+    \ dõi những người khác."
+  step5_2: "{feature} sẽ hiển thị cho bạn các tút nổi bật trên máy chủ này. {explore}\
+    \ sẽ cho phép bạn tìm thấy những người dùng thú vị. Hãy thử tìm những người bạn\
+    \ muốn theo dõi ở đó!"
+  step5_3: "Để theo dõi những người dùng khác, hãy nhấn vào ảnh đại diện của họ và\
+    \ nhấn nút \"Theo dõi\" trên hồ sơ của họ."
+  step5_4: "Nếu người dùng khác có biểu tượng ổ khóa bên cạnh tên của họ, có thể mất\
+    \ một khoảng thời gian để người dùng đó phê duyệt yêu cầu theo dõi của bạn theo\
+    \ cách thủ công."
+  step6_1: "Bạn sẽ có thể xem tút của những người dùng khác trên bảng tin của mình\
+    \ ngay bây giờ."
+  step6_2: "Bạn cũng có thể đặt \"biểu cảm\" trên tút của người khác để phản hồi nhanh\
+    \ chúng."
+  step6_3: "Để đính kèm \"biểu cảm\", hãy nhấn vào dấu \"+\" trên tút của người dùng\
+    \ khác rồi chọn biểu tượng cảm xúc mà bạn muốn dùng."
   step7_1: "Xin chúc mừng! Bây giờ bạn đã hoàn thành phần hướng dẫn cơ bản của FoundKey."
   step7_2: "Nếu bạn muốn tìm hiểu thêm về FoundKey, hãy thử phần {help}."
-  step7_3: "Bây giờ, chúc may mắn và vui vẻ với FoundKey! 🚀"
+  step7_3: "Bây giờ, chúc may mắn và vui vẻ với FoundKey! \U0001F680"
 _2fa:
   alreadyRegistered: "Bạn đã đăng ký thiết bị xác minh 2 bước."
   registerDevice: "Đăng ký một thiết bị"
   registerKey: "Đăng ký một mã bảo vệ"
-  step1: "Trước tiên, hãy cài đặt một ứng dụng xác minh (chẳng hạn như {a} hoặc {b}) trên thiết bị của bạn."
+  step1: "Trước tiên, hãy cài đặt một ứng dụng xác minh (chẳng hạn như {a} hoặc {b})\
+    \ trên thiết bị của bạn."
   step2: "Sau đó, quét mã QR hiển thị trên màn hình này."
   step2Url: "Bạn cũng có thể nhập URL này nếu sử dụng một chương trình máy tính:"
   step3: "Nhập mã token do ứng dụng của bạn cung cấp để hoàn tất thiết lập."
-  step4: "Kể từ bây giờ, những lần đăng nhập trong tương lai sẽ yêu cầu mã token đăng nhập đó."
-  securityKeyInfo: "Bên cạnh xác minh bằng vân tay hoặc mã PIN, bạn cũng có thể thiết lập xác minh thông qua khóa bảo mật phần cứng hỗ trợ FIDO2 để bảo mật hơn nữa cho tài khoản của mình."
+  step4: "Kể từ bây giờ, những lần đăng nhập trong tương lai sẽ yêu cầu mã token đăng\
+    \ nhập đó."
+  securityKeyInfo: "Bên cạnh xác minh bằng vân tay hoặc mã PIN, bạn cũng có thể thiết\
+    \ lập xác minh thông qua khóa bảo mật phần cứng hỗ trợ FIDO2 để bảo mật hơn nữa\
+    \ cho tài khoản của mình."
 _permissions:
   "read:account": "Xem thông tin tài khoản của bạn"
   "write:account": "Sửa thông tin tài khoản của bạn"
@@ -1156,7 +1247,8 @@ _permissions:
   "write:gallery-likes": "Sửa danh sách các tút đã thích trong thư viện của tôi"
 _auth:
   shareAccess: "Bạn có muốn cho phép \"{name}\" truy cập vào tài khoản này không?"
-  shareAccessAsk: "Bạn có chắc muốn cho phép ứng dụng này truy cập vào tài khoản của mình không?"
+  shareAccessAsk: "Bạn có chắc muốn cho phép ứng dụng này truy cập vào tài khoản của\
+    \ mình không?"
   permissionAsk: "Ứng dụng này yêu cầu các quyền sau"
   pleaseGoBack: "Vui lòng quay lại ứng dụng"
   callback: "Quay lại ứng dụng"
@@ -1195,6 +1287,7 @@ _widgets:
   serverMetric: "Thống kê máy chủ"
   aiscript: "AiScript console"
   aichan: "Ai"
+  rssMarquee: ''
 _cw:
   hide: "Ẩn"
   show: "Tải thêm"
@@ -1251,7 +1344,8 @@ _profile:
   youCanIncludeHashtags: "Bạn có thể dùng hashtag trong tiểu sử."
   metadata: "Thông tin bổ sung"
   metadataEdit: "Sửa thông tin bổ sung"
-  metadataDescription: "Sử dụng phần này, bạn có thể hiển thị các mục thông tin bổ sung trong hồ sơ của mình."
+  metadataDescription: "Sử dụng phần này, bạn có thể hiển thị các mục thông tin bổ\
+    \ sung trong hồ sơ của mình."
   metadataLabel: "Nhãn"
   metadataContent: "Nội dung"
   changeAvatar: "Đổi ảnh đại diện"
@@ -1384,3 +1478,35 @@ _deck:
     list: "Danh sách"
     mentions: "Lượt nhắc"
     direct: "Nhắn riêng"
+attachmentRequired: ''
+showLess: ''
+cropImage: ''
+cropImageAsk: ''
+recentNHours: ''
+recentNDays: ''
+isSystemAccount: ''
+typeToConfirm: ''
+deleteAccount: ''
+numberOfPageCache: ''
+numberOfPageCacheDescription: ''
+document: ''
+file: ''
+unclip: ''
+confirmToUnclipAlreadyClippedNote: ''
+noEmailServerWarning: ''
+thereIsUnresolvedAbuseReportWarning: ''
+recommended: ''
+check: ''
+maxUnicodeEmojiPicker: ''
+unlimited: ''
+maxCustomEmojiPicker: ''
+_services:
+  _discord:
+    connected: ''
+    disconnected: ''
+  _twitter:
+    connected: ''
+    disconnected: ''
+  _github:
+    connected: ''
+    disconnected: ''
