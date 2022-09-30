@@ -254,6 +254,5 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-followersCount: ''
 _postForm: {}
 _services: {}
