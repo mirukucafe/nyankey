@@ -98,12 +98,7 @@ _deck:
   _columns:
     notifications: "Ilɣuyen"
     list: "Tibdarin"
-emojiUrl: ''
 light: ''
-markAsReadAllTalkMessages: ''
 addItem: ''
-contact: ''
 muteThread: ''
-_ago:
-  daysAgo: ''
 _services: {}

@@ -752,8 +752,5 @@ _deck:
     antenna: "Antene"
     list: "Liste"
     mentions: "Mențiuni"
-usageAmount: ''
 unclip: ''
-_2fa:
-  step3: ''
 _services: {}

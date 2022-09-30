@@ -254,14 +254,9 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-start: ''
 passwordLessLogin: ''
-descendingOrder: ''
 followersCount: ''
-translate: ''
 _nsfw:
   ignore: ''
-_poll:
-  remainingHours: ''
 _postForm: {}
 _services: {}

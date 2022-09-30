@@ -389,12 +389,8 @@ selectAntenna: Kies een antenne
 selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
-twoStepAuthentication: ''
 output: ''
-receivedReactionsCount: ''
 whatIsNew: ''
-_instanceTicker:
-  none: ''
 _pages:
   unlike: ''
 _services: {}

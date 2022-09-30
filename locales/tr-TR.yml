@@ -65,18 +65,11 @@ _deck:
   _columns:
     notifications: "Bildirim"
     tl: "Zaman çizelgesi"
-_exportOrImport:
-  muteList: ''
 _notification: {}
 _services: {}
 _email:
   _receiveFollowRequest:
     title: ''
-_ago:
-  monthsAgo: ''
 cacheRemoteFiles: ''
-lightThemes: ''
 markAsReadAllNotifications: ''
-deleteAllFilesConfirm: ''
 driveFilesCount: ''
-pubSub: ''

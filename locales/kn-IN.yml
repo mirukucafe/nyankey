@@ -85,18 +85,11 @@ _deck:
     notifications: "ಅಧಿಸೂಚನೆಗಳು"
     tl: "ಸಮಯಸಾಲು"
     mentions: "ಹೆಸರಿಸಿದ"
-federation: ''
 avatar: ''
-quoteAttached: ''
 description: ''
-center: ''
 voteConfirm: ''
-_theme:
-  keys:
-    infoBg: ''
+_theme: {}
 _2fa:
   step2: ''
 _postForm: {}
-_pages:
-  fontSerif: ''
 _services: {}

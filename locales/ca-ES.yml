@@ -173,13 +173,8 @@ _deck:
     list: "Llistes"
     mentions: "Mencions"
 _services: {}
-_channel:
-  following: ''
 _postForm: {}
 _pages:
   created: ''
-instanceFollowers: ''
 recaptchaSiteKey: ''
-numberOfDays: ''
 other: ''
-hideOnlineStatus: ''

@@ -317,12 +317,8 @@ _deck:
     tl: "Tidslinje"
     list: "Listor"
     mentions: "Omnämningar"
-_permissions:
-  "write:account": ''
 _services:
   _discord:
     disconnected: ''
-antennaKeywords: ''
 objectStorageBucketDesc: ''
-abuseReports: ''
 selectAccount: ''

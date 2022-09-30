@@ -1234,6 +1234,4 @@ _deck:
     list: "Listy"
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
-_services:
-  _twitter:
-    connected: ''
+_services: {}

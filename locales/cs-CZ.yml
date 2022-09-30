@@ -546,10 +546,6 @@ _deck:
     list: "Seznamy"
     mentions: "Zmínění"
 _services: {}
-_forgotPassword:
-  ifNoEmail: ''
 _postForm:
   quotePlaceholder: ''
-undeck: ''
 emailNotification: ''
-confirmToUnclipAlreadyClippedNote: ''
