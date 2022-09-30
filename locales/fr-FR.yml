@@ -1,7 +1,10 @@
----
 _lang_: "Français"
 headlineMisskey: "Réseau relié par des notes"
-introMisskey: "Bienvenue ! FoundKey est un service de microblogage décentralisé, libre et ouvert.\nÉcrivez des « notes » et partagez ce qui se passe à l’instant présent, autour de vous avec les autres 📡\nLa fonction « réactions », vous permet également d’ajouter une réaction rapide aux notes des autres utilisateur·rice·s 👍\nExplorons un nouveau monde 🚀"
+introMisskey: "Bienvenue ! FoundKey est un service de microblogage décentralisé, libre\
+  \ et ouvert.\nÉcrivez des « notes » et partagez ce qui se passe à l’instant présent,\
+  \ autour de vous avec les autres \U0001F4E1\nLa fonction « réactions », vous permet\
+  \ également d’ajouter une réaction rapide aux notes des autres utilisateur·rice·s\
+  \ \U0001F44D\nExplorons un nouveau monde \U0001F680"
 monthAndDay: "{day}/{month}"
 search: "Rechercher"
 notifications: "Notifications"
@@ -23,7 +26,8 @@ otherSettings: "Paramètres avancés"
 openInWindow: "Ouvrir dans une nouvelle fenêtre"
 profile: "Profil"
 timeline: "Fil"
-noAccountDescription: "L’utilisateur·rice n’a pas encore renseigné de biographie de présentation sur son profil."
+noAccountDescription: "L’utilisateur·rice n’a pas encore renseigné de biographie de\
+  \ présentation sur son profil."
 login: "Se connecter"
 loggingIn: "Connexion en cours"
 logout: "Se déconnecter"
@@ -44,7 +48,8 @@ copyContent: "Copier le contenu"
 copyLink: "Copier le lien"
 delete: "Supprimer"
 deleteAndEdit: "Supprimer et réécrire"
-deleteAndEditConfirm: "Êtes-vous sûr·e de vouloir supprimer cette note et la reformuler ? Vous perdrez toutes les réactions, renotes et réponses y afférentes."
+deleteAndEditConfirm: "Êtes-vous sûr·e de vouloir supprimer cette note et la reformuler\
+  \ ? Vous perdrez toutes les réactions, renotes et réponses y afférentes."
 addToList: "Ajouter à une liste"
 sendMessage: "Envoyer un message"
 copyUsername: "Copier le nom d’utilisateur·rice"
@@ -63,9 +68,11 @@ import: "Importer"
 export: "Exporter"
 files: "Fichiers"
 download: "Télécharger"
-driveFileDeleteConfirm: "Êtes-vous sûr·e de vouloir supprimer le fichier \"{name}\" ? Les notes liées à ce fichier seront aussi supprimées."
+driveFileDeleteConfirm: "Êtes-vous sûr·e de vouloir supprimer le fichier \"{name}\"\
+  \ ? Les notes liées à ce fichier seront aussi supprimées."
 unfollowConfirm: "Désirez-vous vous désabonner de {name} ?"
-exportRequested: "Vous avez demandé une exportation. L’opération pourrait prendre un peu de temps. Une terminée, le fichier résultant sera ajouté au Drive."
+exportRequested: "Vous avez demandé une exportation. L’opération pourrait prendre\
+  \ un peu de temps. Une terminée, le fichier résultant sera ajouté au Drive."
 importRequested: "Vous avez initié un import. Cela pourrait prendre un peu de temps."
 lists: "Listes"
 noLists: "Vous n’avez aucune liste"
@@ -80,9 +87,12 @@ error: "Erreur"
 somethingHappened: "Une erreur est survenue"
 retry: "Réessayer"
 pageLoadError: "Le chargement de la page a échoué"
-pageLoadErrorDescription: "Cela est généralement causé par le cache du navigateur ou par un problème réseau. Veuillez vider votre cache ou attendre un peu et réessayer."
-serverIsDead: "Le serveur ne répond pas. Patientez quelques instants puis essayez à nouveau."
-youShouldUpgradeClient: "Si la page ne s'affiche pas correctement, rechargez-la pour mettre votre client à jour."
+pageLoadErrorDescription: "Cela est généralement causé par le cache du navigateur\
+  \ ou par un problème réseau. Veuillez vider votre cache ou attendre un peu et réessayer."
+serverIsDead: "Le serveur ne répond pas. Patientez quelques instants puis essayez\
+  \ à nouveau."
+youShouldUpgradeClient: "Si la page ne s'affiche pas correctement, rechargez-la pour\
+  \ mettre votre client à jour."
 enterListName: "Nom de la liste"
 privacy: "Confidentialité"
 makeFollowManuallyApprove: "Accepter manuellement les demandes d’abonnement"
@@ -107,7 +117,8 @@ sensitive: "Contenu sensible"
 add: "Ajouter"
 reaction: "Réactions"
 reactionSetting: "Réactions à afficher dans le sélecteur de réactions"
-reactionSettingDescription2: "Déplacer pour réorganiser, cliquer pour effacer, utiliser « + » pour ajouter."
+reactionSettingDescription2: "Déplacer pour réorganiser, cliquer pour effacer, utiliser\
+  \ « + » pour ajouter."
 attachCancel: "Supprimer le fichier attaché"
 markAsSensitive: "Marquer comme sensible"
 unmarkAsSensitive: "Supprimer le marquage comme sensible"
@@ -135,13 +146,20 @@ emojiUrl: "URL de l’émoji"
 addEmoji: "Ajouter un émoji"
 settingGuide: "Configuration proposée"
 cacheRemoteFiles: "Mise en cache des fichiers distants"
-cacheRemoteFilesDescription: "Lorsque cette option est désactivée, les fichiers distants sont chargés directement depuis l’instance distante. La désactiver diminuera certes l’utilisation de l’espace de stockage local mais augmentera le trafic réseau puisque les miniatures ne seront plus générées."
+cacheRemoteFilesDescription: "Lorsque cette option est désactivée, les fichiers distants\
+  \ sont chargés directement depuis l’instance distante. La désactiver diminuera certes\
+  \ l’utilisation de l’espace de stockage local mais augmentera le trafic réseau puisque\
+  \ les miniatures ne seront plus générées."
 flagAsBot: "Ce compte est un robot"
-flagAsBotDescription: "Si ce compte est géré de manière automatisée, choisissez cette option. Si elle est activée, elle agira comme un marqueur pour les autres développeurs afin d'éviter des chaînes d'interaction sans fin avec d'autres robots et d'ajuster les systèmes internes de FoundKey pour traiter ce compte comme un robot."
+flagAsBotDescription: "Si ce compte est géré de manière automatisée, choisissez cette\
+  \ option. Si elle est activée, elle agira comme un marqueur pour les autres développeurs\
+  \ afin d'éviter des chaînes d'interaction sans fin avec d'autres robots et d'ajuster\
+  \ les systèmes internes de FoundKey pour traiter ce compte comme un robot."
 flagAsCat: "Ce compte est un chat"
 flagAsCatDescription: "Activer l'option \" Je suis un chat \" pour ce compte."
 flagShowTimelineReplies: "Afficher les réponses dans le fil"
-autoAcceptFollowed: "Accepter automatiquement les demandes d’abonnement venant d’utilisateur·rice·s que vous suivez"
+autoAcceptFollowed: "Accepter automatiquement les demandes d’abonnement venant d’utilisateur·rice·s\
+  \ que vous suivez"
 addAccount: "Ajouter un compte"
 loginFailed: "Échec de la connexion"
 showOnRemote: "Voir sur l’instance distante"
@@ -153,7 +171,12 @@ searchWith: "Recherche : {q}"
 youHaveNoLists: "Vous n’avez aucune liste"
 followConfirm: "Êtes-vous sûr·e de vouloir suivre {name} ?"
 proxyAccount: "Compte proxy"
-proxyAccountDescription: "Un compte proxy se comporte, dans certaines conditions, comme un·e abonné·e distant·e pour les utilisateurs d'autres instances. Par exemple, quand un·e utilisateur·rice ajoute un·e utilisateur·rice distant·e à une liste, ses notes ne seront pas visibles sur l'instance si personne ne suit cet·te utilisateur·rice. Le compte proxy va donc suivre cet·te utilisateur·rice pour que ses notes soient acheminées."
+proxyAccountDescription: "Un compte proxy se comporte, dans certaines conditions,\
+  \ comme un·e abonné·e distant·e pour les utilisateurs d'autres instances. Par exemple,\
+  \ quand un·e utilisateur·rice ajoute un·e utilisateur·rice distant·e à une liste,\
+  \ ses notes ne seront pas visibles sur l'instance si personne ne suit cet·te utilisateur·rice.\
+  \ Le compte proxy va donc suivre cet·te utilisateur·rice pour que ses notes soient\
+  \ acheminées."
 host: "Serveur distant"
 selectUser: "Sélectionner un·e utilisateur·rice"
 recipient: "Destinataire"
@@ -184,11 +207,14 @@ instanceInfo: "Informations sur l’instance"
 statistics: "Statistiques"
 clearQueue: "Vider la file d’attente"
 clearQueueConfirmTitle: "Êtes-vous sûr·e de vouloir vider la file d’attente ?"
-clearQueueConfirmText: "Les notes non distribuées ne seront pas délivrées. Normalement, vous n'avez pas besoin d'effectuer cette opération."
+clearQueueConfirmText: "Les notes non distribuées ne seront pas délivrées. Normalement,\
+  \ vous n'avez pas besoin d'effectuer cette opération."
 clearCachedFiles: "Vider le cache"
-clearCachedFilesConfirm: "Êtes-vous sûr·e de vouloir vider tout le cache de fichiers distants ?"
+clearCachedFilesConfirm: "Êtes-vous sûr·e de vouloir vider tout le cache de fichiers\
+  \ distants ?"
 blockedInstances: "Instances bloquées"
-blockedInstancesDescription: "Listez les instances que vous désirez bloquer, une par ligne. Ces instances ne seront plus en capacité d'interagir avec votre instance."
+blockedInstancesDescription: "Listez les instances que vous désirez bloquer, une par\
+  \ ligne. Ces instances ne seront plus en capacité d'interagir avec votre instance."
 muteAndBlock: "Masqué·e·s / Bloqué·e·s"
 mutedUsers: "Utilisateur·rice·s en sourdine"
 blockedUsers: "Utilisateur·rice·s bloqué·e·s"
@@ -241,7 +267,8 @@ fromUrl: "Depuis une URL"
 uploadFromUrl: "Téléverser via une URL"
 uploadFromUrlDescription: "URL du fichier que vous souhaitez téléverser"
 uploadFromUrlRequested: "Téléversement demandé"
-uploadFromUrlMayTakeTime: "Le téléversement de votre fichier peut prendre un certain temps."
+uploadFromUrlMayTakeTime: "Le téléversement de votre fichier peut prendre un certain\
+  \ temps."
 explore: "Découvrir"
 messageRead: "Lu"
 noMoreHistory: "Il n’y a plus d’historique"
@@ -251,7 +278,8 @@ agreeTo: "J’accepte {0}"
 tos: "les conditions d’utilisation"
 start: "Commencer"
 home: "Principal"
-remoteUserCaution: "Les informations de ce compte risqueraient d’être incomplètes du fait que l’utilisateur·rice provient d’une instance distante."
+remoteUserCaution: "Les informations de ce compte risqueraient d’être incomplètes\
+  \ du fait que l’utilisateur·rice provient d’une instance distante."
 activity: "Activité"
 images: "Images"
 birthday: "Date de naissance"
@@ -284,7 +312,8 @@ unableToDelete: "Suppression impossible"
 inputNewFileName: "Entrez un nouveau nom de fichier"
 inputNewDescription: "Veuillez entrer une nouvelle description"
 inputNewFolderName: "Entrez un nouveau nom de dossier"
-circularReferenceFolder: "Le dossier de destination est un sous-dossier du dossier que vous souhaitez déplacer."
+circularReferenceFolder: "Le dossier de destination est un sous-dossier du dossier\
+  \ que vous souhaitez déplacer."
 hasChildFilesOrFolders: "Impossible de supprimer ce dossier car il n'est pas vide."
 copyUrl: "Copier l’URL"
 rename: "Renommer"
@@ -318,7 +347,8 @@ connectService: "Connexion"
 disconnectService: "Déconnexion"
 enableLocalTimeline: "Activer le fil local"
 enableGlobalTimeline: "Activer le fil global"
-disablingTimelinesInfo: "Même si vous désactivez ces fils, les administrateur·rice·s et les modérateur·rice·s pourront toujours y accéder."
+disablingTimelinesInfo: "Même si vous désactivez ces fils, les administrateur·rice·s\
+  \ et les modérateur·rice·s pourront toujours y accéder."
 registration: "S’inscrire"
 enableRegistration: "Autoriser les nouvelles inscriptions"
 invite: "Inviter"
@@ -330,9 +360,11 @@ bannerUrl: "URL de l’image de la bannière"
 backgroundImageUrl: "URL de l'image d'arrière-plan"
 basicInfo: "Informations basiques"
 pinnedUsers: "Utilisateur·rice épinglé·e"
-pinnedUsersDescription: "Listez les utilisateur·rice·s que vous souhaitez voir épinglé·e·s sur la page \"Découvrir\", un·e par ligne."
+pinnedUsersDescription: "Listez les utilisateur·rice·s que vous souhaitez voir épinglé·e·s\
+  \ sur la page \"Découvrir\", un·e par ligne."
 pinnedPages: "Pages épinglées"
-pinnedPagesDescription: "Inscrivez le chemin des pages que vous souhaitez épingler en haut de la page de l'instance. Séparez les pages d'un retour à la ligne."
+pinnedPagesDescription: "Inscrivez le chemin des pages que vous souhaitez épingler\
+  \ en haut de la page de l'instance. Séparez les pages d'un retour à la ligne."
 pinnedClipId: "Identifiant du clip épinglé"
 pinnedNotes: "Note épinglée"
 hcaptcha: "hCaptcha"
@@ -343,14 +375,17 @@ recaptcha: "reCAPTCHA"
 enableRecaptcha: "Activer reCAPTCHA"
 recaptchaSiteKey: "Clé du site"
 recaptchaSecretKey: "Clé secrète"
-avoidMultiCaptchaConfirm: "L’utilisation de plusieurs Captchas peut provoquer des interférences. Souhaitez-vous désactiver l’autre Captcha ? Vous pouvez laisser plusieurs Captcha activés en appuyant sur Annuler."
+avoidMultiCaptchaConfirm: "L’utilisation de plusieurs Captchas peut provoquer des\
+  \ interférences. Souhaitez-vous désactiver l’autre Captcha ? Vous pouvez laisser\
+  \ plusieurs Captcha activés en appuyant sur Annuler."
 antennas: "Antennes"
 manageAntennas: "Gestion des antennes"
 name: "Nom"
 antennaSource: "Source de l’antenne"
 antennaKeywords: "Mots clés à recevoir"
 antennaExcludeKeywords: "Mots clés à exclure"
-antennaKeywordsDescription: "Séparer avec des espaces pour la condition AND. Séparer avec un saut de ligne pour une condition OR."
+antennaKeywordsDescription: "Séparer avec des espaces pour la condition AND. Séparer\
+  \ avec un saut de ligne pour une condition OR."
 notifyAntenna: "Je souhaite recevoir les notifications des nouvelles notes"
 withFileAntenna: "Notes ayant des attachements uniquement"
 enableServiceworker: "Activer ServiceWorker"
@@ -361,9 +396,11 @@ connectedTo: "Vous êtes connectés aux services suivants"
 notesAndReplies: "Notes et Réponses"
 withFiles: "Avec fichiers joints"
 silence: "Mettre en sourdine"
-silenceConfirm: "Êtes-vous sûr·e de vouloir mettre l’utilisateur·rice en sourdine ?"
+silenceConfirm: "Êtes-vous sûr·e de vouloir mettre l’utilisateur·rice en sourdine\
+  \ ?"
 unsilence: "Annuler la sourdine"
-unsilenceConfirm: "Êtes-vous sûr·e de vouloir annuler la mise en sourdine de cet·te utilisateur·rice ?"
+unsilenceConfirm: "Êtes-vous sûr·e de vouloir annuler la mise en sourdine de cet·te\
+  \ utilisateur·rice ?"
 popularUsers: "Utilisateur·rice·s populaires"
 recentlyUpdatedUsers: "Utilisateur·rice·s actif·ve·s récemment"
 recentlyRegisteredUsers: "Utilisateur·rice·s récemment inscrit·e·s"
@@ -428,7 +465,8 @@ invitationCode: "Code d’invitation"
 checking: "Vérification en cours..."
 available: "Disponible"
 unavailable: "Non disponible"
-usernameInvalidFormat: "Le nom d'utilisateur peut contenir uniquement des lettres (minuscules et/ou majuscules), des chiffres et des _"
+usernameInvalidFormat: "Le nom d'utilisateur peut contenir uniquement des lettres\
+  \ (minuscules et/ou majuscules), des chiffres et des _"
 tooShort: "Trop court"
 tooLong: "Trop long"
 weakPassword: "Mot de passe faible"
@@ -437,7 +475,8 @@ strongPassword: "Mot de passe fort"
 passwordMatched: "Les mots de passe correspondent"
 passwordNotMatched: "Les mots de passe ne correspondent pas"
 signinWith: "Se connecter avec {x}"
-signinFailed: "Échec d’authentification. Veuillez vérifier que votre nom d’utilisateur et mot de passe sont corrects."
+signinFailed: "Échec d’authentification. Veuillez vérifier que votre nom d’utilisateur\
+  \ et mot de passe sont corrects."
 tapSecurityKey: "Appuyez sur votre clé de sécurité"
 or: "OU"
 language: "Langue"
@@ -446,7 +485,8 @@ groupInvited: "Invité au groupe"
 aboutX: "À propos de {x}"
 useOsNativeEmojis: "Utiliser les émojis natifs du système"
 youHaveNoGroups: "Vous n’avez aucun groupe"
-joinOrCreateGroup: "Vous pouvez être invité·e à rejoindre des groupes existants ou créer votre propre nouveau groupe."
+joinOrCreateGroup: "Vous pouvez être invité·e à rejoindre des groupes existants ou\
+  \ créer votre propre nouveau groupe."
 noHistory: "Pas d'historique"
 signinHistory: "Historique de connexion"
 disableAnimatedMfm: "Désactiver MFM ayant des animations"
@@ -475,19 +515,29 @@ showFeaturedNotesInTimeline: "Afficher les notes des Tendances dans le fil d'act
 objectStorage: "Stockage d'objets"
 useObjectStorage: "Utiliser le stockage d'objets"
 objectStorageBaseUrl: "Base URL"
-objectStorageBaseUrlDesc: "Préfixe d’URL utilisé pour construire l’URL vers le référencement d’objet (média). Spécifiez son URL si vous utilisez un CDN ou un proxy, sinon spécifiez l’adresse accessible au public selon le guide de service que vous allez utiliser. P.ex. 'https://<bucket>.s3.amazonaws.com' pour AWS S3 et 'https://storage.googleapis.com/<bucket>' pour GCS."
+objectStorageBaseUrlDesc: "Préfixe d’URL utilisé pour construire l’URL vers le référencement\
+  \ d’objet (média). Spécifiez son URL si vous utilisez un CDN ou un proxy, sinon\
+  \ spécifiez l’adresse accessible au public selon le guide de service que vous allez\
+  \ utiliser. P.ex. 'https://<bucket>.s3.amazonaws.com' pour AWS S3 et 'https://storage.googleapis.com/<bucket>'\
+  \ pour GCS."
 objectStorageBucket: "Bucket"
-objectStorageBucketDesc: "Veuillez spécifier le nom du compartiment utilisé sur le service configuré."
+objectStorageBucketDesc: "Veuillez spécifier le nom du compartiment utilisé sur le\
+  \ service configuré."
 objectStoragePrefix: "Prefix"
 objectStoragePrefixDesc: "Les fichiers seront stockés sous le répertoire de ce préfixe."
 objectStorageEndpoint: "Endpoint"
-objectStorageEndpointDesc: "Laissez ce champ vide si vous utilisez AWS S3, sinon spécifiez le point de terminaison comme '<host>' ou '<host>: <port>' selon le guide de service que vous allez utiliser."
+objectStorageEndpointDesc: "Laissez ce champ vide si vous utilisez AWS S3, sinon spécifiez\
+  \ le point de terminaison comme '<host>' ou '<host>: <port>' selon le guide de service\
+  \ que vous allez utiliser."
 objectStorageRegion: "Région"
-objectStorageRegionDesc: "Spécifiez une région comme 'xx-east-1'. Si votre service ne fait pas de distinction entre les régions, laissez-le vide ou remplissez 'us-east-1'."
+objectStorageRegionDesc: "Spécifiez une région comme 'xx-east-1'. Si votre service\
+  \ ne fait pas de distinction entre les régions, laissez-le vide ou remplissez 'us-east-1'."
 objectStorageUseSSL: "Utiliser SSL"
-objectStorageUseSSLDesc: "Désactivez cette option si vous n'utilisez pas HTTPS pour la connexion API"
+objectStorageUseSSLDesc: "Désactivez cette option si vous n'utilisez pas HTTPS pour\
+  \ la connexion API"
 objectStorageUseProxy: "Se connecter via proxy"
-objectStorageUseProxyDesc: "Désactivez cette option si vous n'utilisez pas de proxy pour la connexion API"
+objectStorageUseProxyDesc: "Désactivez cette option si vous n'utilisez pas de proxy\
+  \ pour la connexion API"
 objectStorageSetPublicRead: "Régler sur « public » lors de l'envoi"
 serverLogs: "Journal du serveur"
 deleteAll: "Supprimer tout"
@@ -515,18 +565,24 @@ sort: "Trier"
 ascendingOrder: "Ascendant"
 descendingOrder: "Descendant"
 scratchpad: "ScratchPad"
-scratchpadDescription: "ScratchPad fournit un environnement expérimental pour AiScript. Vous pouvez vérifier la rédaction de votre code, sa bonne exécution et le résultat de son interaction avec FoundKey."
+scratchpadDescription: "ScratchPad fournit un environnement expérimental pour AiScript.\
+  \ Vous pouvez vérifier la rédaction de votre code, sa bonne exécution et le résultat\
+  \ de son interaction avec FoundKey."
 output: "Sortie"
 script: "Script"
 updateRemoteUser: "Mettre à jour les informations de l’utilisateur·rice distant·e"
 deleteAllFiles: "Supprimer tous les fichiers"
 deleteAllFilesConfirm: "Êtes-vous sûr·e de vouloir supprimer tous les fichiers ?"
 removeAllFollowing: "Retenir tous les abonnements"
-removeAllFollowingDescription: "Se désabonner de tous les comptes de {host}. Veuillez lancer cette action uniquement si l’instance n’existe plus."
+removeAllFollowingDescription: "Se désabonner de tous les comptes de {host}. Veuillez\
+  \ lancer cette action uniquement si l’instance n’existe plus."
 userSuspended: "Cet·te utilisateur·rice a été suspendu·e."
 userSilenced: "Cette utilisateur·trice a été mis·e en sourdine."
 yourAccountSuspendedTitle: "Ce compte est suspendu"
-yourAccountSuspendedDescription: "Ce compte est suspendu car vous avez enfreint les conditions d'utilisation de l'instance, ou pour un motif similaire. Si vous souhaitez connaître en détail les raisons de cette suspension, renseignez-vous auprès de l'administrateur·rice de votre instance. Merci de ne pas créer de nouveau compte."
+yourAccountSuspendedDescription: "Ce compte est suspendu car vous avez enfreint les\
+  \ conditions d'utilisation de l'instance, ou pour un motif similaire. Si vous souhaitez\
+  \ connaître en détail les raisons de cette suspension, renseignez-vous auprès de\
+  \ l'administrateur·rice de votre instance. Merci de ne pas créer de nouveau compte."
 menu: "Menu"
 divider: "Séparateur"
 addItem: "Ajouter un élément"
@@ -548,7 +604,8 @@ description: "Description"
 describeFile: "Ajouter une description d'image"
 enterFileDescription: "Saisissez une description"
 author: "Auteur·rice"
-leaveConfirm: "Vous avez des modifications non-sauvegardées. Voulez-vous les ignorer ?"
+leaveConfirm: "Vous avez des modifications non-sauvegardées. Voulez-vous les ignorer\
+  \ ?"
 manage: "Gestion"
 plugins: "Extensions"
 deck: "Deck"
@@ -565,13 +622,16 @@ permission: "Autorisations "
 enableAll: "Tout activer"
 disableAll: "Tout désactiver"
 tokenRequested: "Autoriser l'accès au compte"
-pluginTokenRequestedDescription: "Ce plugin pourra utiliser les autorisations définies ici."
+pluginTokenRequestedDescription: "Ce plugin pourra utiliser les autorisations définies\
+  \ ici."
 notificationType: "Type de notifications"
 edit: "Editer"
-useStarForReactionFallback: "Utiliser ★ comme alternative si l’émoji de réaction est inconnu"
+useStarForReactionFallback: "Utiliser ★ comme alternative si l’émoji de réaction est\
+  \ inconnu"
 emailServer: "Serveur mail"
 enableEmail: "Activer la distribution de courriel"
-emailConfigInfo: "Utilisé pour confirmer votre adresse de courriel et la réinitialisation de votre mot de passe en cas d’oubli."
+emailConfigInfo: "Utilisé pour confirmer votre adresse de courriel et la réinitialisation\
+  \ de votre mot de passe en cas d’oubli."
 email: "E-mail "
 emailAddress: "Adresses e-mail"
 smtpConfig: "Paramètres du serveur SMTP"
@@ -579,7 +639,8 @@ smtpHost: "Serveur distant"
 smtpPort: "Port"
 smtpUser: "Nom d’utilisateur·rice"
 smtpPass: "Mot de passe"
-emptyToDisableSmtpAuth: "Laisser le nom d’utilisateur et le mot de passe vides pour désactiver la vérification SMTP"
+emptyToDisableSmtpAuth: "Laisser le nom d’utilisateur et le mot de passe vides pour\
+  \ désactiver la vérification SMTP"
 smtpSecure: "Utiliser SSL/TLS implicitement dans les connexions SMTP"
 smtpSecureInfo: "Désactiver cette option lorsque STARTTLS est utilisé"
 testEmail: "Tester la distribution de courriel"
@@ -600,11 +661,16 @@ create: "Créer"
 notificationSetting: "Paramètres des notifications "
 notificationSettingDesc: "Sélectionnez le type de notification à afficher"
 useGlobalSetting: "Utiliser paramètre général"
-useGlobalSettingDesc: "S'il est activé, les paramètres de notification de votre compte seront utilisés. S'il est désactivé, des configurations individuelles peuvent être effectuées."
+useGlobalSettingDesc: "S'il est activé, les paramètres de notification de votre compte\
+  \ seront utilisés. S'il est désactivé, des configurations individuelles peuvent\
+  \ être effectuées."
 other: "Autre"
 regenerateLoginToken: "Régénérer le jeton de connexion"
-regenerateLoginTokenDescription: "Générer un nouveau jeton d'authentification. Cette opération ne devrait pas être nécessaire ; lors de la génération d'un nouveau jeton, tous les appareils seront déconnectés. "
-setMultipleBySeparatingWithSpace: "Vous pouvez en définir plusieurs, en les séparant par des espaces."
+regenerateLoginTokenDescription: "Générer un nouveau jeton d'authentification. Cette\
+  \ opération ne devrait pas être nécessaire ; lors de la génération d'un nouveau\
+  \ jeton, tous les appareils seront déconnectés. "
+setMultipleBySeparatingWithSpace: "Vous pouvez en définir plusieurs, en les séparant\
+  \ par des espaces."
 fileIdOrUrl: "ID du fichier ou URL"
 behavior: "Comportement"
 sample: "Exemple"
@@ -622,7 +688,8 @@ abuseMarkAsResolved: "Marquer le signalement comme résolu"
 openInNewTab: "Ouvrir dans un nouvel onglet"
 openInSideView: "Ouvrir en vue latérale"
 defaultNavigationBehaviour: "Navigation par défaut"
-editTheseSettingsMayBreakAccount: "La modification de ces paramètres peut endommager votre compte."
+editTheseSettingsMayBreakAccount: "La modification de ces paramètres peut endommager\
+  \ votre compte."
 instanceTicker: "Nom de l'instance d'origine des notes"
 waitingFor: "En attente de {x}"
 random: "Aléatoire"
@@ -634,7 +701,8 @@ createNew: "Créer nouveau"
 optional: "Facultatif"
 createNewClip: "Créer un nouveau clip"
 public: "Public"
-i18nInfo: "FoundKey est traduit dans différentes langues par des bénévoles. Vous pouvez contribuer à {link}."
+i18nInfo: "FoundKey est traduit dans différentes langues par des bénévoles. Vous pouvez\
+  \ contribuer à {link}."
 manageAccessTokens: "Gérer les jetons d'accès"
 accountInfo: " Informations du compte "
 notesCount: "Nombre de notes"
@@ -653,12 +721,16 @@ no: "Non"
 driveFilesCount: "Nombre de fichiers dans le Drive"
 driveUsage: "Utilisation du Drive"
 noCrawle: "Refuser l'indexation par les robots"
-noCrawleDescription: "Demandez aux moteurs de recherche de ne pas indexer votre page de profil, vos notes, vos pages, etc."
-lockedAccountInfo: "À moins que vous ne définissiez la visibilité de votre note sur \"Abonné-e-s\", vos notes sont visibles par tous, même si vous exigez que les demandes d'abonnement soient approuvées manuellement."
+noCrawleDescription: "Demandez aux moteurs de recherche de ne pas indexer votre page\
+  \ de profil, vos notes, vos pages, etc."
+lockedAccountInfo: "À moins que vous ne définissiez la visibilité de votre note sur\
+  \ \"Abonné-e-s\", vos notes sont visibles par tous, même si vous exigez que les\
+  \ demandes d'abonnement soient approuvées manuellement."
 alwaysMarkSensitive: "Marquer les médias comme contenu sensible par défaut"
 loadRawImages: "Affichage complet des images jointes au lieu des vignettes"
 disableShowingAnimatedImages: "Désactiver l'animation des images"
-verificationEmailSent: "Un e-mail de vérification a été envoyé. Veuillez accéder au lien pour compléter la vérification."
+verificationEmailSent: "Un e-mail de vérification a été envoyé. Veuillez accéder au\
+  \ lien pour compléter la vérification."
 notSet: "Non défini"
 emailVerified: "Votre adresse e-mail a été vérifiée."
 noteFavoritesCount: "Nombre de notes dans les favoris"
@@ -670,14 +742,16 @@ clips: "Clips"
 experimentalFeatures: "Fonctionnalités expérimentales"
 developer: "Développeur"
 makeExplorable: "Rendre le compte visible sur la page \"Découvrir\"."
-makeExplorableDescription: "Si vous désactivez cette option, votre compte n'apparaîtra pas sur la page \"Découvrir\"."
+makeExplorableDescription: "Si vous désactivez cette option, votre compte n'apparaîtra\
+  \ pas sur la page \"Découvrir\"."
 showGapBetweenNotesInTimeline: "Afficher un écart entre les notes sur la Timeline"
 duplicate: "Duliquer"
 left: "Gauche"
 center: "Centrer"
 wide: "Large"
 narrow: "Condensé"
-reloadToApplySetting: "Vos paramètres seront appliqués lorsque vous rechargerez la page. Souhaitez-vous recharger ?"
+reloadToApplySetting: "Vos paramètres seront appliqués lorsque vous rechargerez la\
+  \ page. Souhaitez-vous recharger ?"
 needReloadToApply: "Ce paramètre s'appliquera après un rechargement."
 showTitlebar: "Afficher la barre de titre"
 clearCache: "Vider le cache"
@@ -722,14 +796,17 @@ unlikeConfirm: "Êtes-vous sûr·e de ne plus vouloir aimer cette publication ?"
 fullView: "Plein écran"
 quitFullView: "Quitter le plein écran"
 addDescription: "Ajouter une description"
-userPagePinTip: "Vous pouvez afficher des notes ici en sélectionnant l'option « Épingler au profil » dans le menu de chaque note."
-notSpecifiedMentionWarning: "Vous avez mentionné des utilisateur·rice·s qui ne font pas partie de la liste des destinataires"
+userPagePinTip: "Vous pouvez afficher des notes ici en sélectionnant l'option « Épingler\
+  \ au profil » dans le menu de chaque note."
+notSpecifiedMentionWarning: "Vous avez mentionné des utilisateur·rice·s qui ne font\
+  \ pas partie de la liste des destinataires"
 info: "Informations"
 userInfo: "Informations sur l'utilisateur"
 unknown: "Inconnu"
 onlineStatus: "Statut"
 hideOnlineStatus: "Se rendre invisible"
-hideOnlineStatusDescription: "Rendre votre statut invisible peut diminuer les performances de certaines fonctionnalités, telles que la Recherche."
+hideOnlineStatusDescription: "Rendre votre statut invisible peut diminuer les performances\
+  \ de certaines fonctionnalités, telles que la Recherche."
 online: "En ligne"
 active: "Actif·ve"
 offline: "Hors ligne"
@@ -763,7 +840,9 @@ emailNotConfiguredWarning: "Vous n'avez pas configuré d'adresse e-mail."
 ratio: "Ratio"
 previewNoteText: "Voir l'aperçu"
 customCss: "CSS personnalisé"
-customCssWarn: "Utilisez cette fonctionnalité uniquement si vous savez exactement ce que vous faites. Une configuration inadaptée peut empêcher le client de s'exécuter normalement."
+customCssWarn: "Utilisez cette fonctionnalité uniquement si vous savez exactement\
+  \ ce que vous faites. Une configuration inadaptée peut empêcher le client de s'exécuter\
+  \ normalement."
 global: "Global"
 squareAvatars: "Avatars carrés"
 sent: "Envoyer"
@@ -778,7 +857,10 @@ whatIsNew: "Voir les derniers changements"
 translate: "Traduire"
 translatedFrom: "Traduit depuis {x}"
 accountDeletionInProgress: "La suppression de votre compte est en cours"
-usernameInfo: "C'est un nom qui identifie votre compte sur l'instance de manière unique. Vous pouvez utiliser des lettres de l'alphabet (minuscules et majuscules), des chiffres (de 0 à 9), ou bien le tiret « _ ». Vous ne pourrez pas modifier votre nom d'utilisateur·rice par la suite."
+usernameInfo: "C'est un nom qui identifie votre compte sur l'instance de manière unique.\
+  \ Vous pouvez utiliser des lettres de l'alphabet (minuscules et majuscules), des\
+  \ chiffres (de 0 à 9), ou bien le tiret « _ ». Vous ne pourrez pas modifier votre\
+  \ nom d'utilisateur·rice par la suite."
 keepCw: "Garder le CW"
 pubSub: "Comptes Pub/Sub"
 lastCommunication: "Dernière communication"
@@ -793,12 +875,14 @@ filter: "Filtre"
 controlPanel: "Panneau de contrôle"
 manageAccounts: "Gérer les comptes"
 makeReactionsPublic: "Rendre les réactions publiques"
-makeReactionsPublicDescription: "Ceci rendra la liste de toutes vos réactions données publique."
+makeReactionsPublicDescription: "Ceci rendra la liste de toutes vos réactions données\
+  \ publique."
 classic: "Classique"
 muteThread: "Masquer cette discussion"
 unmuteThread: "Ne plus masquer le fil"
 ffVisibility: "Visibilité des abonnés/abonnements"
-ffVisibilityDescription: "Permet de configurer qui peut voir les personnes que tu suis et les personnes qui te suivent."
+ffVisibilityDescription: "Permet de configurer qui peut voir les personnes que tu\
+  \ suis et les personnes qui te suivent."
 continueThread: "Afficher la suite du fil"
 deleteAccountConfirm: "Votre compte sera supprimé. Êtes vous certain ?"
 incorrectPassword: "Le mot de passe est incorrect."
@@ -806,7 +890,8 @@ voteConfirm: "Confirmez-vous votre vote pour « {choice} » ?"
 hide: "Masquer"
 leaveGroup: "Quitter le groupe"
 leaveGroupConfirm: "Êtes vous sûr de vouloir quitter \"{name}\" ?"
-clickToFinishEmailVerification: "Veuillez cliquer sur [{ok}] afin de compléter la vérification par courriel."
+clickToFinishEmailVerification: "Veuillez cliquer sur [{ok}] afin de compléter la\
+  \ vérification par courriel."
 overridedDeviceKind: "Type d’appareil"
 smartphone: "Smartphone"
 tablet: "Tablette"
@@ -827,6 +912,7 @@ _emailUnavailable:
   format: "Le format de cette adresse de courriel est invalide"
   mx: "Ce serveur de courriels est invalide"
   smtp: "Ce serveur de courriels ne répond pas"
+  disposable: ''
 _ffVisibility:
   public: "Public"
   followers: "Visible uniquement pour les abonné·e·s"
@@ -834,11 +920,16 @@ _ffVisibility:
 _signup:
   almostThere: "Bientôt fini"
   emailAddressInfo: "Insérez votre adresse e-mail."
-  emailSent: "Un courriel de confirmation vient d'être envoyé à l'adresse que vous avez renseignée ({email}). Cliquez sur le lien contenu dans le message pour terminer la création de votre compte."
+  emailSent: "Un courriel de confirmation vient d'être envoyé à l'adresse que vous\
+    \ avez renseignée ({email}). Cliquez sur le lien contenu dans le message pour\
+    \ terminer la création de votre compte."
 _accountDelete:
   accountDelete: "Supprimer le compte"
-  mayTakeTime: "La suppression de compte nécessitant beaucoup de ressources, l'exécution du processus peut prendre du temps, en fonction de la quantité de contenus que vous avez créés et du nombre de fichiers que vous avez téléversés."
-  sendEmail: "Une fois la suppression de votre compte effectuée, un courriel sera envoyé à l'adresse que vous aviez enregistrée."
+  mayTakeTime: "La suppression de compte nécessitant beaucoup de ressources, l'exécution\
+    \ du processus peut prendre du temps, en fonction de la quantité de contenus que\
+    \ vous avez créés et du nombre de fichiers que vous avez téléversés."
+  sendEmail: "Une fois la suppression de votre compte effectuée, un courriel sera\
+    \ envoyé à l'adresse que vous aviez enregistrée."
   requestAccountDelete: "Demander la suppression de votre compte"
   started: "La procédure de suppression a commencé."
   inProgress: "Suppression en cours"
@@ -846,9 +937,14 @@ _ad:
   back: "Retour"
   reduceFrequencyOfThisAd: "Voir cette publicité moins souvent"
 _forgotPassword:
-  enterEmail: "Entrez ici l'adresse e-mail que vous avez enregistrée pour votre compte. Un lien vous permettant de réinitialiser votre mot de passe sera envoyé à cette adresse."
-  ifNoEmail: "Si vous n'avez pas enregistré d'adresse e-mail, merci de contacter l'administrateur·rice de votre instance."
-  contactAdmin: "Cette instance ne permettant pas l'utilisation d'adresses e-mail, prenez contact avec l'administrateur·rice pour procéder à la réinitialisation de votre mot de passe."
+  enterEmail: "Entrez ici l'adresse e-mail que vous avez enregistrée pour votre compte.\
+    \ Un lien vous permettant de réinitialiser votre mot de passe sera envoyé à cette\
+    \ adresse."
+  ifNoEmail: "Si vous n'avez pas enregistré d'adresse e-mail, merci de contacter l'administrateur·rice\
+    \ de votre instance."
+  contactAdmin: "Cette instance ne permettant pas l'utilisation d'adresses e-mail,\
+    \ prenez contact avec l'administrateur·rice pour procéder à la réinitialisation\
+    \ de votre mot de passe."
 _gallery:
   my: "Mes publications"
   liked: " Publications que j'ai aimées"
@@ -881,18 +977,22 @@ _nsfw:
   force: "Cacher tous les médias"
 _mfm:
   cheatSheet: "Antisèche MFM"
-  intro: "MFM est un langage Markdown spécifique utilisable ici et là dans FoundKey. Vous pouvez vérifier ici les structures utilisables avec MFM."
+  intro: "MFM est un langage Markdown spécifique utilisable ici et là dans FoundKey.\
+    \ Vous pouvez vérifier ici les structures utilisables avec MFM."
   dummy: "La Fédiverse s'agrandit avec FoundKey"
   mention: "Mentionner"
-  mentionDescription: "Vous pouvez afficher un utilisateur spécifique en indiquant une arobase suivie d'un nom d'utilisateur"
+  mentionDescription: "Vous pouvez afficher un utilisateur spécifique en indiquant\
+    \ une arobase suivie d'un nom d'utilisateur"
   hashtag: "Hashtags"
-  hashtagDescription: "Vous pouvez afficher un mot-dièse en utilisant un croisillon et du texte"
+  hashtagDescription: "Vous pouvez afficher un mot-dièse en utilisant un croisillon\
+    \ et du texte"
   url: "URL"
   urlDescription: "L'adresse web peut être affichée."
   link: "Lien"
   linkDescription: "Une partie précise d'une phrase peut être liée à l'adresse web."
   bold: "Gras"
-  boldDescription: "Il est possible de mettre le texte en exergue en le mettant en gras."
+  boldDescription: "Il est possible de mettre le texte en exergue en le mettant en\
+    \ gras."
   small: "Diminuer l'emphase"
   smallDescription: "Le contenu peut être affiché en petit et fin."
   center: "Centrer"
@@ -904,7 +1004,8 @@ _mfm:
   inlineMath: "Formule mathématique (inline)"
   inlineMathDescription: "Afficher les formules mathématiques (KaTeX)."
   blockMath: "Formule mathématique (bloc)"
-  blockMathDescription: "Afficher les formules mathématiques (KaTeX) multi-lignes dans un bloc."
+  blockMathDescription: "Afficher les formules mathématiques (KaTeX) multi-lignes\
+    \ dans un bloc."
   quote: "Citer"
   quoteDescription: "Affiche le contenu sous forme de citation."
   emoji: "Émojis personnalisés"
@@ -934,7 +1035,8 @@ _mfm:
   x4: "Plus grand"
   x4Description: "Afficher le contenu en plus grand."
   blur: "Flou"
-  blurDescription: "Le contenu peut être flouté ; il sera visible en le survolant avec le curseur."
+  blurDescription: "Le contenu peut être flouté ; il sera visible en le survolant\
+    \ avec le curseur."
   font: "Police de caractères"
   fontDescription: "Il est possible de choisir la police."
   rainbow: "Arc-en-ciel"
@@ -942,6 +1044,7 @@ _mfm:
   sparkle: "Paillettes"
   sparkleDescription: "Ajoute un effet scintillant au contenu."
   rotate: "Pivoter"
+  rotateDescription: ''
 _instanceTicker:
   none: "Cacher "
   remote: "Montrer pour les utilisateur·ice·s distant·e·s"
@@ -967,10 +1070,14 @@ _menuDisplay:
   hide: "Masquer"
 _wordMute:
   muteWords: "Mots à filtrer"
-  muteWordsDescription: "Séparer avec des espaces pour la condition AND. Séparer avec un saut de ligne pour une condition OR."
-  muteWordsDescription2: "Pour utiliser des expressions régulières (regex), mettez les mots-clés entre barres obliques."
+  muteWordsDescription: "Séparer avec des espaces pour la condition AND. Séparer avec\
+    \ un saut de ligne pour une condition OR."
+  muteWordsDescription2: "Pour utiliser des expressions régulières (regex), mettez\
+    \ les mots-clés entre barres obliques."
   softDescription: "Masquez les notes de votre fil selon les paramètres que vous définissez."
-  hardDescription: "Empêchez votre fil de charger les notes selon les paramètres que vous définissez. Cette action est irréversible : si vous modifiez ces paramètres plus tard, les notes précédemment filtrées ne seront pas récupérées."
+  hardDescription: "Empêchez votre fil de charger les notes selon les paramètres que\
+    \ vous définissez. Cette action est irréversible : si vous modifiez ces paramètres\
+    \ plus tard, les notes précédemment filtrées ne seront pas récupérées."
   soft: "Doux"
   hard: "Strict"
   mutedNotes: "Notes filtrées"
@@ -978,6 +1085,7 @@ _instanceMute:
   instanceMuteDescription2: "Séparer avec de nouvelles lignes"
   title: "Masque les notes venant des instances listées."
   heading: "Instances à mettre en sourdine"
+  instanceMuteDescription: ''
 _theme:
   explore: "Explorer les thèmes"
   install: "Installer un thème"
@@ -1006,8 +1114,10 @@ _theme:
   darken: "Sombre"
   lighten: "Clair"
   inputConstantName: "Insérez un nom de constante"
-  importInfo: "Vous pouvez importer un thème vers l’éditeur de thèmes en saisissant son code ici."
-  deleteConstantConfirm: "Êtes-vous sûr·e de vouloir supprimer la constante {const} ?"
+  importInfo: "Vous pouvez importer un thème vers l’éditeur de thèmes en saisissant\
+    \ son code ici."
+  deleteConstantConfirm: "Êtes-vous sûr·e de vouloir supprimer la constante {const}\
+    \ ?"
   keys:
     accent: "Accentuation"
     bg: "Arrière-plan"
@@ -1078,35 +1188,58 @@ _time:
 _tutorial:
   title: "Comment utiliser FoundKey"
   step1_1: "Bienvenue,"
-  step1_2: "Cette page est appelée « un fil ». Elle affiche les « notes » des personnes auxquelles vous êtes abonné dans un ordre chronologique."
-  step1_3: "Votre fil est actuellement vide vu que vous ne suivez aucun compte et que vous n’avez publié aucune note, pour l’instant."
-  step2_1: "Procédons d’abord à la préparation de votre profil avant d’écrire une note et/ou de vous abonner à un compte."
-  step2_2: "En fournissant quelques informations sur vous, il sera plus facile pour les autres de s’abonner à votre compte."
+  step1_2: "Cette page est appelée « un fil ». Elle affiche les « notes » des personnes\
+    \ auxquelles vous êtes abonné dans un ordre chronologique."
+  step1_3: "Votre fil est actuellement vide vu que vous ne suivez aucun compte et\
+    \ que vous n’avez publié aucune note, pour l’instant."
+  step2_1: "Procédons d’abord à la préparation de votre profil avant d’écrire une\
+    \ note et/ou de vous abonner à un compte."
+  step2_2: "En fournissant quelques informations sur vous, il sera plus facile pour\
+    \ les autres de s’abonner à votre compte."
   step3_1: "Vous avez fini de créer votre profil ?"
-  step3_2: "L’étape suivante consiste à créer une note. Vous pouvez commencer en cliquant sur l’icône crayon sur l’écran."
+  step3_2: "L’étape suivante consiste à créer une note. Vous pouvez commencer en cliquant\
+    \ sur l’icône crayon sur l’écran."
   step3_3: "Remplissez le cadran et cliquez sur le bouton en haut à droite pour envoyer."
-  step3_4: "Vous n’avez rien à dire ? Essayez d’écrire « J’ai commencé à utiliser FoundKey »."
+  step3_4: "Vous n’avez rien à dire ? Essayez d’écrire « J’ai commencé à utiliser\
+    \ FoundKey »."
   step4_1: "Avez-vous publié votre première note ?"
   step4_2: "Youpi ! Celle-ci est maintenant affichée sur votre fil d’actualité."
-  step5_1: "Maintenant, essayons de nous abonner à d’autres personnes afin de rendre votre fil plus vivant."
-  step5_2: "La page {featured} affiche les notes en tendance sur la présente instance et {explore} vous permet de trouver des utilisateur·rice·s en tendance. Essayez de vous abonner aux gens que vous aimez !"
-  step5_3: "Pour pouvoir suivre d’autres utilisateur·rice, cliquez sur leur avatar afin d’afficher la page du profil utilisateur ensuite appuyez sur le bouton « S’abonner »."
-  step5_4: "Si l’autre utilisateur possède une icône sous forme d’un cadenas à côté de son nom, il devra accepter votre demande d’abonnement manuellement."
-  step6_1: "Maintenant, vous êtes en mesure de voir s’afficher les notes des autres utilisateur·rice·s sur votre propre fil."
-  step6_2: "Vous avez également la possibilité d’intéragir rapidement avec les notes des autres utilisateur·rice·s en ajoutant des « réactions »."
-  step6_3: "Pour ajouter une réaction à une note, cliquez sur le signe « + » de celle-ci et sélectionnez l’émoji souhaité."
-  step7_1: "Félicitations ! Vous avez atteint la fin du tutoriel de base pour l’utilisation de FoundKey."
-  step7_2: "Si vous désirez en savoir plus sur FoundKey, jetez un œil sur la section {help}."
-  step7_3: "Bon courage et amusez-vous bien sur FoundKey ! 🚀"
+  step5_1: "Maintenant, essayons de nous abonner à d’autres personnes afin de rendre\
+    \ votre fil plus vivant."
+  step5_2: "La page {featured} affiche les notes en tendance sur la présente instance\
+    \ et {explore} vous permet de trouver des utilisateur·rice·s en tendance. Essayez\
+    \ de vous abonner aux gens que vous aimez !"
+  step5_3: "Pour pouvoir suivre d’autres utilisateur·rice, cliquez sur leur avatar\
+    \ afin d’afficher la page du profil utilisateur ensuite appuyez sur le bouton\
+    \ « S’abonner »."
+  step5_4: "Si l’autre utilisateur possède une icône sous forme d’un cadenas à côté\
+    \ de son nom, il devra accepter votre demande d’abonnement manuellement."
+  step6_1: "Maintenant, vous êtes en mesure de voir s’afficher les notes des autres\
+    \ utilisateur·rice·s sur votre propre fil."
+  step6_2: "Vous avez également la possibilité d’intéragir rapidement avec les notes\
+    \ des autres utilisateur·rice·s en ajoutant des « réactions »."
+  step6_3: "Pour ajouter une réaction à une note, cliquez sur le signe « + » de celle-ci\
+    \ et sélectionnez l’émoji souhaité."
+  step7_1: "Félicitations ! Vous avez atteint la fin du tutoriel de base pour l’utilisation\
+    \ de FoundKey."
+  step7_2: "Si vous désirez en savoir plus sur FoundKey, jetez un œil sur la section\
+    \ {help}."
+  step7_3: "Bon courage et amusez-vous bien sur FoundKey ! \U0001F680"
 _2fa:
   alreadyRegistered: "Configuration déjà achevée."
   registerDevice: "Ajouter un nouvel appareil"
   registerKey: "Enregistrer une clef"
-  step1: "Tout d'abord, installez une application d'authentification, telle que {a} ou {b}, sur votre appareil."
+  step1: "Tout d'abord, installez une application d'authentification, telle que {a}\
+    \ ou {b}, sur votre appareil."
   step2: "Ensuite, scannez le code QR affiché sur l’écran."
   step3: "Entrez le jeton affiché sur votre application pour compléter la configuration."
-  step4: "À partir de maintenant, ce même jeton vous sera demandé à chacune de vos connexions."
-  securityKeyInfo: "Vous pouvez configurer l'authentification WebAuthN pour sécuriser davantage le processus de connexion grâce à une clé de sécurité matérielle qui prend en charge FIDO2, ou bien en configurant l'authentification par empreinte digitale ou par code PIN sur votre appareil."
+  step4: "À partir de maintenant, ce même jeton vous sera demandé à chacune de vos\
+    \ connexions."
+  securityKeyInfo: "Vous pouvez configurer l'authentification WebAuthN pour sécuriser\
+    \ davantage le processus de connexion grâce à une clé de sécurité matérielle qui\
+    \ prend en charge FIDO2, ou bien en configurant l'authentification par empreinte\
+    \ digitale ou par code PIN sur votre appareil."
+  step2Url: ''
 _permissions:
   "read:account": "Afficher les informations du compte"
   "write:account": "Mettre à jour les informations de votre compte"
@@ -1142,7 +1275,8 @@ _permissions:
   "write:gallery-likes": "Gérer les mentions « J'aime » dans la galerie"
 _auth:
   shareAccess: "Autoriser \"{name}\" à accéder à votre compte ?"
-  shareAccessAsk: "Voulez-vous vraiment autoriser cette application à accéder à votre compte?"
+  shareAccessAsk: "Voulez-vous vraiment autoriser cette application à accéder à votre\
+    \ compte?"
   permissionAsk: "Cette application nécessite les autorisations suivantes :"
   pleaseGoBack: "Veuillez retourner à l’application"
   callback: "Retour vers l’application"
@@ -1181,6 +1315,7 @@ _widgets:
   serverMetric: "Statistiques du serveur"
   aiscript: "Console AiScript"
   aichan: "Ai"
+  rssMarquee: ''
 _cw:
   hide: "Masquer"
   show: "Afficher plus …"
@@ -1237,7 +1372,8 @@ _profile:
   youCanIncludeHashtags: "Vous pouvez également inclure des hashtags."
   metadata: "Informations supplémentaires"
   metadataEdit: "Éditer les informations supplémentaires"
-  metadataDescription: "Vous pouvez afficher jusqu'à quatre informations supplémentaires dans votre profil."
+  metadataDescription: "Vous pouvez afficher jusqu'à quatre informations supplémentaires\
+    \ dans votre profil."
   metadataLabel: "Étiquette"
   metadataContent: "Contenu"
   changeAvatar: "Changer l'image de profil"
@@ -1305,7 +1441,8 @@ _pages:
   url: "URL de la page"
   summary: "Résumé de page"
   alignCenter: "Centrée"
-  hideTitleWhenPinned: "Masquer le titre de la page lorsque celle-ci est épinglée au profil"
+  hideTitleWhenPinned: "Masquer le titre de la page lorsque celle-ci est épinglée\
+    \ au profil"
   font: "Police de caractères"
   fontSerif: "Serif"
   fontSansSerif: "Sans Serif"
@@ -1341,9 +1478,13 @@ _notification:
     followRequestAccepted: "Demande d'abonnement acceptée"
     groupInvited: "Invitation à un groupe"
     app: "Notifications provenant des apps"
+    pollEnded: ''
   _actions:
     reply: "Répondre"
     renote: "Renoter"
+    followBack: ''
+  emptyPushNotificationMessage: ''
+  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Toujours afficher la colonne principale"
   columnAlign: "Aligner les colonnes"
@@ -1366,3 +1507,45 @@ _deck:
     list: "Listes"
     mentions: "Mentions"
     direct: "Direct"
+unclip: ''
+unlimited: ''
+maxCustomEmojiPicker: ''
+_services:
+  _discord:
+    connected: ''
+    disconnected: ''
+  _twitter:
+    connected: ''
+    disconnected: ''
+  _github:
+    connected: ''
+    disconnected: ''
+showLess: ''
+flagShowTimelineRepliesDescription: ''
+keepOriginalUploadingDescription: ''
+disableDrawer: ''
+regexpErrorDescription: ''
+forwardReportIsAnonymous: ''
+attachmentRequired: ''
+useDrawerReactionPickerForMobile: ''
+instanceDefaultThemeDescription: ''
+reflectMayTakeTime: ''
+failedToFetchAccountInformation: ''
+rateLimitExceeded: ''
+cropImage: ''
+cropImageAsk: ''
+recentNHours: ''
+recentNDays: ''
+isSystemAccount: ''
+typeToConfirm: ''
+deleteAccount: ''
+numberOfPageCache: ''
+numberOfPageCacheDescription: ''
+document: ''
+file: ''
+confirmToUnclipAlreadyClippedNote: ''
+noEmailServerWarning: ''
+thereIsUnresolvedAbuseReportWarning: ''
+recommended: ''
+check: ''
+maxUnicodeEmojiPicker: ''
