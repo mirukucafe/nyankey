@@ -54,115 +54,67 @@ smtpPass: "Şifre"
 user: "Kullanıcı"
 _mfm:
   search: "Arama"
-  smallDescription: ''
   flipDescription: ''
-  x3Description: ''
 _sfx:
   notification: "Bildirim"
 _widgets:
   notifications: "Bildirim"
   timeline: "Zaman çizelgesi"
-  serverMetric: ''
 _profile:
   username: "Kullanıcı Adı"
 _deck:
   _columns:
     notifications: "Bildirim"
     tl: "Zaman çizelgesi"
-  addColumn: ''
 _permissions:
   "read:channels": ''
-  "read:messaging": ''
 _antennaSources:
   all: ''
-_instanceCharts:
-  files: ''
 _poll:
   deadlineTime: ''
-_visibility:
-  followers: ''
 _exportOrImport:
   muteList: ''
 _notification:
-  youGotMessagingMessageFromGroup: ''
   _types:
     receiveFollowRequest: ''
-_charts:
-  storageUsageTotal: ''
 _pages:
   viewSource: ''
-  eyeCatchingImageSet: ''
 _services: {}
 nUsers: ''
-_accountDelete:
-  accountDelete: ''
 _email:
   _receiveFollowRequest:
     title: ''
-_nsfw:
-  force: ''
 _channel:
   notesCount: ''
-_instanceMute:
-  instanceMuteDescription2: ''
 _theme:
   color: ''
   keys:
-    fg: ''
     modalBg: ''
-    inputBorder: ''
 _ago:
   monthsAgo: ''
-_tutorial:
-  step4_1: ''
 _2fa:
   step2: ''
-receiveFollowRequest: ''
 note: ''
-makeFollowManuallyApprove: ''
 clickToShow: ''
-blockConfirm: ''
 cacheRemoteFiles: ''
-searchWith: ''
 perHour: ''
-clearQueue: ''
 preview: ''
-retypedNotMatch: ''
 saved: ''
-agreeTo: ''
 lightThemes: ''
-inputNewFileName: ''
 unwatch: ''
-integration: ''
 pinnedUsers: ''
-manageAntennas: ''
 silenceConfirm: ''
-moderator: ''
 markAsReadAllNotifications: ''
-messagingWithGroup: ''
 checking: ''
-uiLanguage: ''
 regenerate: ''
-objectStorage: ''
 objectStorageSetPublicRead: ''
-install: ''
 deleteAllFilesConfirm: ''
-invisibleNote: ''
 undeck: ''
-useStarForReactionFallback: ''
 userSaysSomething: ''
-regenerateLoginTokenDescription: ''
 abuseMarkAsResolved: ''
-i18nInfo: ''
 driveFilesCount: ''
-clips: ''
 nNotes: ''
-latestVersion: ''
 clear: ''
-active: ''
 postToGallery: ''
-customCssWarn: ''
 pubSub: ''
-ffVisibility: ''
 size: ''
-recentNHours: ''

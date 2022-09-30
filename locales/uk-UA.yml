@@ -1256,14 +1256,8 @@ _deck:
     list: "Списки"
     mentions: "Згадки"
     direct: "Особисте"
-fullView: ''
 selectAccount: ''
-memo: ''
 translate: ''
-makeReactionsPublic: ''
 smartphone: ''
-failedToFetchAccountInformation: ''
 thereIsUnresolvedAbuseReportWarning: ''
-_forgotPassword:
-  ifNoEmail: ''
 _services: {}

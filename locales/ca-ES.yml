@@ -134,16 +134,12 @@ _mfm:
   mention: "Menció"
   quote: "Citar"
   search: "Cercar"
-  centerDescription: ''
   tada: ''
-  x4: ''
 _theme:
   keys:
     mention: "Menció"
     renote: "Renotar"
-    mentionMe: ''
     buttonHoverBg: ''
-  installedThemes: ''
   basedProp: ''
 _sfx:
   note: "Notes"
@@ -153,7 +149,6 @@ _2fa:
 _widgets:
   notifications: "Notificacions"
   timeline: "Línia de temps"
-  serverMetric: ''
 _cw:
   show: "Carregar més"
 _visibility:
@@ -180,79 +175,43 @@ _deck:
     tl: "Línia de temps"
     list: "Llistes"
     mentions: "Mencions"
-  profile: ''
 _services: {}
 _ago:
   yearsAgo: ''
-_instanceCharts:
-  ff: ''
 muteThread: ''
-_ffVisibility:
-  private: ''
 _gallery:
   liked: ''
-_nsfw:
-  respect: ''
 _channel:
   following: ''
-_instanceMute:
-  instanceMuteDescription2: ''
 _tutorial:
   step3_4: ''
 _permissions:
-  "write:blocks": ''
   "write:votes": ''
-_auth:
-  pleaseGoBack: ''
 _poll:
   choiceN: ''
-  remainingDays: ''
 _postForm: {}
 _pages:
   created: ''
-  title: ''
 unmute: ''
-emojis: ''
 showOnRemote: ''
-latestRequestSentAt: ''
 cpuAndMemory: ''
-editProfile: ''
 instanceFollowers: ''
-removed: ''
 messageRead: ''
-themeForLightMode: ''
 renameFolder: ''
-disconnectedFromServer: ''
 today: ''
-inMb: ''
 recaptchaSiteKey: ''
-connectedTo: ''
 administrator: ''
-notFoundDescription: ''
 members: ''
-signinRequired: ''
 tapSecurityKey: ''
-docSource: ''
 numberOfDays: ''
-objectStorageUseSSLDesc: ''
 chooseEmoji: ''
-script: ''
 addedRelays: ''
-manage: ''
 pluginTokenRequestedDescription: ''
-instanceMute: ''
 other: ''
-forwardReportIsAnonymous: ''
 createNewClip: ''
-yes: ''
 contact: ''
-clearCache: ''
 registry: ''
-typingUsers: ''
 hideOnlineStatus: ''
-noBotProtectionWarning: ''
 previewNoteText: ''
-usernameInfo: ''
 classic: ''
-numberOfColumn: ''
 recentNDays: ''

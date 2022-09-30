@@ -882,7 +882,6 @@ _mfm:
   font: "Czcionka"
   fontDescription: "Wybiera czcionkę do wyświetlania treści."
   rotate: "Obróć"
-  bounceDescription: ''
 _instanceTicker:
   none: "Nigdy nie pokazuj"
   remote: "Pokaż dla zdalnych użytkowników"
@@ -1015,7 +1014,6 @@ _tutorial:
     \ obserwować."
   step3_1: "Zakończyłeś(-aś) konfigurację profilu?"
   step3_3: "Wypełnij pole i kliknij przycisk w prawym górnym rogu by wysłać post."
-  step7_3: ''
 _2fa:
   registerDevice: "Zarejestruj nowe urządzenie"
   step1: "Najpierw, zainstaluj aplikację uwierzytelniającą (taką jak {a} lub {b})\
@@ -1236,14 +1234,9 @@ _deck:
     list: "Listy"
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
-menu: ''
 learnMore: ''
-filter: ''
 useDrawerReactionPickerForMobile: ''
-oneWeek: ''
 noEmailServerWarning: ''
-_accountDelete:
-  sendEmail: ''
 _services:
   _twitter:
     connected: ''

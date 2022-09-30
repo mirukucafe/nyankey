@@ -274,16 +274,12 @@ _mfm:
   quote: "Citat"
   emoji: "Anpassa emoji"
   search: "Sök"
-  center: ''
   tada: ''
-  x4: ''
 _theme:
   keys:
     mention: "Nämn"
     renote: "Omnotera"
-    mentionMe: ''
     accentDarken: ''
-  installed: ''
   alpha: ''
 _sfx:
   note: "Noter"
@@ -294,7 +290,6 @@ _widgets:
   timeline: "Tidslinje"
   federation: "Federation"
   jobQueue: "Jobbkö"
-  aichan: ''
 _cw:
   show: "Ladda mer"
 _visibility:
@@ -325,71 +320,39 @@ _deck:
     tl: "Tidslinje"
     list: "Listor"
     mentions: "Omnämningar"
-  popRight: ''
 _signup:
   almostThere: ''
-_plugin:
-  install: ''
 _serverDisconnectedBehavior:
   reload: ''
-_menuDisplay:
-  hide: ''
 _ago:
   minutesAgo: ''
-_tutorial:
-  step3_1: ''
 _permissions:
   "write:account": ''
-  "read:reactions": ''
 _auth:
   shareAccess: ''
-_weekday:
-  saturday: ''
 _poll:
   showResult: ''
-_instanceCharts:
-  requests: ''
 _pages:
   editPage: ''
-  featured: ''
 _services:
   _discord:
     disconnected: ''
-showLess: ''
 home: ''
-drive: ''
 inputNewDescription: ''
-reject: ''
 disconnectService: ''
-pinnedPages: ''
 antennaKeywords: ''
-popularUsers: ''
 registerSecurityKey: ''
-inputMessageHere: ''
 retype: ''
-tooLong: ''
 youHaveNoGroups: ''
-local: ''
 objectStorageBucketDesc: ''
-sounds: ''
 lastUsedDate: ''
-yourAccountSuspendedDescription: ''
 disablePlayer: ''
-medium: ''
 smtpConfig: ''
-logs: ''
 abuseReports: ''
-instanceTicker: ''
 renotesCount: ''
-alwaysMarkSensitive: ''
 showGapBetweenNotesInTimeline: ''
-saveAs: ''
 inUse: ''
-quitFullView: ''
 selectAccount: ''
-shareWithNote: ''
 searchResult: ''
-itsOn: ''
 incorrectPassword: ''
-instanceDefaultThemeDescription: ''
 deleteAccount: ''

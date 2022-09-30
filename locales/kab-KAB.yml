@@ -61,24 +61,18 @@ _mfm:
   mention: "Bder"
   search: "Nadi"
   font: "Tasefsit"
-  center: ''
   jelly: ''
-  x3: ''
 _theme:
   keys:
     mention: "Bder"
-    link: ''
     toastFg: ''
-  description: ''
   argument: ''
 _sfx:
   notification: "Ilɣuyen"
 _permissions:
   "write:account": "Ẓreg talɣut n umiḍan-ik·im"
-  "write:notifications": ''
 _widgets:
   notifications: "Ilɣuyen"
-  jobQueue: ''
 _cw:
   show: "Wali ugar"
 _visibility:
@@ -96,7 +90,6 @@ _pages:
   fontSerif: "Serif"
   fontSansSerif: "Sans Serif"
   eyeCatchingImageRemove: "Kkes tugna i d-ijebden"
-  my: ''
 _notification:
   youWereFollowed: "Yeṭṭafaṛ-ik·em-id"
   _types:
@@ -108,79 +101,41 @@ _deck:
   _columns:
     notifications: "Ilɣuyen"
     list: "Tibdarin"
-  stackLeft: ''
 fetchingAsApObject: ''
-users: ''
 searchUser: ''
-retry: ''
 cantReRenote: ''
-block: ''
 emojiUrl: ''
-wallpaper: ''
 latestStatus: ''
-disk: ''
 intro: ''
-instanceUsers: ''
 deleteAreYouSure: ''
-startMessaging: ''
 light: ''
-addFile: ''
 reload: ''
-monthX: ''
 backgroundImageUrl: ''
-avoidMultiCaptchaConfirm: ''
 withFiles: ''
-moderator: ''
 markAsReadAllTalkMessages: ''
-text: ''
 usernameInvalidFormat: ''
-joinOrCreateGroup: ''
 total: ''
-objectStorageEndpoint: ''
 showInPage: ''
-descendingOrder: ''
 addItem: ''
-describeFile: ''
 enableAll: ''
-wordMute: ''
 notificationSettingDesc: ''
-reporterOrigin: ''
 createNew: ''
-pollVotedCount: ''
 contact: ''
-clearCache: ''
 registry: ''
-jumpToSpecifiedDate: ''
 hideOnlineStatusDescription: ''
-configure: ''
 customCss: ''
-keepCw: ''
 muteThread: ''
-auto: ''
 cropImage: ''
-check: ''
 _emailUnavailable:
   mx: ''
-_forgotPassword:
-  contactAdmin: ''
 _aboutMisskey:
   source: ''
-_wordMute:
-  muteWordsDescription: ''
 _ago:
   daysAgo: ''
-_tutorial:
-  step3_3: ''
 _2fa:
   registerKey: ''
-_antennaSources:
-  userList: ''
 _poll:
   after: ''
-_postForm:
-  channelPlaceholder: ''
 _charts:
   filesIncDec: ''
-_timelines:
-  local: ''
 _services: {}

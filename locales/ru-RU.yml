@@ -1466,6 +1466,5 @@ _deck:
     list: "Списки"
     mentions: "Упоминания"
     direct: "Личное"
-recentNHours: ''
 maxCustomEmojiPicker: ''
 _services: {}

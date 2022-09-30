@@ -67,15 +67,12 @@ _email:
     title: "ಹಿಂಬಾಲಿಸಿದರು"
 _mfm:
   search: "ಹುಡುಕು"
-  center: ''
   flipDescription: ''
-  x2Description: ''
 _sfx:
   notification: "ಅಧಿಸೂಚನೆಗಳು"
 _widgets:
   notifications: "ಅಧಿಸೂಚನೆಗಳು"
   timeline: "ಸಮಯಸಾಲು"
-  serverMetric: ''
 _cw:
   show: "ಇನ್ನಷ್ಟು ನೋಡು"
 _profile:
@@ -84,100 +81,57 @@ _notification:
   youWereFollowed: "ಹಿಂಬಾಲಿಸಿದರು"
   _actions:
     reply: "ಉತ್ತರಿಸು"
-  _types:
-    all: ''
 _deck:
   _columns:
     notifications: "ಅಧಿಸೂಚನೆಗಳು"
     tl: "ಸಮಯಸಾಲು"
     mentions: "ಹೆಸರಿಸಿದ"
-  popRight: ''
 deleteAndEdit: ''
-somethingHappened: ''
 renote: ''
-enterFileName: ''
 customEmojis: ''
-addAccount: ''
 federation: ''
-withNFiles: ''
 mutedUsers: ''
-subscribing: ''
 lookup: ''
-uploadFromUrlRequested: ''
 registeredDate: ''
-renameFile: ''
 avatar: ''
-maintainerEmail: ''
 enableRegistration: ''
-enableHcaptcha: ''
 withFileAntenna: ''
-exploreUsersCount: ''
 resetPassword: ''
-createGroup: ''
 quoteAttached: ''
-strongPassword: ''
 signinHistory: ''
-weekOverWeekChanges: ''
 objectStorageEndpoint: ''
-showInPage: ''
 ascendingOrder: ''
-divider: ''
 description: ''
-enableAll: ''
 emptyToDisableSmtpAuth: ''
-channel: ''
 fillAbuseReportDescription: ''
-system: ''
 followingCount: ''
-verificationEmailSent: ''
 center: ''
-value: ''
 apply: ''
-userPagePinTip: ''
 enabled: ''
-memo: ''
 troubleshooting: ''
-itsOff: ''
 voteConfirm: ''
-mutePeriod: ''
 numberOfPageCache: ''
-_nsfw:
-  force: ''
 _poll:
   deadlineTime: ''
 _theme:
-  code: ''
   func: ''
   keys:
-    header: ''
     infoBg: ''
-    messageBg: ''
 _tutorial:
   step4_2: ''
-unlimited: ''
 _forgotPassword:
   ifNoEmail: ''
-_aboutMisskey:
-  allContributors: ''
 _channel:
   following: ''
-_instanceMute:
-  instanceMuteDescription2: ''
 _2fa:
   step2: ''
 _permissions:
-  "write:messaging": ''
   "write:channels": ''
-_weekday:
-  saturday: ''
 _postForm:
   _placeholders:
     c: ''
-_charts:
-  notesIncDec: ''
 _instanceCharts:
   cacheSizeTotal: ''
 _pages:
-  invalidNameText: ''
   fontSerif: ''
 _services: {}

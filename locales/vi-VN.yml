@@ -1477,5 +1477,4 @@ _deck:
     list: "Danh sách"
     mentions: "Lượt nhắc"
     direct: "Nhắn riêng"
-noEmailServerWarning: ''
 _services: {}

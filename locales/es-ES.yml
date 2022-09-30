@@ -937,7 +937,6 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
-  jelly: ''
   x4Description: ''
 _instanceTicker:
   none: "No mostrar"
@@ -1361,8 +1360,5 @@ _deck:
     mentions: "Menciones"
     direct: "Mensaje directo"
 _services: {}
-_emailUnavailable:
-  smtp: ''
 voteConfirm: ''
-tenMinutes: ''
 document: ''

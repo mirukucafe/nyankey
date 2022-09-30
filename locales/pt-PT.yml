@@ -176,16 +176,12 @@ _mfm:
   quote: "Citar"
   emoji: "Emoji personalizado"
   search: "Pesquisar"
-  smallDescription: ''
   jelly: ''
-  x3: ''
 _theme:
   keys:
     mention: "Menção"
     renote: "Repostar"
-    mentionMe: ''
     buttonHoverBg: ''
-  installedThemes: ''
   basedProp: ''
 _sfx:
   note: "Posts"
@@ -193,7 +189,6 @@ _sfx:
 _widgets:
   notifications: "Notificações"
   timeline: "Timeline"
-  serverMetric: ''
 _cw:
   show: "Carregar mais"
 _visibility:
@@ -262,76 +257,41 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-_instanceCharts:
-  ffTotal: ''
 autoAcceptFollowed: ''
-storageUsage: ''
 clearQueue: ''
-preview: ''
 currentPassword: ''
-messaging: ''
 start: ''
-fileName: ''
 circularReferenceFolder: ''
-instanceName: ''
 disablingTimelinesInfo: ''
-hcaptcha: ''
 notifyAntenna: ''
-recentlyDiscoveredUsers: ''
 passwordLessLogin: ''
-createGroup: ''
 quoteAttached: ''
-strongPassword: ''
 signinHistory: ''
-weekOverWeekChanges: ''
 objectStorageEndpoint: ''
-popout: ''
 descendingOrder: ''
-relays: ''
 enterFileDescription: ''
-enableAll: ''
 smtpSecure: ''
-create: ''
 abuseReported: ''
-switchUi: ''
 followersCount: ''
-notSet: ''
 reloadToApplySetting: ''
-deleteConfirm: ''
 useReactionPickerForContextMenu: ''
-onlineStatus: ''
 switch: ''
-emailNotConfiguredWarning: ''
 translate: ''
-makeReactionsPublic: ''
 overridedDeviceKind: ''
-reflectMayTakeTime: ''
 noEmailServerWarning: ''
-_channel:
-  featured: ''
 _timelines:
   social: ''
-_signup:
-  almostThere: ''
 _nsfw:
   ignore: ''
-_wordMute:
-  softDescription: ''
 _tutorial:
   step1_3: ''
-  step7_1: ''
 _permissions:
   "read:drive": ''
-  "read:pages": ''
 _auth:
   callback: ''
 _poll:
-  noMore: ''
   remainingHours: ''
 _postForm: {}
-_charts:
-  activeUsers: ''
 _pages:
   nameAlreadyExists: ''
-  hideTitleWhenPinned: ''
 _services: {}

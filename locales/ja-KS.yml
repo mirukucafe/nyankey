@@ -698,7 +698,6 @@ _mfm:
   blur: "ぼかし"
   font: "フォント"
   rotate: "回転"
-  intro: ''
   emojiDescription: ''
 _instanceTicker:
   none: "表示せん"
@@ -810,7 +809,6 @@ _time:
   day: "日"
 _tutorial:
   step3_1: "プロフィール設定はええ感じにできたか？"
-  step5_1: ''
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
 _permissions:
@@ -821,7 +819,6 @@ _permissions:
   "write:page-likes": "ページのええやんを操作する"
   "read:user-groups": "ユーザーグループを見る"
   "read:channels": "チャンネルを見る"
-  "read:notifications": ''
 _auth:
   permissionAsk: "このアプリは次の権限を要求しとるで"
 _antennaSources:
@@ -977,21 +974,12 @@ _deck:
     list: "リスト"
     mentions: "あんた宛て"
     direct: "ダイレクト"
-_accountDelete:
-  accountDelete: ''
 _postForm:
   quotePlaceholder: ''
 _services: {}
-disableDrawer: ''
 visibility: ''
-regexpError: ''
 createNewClip: ''
-lockedAccountInfo: ''
 publish: ''
-botProtection: ''
 popularPosts: ''
-whatIsNew: ''
 manageAccounts: ''
-overridedDeviceKind: ''
 failedToFetchAccountInformation: ''
-thereIsUnresolvedAbuseReportWarning: ''

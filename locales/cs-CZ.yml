@@ -494,17 +494,13 @@ _mfm:
   quote: "Citovat"
   emoji: "Vlastní emoji"
   search: "Vyhledávání"
-  smallDescription: ''
   jellyDescription: ''
-  x4Description: ''
 _theme:
   description: "Popis"
   keys:
     mention: "Zmínění"
     renote: "Přeposlat"
-    navHoverFg: ''
     toastBg: ''
-  installed: ''
   alpha: ''
 _sfx:
   note: "Poznámky"
@@ -552,58 +548,32 @@ _deck:
     antenna: "Antény"
     list: "Seznamy"
     mentions: "Zmínění"
-_services:
-  _discord:
-    disconnected: ''
+_services: {}
 _instanceCharts:
   cacheSize: ''
-_wordMute:
-  muteWords: ''
 _tutorial:
   step3_1: ''
-_auth:
-  shareAccessAsk: ''
 _pages:
   viewPage: ''
-  eyeCatchingImageRemove: ''
 _forgotPassword:
   ifNoEmail: ''
-_instanceTicker:
-  none: ''
 _menuDisplay:
   sideFull: ''
-_ago:
-  yearsAgo: ''
 _permissions:
   "read:blocks": ''
-  "write:reactions": ''
 _antennaSources:
   users: ''
-_poll:
-  at: ''
 _postForm:
   quotePlaceholder: ''
-clearCachedFilesConfirm: ''
 whenServerDisconnected: ''
-withFileAntenna: ''
 messagingWithUser: ''
-objectStorageBaseUrl: ''
 newNoteRecived: ''
-relays: ''
 undeck: ''
-regexpErrorDescription: ''
 abuseReported: ''
-switchUi: ''
 followersCount: ''
-notSet: ''
 wide: ''
-updatedAt: ''
 emailNotification: ''
-unknown: ''
 accounts: ''
-low: ''
 whatIsNew: ''
-manageAccounts: ''
 clickToFinishEmailVerification: ''
-oneWeek: ''
 confirmToUnclipAlreadyClippedNote: ''

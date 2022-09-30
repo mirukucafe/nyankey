@@ -335,16 +335,12 @@ _mfm:
   mention: "Vermelding"
   quote: "Quote"
   search: "Zoeken"
-  hashtag: ''
   flipDescription: ''
-  x2Description: ''
 _theme:
   keys:
     mention: "Vermelding"
     renote: "Herdelen"
-    shadow: ''
     buttonBg: ''
-  installedThemes: ''
   basedProp: ''
 _sfx:
   note: "Notities"
@@ -391,73 +387,40 @@ _deck:
     tl: "Tijdlijn"
     list: "Lijsten"
     mentions: "Vermeldingen"
-  profile: ''
 selectList: Kies een lijst
 selectAntenna: Kies een antenne
 selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
-_menuDisplay:
-  top: ''
 _ffVisibility:
   followers: ''
-inputNewFolderName: ''
 thisYear: ''
-driveCapacityPerLocalAccount: ''
 enableRecaptcha: ''
-withReplies: ''
 twoStepAuthentication: ''
-joinedGroups: ''
 noMessagesYet: ''
-passwordNotMatched: ''
 category: ''
-clientSettings: ''
 objectStorageRegionDesc: ''
-details: ''
 output: ''
-inboxUrl: ''
 leaveConfirm: ''
-tokenRequested: ''
 regexpError: ''
-useGlobalSetting: ''
 reporterOrigin: ''
-clip: ''
 receivedReactionsCount: ''
-noteFavoritesCount: ''
 reloadToApplySetting: ''
-deleteConfirm: ''
 inChannelSearch: ''
-unknown: ''
 accounts: ''
-low: ''
 whatIsNew: ''
-manageAccounts: ''
 tablet: ''
-rateLimitExceeded: ''
 maxUnicodeEmojiPicker: ''
 _permissions:
-  "read:notifications": ''
   "write:gallery-likes": ''
-_plugin:
-  install: ''
 _instanceTicker:
   none: ''
-_ago:
-  daysAgo: ''
 _tutorial:
   step3_3: ''
-_2fa:
-  registerKey: ''
 _antennaSources:
   userList: ''
-_poll:
-  after: ''
 _postForm:
   channelPlaceholder: ''
-_instanceCharts:
-  files: ''
 _pages:
   unlike: ''
-_relayStatus:
-  accepted: ''
 _services: {}
