@@ -274,64 +274,43 @@ _mfm:
   quote: "Citat"
   emoji: "Anpassa emoji"
   search: "Sök"
-  dummy: ''
   url: ''
-  bold: ''
   center: ''
-  blockCodeDescription: ''
   blockMathDescription: ''
-  flip: ''
   tada: ''
-  bounce: ''
   twitch: ''
-  x2: ''
   x4: ''
-  font: ''
   sparkle: ''
 _theme:
   keys:
     mention: "Nämn"
     renote: "Omnotera"
-    focus: ''
     header: ''
-    navActive: ''
     mentionMe: ''
-    scrollbarHandleHover: ''
     buttonBg: ''
-    driveFolderBg: ''
     accentDarken: ''
-    cwBg: ''
     cwHoverBg: ''
-  install: ''
   installed: ''
-  invalid: ''
   color: ''
-  func: ''
   alpha: ''
-  importInfo: ''
 _sfx:
   note: "Noter"
   notification: "Notifikationer"
   chat: "Chatt"
-  channel: ''
 _widgets:
   notifications: "Notifikationer"
   timeline: "Tidslinje"
   federation: "Federation"
   jobQueue: "Jobbkö"
-  clock: ''
   photos: ''
-  button: ''
   aichan: ''
 _cw:
   show: "Ladda mer"
 _visibility:
   followers: "Följare"
-  homeDescription: ''
   localOnly: ''
 _profile:
   username: "Användarnamn"
-  metadata: ''
   metadataContent: ''
 _exportOrImport:
   followingList: "Följer"
@@ -340,9 +319,7 @@ _exportOrImport:
   userLists: "Listor"
 _charts:
   federation: "Federation"
-  activeUsers: ''
   notesTotal: ''
-  storageUsageTotal: ''
 _notification:
   youWereFollowed: "följde dig"
   _types:
@@ -351,267 +328,146 @@ _notification:
     renote: "Omnotera"
     quote: "Citat"
     reaction: "Reaktioner"
-    receiveFollowRequest: ''
     all: ''
   _actions:
     reply: "Svara"
     renote: "Omnotera"
-  youGotReply: ''
   youGotMessagingMessageFromUser: ''
-  youReceivedFollowRequest: ''
 _deck:
   _columns:
     notifications: "Notifikationer"
     tl: "Tidslinje"
     list: "Listor"
     mentions: "Omnämningar"
-    direct: ''
   columnMargin: ''
-  swapRight: ''
   popRight: ''
-_emailUnavailable:
-  mx: ''
 _ffVisibility:
   private: ''
-accountDeletionInProgress: ''
 _signup:
   almostThere: ''
-_accountDelete:
-  requestAccountDelete: ''
 _ad:
   reduceFrequencyOfThisAd: ''
-_gallery:
-  my: ''
 _plugin:
   install: ''
-_registry:
-  key: ''
 _aboutMisskey:
   about: ''
-  translation: ''
 _serverDisconnectedBehavior:
   reload: ''
 _channel:
-  create: ''
   featured: ''
-  notesCount: ''
 _menuDisplay:
   hide: ''
 _wordMute:
-  softDescription: ''
   mutedNotes: ''
-_instanceMute:
-  heading: ''
 _ago:
   minutesAgo: ''
-  monthsAgo: ''
 _time:
   hour: ''
 _tutorial:
-  step1_2: ''
   step3_1: ''
-  step4_1: ''
   step5_3: ''
-  step6_3: ''
 _permissions:
   "write:account": ''
-  "write:drive": ''
   "write:following": ''
-  "write:mutes": ''
   "read:reactions": ''
-  "write:pages": ''
   "write:user-groups": ''
-  "write:gallery": ''
 _auth:
   shareAccess: ''
-  callback: ''
 _antennaSources:
   users: ''
 _weekday:
-  monday: ''
   saturday: ''
 _poll:
-  noMore: ''
   at: ''
-  duration: ''
   showResult: ''
-  remainingHours: ''
 _postForm:
   quotePlaceholder: ''
-  _placeholders:
-    c: ''
 _instanceCharts:
   requests: ''
-  notesTotal: ''
   cacheSizeTotal: ''
-_timelines:
-  local: ''
 _pages:
   editPage: ''
-  deleted: ''
   invalidNameText: ''
-  like: ''
   featured: ''
-  summary: ''
   fontSerif: ''
-_relayStatus:
-  requesting: ''
 _services:
   _discord:
     disconnected: ''
-  _github:
-    disconnected: ''
 _2fa:
   alreadyRegistered: ''
-  step2Url: ''
 showLess: ''
-uploadFromUrl: ''
 explore: ''
-nUsersRead: ''
 home: ''
-birthday: ''
 theme: ''
-dark: ''
 drive: ''
-selectFolder: ''
 createFolder: ''
-emptyDrive: ''
 inputNewDescription: ''
-copyUrl: ''
 whenServerDisconnected: ''
-reloadConfirm: ''
 reject: ''
-maintainerName: ''
 thisMonth: ''
-yearX: ''
 disconnectService: ''
-registration: ''
 driveCapacityPerRemoteAccount: ''
-backgroundImageUrl: ''
 pinnedPages: ''
-enableHcaptcha: ''
 enableRecaptcha: ''
-antennas: ''
 antennaKeywords: ''
-withFileAntenna: ''
 withReplies: ''
-silence: ''
 popularUsers: ''
-exploreUsersCount: ''
 aboutMisskey: ''
-moderator: ''
 registerSecurityKey: ''
-resetPassword: ''
 notFound: ''
-markAsReadAllNotifications: ''
 inputMessageHere: ''
-createGroup: ''
 groupName: ''
-messagingWithGroup: ''
 retype: ''
-quoteQuestion: ''
 signinRequired: ''
-available: ''
 tooLong: ''
-passwordMatched: ''
 tapSecurityKey: ''
-groupInvited: ''
 youHaveNoGroups: ''
-disableAnimatedMfm: ''
 docSource: ''
-fontSize: ''
 local: ''
-dayOverDayChanges: ''
 numberOfDays: ''
-useObjectStorage: ''
 objectStorageBucketDesc: ''
-objectStorageEndpointDesc: ''
 objectStorageUseSSLDesc: ''
-serverLogs: ''
 sounds: ''
-popout: ''
 chooseEmoji: ''
-uninstall: ''
 lastUsedDate: ''
-descendingOrder: ''
 updateRemoteUser: ''
-removeAllFollowingDescription: ''
 yourAccountSuspendedDescription: ''
-relays: ''
 serviceworkerInfo: ''
-visibility: ''
 disablePlayer: ''
-enterFileDescription: ''
 plugins: ''
-useFullReactionPicker: ''
 medium: ''
-enableAll: ''
 notificationType: ''
-enableEmail: ''
 smtpConfig: ''
-smtpSecure: ''
 regexpErrorDescription: ''
-display: ''
 logs: ''
-create: ''
 useGlobalSettingDesc: ''
-setMultipleBySeparatingWithSpace: ''
 abuseReports: ''
-abuseReported: ''
 forwardReport: ''
-openInNewTab: ''
 instanceTicker: ''
-switchUi: ''
 optional: ''
-manageAccessTokens: ''
 renotesCount: ''
-followersCount: ''
 pollVotedCount: ''
-driveUsage: ''
 alwaysMarkSensitive: ''
-notSet: ''
 pageLikedCount: ''
-experimentalFeatures: ''
 showGapBetweenNotesInTimeline: ''
-wide: ''
 showTitlebar: ''
-myTheme: ''
 saveAs: ''
-updatedAt: ''
 registry: ''
-youAreRunningUpToDateClient: ''
 inUse: ''
-emailNotification: ''
 typingUsers: ''
-markAllAsRead: ''
 quitFullView: ''
-info: ''
 hideOnlineStatus: ''
-offline: ''
 selectAccount: ''
-quickAction: ''
 noMaintainerInformationWarning: ''
-attachmentRequired: ''
 shareWithNote: ''
-high: ''
 ratio: ''
-global: ''
 searchResult: ''
-learnMore: ''
 translatedFrom: ''
-lastCommunication: ''
 itsOn: ''
-filter: ''
 makeReactionsPublicDescription: ''
-ffVisibility: ''
 incorrectPassword: ''
-leaveGroupConfirm: ''
 smartphone: ''
-size: ''
 instanceDefaultThemeDescription: ''
-oneHour: ''
 failedToFetchAccountInformation: ''
-recentNHours: ''
 deleteAccount: ''
-file: ''
 thereIsUnresolvedAbuseReportWarning: ''

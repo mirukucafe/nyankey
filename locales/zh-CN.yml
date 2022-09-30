@@ -1384,12 +1384,7 @@ _deck:
     list: "列表"
     mentions: "提及"
     direct: "指定用户"
-_services:
-  _twitter:
-    disconnected: ''
+_services: {}
 attachmentRequired: ''
-recentNHours: ''
 deleteAccount: ''
-file: ''
 thereIsUnresolvedAbuseReportWarning: ''
-maxCustomEmojiPicker: ''

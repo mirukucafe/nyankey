@@ -875,7 +875,6 @@ _ffVisibility:
   public: "Publicar"
 _accountDelete:
   accountDelete: "Eliminar Cuenta"
-  started: ''
 _ad:
   back: "Deseleccionar"
 _forgotPassword:
@@ -938,15 +937,10 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
-  small: ''
   inlineCodeDescription: ''
-  blockMathDescription: ''
   jelly: ''
-  jump: ''
   shake: ''
-  spin: ''
   x4Description: ''
-  rainbow: ''
   rotateDescription: ''
 _instanceTicker:
   none: "No mostrar"
@@ -1160,7 +1154,6 @@ _permissions:
   "write:user-groups": "Administrar grupos de usuarios"
   "read:channels": "Ver canal"
   "write:channels": "Modificar canal"
-  "write:gallery-likes": ''
 _auth:
   shareAccess: "¿Desea permitir el acceso a la cuenta \"{name}\"?"
   shareAccessAsk: "¿Está seguro de que desea autorizar esta aplicación para acceder\
@@ -1198,7 +1191,6 @@ _widgets:
   postForm: "Formulario"
   button: "Botón"
   jobQueue: "Cola de trabajos"
-  serverMetric: ''
 _cw:
   hide: "Ocultar"
   show: "Ver más"
@@ -1255,7 +1247,6 @@ _profile:
   youCanIncludeHashtags: "Puedes añadir hashtags"
   metadataLabel: "Etiqueta"
   metadataContent: "Contenido"
-  changeBanner: ''
 _exportOrImport:
   allNotes: "Todas las notas"
   followingList: "Siguiendo"
@@ -1372,24 +1363,15 @@ _deck:
     list: "Listas"
     mentions: "Menciones"
     direct: "Mensaje directo"
-  profile: ''
 _services:
   _github:
     connected: ''
 _emailUnavailable:
-  used: ''
   smtp: ''
-maxCustomEmojiPicker: ''
 reporter: ''
-ffVisibilityDescription: ''
 voteConfirm: ''
-clickToFinishEmailVerification: ''
 auto: ''
-instanceDefaultLightTheme: ''
 tenMinutes: ''
-reflectMayTakeTime: ''
 cropImageAsk: ''
-typeToConfirm: ''
 document: ''
-noEmailServerWarning: ''
 maxUnicodeEmojiPicker: ''

@@ -1462,4 +1462,3 @@ _services:
   _github:
     connected: "GitHub: @{login} を、FoundKey: @{userName} に接続しました！"
     disconnected: "GitHubの連携を解除しました :v:"
-maxUnicodeEmojiPicker: ''

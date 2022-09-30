@@ -1482,12 +1482,7 @@ _deck:
     list: "লিস্ট"
     mentions: "উল্লেখসমূহ"
     direct: "ডাইরেক্ট নোটগুলি"
-_services:
-  _twitter:
-    disconnected: ''
+_services: {}
 unlimited: ''
-recentNHours: ''
 deleteAccount: ''
-file: ''
 thereIsUnresolvedAbuseReportWarning: ''
-maxUnicodeEmojiPicker: ''

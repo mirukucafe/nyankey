@@ -964,11 +964,8 @@ _mfm:
   fontDescription: "Puoi scegliere il tipo di carattere per il contenuto."
   rainbow: "Arcobaleno"
   rotate: "Ruota"
-  boldDescription: ''
   centerDescription: ''
-  blockMathDescription: ''
   flipDescription: ''
-  tadaDescription: ''
   rotateDescription: ''
 _instanceTicker:
   none: "Nascondi"
@@ -1066,9 +1063,7 @@ _theme:
     driveFolderBg: "Sfondo della cartella di disco"
     badge: "Distintivo"
     messageBg: "Sfondo della chat"
-    scrollbarHandleHover: ''
     accentLighten: ''
-  importInfo: ''
 _sfx:
   note: "Nota"
   noteMy: "Mia nota"
@@ -1133,7 +1128,6 @@ _tutorial:
   step7_3: "Da ultimo, buon divertimento su FoundKey! \U0001F680"
 _2fa:
   registerDevice: "Aggiungi dispositivo"
-  step2: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "Visualizzare le informazioni dell'account"
@@ -1164,7 +1158,6 @@ _permissions:
   "write:user-groups": "Gestisci gruppi di utenti"
   "read:channels": "Visualizza canali"
   "write:channels": "Gerisci canali"
-  "write:gallery-likes": ''
 _auth:
   shareAccess: "Autorizzare「{name}」ad accedere al tuo account?"
   shareAccessAsk: "Vuoi davvero consentire l'accesso al tuo account a questa app'?"
@@ -1388,22 +1381,12 @@ _deck:
     list: "Liste"
     mentions: "Menzioni"
     direct: "Diretta"
-_services:
-  _discord:
-    connected: ''
+_services: {}
 keepOriginalUploadingDescription: ''
-_instanceMute:
-  instanceMuteDescription2: ''
 regexpErrorDescription: ''
-forwardReport: ''
 advanced: ''
-pubSub: ''
 ffVisibility: ''
-smartphone: ''
 size: ''
-instanceDefaultThemeDescription: ''
 rateLimitExceeded: ''
-recentNDays: ''
 numberOfPageCache: ''
-unclip: ''
 recommended: ''

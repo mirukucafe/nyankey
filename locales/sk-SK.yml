@@ -1462,12 +1462,7 @@ _deck:
     list: "Zoznam"
     mentions: "Zmienky"
     direct: "Priame poznámky"
-_services:
-  _twitter:
-    connected: ''
+_services: {}
 showLess: ''
-cropImageAsk: ''
 typeToConfirm: ''
-document: ''
 noEmailServerWarning: ''
-maxUnicodeEmojiPicker: ''

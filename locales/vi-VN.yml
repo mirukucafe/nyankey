@@ -1477,13 +1477,8 @@ _deck:
     list: "Danh sách"
     mentions: "Lượt nhắc"
     direct: "Nhắn riêng"
-cropImageAsk: ''
 typeToConfirm: ''
-document: ''
 noEmailServerWarning: ''
-maxUnicodeEmojiPicker: ''
 _services:
   _discord:
-    disconnected: ''
-  _github:
     disconnected: ''

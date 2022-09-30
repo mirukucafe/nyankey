@@ -700,19 +700,12 @@ _mfm:
   quote: "Citează"
   emoji: "Emoji personalizat"
   search: "Caută"
-  inlineMath: ''
   dummy: ''
-  url: ''
   bold: ''
-  center: ''
   blockCode: ''
-  emojiDescription: ''
   jellyDescription: ''
-  bounce: ''
   twitch: ''
-  x2: ''
   x4: ''
-  font: ''
   sparkle: ''
 _theme:
   description: "Descriere"
@@ -720,48 +713,34 @@ _theme:
     mention: "Mențiune"
     renote: "Re-notează"
     divider: "Separator"
-    focus: ''
     header: ''
-    navActive: ''
     mentionMe: ''
-    dateLabelFg: ''
     infoWarnFg: ''
-    toastBg: ''
     inputBorder: ''
-    badge: ''
     fgHighlighted: ''
-  manage: ''
   builtinThemes: ''
-  addConstant: ''
   refProp: ''
-  funcKind: ''
   darken: ''
-  deleteConstantConfirm: ''
 _sfx:
   note: "Note"
   notification: "Notificări"
   chat: "Chat"
-  channel: ''
 _widgets:
   notifications: "Notificări"
   timeline: "Cronologie"
   activity: "Activitate"
   federation: "Federație"
   jobQueue: "coada de job-uri"
-  clock: ''
   digitalClock: ''
-  onlineUsers: ''
 _cw:
   show: "Incarcă mai mult"
 _visibility:
   home: "Acasă"
   followers: "Urmăritori"
-  publicDescription: ''
   localOnlyDescription: ''
 _profile:
   name: "Nume"
   username: "Nume de utilizator"
-  metadataEdit: ''
   changeAvatar: ''
 _exportOrImport:
   followingList: "Urmărești"
@@ -770,9 +749,7 @@ _exportOrImport:
   userLists: "Liste"
 _charts:
   federation: "Federație"
-  activeUsers: ''
   notesTotal: ''
-  storageUsageTotal: ''
 _timelines:
   home: "Acasă"
 _notification:
@@ -784,14 +761,11 @@ _notification:
     renote: "Re-notează"
     quote: "Citează"
     reaction: "Reacție"
-    pollEnded: ''
     app: ''
   _actions:
     reply: "Răspunde"
     renote: "Re-notează"
-  youGotReply: ''
   youGotMessagingMessageFromUser: ''
-  pollEnded: ''
 _deck:
   _columns:
     notifications: "Notificări"
@@ -799,154 +773,84 @@ _deck:
     antenna: "Antene"
     list: "Liste"
     mentions: "Mențiuni"
-  alwaysShowMainColumn: ''
   addColumn: ''
-  swapDown: ''
 unlimited: ''
 _instanceCharts:
-  users: ''
   cacheSize: ''
-showLess: ''
 rateLimitExceeded: ''
 _poll:
-  noOnlyOneChoice: ''
   expiration: ''
-  deadlineDate: ''
   totalVotes: ''
-  remainingDays: ''
 instanceTicker: ''
-createNewClip: ''
 accountInfo: ''
-repliedCount: ''
 sentReactionsCount: ''
-no: ''
 noCrawleDescription: ''
-disableShowingAnimatedImages: ''
 noteFavoritesCount: ''
-useSystemFont: ''
 makeExplorable: ''
-left: ''
 reloadToApplySetting: ''
-nUsers: ''
 accentColor: ''
-value: ''
 deleteConfirm: ''
-currentVersion: ''
 usageAmount: ''
-apply: ''
 inChannelSearch: ''
-showingPastTimeline: ''
 unlikeConfirm: ''
-userPagePinTip: ''
 onlineStatus: ''
-active: ''
 instanceBlocking: ''
-quickAction: ''
 noBotProtectionWarning: ''
-gallery: ''
 expiration: ''
-low: ''
 customCssWarn: ''
-received: ''
 useBlurEffect: ''
-translate: ''
 pubSub: ''
-breakFollow: ''
 unread: ''
-makeReactionsPublic: ''
 unmuteThread: ''
-deleteAccountConfirm: ''
 leaveGroup: ''
-overridedDeviceKind: ''
 themeColor: ''
-instanceDefaultDarkTheme: ''
 tenMinutes: ''
-reflectMayTakeTime: ''
 recentNHours: ''
-deleteAccount: ''
 unclip: ''
-recommended: ''
 _accountDelete:
   mayTakeTime: ''
-_plugin:
-  install: ''
 _serverDisconnectedBehavior:
   reload: ''
 _ago:
-  yearsAgo: ''
   minutesAgo: ''
 _auth:
-  denied: ''
   pleaseGoBack: ''
-_emailUnavailable:
-  disposable: ''
 _ffVisibility:
   followers: ''
-_signup:
-  emailSent: ''
 _forgotPassword:
   ifNoEmail: ''
-_gallery:
-  like: ''
 _registry:
   keys: ''
-_aboutMisskey:
-  contributors: ''
 _nsfw:
   respect: ''
-_instanceTicker:
-  remote: ''
 _channel:
   edit: ''
-  owned: ''
 _menuDisplay:
   sideFull: ''
 _wordMute:
-  muteWords: ''
   hardDescription: ''
-_instanceMute:
-  instanceMuteDescription: ''
 _time:
   second: ''
 _tutorial:
-  title: ''
   step2_1: ''
-  step3_3: ''
   step5_1: ''
-  step6_1: ''
   step7_2: ''
 _2fa:
-  registerKey: ''
   step3: ''
 _weekday:
-  sunday: ''
   thursday: ''
 _permissions:
-  "read:blocks": ''
   "read:favorites": ''
-  "read:messaging": ''
   "write:notes": ''
-  "write:reactions": ''
   "read:page-likes": ''
-  "read:channels": ''
   "read:gallery-likes": ''
-_antennaSources:
-  users: ''
 _postForm:
   quotePlaceholder: ''
-  _placeholders:
-    c: ''
 _pages:
   newPage: ''
-  updated: ''
   invalidNameTitle: ''
-  viewPage: ''
   liked: ''
-  url: ''
   font: ''
-  eyeCatchingImageRemove: ''
 _services:
   _discord:
-    connected: ''
-  _github:
     connected: ''

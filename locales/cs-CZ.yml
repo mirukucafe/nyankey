@@ -494,67 +494,46 @@ _mfm:
   quote: "Citovat"
   emoji: "Vlastní emoji"
   search: "Vyhledávání"
-  link: ''
   mentionDescription: ''
-  linkDescription: ''
   smallDescription: ''
-  inlineCodeDescription: ''
   blockMath: ''
-  searchDescription: ''
   jellyDescription: ''
-  bounceDescription: ''
   twitchDescription: ''
-  x2Description: ''
   x4Description: ''
-  fontDescription: ''
   rotate: ''
 _theme:
   description: "Popis"
   keys:
     mention: "Zmínění"
     renote: "Přeposlat"
-    badge: ''
     fg: ''
-    shadow: ''
     navHoverFg: ''
-    hashtag: ''
     dateLabelFg: ''
-    infoWarnFg: ''
     toastBg: ''
-    inputBorder: ''
     accentLighten: ''
-  explore: ''
   installed: ''
-  make: ''
   color: ''
-  func: ''
   alpha: ''
-  importInfo: ''
 _sfx:
   note: "Poznámky"
   notification: "Oznámení"
   chat: "Zprávy"
-  channel: ''
 _widgets:
   notifications: "Oznámení"
   timeline: "Časová osa"
   activity: "Aktivita"
   federation: "Federace"
   jobQueue: "Fronta úloh"
-  clock: ''
   digitalClock: ''
-  onlineUsers: ''
 _cw:
   show: "Zobrazit více"
 _visibility:
   home: "Domů"
   followers: "Sledující"
-  specified: ''
   public: ''
 _profile:
   name: "Jméno"
   username: "Uživatelské jméno"
-  metadataEdit: ''
   changeAvatar: ''
 _exportOrImport:
   followingList: "Sledovaní"
@@ -563,9 +542,7 @@ _exportOrImport:
   userLists: "Seznamy"
 _charts:
   federation: "Federace"
-  activeUsers: ''
   notesTotal: ''
-  storageUsageTotal: ''
 _timelines:
   home: "Domů"
 _notification:
@@ -577,14 +554,11 @@ _notification:
     renote: "Přeposlat"
     quote: "Citovat"
     reaction: "Reakce"
-    pollEnded: ''
     app: ''
   _actions:
     reply: "Odpovědět"
     renote: "Přeposlat"
-  youGotReply: ''
   youGotMessagingMessageFromUser: ''
-  pollEnded: ''
 _deck:
   _columns:
     notifications: "Oznámení"
@@ -592,196 +566,106 @@ _deck:
     antenna: "Antény"
     list: "Seznamy"
     mentions: "Zmínění"
-  alwaysShowMainColumn: ''
   addColumn: ''
-  swapDown: ''
 _services:
   _discord:
     disconnected: ''
-  _github:
-    connected: ''
 _ffVisibility:
   public: ''
 _instanceCharts:
-  usersTotal: ''
   cacheSize: ''
-_signup:
-  almostThere: ''
 _accountDelete:
   mayTakeTime: ''
-  inProgress: ''
 _wordMute:
   muteWords: ''
-  soft: ''
 _tutorial:
   step2_1: ''
-  step1_1: ''
   step3_1: ''
-  step4_1: ''
   step5_3: ''
-  step7_2: ''
 _auth:
   shareAccessAsk: ''
 _pages:
-  newPage: ''
   created: ''
-  invalidNameTitle: ''
   viewPage: ''
-  liked: ''
   url: ''
-  font: ''
   eyeCatchingImageRemove: ''
-_plugin:
-  manage: ''
 _emailUnavailable:
   format: ''
-  used: ''
 _forgotPassword:
   ifNoEmail: ''
-_gallery:
-  like: ''
 _registry:
   keys: ''
-_aboutMisskey:
-  contributors: ''
 _instanceTicker:
   none: ''
-_serverDisconnectedBehavior:
-  dialog: ''
 _channel:
   edit: ''
-  owned: ''
 _menuDisplay:
   sideFull: ''
-_instanceMute:
-  instanceMuteDescription: ''
 _ago:
   future: ''
-  hoursAgo: ''
   yearsAgo: ''
-_time:
-  day: ''
 _2fa:
   step1: ''
-  step4: ''
 _permissions:
   "read:blocks": ''
-  "read:favorites": ''
   "read:messaging": ''
-  "write:notes": ''
   "write:reactions": ''
-  "read:page-likes": ''
   "read:channels": ''
-  "read:gallery-likes": ''
 _antennaSources:
   users: ''
 _weekday:
-  monday: ''
   friday: ''
 _poll:
-  noMore: ''
   at: ''
-  duration: ''
   showResult: ''
-  remainingHours: ''
 _postForm:
   quotePlaceholder: ''
-  _placeholders:
-    c: ''
 _relayStatus:
   requesting: ''
-directNotes: ''
 clearCachedFilesConfirm: ''
-noteDeleteConfirm: ''
 lookup: ''
-inputNewDescription: ''
 whenServerDisconnected: ''
-driveCapacityPerRemoteAccount: ''
 pinnedClipId: ''
-antennaKeywords: ''
 withFileAntenna: ''
-withFiles: ''
 unsilenceConfirm: ''
-recentlyDiscoveredUsers: ''
 messagingWithUser: ''
-noMessagesYet: ''
 disableAnimatedMfm: ''
-hideThisNote: ''
 objectStorageBaseUrl: ''
-objectStoragePrefix: ''
 objectStorageRegion: ''
-objectStorageUseProxy: ''
 newNoteRecived: ''
-showInPage: ''
 installedDate: ''
-userSilenced: ''
 relays: ''
-enableInfiniteScroll: ''
 enablePlayer: ''
-enterFileDescription: ''
 undeck: ''
-height: ''
 pluginTokenRequestedDescription: ''
-smtpSecure: ''
 regexpErrorDescription: ''
-overview: ''
 useGlobalSettingDesc: ''
-abuseReports: ''
 abuseReported: ''
-forwardReport: ''
 openInNewTab: ''
-instanceTicker: ''
 switchUi: ''
-optional: ''
 manageAccessTokens: ''
-renotesCount: ''
 followersCount: ''
-pollVotedCount: ''
 driveUsage: ''
-alwaysMarkSensitive: ''
 notSet: ''
-pageLikedCount: ''
 experimentalFeatures: ''
-showGapBetweenNotesInTimeline: ''
 wide: ''
-showTitlebar: ''
 myTheme: ''
-saveAs: ''
 updatedAt: ''
-registry: ''
 youAreRunningUpToDateClient: ''
-inUse: ''
 emailNotification: ''
-typingUsers: ''
 markAllAsRead: ''
-quitFullView: ''
 unknown: ''
-online: ''
 botProtection: ''
-enabled: ''
 accounts: ''
-configure: ''
 recentPosts: ''
-memo: ''
 low: ''
-customCss: ''
 sent: ''
-troubleshooting: ''
 whatIsNew: ''
-keepCw: ''
 unresolved: ''
-emailRequiredForSignup: ''
 manageAccounts: ''
-muteThread: ''
 continueThread: ''
-hide: ''
 clickToFinishEmailVerification: ''
-auto: ''
 instanceDefaultLightTheme: ''
-indefinitely: ''
 oneWeek: ''
-cropImage: ''
 isSystemAccount: ''
-numberOfPageCacheDescription: ''
 confirmToUnclipAlreadyClippedNote: ''
-check: ''

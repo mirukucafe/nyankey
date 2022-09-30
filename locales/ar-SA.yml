@@ -934,9 +934,7 @@ _mfm:
   rainbowDescription: "اجعل المحتوى يظهر بألوان الطيف"
   rotate: "تدوير"
   rotateDescription: "يُدير المحتوى بزاوية معيّنة."
-  inlineCode: ''
   inlineMath: ''
-  twitchDescription: ''
 _instanceTicker:
   none: "لا تظهره بتاتًا"
   remote: "أظهر للمستخدمين البِعاد"
@@ -1026,11 +1024,8 @@ _theme:
     listItemHoverBg: "خلفية عناصر القائمة (عند التمرير فوقها)"
     driveFolderBg: "خلفية مجلد قرص التخزين"
     messageBg: "خلفية المحادثة"
-    navIndicator: ''
     infoBg: ''
-    cwHoverBg: ''
     accentLighten: ''
-  refConst: ''
   importInfo: ''
 _sfx:
   note: "الملاحظات"
@@ -1339,23 +1334,13 @@ _deck:
     list: "القوائم"
     mentions: "الإشارات"
     direct: "مباشرة"
-  popRight: ''
 objectStorage: ''
-objectStorageBucketDesc: ''
 left: ''
 _services:
-  _twitter:
-    connected: ''
   _discord:
     connected: ''
-clearQueueConfirmText: ''
 objectStorageRegionDesc: ''
-script: ''
 enableEmail: ''
-publish: ''
 useDrawerReactionPickerForMobile: ''
-reflectMayTakeTime: ''
 recentNHours: ''
-deleteAccount: ''
 file: ''
-thereIsUnresolvedAbuseReportWarning: ''

@@ -134,71 +134,47 @@ _mfm:
   mention: "Menció"
   quote: "Citar"
   search: "Cercar"
-  intro: ''
   urlDescription: ''
-  boldDescription: ''
   centerDescription: ''
-  blockCodeDescription: ''
   quoteDescription: ''
-  flip: ''
   tada: ''
-  bounce: ''
   twitch: ''
-  x2: ''
   x4: ''
-  font: ''
   rotate: ''
-  rainbowDescription: ''
 _theme:
   keys:
     mention: "Menció"
     renote: "Renotar"
-    focus: ''
     header: ''
-    navActive: ''
     mentionMe: ''
-    scrollbarHandleHover: ''
     infoWarnBg: ''
-    cwHoverBg: ''
     buttonHoverBg: ''
-    wallpaperOverlay: ''
     accentLighten: ''
-  manage: ''
   installedThemes: ''
-  make: ''
   defaultValue: ''
-  key: ''
   basedProp: ''
-  inputConstantName: ''
 _sfx:
   note: "Notes"
   notification: "Notificacions"
-  channel: ''
 _2fa:
   step2Url: "També pots inserir aquest enllaç i utilitzes una aplicació d'escriptori:"
-  step1: ''
   securityKeyInfo: ''
 _widgets:
   notifications: "Notificacions"
   timeline: "Línia de temps"
-  clock: ''
   photos: ''
-  slideshow: ''
   serverMetric: ''
 _cw:
   show: "Carregar més"
 _visibility:
   followers: "Seguidors"
-  homeDescription: ''
   localOnly: ''
 _profile:
   username: "Nom d'usuari"
-  metadata: ''
   metadataContent: ''
 _exportOrImport:
   followingList: "Seguint"
   userLists: "Llistes"
-  excludeMutingUsers: ''
 _notification:
   youWereFollowed: "t'ha seguit"
   _types:
@@ -207,300 +183,160 @@ _notification:
     renote: "Renotar"
     quote: "Citar"
     reaction: "Reaccions"
-    pollEnded: ''
     app: ''
   _actions:
     reply: "Respondre"
     renote: "Renotar"
-  youGotReply: ''
   youGotMessagingMessageFromUser: ''
-  youWereInvitedToGroup: ''
 _deck:
   _columns:
     notifications: "Notificacions"
     tl: "Línia de temps"
     list: "Llistes"
     mentions: "Mencions"
-    direct: ''
   columnHeaderHeight: ''
-  swapUp: ''
   profile: ''
-_services:
-  _twitter:
-    disconnected: ''
+_services: {}
 _ago:
   daysAgo: ''
-  secondsAgo: ''
   yearsAgo: ''
 _charts:
-  usersTotal: ''
   remoteNotesIncDec: ''
-  storageUsageIncDec: ''
 _instanceCharts:
   ff: ''
-  notes: ''
   cacheSizeTotal: ''
-all: ''
 muteThread: ''
-_timelines:
-  home: ''
 unlimited: ''
-_emailUnavailable:
-  mx: ''
 _ffVisibility:
   private: ''
 _accountDelete:
-  accountDelete: ''
   started: ''
-_forgotPassword:
-  enterEmail: ''
 _gallery:
   liked: ''
-_plugin:
-  installWarn: ''
 _registry:
   keys: ''
-_aboutMisskey:
-  contributors: ''
 _nsfw:
   respect: ''
-_instanceTicker:
-  remote: ''
 _serverDisconnectedBehavior:
   quiet: ''
 _channel:
-  setBanner: ''
   following: ''
-_menuDisplay:
-  sideIcon: ''
 _wordMute:
   muteWordsDescription: ''
-  soft: ''
 _instanceMute:
   instanceMuteDescription2: ''
-_time:
-  minute: ''
 _tutorial:
   step1_1: ''
-  step2_2: ''
   step3_4: ''
-  step5_2: ''
   step6_2: ''
-  step7_3: ''
 _permissions:
   "write:blocks": ''
-  "write:favorites": ''
   "write:messaging": ''
-  "read:notifications": ''
   "write:votes": ''
-  "write:page-likes": ''
   "write:channels": ''
-  "write:gallery-likes": ''
 _auth:
   pleaseGoBack: ''
-_antennaSources:
-  homeTimeline: ''
 _weekday:
   sunday: ''
-  thursday: ''
 _poll:
   choiceN: ''
-  infinite: ''
   deadlineTime: ''
-  vote: ''
   remainingDays: ''
 _postForm:
-  replyPlaceholder: ''
   _placeholders:
     b: ''
-    f: ''
 _pages:
   created: ''
-  nameAlreadyExists: ''
   viewSource: ''
-  my: ''
   title: ''
-  hideTitleWhenPinned: ''
   eyeCatchingImageSet: ''
-_relayStatus:
-  rejected: ''
 unmute: ''
-unsuspend: ''
 unsuspendConfirm: ''
-editWidgets: ''
 emojis: ''
-settingGuide: ''
 flagAsBotDescription: ''
-flagShowTimelineRepliesDescription: ''
 showOnRemote: ''
-removeWallpaper: ''
 proxyAccount: ''
-recipient: ''
 latestRequestSentAt: ''
-charts: ''
 blockThisInstance: ''
-metadata: ''
 cpuAndMemory: ''
-statistics: ''
 clearCachedFiles: ''
-muteAndBlock: ''
 editProfile: ''
-processing: ''
 noJobs: ''
-subscribing: ''
 instanceFollowers: ''
-retypedNotMatch: ''
 attachFile: ''
-noSuchUser: ''
 removed: ''
-saved: ''
 keepOriginalUploadingDescription: ''
-uploadFromUrlDescription: ''
 messageRead: ''
-agreeTo: ''
 remoteUserCaution: ''
-yearsOld: ''
 themeForLightMode: ''
-lightThemes: ''
 fileName: ''
-selectFolders: ''
 renameFolder: ''
-emptyFolder: ''
 inputNewFolderName: ''
-rename: ''
 disconnectedFromServer: ''
-watch: ''
 normal: ''
-maintainerEmail: ''
 today: ''
-pages: ''
 enableLocalTimeline: ''
-enableRegistration: ''
 inMb: ''
-basicInfo: ''
 pinnedPagesDescription: ''
-hcaptchaSiteKey: ''
 recaptchaSiteKey: ''
-manageAntennas: ''
 antennaExcludeKeywords: ''
-enableServiceworker: ''
 connectedTo: ''
-silenceConfirm: ''
 recentlyUpdatedUsers: ''
-exploreFediverse: ''
 administrator: ''
-nUsersMentioned: ''
 lastUsed: ''
-newPasswordIs: ''
 notFoundDescription: ''
-markAsReadAllUnreadNotes: ''
 close: ''
-ownedGroups: ''
 members: ''
-title: ''
 retype: ''
-quoteQuestion: ''
 signinRequired: ''
-available: ''
 tooLong: ''
-passwordMatched: ''
 tapSecurityKey: ''
-groupInvited: ''
 youHaveNoGroups: ''
-disableAnimatedMfm: ''
 docSource: ''
-fontSize: ''
 local: ''
-dayOverDayChanges: ''
 numberOfDays: ''
-useObjectStorage: ''
 objectStorageBucketDesc: ''
-objectStorageEndpointDesc: ''
 objectStorageUseSSLDesc: ''
-serverLogs: ''
 sounds: ''
-popout: ''
 chooseEmoji: ''
-uninstall: ''
 lastUsedDate: ''
-descendingOrder: ''
 script: ''
-removeAllFollowing: ''
 yourAccountSuspendedTitle: ''
-addItem: ''
 addedRelays: ''
-enableInfiniteScroll: ''
 enablePlayer: ''
-describeFile: ''
 manage: ''
-useBlurEffectForModal: ''
 large: ''
-permission: ''
 pluginTokenRequestedDescription: ''
-emailServer: ''
 emailAddress: ''
-testEmail: ''
 instanceMute: ''
-copy: ''
 delayed: ''
-notificationSetting: ''
 other: ''
-fileIdOrUrl: ''
 reportAbuse: ''
-reporter: ''
 forwardReportIsAnonymous: ''
-openInSideView: ''
 waitingFor: ''
-desktop: ''
 createNewClip: ''
-accountInfo: ''
 repliedCount: ''
-sentReactionsCount: ''
 yes: ''
-noCrawle: ''
 loadRawImages: ''
-emailVerified: ''
 contact: ''
-developer: ''
 duplicate: ''
-narrow: ''
 clearCache: ''
-myTheme: ''
 saveAs: ''
-updatedAt: ''
 registry: ''
-youAreRunningUpToDateClient: ''
 inUse: ''
-emailNotification: ''
 typingUsers: ''
-markAllAsRead: ''
 quitFullView: ''
-info: ''
 hideOnlineStatus: ''
-offline: ''
 selectAccount: ''
-quickAction: ''
 noBotProtectionWarning: ''
-gallery: ''
 expiration: ''
-middle: ''
 previewNoteText: ''
-squareAvatars: ''
 hashtags: ''
-misskeyUpdated: ''
 usernameInfo: ''
-resolved: ''
 itsOff: ''
-controlPanel: ''
 classic: ''
-voteConfirm: ''
 useDrawerReactionPickerForMobile: ''
-tablet: ''
 numberOfColumn: ''
-mutePeriod: ''
 oneDay: ''
-rateLimitExceeded: ''
 recentNDays: ''
-numberOfPageCache: ''
 unclip: ''
-recommended: ''

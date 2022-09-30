@@ -1504,11 +1504,7 @@ _deck:
     list: "Daftar"
     mentions: "Sebutan"
     direct: "Langsung"
-_services:
-  _twitter:
-    connected: ''
+_services: {}
 attachmentRequired: ''
-typeToConfirm: ''
 document: ''
-noEmailServerWarning: ''
 showLess: ''

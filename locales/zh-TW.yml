@@ -1383,12 +1383,7 @@ _deck:
     list: "清單"
     mentions: "提及"
     direct: "指定使用者"
-_services:
-  _twitter:
-    disconnected: ''
+_services: {}
 showLess: ''
-cropImageAsk: ''
 typeToConfirm: ''
-document: ''
 noEmailServerWarning: ''
-maxCustomEmojiPicker: ''

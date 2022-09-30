@@ -864,7 +864,6 @@ _mfm:
   font: "Шрифт"
   fontDescription: "Встановлює шрифт для контенту."
   rotate: "Обертати"
-  spinDescription: ''
   sparkleDescription: ''
 _instanceTicker:
   none: "Не відображати"
@@ -961,7 +960,6 @@ _theme:
     accentDarken: "Акцент (Затемлений)"
     accentLighten: "Акцент (Освітлений)"
     fgHighlighted: "Виділений текст"
-  key: ''
   alpha: ''
 _sfx:
   note: "Нотатки"
@@ -1022,7 +1020,6 @@ _tutorial:
   step7_3: "Насолоджуйтесь FoundKey! \U0001F680"
 _2fa:
   registerKey: "Зареєструвати новий ключ безпеки"
-  step1: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "Переглядати дані профілю"
@@ -1052,7 +1049,6 @@ _permissions:
   "write:user-groups": "Змінювати групи користувача"
   "read:channels": "Переглядати канали"
   "write:channels": "Змінювати канали"
-  "read:gallery-likes": ''
 _auth:
   shareAccess: "Ви хочете надати \"{name}\" доступ до цього акаунту?"
   shareAccessAsk: "Ви впевнені, що хочете надати цій програмі доступ до вашого акаунту?"
@@ -1163,7 +1159,6 @@ _charts:
   notesTotal: "Загальна кількість нотаток"
   filesIncDec: "Зміни кількості файлів"
   filesTotal: "Загальна кількість файлів"
-  localNotesIncDec: ''
 _instanceCharts:
   requests: "Запити"
   usersTotal: "Сумарна кількість користувачів"
@@ -1264,49 +1259,27 @@ _deck:
     list: "Списки"
     mentions: "Згадки"
     direct: "Особисте"
-_signup:
-  emailAddressInfo: ''
 _instanceMute:
   title: ''
-showingPastTimeline: ''
 fullView: ''
-notSpecifiedMentionWarning: ''
 hideOnlineStatus: ''
-offline: ''
 selectAccount: ''
-quickAction: ''
 noBotProtectionWarning: ''
-gallery: ''
 memo: ''
-emailNotConfiguredWarning: ''
 squareAvatars: ''
-useBlurEffect: ''
 translate: ''
-pubSub: ''
 breakFollow: ''
-unread: ''
 makeReactionsPublic: ''
-unmuteThread: ''
 deleteAccountConfirm: ''
-leaveGroupConfirm: ''
 smartphone: ''
-size: ''
 instanceDefaultThemeDescription: ''
-oneHour: ''
 failedToFetchAccountInformation: ''
-recentNHours: ''
 deleteAccount: ''
-file: ''
 thereIsUnresolvedAbuseReportWarning: ''
 _emailUnavailable:
-  used: ''
   smtp: ''
-_accountDelete:
-  requestAccountDelete: ''
 _forgotPassword:
   ifNoEmail: ''
-_plugin:
-  manage: ''
 _services:
   _twitter:
     connected: ''

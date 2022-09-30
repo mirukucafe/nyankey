@@ -1466,14 +1466,8 @@ _deck:
     list: "Списки"
     mentions: "Упоминания"
     direct: "Личное"
-reporter: ''
 oneHour: ''
-failedToFetchAccountInformation: ''
 recentNHours: ''
-deleteAccount: ''
 file: ''
-thereIsUnresolvedAbuseReportWarning: ''
 maxCustomEmojiPicker: ''
-_services:
-  _twitter:
-    connected: ''
+_services: {}

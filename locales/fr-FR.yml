@@ -1499,14 +1499,8 @@ _deck:
     mentions: "Mentions"
     direct: "Direct"
 _services:
-  _discord:
-    connected: ''
   _github:
     connected: ''
-keepOriginalUploadingDescription: ''
 attachmentRequired: ''
-failedToFetchAccountInformation: ''
 recentNHours: ''
-deleteAccount: ''
 file: ''
-recommended: ''

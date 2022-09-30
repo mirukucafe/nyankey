@@ -882,11 +882,8 @@ _mfm:
   font: "Czcionka"
   fontDescription: "Wybiera czcionkę do wyświetlania treści."
   rotate: "Obróć"
-  sparkleDescription: ''
   blockMathDescription: ''
-  tadaDescription: ''
   bounceDescription: ''
-  twitchDescription: ''
   rainbow: ''
 _instanceTicker:
   none: "Nigdy nie pokazuj"
@@ -1020,9 +1017,7 @@ _tutorial:
     \ obserwować."
   step3_1: "Zakończyłeś(-aś) konfigurację profilu?"
   step3_3: "Wypełnij pole i kliknij przycisk w prawym górnym rogu by wysłać post."
-  step3_4: ''
   step5_2: ''
-  step6_2: ''
   step7_3: ''
 _2fa:
   registerDevice: "Zarejestruj nowe urządzenie"
@@ -1031,7 +1026,6 @@ _2fa:
   step2: "Następnie, zeskanuje kod QR z ekranu."
   step3: "Wprowadź token podany w aplikacji, aby ukończyć konfigurację."
   step4: "Od teraz, przy każdej próbie logowania otrzymasz prośbę o token logowania."
-  securityKeyInfo: ''
 _permissions:
   "read:account": "Wyświetl informacje o swoim koncie"
   "write:account": "Edytuj swoje informacje o koncie"
@@ -1056,12 +1050,10 @@ _permissions:
   "write:page-likes": "Edycja polubień na stronach"
   "read:user-groups": "Wyświetlanie grup użytkownika"
   "write:user-groups": "Edycja lub usuwanie grup użytkownika"
-  "read:channels": ''
   "read:gallery-likes": ''
 _auth:
   shareAccess: "Czy chcesz autoryzować „{name}” do dostępu do tego konta?"
   permissionAsk: "Ta aplikacja wymaga następujących uprawnień:"
-  denied: ''
 _weekday:
   sunday: "Niedziela"
   monday: "Poniedziałek"
@@ -1083,7 +1075,6 @@ _widgets:
   postForm: "Utwórz wpis"
   button: "Przycisk"
   jobQueue: "Kolejka zadań"
-  slideshow: ''
   aichan: ''
 _cw:
   hide: "Ukryj"
@@ -1119,7 +1110,6 @@ _visibility:
   followers: "Obserwujący"
   specified: "Bezpośredni"
   specifiedDescription: "Napisz tylko określonym użytkownikom"
-  localOnlyDescription: ''
 _postForm:
   _placeholders:
     a: "Co się dzieje?"
@@ -1152,7 +1142,6 @@ _charts:
   apRequest: "Żądania"
   usersTotal: "Łącznie # użytkowników"
   activeUsers: "Aktywni użytkownicy"
-  remoteNotesIncDec: ''
   storageUsageIncDec: ''
 _instanceCharts:
   requests: "Żądania"
@@ -1253,42 +1242,24 @@ _deck:
     list: "Listy"
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
-flagShowTimelineReplies: ''
 keepOriginalUploadingDescription: ''
-objectStorageSetPublicRead: ''
 menu: ''
-regexpErrorDescription: ''
 forwardReportIsAnonymous: ''
-attachmentRequired: ''
 learnMore: ''
-translatedFrom: ''
 lastCommunication: ''
-itsOn: ''
 filter: ''
-makeReactionsPublicDescription: ''
 ffVisibility: ''
-incorrectPassword: ''
 useDrawerReactionPickerForMobile: ''
-tablet: ''
 numberOfColumn: ''
-mutePeriod: ''
 oneWeek: ''
-cropImage: ''
 isSystemAccount: ''
-numberOfPageCacheDescription: ''
 noEmailServerWarning: ''
-maxUnicodeEmojiPicker: ''
 _emailUnavailable:
   disposable: ''
-_signup:
-  emailAddressInfo: ''
 _accountDelete:
   sendEmail: ''
-maxCustomEmojiPicker: ''
 _instanceMute:
   heading: ''
-_antennaSources:
-  userList: ''
 _services:
   _twitter:
     connected: ''

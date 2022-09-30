@@ -335,66 +335,44 @@ _mfm:
   mention: "Vermelding"
   quote: "Quote"
   search: "Zoeken"
-  small: ''
   x3: ''
-  cheatSheet: ''
   hashtag: ''
-  linkDescription: ''
   inlineMathDescription: ''
-  emoji: ''
   flipDescription: ''
-  tadaDescription: ''
   bounceDescription: ''
-  twitchDescription: ''
   x2Description: ''
-  blurDescription: ''
   rainbowDescription: ''
-  rotateDescription: ''
 _theme:
   keys:
     mention: "Vermelding"
     renote: "Herdelen"
-    scrollbarHandle: ''
     link: ''
-    fg: ''
     shadow: ''
-    navHoverFg: ''
     infoFg: ''
-    cwFg: ''
     buttonBg: ''
-    driveFolderBg: ''
     accentLighten: ''
-  manage: ''
   installedThemes: ''
-  make: ''
   defaultValue: ''
-  key: ''
   basedProp: ''
-  inputConstantName: ''
 _sfx:
   note: "Notities"
   notification: "Meldingen"
   chat: "Chat"
-  channel: ''
 _widgets:
   notifications: "Meldingen"
   timeline: "Tijdlijn"
   activity: "Activiteit"
   federation: "Federatie"
   jobQueue: "Job Queue"
-  clock: ''
   digitalClock: ''
-  onlineUsers: ''
 _cw:
   show: "Laad meer"
 _visibility:
   home: "Startpagina"
   followers: "Volgers"
-  followersDescription: ''
   localOnlyDescription: ''
 _profile:
   username: "Gebruikersnaam"
-  metadata: ''
   metadataContent: ''
 _exportOrImport:
   followingList: "Volgend"
@@ -405,9 +383,7 @@ _exportOrImport:
   excludeInactiveUsers: "Negeer inactieve gebruikers"
 _charts:
   federation: "Federatie"
-  activeUsers: ''
   notesTotal: ''
-  storageUsageTotal: ''
 _timelines:
   home: "Startpagina"
 _notification:
@@ -418,23 +394,18 @@ _notification:
     renote: "Herdelen"
     quote: "Quote"
     reaction: "Reacties"
-    pollEnded: ''
     app: ''
   _actions:
     reply: "Antwoord"
     renote: "Herdelen"
-  youGotReply: ''
   youGotMessagingMessageFromUser: ''
-  youWereInvitedToGroup: ''
 _deck:
   _columns:
     notifications: "Meldingen"
     tl: "Tijdlijn"
     list: "Lijsten"
     mentions: "Vermeldingen"
-    direct: ''
   columnHeaderHeight: ''
-  swapUp: ''
   profile: ''
 selectList: Kies een lijst
 selectAntenna: Kies een antenne
@@ -442,230 +413,122 @@ selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
 _channel:
-  following: ''
   edit: ''
-accountDeletionInProgress: ''
 _menuDisplay:
   top: ''
-_emailUnavailable:
-  disposable: ''
 _wordMute:
   muteWordsDescription: ''
-  soft: ''
 _ffVisibility:
   followers: ''
-_signup:
-  emailSent: ''
 emojis: ''
-settingGuide: ''
 inputNewFolderName: ''
-doNothing: ''
 accept: ''
-instanceDescription: ''
 thisYear: ''
-monthX: ''
 connectService: ''
-disablingTimelinesInfo: ''
 driveCapacityPerLocalAccount: ''
-backgroundImageUrl: ''
 pinnedPages: ''
-enableHcaptcha: ''
 enableRecaptcha: ''
-antennas: ''
 antennaKeywords: ''
-withFileAntenna: ''
 withReplies: ''
-silence: ''
 popularUsers: ''
-exploreUsersCount: ''
 twoStepAuthentication: ''
-notFoundDescription: ''
 markAsReadAllTalkMessages: ''
-group: ''
 joinedGroups: ''
-transfer: ''
 text: ''
-noteOf: ''
 noMessagesYet: ''
-invitations: ''
 unavailable: ''
-weakPassword: ''
 passwordNotMatched: ''
-language: ''
 useOsNativeEmojis: ''
-noHistory: ''
 category: ''
-existingAccount: ''
 openImageInNewTab: ''
-total: ''
 clientSettings: ''
-showFeaturedNotesInTimeline: ''
 objectStorageBaseUrlDesc: ''
-objectStoragePrefixDesc: ''
 objectStorageRegionDesc: ''
-objectStorageUseProxyDesc: ''
 showFixedPostForm: ''
-none: ''
 details: ''
-install: ''
 installedDate: ''
-ascendingOrder: ''
 output: ''
-deleteAllFilesConfirm: ''
 userSilenced: ''
-divider: ''
 inboxUrl: ''
-invisibleNote: ''
 useCw: ''
-description: ''
 leaveConfirm: ''
-undeck: ''
 height: ''
-generateAccessToken: ''
 tokenRequested: ''
-useStarForReactionFallback: ''
 email: ''
-emptyToDisableSmtpAuth: ''
 regexpError: ''
-makeActive: ''
 overview: ''
-channel: ''
 useGlobalSetting: ''
-regenerateLoginTokenDescription: ''
 sample: ''
-fillAbuseReportDescription: ''
 reporterOrigin: ''
-abuseMarkAsResolved: ''
 editTheseSettingsMayBreakAccount: ''
-smtpSecureInfo: ''
 clip: ''
-public: ''
 notesCount: ''
-renotedCount: ''
 receivedReactionsCount: ''
-no: ''
 noCrawleDescription: ''
-disableShowingAnimatedImages: ''
 noteFavoritesCount: ''
-useSystemFont: ''
 makeExplorable: ''
-left: ''
 reloadToApplySetting: ''
-nUsers: ''
 accentColor: ''
-value: ''
 deleteConfirm: ''
-currentVersion: ''
 usageAmount: ''
-apply: ''
 inChannelSearch: ''
-showingPastTimeline: ''
 unlikeConfirm: ''
-userPagePinTip: ''
 unknown: ''
-online: ''
 botProtection: ''
-enabled: ''
 accounts: ''
-configure: ''
 recentPosts: ''
-memo: ''
 low: ''
-customCss: ''
 sent: ''
-troubleshooting: ''
 whatIsNew: ''
-keepCw: ''
 unresolved: ''
-emailRequiredForSignup: ''
 manageAccounts: ''
-ffVisibility: ''
 incorrectPassword: ''
-useDrawerReactionPickerForMobile: ''
 tablet: ''
-numberOfColumn: ''
 mutePeriod: ''
-oneDay: ''
 rateLimitExceeded: ''
-typeToConfirm: ''
 document: ''
-noEmailServerWarning: ''
 maxUnicodeEmojiPicker: ''
 _permissions:
-  "read:blocks": ''
   "read:favorites": ''
-  "write:messaging": ''
   "read:notifications": ''
-  "write:votes": ''
   "write:page-likes": ''
-  "write:channels": ''
   "write:gallery-likes": ''
-_accountDelete:
-  requestAccountDelete: ''
 _ad:
   reduceFrequencyOfThisAd: ''
-_gallery:
-  my: ''
 _plugin:
   install: ''
-_registry:
-  key: ''
 _aboutMisskey:
   about: ''
-  translation: ''
 _instanceTicker:
   none: ''
-_serverDisconnectedBehavior:
-  dialog: ''
 _instanceMute:
   instanceMuteDescription2: ''
 _ago:
-  justNow: ''
   daysAgo: ''
-_time:
-  second: ''
 _tutorial:
   title: ''
-  step2_1: ''
   step3_3: ''
-  step5_1: ''
   step6_1: ''
-  step7_2: ''
 _2fa:
   registerKey: ''
-  step3: ''
 _auth:
   shareAccessAsk: ''
-  denied: ''
 _antennaSources:
   userList: ''
 _weekday:
-  tuesday: ''
   saturday: ''
 _poll:
-  canMultipleVote: ''
   after: ''
-  votesCount: ''
   voted: ''
-  remainingMinutes: ''
 _postForm:
   channelPlaceholder: ''
-  _placeholders:
-    d: ''
 _instanceCharts:
   users: ''
-  ff: ''
   files: ''
 _pages:
-  readPage: ''
   pageSetting: ''
-  editThisPage: ''
   unlike: ''
-  contents: ''
   alignCenter: ''
-  fontSansSerif: ''
 _relayStatus:
   accepted: ''
-_services:
-  _twitter:
-    connected: ''
+_services: {}

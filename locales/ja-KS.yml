@@ -698,17 +698,11 @@ _mfm:
   blur: "ぼかし"
   font: "フォント"
   rotate: "回転"
-  x2Description: ''
   x4Description: ''
-  rainbowDescription: ''
   intro: ''
-  urlDescription: ''
   smallDescription: ''
-  inlineMathDescription: ''
   emojiDescription: ''
-  jelly: ''
   jump: ''
-  x2: ''
 _instanceTicker:
   none: "表示せん"
   remote: "リモートユーザーに表示"
@@ -728,7 +722,6 @@ _menuDisplay:
 _wordMute:
   soft: "ソフト"
   hard: "ハード"
-  softDescription: ''
 _theme:
   explore: "テーマを探す"
   install: "テーマのインストール"
@@ -798,7 +791,6 @@ _theme:
     accentDarken: "アクセント (暗め)"
     accentLighten: "アクセント (明るめ)"
     fgHighlighted: "強調されとる文字"
-  importInfo: ''
 _sfx:
   note: "ノート"
   noteMy: "ノート(自分)"
@@ -821,14 +813,10 @@ _time:
   day: "日"
 _tutorial:
   step3_1: "プロフィール設定はええ感じにできたか？"
-  step7_1: ''
   step1_3: ''
-  step3_3: ''
   step5_1: ''
-  step6_1: ''
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
-  step2: ''
   securityKeyInfo: ''
 _permissions:
   "read:reactions": "リアクションを見る"
@@ -838,15 +826,11 @@ _permissions:
   "write:page-likes": "ページのええやんを操作する"
   "read:user-groups": "ユーザーグループを見る"
   "read:channels": "チャンネルを見る"
-  "write:blocks": ''
   "write:favorites": ''
-  "write:messaging": ''
   "read:notifications": ''
-  "write:user-groups": ''
   "read:gallery-likes": ''
 _auth:
   permissionAsk: "このアプリは次の権限を要求しとるで"
-  callback: ''
 _antennaSources:
   all: "みんなのノート"
   homeTimeline: "フォローしとるユーザーのノート"
@@ -895,17 +879,14 @@ _poll:
   duration: "期間"
   votesCount: "{n}票"
   vote: "投票する"
-  voted: ''
   remainingMinutes: ''
 _visibility:
   publicDescription: "みんなに公開"
   home: "ホーム"
   followers: "フォロワー"
-  specified: ''
 _profile:
   name: "名前"
   username: "ユーザー名"
-  metadataEdit: ''
   changeAvatar: ''
 _exportOrImport:
   allNotes: "全てのノート"
@@ -963,7 +944,6 @@ _pages:
   fontSansSerif: "サンセリフ"
   eyeCatchingImageSet: "アイキャッチ画像を設定"
   eyeCatchingImageRemove: "アイキャッチ画像を削除"
-  editThisPage: ''
   title: ''
 _notification:
   fileUploaded: "ファイルが無事アップロードされたで。"
@@ -982,11 +962,9 @@ _notification:
     reaction: "リアクション"
     receiveFollowRequest: "フォロー許可してほしいみたいやで"
     followRequestAccepted: "フォローが受理されたで"
-    groupInvited: ''
   _actions:
     reply: "返事"
     renote: "Renote"
-  youRenoted: ''
   emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "いつもメインカラムを表示"
@@ -1010,75 +988,40 @@ _deck:
     list: "リスト"
     mentions: "あんた宛て"
     direct: "ダイレクト"
-unlimited: ''
 _emailUnavailable:
   smtp: ''
-_ffVisibility:
-  private: ''
 _accountDelete:
   accountDelete: ''
-  started: ''
 _forgotPassword:
   contactAdmin: ''
 _postForm:
-  _placeholders:
-    a: ''
   quotePlaceholder: ''
-_services:
-  _twitter:
-    connected: ''
+_services: {}
 showLess: ''
-pinnedPagesDescription: ''
 disableDrawer: ''
-objectStoragePrefixDesc: ''
 yourAccountSuspendedTitle: ''
-serviceworkerInfo: ''
 visibility: ''
-useBlurEffectForModal: ''
 enableAll: ''
-notificationType: ''
 regexpError: ''
-regenerateLoginTokenDescription: ''
 abuseReported: ''
-forwardReport: ''
 createNewClip: ''
-accountInfo: ''
 repliedCount: ''
-sentReactionsCount: ''
 lockedAccountInfo: ''
-verificationEmailSent: ''
 useSystemFont: ''
-makeExplorableDescription: ''
 publish: ''
-addDescription: ''
 unknown: ''
-online: ''
 botProtection: ''
-enabled: ''
 switch: ''
-postToGallery: ''
 popularPosts: ''
-ratio: ''
 accountDeletionInProgress: ''
-troubleshooting: ''
 whatIsNew: ''
-keepCw: ''
 unresolved: ''
-emailRequiredForSignup: ''
 manageAccounts: ''
-muteThread: ''
 continueThread: ''
-leaveGroup: ''
 overridedDeviceKind: ''
-themeColor: ''
 instanceDefaultDarkTheme: ''
-oneHour: ''
 failedToFetchAccountInformation: ''
-recentNHours: ''
 deleteAccount: ''
-file: ''
 thereIsUnresolvedAbuseReportWarning: ''
-_nsfw:
-  ignore: ''
 _instanceMute:
   instanceMuteDescription: ''
