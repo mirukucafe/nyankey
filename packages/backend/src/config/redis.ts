@@ -1,10 +1,9 @@
 import Logger from '@/services/logger.js';
-import { IpFamily } from './types.js';
 import config from './index.js';
 
 const logger = new Logger('config:redis', 'gray', false);
 
-function getRedisFamily(family?: IpFamily | number): number {
+function getRedisFamily(family?: string | number): number {
 	const familyMap = {
 		ipv4: 4,
 		ipv6: 6,

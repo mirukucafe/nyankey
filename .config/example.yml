@@ -93,9 +93,6 @@ redis:
 # deliverJobMaxAttempts: 12
 # inboxJobMaxAttempts: 8
 
-# IP address family used for outgoing requests (ipv4, ipv6 or dual)
-#outgoingAddressFamily: ipv4
-
 # Syslog option
 #syslog:
 #  host: localhost

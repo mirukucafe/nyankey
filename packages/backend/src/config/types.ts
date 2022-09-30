@@ -1,9 +1,4 @@
 /**
- * IP address family
- */
-export type IpFamily = 'ipv4' | 'ipv6' | 'dual';
-
-/**
  * Configuration options set up by the user
  */
 export type Source = {
@@ -24,7 +19,7 @@ export type Source = {
 	redis: {
 		host: string;
 		port: number;
-		family?: number | IpFamily;
+		family?: number | 'dual' | 'ipv4' | 'ipv6';
 		pass: string;
 		db?: number;
 		prefix?: string;
@@ -51,8 +46,6 @@ export type Source = {
 	clusterLimit?: number;
 
 	id: string;
-
-	outgoingAddressFamily?: IpFamily;
 
 	deliverJobConcurrency?: number;
 	inboxJobConcurrency?: number;
