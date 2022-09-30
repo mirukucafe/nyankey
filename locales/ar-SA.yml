@@ -827,7 +827,6 @@ _emailUnavailable:
   format: "صيغة البريد الإلكتروني غير صالحة"
   mx: "خادم البريد الإلكتروني غير صالح"
   smtp: "خادم البريد الإلكتروتي لا يستجيب"
-  disposable: ''
 _ffVisibility:
   public: "علني"
   followers: "مرئية لمتابِعيك فقط"
@@ -935,19 +934,12 @@ _mfm:
   rainbowDescription: "اجعل المحتوى يظهر بألوان الطيف"
   rotate: "تدوير"
   rotateDescription: "يُدير المحتوى بزاوية معيّنة."
-  inlineMathDescription: ''
   dummy: ''
-  linkDescription: ''
   inlineCode: ''
-  inlineCodeDescription: ''
   blockCode: ''
-  blockCodeDescription: ''
   inlineMath: ''
-  blockMath: ''
   blockMathDescription: ''
-  twitch: ''
   twitchDescription: ''
-  sparkle: ''
   sparkleDescription: ''
 _instanceTicker:
   none: "لا تظهره بتاتًا"
@@ -956,7 +948,6 @@ _instanceTicker:
 _serverDisconnectedBehavior:
   reload: "إعادة تحميل تلقائية"
   dialog: "أظهر مربع حوار التحذيرات"
-  quiet: ''
 _channel:
   create: "أنشئ قناة"
   edit: "عدّل قناة"
@@ -971,7 +962,6 @@ _menuDisplay:
   sideFull: "جانبي"
   top: "الأعلى"
   hide: "إخفاء"
-  sideIcon: ''
 _wordMute:
   muteWords: "الكلمات المحظورة"
   muteWordsDescription: "افصل بينهم بمسافة لاستخدام معامل \"و\" أو بسطر لاستخدام معامل\
@@ -1040,29 +1030,17 @@ _theme:
     listItemHoverBg: "خلفية عناصر القائمة (عند التمرير فوقها)"
     driveFolderBg: "خلفية مجلد قرص التخزين"
     messageBg: "خلفية المحادثة"
-    focus: ''
     header: ''
-    navActive: ''
     navIndicator: ''
-    mentionMe: ''
     modalBg: ''
-    dateLabelFg: ''
     infoBg: ''
-    infoFg: ''
     cwBg: ''
-    cwFg: ''
     cwHoverBg: ''
-    wallpaperOverlay: ''
     badge: ''
-    accentDarken: ''
     accentLighten: ''
-    fgHighlighted: ''
   base: ''
-  refProp: ''
   refConst: ''
-  basedProp: ''
   darken: ''
-  lighten: ''
   importInfo: ''
 _sfx:
   note: "الملاحظات"
@@ -1124,7 +1102,6 @@ _2fa:
   step2: "امسح رمز الاستجابة السريعة الموجد على الشاشة."
   step3: "أدخل الرمز الموجود في تطبيقك لإكمال التثبيت."
   step4: "من هذه اللحظة أثناء ولوجك سيُطلب منك الرمز."
-  step2Url: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "اعرض معلومات حسابك"
@@ -1157,7 +1134,6 @@ _permissions:
   "read:gallery": "اعرض المعرض"
   "write:gallery": "عدّل المعرض"
   "read:gallery-likes": "يعرض ما أعجبك من مشاركات المعرض"
-  "write:page-likes": ''
   "write:gallery-likes": ''
 _auth:
   shareAccess: "أتريد التفويض لـ \"{name}\" بالوصول لحسابك؟"
@@ -1170,7 +1146,6 @@ _antennaSources:
   all: "كل الملاحظات"
   homeTimeline: "ملاحظات المستخدمين المتابَعين"
   users: "ملاحظات مستخدمين محددين"
-  userList: ''
   userGroup: ''
 _weekday:
   sunday: "الأحد"
@@ -1198,9 +1173,7 @@ _widgets:
   onlineUsers: "المتّصلون"
   jobQueue: "قائمة الانتظار"
   serverMetric: "إحصائيات الخادم"
-  rssMarquee: ''
   aiscript: ''
-  aichan: ''
 _cw:
   hide: "إخفاء"
   show: "عرض المزيد"
@@ -1282,7 +1255,6 @@ _charts:
   notesTotal: "إجمالي الملاحظات"
   filesIncDec: "تباين عدد الملفات"
   filesTotal: "العدد الإجمالي للملفات"
-  storageUsageIncDec: ''
   storageUsageTotal: ''
 _instanceCharts:
   requests: "الطلبات"
@@ -1294,7 +1266,6 @@ _instanceCharts:
   ffTotal: "تباين عدد حسابات المتابَعة/المتابِعة"
   files: "تباين عدد الملفات"
   filesTotal: "تباين عدد الملفات"
-  cacheSize: ''
   cacheSizeTotal: ''
 _timelines:
   home: "الرئيسي"
@@ -1362,12 +1333,10 @@ _notification:
     followRequestAccepted: "طلبات المتابعة المقبولة"
     groupInvited: "دعوات الفريق"
     app: "إشعارات التطبيقات المرتبطة"
-    pollEnded: ''
   _actions:
     followBack: "تابعك بالمثل"
     reply: "رد"
     renote: "أعد النشر"
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "أظهر العمود الرئيسي دائمًا"
   columnAlign: "حاذِ الأعمدة"
@@ -1386,78 +1355,42 @@ _deck:
     list: "القوائم"
     mentions: "الإشارات"
     direct: "مباشرة"
-  columnMargin: ''
   columnHeaderHeight: ''
-  stackLeft: ''
   popRight: ''
-publishing: ''
 disableDrawer: ''
-disableAnimatedMfm: ''
 objectStorage: ''
-useObjectStorage: ''
 objectStorageBaseUrlDesc: ''
-objectStorageBucket: ''
 objectStorageBucketDesc: ''
-openInSideView: ''
 lockedAccountInfo: ''
-duplicate: ''
 left: ''
-center: ''
 unlimited: ''
-maxCustomEmojiPicker: ''
 _services:
   _twitter:
     connected: ''
-    disconnected: ''
   _github:
     connected: ''
-    disconnected: ''
   _discord:
     connected: ''
-    disconnected: ''
 showLess: ''
-cacheRemoteFilesDescription: ''
 clearQueueConfirmText: ''
-subscribing: ''
 enableServiceworker: ''
-objectStorageEndpointDesc: ''
 objectStorageRegionDesc: ''
-objectStorageSetPublicRead: ''
 scratchpad: ''
-scratchpadDescription: ''
 script: ''
-deck: ''
 undeck: ''
-useBlurEffectForModal: ''
 enableEmail: ''
-smtpSecure: ''
 testEmail: ''
-regexpErrorDescription: ''
 publish: ''
-attachmentRequired: ''
 pubSub: ''
-continueThread: ''
 useDrawerReactionPickerForMobile: ''
-instanceDefaultLightTheme: ''
 instanceDefaultDarkTheme: ''
-instanceDefaultThemeDescription: ''
 reflectMayTakeTime: ''
-rateLimitExceeded: ''
 cropImage: ''
-cropImageAsk: ''
 recentNHours: ''
-recentNDays: ''
 isSystemAccount: ''
-typeToConfirm: ''
 deleteAccount: ''
-numberOfPageCache: ''
 numberOfPageCacheDescription: ''
-document: ''
 file: ''
-unclip: ''
 confirmToUnclipAlreadyClippedNote: ''
-noEmailServerWarning: ''
 thereIsUnresolvedAbuseReportWarning: ''
-recommended: ''
 check: ''
-maxUnicodeEmojiPicker: ''

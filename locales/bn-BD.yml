@@ -1292,7 +1292,6 @@ _widgets:
   serverMetric: "সার্ভার মেট্রিক্স"
   aiscript: "AiScript কনসোল"
   aichan: "আই চান"
-  rssMarquee: ''
 _cw:
   hide: "লুকান"
   show: "আরও দেখুন"
@@ -1485,33 +1484,19 @@ _deck:
     direct: "ডাইরেক্ট নোটগুলি"
 _services:
   _discord:
-    disconnected: ''
     connected: ''
   _twitter:
-    connected: ''
     disconnected: ''
   _github:
-    connected: ''
     disconnected: ''
-showLess: ''
 unlimited: ''
-attachmentRequired: ''
 cropImage: ''
-cropImageAsk: ''
 recentNHours: ''
-recentNDays: ''
 isSystemAccount: ''
-typeToConfirm: ''
 deleteAccount: ''
-numberOfPageCache: ''
 numberOfPageCacheDescription: ''
-document: ''
 file: ''
-unclip: ''
 confirmToUnclipAlreadyClippedNote: ''
-noEmailServerWarning: ''
 thereIsUnresolvedAbuseReportWarning: ''
-recommended: ''
 check: ''
-maxCustomEmojiPicker: ''
 maxUnicodeEmojiPicker: ''

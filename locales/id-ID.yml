@@ -1314,7 +1314,6 @@ _widgets:
   serverMetric: "Statistik server"
   aiscript: "Konsol AiScript"
   aichan: "Ai"
-  rssMarquee: ''
 _cw:
   hide: "Sembunyikan"
   show: "Lihat konten"
@@ -1505,33 +1504,20 @@ _deck:
     list: "Daftar"
     mentions: "Sebutan"
     direct: "Langsung"
-check: ''
 _services:
   _discord:
     disconnected: ''
-    connected: ''
   _twitter:
     connected: ''
-    disconnected: ''
   _github:
     connected: ''
-    disconnected: ''
 attachmentRequired: ''
-recentNHours: ''
 recentNDays: ''
-isSystemAccount: ''
 typeToConfirm: ''
-deleteAccount: ''
 numberOfPageCache: ''
-numberOfPageCacheDescription: ''
 document: ''
-file: ''
 unclip: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-unlimited: ''
 showLess: ''
-maxCustomEmojiPicker: ''
 maxUnicodeEmojiPicker: ''

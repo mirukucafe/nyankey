@@ -912,7 +912,6 @@ _emailUnavailable:
   format: "Le format de cette adresse de courriel est invalide"
   mx: "Ce serveur de courriels est invalide"
   smtp: "Ce serveur de courriels ne répond pas"
-  disposable: ''
 _ffVisibility:
   public: "Public"
   followers: "Visible uniquement pour les abonné·e·s"
@@ -1044,7 +1043,6 @@ _mfm:
   sparkle: "Paillettes"
   sparkleDescription: "Ajoute un effet scintillant au contenu."
   rotate: "Pivoter"
-  rotateDescription: ''
 _instanceTicker:
   none: "Cacher "
   remote: "Montrer pour les utilisateur·ice·s distant·e·s"
@@ -1085,7 +1083,6 @@ _instanceMute:
   instanceMuteDescription2: "Séparer avec de nouvelles lignes"
   title: "Masque les notes venant des instances listées."
   heading: "Instances à mettre en sourdine"
-  instanceMuteDescription: ''
 _theme:
   explore: "Explorer les thèmes"
   install: "Installer un thème"
@@ -1239,7 +1236,6 @@ _2fa:
     \ davantage le processus de connexion grâce à une clé de sécurité matérielle qui\
     \ prend en charge FIDO2, ou bien en configurant l'authentification par empreinte\
     \ digitale ou par code PIN sur votre appareil."
-  step2Url: ''
 _permissions:
   "read:account": "Afficher les informations du compte"
   "write:account": "Mettre à jour les informations de votre compte"
@@ -1315,7 +1311,6 @@ _widgets:
   serverMetric: "Statistiques du serveur"
   aiscript: "Console AiScript"
   aichan: "Ai"
-  rssMarquee: ''
 _cw:
   hide: "Masquer"
   show: "Afficher plus …"
@@ -1478,13 +1473,10 @@ _notification:
     followRequestAccepted: "Demande d'abonnement acceptée"
     groupInvited: "Invitation à un groupe"
     app: "Notifications provenant des apps"
-    pollEnded: ''
   _actions:
     reply: "Répondre"
     renote: "Renoter"
-    followBack: ''
   emptyPushNotificationMessage: ''
-  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Toujours afficher la colonne principale"
   columnAlign: "Aligner les colonnes"
@@ -1507,45 +1499,26 @@ _deck:
     list: "Listes"
     mentions: "Mentions"
     direct: "Direct"
-unclip: ''
 unlimited: ''
-maxCustomEmojiPicker: ''
 _services:
   _discord:
     connected: ''
-    disconnected: ''
   _twitter:
     connected: ''
-    disconnected: ''
   _github:
     connected: ''
-    disconnected: ''
 showLess: ''
-flagShowTimelineRepliesDescription: ''
 keepOriginalUploadingDescription: ''
-disableDrawer: ''
 regexpErrorDescription: ''
-forwardReportIsAnonymous: ''
 attachmentRequired: ''
-useDrawerReactionPickerForMobile: ''
 instanceDefaultThemeDescription: ''
-reflectMayTakeTime: ''
 failedToFetchAccountInformation: ''
-rateLimitExceeded: ''
 cropImage: ''
-cropImageAsk: ''
 recentNHours: ''
-recentNDays: ''
 isSystemAccount: ''
-typeToConfirm: ''
 deleteAccount: ''
-numberOfPageCache: ''
 numberOfPageCacheDescription: ''
-document: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-check: ''
 maxUnicodeEmojiPicker: ''

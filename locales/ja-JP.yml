@@ -1248,7 +1248,6 @@ _widgets:
   aiscript: "AiScriptコンソール"
   aichan: "藍"
 
-  rssMarquee: ''
 _cw:
   hide: "隠す"
   show: "もっと見る"
@@ -1463,7 +1462,5 @@ _services:
   _github:
     connected: "GitHub: @{login} を、FoundKey: @{userName} に接続しました！"
     disconnected: "GitHubの連携を解除しました :v:"
-attachmentRequired: ''
 unlimited: ''
-maxCustomEmojiPicker: ''
 maxUnicodeEmojiPicker: ''

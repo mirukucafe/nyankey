@@ -1273,7 +1273,6 @@ _widgets:
   serverMetric: "Metriky servera"
   aiscript: "Konzola AiScript"
   aichan: "Ai"
-  rssMarquee: ''
 _cw:
   hide: "Skryť"
   show: "Zobraziť viac"
@@ -1441,7 +1440,6 @@ _notification:
     followBack: "Sledovať späť\n"
     reply: "Odpovedať"
     renote: "Preposlať"
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "Vždy zobraziť v hlavnom stĺpci"
   columnAlign: "Zarovnať stĺpce"
@@ -1464,36 +1462,21 @@ _deck:
     list: "Zoznam"
     mentions: "Zmienky"
     direct: "Priame poznámky"
-unlimited: ''
 _services:
   _discord:
     connected: ''
-    disconnected: ''
   _twitter:
     connected: ''
-    disconnected: ''
   _github:
     connected: ''
-    disconnected: ''
 showLess: ''
-undeck: ''
 attachmentRequired: ''
-cropImage: ''
 cropImageAsk: ''
-recentNHours: ''
 recentNDays: ''
-isSystemAccount: ''
 typeToConfirm: ''
-deleteAccount: ''
 numberOfPageCache: ''
-numberOfPageCacheDescription: ''
 document: ''
-file: ''
 unclip: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-check: ''
 maxUnicodeEmojiPicker: ''
-maxCustomEmojiPicker: ''

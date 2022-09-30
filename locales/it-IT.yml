@@ -875,7 +875,6 @@ _ffVisibility:
 _signup:
   almostThere: "Quasi completo"
   emailAddressInfo: "Inserisci il tuo indirizzo email. Non verrà reso pubblico."
-  emailSent: ''
 _accountDelete:
   accountDelete: "Cancellazione account"
   sendEmail: "Al termine della cancellazione dell'account, verrà inviata una mail\
@@ -883,7 +882,6 @@ _accountDelete:
   requestAccountDelete: "Richiesta di cancellazione account"
   started: "Il processo di cancellazione è iniziato."
   inProgress: "Cancellazione in corso"
-  mayTakeTime: ''
 _ad:
   back: "Indietro"
   reduceFrequencyOfThisAd: "Visualizza questa pubblicità meno spesso"
@@ -916,7 +914,6 @@ _registry:
   keys: "Dati"
   domain: "Dominio"
   createKey: "Crea chiave"
-  scope: ''
 _aboutMisskey:
   about: "FoundKey è un software libero e open source, sviluppato da syuilo dal 2014."
   contributors: "Principali sostenitori"
@@ -967,33 +964,19 @@ _mfm:
   fontDescription: "Puoi scegliere il tipo di carattere per il contenuto."
   rainbow: "Arcobaleno"
   rotate: "Ruota"
-  inlineMathDescription: ''
   hashtagDescription: ''
-  urlDescription: ''
   boldDescription: ''
-  small: ''
   smallDescription: ''
-  center: ''
   centerDescription: ''
-  inlineCode: ''
   inlineCodeDescription: ''
-  blockCodeDescription: ''
   blockMathDescription: ''
-  quoteDescription: ''
   emojiDescription: ''
-  searchDescription: ''
   flipDescription: ''
-  jelly: ''
   jellyDescription: ''
-  tada: ''
   tadaDescription: ''
-  spin: ''
   spinDescription: ''
-  sparkleDescription: ''
   rotateDescription: ''
-  linkDescription: ''
   rainbowDescription: ''
-  sparkle: ''
 _instanceTicker:
   none: "Nascondi"
   remote: "Mostra solo per gli/le utenti remotə"
@@ -1014,9 +997,7 @@ _channel:
   notesCount: "{n} note"
 _menuDisplay:
   hide: "Nascondere"
-  sideFull: ''
   sideIcon: ''
-  top: ''
 _wordMute:
   muteWords: "Parole da filtrare"
   muteWordsDescription: "Separare con uno spazio indica la condizione \"E\". Separare\
@@ -1093,17 +1074,11 @@ _theme:
     driveFolderBg: "Sfondo della cartella di disco"
     badge: "Distintivo"
     messageBg: "Sfondo della chat"
-    accent: ''
     modalBg: ''
-    scrollbarHandle: ''
     scrollbarHandleHover: ''
-    dateLabelFg: ''
     wallpaperOverlay: ''
-    accentDarken: ''
     accentLighten: ''
-    fgHighlighted: ''
   refProp: ''
-  basedProp: ''
   importInfo: ''
 _sfx:
   note: "Nota"
@@ -1169,13 +1144,9 @@ _tutorial:
   step7_3: "Da ultimo, buon divertimento su FoundKey! \U0001F680"
 _2fa:
   registerDevice: "Aggiungi dispositivo"
-  alreadyRegistered: ''
   registerKey: ''
-  step1: ''
   step2: ''
-  step2Url: ''
   step3: ''
-  step4: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "Visualizzare le informazioni dell'account"
@@ -1206,9 +1177,7 @@ _permissions:
   "write:user-groups": "Gestisci gruppi di utenti"
   "read:channels": "Visualizza canali"
   "write:channels": "Gerisci canali"
-  "read:gallery": ''
   "write:gallery": ''
-  "read:gallery-likes": ''
   "write:gallery-likes": ''
 _auth:
   shareAccess: "Autorizzare「{name}」ad accedere al tuo account?"
@@ -1250,7 +1219,6 @@ _widgets:
   jobQueue: "Coda di lavoro"
   serverMetric: "Statistiche server"
   aiscript: "Console AiScript"
-  aichan: ''
   rssMarquee: ''
 _cw:
   hide: "Nascondere"
@@ -1320,7 +1288,6 @@ _exportOrImport:
   muteList: "Account silenziati"
   blockingList: "Account bloccati"
   userLists: "Liste"
-  excludeMutingUsers: ''
   excludeInactiveUsers: ''
 _charts:
   federation: "Federazione"
@@ -1382,7 +1349,6 @@ _pages:
   fontSansSerif: "Sans serif"
   eyeCatchingImageSet: "Imposta un'immagine attrattiva"
   eyeCatchingImageRemove: "Elimina l'immagine attrattiva"
-  alignCenter: ''
 _relayStatus:
   requesting: "In attesa di approvazione"
   accepted: "Approvato"
@@ -1413,13 +1379,10 @@ _notification:
     followRequestAccepted: "Richiesta di follow accettata"
     groupInvited: "Invito a un gruppo"
     app: "Notifiche da applicazioni"
-    pollEnded: ''
   _actions:
     reply: "Rispondi"
     renote: "Rinota"
-    followBack: ''
   pollEnded: ''
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "Mostra sempre la colonna principale"
   columnAlign: "Allineare colonne"
@@ -1444,72 +1407,39 @@ _deck:
     direct: "Diretta"
 _services:
   _github:
-    disconnected: ''
     connected: ''
   _discord:
-    disconnected: ''
     connected: ''
   _twitter:
-    connected: ''
     disconnected: ''
-keepOriginalUploading: ''
 keepOriginalUploadingDescription: ''
-unlimited: ''
 maxCustomEmojiPicker: ''
 _instanceMute:
-  instanceMuteDescription: ''
   instanceMuteDescription2: ''
-  title: ''
   heading: ''
-regexpError: ''
 regexpErrorDescription: ''
-showLess: ''
 flagShowTimelineReplies: ''
-flagShowTimelineRepliesDescription: ''
 forwardReport: ''
-forwardReportIsAnonymous: ''
 narrow: ''
-accentColor: ''
 advanced: ''
-switchAccount: ''
 attachmentRequired: ''
-customCssWarn: ''
 pubSub: ''
-lastCommunication: ''
 makeReactionsPublic: ''
-makeReactionsPublicDescription: ''
 ffVisibility: ''
-ffVisibilityDescription: ''
 continueThread: ''
-overridedDeviceKind: ''
 smartphone: ''
-tablet: ''
 auto: ''
-themeColor: ''
 size: ''
-numberOfColumn: ''
 instanceDefaultLightTheme: ''
-instanceDefaultDarkTheme: ''
 instanceDefaultThemeDescription: ''
-mutePeriod: ''
 reflectMayTakeTime: ''
-failedToFetchAccountInformation: ''
 rateLimitExceeded: ''
-cropImage: ''
 cropImageAsk: ''
-recentNHours: ''
 recentNDays: ''
-isSystemAccount: ''
 typeToConfirm: ''
-deleteAccount: ''
 numberOfPageCache: ''
-numberOfPageCacheDescription: ''
 document: ''
-file: ''
 unclip: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-check: ''
 maxUnicodeEmojiPicker: ''

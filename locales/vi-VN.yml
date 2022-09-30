@@ -1287,7 +1287,6 @@ _widgets:
   serverMetric: "Thống kê máy chủ"
   aiscript: "AiScript console"
   aichan: "Ai"
-  rssMarquee: ''
 _cw:
   hide: "Ẩn"
   show: "Tải thêm"
@@ -1478,35 +1477,21 @@ _deck:
     list: "Danh sách"
     mentions: "Lượt nhắc"
     direct: "Nhắn riêng"
-attachmentRequired: ''
 showLess: ''
-cropImage: ''
 cropImageAsk: ''
-recentNHours: ''
 recentNDays: ''
-isSystemAccount: ''
 typeToConfirm: ''
-deleteAccount: ''
 numberOfPageCache: ''
-numberOfPageCacheDescription: ''
 document: ''
-file: ''
 unclip: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-check: ''
 maxUnicodeEmojiPicker: ''
-unlimited: ''
 maxCustomEmojiPicker: ''
 _services:
   _discord:
-    connected: ''
     disconnected: ''
   _twitter:
-    connected: ''
     disconnected: ''
   _github:
-    connected: ''
     disconnected: ''

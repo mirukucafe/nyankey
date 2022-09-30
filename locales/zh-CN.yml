@@ -1195,7 +1195,6 @@ _widgets:
   serverMetric: "服务器监控"
   aiscript: "AiScript控制台"
   aichan: "小蓝"
-  rssMarquee: ''
 _cw:
   hide: "隐藏"
   show: "查看更多"
@@ -1387,34 +1386,19 @@ _deck:
     direct: "指定用户"
 _services:
   _discord:
-    connected: ''
     disconnected: ''
   _twitter:
-    connected: ''
     disconnected: ''
   _github:
-    connected: ''
     disconnected: ''
-showLess: ''
 attachmentRequired: ''
-rateLimitExceeded: ''
 cropImage: ''
-cropImageAsk: ''
 recentNHours: ''
-recentNDays: ''
 isSystemAccount: ''
-typeToConfirm: ''
 deleteAccount: ''
-numberOfPageCache: ''
 numberOfPageCacheDescription: ''
-document: ''
 file: ''
-unclip: ''
 confirmToUnclipAlreadyClippedNote: ''
-noEmailServerWarning: ''
 thereIsUnresolvedAbuseReportWarning: ''
-recommended: ''
 check: ''
-maxUnicodeEmojiPicker: ''
 maxCustomEmojiPicker: ''
-unlimited: ''

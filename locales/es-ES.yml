@@ -873,23 +873,17 @@ hide: "Ocultar"
 indefinitely: "Sin límite de tiempo"
 _ffVisibility:
   public: "Publicar"
-  followers: ''
   private: ''
 _accountDelete:
   accountDelete: "Eliminar Cuenta"
-  mayTakeTime: ''
   sendEmail: ''
-  requestAccountDelete: ''
   started: ''
-  inProgress: ''
 _ad:
   back: "Deseleccionar"
-  reduceFrequencyOfThisAd: ''
 _forgotPassword:
   contactAdmin: "Esta instancia no admite el uso de direcciones de correo electrónico,\
     \ póngase en contacto con el administrador de la instancia para restablecer su\
     \ contraseña"
-  enterEmail: ''
   ifNoEmail: ''
 _gallery:
   my: "Mi galería"
@@ -947,49 +941,27 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
-  hashtagDescription: ''
   linkDescription: ''
-  boldDescription: ''
   small: ''
-  smallDescription: ''
   centerDescription: ''
-  inlineCode: ''
   inlineCodeDescription: ''
-  inlineMath: ''
   inlineMathDescription: ''
-  blockMath: ''
   blockMathDescription: ''
-  quoteDescription: ''
   emojiDescription: ''
-  searchDescription: ''
   jelly: ''
-  jellyDescription: ''
   tada: ''
-  tadaDescription: ''
   jump: ''
-  jumpDescription: ''
   bounce: ''
-  bounceDescription: ''
   shake: ''
-  shakeDescription: ''
   twitch: ''
-  twitchDescription: ''
   spin: ''
-  spinDescription: ''
   x2: ''
-  x2Description: ''
   x4Description: ''
-  blur: ''
   blurDescription: ''
-  fontDescription: ''
   rainbow: ''
-  rainbowDescription: ''
   sparkle: ''
-  sparkleDescription: ''
   rotateDescription: ''
-  x3: ''
   x3Description: ''
-  x4: ''
 _instanceTicker:
   none: "No mostrar"
   remote: "Mostrar a usuarios remotos"
@@ -1012,7 +984,6 @@ _menuDisplay:
   sideFull: "Horizontal"
   sideIcon: "Horizontal (ícono)"
   hide: "Ocultar"
-  top: ''
 _wordMute:
   muteWords: "Palabras que silenciar"
   muteWordsDescription: "Separar con espacios indica una declaracion And, separar\
@@ -1104,7 +1075,6 @@ _theme:
     accentDarken: "Acento (oscuro)"
     accentLighten: "Acento (claro)"
     fgHighlighted: "Texto resaltado"
-  installedThemes: ''
   builtinThemes: ''
 _sfx:
   note: "Notas"
@@ -1176,7 +1146,6 @@ _2fa:
   securityKeyInfo: "Se puede configurar el inicio de sesión usando una clave de seguridad\
     \ de hardware que soporte FIDO2 o con un certificado de huella digital o con un\
     \ PIN"
-  step2Url: ''
 _permissions:
   "read:account": "Ver información de la cuenta"
   "write:account": "Editar información de la cuenta"
@@ -1206,9 +1175,7 @@ _permissions:
   "write:user-groups": "Administrar grupos de usuarios"
   "read:channels": "Ver canal"
   "write:channels": "Modificar canal"
-  "read:gallery": ''
   "write:gallery": ''
-  "read:gallery-likes": ''
   "write:gallery-likes": ''
 _auth:
   shareAccess: "¿Desea permitir el acceso a la cuenta \"{name}\"?"
@@ -1247,11 +1214,8 @@ _widgets:
   postForm: "Formulario"
   button: "Botón"
   jobQueue: "Cola de trabajos"
-  rssMarquee: ''
   slideshow: ''
-  onlineUsers: ''
   serverMetric: ''
-  aiscript: ''
   aichan: ''
 _cw:
   hide: "Ocultar"
@@ -1309,18 +1273,14 @@ _profile:
   youCanIncludeHashtags: "Puedes añadir hashtags"
   metadataLabel: "Etiqueta"
   metadataContent: "Contenido"
-  metadataEdit: ''
   metadataDescription: ''
-  changeAvatar: ''
   changeBanner: ''
-  metadata: ''
 _exportOrImport:
   allNotes: "Todas las notas"
   followingList: "Siguiendo"
   muteList: "Silenciados"
   blockingList: "Bloqueados"
   userLists: "Listas"
-  excludeMutingUsers: ''
   excludeInactiveUsers: ''
 _charts:
   federation: "Federación"
@@ -1381,7 +1341,6 @@ _pages:
   fontSansSerif: "Sans Serif"
   eyeCatchingImageSet: "Elegir imagen llamativa"
   eyeCatchingImageRemove: "Borrar imagen llamativa"
-  featured: ''
   pageSetting: ''
 _relayStatus:
   requesting: "Pendiente"
@@ -1413,13 +1372,10 @@ _notification:
     followRequestAccepted: "El seguimiento fue aceptado"
     groupInvited: "Invitado al grupo"
     app: "Notificaciones desde aplicaciones"
-    pollEnded: ''
   _actions:
     reply: "Responder"
     renote: "Renotar"
-    followBack: ''
   pollEnded: ''
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "Siempre mostrar la columna principal"
   columnAlign: "Alinear columnas"
@@ -1438,81 +1394,45 @@ _deck:
     list: "Listas"
     mentions: "Menciones"
     direct: "Mensaje directo"
-    main: ''
   columnMargin: ''
-  columnHeaderHeight: ''
   profile: ''
 _services:
   _discord:
-    disconnected: ''
     connected: ''
   _github:
-    disconnected: ''
     connected: ''
   _twitter:
-    connected: ''
     disconnected: ''
-unlimited: ''
 _emailUnavailable:
   used: ''
-  format: ''
   disposable: ''
-  mx: ''
   smtp: ''
 _signup:
-  almostThere: ''
   emailAddressInfo: ''
-  emailSent: ''
 maxCustomEmojiPicker: ''
-showLess: ''
 regexpError: ''
-regexpErrorDescription: ''
 reporter: ''
-unlikeConfirm: ''
 attachmentRequired: ''
-breakFollow: ''
 ffVisibilityDescription: ''
-continueThread: ''
 deleteAccountConfirm: ''
-incorrectPassword: ''
 voteConfirm: ''
-leaveGroup: ''
 leaveGroupConfirm: ''
-useDrawerReactionPickerForMobile: ''
 clickToFinishEmailVerification: ''
-overridedDeviceKind: ''
 smartphone: ''
-tablet: ''
 auto: ''
-themeColor: ''
 size: ''
-numberOfColumn: ''
 instanceDefaultLightTheme: ''
-instanceDefaultDarkTheme: ''
 instanceDefaultThemeDescription: ''
-mutePeriod: ''
 tenMinutes: ''
-oneHour: ''
 oneDay: ''
-oneWeek: ''
 reflectMayTakeTime: ''
-failedToFetchAccountInformation: ''
 rateLimitExceeded: ''
-cropImage: ''
 cropImageAsk: ''
-recentNHours: ''
 recentNDays: ''
-isSystemAccount: ''
 typeToConfirm: ''
-deleteAccount: ''
 numberOfPageCache: ''
-numberOfPageCacheDescription: ''
 document: ''
-file: ''
 unclip: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-check: ''
 maxUnicodeEmojiPicker: ''

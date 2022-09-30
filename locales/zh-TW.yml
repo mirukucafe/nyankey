@@ -1194,7 +1194,6 @@ _widgets:
   serverMetric: "服務器指標 "
   aiscript: "AiScript控制台"
   aichan: "小藍"
-  rssMarquee: ''
 _cw:
   hide: "隱藏"
   show: "瀏覽更多"
@@ -1386,34 +1385,19 @@ _deck:
     direct: "指定使用者"
 _services:
   _discord:
-    connected: ''
     disconnected: ''
   _twitter:
-    connected: ''
     disconnected: ''
   _github:
-    connected: ''
     disconnected: ''
-unlimited: ''
 showLess: ''
-attachmentRequired: ''
 rateLimitExceeded: ''
-cropImage: ''
 cropImageAsk: ''
-recentNHours: ''
 recentNDays: ''
-isSystemAccount: ''
 typeToConfirm: ''
-deleteAccount: ''
 numberOfPageCache: ''
-numberOfPageCacheDescription: ''
 document: ''
-file: ''
 unclip: ''
-confirmToUnclipAlreadyClippedNote: ''
 noEmailServerWarning: ''
-thereIsUnresolvedAbuseReportWarning: ''
 recommended: ''
-check: ''
 maxCustomEmojiPicker: ''
-maxUnicodeEmojiPicker: ''

@@ -1060,9 +1060,7 @@ _wordMute:
   mutedNotes: "Скрытые заметки"
 _instanceMute:
   heading: "Список заглушенных инстансов"
-  instanceMuteDescription: ''
   instanceMuteDescription2: ''
-  title: ''
 _theme:
   explore: "Обзор"
   install: "Установить тему"
@@ -1210,7 +1208,6 @@ _2fa:
     \ аналогичным образом."
   securityKeyInfo: "Вы можете настроить вход с помощью аппаратного ключа безопасности,\
     \ поддерживающего FIDO2, или отпечатка пальца или PIN-кода на устройстве."
-  step2Url: ''
 _permissions:
   "read:account": "Просматривать данные учётной записи"
   "write:account": "Изменять данные учётной записи"
@@ -1285,7 +1282,6 @@ _widgets:
   serverMetric: "Показатели сервера"
   aiscript: "Консоль AiScript"
   aichan: "Ай"
-  rssMarquee: ''
 _cw:
   hide: "Спрятать"
   show: "Показать еще"
@@ -1446,13 +1442,10 @@ _notification:
     followRequestAccepted: "Запрос на подписку одобрен"
     groupInvited: "Приглашение в группы"
     app: "Уведомления из приложений"
-    pollEnded: ''
   _actions:
     reply: "Ответить"
     renote: "Репост"
-    followBack: ''
   pollEnded: ''
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "Всегда показывать главную колонку"
   columnAlign: "Выравнивание колонок"
@@ -1475,46 +1468,26 @@ _deck:
     list: "Списки"
     mentions: "Упоминания"
     direct: "Личное"
-showLess: ''
 mutePeriod: ''
-regexpErrorDescription: ''
 reporter: ''
-attachmentRequired: ''
 instanceDefaultThemeDescription: ''
-tenMinutes: ''
 oneHour: ''
-oneDay: ''
 oneWeek: ''
-reflectMayTakeTime: ''
 failedToFetchAccountInformation: ''
-rateLimitExceeded: ''
 cropImage: ''
-cropImageAsk: ''
 recentNHours: ''
-recentNDays: ''
 isSystemAccount: ''
-typeToConfirm: ''
 deleteAccount: ''
-numberOfPageCache: ''
 numberOfPageCacheDescription: ''
-document: ''
 file: ''
-unclip: ''
 confirmToUnclipAlreadyClippedNote: ''
-noEmailServerWarning: ''
 thereIsUnresolvedAbuseReportWarning: ''
-recommended: ''
 check: ''
-maxUnicodeEmojiPicker: ''
 maxCustomEmojiPicker: ''
-unlimited: ''
 _services:
   _discord:
     connected: ''
-    disconnected: ''
   _twitter:
     connected: ''
-    disconnected: ''
   _github:
     connected: ''
-    disconnected: ''
