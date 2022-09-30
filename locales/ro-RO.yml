@@ -706,7 +706,6 @@ _theme:
     mention: "Mențiune"
     renote: "Re-notează"
     divider: "Separator"
-  darken: ''
 _sfx:
   note: "Note"
   notification: "Notificări"
@@ -753,14 +752,8 @@ _deck:
     antenna: "Antene"
     list: "Liste"
     mentions: "Mențiuni"
-accountInfo: ''
 usageAmount: ''
-useBlurEffect: ''
 unclip: ''
-_nsfw:
-  respect: ''
 _2fa:
   step3: ''
-_pages:
-  invalidNameTitle: ''
 _services: {}

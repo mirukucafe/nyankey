@@ -180,7 +180,6 @@ _theme:
   keys:
     mention: "Menção"
     renote: "Repostar"
-  basedProp: ''
 _sfx:
   note: "Posts"
   notification: "Notificações"
@@ -255,21 +254,13 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-clearQueue: ''
 start: ''
-disablingTimelinesInfo: ''
 passwordLessLogin: ''
-signinHistory: ''
 descendingOrder: ''
-smtpSecure: ''
 followersCount: ''
-useReactionPickerForContextMenu: ''
 translate: ''
-noEmailServerWarning: ''
 _nsfw:
   ignore: ''
-_permissions:
-  "read:drive": ''
 _poll:
   remainingHours: ''
 _postForm: {}

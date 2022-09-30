@@ -278,7 +278,6 @@ _theme:
   keys:
     mention: "Nämn"
     renote: "Omnotera"
-  alpha: ''
 _sfx:
   note: "Noter"
   notification: "Notifikationer"
@@ -318,21 +317,12 @@ _deck:
     tl: "Tidslinje"
     list: "Listor"
     mentions: "Omnämningar"
-_serverDisconnectedBehavior:
-  reload: ''
 _permissions:
   "write:account": ''
-_poll:
-  showResult: ''
 _services:
   _discord:
     disconnected: ''
-inputNewDescription: ''
 antennaKeywords: ''
-retype: ''
 objectStorageBucketDesc: ''
-disablePlayer: ''
 abuseReports: ''
-showGapBetweenNotesInTimeline: ''
 selectAccount: ''
-incorrectPassword: ''

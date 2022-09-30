@@ -339,7 +339,6 @@ _theme:
   keys:
     mention: "Vermelding"
     renote: "Herdelen"
-  basedProp: ''
 _sfx:
   note: "Notities"
   notification: "Meldingen"
@@ -390,19 +389,12 @@ selectAntenna: Kies een antenne
 selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
-thisYear: ''
 twoStepAuthentication: ''
-category: ''
 output: ''
-regexpError: ''
 receivedReactionsCount: ''
-inChannelSearch: ''
 whatIsNew: ''
-maxUnicodeEmojiPicker: ''
 _instanceTicker:
   none: ''
-_antennaSources:
-  userList: ''
 _pages:
   unlike: ''
 _services: {}

@@ -138,7 +138,6 @@ _theme:
   keys:
     mention: "Menció"
     renote: "Renotar"
-  basedProp: ''
 _sfx:
   note: "Notes"
   notification: "Notificacions"
@@ -174,22 +173,13 @@ _deck:
     list: "Llistes"
     mentions: "Mencions"
 _services: {}
-muteThread: ''
 _channel:
   following: ''
-_permissions:
-  "write:votes": ''
 _postForm: {}
 _pages:
   created: ''
-showOnRemote: ''
 instanceFollowers: ''
-renameFolder: ''
 recaptchaSiteKey: ''
-members: ''
 numberOfDays: ''
-addedRelays: ''
 other: ''
-contact: ''
 hideOnlineStatus: ''
-classic: ''

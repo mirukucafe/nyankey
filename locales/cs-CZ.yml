@@ -499,7 +499,6 @@ _theme:
   keys:
     mention: "Zmínění"
     renote: "Přeposlat"
-  alpha: ''
 _sfx:
   note: "Poznámky"
   notification: "Oznámení"
@@ -547,17 +546,10 @@ _deck:
     list: "Seznamy"
     mentions: "Zmínění"
 _services: {}
-_tutorial:
-  step3_1: ''
 _forgotPassword:
   ifNoEmail: ''
-_permissions:
-  "read:blocks": ''
 _postForm:
   quotePlaceholder: ''
-messagingWithUser: ''
 undeck: ''
-followersCount: ''
 emailNotification: ''
-whatIsNew: ''
 confirmToUnclipAlreadyClippedNote: ''

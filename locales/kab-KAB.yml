@@ -64,7 +64,6 @@ _mfm:
 _theme:
   keys:
     mention: "Bder"
-  argument: ''
 _sfx:
   notification: "Ilɣuyen"
 _permissions:
@@ -99,22 +98,12 @@ _deck:
   _columns:
     notifications: "Ilɣuyen"
     list: "Tibdarin"
-searchUser: ''
 emojiUrl: ''
-intro: ''
 light: ''
-backgroundImageUrl: ''
 markAsReadAllTalkMessages: ''
-total: ''
 addItem: ''
-notificationSettingDesc: ''
 contact: ''
-hideOnlineStatusDescription: ''
 muteThread: ''
-_emailUnavailable:
-  mx: ''
 _ago:
   daysAgo: ''
-_poll:
-  after: ''
 _services: {}
