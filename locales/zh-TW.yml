@@ -1,7 +1,7 @@
----
 _lang_: "繁體中文"
 headlineMisskey: "貼文連繫網路"
-introMisskey: "歡迎！ FoundKey是一個開放原始碼且去中心化的社群網路。\n透過「貼文」分享周邊新鮮事，並告訴其他人您的想法！📡\n透過「情感」功能，對大家的貼文表達情感！👍\n一起來探索這個新的世界吧！🚀"
+introMisskey: "歡迎！ FoundKey是一個開放原始碼且去中心化的社群網路。\n透過「貼文」分享周邊新鮮事，並告訴其他人您的想法！\U0001F4E1\
+  \n透過「情感」功能，對大家的貼文表達情感！\U0001F44D\n一起來探索這個新的世界吧！\U0001F680"
 monthAndDay: "{month}月 {day}日"
 search: "搜尋"
 notifications: "通知"
@@ -1109,7 +1109,7 @@ _tutorial:
   step6_3: "在他人的貼文按下\"+\"圖標，即可選擇喜好的表情符號進行回應。"
   step7_1: "以上為FoundKey的基本操作說明，教學在此告一段落。辛苦了。"
   step7_2: "歡迎到{help}來瞭解更多FoundKey相關介紹。"
-  step7_3: "那麼，祝您在FoundKey玩的開心~ 🚀"
+  step7_3: "那麼，祝您在FoundKey玩的開心~ \U0001F680"
 _2fa:
   alreadyRegistered: "此設備已經被註冊過了"
   registerDevice: "註冊裝置"
@@ -1194,6 +1194,7 @@ _widgets:
   serverMetric: "服務器指標 "
   aiscript: "AiScript控制台"
   aichan: "小藍"
+  rssMarquee: ''
 _cw:
   hide: "隱藏"
   show: "瀏覽更多"
@@ -1383,3 +1384,36 @@ _deck:
     list: "清單"
     mentions: "提及"
     direct: "指定使用者"
+_services:
+  _discord:
+    connected: ''
+    disconnected: ''
+  _twitter:
+    connected: ''
+    disconnected: ''
+  _github:
+    connected: ''
+    disconnected: ''
+unlimited: ''
+showLess: ''
+attachmentRequired: ''
+rateLimitExceeded: ''
+cropImage: ''
+cropImageAsk: ''
+recentNHours: ''
+recentNDays: ''
+isSystemAccount: ''
+typeToConfirm: ''
+deleteAccount: ''
+numberOfPageCache: ''
+numberOfPageCacheDescription: ''
+document: ''
+file: ''
+unclip: ''
+confirmToUnclipAlreadyClippedNote: ''
+noEmailServerWarning: ''
+thereIsUnresolvedAbuseReportWarning: ''
+recommended: ''
+check: ''
+maxCustomEmojiPicker: ''
+maxUnicodeEmojiPicker: ''
