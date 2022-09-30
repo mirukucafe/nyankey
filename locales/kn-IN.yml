@@ -86,7 +86,5 @@ _deck:
     tl: "ಸಮಯಸಾಲು"
     mentions: "ಹೆಸರಿಸಿದ"
 _theme: {}
-_2fa:
-  step2: ''
 _postForm: {}
 _services: {}
