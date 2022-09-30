@@ -1,7 +1,10 @@
----
 _lang_: "Italiano"
 headlineMisskey: "Rete collegata tramite note"
-introMisskey: "Benvenut@! FoundKey è un servizio di microblogging decentralizzato, libero e aperto. \nScrivi \"note\" per condividere ciò che sta succedendo adesso o per dire a tutti qualcosa di te. 📡\nGrazie alla funzione \"reazioni\" puoi anche mandare reazioni rapide alle note delle altre persone del Fediverso. 👍\nEsplora un nuovo mondo! 🚀"
+introMisskey: "Benvenut@! FoundKey è un servizio di microblogging decentralizzato,\
+  \ libero e aperto. \nScrivi \"note\" per condividere ciò che sta succedendo adesso\
+  \ o per dire a tutti qualcosa di te. \U0001F4E1\nGrazie alla funzione \"reazioni\"\
+  \ puoi anche mandare reazioni rapide alle note delle altre persone del Fediverso.\
+  \ \U0001F44D\nEsplora un nuovo mondo! \U0001F680"
 monthAndDay: "{day}/{month}"
 search: "Cerca"
 notifications: "Notifiche"
@@ -44,7 +47,8 @@ copyContent: "Copia il contenuto"
 copyLink: "Copia il link"
 delete: "Elimina"
 deleteAndEdit: "Elimina e modifica"
-deleteAndEditConfirm: "Vuoi davvero cancellare questa nota e scriverla di nuovo? Verrano eliminate anche tutte le reazioni, Rinote e risposte collegate."
+deleteAndEditConfirm: "Vuoi davvero cancellare questa nota e scriverla di nuovo? Verrano\
+  \ eliminate anche tutte le reazioni, Rinote e risposte collegate."
 addToList: "Aggiungi alla lista"
 sendMessage: "Invia messaggio"
 copyUsername: "Copia nome utente"
@@ -63,9 +67,11 @@ import: "Importa"
 export: "Esporta"
 files: "Allegati"
 download: "Scarica"
-driveFileDeleteConfirm: "Vuoi davvero eliminare il file「{name}? Anche gli allegati verranno eliminati."
+driveFileDeleteConfirm: "Vuoi davvero eliminare il file「{name}? Anche gli allegati\
+  \ verranno eliminati."
 unfollowConfirm: "Vuoi davvero smettere di seguire {name}?"
-exportRequested: "Hai richiesto un'esportazione, e potrebbe volerci tempo. Quando sarà compiuta, il file verrà aggiunto direttamente al Drive."
+exportRequested: "Hai richiesto un'esportazione, e potrebbe volerci tempo. Quando\
+  \ sarà compiuta, il file verrà aggiunto direttamente al Drive."
 importRequested: "Hai richiesto un'importazione. Può volerci tempo. "
 lists: "Liste"
 noLists: "Nessuna lista"
@@ -80,9 +86,11 @@ error: "Errore"
 somethingHappened: "Si è verificato un problema"
 retry: "Riprova"
 pageLoadError: "Caricamento pagina non riuscito. "
-pageLoadErrorDescription: "Questo viene normalmente causato dalla rete o dalla cache del browser. Si prega di pulire la cache, o di attendere e riprovare più tardi."
+pageLoadErrorDescription: "Questo viene normalmente causato dalla rete o dalla cache\
+  \ del browser. Si prega di pulire la cache, o di attendere e riprovare più tardi."
 serverIsDead: "Il server non risponde. Si prega di attendere e riprovare più tardi."
-youShouldUpgradeClient: "Per visualizzare la pagina è necessario aggiornare il client alla nuova versione e ricaricare."
+youShouldUpgradeClient: "Per visualizzare la pagina è necessario aggiornare il client\
+  \ alla nuova versione e ricaricare."
 enterListName: "Nome della lista"
 privacy: "Privacy"
 makeFollowManuallyApprove: "Richiedi di approvare i follower manualmente"
@@ -107,7 +115,8 @@ sensitive: "Contenuto sensibile"
 add: "Aggiungi"
 reaction: "Reazione"
 reactionSetting: "Reazioni visualizzate sul pannello"
-reactionSettingDescription2: "Trascina per riorganizzare, clicca per cancellare, usa il pulsante \"+\" per aggiungere."
+reactionSettingDescription2: "Trascina per riorganizzare, clicca per cancellare, usa\
+  \ il pulsante \"+\" per aggiungere."
 attachCancel: "Rimuovi allegato"
 markAsSensitive: "Segna come sensibile"
 unmarkAsSensitive: "Segna come non sensibile"
@@ -135,12 +144,20 @@ emojiUrl: "URL dell'emoji"
 addEmoji: "Aggiungi un emoji"
 settingGuide: "Configurazione suggerita"
 cacheRemoteFiles: "Memorizzazione nella cache dei file remoti"
-cacheRemoteFilesDescription: "Disabilitando questa opzione, i file remoti verranno linkati direttamente senza essere memorizzati nella cache. Sarà possibile risparmiare spazio di archiviazione sul server, ma il traffico aumenterà in quanto non verranno generate anteprime."
+cacheRemoteFilesDescription: "Disabilitando questa opzione, i file remoti verranno\
+  \ linkati direttamente senza essere memorizzati nella cache. Sarà possibile risparmiare\
+  \ spazio di archiviazione sul server, ma il traffico aumenterà in quanto non verranno\
+  \ generate anteprime."
 flagAsBot: "Io sono un robot"
-flagAsBotDescription: "Se l'account esegue principalmente operazioni automatiche, attiva quest'opzione. Quando attivata, opera come un segnalatore per gli altri sviluppatori allo scopo di prevenire catene d’interazione senza fine con altri bot, e di adeguare i sistemi interni di FoundKey perché trattino questo account come un bot."
+flagAsBotDescription: "Se l'account esegue principalmente operazioni automatiche,\
+  \ attiva quest'opzione. Quando attivata, opera come un segnalatore per gli altri\
+  \ sviluppatori allo scopo di prevenire catene d’interazione senza fine con altri\
+  \ bot, e di adeguare i sistemi interni di FoundKey perché trattino questo account\
+  \ come un bot."
 flagAsCat: "Io sono un gatto"
 flagAsCatDescription: "Abilita l'opzione \"Io sono un gatto\" per l'account."
-autoAcceptFollowed: "Accetta automaticamente le richieste di follow da utenti che già segui"
+autoAcceptFollowed: "Accetta automaticamente le richieste di follow da utenti che\
+  \ già segui"
 addAccount: "Aggiungi account"
 loginFailed: "Accesso non riuscito"
 showOnRemote: "Sfoglia sull'istanza remota"
@@ -152,7 +169,10 @@ searchWith: "Cerca: {q}"
 youHaveNoLists: "Non hai ancora creato nessuna lista"
 followConfirm: "Sei sicur@ di voler seguire {name}?"
 proxyAccount: "Account proxy"
-proxyAccountDescription: "Un account proxy è un account che funziona da follower remoto per gli utenti sotto certe condizioni. Ad esempio, quando un utente aggiunge un utente remoto alla lista, dato che se nessun utente locale segue quell'utente le sue attività non verranno distribuite, al suo posto lo seguirà un account proxy."
+proxyAccountDescription: "Un account proxy è un account che funziona da follower remoto\
+  \ per gli utenti sotto certe condizioni. Ad esempio, quando un utente aggiunge un\
+  \ utente remoto alla lista, dato che se nessun utente locale segue quell'utente\
+  \ le sue attività non verranno distribuite, al suo posto lo seguirà un account proxy."
 host: "Server remoto"
 selectUser: "Seleziona utente"
 recipient: "Destinatario"
@@ -183,11 +203,13 @@ instanceInfo: "Informazioni sull'istanza"
 statistics: "Statistiche"
 clearQueue: "Svuota coda"
 clearQueueConfirmTitle: "Vuoi davvero svuotare la coda?"
-clearQueueConfirmText: "Le note ancora non distribuite non verranno rilasciate. Solitamente, non è necessario eseguire questa operazione."
+clearQueueConfirmText: "Le note ancora non distribuite non verranno rilasciate. Solitamente,\
+  \ non è necessario eseguire questa operazione."
 clearCachedFiles: "Svuota cache"
 clearCachedFilesConfirm: "Vuoi davvero svuotare la cache da tutti i file remoti?"
 blockedInstances: "Istanze bloccate"
-blockedInstancesDescription: "Elenca le istanze che vuoi bloccare, una per riga. Esse non potranno più interagire con la tua istanza."
+blockedInstancesDescription: "Elenca le istanze che vuoi bloccare, una per riga. Esse\
+  \ non potranno più interagire con la tua istanza."
 muteAndBlock: "Silenziati / Bloccati"
 mutedUsers: "Account silenziati"
 blockedUsers: "Account bloccati"
@@ -249,7 +271,8 @@ agreeTo: "Sono d'accordo con {0}"
 tos: "Termini di servizio"
 start: "Inizia!"
 home: "Home"
-remoteUserCaution: "Può darsi che le informazioni siano incomplete perché questo è un utente remoto."
+remoteUserCaution: "Può darsi che le informazioni siano incomplete perché questo è\
+  \ un utente remoto."
 activity: "Attività"
 images: "Immagini"
 birthday: "Compleanno"
@@ -282,7 +305,8 @@ unableToDelete: "Eliminazione impossibile"
 inputNewFileName: "Inserisci nome del nuovo file"
 inputNewDescription: "Inserisci una nuova descrizione"
 inputNewFolderName: "Inserisci nome della nuova cartella"
-circularReferenceFolder: "La cartella di destinazione è una sottocartella della cartella che vuoi spostare."
+circularReferenceFolder: "La cartella di destinazione è una sottocartella della cartella\
+  \ che vuoi spostare."
 hasChildFilesOrFolders: "Impossibile eliminare la cartella perché non è vuota"
 copyUrl: "Copia URL"
 rename: "Modifica nome"
@@ -316,7 +340,8 @@ connectService: "Connessione"
 disconnectService: "Disconnessione "
 enableLocalTimeline: "Abilita Timeline locale"
 enableGlobalTimeline: "Abilita Timeline federata"
-disablingTimelinesInfo: "Anche se disabiliti queste timeline, gli amministratori e i moderatori potranno sempre accederci."
+disablingTimelinesInfo: "Anche se disabiliti queste timeline, gli amministratori e\
+  \ i moderatori potranno sempre accederci."
 registration: "Iscriviti"
 enableRegistration: "Permettere nuove registrazioni"
 invite: "Invita"
@@ -328,9 +353,11 @@ bannerUrl: "URL dell'immagine d'intestazione"
 backgroundImageUrl: "URL dello sfondo"
 basicInfo: "Informazioni fondamentali"
 pinnedUsers: "Utenti in evidenza"
-pinnedUsersDescription: "Elenca gli/le utenti che vuoi fissare in cima alla pagina \"Esplora\", un@ per riga."
+pinnedUsersDescription: "Elenca gli/le utenti che vuoi fissare in cima alla pagina\
+  \ \"Esplora\", un@ per riga."
 pinnedPages: "Pagine in evidenza"
-pinnedPagesDescription: "Specifica il percorso delle pagine che vuoi fissare in cima alla pagina dell'istanza. Una pagina per riga."
+pinnedPagesDescription: "Specifica il percorso delle pagine che vuoi fissare in cima\
+  \ alla pagina dell'istanza. Una pagina per riga."
 pinnedClipId: "ID della clip in evidenza"
 pinnedNotes: "Nota fissata"
 hcaptcha: "hCaptcha"
@@ -341,14 +368,17 @@ recaptcha: "reCAPTCHA"
 enableRecaptcha: "Abilita reCAPTCHA"
 recaptchaSiteKey: "Chiave del sito"
 recaptchaSecretKey: "Chiave segreta"
-avoidMultiCaptchaConfirm: "Utilizzare diversi Captcha può causare interferenze. Vuoi disattivare l'altro Captcha? Puoi lasciare diversi Captcha attivi premendo \"Cancella\"."
+avoidMultiCaptchaConfirm: "Utilizzare diversi Captcha può causare interferenze. Vuoi\
+  \ disattivare l'altro Captcha? Puoi lasciare diversi Captcha attivi premendo \"\
+  Cancella\"."
 antennas: "Antenne"
 manageAntennas: "Gestore delle antenne"
 name: "Nome"
 antennaSource: "Fonte dell'antenna"
 antennaKeywords: "Parole chiavi da ricevere"
 antennaExcludeKeywords: "Parole chiavi da escludere"
-antennaKeywordsDescription: "Separare con uno spazio indica la condizione \"E\". Separare con un'interruzzione riga indica la condizione \"O\"."
+antennaKeywordsDescription: "Separare con uno spazio indica la condizione \"E\". Separare\
+  \ con un'interruzzione riga indica la condizione \"O\"."
 notifyAntenna: "Invia notifiche delle nuove note"
 withFileAntenna: "Solo note con file in allegato"
 enableServiceworker: "Abilita ServiceWorker"
@@ -474,19 +504,26 @@ showFeaturedNotesInTimeline: "Mostrare le note di tendenza nella tua timeline"
 objectStorage: "Stoccaggio oggetti"
 useObjectStorage: "Utilizza stoccaggio oggetti"
 objectStorageBaseUrl: "Base URL"
-objectStorageBaseUrlDesc: "URL di riferimento. In caso di utilizzo di proxy o CDN l'URL è 'https://<bucket>.s3.amazonaws.com' per S3, 'https://storage.googleapis.com/<bucket>' per GCS eccetera. "
+objectStorageBaseUrlDesc: "URL di riferimento. In caso di utilizzo di proxy o CDN\
+  \ l'URL è 'https://<bucket>.s3.amazonaws.com' per S3, 'https://storage.googleapis.com/<bucket>'\
+  \ per GCS eccetera. "
 objectStorageBucket: "Bucket"
 objectStorageBucketDesc: "Specificare il nome del bucket utilizzato dal provider."
 objectStoragePrefix: "Prefix"
 objectStoragePrefixDesc: "I file saranno conservati sotto la directory di questo prefisso."
 objectStorageEndpoint: "Endpoint"
-objectStorageEndpointDesc: "Lasciare vuoto se si sta utilizzando S3. In caso contrario si prega di specificare l'endpoint come '<host>' oppure '<host>:<port>' a seconda del servizio utilizzato."
+objectStorageEndpointDesc: "Lasciare vuoto se si sta utilizzando S3. In caso contrario\
+  \ si prega di specificare l'endpoint come '<host>' oppure '<host>:<port>' a seconda\
+  \ del servizio utilizzato."
 objectStorageRegion: "Region"
-objectStorageRegionDesc: "Specificate una regione, quale 'xx-east-1'. Se il servizio in utilizzo non distingue tra regioni, lasciate vuoto o inserite 'us-east-1'."
+objectStorageRegionDesc: "Specificate una regione, quale 'xx-east-1'. Se il servizio\
+  \ in utilizzo non distingue tra regioni, lasciate vuoto o inserite 'us-east-1'."
 objectStorageUseSSL: "Usare SSL"
-objectStorageUseSSLDesc: "Disabilita quest'opzione se non utilizzi HTTPS per le connessioni API."
+objectStorageUseSSLDesc: "Disabilita quest'opzione se non utilizzi HTTPS per le connessioni\
+  \ API."
 objectStorageUseProxy: "Usa proxy"
-objectStorageUseProxyDesc: "Disabilita quest'opzione se non usi proxy per la connessione API."
+objectStorageUseProxyDesc: "Disabilita quest'opzione se non usi proxy per la connessione\
+  \ API."
 objectStorageSetPublicRead: "Imposta \"visibilità pubblica\" al momento di caricare"
 serverLogs: "Log del server"
 deleteAll: "Cancella cronologia"
@@ -514,18 +551,23 @@ sort: "Ordina per"
 ascendingOrder: "Ascendente"
 descendingOrder: "Discendente"
 scratchpad: "ScratchPad"
-scratchpadDescription: "Lo Scratchpad offre un ambiente per esperimenti di AiScript. È possibile scrivere, eseguire e confermare i risultati dell'interazione del codice con FoundKey."
+scratchpadDescription: "Lo Scratchpad offre un ambiente per esperimenti di AiScript.\
+  \ È possibile scrivere, eseguire e confermare i risultati dell'interazione del codice\
+  \ con FoundKey."
 output: "Uscita"
 script: "Script"
 updateRemoteUser: "Aggiornare le informazioni di utente remot@"
 deleteAllFiles: "Elimina tutti i file"
 deleteAllFilesConfirm: "Vuoi davvero eliminare tutti i file?"
 removeAllFollowing: "Cancella tutti i follows"
-removeAllFollowingDescription: "Cancella tutti i follows del server {host}. Per favore, esegui se, ad esempio, l'istanza non esiste più."
+removeAllFollowingDescription: "Cancella tutti i follows del server {host}. Per favore,\
+  \ esegui se, ad esempio, l'istanza non esiste più."
 userSuspended: "L'utente è sospes@."
 userSilenced: "L'utente è silenziat@."
 yourAccountSuspendedTitle: "Questo account è sospeso."
-yourAccountSuspendedDescription: "Questo account è stato sospeso a causa di una violazione dei termini di servizio del server. Contattare l'amministrazione per i dettagli. Si prega di non creare un nuovo account."
+yourAccountSuspendedDescription: "Questo account è stato sospeso a causa di una violazione\
+  \ dei termini di servizio del server. Contattare l'amministrazione per i dettagli.\
+  \ Si prega di non creare un nuovo account."
 menu: "Menù"
 divider: "Linea di separazione"
 addItem: "Aggiungi elemento"
@@ -564,13 +606,16 @@ permission: "Autorizzazioni "
 enableAll: "Abilita tutto"
 disableAll: "Disabilita tutto"
 tokenRequested: "Autorizza accesso all'account"
-pluginTokenRequestedDescription: "Il plugin potrà utilizzare le autorizzazioni impostate qui."
+pluginTokenRequestedDescription: "Il plugin potrà utilizzare le autorizzazioni impostate\
+  \ qui."
 notificationType: "Tipo di notifiche"
 edit: "Modifica"
-useStarForReactionFallback: "Se è sconosciuto l'emoji di reazione, usare la ★ come alternativa."
+useStarForReactionFallback: "Se è sconosciuto l'emoji di reazione, usare la ★ come\
+  \ alternativa."
 emailServer: "Server email"
 enableEmail: "Abilita consegna email"
-emailConfigInfo: "Utilizzato per verificare il tuo indirizzo di posta elettronica e per reimpostare la tua password"
+emailConfigInfo: "Utilizzato per verificare il tuo indirizzo di posta elettronica\
+  \ e per reimpostare la tua password"
 email: "Email"
 emailAddress: "Indirizzo di posta elettronica"
 smtpConfig: "Impostazioni del server SMTP"
@@ -578,7 +623,8 @@ smtpHost: "Server remoto"
 smtpPort: "Porta"
 smtpUser: "Nome utente"
 smtpPass: "Password"
-emptyToDisableSmtpAuth: "Lasciare il nome utente e la password vuoti per disabilitare la verifica SMTP"
+emptyToDisableSmtpAuth: "Lasciare il nome utente e la password vuoti per disabilitare\
+  \ la verifica SMTP"
 smtpSecure: "Usare la porta SSL/TLS implicito per le connessioni SMTP"
 smtpSecureInfo: "Disabilitare quando è attivo STARTTLS."
 testEmail: "Testare la consegna di posta elettronica"
@@ -598,10 +644,13 @@ create: "Crea"
 notificationSetting: "Impostazioni notifiche"
 notificationSettingDesc: "Seleziona il tipo di notifiche da visualizzare."
 useGlobalSetting: "Usa impostazioni generali"
-useGlobalSettingDesc: "Se abilitato, le impostazioni notifiche dell'account verranno utilizzate. Se disabilitato, si possono definire diverse singole impostazioni."
+useGlobalSettingDesc: "Se abilitato, le impostazioni notifiche dell'account verranno\
+  \ utilizzate. Se disabilitato, si possono definire diverse singole impostazioni."
 other: "Avanzate"
 regenerateLoginToken: "Genera di nuovo un token di connessione"
-regenerateLoginTokenDescription: "Genera un nuovo token di autenticazione. Solitamente questa operazione non è necessaria: quando si genera un nuovo token, tutti i dispositivi vanno disconnessi."
+regenerateLoginTokenDescription: "Genera un nuovo token di autenticazione. Solitamente\
+  \ questa operazione non è necessaria: quando si genera un nuovo token, tutti i dispositivi\
+  \ vanno disconnessi."
 setMultipleBySeparatingWithSpace: "È possibile creare multiple voci separate da spazi."
 fileIdOrUrl: "ID o URL del file"
 behavior: "Comportamento"
@@ -619,7 +668,8 @@ abuseMarkAsResolved: "Contrassegna la segnalazione come risolta"
 openInNewTab: "Apri in una nuova scheda"
 openInSideView: "Apri in vista laterale"
 defaultNavigationBehaviour: "Navigazione preimpostata"
-editTheseSettingsMayBreakAccount: "Modificare queste impostazioni può danneggiare l'account."
+editTheseSettingsMayBreakAccount: "Modificare queste impostazioni può danneggiare\
+  \ l'account."
 instanceTicker: "Informazioni sull'istanza da cui vengono le note"
 waitingFor: "Aspettando {x}"
 random: "Casuale"
@@ -631,7 +681,8 @@ createNew: "Crea nuov@"
 optional: "Opzionale"
 createNewClip: "Nuova clip"
 public: "Pubblica"
-i18nInfo: "FoundKey è tradotto in diverse lingue da volontari. Anche tu puoi contribuire su {link}."
+i18nInfo: "FoundKey è tradotto in diverse lingue da volontari. Anche tu puoi contribuire\
+  \ su {link}."
 manageAccessTokens: "Gestisci token di accesso"
 accountInfo: "Informazioni account"
 notesCount: "Conteggio note"
@@ -650,12 +701,16 @@ no: "No"
 driveFilesCount: "Numero di file nel Drive"
 driveUsage: "Utilizzazione del Drive"
 noCrawle: "Rifiuta l'indicizzazione dai robot."
-noCrawleDescription: "Richiedi che i motori di ricerca non indicizzino la tua pagina di profilo, le tue note, pagine, ecc."
-lockedAccountInfo: "A meno che non imposti la visibilità delle tue note su \"Solo ai follower\", le tue note sono visibili da tutti, anche se hai configurato l'account per confermare manualmente le richieste di follow."
+noCrawleDescription: "Richiedi che i motori di ricerca non indicizzino la tua pagina\
+  \ di profilo, le tue note, pagine, ecc."
+lockedAccountInfo: "A meno che non imposti la visibilità delle tue note su \"Solo\
+  \ ai follower\", le tue note sono visibili da tutti, anche se hai configurato l'account\
+  \ per confermare manualmente le richieste di follow."
 alwaysMarkSensitive: "Segnare i media come sensibili per impostazione predefinita"
 loadRawImages: "Visualizza le intere immagini allegate invece delle miniature."
 disableShowingAnimatedImages: "Disabilita le immagini animate"
-verificationEmailSent: "Una mail di verifica è stata inviata. Si prega di accedere al collegamento per compiere la verifica."
+verificationEmailSent: "Una mail di verifica è stata inviata. Si prega di accedere\
+  \ al collegamento per compiere la verifica."
 notSet: "Non impostato"
 emailVerified: "Il tuo indirizzo email è stato verificato"
 noteFavoritesCount: "Conteggio note tra i preferiti"
@@ -667,13 +722,15 @@ clips: "Clip"
 experimentalFeatures: "Funzioni sperimentali"
 developer: "Sviluppatore"
 makeExplorable: "Account visibile sulla pagina \"Esplora\""
-makeExplorableDescription: "Se disabiliti l'opzione, il tuo account non verrà visualizzato sulla pagina \"Esplora\"."
+makeExplorableDescription: "Se disabiliti l'opzione, il tuo account non verrà visualizzato\
+  \ sulla pagina \"Esplora\"."
 showGapBetweenNotesInTimeline: "Mostrare un intervallo tra le note sulla timeline"
 duplicate: "Duplica"
 left: "Sinistra"
 center: "Centro"
 wide: "Largo"
-reloadToApplySetting: "Le tue preferenze verranno impostate dopo il ricaricamento della pagina. Vuoi ricaricare adesso?"
+reloadToApplySetting: "Le tue preferenze verranno impostate dopo il ricaricamento\
+  \ della pagina. Vuoi ricaricare adesso?"
 needReloadToApply: "È necessario riavviare per rendere effettive le modifiche."
 showTitlebar: "Visualizza la barra del titolo"
 clearCache: "Svuota cache"
@@ -705,7 +762,8 @@ receiveAnnouncementFromInstance: "Ricevi i messaggi informativi dall'istanza"
 emailNotification: "Eventi per notifiche via mail"
 publish: "Pubblico"
 inChannelSearch: "Cerca in canale"
-useReactionPickerForContextMenu: "Cliccare sul tasto destro per aprire il pannello di reazioni"
+useReactionPickerForContextMenu: "Cliccare sul tasto destro per aprire il pannello\
+  \ di reazioni"
 typingUsers: "{users} sta(nno) scrivendo"
 jumpToSpecifiedDate: "Vai alla data "
 showingPastTimeline: "Stai visualizzando una vecchia timeline"
@@ -716,14 +774,17 @@ unlikeConfirm: "Non ti piace più?"
 fullView: "Schermo intero"
 quitFullView: "Esci dalla modalità a schermo intero"
 addDescription: "Aggiungi descrizione"
-userPagePinTip: "Qui puoi appuntare note, premendo \"Fissa sul profilo\" nel menù delle singole note."
-notSpecifiedMentionWarning: "Sono menzionati account che non vengono inclusi fra i destinatari"
+userPagePinTip: "Qui puoi appuntare note, premendo \"Fissa sul profilo\" nel menù\
+  \ delle singole note."
+notSpecifiedMentionWarning: "Sono menzionati account che non vengono inclusi fra i\
+  \ destinatari"
 info: "Informazioni"
 userInfo: "Informazioni utente"
 unknown: "Sconosciuto"
 onlineStatus: "Stato di connessione"
 hideOnlineStatus: "Stato invisibile"
-hideOnlineStatusDescription: "Abilitare l'opzione di stato invisibile può guastare la praticità di singole funzioni, come la ricerca."
+hideOnlineStatusDescription: "Abilitare l'opzione di stato invisibile può guastare\
+  \ la praticità di singole funzioni, come la ricerca."
 online: "Online"
 active: "Attiv@"
 offline: "Offline"
@@ -770,7 +831,9 @@ whatIsNew: "Visualizza le informazioni sull'aggiornamento"
 translate: "Traduzione"
 translatedFrom: "Tradotto da {x}"
 accountDeletionInProgress: "La cancellazione dell'account è in corso"
-usernameInfo: "Un nome per identificare univocamente il tuo account sul server. È possibile utilizzare caratteri alfanumerici (a~z, A~Z, 0~9) e il trattino basso (_). Non sarà possibile cambiare il nome utente in seguito."
+usernameInfo: "Un nome per identificare univocamente il tuo account sul server. È\
+  \ possibile utilizzare caratteri alfanumerici (a~z, A~Z, 0~9) e il trattino basso\
+  \ (_). Non sarà possibile cambiare il nome utente in seguito."
 keepCw: "Mantieni il CW"
 resolved: "Risolto"
 unresolved: "Non risolto"
@@ -792,7 +855,8 @@ hide: "Nascondere"
 leaveGroup: "Esci dal gruppo"
 leaveGroupConfirm: "Uscire da「{name}」?"
 useDrawerReactionPickerForMobile: "Mostra sul drawer da dispositivo mobile"
-clickToFinishEmailVerification: "Fai click su [{ok}] per completare la verifica dell'indirizzo email."
+clickToFinishEmailVerification: "Fai click su [{ok}] per completare la verifica dell'indirizzo\
+  \ email."
 indefinitely: "Non scade"
 tenMinutes: "10 minuti"
 oneHour: "1 ora"
@@ -811,19 +875,27 @@ _ffVisibility:
 _signup:
   almostThere: "Quasi completo"
   emailAddressInfo: "Inserisci il tuo indirizzo email. Non verrà reso pubblico."
+  emailSent: ''
 _accountDelete:
   accountDelete: "Cancellazione account"
-  sendEmail: "Al termine della cancellazione dell'account, verrà inviata una mail all'indirizzo a cui era registrato."
+  sendEmail: "Al termine della cancellazione dell'account, verrà inviata una mail\
+    \ all'indirizzo a cui era registrato."
   requestAccountDelete: "Richiesta di cancellazione account"
   started: "Il processo di cancellazione è iniziato."
   inProgress: "Cancellazione in corso"
+  mayTakeTime: ''
 _ad:
   back: "Indietro"
   reduceFrequencyOfThisAd: "Visualizza questa pubblicità meno spesso"
 _forgotPassword:
-  enterEmail: "Inserisci l'indirizzo di posta elettronica che hai registrato nel tuo profilo. Il collegamento necessario per ripristinare la password verrà inviato a questo indirizzo."
-  ifNoEmail: "Se nessun indirizzo e-mail è stato registrato, si prega di contattare l'amministratore·trice dell'istanza."
-  contactAdmin: "Poiché questa istanza non permette l'utilizzo di una mail, si prega di contattare l'amministratore·trice dell'istanza per poter ripristinare la password."
+  enterEmail: "Inserisci l'indirizzo di posta elettronica che hai registrato nel tuo\
+    \ profilo. Il collegamento necessario per ripristinare la password verrà inviato\
+    \ a questo indirizzo."
+  ifNoEmail: "Se nessun indirizzo e-mail è stato registrato, si prega di contattare\
+    \ l'amministratore·trice dell'istanza."
+  contactAdmin: "Poiché questa istanza non permette l'utilizzo di una mail, si prega\
+    \ di contattare l'amministratore·trice dell'istanza per poter ripristinare la\
+    \ password."
 _gallery:
   my: "Le mie pubblicazioni"
   liked: "Pubblicazioni che mi piacciono"
@@ -836,13 +908,15 @@ _email:
     title: "Hai ricevuto una richiesta di follow"
 _plugin:
   install: "Installa estensioni"
-  installWarn: "Si prega di installare soltanto estensioni che provengono da fonti affidabili."
+  installWarn: "Si prega di installare soltanto estensioni che provengono da fonti\
+    \ affidabili."
   manage: "Gestisci estensioni"
 _registry:
   key: "Dati"
   keys: "Dati"
   domain: "Dominio"
   createKey: "Crea chiave"
+  scope: ''
 _aboutMisskey:
   about: "FoundKey è un software libero e open source, sviluppato da syuilo dal 2014."
   contributors: "Principali sostenitori"
@@ -855,10 +929,12 @@ _nsfw:
   force: "Nascondere tutti i media"
 _mfm:
   cheatSheet: "Bigliettino MFM"
-  intro: "MFM è un linguaggio Markdown particolare che si può usare in diverse parti di FoundKey. Qui puoi visualizzare a colpo d'occhio tutta la sintassi MFM utile."
+  intro: "MFM è un linguaggio Markdown particolare che si può usare in diverse parti\
+    \ di FoundKey. Qui puoi visualizzare a colpo d'occhio tutta la sintassi MFM utile."
   dummy: "Il Fediverso si espande con FoundKey"
   mention: "Menzioni"
-  mentionDescription: "Si può menzionare un utente specifico digitando il suo nome utente subito dopo il segno @."
+  mentionDescription: "Si può menzionare un utente specifico digitando il suo nome\
+    \ utente subito dopo il segno @."
   hashtag: "Hashtag"
   url: "URL"
   link: "Link"
@@ -885,11 +961,39 @@ _mfm:
   x4: "Estremamente più grande"
   x4Description: "Mostra il contenuto estremamente più ingrandito."
   blur: "Sfocatura"
-  blurDescription: "È possibile rendere sfocato il contenuto. Spostando il cursore su di esso tornerà visibile chiaramente."
+  blurDescription: "È possibile rendere sfocato il contenuto. Spostando il cursore\
+    \ su di esso tornerà visibile chiaramente."
   font: "Tipo di carattere"
   fontDescription: "Puoi scegliere il tipo di carattere per il contenuto."
   rainbow: "Arcobaleno"
   rotate: "Ruota"
+  inlineMathDescription: ''
+  hashtagDescription: ''
+  urlDescription: ''
+  boldDescription: ''
+  small: ''
+  smallDescription: ''
+  center: ''
+  centerDescription: ''
+  inlineCode: ''
+  inlineCodeDescription: ''
+  blockCodeDescription: ''
+  blockMathDescription: ''
+  quoteDescription: ''
+  emojiDescription: ''
+  searchDescription: ''
+  flipDescription: ''
+  jelly: ''
+  jellyDescription: ''
+  tada: ''
+  tadaDescription: ''
+  spin: ''
+  spinDescription: ''
+  sparkleDescription: ''
+  rotateDescription: ''
+  linkDescription: ''
+  rainbowDescription: ''
+  sparkle: ''
 _instanceTicker:
   none: "Nascondi"
   remote: "Mostra solo per gli/le utenti remotə"
@@ -910,12 +1014,20 @@ _channel:
   notesCount: "{n} note"
 _menuDisplay:
   hide: "Nascondere"
+  sideFull: ''
+  sideIcon: ''
+  top: ''
 _wordMute:
   muteWords: "Parole da filtrare"
-  muteWordsDescription: "Separare con uno spazio indica la condizione \"E\". Separare con un'interruzzione riga indica la condizione \"O\"."
-  muteWordsDescription2: "Metti le parole chiavi tra slash per usare espressioni regolari (regexp)."
-  softDescription: "Nascondi della timeline note che rispondono alle condizioni impostate qui."
-  hardDescription: "Impedisci alla timeline di caricare le note che rispondono alle condizioni impostate qui. Inoltre, le note scompariranno in modo irreversibile, anche se le condizioni verranno successivamente rimosse."
+  muteWordsDescription: "Separare con uno spazio indica la condizione \"E\". Separare\
+    \ con un'interruzzione riga indica la condizione \"O\"."
+  muteWordsDescription2: "Metti le parole chiavi tra slash per usare espressioni regolari\
+    \ (regexp)."
+  softDescription: "Nascondi della timeline note che rispondono alle condizioni impostate\
+    \ qui."
+  hardDescription: "Impedisci alla timeline di caricare le note che rispondono alle\
+    \ condizioni impostate qui. Inoltre, le note scompariranno in modo irreversibile,\
+    \ anche se le condizioni verranno successivamente rimosse."
   soft: "Moderato"
   hard: "Severo"
   mutedNotes: "Note silenziate"
@@ -981,6 +1093,18 @@ _theme:
     driveFolderBg: "Sfondo della cartella di disco"
     badge: "Distintivo"
     messageBg: "Sfondo della chat"
+    accent: ''
+    modalBg: ''
+    scrollbarHandle: ''
+    scrollbarHandleHover: ''
+    dateLabelFg: ''
+    wallpaperOverlay: ''
+    accentDarken: ''
+    accentLighten: ''
+    fgHighlighted: ''
+  refProp: ''
+  basedProp: ''
+  importInfo: ''
 _sfx:
   note: "Nota"
   noteMy: "Mia nota"
@@ -1007,28 +1131,52 @@ _time:
 _tutorial:
   title: "Come usare FoundKey"
   step1_1: "Benvenuto/a!"
-  step1_2: "Questa pagina si chiama una \" Timeline \". Mostra in ordine cronologico le \" note \" delle persone che segui."
-  step1_3: "Attualmente la tua Timeline è vuota perché non segui alcun account e non hai pubblicato alcuna nota ancora."
+  step1_2: "Questa pagina si chiama una \" Timeline \". Mostra in ordine cronologico\
+    \ le \" note \" delle persone che segui."
+  step1_3: "Attualmente la tua Timeline è vuota perché non segui alcun account e non\
+    \ hai pubblicato alcuna nota ancora."
   step2_1: "Prima di scrivere una nota o di seguire un account, imposta il tuo profilo!"
-  step2_2: "Aggiungere qualche informazione su di te aumenterà le tue possibilità di essere seguit@ da altre persone. "
+  step2_2: "Aggiungere qualche informazione su di te aumenterà le tue possibilità\
+    \ di essere seguit@ da altre persone. "
   step3_1: "Hai finito di impostare il tuo profilo?"
-  step3_2: "Ora, puoi pubblicare una nota. Facciamo una prova! Premi il pulsante a forma di penna in cima allo schermo per aprire una finestra di dialogo.  "
-  step3_3: "Scritto il testo della nota, puoi pubblicarla premendo il pulsante nella parte superiore destra della finestra di dialogo."
-  step3_4: "Non ti viene niente in mente? Perché non scrivi semplicemente \"Ho appena cominciato a usare FoundKey\"?"
+  step3_2: "Ora, puoi pubblicare una nota. Facciamo una prova! Premi il pulsante a\
+    \ forma di penna in cima allo schermo per aprire una finestra di dialogo.  "
+  step3_3: "Scritto il testo della nota, puoi pubblicarla premendo il pulsante nella\
+    \ parte superiore destra della finestra di dialogo."
+  step3_4: "Non ti viene niente in mente? Perché non scrivi semplicemente \"Ho appena\
+    \ cominciato a usare FoundKey\"?"
   step4_1: "Hai pubblicato qualcosa?"
   step4_2: "Se puoi visualizzare la tua nota sulla timeline, ce l'hai fatta!"
   step5_1: "Adesso, cerca di seguire altre persone per vivacizzare la tua timeline. "
-  step5_2: "La pagina {featured} mostra le note di tendenza su questa istanza, e magari ti aiuterà a trovare account che ti piacciono e che vorrai seguire. Oppure, potrai trovare utenti popolari usando {explore}."
-  step5_3: "Per seguire altrə utenti, clicca sul loro avatar per aprire la pagina di profilo dove puoi premere il pulsante \"Seguire\". "
-  step5_4: "Alcunə utenti scelgono di confermare manualmente le richieste di follow che ricevono, quindi a seconda delle persone potrebbe volerci un pò prima che la tua richiesta sia accolta."
-  step6_1: "Ora, se puoi visualizzare le note di altrə utenti sulla tua timeline, ce l'hai fatta!"
-  step6_2: "Puoi inviare una risposta rapida alle note di altrə utenti mandando loro \"reazioni\"."
-  step6_3: "Per inviare una reazione, premi l'icona + della nota e scegli l'emoji che vuoi mandare."
-  step7_1: "Complimenti! Sei arrivat@ alla fine dell'esercitazione di base su come usare FoundKey. "
-  step7_2: "Se vuoi saperne di più su FoundKey, puoi dare un'occhiata alla sezione {help}."
-  step7_3: "Da ultimo, buon divertimento su FoundKey! 🚀"
+  step5_2: "La pagina {featured} mostra le note di tendenza su questa istanza, e magari\
+    \ ti aiuterà a trovare account che ti piacciono e che vorrai seguire. Oppure,\
+    \ potrai trovare utenti popolari usando {explore}."
+  step5_3: "Per seguire altrə utenti, clicca sul loro avatar per aprire la pagina\
+    \ di profilo dove puoi premere il pulsante \"Seguire\". "
+  step5_4: "Alcunə utenti scelgono di confermare manualmente le richieste di follow\
+    \ che ricevono, quindi a seconda delle persone potrebbe volerci un pò prima che\
+    \ la tua richiesta sia accolta."
+  step6_1: "Ora, se puoi visualizzare le note di altrə utenti sulla tua timeline,\
+    \ ce l'hai fatta!"
+  step6_2: "Puoi inviare una risposta rapida alle note di altrə utenti mandando loro\
+    \ \"reazioni\"."
+  step6_3: "Per inviare una reazione, premi l'icona + della nota e scegli l'emoji\
+    \ che vuoi mandare."
+  step7_1: "Complimenti! Sei arrivat@ alla fine dell'esercitazione di base su come\
+    \ usare FoundKey. "
+  step7_2: "Se vuoi saperne di più su FoundKey, puoi dare un'occhiata alla sezione\
+    \ {help}."
+  step7_3: "Da ultimo, buon divertimento su FoundKey! \U0001F680"
 _2fa:
   registerDevice: "Aggiungi dispositivo"
+  alreadyRegistered: ''
+  registerKey: ''
+  step1: ''
+  step2: ''
+  step2Url: ''
+  step3: ''
+  step4: ''
+  securityKeyInfo: ''
 _permissions:
   "read:account": "Visualizzare le informazioni dell'account"
   "write:account": "Modificare le informazioni dell'account"
@@ -1058,6 +1206,10 @@ _permissions:
   "write:user-groups": "Gestisci gruppi di utenti"
   "read:channels": "Visualizza canali"
   "write:channels": "Gerisci canali"
+  "read:gallery": ''
+  "write:gallery": ''
+  "read:gallery-likes": ''
+  "write:gallery-likes": ''
 _auth:
   shareAccess: "Autorizzare「{name}」ad accedere al tuo account?"
   shareAccessAsk: "Vuoi davvero consentire l'accesso al tuo account a questa app'?"
@@ -1098,6 +1250,8 @@ _widgets:
   jobQueue: "Coda di lavoro"
   serverMetric: "Statistiche server"
   aiscript: "Console AiScript"
+  aichan: ''
+  rssMarquee: ''
 _cw:
   hide: "Nascondere"
   show: "Mostra di più"
@@ -1154,7 +1308,8 @@ _profile:
   youCanIncludeHashtags: "Puoi anche includere hashtag."
   metadata: "Informazioni aggiuntive"
   metadataEdit: "Modifica informazioni aggiuntive"
-  metadataDescription: "Puoi pubblicare fino a quattro informazioni aggiuntive sul profilo."
+  metadataDescription: "Puoi pubblicare fino a quattro informazioni aggiuntive sul\
+    \ profilo."
   metadataLabel: "Etichetta"
   metadataContent: "Contenuto"
   changeAvatar: "Modifica immagine profilo"
@@ -1165,6 +1320,8 @@ _exportOrImport:
   muteList: "Account silenziati"
   blockingList: "Account bloccati"
   userLists: "Liste"
+  excludeMutingUsers: ''
+  excludeInactiveUsers: ''
 _charts:
   federation: "Federazione"
   apRequest: "Richieste"
@@ -1225,6 +1382,7 @@ _pages:
   fontSansSerif: "Sans serif"
   eyeCatchingImageSet: "Imposta un'immagine attrattiva"
   eyeCatchingImageRemove: "Elimina l'immagine attrattiva"
+  alignCenter: ''
 _relayStatus:
   requesting: "In attesa di approvazione"
   accepted: "Approvato"
@@ -1255,9 +1413,13 @@ _notification:
     followRequestAccepted: "Richiesta di follow accettata"
     groupInvited: "Invito a un gruppo"
     app: "Notifiche da applicazioni"
+    pollEnded: ''
   _actions:
     reply: "Rispondi"
     renote: "Rinota"
+    followBack: ''
+  pollEnded: ''
+  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "Mostra sempre la colonna principale"
   columnAlign: "Allineare colonne"
@@ -1280,3 +1442,74 @@ _deck:
     list: "Liste"
     mentions: "Menzioni"
     direct: "Diretta"
+_services:
+  _github:
+    disconnected: ''
+    connected: ''
+  _discord:
+    disconnected: ''
+    connected: ''
+  _twitter:
+    connected: ''
+    disconnected: ''
+keepOriginalUploading: ''
+keepOriginalUploadingDescription: ''
+unlimited: ''
+maxCustomEmojiPicker: ''
+_instanceMute:
+  instanceMuteDescription: ''
+  instanceMuteDescription2: ''
+  title: ''
+  heading: ''
+regexpError: ''
+regexpErrorDescription: ''
+showLess: ''
+flagShowTimelineReplies: ''
+flagShowTimelineRepliesDescription: ''
+forwardReport: ''
+forwardReportIsAnonymous: ''
+narrow: ''
+accentColor: ''
+advanced: ''
+switchAccount: ''
+attachmentRequired: ''
+customCssWarn: ''
+pubSub: ''
+lastCommunication: ''
+makeReactionsPublic: ''
+makeReactionsPublicDescription: ''
+ffVisibility: ''
+ffVisibilityDescription: ''
+continueThread: ''
+overridedDeviceKind: ''
+smartphone: ''
+tablet: ''
+auto: ''
+themeColor: ''
+size: ''
+numberOfColumn: ''
+instanceDefaultLightTheme: ''
+instanceDefaultDarkTheme: ''
+instanceDefaultThemeDescription: ''
+mutePeriod: ''
+reflectMayTakeTime: ''
+failedToFetchAccountInformation: ''
+rateLimitExceeded: ''
+cropImage: ''
+cropImageAsk: ''
+recentNHours: ''
+recentNDays: ''
+isSystemAccount: ''
+typeToConfirm: ''
+deleteAccount: ''
+numberOfPageCache: ''
+numberOfPageCacheDescription: ''
+document: ''
+file: ''
+unclip: ''
+confirmToUnclipAlreadyClippedNote: ''
+noEmailServerWarning: ''
+thereIsUnresolvedAbuseReportWarning: ''
+recommended: ''
+check: ''
+maxUnicodeEmojiPicker: ''
