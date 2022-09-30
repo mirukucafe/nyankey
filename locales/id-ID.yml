@@ -1,7 +1,9 @@
----
 _lang_: "Bahasa Indonesia"
 headlineMisskey: "Jaringan terhubung melalui catatan"
-introMisskey: "Selamat datang! FoundKey adalah perangkat mikroblog tercatu bersifat sumber terbuka.\nMulailah menuliskan catatan, bagikan peristiwa terkini, serta ceritakan segala tentangmu.📡\nTunjukkan juga reaksimu pada catatan pengguna lain.👍\nMari jelajahi dunia baru🚀"
+introMisskey: "Selamat datang! FoundKey adalah perangkat mikroblog tercatu bersifat\
+  \ sumber terbuka.\nMulailah menuliskan catatan, bagikan peristiwa terkini, serta\
+  \ ceritakan segala tentangmu.\U0001F4E1\nTunjukkan juga reaksimu pada catatan pengguna\
+  \ lain.\U0001F44D\nMari jelajahi dunia baru\U0001F680"
 monthAndDay: "{day} {month}"
 search: "Penelusuran"
 notifications: "Pemberitahuan"
@@ -44,7 +46,8 @@ copyContent: "Salin konten"
 copyLink: "Salin tautan"
 delete: "Hapus"
 deleteAndEdit: "Hapus dan sunting"
-deleteAndEditConfirm: "Apakah kamu yakin ingin menghapus note ini dan menyuntingnya? Kamu akan kehilangan semua reaksi, renote dan balasan di note ini."
+deleteAndEditConfirm: "Apakah kamu yakin ingin menghapus note ini dan menyuntingnya?\
+  \ Kamu akan kehilangan semua reaksi, renote dan balasan di note ini."
 addToList: "Tambahkan ke daftar"
 sendMessage: "Kirim pesan"
 copyUsername: "Salin nama pengguna"
@@ -65,7 +68,8 @@ files: "Berkas"
 download: "Unduh"
 driveFileDeleteConfirm: "Hapus {name}? Catatan dengan berkas terkait juga akan terhapus."
 unfollowConfirm: "Berhenti mengikuti {name}?"
-exportRequested: "Kamu telah meminta ekspor. Ini akan memakan waktu sesaat. Setelah ekspor selesai, berkas yang dihasilkan akan ditambahkan ke Drive"
+exportRequested: "Kamu telah meminta ekspor. Ini akan memakan waktu sesaat. Setelah\
+  \ ekspor selesai, berkas yang dihasilkan akan ditambahkan ke Drive"
 importRequested: "Kamu telah meminta impor. Ini akan memakan waktu sesaat."
 lists: "Daftar"
 noLists: "Kamu tidak memiliki daftar apapun"
@@ -80,9 +84,11 @@ error: "Galat"
 somethingHappened: "Terjadi kesalahan"
 retry: "Coba lagi"
 pageLoadError: "Gagal memuat halaman."
-pageLoadErrorDescription: "Umumnya disebabkan jaringan atau tembolok perambah. Cobalah bersihkan tembolok peramban lalu tunggu sesaat sebelum mencoba kembali."
+pageLoadErrorDescription: "Umumnya disebabkan jaringan atau tembolok perambah. Cobalah\
+  \ bersihkan tembolok peramban lalu tunggu sesaat sebelum mencoba kembali."
 serverIsDead: "Tidak ada respon dari server. Mohon tunggu dan coba beberapa saat lagi."
-youShouldUpgradeClient: "Untuk melihat halaman ini, mohon muat ulang untuk memutakhirkan klienmu."
+youShouldUpgradeClient: "Untuk melihat halaman ini, mohon muat ulang untuk memutakhirkan\
+  \ klienmu."
 enterListName: "Masukkan nama daftar"
 privacy: "Privasi"
 makeFollowManuallyApprove: "Permintaan mengikuti membutuhkan persetujuan"
@@ -107,7 +113,8 @@ sensitive: "Konten sensitif"
 add: "Tambahkan"
 reaction: "Reaksi"
 reactionSetting: "Reaksi untuk dimunculkan di bilah reaksi"
-reactionSettingDescription2: "Geser untuk memindah urutkan, klik untuk menghapus, tekan \"+\" untuk menambahkan"
+reactionSettingDescription2: "Geser untuk memindah urutkan, klik untuk menghapus,\
+  \ tekan \"+\" untuk menambahkan"
 attachCancel: "Hapus lampiran"
 markAsSensitive: "Tandai sebagai konten sensitif"
 unmarkAsSensitive: "Hapus tanda konten sensitif"
@@ -135,14 +142,22 @@ emojiUrl: "URL Emoji"
 addEmoji: "Tambahkan emoji"
 settingGuide: "Pengaturan rekomendasi"
 cacheRemoteFiles: "Tembolokkan berkas remote"
-cacheRemoteFilesDescription: "Ketika pengaturan ini dinonaktifkan, berkas luar akan dimuat langsung dari instansi luar. Menonaktifkan ini akan mengurangi penggunaan penyimpanan, namun dapat menyebabkan meningkatkan lalu lintas bandwidth, karena thumbnail tidak dihasilkan."
+cacheRemoteFilesDescription: "Ketika pengaturan ini dinonaktifkan, berkas luar akan\
+  \ dimuat langsung dari instansi luar. Menonaktifkan ini akan mengurangi penggunaan\
+  \ penyimpanan, namun dapat menyebabkan meningkatkan lalu lintas bandwidth, karena\
+  \ thumbnail tidak dihasilkan."
 flagAsBot: "Atur akun ini sebagai Bot"
-flagAsBotDescription: "Jika akun ini dikendalikan oleh program, tetapkanlah opsi ini. Jika diaktifkan, ini akan berfungsi sebagai tanda bagi pengembang lain untuk mencegah interaksi berantai dengan bot lain dan menyesuaikan sistem internal FoundKey untuk memperlakukan akun ini sebagai bot."
+flagAsBotDescription: "Jika akun ini dikendalikan oleh program, tetapkanlah opsi ini.\
+  \ Jika diaktifkan, ini akan berfungsi sebagai tanda bagi pengembang lain untuk mencegah\
+  \ interaksi berantai dengan bot lain dan menyesuaikan sistem internal FoundKey untuk\
+  \ memperlakukan akun ini sebagai bot."
 flagAsCat: "Atur akun ini sebagai kucing"
 flagAsCatDescription: "Nyalakan tanda ini untuk menandai akun ini sebagai kucing."
 flagShowTimelineReplies: "Tampilkan balasan di linimasa"
-flagShowTimelineRepliesDescription: "Menampilkan balasan pengguna dari note pengguna lain di linimasa apabila dinyalakan."
-autoAcceptFollowed: "Setujui otomatis permintaan mengikuti dari pengguna yang kamu ikuti"
+flagShowTimelineRepliesDescription: "Menampilkan balasan pengguna dari note pengguna\
+  \ lain di linimasa apabila dinyalakan."
+autoAcceptFollowed: "Setujui otomatis permintaan mengikuti dari pengguna yang kamu\
+  \ ikuti"
 addAccount: "Tambahkan akun"
 loginFailed: "Gagal untuk masuk"
 showOnRemote: "Lihat profil asli"
@@ -154,7 +169,11 @@ searchWith: "Cari: {q}"
 youHaveNoLists: "Kamu tidak memiliki daftar apapun"
 followConfirm: "Apakah kamu yakin ingin mengikuti {name}?"
 proxyAccount: "Akun proksi"
-proxyAccountDescription: "Akun proksi merupakan sebuah akun yang bertindak sebagai pengikut luar untuk pengguna dalam kondisi tertentu. Sebagai contoh, ketika pengguna menambahkan seorang pengguna luar ke dalam daftar, aktivitas dari pengguna luar tidak akan disampaikan ke instansi apabila tidak ada pengguna lokal yang mengikuti pengguna tersebut, dengan begitu akun proksilah yang akan mengikutinya."
+proxyAccountDescription: "Akun proksi merupakan sebuah akun yang bertindak sebagai\
+  \ pengikut luar untuk pengguna dalam kondisi tertentu. Sebagai contoh, ketika pengguna\
+  \ menambahkan seorang pengguna luar ke dalam daftar, aktivitas dari pengguna luar\
+  \ tidak akan disampaikan ke instansi apabila tidak ada pengguna lokal yang mengikuti\
+  \ pengguna tersebut, dengan begitu akun proksilah yang akan mengikutinya."
 host: "Host"
 selectUser: "Pilih pengguna"
 recipient: "Penerima"
@@ -185,11 +204,15 @@ instanceInfo: "Informasi Instansi"
 statistics: "Statistik"
 clearQueue: "Bersihkan antrian"
 clearQueueConfirmTitle: "Apakah kamu yakin ingin membersihkan antrian?"
-clearQueueConfirmText: "Seluruh sisa catatan yang tidak tersampaikan di dalam antrian tidak akan difederasi. Biasanya operasi ini TIDAK dibutuhkan."
+clearQueueConfirmText: "Seluruh sisa catatan yang tidak tersampaikan di dalam antrian\
+  \ tidak akan difederasi. Biasanya operasi ini TIDAK dibutuhkan."
 clearCachedFiles: "Hapus tembolok"
-clearCachedFilesConfirm: "Apakah kamu yakin ingin menghapus seluruh tembolok berkas remote?"
+clearCachedFilesConfirm: "Apakah kamu yakin ingin menghapus seluruh tembolok berkas\
+  \ remote?"
 blockedInstances: "Instansi terblokir"
-blockedInstancesDescription: "Daftar nama host dari instansi yang diperlukan untuk diblokir. Instansi yang didaftarkan tidak akan dapat berkomunikasi dengan instansi ini."
+blockedInstancesDescription: "Daftar nama host dari instansi yang diperlukan untuk\
+  \ diblokir. Instansi yang didaftarkan tidak akan dapat berkomunikasi dengan instansi\
+  \ ini."
 muteAndBlock: "Bisukan / Blokir"
 mutedUsers: "Pengguna yang dibisukan"
 blockedUsers: "Pengguna yang diblokir"
@@ -237,7 +260,8 @@ saved: "Telah disimpan"
 messaging: "Pesan"
 upload: "Unggah"
 keepOriginalUploading: "Simpan gambar asli"
-keepOriginalUploadingDescription: "Simpan gambar yang diunggah sebagaimana gambar aslinya. Bila dimatikan, versi tampilan web akan dihasilkan pada saat diunggah."
+keepOriginalUploadingDescription: "Simpan gambar yang diunggah sebagaimana gambar\
+  \ aslinya. Bila dimatikan, versi tampilan web akan dihasilkan pada saat diunggah."
 fromDrive: "Dari Drive"
 fromUrl: "Dari URL"
 uploadFromUrl: "Unggah dari URL"
@@ -253,7 +277,8 @@ agreeTo: "Saya setuju kepada {0}"
 tos: "Syarat dan ketentuan"
 start: "Mulai"
 home: "Beranda"
-remoteUserCaution: "Informasi ini mungkin tidak mutakhir, karena pengguna ini berasal dari instansi luar."
+remoteUserCaution: "Informasi ini mungkin tidak mutakhir, karena pengguna ini berasal\
+  \ dari instansi luar."
 activity: "Aktivitas"
 images: "Gambar"
 birthday: "Tanggal lahir"
@@ -286,7 +311,8 @@ unableToDelete: "Tidak dapat menghapus"
 inputNewFileName: "Masukkan nama berkas yang baru"
 inputNewDescription: "Masukkan keterangan disini"
 inputNewFolderName: "Masukkan nama folder yang baru"
-circularReferenceFolder: "Folder tujuan adalah subfolder dari folder yang ingin kamu pindahkan."
+circularReferenceFolder: "Folder tujuan adalah subfolder dari folder yang ingin kamu\
+  \ pindahkan."
 hasChildFilesOrFolders: "Karena folder ini tidak kosong, maka tidak dapat dihapus."
 copyUrl: "Salin tautan"
 rename: "Ubah nama"
@@ -320,7 +346,8 @@ connectService: "Sambungkan"
 disconnectService: "Putuskan"
 enableLocalTimeline: "Nyalakan linimasa lokal"
 enableGlobalTimeline: "Nyalakan linimasa global"
-disablingTimelinesInfo: "Admin dan Moderator akan selalu memiliki akses ke semua linimasa meskipun linimasa tersebut tidak diaktifkan."
+disablingTimelinesInfo: "Admin dan Moderator akan selalu memiliki akses ke semua linimasa\
+  \ meskipun linimasa tersebut tidak diaktifkan."
 registration: "Pendaftaran"
 enableRegistration: "Nyalakan pendaftaran pengguna baru"
 invite: "Undang"
@@ -332,9 +359,11 @@ bannerUrl: "URL Banner"
 backgroundImageUrl: "URL Gambar latar"
 basicInfo: "Informasi Umum"
 pinnedUsers: "Pengguna yang disematkan"
-pinnedUsersDescription: "Tuliskan satu nama pengguna dalam satu baris. Pengguna yang dituliskan disini akan disematkan dalam bilah \"Jelajahi\"."
+pinnedUsersDescription: "Tuliskan satu nama pengguna dalam satu baris. Pengguna yang\
+  \ dituliskan disini akan disematkan dalam bilah \"Jelajahi\"."
 pinnedPages: "Halaman yang disematkan"
-pinnedPagesDescription: "Masukkan tautan dari halaman yang kamu ingin sematkan ke halaman utama dari instansi ini, dipisah dengan membuat baris baru."
+pinnedPagesDescription: "Masukkan tautan dari halaman yang kamu ingin sematkan ke\
+  \ halaman utama dari instansi ini, dipisah dengan membuat baris baru."
 pinnedClipId: "ID dari klip yang disematkan"
 pinnedNotes: "Catatan yang disematkan"
 hcaptcha: "hCaptcha"
@@ -345,14 +374,17 @@ recaptcha: "reCAPTCHA"
 enableRecaptcha: "Nyalakan reCAPTCHA"
 recaptchaSiteKey: "Site key"
 recaptchaSecretKey: "Secret Key"
-avoidMultiCaptchaConfirm: "Menggunakan banyak Captcha dapat menyebabkan gangguan. Apakah kamu ingin untuk menonaktifkan Captcha yang lain? Kamu dapat membiarkan fitur ini tetap aktif dengan menekan tombol batal."
+avoidMultiCaptchaConfirm: "Menggunakan banyak Captcha dapat menyebabkan gangguan.\
+  \ Apakah kamu ingin untuk menonaktifkan Captcha yang lain? Kamu dapat membiarkan\
+  \ fitur ini tetap aktif dengan menekan tombol batal."
 antennas: "Antena"
 manageAntennas: "Pengelola Antena"
 name: "Nama"
 antennaSource: "Sumber Antenna"
 antennaKeywords: "Kata kunci yang diterima"
 antennaExcludeKeywords: "Kata kunci yang dikecualikan"
-antennaKeywordsDescription: "Pisahkan dengan spasi untuk kondisi AND. Pisahkan dengan baris baru untuk kondisi OR."
+antennaKeywordsDescription: "Pisahkan dengan spasi untuk kondisi AND. Pisahkan dengan\
+  \ baris baru untuk kondisi OR."
 notifyAntenna: "Beritahu untuk catatan baru"
 withFileAntenna: "Hanya tampilkan catatan dengan berkas yang dilampirkan"
 enableServiceworker: "Aktifkan ServiceWorker"
@@ -439,7 +471,8 @@ strongPassword: "Kata sandi kuat"
 passwordMatched: "Kata sandi sama"
 passwordNotMatched: "Kata sandi tidak sama"
 signinWith: "Masuk dengan {x}"
-signinFailed: "Tidak dapat masuk. Nama pengguna atau kata sandi yang kamu masukkan salah."
+signinFailed: "Tidak dapat masuk. Nama pengguna atau kata sandi yang kamu masukkan\
+  \ salah."
 tapSecurityKey: "Ketuk kunci keamanan kamu"
 or: "atau"
 language: "Bahasa"
@@ -478,19 +511,29 @@ showFeaturedNotesInTimeline: "Tampilkan catatan yang diunggulkan di linimasa"
 objectStorage: "Object Storage"
 useObjectStorage: "Gunakan object storage"
 objectStorageBaseUrl: "Base URL"
-objectStorageBaseUrlDesc: "Prefix URL digunakan untuk mengkonstruksi URL ke object (media) referencing. Tentukan URL jika kamu menggunakan CDN atau Proxy, jika tidak tentukan alamat yang dapat diakses secara publik sesuai dengan panduan dari layanan yang akan kamu gunakan, contohnya. 'https://<bucket>.s3.amazonaws.com' untuk AWS S3, dan 'https://storage.googleapis.com/<bucket>' untuk GCS."
+objectStorageBaseUrlDesc: "Prefix URL digunakan untuk mengkonstruksi URL ke object\
+  \ (media) referencing. Tentukan URL jika kamu menggunakan CDN atau Proxy, jika tidak\
+  \ tentukan alamat yang dapat diakses secara publik sesuai dengan panduan dari layanan\
+  \ yang akan kamu gunakan, contohnya. 'https://<bucket>.s3.amazonaws.com' untuk AWS\
+  \ S3, dan 'https://storage.googleapis.com/<bucket>' untuk GCS."
 objectStorageBucket: "Bucket"
-objectStorageBucketDesc: "Mohon tentukan nama bucket yang digunakan pada layanan yang telah dikonfigurasi."
+objectStorageBucketDesc: "Mohon tentukan nama bucket yang digunakan pada layanan yang\
+  \ telah dikonfigurasi."
 objectStoragePrefix: "Prefix"
 objectStoragePrefixDesc: "Berkas tidak akan disimpan dalam direktori dari prefix ini."
 objectStorageEndpoint: "Endpoint"
-objectStorageEndpointDesc: "Kosongkan bagian ini jika kamu menggunakan AWS S3, jika tidak tentukan endpoint sebagai '<host>' atau '<host>:<port>' sesuai dengan panduan dari layanan yang akan kamu gunakan."
+objectStorageEndpointDesc: "Kosongkan bagian ini jika kamu menggunakan AWS S3, jika\
+  \ tidak tentukan endpoint sebagai '<host>' atau '<host>:<port>' sesuai dengan panduan\
+  \ dari layanan yang akan kamu gunakan."
 objectStorageRegion: "Region"
-objectStorageRegionDesc: "Tentukan region seperti 'xx-east-1'. Jika layanan kamu tidak memiliki perbedaan mengenai region, kosongkan saja atau isi dengan 'us-east-1'."
+objectStorageRegionDesc: "Tentukan region seperti 'xx-east-1'. Jika layanan kamu tidak\
+  \ memiliki perbedaan mengenai region, kosongkan saja atau isi dengan 'us-east-1'."
 objectStorageUseSSL: "Gunakan SSL"
-objectStorageUseSSLDesc: "Matikan ini jika kamu tidak akan menggunakan HTTPS untuk koneksi API"
+objectStorageUseSSLDesc: "Matikan ini jika kamu tidak akan menggunakan HTTPS untuk\
+  \ koneksi API"
 objectStorageUseProxy: "Hubungkan melalui Proxy"
-objectStorageUseProxyDesc: "Matikan ini jika kamu tidak akan menggunakan Proxy untuk koneksi ObjectStorage"
+objectStorageUseProxyDesc: "Matikan ini jika kamu tidak akan menggunakan Proxy untuk\
+  \ koneksi ObjectStorage"
 objectStorageSetPublicRead: "Setel \"public-read\" disaat mengunggah"
 serverLogs: "Log Server"
 deleteAll: "Hapus semua"
@@ -518,18 +561,23 @@ sort: "Urutkan"
 ascendingOrder: "Urutkan naik"
 descendingOrder: "Urutkan menurun"
 scratchpad: "Scratchpad"
-scratchpadDescription: "Scratchpad menyediakan lingkungan eksperimen untuk AiScript. Kamu  bisa menulis, mengeksuksi, serta mengecek hasil yang berinteraksi dengan FoundKey."
+scratchpadDescription: "Scratchpad menyediakan lingkungan eksperimen untuk AiScript.\
+  \ Kamu  bisa menulis, mengeksuksi, serta mengecek hasil yang berinteraksi dengan\
+  \ FoundKey."
 output: "Keluaran"
 script: "Script"
 updateRemoteUser: "Perbaharui informasi pengguna luar"
 deleteAllFiles: "Hapus semua berkas"
 deleteAllFilesConfirm: "Apakah kamu yakin ingin menghapus semua berkas?"
 removeAllFollowing: "Tahan semua mengikuti"
-removeAllFollowingDescription: "Batal mengikuti semua akun dari {host}. Mohon jalankan ini ketika instansi sudah tidak ada lagi."
+removeAllFollowingDescription: "Batal mengikuti semua akun dari {host}. Mohon jalankan\
+  \ ini ketika instansi sudah tidak ada lagi."
 userSuspended: "Pengguna ini telah dibekukan."
 userSilenced: "Pengguna ini telah dibungkam."
 yourAccountSuspendedTitle: "Akun ini dibekukan"
-yourAccountSuspendedDescription: "Akun ini dibekukan karena melanggar ketentuan penggunaan layanan server atau semacamnya. Hubungi admin apabila ingin tahu alasan lebih lanjut. Mohon untuk tidak membuat akun baru."
+yourAccountSuspendedDescription: "Akun ini dibekukan karena melanggar ketentuan penggunaan\
+  \ layanan server atau semacamnya. Hubungi admin apabila ingin tahu alasan lebih\
+  \ lanjut. Mohon untuk tidak membuat akun baru."
 menu: "Menu"
 divider: "Pembagi"
 addItem: "Tambahkan item"
@@ -574,7 +622,8 @@ edit: "Sunting"
 useStarForReactionFallback: "Gunakan ★ sebagai fallback jika reaksi emoji tidak diketahui"
 emailServer: "Server surel"
 enableEmail: "Nyalakan distribusi surel"
-emailConfigInfo: "Digunakan untuk mengonfirmasi surel kamu disaat mendaftar dan lupa kata sandi"
+emailConfigInfo: "Digunakan untuk mengonfirmasi surel kamu disaat mendaftar dan lupa\
+  \ kata sandi"
 email: "Surel"
 emailAddress: "Alamat surel"
 smtpConfig: "Konfigurasi server SMTP"
@@ -582,13 +631,15 @@ smtpHost: "Host"
 smtpPort: "Port"
 smtpUser: "Nama Pengguna"
 smtpPass: "Kata sandi"
-emptyToDisableSmtpAuth: "Kosongkan nama pengguna dan kata sandi untuk menonaktifkan verifikasi SMTP"
+emptyToDisableSmtpAuth: "Kosongkan nama pengguna dan kata sandi untuk menonaktifkan\
+  \ verifikasi SMTP"
 smtpSecure: "Gunakan SSL/TLS implisit untuk koneksi SMTP"
 smtpSecureInfo: "Matikan ini ketika menggunakan STARTTLS"
 testEmail: "Tes pengiriman surel"
 wordMute: "Bisukan kata"
 regexpError: "Kesalahan ekspresi reguler"
-regexpErrorDescription: "Galat terjadi pada baris {line} ekspresi reguler dari {tab} kata yang dibisukan:"
+regexpErrorDescription: "Galat terjadi pada baris {line} ekspresi reguler dari {tab}\
+  \ kata yang dibisukan:"
 instanceMute: "Bisuka instansi"
 userSaysSomething: "{name} mengatakan sesuatu"
 makeActive: "Aktifkan"
@@ -604,11 +655,15 @@ create: "Buat"
 notificationSetting: "Pengaturan Pemberitahuan"
 notificationSettingDesc: "Pilih tipe pemberitahuan untuk ditampilkan"
 useGlobalSetting: "Gunakan setelan global"
-useGlobalSettingDesc: "Jika dinyalakan, setelan pemberitahuan akun kamu akan digunakan. Jika dimatikan, konfigurasi secara individu dapat dibuat."
+useGlobalSettingDesc: "Jika dinyalakan, setelan pemberitahuan akun kamu akan digunakan.\
+  \ Jika dimatikan, konfigurasi secara individu dapat dibuat."
 other: "Lainnya"
 regenerateLoginToken: "Perbarui token login"
-regenerateLoginTokenDescription: "Perbarui token yang digunakan secara internal saat login. Normalnya aksi ini tidak diperlukan. Jika diperbarui, semua perangkat akan dilogout."
-setMultipleBySeparatingWithSpace: "Kamu dapat menyetel banyak dengan memisahkannya menggunakan spasi."
+regenerateLoginTokenDescription: "Perbarui token yang digunakan secara internal saat\
+  \ login. Normalnya aksi ini tidak diperlukan. Jika diperbarui, semua perangkat akan\
+  \ dilogout."
+setMultipleBySeparatingWithSpace: "Kamu dapat menyetel banyak dengan memisahkannya\
+  \ menggunakan spasi."
 fileIdOrUrl: "File-ID atau URL"
 behavior: "Perilaku"
 sample: "Contoh"
@@ -621,13 +676,15 @@ reporter: "Pelapor"
 reporteeOrigin: "Yang dilaporkan"
 reporterOrigin: "Pelapor"
 forwardReport: "Teruskan laporan ke instansi luar"
-forwardReportIsAnonymous: "Untuk melindungi privasi akun kamu, akun anonim dari sistem akan digunakan sebagai pelapor pada instansi luar."
+forwardReportIsAnonymous: "Untuk melindungi privasi akun kamu, akun anonim dari sistem\
+  \ akan digunakan sebagai pelapor pada instansi luar."
 send: "Kirim"
 abuseMarkAsResolved: "Tandai laporan sebagai selesai"
 openInNewTab: "Buka di tab baru"
 openInSideView: "Buka di tampilan samping"
 defaultNavigationBehaviour: "Navigasi bawaan"
-editTheseSettingsMayBreakAccount: "Menyunting pengaturan ini memiliki kemungkinan untuk merusak akun kamu."
+editTheseSettingsMayBreakAccount: "Menyunting pengaturan ini memiliki kemungkinan\
+  \ untuk merusak akun kamu."
 instanceTicker: "Informasi pengguna pada instansi"
 waitingFor: "Menunggu untuk {x}"
 random: "Acak"
@@ -639,7 +696,8 @@ createNew: "Buat baru"
 optional: "Opsional"
 createNewClip: "Buat klip baru"
 public: "Publik"
-i18nInfo: "FoundKey diterjemahkan ke dalam banyak bahasa oleh sukarelawan. Kamu dapat ikut membantu di {link}."
+i18nInfo: "FoundKey diterjemahkan ke dalam banyak bahasa oleh sukarelawan. Kamu dapat\
+  \ ikut membantu di {link}."
 manageAccessTokens: "Kelola access token"
 accountInfo: "Informasi akun"
 notesCount: "Jumlah catatan"
@@ -658,12 +716,16 @@ no: "Tidak"
 driveFilesCount: "Jumlah berkas drive"
 driveUsage: "Penggunaan ruang penyimpanan drive"
 noCrawle: "Tolak pengindeksan crawler"
-noCrawleDescription: "Meminta mesin pencari untuk tidak mengindeks halaman profil kamu, catatan, Halaman, dll."
-lockedAccountInfo: "Kecuali kamu menyetel visibilitas catatan milikmu ke \"Hanya pengikut\", catatan milikmu akan dapat dilihat oleh siapa saja, bahkan jika kamu memerlukan pengikut untuk disetujui secara manual."
+noCrawleDescription: "Meminta mesin pencari untuk tidak mengindeks halaman profil\
+  \ kamu, catatan, Halaman, dll."
+lockedAccountInfo: "Kecuali kamu menyetel visibilitas catatan milikmu ke \"Hanya pengikut\"\
+  , catatan milikmu akan dapat dilihat oleh siapa saja, bahkan jika kamu memerlukan\
+  \ pengikut untuk disetujui secara manual."
 alwaysMarkSensitive: "Tandai media dalam catatan sebagai media sensitif"
 loadRawImages: "Tampilkan lampiran gambar secara penuh daripada thumbnail"
 disableShowingAnimatedImages: "Jangan mainkan gambar bergerak"
-verificationEmailSent: "Surel verifikasi telah dikirimkan. Mohon akses tautan yang telah disertakan untuk menyelesaikan verifikasi."
+verificationEmailSent: "Surel verifikasi telah dikirimkan. Mohon akses tautan yang\
+  \ telah disertakan untuk menyelesaikan verifikasi."
 notSet: "Tidak disetel"
 emailVerified: "Surel telah diverifikasi"
 noteFavoritesCount: "Jumlah catatan yang difavoritkan"
@@ -675,14 +737,16 @@ clips: "Klip"
 experimentalFeatures: "Fitur eksperimental"
 developer: "Pengembang"
 makeExplorable: "Buat akun tampil di \"Jelajahi\""
-makeExplorableDescription: "Jika kamu mematikan ini, akun kamu tidak akan muncul di bagian \"Jelajahi:"
+makeExplorableDescription: "Jika kamu mematikan ini, akun kamu tidak akan muncul di\
+  \ bagian \"Jelajahi:"
 showGapBetweenNotesInTimeline: "Tampilkan jarak diantara catatan pada linimasa"
 duplicate: "Duplikat"
 left: "Kiri"
 center: "Tengah"
 wide: "Lebar"
 narrow: "Sempit"
-reloadToApplySetting: "Pengaturan ini akan diterapkan saat memuat halaman kembali. Apakah kamu ingin memuat halaman kembali sekarang?"
+reloadToApplySetting: "Pengaturan ini akan diterapkan saat memuat halaman kembali.\
+  \ Apakah kamu ingin memuat halaman kembali sekarang?"
 needReloadToApply: "Pengaturan ini hanya akan diterapkan setelah memuat ulang halaman."
 showTitlebar: "Tampilkan bilah judul"
 clearCache: "Hapus tembolok"
@@ -727,14 +791,17 @@ unlikeConfirm: "Yakin ingin hapus sukamu?"
 fullView: "Tampilan penuh"
 quitFullView: "Keluar tampilan penuh"
 addDescription: "Tambahkan deskripsi"
-userPagePinTip: "Kamu dapat membuat catatan untuk ditampilkan disini dengan memilih \"Sematkan ke profil\" dari menu pada catatan individu."
-notSpecifiedMentionWarning: "Catatan ini mengandung sebutan dari pengguna yang tidak dimuat sebagai penerima"
+userPagePinTip: "Kamu dapat membuat catatan untuk ditampilkan disini dengan memilih\
+  \ \"Sematkan ke profil\" dari menu pada catatan individu."
+notSpecifiedMentionWarning: "Catatan ini mengandung sebutan dari pengguna yang tidak\
+  \ dimuat sebagai penerima"
 info: "Informasi"
 userInfo: "Informasi pengguna"
 unknown: "Tidak diketahui"
 onlineStatus: "Status daring"
 hideOnlineStatus: "Sembunyikan status daring"
-hideOnlineStatusDescription: "Menyembunyikan status daring kamu umengurangi kenyamanan untuk beberapa fungsi seperti contohnya pencarian."
+hideOnlineStatusDescription: "Menyembunyikan status daring kamu umengurangi kenyamanan\
+  \ untuk beberapa fungsi seperti contohnya pencarian."
 online: "Daring"
 active: "Aktif"
 offline: "Luring"
@@ -768,7 +835,8 @@ emailNotConfiguredWarning: "Alamat surel tidak disetel."
 ratio: "Rasio"
 previewNoteText: "Tampilkan pratinjau"
 customCss: "Custom CSS"
-customCssWarn: "Pengaturan ini seharusnya digunakan jika kamu tahu cara kerjanya. Memasukkan nilai yang tidak tepat dapat menyebabkan klien tidak berfungsi semestinya."
+customCssWarn: "Pengaturan ini seharusnya digunakan jika kamu tahu cara kerjanya.\
+  \ Memasukkan nilai yang tidak tepat dapat menyebabkan klien tidak berfungsi semestinya."
 global: "Global"
 squareAvatars: "Tampilkan avatar sebagai persegi"
 sent: "Kirim"
@@ -783,7 +851,9 @@ whatIsNew: "Lihat perubahan pemutakhiran"
 translate: "Terjemahkan"
 translatedFrom: "Terjemahkan dari {x}"
 accountDeletionInProgress: "Penghapusan akun sedang dalam proses"
-usernameInfo: "Nama yang mengidentifikasikan akun kamu dari yang lain pada server ini. Kamu dapat menggunakan alfabet (a~z, A~Z), digit (0~9) atau garis bawah (_). Username tidak dapat diubah setelahnya."
+usernameInfo: "Nama yang mengidentifikasikan akun kamu dari yang lain pada server\
+  \ ini. Kamu dapat menggunakan alfabet (a~z, A~Z), digit (0~9) atau garis bawah (_).\
+  \ Username tidak dapat diubah setelahnya."
 keepCw: "Biarkan Peringatan Konten"
 pubSub: "Akun Pub/Sub"
 lastCommunication: "Komunikasi terakhir"
@@ -798,12 +868,14 @@ filter: "Saring"
 controlPanel: "Panel kontrol"
 manageAccounts: "Kelola Akun"
 makeReactionsPublic: "Tampilkan riwayat reaksi ke publik"
-makeReactionsPublicDescription: "Pengaturan ini akan membuat daftar dari semua reaksi masa lalu kamu ditampilkan secara publik."
+makeReactionsPublicDescription: "Pengaturan ini akan membuat daftar dari semua reaksi\
+  \ masa lalu kamu ditampilkan secara publik."
 classic: "Klasik"
 muteThread: "Bisukan thread"
 unmuteThread: "Suarakan thread"
 ffVisibility: "Visibilitas Mengikuti/Pengikut"
-ffVisibilityDescription: "Mengatur siapa yang dapat melihat pengikutmu dan yang kamu ikuti."
+ffVisibilityDescription: "Mengatur siapa yang dapat melihat pengikutmu dan yang kamu\
+  \ ikuti."
 continueThread: "Lihat lanjutan thread"
 deleteAccountConfirm: "Akun akan dihapus. Apakah kamu yakin?"
 incorrectPassword: "Kata sandi salah."
@@ -812,7 +884,8 @@ hide: "Sembunyikan"
 leaveGroup: "Keluar grup"
 leaveGroupConfirm: "Apakah kamu yakin untuk keluar dari \"{name}\"?"
 useDrawerReactionPickerForMobile: "Tampilkan bilah reaksi sebagai laci di ponsel"
-clickToFinishEmailVerification: "Mohon klik [{ok}] untuk menyelesaikan verifikasi email."
+clickToFinishEmailVerification: "Mohon klik [{ok}] untuk menyelesaikan verifikasi\
+  \ email."
 overridedDeviceKind: "Tipe perangkat"
 smartphone: "Ponsel"
 tablet: "Tablet"
@@ -847,11 +920,16 @@ _ffVisibility:
 _signup:
   almostThere: "Hampir selesai"
   emailAddressInfo: "Mohon masukkan alamat surel kamu."
-  emailSent: "Konfirmasi surel telah dikirimkan ke alamat surel kamu ({email}). Mohon klik tautan yang tercantum di dalamnya untuk menyelesaikan pembuatan akun."
+  emailSent: "Konfirmasi surel telah dikirimkan ke alamat surel kamu ({email}). Mohon\
+    \ klik tautan yang tercantum di dalamnya untuk menyelesaikan pembuatan akun."
 _accountDelete:
   accountDelete: "Hapus akun"
-  mayTakeTime: "Karena penghapusan akun merupakan proses yang berat dan intensif, kemungkinan dapat membutuhkan waktu untuk menyelesaikan tergantung daripada berapa banyak konten yang kamu buat dan berapa banyak berkas yang telah kamu unggah."
-  sendEmail: "Setelah penghapusan akun selesai, pemberitahuan akan dikirimkan ke alamat surel yang terdaftarkan pada akun ini."
+  mayTakeTime: "Karena penghapusan akun merupakan proses yang berat dan intensif,\
+    \ kemungkinan dapat membutuhkan waktu untuk menyelesaikan tergantung daripada\
+    \ berapa banyak konten yang kamu buat dan berapa banyak berkas yang telah kamu\
+    \ unggah."
+  sendEmail: "Setelah penghapusan akun selesai, pemberitahuan akan dikirimkan ke alamat\
+    \ surel yang terdaftarkan pada akun ini."
   requestAccountDelete: "Minta penghapusan akun"
   started: "Penghapusan telah dimulai"
   inProgress: "Penghapusan sedang dalam proses"
@@ -859,9 +937,13 @@ _ad:
   back: "Kembali"
   reduceFrequencyOfThisAd: "Tampilkan iklan ini lebih sedikit"
 _forgotPassword:
-  enterEmail: "Masukkan alamat surel yang kamu gunakan pada saat mendaftar. Sebuah tautan untuk mengatur ulang kata sandi kamu akan dikirimkan ke alamat surel tersebut."
-  ifNoEmail: "Apabila kamu tidak menggunakan surel pada saat pendaftaran, mohon hubungi admin segera."
-  contactAdmin: "Instansi ini tidak mendukung menggunakan alamat surel, mohon kontak admin untuk mengatur ulang password kamu."
+  enterEmail: "Masukkan alamat surel yang kamu gunakan pada saat mendaftar. Sebuah\
+    \ tautan untuk mengatur ulang kata sandi kamu akan dikirimkan ke alamat surel\
+    \ tersebut."
+  ifNoEmail: "Apabila kamu tidak menggunakan surel pada saat pendaftaran, mohon hubungi\
+    \ admin segera."
+  contactAdmin: "Instansi ini tidak mendukung menggunakan alamat surel, mohon kontak\
+    \ admin untuk mengatur ulang password kamu."
 _gallery:
   my: "Postingan saya"
   liked: "Postingan yang disukai"
@@ -883,7 +965,8 @@ _registry:
   domain: "Domain"
   createKey: "Buat kunci"
 _aboutMisskey:
-  about: "FoundKey adalah perangkat lunak sumber terbuka yang sedang dikembangkan oleh syuilo sejak 2014."
+  about: "FoundKey adalah perangkat lunak sumber terbuka yang sedang dikembangkan\
+    \ oleh syuilo sejak 2014."
   contributors: "Kontributor utama"
   allContributors: "Seluruh kontributor"
   source: "Sumber kode"
@@ -894,10 +977,12 @@ _nsfw:
   force: "Sembunyikan semua media"
 _mfm:
   cheatSheet: "Contekan MFM"
-  intro: "MFM adalah FoundKey-exclusive Markup Language yang dapat digunakan di banyak tempat. Berikut kamu bisa melihat daftar dari syntax MFM yang ada."
+  intro: "MFM adalah FoundKey-exclusive Markup Language yang dapat digunakan di banyak\
+    \ tempat. Berikut kamu bisa melihat daftar dari syntax MFM yang ada."
   dummy: "FoundKey membentangkan dunia Fediverse"
   mention: "Sebut"
-  mentionDescription: "Kamu dapat menentukan pengguna tertentu dengan menggunakan simbol-At dan nama engguna mereka."
+  mentionDescription: "Kamu dapat menentukan pengguna tertentu dengan menggunakan\
+    \ simbol-At dan nama engguna mereka."
   hashtag: "Tagar"
   hashtagDescription: "Kamu dapat menentukan tagar dengan menggunakan angka dan teks."
   url: "URL"
@@ -913,15 +998,18 @@ _mfm:
   inlineCode: "Kode (Dalam baris)"
   inlineCodeDescription: "Menampilkan sorotan sintaks dalam baris untuk kode(program-)."
   blockCode: "Kode (Blok)"
-  blockCodeDescription: "Menampilkan sorotan sintaks untuk kode(program-) multi baris dalam sebuah blok."
+  blockCodeDescription: "Menampilkan sorotan sintaks untuk kode(program-) multi baris\
+    \ dalam sebuah blok."
   inlineMath: "Matematika (Dalam baris)"
   inlineMathDescription: "Menampilkan formula matematika (KaTeX) dalam baris."
   blockMath: "Matematika (Blok)"
-  blockMathDescription: "Menampilkan formula matematika (KaTeX) multibaris dalam sebuah blok."
+  blockMathDescription: "Menampilkan formula matematika (KaTeX) multibaris dalam sebuah\
+    \ blok."
   quote: "Kutip"
   quoteDescription: "Menampilkan konten sebagai kutipan."
   emoji: "Emoji kustom"
-  emojiDescription: "Emoji kustom dapat ditampilkan dengan mengurung nama emoji kustom menggunakan tanda titik dua."
+  emojiDescription: "Emoji kustom dapat ditampilkan dengan mengurung nama emoji kustom\
+    \ menggunakan tanda titik dua."
   search: "Penelusuran"
   searchDescription: "Menampilkan kotak pencarian dengan teks yang sudah dimasukkan."
   flip: "Balik"
@@ -947,7 +1035,8 @@ _mfm:
   x4: "Sangat besar"
   x4Description: "Tampilka konten menjadi sangat besar."
   blur: "Buram"
-  blurDescription: "Konten dapat diburamkan dengan efek ini. Konten dapat ditampilkan dengan jelas dengan melayangkan kursor tetikus di atasnya."
+  blurDescription: "Konten dapat diburamkan dengan efek ini. Konten dapat ditampilkan\
+    \ dengan jelas dengan melayangkan kursor tetikus di atasnya."
   font: "Font"
   fontDescription: "Setel font yang ditampilkan untuk konten."
   rainbow: "Pelangi"
@@ -981,15 +1070,21 @@ _menuDisplay:
   hide: "Sembunyikan"
 _wordMute:
   muteWords: "Kata yang dibisukan"
-  muteWordsDescription: "Pisahkan dengan spasi untuk kondisi AND. Pisahkan dengan baris baru untuk kondisi OR."
-  muteWordsDescription2: "Kurung kata kunci dengan garis miring untuk menggunakan regular expressions."
+  muteWordsDescription: "Pisahkan dengan spasi untuk kondisi AND. Pisahkan dengan\
+    \ baris baru untuk kondisi OR."
+  muteWordsDescription2: "Kurung kata kunci dengan garis miring untuk menggunakan\
+    \ regular expressions."
   softDescription: "Sembunyikan catatan yang memenuhi aturan kondisi dari linimasa."
-  hardDescription: "Cegah catatan memenuhi aturan kondisi dari ditambahkan ke linimasa. Dengan tambahan, catatan berikut tidak akan ditambahkan ke linimasa meskipun jika kondisi tersebut diubah."
+  hardDescription: "Cegah catatan memenuhi aturan kondisi dari ditambahkan ke linimasa.\
+    \ Dengan tambahan, catatan berikut tidak akan ditambahkan ke linimasa meskipun\
+    \ jika kondisi tersebut diubah."
   soft: "Lembut"
   hard: "Keras"
   mutedNotes: "Catatan yang dibisukan"
 _instanceMute:
-  instanceMuteDescription: "Pengaturan ini akan membisukan note/renote apa saja dari instansi yang terdaftar, termasuk pengguna yang membalas pengguna lain dalam instansi yang dibisukan."
+  instanceMuteDescription: "Pengaturan ini akan membisukan note/renote apa saja dari\
+    \ instansi yang terdaftar, termasuk pengguna yang membalas pengguna lain dalam\
+    \ instansi yang dibisukan."
   instanceMuteDescription2: "Pisah dengan baris baru"
   title: "Sembunyikan note dari instansi terdaftar."
   heading: "Daftar instansi yang akan dibisukan"
@@ -1021,7 +1116,8 @@ _theme:
   darken: "Mengelamkan"
   lighten: "Menerangkan"
   inputConstantName: "Masukkan nama untuk konstanta"
-  importInfo: "Jika kamu memasukkan kode tema disini, kamu dapat mengimpornya ke penyunting tema"
+  importInfo: "Jika kamu memasukkan kode tema disini, kamu dapat mengimpornya ke penyunting\
+    \ tema"
   deleteConstantConfirm: "apakah kamu ingin menghapus konstanta {const}?"
   keys:
     accent: "Aksen"
@@ -1093,36 +1189,56 @@ _time:
 _tutorial:
   title: "Cara menggunakan FoundKey"
   step1_1: "Selamat datang!"
-  step1_2: "Halaman ini disebut \"linimasa\". Halaman ini menampilkan \"catatan\" yang diurutkan secara kronologis dari orang-orang yang kamu \"ikuti\"."
-  step1_3: "Linimasa kamu kosong, karena kamu belum mencatat catatan apapun atau mengikuti siapapun."
-  step2_1: "Selesaikan menyetel profilmu sebelum menulis sebuah catatan atau mengikuti seseorang."
-  step2_2: "Menyediakan beberapa informasi tentang siapa kamu akan membuat orang lain mudah untuk mengikutimu kembali."
+  step1_2: "Halaman ini disebut \"linimasa\". Halaman ini menampilkan \"catatan\"\
+    \ yang diurutkan secara kronologis dari orang-orang yang kamu \"ikuti\"."
+  step1_3: "Linimasa kamu kosong, karena kamu belum mencatat catatan apapun atau mengikuti\
+    \ siapapun."
+  step2_1: "Selesaikan menyetel profilmu sebelum menulis sebuah catatan atau mengikuti\
+    \ seseorang."
+  step2_2: "Menyediakan beberapa informasi tentang siapa kamu akan membuat orang lain\
+    \ mudah untuk mengikutimu kembali."
   step3_1: "Selesai menyetel profil kamu?"
-  step3_2: "Langkah selanjutnya adalah membuat catatan. Kamu bisa lakukan ini dengan mengklik ikon pensil pada layar kamu."
-  step3_3: "Isilah di dalam modal dan tekan tombol pada atas kanan untuk memcatat catatan kamu."
-  step3_4: "Bingung tidak berpikiran untuk mengatakan sesuatu? Coba saja \"baru aja ikutan bikin akun misskey punyaku\"!"
+  step3_2: "Langkah selanjutnya adalah membuat catatan. Kamu bisa lakukan ini dengan\
+    \ mengklik ikon pensil pada layar kamu."
+  step3_3: "Isilah di dalam modal dan tekan tombol pada atas kanan untuk memcatat\
+    \ catatan kamu."
+  step3_4: "Bingung tidak berpikiran untuk mengatakan sesuatu? Coba saja \"baru aja\
+    \ ikutan bikin akun misskey punyaku\"!"
   step4_1: "Selesai mencatat catatan pertamamu?"
   step4_2: "Horee! Sekarang catatan pertamamu sudah ditampilkan di linimasa milikmu."
-  step5_1: "Sekarang, mari mencoba untuk membuat linimasamu lebih hidup dengan mengikuti orang lain."
-  step5_2: "{featured} akan memperlihatkan catatan yang sedang tren saat ini untuk kamu. {explore} akan membantumu untuk mencari pengguna yang sedang tren juga saat ini. Coba ikuti seseorang yang kamu suka!"
-  step5_3: "Untuk mengikuti pengguna lain, klik pada ikon mereka dan tekan tombol follow pada profil mereka."
-  step5_4: "Jika pengguna lain memiliki ikon gembok di sebelah nama mereka, maka pengguna rersebut harus menyetujui permintaan mengikuti dari kamu secara manual."
+  step5_1: "Sekarang, mari mencoba untuk membuat linimasamu lebih hidup dengan mengikuti\
+    \ orang lain."
+  step5_2: "{featured} akan memperlihatkan catatan yang sedang tren saat ini untuk\
+    \ kamu. {explore} akan membantumu untuk mencari pengguna yang sedang tren juga\
+    \ saat ini. Coba ikuti seseorang yang kamu suka!"
+  step5_3: "Untuk mengikuti pengguna lain, klik pada ikon mereka dan tekan tombol\
+    \ follow pada profil mereka."
+  step5_4: "Jika pengguna lain memiliki ikon gembok di sebelah nama mereka, maka pengguna\
+    \ rersebut harus menyetujui permintaan mengikuti dari kamu secara manual."
   step6_1: "Sekarang kamu dapat melihat catatan pengguna lain pada linimasamu."
-  step6_2: "Kamu juga bisa memberikan \"reaksi\" ke catatan orang lain untuk merespon dengan cepat."
-  step6_3: "Untuk memberikan \"reaksi\", tekan tanda \"+\" pada catatan pengguna lain dan pilih emoji yang kamu suka untuk memberikan reaksimu kepada mereka."
+  step6_2: "Kamu juga bisa memberikan \"reaksi\" ke catatan orang lain untuk merespon\
+    \ dengan cepat."
+  step6_3: "Untuk memberikan \"reaksi\", tekan tanda \"+\" pada catatan pengguna lain\
+    \ dan pilih emoji yang kamu suka untuk memberikan reaksimu kepada mereka."
   step7_1: "Yay, Selamat! Kamu sudah menyelesaikan tutorial dasar FoundKey."
-  step7_2: "Jika kamu ingin mempelajari lebih lanjut tentang FoundKey, cobalah berkunjung ke bagian {help}."
-  step7_3: "Semoga berhasil dan bersenang-senanglah! 🚀"
+  step7_2: "Jika kamu ingin mempelajari lebih lanjut tentang FoundKey, cobalah berkunjung\
+    \ ke bagian {help}."
+  step7_3: "Semoga berhasil dan bersenang-senanglah! \U0001F680"
 _2fa:
   alreadyRegistered: "Kamu telah mendaftarkan perangkat otentikasi dua faktor."
   registerDevice: "Daftarkan perangkat baru"
   registerKey: "Daftarkan kunci keamanan baru"
-  step1: "Pertama, pasang aplikasi otentikasi (seperti {a} atau {b}) di perangkat kamu."
+  step1: "Pertama, pasang aplikasi otentikasi (seperti {a} atau {b}) di perangkat\
+    \ kamu."
   step2: "Lalu, pindai kode QR yang ada di layar."
   step2Url: "Di aplikasi desktop, masukkan URL berikut:"
-  step3: "Masukkan token yang telah disediakan oleh aplikasimu untuk menyelesaikan pemasangan."
-  step4: "Mulai sekarang, upaya login apapun akan meminta token login dari aplikasi otentikasi kamu."
-  securityKeyInfo: "Kamu dapat memasang otentikasi WebAuthN untuk mengamankan proses login lebih lanjut dengan tidak hanya perangkat keras kunci keamanan yang mendukung FIDO2, namun juga sidik jari atau otentikasi PIN pada perangkatmu."
+  step3: "Masukkan token yang telah disediakan oleh aplikasimu untuk menyelesaikan\
+    \ pemasangan."
+  step4: "Mulai sekarang, upaya login apapun akan meminta token login dari aplikasi\
+    \ otentikasi kamu."
+  securityKeyInfo: "Kamu dapat memasang otentikasi WebAuthN untuk mengamankan proses\
+    \ login lebih lanjut dengan tidak hanya perangkat keras kunci keamanan yang mendukung\
+    \ FIDO2, namun juga sidik jari atau otentikasi PIN pada perangkatmu."
 _permissions:
   "read:account": "Lihat informasi akun"
   "write:account": "Sunting informasi akun"
@@ -1158,7 +1274,8 @@ _permissions:
   "write:gallery-likes": "Sunting daftar postingan galeri yang disukai"
 _auth:
   shareAccess: "Apakah kamu ingin mengijinkan \"{name}\" untuk mengakses akun ini?"
-  shareAccessAsk: "Apakah kamu ingin mengijinkan aplikasi ini untuk mengakses akun kamu?"
+  shareAccessAsk: "Apakah kamu ingin mengijinkan aplikasi ini untuk mengakses akun\
+    \ kamu?"
   permissionAsk: "Aplikasi ini membutuhkan beberapa ijin, yaitu:"
   pleaseGoBack: "Mohon kembali ke aplikasi kamu"
   callback: "Mengembalikan kamu ke aplikasi"
@@ -1197,6 +1314,7 @@ _widgets:
   serverMetric: "Statistik server"
   aiscript: "Konsol AiScript"
   aichan: "Ai"
+  rssMarquee: ''
 _cw:
   hide: "Sembunyikan"
   show: "Lihat konten"
@@ -1253,7 +1371,8 @@ _profile:
   youCanIncludeHashtags: "Kamu juga dapat menambahkan tagar ke dalam bio."
   metadata: "Informasi tambahan"
   metadataEdit: "Sunting informasi tambahan"
-  metadataDescription: "Kamu dapat menampilkan hingga 4 bagian informasi tambahan ke dalam profilmu."
+  metadataDescription: "Kamu dapat menampilkan hingga 4 bagian informasi tambahan\
+    \ ke dalam profilmu."
   metadataLabel: "Label"
   metadataContent: "Isi"
   changeAvatar: "Ubah avatar"
@@ -1386,3 +1505,33 @@ _deck:
     list: "Daftar"
     mentions: "Sebutan"
     direct: "Langsung"
+check: ''
+_services:
+  _discord:
+    disconnected: ''
+    connected: ''
+  _twitter:
+    connected: ''
+    disconnected: ''
+  _github:
+    connected: ''
+    disconnected: ''
+attachmentRequired: ''
+recentNHours: ''
+recentNDays: ''
+isSystemAccount: ''
+typeToConfirm: ''
+deleteAccount: ''
+numberOfPageCache: ''
+numberOfPageCacheDescription: ''
+document: ''
+file: ''
+unclip: ''
+confirmToUnclipAlreadyClippedNote: ''
+noEmailServerWarning: ''
+thereIsUnresolvedAbuseReportWarning: ''
+recommended: ''
+unlimited: ''
+showLess: ''
+maxCustomEmojiPicker: ''
+maxUnicodeEmojiPicker: ''
