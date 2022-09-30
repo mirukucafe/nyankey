@@ -67,9 +67,6 @@ _deck:
     tl: "Zaman çizelgesi"
 _notification: {}
 _services: {}
-_email:
-  _receiveFollowRequest:
-    title: ''
+_email: {}
 cacheRemoteFiles: ''
-markAsReadAllNotifications: ''
 driveFilesCount: ''

@@ -98,7 +98,5 @@ _deck:
   _columns:
     notifications: "Ilɣuyen"
     list: "Tibdarin"
-light: ''
 addItem: ''
-muteThread: ''
 _services: {}

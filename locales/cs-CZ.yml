@@ -546,6 +546,4 @@ _deck:
     list: "Seznamy"
     mentions: "Zmínění"
 _services: {}
-_postForm:
-  quotePlaceholder: ''
 emailNotification: ''

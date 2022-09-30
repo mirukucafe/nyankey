@@ -254,9 +254,6 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-passwordLessLogin: ''
 followersCount: ''
-_nsfw:
-  ignore: ''
 _postForm: {}
 _services: {}

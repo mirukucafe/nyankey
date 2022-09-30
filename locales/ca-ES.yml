@@ -174,7 +174,4 @@ _deck:
     mentions: "Mencions"
 _services: {}
 _postForm: {}
-_pages:
-  created: ''
 recaptchaSiteKey: ''
-other: ''
