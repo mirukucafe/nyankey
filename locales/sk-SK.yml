@@ -1463,20 +1463,11 @@ _deck:
     mentions: "Zmienky"
     direct: "Priame poznámky"
 _services:
-  _discord:
-    connected: ''
   _twitter:
     connected: ''
-  _github:
-    connected: ''
 showLess: ''
-attachmentRequired: ''
 cropImageAsk: ''
-recentNDays: ''
 typeToConfirm: ''
-numberOfPageCache: ''
 document: ''
-unclip: ''
 noEmailServerWarning: ''
-recommended: ''
 maxUnicodeEmojiPicker: ''

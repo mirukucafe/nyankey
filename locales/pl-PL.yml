@@ -803,7 +803,6 @@ hide: "Ukryj"
 indefinitely: "Nigdy"
 _ffVisibility:
   public: "Publikuj"
-  private: ''
 _ad:
   back: "Wróć"
   reduceFrequencyOfThisAd: "Pokazuj tę reklamę rzadziej"
@@ -883,19 +882,12 @@ _mfm:
   font: "Czcionka"
   fontDescription: "Wybiera czcionkę do wyświetlania treści."
   rotate: "Obróć"
-  inlineMathDescription: ''
   sparkleDescription: ''
-  inlineCode: ''
   blockMathDescription: ''
-  jellyDescription: ''
   tadaDescription: ''
-  jumpDescription: ''
   bounceDescription: ''
-  shakeDescription: ''
   twitchDescription: ''
-  spinDescription: ''
   rainbow: ''
-  sparkle: ''
 _instanceTicker:
   none: "Nigdy nie pokazuj"
   remote: "Pokaż dla zdalnych użytkowników"
@@ -916,14 +908,12 @@ _channel:
   notesCount: "{n} wpisy"
 _menuDisplay:
   hide: "Ukryj"
-  sideIcon: ''
 _wordMute:
   muteWords: "Słowo do wyciszenia"
   muteWordsDescription2: "Otocz słowa kluczowe ukośnikami, aby używać wyrażeń regularnych."
   soft: "Łagodny"
   hard: "Twardy"
   mutedNotes: "Wyciszone wpisy"
-  softDescription: ''
 _theme:
   explore: "Przeglądaj motywy"
   install: "Zainstaluj motyw"
@@ -1030,13 +1020,9 @@ _tutorial:
     \ obserwować."
   step3_1: "Zakończyłeś(-aś) konfigurację profilu?"
   step3_3: "Wypełnij pole i kliknij przycisk w prawym górnym rogu by wysłać post."
-  step2_2: ''
   step3_4: ''
-  step4_2: ''
   step5_2: ''
-  step5_4: ''
   step6_2: ''
-  step7_1: ''
   step7_3: ''
 _2fa:
   registerDevice: "Zarejestruj nowe urządzenie"
@@ -1045,7 +1031,6 @@ _2fa:
   step2: "Następnie, zeskanuje kod QR z ekranu."
   step3: "Wprowadź token podany w aplikacji, aby ukończyć konfigurację."
   step4: "Od teraz, przy każdej próbie logowania otrzymasz prośbę o token logowania."
-  registerKey: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "Wyświetl informacje o swoim koncie"
@@ -1071,14 +1056,11 @@ _permissions:
   "write:page-likes": "Edycja polubień na stronach"
   "read:user-groups": "Wyświetlanie grup użytkownika"
   "write:user-groups": "Edycja lub usuwanie grup użytkownika"
-  "write:messaging": ''
   "read:channels": ''
-  "read:gallery": ''
   "read:gallery-likes": ''
 _auth:
   shareAccess: "Czy chcesz autoryzować „{name}” do dostępu do tego konta?"
   permissionAsk: "Ta aplikacja wymaga następujących uprawnień:"
-  pleaseGoBack: ''
   denied: ''
 _weekday:
   sunday: "Niedziela"
@@ -1101,9 +1083,7 @@ _widgets:
   postForm: "Utwórz wpis"
   button: "Przycisk"
   jobQueue: "Kolejka zadań"
-  rssMarquee: ''
   slideshow: ''
-  serverMetric: ''
   aichan: ''
 _cw:
   hide: "Ukryj"
@@ -1139,7 +1119,6 @@ _visibility:
   followers: "Obserwujący"
   specified: "Bezpośredni"
   specifiedDescription: "Napisz tylko określonym użytkownikom"
-  followersDescription: ''
   localOnlyDescription: ''
 _postForm:
   _placeholders:
@@ -1149,7 +1128,6 @@ _postForm:
     d: "Czy masz coś do powiedzenia?"
     e: "Zacznij coś pisać…"
     f: "Czekamy, aż coś napiszesz."
-  quotePlaceholder: ''
 _profile:
   name: "Nazwa"
   username: "Nazwa użytkownika"
@@ -1169,15 +1147,12 @@ _exportOrImport:
   muteList: "Wycisz"
   blockingList: "Zablokuj"
   userLists: "Listy"
-  excludeInactiveUsers: ''
 _charts:
   federation: "Federacja"
   apRequest: "Żądania"
   usersTotal: "Łącznie # użytkowników"
   activeUsers: "Aktywni użytkownicy"
-  notesIncDec: ''
   remoteNotesIncDec: ''
-  filesIncDec: ''
   storageUsageIncDec: ''
 _instanceCharts:
   requests: "Żądania"
@@ -1188,7 +1163,6 @@ _instanceCharts:
   cacheSizeTotal: "Łączny rozmiar pamięci podręcznej"
   files: "Różnica # plików"
   filesTotal: "Łącznie # plików"
-  usersTotal: ''
 _timelines:
   home: "Strona główna"
   local: "Lokalne"
@@ -1257,7 +1231,6 @@ _notification:
   _actions:
     reply: "Odpowiedz"
     renote: "Udostępnij"
-  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Zawsze pokazuj główną kolumnę"
   columnAlign: "Wyrównaj kolumny"
@@ -1280,77 +1253,42 @@ _deck:
     list: "Listy"
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
-file: ''
 flagShowTimelineReplies: ''
-proxyAccountDescription: ''
 keepOriginalUploadingDescription: ''
-doing: ''
 objectStorageSetPublicRead: ''
-yourAccountSuspendedTitle: ''
 menu: ''
-smtpSecure: ''
 regexpErrorDescription: ''
-reporter: ''
 forwardReportIsAnonymous: ''
-createNewClip: ''
 attachmentRequired: ''
-troubleshooting: ''
 learnMore: ''
-whatIsNew: ''
 translatedFrom: ''
-keepCw: ''
 lastCommunication: ''
-unresolved: ''
 itsOn: ''
-emailRequiredForSignup: ''
 filter: ''
-manageAccounts: ''
 makeReactionsPublicDescription: ''
-muteThread: ''
 ffVisibility: ''
-continueThread: ''
 incorrectPassword: ''
-leaveGroup: ''
 useDrawerReactionPickerForMobile: ''
-overridedDeviceKind: ''
 tablet: ''
-themeColor: ''
 numberOfColumn: ''
-instanceDefaultDarkTheme: ''
 mutePeriod: ''
-oneHour: ''
 oneWeek: ''
-failedToFetchAccountInformation: ''
 cropImage: ''
-recentNHours: ''
 isSystemAccount: ''
-deleteAccount: ''
 numberOfPageCacheDescription: ''
-unclip: ''
 noEmailServerWarning: ''
-recommended: ''
 maxUnicodeEmojiPicker: ''
 _emailUnavailable:
-  used: ''
   disposable: ''
-  smtp: ''
 _signup:
   emailAddressInfo: ''
 _accountDelete:
-  accountDelete: ''
   sendEmail: ''
-  started: ''
 maxCustomEmojiPicker: ''
 _instanceMute:
-  instanceMuteDescription2: ''
   heading: ''
 _antennaSources:
-  homeTimeline: ''
   userList: ''
 _services:
-  _discord:
-    connected: ''
   _twitter:
-    connected: ''
-  _github:
     connected: ''

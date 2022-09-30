@@ -783,12 +783,10 @@ hide: "Сховати"
 indefinitely: "Ніколи"
 _ffVisibility:
   public: "Опублікувати"
-  private: ''
 _ad:
   back: "Назад"
 _gallery:
   unlike: "Не вподобати"
-  my: ''
 _email:
   _follow:
     title: "Новий підписник"
@@ -866,9 +864,7 @@ _mfm:
   font: "Шрифт"
   fontDescription: "Встановлює шрифт для контенту."
   rotate: "Обертати"
-  shakeDescription: ''
   spinDescription: ''
-  rainbowDescription: ''
   sparkleDescription: ''
 _instanceTicker:
   none: "Не відображати"
@@ -889,7 +885,6 @@ _channel:
   notesCount: "{n} дописів"
 _menuDisplay:
   hide: "Сховати"
-  sideIcon: ''
 _wordMute:
   muteWords: "Заглушені слова"
   muteWordsDescription: "Розділення ключових слів пробілами для \"І\" або з нової\
@@ -966,11 +961,8 @@ _theme:
     accentDarken: "Акцент (Затемлений)"
     accentLighten: "Акцент (Освітлений)"
     fgHighlighted: "Виділений текст"
-  refProp: ''
   key: ''
-  argument: ''
   alpha: ''
-  constant: ''
 _sfx:
   note: "Нотатки"
   noteMy: "Мої нотатки"
@@ -1030,9 +1022,7 @@ _tutorial:
   step7_3: "Насолоджуйтесь FoundKey! \U0001F680"
 _2fa:
   registerKey: "Зареєструвати новий ключ безпеки"
-  alreadyRegistered: ''
   step1: ''
-  step2Url: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "Переглядати дані профілю"
@@ -1062,17 +1052,14 @@ _permissions:
   "write:user-groups": "Змінювати групи користувача"
   "read:channels": "Переглядати канали"
   "write:channels": "Змінювати канали"
-  "write:notifications": ''
   "read:gallery-likes": ''
 _auth:
   shareAccess: "Ви хочете надати \"{name}\" доступ до цього акаунту?"
   shareAccessAsk: "Ви впевнені, що хочете надати цій програмі доступ до вашого акаунту?"
   denied: "У доступі відмовлено"
-  pleaseGoBack: ''
 _antennaSources:
   all: "Всі нотатки"
   homeTimeline: "Нотатки тих, на кого ви підписані"
-  userList: ''
 _weekday:
   sunday: "Неділя"
   monday: "Понеділок"
@@ -1100,7 +1087,6 @@ _widgets:
   jobQueue: "Черга завдань"
   serverMetric: "Показники сервера "
   aiscript: "Консоль AiScript"
-  rssMarquee: ''
 _cw:
   hide: "Сховати"
   show: "Показати більше"
@@ -1169,7 +1155,6 @@ _exportOrImport:
   muteList: "Ігнорувати"
   blockingList: "Заблокувати"
   userLists: "Списки"
-  excludeInactiveUsers: ''
 _charts:
   federation: "Федіверс"
   apRequest: "Запити"
@@ -1178,9 +1163,7 @@ _charts:
   notesTotal: "Загальна кількість нотаток"
   filesIncDec: "Зміни кількості файлів"
   filesTotal: "Загальна кількість файлів"
-  usersIncDec: ''
   localNotesIncDec: ''
-  storageUsageTotal: ''
 _instanceCharts:
   requests: "Запити"
   usersTotal: "Сумарна кількість користувачів"
@@ -1191,7 +1174,6 @@ _instanceCharts:
   cacheSizeTotal: "Сумарний розмір кешу"
   files: "Різниця в кількості файлів"
   filesTotal: "Сумарна кількість файлів"
-  cacheSize: ''
 _timelines:
   home: "Домівка"
   local: "Локальна"
@@ -1260,7 +1242,6 @@ _notification:
   _actions:
     reply: "Відповісти"
     renote: "Поширити"
-  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Завжди показувати головну колонку"
   columnAlign: "Вирівняти стовпці"
@@ -1283,90 +1264,49 @@ _deck:
     list: "Списки"
     mentions: "Згадки"
     direct: "Особисте"
-maxUnicodeEmojiPicker: ''
 _signup:
   emailAddressInfo: ''
 _instanceMute:
-  instanceMuteDescription: ''
   title: ''
-showLess: ''
 showingPastTimeline: ''
-markAllAsRead: ''
 fullView: ''
-addDescription: ''
 notSpecifiedMentionWarning: ''
-unknown: ''
 hideOnlineStatus: ''
-online: ''
 offline: ''
-botProtection: ''
 selectAccount: ''
-enabled: ''
 quickAction: ''
-switch: ''
 noBotProtectionWarning: ''
-postToGallery: ''
 gallery: ''
-popularPosts: ''
 memo: ''
-high: ''
 emailNotConfiguredWarning: ''
-customCss: ''
 squareAvatars: ''
-searchResult: ''
 useBlurEffect: ''
-misskeyUpdated: ''
 translate: ''
-usernameInfo: ''
 pubSub: ''
-resolved: ''
 breakFollow: ''
-itsOff: ''
 unread: ''
-controlPanel: ''
 makeReactionsPublic: ''
-classic: ''
 unmuteThread: ''
-ffVisibilityDescription: ''
 deleteAccountConfirm: ''
-voteConfirm: ''
 leaveGroupConfirm: ''
-clickToFinishEmailVerification: ''
 smartphone: ''
-auto: ''
 size: ''
-instanceDefaultLightTheme: ''
 instanceDefaultThemeDescription: ''
-accountDeletionInProgress: ''
 oneHour: ''
-oneWeek: ''
 failedToFetchAccountInformation: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 thereIsUnresolvedAbuseReportWarning: ''
-check: ''
 _emailUnavailable:
   used: ''
-  disposable: ''
   smtp: ''
 _accountDelete:
-  mayTakeTime: ''
   requestAccountDelete: ''
-  inProgress: ''
 _forgotPassword:
   ifNoEmail: ''
 _plugin:
-  install: ''
   manage: ''
 _services:
-  _discord:
-    connected: ''
   _twitter:
-    connected: ''
-  _github:
     connected: ''

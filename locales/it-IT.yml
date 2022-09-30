@@ -964,19 +964,12 @@ _mfm:
   fontDescription: "Puoi scegliere il tipo di carattere per il contenuto."
   rainbow: "Arcobaleno"
   rotate: "Ruota"
-  hashtagDescription: ''
   boldDescription: ''
-  smallDescription: ''
   centerDescription: ''
-  inlineCodeDescription: ''
   blockMathDescription: ''
-  emojiDescription: ''
   flipDescription: ''
-  jellyDescription: ''
   tadaDescription: ''
-  spinDescription: ''
   rotateDescription: ''
-  rainbowDescription: ''
 _instanceTicker:
   none: "Nascondi"
   remote: "Mostra solo per gli/le utenti remotə"
@@ -997,7 +990,6 @@ _channel:
   notesCount: "{n} note"
 _menuDisplay:
   hide: "Nascondere"
-  sideIcon: ''
 _wordMute:
   muteWords: "Parole da filtrare"
   muteWordsDescription: "Separare con uno spazio indica la condizione \"E\". Separare\
@@ -1074,11 +1066,8 @@ _theme:
     driveFolderBg: "Sfondo della cartella di disco"
     badge: "Distintivo"
     messageBg: "Sfondo della chat"
-    modalBg: ''
     scrollbarHandleHover: ''
-    wallpaperOverlay: ''
     accentLighten: ''
-  refProp: ''
   importInfo: ''
 _sfx:
   note: "Nota"
@@ -1144,9 +1133,7 @@ _tutorial:
   step7_3: "Da ultimo, buon divertimento su FoundKey! \U0001F680"
 _2fa:
   registerDevice: "Aggiungi dispositivo"
-  registerKey: ''
   step2: ''
-  step3: ''
   securityKeyInfo: ''
 _permissions:
   "read:account": "Visualizzare le informazioni dell'account"
@@ -1177,7 +1164,6 @@ _permissions:
   "write:user-groups": "Gestisci gruppi di utenti"
   "read:channels": "Visualizza canali"
   "write:channels": "Gerisci canali"
-  "write:gallery": ''
   "write:gallery-likes": ''
 _auth:
   shareAccess: "Autorizzare「{name}」ad accedere al tuo account?"
@@ -1219,7 +1205,6 @@ _widgets:
   jobQueue: "Coda di lavoro"
   serverMetric: "Statistiche server"
   aiscript: "Console AiScript"
-  rssMarquee: ''
 _cw:
   hide: "Nascondere"
   show: "Mostra di più"
@@ -1288,7 +1273,6 @@ _exportOrImport:
   muteList: "Account silenziati"
   blockingList: "Account bloccati"
   userLists: "Liste"
-  excludeInactiveUsers: ''
 _charts:
   federation: "Federazione"
   apRequest: "Richieste"
@@ -1382,7 +1366,6 @@ _notification:
   _actions:
     reply: "Rispondi"
     renote: "Rinota"
-  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Mostra sempre la colonna principale"
   columnAlign: "Allineare colonne"
@@ -1406,40 +1389,21 @@ _deck:
     mentions: "Menzioni"
     direct: "Diretta"
 _services:
-  _github:
-    connected: ''
   _discord:
     connected: ''
-  _twitter:
-    disconnected: ''
 keepOriginalUploadingDescription: ''
-maxCustomEmojiPicker: ''
 _instanceMute:
   instanceMuteDescription2: ''
-  heading: ''
 regexpErrorDescription: ''
-flagShowTimelineReplies: ''
 forwardReport: ''
-narrow: ''
 advanced: ''
-attachmentRequired: ''
 pubSub: ''
-makeReactionsPublic: ''
 ffVisibility: ''
-continueThread: ''
 smartphone: ''
-auto: ''
 size: ''
-instanceDefaultLightTheme: ''
 instanceDefaultThemeDescription: ''
-reflectMayTakeTime: ''
 rateLimitExceeded: ''
-cropImageAsk: ''
 recentNDays: ''
-typeToConfirm: ''
 numberOfPageCache: ''
-document: ''
 unclip: ''
-noEmailServerWarning: ''
 recommended: ''
-maxUnicodeEmojiPicker: ''

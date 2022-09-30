@@ -1505,19 +1505,10 @@ _deck:
     mentions: "Sebutan"
     direct: "Langsung"
 _services:
-  _discord:
-    disconnected: ''
   _twitter:
     connected: ''
-  _github:
-    connected: ''
 attachmentRequired: ''
-recentNDays: ''
 typeToConfirm: ''
-numberOfPageCache: ''
 document: ''
-unclip: ''
 noEmailServerWarning: ''
-recommended: ''
 showLess: ''
-maxUnicodeEmojiPicker: ''

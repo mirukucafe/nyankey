@@ -657,7 +657,6 @@ _ad:
   back: "戻る"
 _gallery:
   unlike: "良くないわ"
-  liked: ''
 _email:
   _follow:
     title: "フォローされたで"
@@ -699,27 +698,16 @@ _mfm:
   blur: "ぼかし"
   font: "フォント"
   rotate: "回転"
-  twitchDescription: ''
   x2Description: ''
-  x3Description: ''
   x4Description: ''
-  fontDescription: ''
   rainbowDescription: ''
-  sparkleDescription: ''
   intro: ''
-  mentionDescription: ''
   urlDescription: ''
-  boldDescription: ''
   smallDescription: ''
-  inlineCodeDescription: ''
   inlineMathDescription: ''
-  blockMathDescription: ''
   emojiDescription: ''
-  flip: ''
   jelly: ''
-  tada: ''
   jump: ''
-  bounce: ''
   x2: ''
 _instanceTicker:
   none: "表示せん"
@@ -735,16 +723,12 @@ _channel:
   removeBanner: "バナーを削除"
   featured: "トレンド"
   notesCount: "{n}こ投稿があるで"
-  following: ''
 _menuDisplay:
   hide: "隠す"
-  sideIcon: ''
 _wordMute:
   soft: "ソフト"
   hard: "ハード"
-  muteWordsDescription: ''
   softDescription: ''
-  mutedNotes: ''
 _theme:
   explore: "テーマを探す"
   install: "テーマのインストール"
@@ -814,14 +798,12 @@ _theme:
     accentDarken: "アクセント (暗め)"
     accentLighten: "アクセント (明るめ)"
     fgHighlighted: "強調されとる文字"
-  constant: ''
   importInfo: ''
 _sfx:
   note: "ノート"
   noteMy: "ノート(自分)"
   notification: "通知"
   chat: "チャット"
-  antenna: ''
 _ago:
   future: "未来"
   justNow: "たった今"
@@ -839,21 +821,14 @@ _time:
   day: "日"
 _tutorial:
   step3_1: "プロフィール設定はええ感じにできたか？"
-  step7_2: ''
   step7_1: ''
-  step1_1: ''
   step1_3: ''
-  step2_2: ''
   step3_3: ''
-  step4_1: ''
   step5_1: ''
-  step5_3: ''
   step6_1: ''
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
-  registerKey: ''
   step2: ''
-  step3: ''
   securityKeyInfo: ''
 _permissions:
   "read:reactions": "リアクションを見る"
@@ -863,26 +838,18 @@ _permissions:
   "write:page-likes": "ページのええやんを操作する"
   "read:user-groups": "ユーザーグループを見る"
   "read:channels": "チャンネルを見る"
-  "write:account": ''
   "write:blocks": ''
-  "write:drive": ''
   "write:favorites": ''
-  "write:following": ''
   "write:messaging": ''
-  "write:mutes": ''
   "read:notifications": ''
-  "write:reactions": ''
   "write:user-groups": ''
-  "read:gallery": ''
   "read:gallery-likes": ''
 _auth:
   permissionAsk: "このアプリは次の権限を要求しとるで"
-  shareAccessAsk: ''
   callback: ''
 _antennaSources:
   all: "みんなのノート"
   homeTimeline: "フォローしとるユーザーのノート"
-  userList: ''
 _weekday:
   sunday: "日曜日"
   monday: "月曜日"
@@ -910,7 +877,6 @@ _widgets:
   jobQueue: "ジョブキュー"
   serverMetric: "サーバーメトリクス"
   aiscript: "AiScriptコンソール"
-  aichan: ''
 _cw:
   hide: "隠す"
   show: "続き見して！"
@@ -929,23 +895,17 @@ _poll:
   duration: "期間"
   votesCount: "{n}票"
   vote: "投票する"
-  totalVotes: ''
   voted: ''
-  remainingDays: ''
   remainingMinutes: ''
 _visibility:
   publicDescription: "みんなに公開"
   home: "ホーム"
   followers: "フォロワー"
-  homeDescription: ''
   specified: ''
-  localOnly: ''
 _profile:
   name: "名前"
   username: "ユーザー名"
-  youCanIncludeHashtags: ''
   metadataEdit: ''
-  metadataLabel: ''
   changeAvatar: ''
 _exportOrImport:
   allNotes: "全てのノート"
@@ -953,7 +913,6 @@ _exportOrImport:
   muteList: "ミュート"
   blockingList: "ブロック"
   userLists: "リスト"
-  excludeInactiveUsers: ''
 _charts:
   federation: "連合"
   apRequest: "リクエスト"
@@ -1004,11 +963,8 @@ _pages:
   fontSansSerif: "サンセリフ"
   eyeCatchingImageSet: "アイキャッチ画像を設定"
   eyeCatchingImageRemove: "アイキャッチ画像を削除"
-  invalidNameTitle: ''
   editThisPage: ''
-  my: ''
   title: ''
-  hideTitleWhenPinned: ''
 _notification:
   fileUploaded: "ファイルが無事アップロードされたで。"
   youGotMention: "{name}からのメンション"
@@ -1026,14 +982,11 @@ _notification:
     reaction: "リアクション"
     receiveFollowRequest: "フォロー許可してほしいみたいやで"
     followRequestAccepted: "フォローが受理されたで"
-    pollVote: ''
     groupInvited: ''
   _actions:
     reply: "返事"
     renote: "Renote"
-  pollEnded: ''
   youRenoted: ''
-  youGotMessagingMessageFromUser: ''
   emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "いつもメインカラムを表示"
@@ -1057,142 +1010,75 @@ _deck:
     list: "リスト"
     mentions: "あんた宛て"
     direct: "ダイレクト"
-_relayStatus:
-  accepted: ''
 unlimited: ''
 _emailUnavailable:
-  disposable: ''
   smtp: ''
 _ffVisibility:
-  public: ''
   private: ''
-_signup:
-  emailAddressInfo: ''
 _accountDelete:
   accountDelete: ''
-  sendEmail: ''
   started: ''
 _forgotPassword:
-  enterEmail: ''
   contactAdmin: ''
 _postForm:
   _placeholders:
-    e: ''
     a: ''
-    c: ''
   quotePlaceholder: ''
 _services:
-  _discord:
-    connected: ''
   _twitter:
     connected: ''
-  _github:
-    connected: ''
 showLess: ''
-disconnectService: ''
 pinnedPagesDescription: ''
-signinFailed: ''
 disableDrawer: ''
-existingAccount: ''
 objectStoragePrefixDesc: ''
-objectStorageRegionDesc: ''
 yourAccountSuspendedTitle: ''
-menu: ''
 serviceworkerInfo: ''
-invisibleNote: ''
 visibility: ''
-describeFile: ''
 useBlurEffectForModal: ''
-generateAccessToken: ''
 enableAll: ''
-tokenRequested: ''
 notificationType: ''
-emailServer: ''
 regexpError: ''
-instanceMute: ''
 regenerateLoginTokenDescription: ''
-fileIdOrUrl: ''
 abuseReported: ''
-reporteeOrigin: ''
 forwardReport: ''
-createNew: ''
 createNewClip: ''
-i18nInfo: ''
 accountInfo: ''
-repliesCount: ''
 repliedCount: ''
-followingCount: ''
 sentReactionsCount: ''
-noCrawle: ''
 lockedAccountInfo: ''
-loadRawImages: ''
 verificationEmailSent: ''
-noteFavoritesCount: ''
 useSystemFont: ''
-developer: ''
 makeExplorableDescription: ''
-needReloadToApply: ''
 publish: ''
-fullView: ''
 addDescription: ''
-notSpecifiedMentionWarning: ''
 unknown: ''
-hideOnlineStatus: ''
 online: ''
-offline: ''
 botProtection: ''
-selectAccount: ''
 enabled: ''
-quickAction: ''
 switch: ''
-noBotProtectionWarning: ''
 postToGallery: ''
-gallery: ''
 popularPosts: ''
-priority: ''
 ratio: ''
-customCss: ''
 accountDeletionInProgress: ''
-received: ''
 troubleshooting: ''
-learnMore: ''
 whatIsNew: ''
-translatedFrom: ''
 keepCw: ''
-lastCommunication: ''
 unresolved: ''
-itsOn: ''
 emailRequiredForSignup: ''
-filter: ''
 manageAccounts: ''
-makeReactionsPublicDescription: ''
 muteThread: ''
-ffVisibility: ''
 continueThread: ''
-incorrectPassword: ''
 leaveGroup: ''
-useDrawerReactionPickerForMobile: ''
 overridedDeviceKind: ''
-tablet: ''
 themeColor: ''
-numberOfColumn: ''
 instanceDefaultDarkTheme: ''
-mutePeriod: ''
 oneHour: ''
-oneWeek: ''
 failedToFetchAccountInformation: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 thereIsUnresolvedAbuseReportWarning: ''
-check: ''
 _nsfw:
   ignore: ''
-maxUnicodeEmojiPicker: ''
 _instanceMute:
   instanceMuteDescription: ''
-  title: ''

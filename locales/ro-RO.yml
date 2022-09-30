@@ -700,80 +700,47 @@ _mfm:
   quote: "Citează"
   emoji: "Emoji personalizat"
   search: "Caută"
-  jelly: ''
   inlineMath: ''
-  cheatSheet: ''
   dummy: ''
-  hashtag: ''
   url: ''
-  link: ''
   bold: ''
-  small: ''
   center: ''
-  inlineCode: ''
   blockCode: ''
-  blockMath: ''
   emojiDescription: ''
-  flip: ''
   jellyDescription: ''
-  jump: ''
   bounce: ''
-  shake: ''
   twitch: ''
-  spin: ''
   x2: ''
-  x3: ''
   x4: ''
-  blur: ''
   font: ''
-  rainbow: ''
   sparkle: ''
-  rotate: ''
 _theme:
   description: "Descriere"
   keys:
     mention: "Mențiune"
     renote: "Re-notează"
     divider: "Separator"
-    bg: ''
     focus: ''
-    panel: ''
     header: ''
-    navFg: ''
     navActive: ''
-    link: ''
     mentionMe: ''
-    scrollbarHandle: ''
     dateLabelFg: ''
-    infoFg: ''
     infoWarnFg: ''
-    cwFg: ''
     toastBg: ''
-    buttonBg: ''
     inputBorder: ''
-    driveFolderBg: ''
     badge: ''
-    accentDarken: ''
     fgHighlighted: ''
-  explore: ''
   manage: ''
-  installed: ''
   builtinThemes: ''
-  invalid: ''
   addConstant: ''
-  defaultValue: ''
   refProp: ''
-  key: ''
   funcKind: ''
-  basedProp: ''
   darken: ''
-  inputConstantName: ''
   deleteConstantConfirm: ''
 _sfx:
   note: "Note"
   notification: "Notificări"
   chat: "Chat"
-  chatBg: ''
   channel: ''
 _widgets:
   notifications: "Notificări"
@@ -781,47 +748,33 @@ _widgets:
   activity: "Activitate"
   federation: "Federație"
   jobQueue: "coada de job-uri"
-  calendar: ''
   clock: ''
-  rssMarquee: ''
   digitalClock: ''
-  slideshow: ''
   onlineUsers: ''
-  aiscript: ''
 _cw:
   show: "Incarcă mai mult"
-  chars: ''
 _visibility:
   home: "Acasă"
   followers: "Urmăritori"
-  specified: ''
   publicDescription: ''
-  specifiedDescription: ''
   localOnlyDescription: ''
 _profile:
   name: "Nume"
   username: "Nume de utilizator"
-  youCanIncludeHashtags: ''
   metadataEdit: ''
-  metadataLabel: ''
   changeAvatar: ''
 _exportOrImport:
   followingList: "Urmărești"
   muteList: "Amuțește"
   blockingList: "Blochează"
   userLists: "Liste"
-  excludeMutingUsers: ''
 _charts:
   federation: "Federație"
-  usersIncDec: ''
   activeUsers: ''
-  localNotesIncDec: ''
   notesTotal: ''
-  filesTotal: ''
   storageUsageTotal: ''
 _timelines:
   home: "Acasă"
-  social: ''
 _notification:
   youWereFollowed: "te-a urmărit"
   youWereInvitedToGroup: "Ai fost invitat într-un grup"
@@ -831,18 +784,13 @@ _notification:
     renote: "Re-notează"
     quote: "Citează"
     reaction: "Reacție"
-    reply: ''
     pollEnded: ''
-    followRequestAccepted: ''
     app: ''
   _actions:
     reply: "Răspunde"
     renote: "Re-notează"
-  fileUploaded: ''
   youGotReply: ''
-  youRenoted: ''
   youGotMessagingMessageFromUser: ''
-  youReceivedFollowRequest: ''
   pollEnded: ''
 _deck:
   _columns:
@@ -851,276 +799,154 @@ _deck:
     antenna: "Antene"
     list: "Liste"
     mentions: "Mențiuni"
-    widgets: ''
   alwaysShowMainColumn: ''
-  columnMargin: ''
   addColumn: ''
-  swapRight: ''
   swapDown: ''
-  popRight: ''
 unlimited: ''
 _instanceCharts:
-  usersTotal: ''
   users: ''
-  notesTotal: ''
   cacheSize: ''
-  files: ''
 showLess: ''
-switchAccount: ''
 rateLimitExceeded: ''
 _poll:
-  closed: ''
   noOnlyOneChoice: ''
-  noMore: ''
   expiration: ''
-  at: ''
   deadlineDate: ''
-  duration: ''
   totalVotes: ''
-  showResult: ''
   remainingDays: ''
-  remainingMinutes: ''
 instanceTicker: ''
-createNew: ''
 createNewClip: ''
-i18nInfo: ''
 accountInfo: ''
-repliesCount: ''
 repliedCount: ''
-followingCount: ''
 sentReactionsCount: ''
-pollVotesCount: ''
 no: ''
-driveUsage: ''
 noCrawleDescription: ''
-alwaysMarkSensitive: ''
 disableShowingAnimatedImages: ''
-notSet: ''
 noteFavoritesCount: ''
-pageLikedCount: ''
 useSystemFont: ''
-experimentalFeatures: ''
 makeExplorable: ''
-showGapBetweenNotesInTimeline: ''
 left: ''
-wide: ''
 reloadToApplySetting: ''
-showTitlebar: ''
 nUsers: ''
-myTheme: ''
 accentColor: ''
-saveAs: ''
 value: ''
-updatedAt: ''
 deleteConfirm: ''
-registry: ''
 currentVersion: ''
-youAreRunningUpToDateClient: ''
 usageAmount: ''
-inUse: ''
 apply: ''
-emailNotification: ''
 inChannelSearch: ''
-typingUsers: ''
 showingPastTimeline: ''
-markAllAsRead: ''
 unlikeConfirm: ''
-quitFullView: ''
 userPagePinTip: ''
-userInfo: ''
 onlineStatus: ''
-hideOnlineStatusDescription: ''
 active: ''
-notRecommended: ''
 instanceBlocking: ''
-enabled: ''
 quickAction: ''
-switch: ''
 noBotProtectionWarning: ''
-postToGallery: ''
 gallery: ''
-popularPosts: ''
 expiration: ''
-priority: ''
 low: ''
-ratio: ''
 customCssWarn: ''
-squareAvatars: ''
 received: ''
-hashtags: ''
 useBlurEffect: ''
-misskeyUpdated: ''
 translate: ''
-usernameInfo: ''
 pubSub: ''
-resolved: ''
 breakFollow: ''
-itsOff: ''
 unread: ''
-controlPanel: ''
 makeReactionsPublic: ''
-classic: ''
 unmuteThread: ''
-ffVisibilityDescription: ''
 deleteAccountConfirm: ''
-voteConfirm: ''
 leaveGroup: ''
-useDrawerReactionPickerForMobile: ''
 overridedDeviceKind: ''
-tablet: ''
 themeColor: ''
-numberOfColumn: ''
 instanceDefaultDarkTheme: ''
-mutePeriod: ''
 tenMinutes: ''
-oneDay: ''
 reflectMayTakeTime: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-document: ''
 unclip: ''
-noEmailServerWarning: ''
 recommended: ''
 _accountDelete:
-  sendEmail: ''
   mayTakeTime: ''
-  started: ''
 _plugin:
   install: ''
-  manage: ''
 _serverDisconnectedBehavior:
   reload: ''
-  quiet: ''
 _ago:
   yearsAgo: ''
-  justNow: ''
   minutesAgo: ''
-  daysAgo: ''
 _auth:
   denied: ''
-  shareAccessAsk: ''
   pleaseGoBack: ''
 _emailUnavailable:
-  used: ''
   disposable: ''
-  smtp: ''
 _ffVisibility:
   followers: ''
 _signup:
-  almostThere: ''
   emailSent: ''
-_ad:
-  reduceFrequencyOfThisAd: ''
 _forgotPassword:
   ifNoEmail: ''
 _gallery:
-  my: ''
   like: ''
 _registry:
-  scope: ''
   keys: ''
-  createKey: ''
 _aboutMisskey:
   contributors: ''
-  source: ''
 _nsfw:
   respect: ''
-  force: ''
 _instanceTicker:
   remote: ''
-maxCustomEmojiPicker: ''
 _channel:
   edit: ''
-  removeBanner: ''
   owned: ''
-  usersCount: ''
 _menuDisplay:
   sideFull: ''
-  top: ''
 _wordMute:
   muteWords: ''
-  muteWordsDescription2: ''
   hardDescription: ''
-  hard: ''
 _instanceMute:
   instanceMuteDescription: ''
-  title: ''
 _time:
   second: ''
-  hour: ''
 _tutorial:
   title: ''
-  step1_2: ''
   step2_1: ''
-  step3_1: ''
   step3_3: ''
-  step4_1: ''
   step5_1: ''
-  step5_3: ''
   step6_1: ''
-  step6_3: ''
   step7_2: ''
 _2fa:
-  alreadyRegistered: ''
   registerKey: ''
-  step2: ''
   step3: ''
-  securityKeyInfo: ''
 _weekday:
   sunday: ''
-  tuesday: ''
   thursday: ''
 _permissions:
-  "read:account": ''
   "read:blocks": ''
-  "read:drive": ''
   "read:favorites": ''
-  "read:following": ''
   "read:messaging": ''
-  "read:mutes": ''
   "write:notes": ''
-  "write:notifications": ''
   "write:reactions": ''
-  "read:pages": ''
   "read:page-likes": ''
-  "read:user-groups": ''
   "read:channels": ''
-  "read:gallery": ''
   "read:gallery-likes": ''
 _antennaSources:
-  all: ''
   users: ''
-  userGroup: ''
 _postForm:
   quotePlaceholder: ''
   _placeholders:
-    a: ''
     c: ''
-    e: ''
 _pages:
   newPage: ''
-  readPage: ''
   updated: ''
-  pageSetting: ''
   invalidNameTitle: ''
-  editThisPage: ''
   viewPage: ''
-  unlike: ''
   liked: ''
-  contents: ''
   url: ''
-  alignCenter: ''
   font: ''
-  fontSansSerif: ''
   eyeCatchingImageRemove: ''
-_relayStatus:
-  accepted: ''
 _services:
   _discord:
-    connected: ''
-  _twitter:
     connected: ''
   _github:
     connected: ''

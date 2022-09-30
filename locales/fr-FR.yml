@@ -1476,7 +1476,6 @@ _notification:
   _actions:
     reply: "Répondre"
     renote: "Renoter"
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "Toujours afficher la colonne principale"
   columnAlign: "Aligner les colonnes"
@@ -1499,26 +1498,15 @@ _deck:
     list: "Listes"
     mentions: "Mentions"
     direct: "Direct"
-unlimited: ''
 _services:
   _discord:
     connected: ''
-  _twitter:
-    connected: ''
   _github:
     connected: ''
-showLess: ''
 keepOriginalUploadingDescription: ''
-regexpErrorDescription: ''
 attachmentRequired: ''
-instanceDefaultThemeDescription: ''
 failedToFetchAccountInformation: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-noEmailServerWarning: ''
 recommended: ''
-maxUnicodeEmojiPicker: ''

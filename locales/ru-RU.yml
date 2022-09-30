@@ -1060,7 +1060,6 @@ _wordMute:
   mutedNotes: "Скрытые заметки"
 _instanceMute:
   heading: "Список заглушенных инстансов"
-  instanceMuteDescription2: ''
 _theme:
   explore: "Обзор"
   install: "Установить тему"
@@ -1445,7 +1444,6 @@ _notification:
   _actions:
     reply: "Ответить"
     renote: "Репост"
-  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Всегда показывать главную колонку"
   columnAlign: "Выравнивание колонок"
@@ -1468,26 +1466,14 @@ _deck:
     list: "Списки"
     mentions: "Упоминания"
     direct: "Личное"
-mutePeriod: ''
 reporter: ''
-instanceDefaultThemeDescription: ''
 oneHour: ''
-oneWeek: ''
 failedToFetchAccountInformation: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 thereIsUnresolvedAbuseReportWarning: ''
-check: ''
 maxCustomEmojiPicker: ''
 _services:
-  _discord:
-    connected: ''
   _twitter:
-    connected: ''
-  _github:
     connected: ''

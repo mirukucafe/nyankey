@@ -1385,20 +1385,11 @@ _deck:
     mentions: "提及"
     direct: "指定用户"
 _services:
-  _discord:
-    disconnected: ''
   _twitter:
     disconnected: ''
-  _github:
-    disconnected: ''
 attachmentRequired: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 thereIsUnresolvedAbuseReportWarning: ''
-check: ''
 maxCustomEmojiPicker: ''

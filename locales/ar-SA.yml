@@ -934,13 +934,9 @@ _mfm:
   rainbowDescription: "اجعل المحتوى يظهر بألوان الطيف"
   rotate: "تدوير"
   rotateDescription: "يُدير المحتوى بزاوية معيّنة."
-  dummy: ''
   inlineCode: ''
-  blockCode: ''
   inlineMath: ''
-  blockMathDescription: ''
   twitchDescription: ''
-  sparkleDescription: ''
 _instanceTicker:
   none: "لا تظهره بتاتًا"
   remote: "أظهر للمستخدمين البِعاد"
@@ -1030,17 +1026,11 @@ _theme:
     listItemHoverBg: "خلفية عناصر القائمة (عند التمرير فوقها)"
     driveFolderBg: "خلفية مجلد قرص التخزين"
     messageBg: "خلفية المحادثة"
-    header: ''
     navIndicator: ''
-    modalBg: ''
     infoBg: ''
-    cwBg: ''
     cwHoverBg: ''
-    badge: ''
     accentLighten: ''
-  base: ''
   refConst: ''
-  darken: ''
   importInfo: ''
 _sfx:
   note: "الملاحظات"
@@ -1102,7 +1092,6 @@ _2fa:
   step2: "امسح رمز الاستجابة السريعة الموجد على الشاشة."
   step3: "أدخل الرمز الموجود في تطبيقك لإكمال التثبيت."
   step4: "من هذه اللحظة أثناء ولوجك سيُطلب منك الرمز."
-  securityKeyInfo: ''
 _permissions:
   "read:account": "اعرض معلومات حسابك"
   "write:account": "تعديل معلومات حسابك"
@@ -1134,7 +1123,6 @@ _permissions:
   "read:gallery": "اعرض المعرض"
   "write:gallery": "عدّل المعرض"
   "read:gallery-likes": "يعرض ما أعجبك من مشاركات المعرض"
-  "write:gallery-likes": ''
 _auth:
   shareAccess: "أتريد التفويض لـ \"{name}\" بالوصول لحسابك؟"
   shareAccessAsk: "هل تخول لهذا التطبيق الوصول لحسابك؟"
@@ -1146,7 +1134,6 @@ _antennaSources:
   all: "كل الملاحظات"
   homeTimeline: "ملاحظات المستخدمين المتابَعين"
   users: "ملاحظات مستخدمين محددين"
-  userGroup: ''
 _weekday:
   sunday: "الأحد"
   monday: "الإثنين"
@@ -1173,7 +1160,6 @@ _widgets:
   onlineUsers: "المتّصلون"
   jobQueue: "قائمة الانتظار"
   serverMetric: "إحصائيات الخادم"
-  aiscript: ''
 _cw:
   hide: "إخفاء"
   show: "عرض المزيد"
@@ -1255,7 +1241,6 @@ _charts:
   notesTotal: "إجمالي الملاحظات"
   filesIncDec: "تباين عدد الملفات"
   filesTotal: "العدد الإجمالي للملفات"
-  storageUsageTotal: ''
 _instanceCharts:
   requests: "الطلبات"
   users: "تباين عدد المستخدمين"
@@ -1266,7 +1251,6 @@ _instanceCharts:
   ffTotal: "تباين عدد حسابات المتابَعة/المتابِعة"
   files: "تباين عدد الملفات"
   filesTotal: "تباين عدد الملفات"
-  cacheSizeTotal: ''
 _timelines:
   home: "الرئيسي"
   local: "المحلي"
@@ -1355,42 +1339,23 @@ _deck:
     list: "القوائم"
     mentions: "الإشارات"
     direct: "مباشرة"
-  columnHeaderHeight: ''
   popRight: ''
-disableDrawer: ''
 objectStorage: ''
-objectStorageBaseUrlDesc: ''
 objectStorageBucketDesc: ''
-lockedAccountInfo: ''
 left: ''
-unlimited: ''
 _services:
   _twitter:
     connected: ''
-  _github:
-    connected: ''
   _discord:
     connected: ''
-showLess: ''
 clearQueueConfirmText: ''
-enableServiceworker: ''
 objectStorageRegionDesc: ''
-scratchpad: ''
 script: ''
-undeck: ''
 enableEmail: ''
-testEmail: ''
 publish: ''
-pubSub: ''
 useDrawerReactionPickerForMobile: ''
-instanceDefaultDarkTheme: ''
 reflectMayTakeTime: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 thereIsUnresolvedAbuseReportWarning: ''
-check: ''

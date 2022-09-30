@@ -1483,20 +1483,11 @@ _deck:
     mentions: "উল্লেখসমূহ"
     direct: "ডাইরেক্ট নোটগুলি"
 _services:
-  _discord:
-    connected: ''
   _twitter:
     disconnected: ''
-  _github:
-    disconnected: ''
 unlimited: ''
-cropImage: ''
 recentNHours: ''
-isSystemAccount: ''
 deleteAccount: ''
-numberOfPageCacheDescription: ''
 file: ''
-confirmToUnclipAlreadyClippedNote: ''
 thereIsUnresolvedAbuseReportWarning: ''
-check: ''
 maxUnicodeEmojiPicker: ''

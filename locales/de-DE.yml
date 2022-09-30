@@ -1558,4 +1558,3 @@ _services:
   _github:
     connected: GitHub-Account @{login} wurde mit Foundkey-Account @{userName} verknüpft!
     disconnected: GitHub-Verknüpfung wurde entfernt.
-document: ''

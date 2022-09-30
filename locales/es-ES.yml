@@ -873,10 +873,8 @@ hide: "Ocultar"
 indefinitely: "Sin límite de tiempo"
 _ffVisibility:
   public: "Publicar"
-  private: ''
 _accountDelete:
   accountDelete: "Eliminar Cuenta"
-  sendEmail: ''
   started: ''
 _ad:
   back: "Deseleccionar"
@@ -884,7 +882,6 @@ _forgotPassword:
   contactAdmin: "Esta instancia no admite el uso de direcciones de correo electrónico,\
     \ póngase en contacto con el administrador de la instancia para restablecer su\
     \ contraseña"
-  ifNoEmail: ''
 _gallery:
   my: "Mi galería"
   liked: "Publicaciones que me gustan"
@@ -941,27 +938,16 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
-  linkDescription: ''
   small: ''
-  centerDescription: ''
   inlineCodeDescription: ''
-  inlineMathDescription: ''
   blockMathDescription: ''
-  emojiDescription: ''
   jelly: ''
-  tada: ''
   jump: ''
-  bounce: ''
   shake: ''
-  twitch: ''
   spin: ''
-  x2: ''
   x4Description: ''
-  blurDescription: ''
   rainbow: ''
-  sparkle: ''
   rotateDescription: ''
-  x3Description: ''
 _instanceTicker:
   none: "No mostrar"
   remote: "Mostrar a usuarios remotos"
@@ -1075,7 +1061,6 @@ _theme:
     accentDarken: "Acento (oscuro)"
     accentLighten: "Acento (claro)"
     fgHighlighted: "Texto resaltado"
-  builtinThemes: ''
 _sfx:
   note: "Notas"
   noteMy: "Nota (a mí mismo)"
@@ -1175,7 +1160,6 @@ _permissions:
   "write:user-groups": "Administrar grupos de usuarios"
   "read:channels": "Ver canal"
   "write:channels": "Modificar canal"
-  "write:gallery": ''
   "write:gallery-likes": ''
 _auth:
   shareAccess: "¿Desea permitir el acceso a la cuenta \"{name}\"?"
@@ -1214,9 +1198,7 @@ _widgets:
   postForm: "Formulario"
   button: "Botón"
   jobQueue: "Cola de trabajos"
-  slideshow: ''
   serverMetric: ''
-  aichan: ''
 _cw:
   hide: "Ocultar"
   show: "Ver más"
@@ -1273,7 +1255,6 @@ _profile:
   youCanIncludeHashtags: "Puedes añadir hashtags"
   metadataLabel: "Etiqueta"
   metadataContent: "Contenido"
-  metadataDescription: ''
   changeBanner: ''
 _exportOrImport:
   allNotes: "Todas las notas"
@@ -1281,7 +1262,6 @@ _exportOrImport:
   muteList: "Silenciados"
   blockingList: "Bloqueados"
   userLists: "Listas"
-  excludeInactiveUsers: ''
 _charts:
   federation: "Federación"
   apRequest: "Pedidos"
@@ -1341,7 +1321,6 @@ _pages:
   fontSansSerif: "Sans Serif"
   eyeCatchingImageSet: "Elegir imagen llamativa"
   eyeCatchingImageRemove: "Borrar imagen llamativa"
-  pageSetting: ''
 _relayStatus:
   requesting: "Pendiente"
   accepted: "Aceptar"
@@ -1375,7 +1354,6 @@ _notification:
   _actions:
     reply: "Responder"
     renote: "Renotar"
-  pollEnded: ''
 _deck:
   alwaysShowMainColumn: "Siempre mostrar la columna principal"
   columnAlign: "Alinear columnas"
@@ -1394,45 +1372,24 @@ _deck:
     list: "Listas"
     mentions: "Menciones"
     direct: "Mensaje directo"
-  columnMargin: ''
   profile: ''
 _services:
-  _discord:
-    connected: ''
   _github:
     connected: ''
-  _twitter:
-    disconnected: ''
 _emailUnavailable:
   used: ''
-  disposable: ''
   smtp: ''
-_signup:
-  emailAddressInfo: ''
 maxCustomEmojiPicker: ''
-regexpError: ''
 reporter: ''
-attachmentRequired: ''
 ffVisibilityDescription: ''
-deleteAccountConfirm: ''
 voteConfirm: ''
-leaveGroupConfirm: ''
 clickToFinishEmailVerification: ''
-smartphone: ''
 auto: ''
-size: ''
 instanceDefaultLightTheme: ''
-instanceDefaultThemeDescription: ''
 tenMinutes: ''
-oneDay: ''
 reflectMayTakeTime: ''
-rateLimitExceeded: ''
 cropImageAsk: ''
-recentNDays: ''
 typeToConfirm: ''
-numberOfPageCache: ''
 document: ''
-unclip: ''
 noEmailServerWarning: ''
-recommended: ''
 maxUnicodeEmojiPicker: ''
