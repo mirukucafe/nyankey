@@ -335,24 +335,16 @@ _mfm:
   mention: "Vermelding"
   quote: "Quote"
   search: "Zoeken"
-  x3: ''
   hashtag: ''
-  inlineMathDescription: ''
   flipDescription: ''
-  bounceDescription: ''
   x2Description: ''
-  rainbowDescription: ''
 _theme:
   keys:
     mention: "Vermelding"
     renote: "Herdelen"
-    link: ''
     shadow: ''
-    infoFg: ''
     buttonBg: ''
-    accentLighten: ''
   installedThemes: ''
-  defaultValue: ''
   basedProp: ''
 _sfx:
   note: "Notities"
@@ -364,16 +356,13 @@ _widgets:
   activity: "Activiteit"
   federation: "Federatie"
   jobQueue: "Job Queue"
-  digitalClock: ''
 _cw:
   show: "Laad meer"
 _visibility:
   home: "Startpagina"
   followers: "Volgers"
-  localOnlyDescription: ''
 _profile:
   username: "Gebruikersnaam"
-  metadataContent: ''
 _exportOrImport:
   followingList: "Volgend"
   muteList: "Dempen"
@@ -383,7 +372,6 @@ _exportOrImport:
   excludeInactiveUsers: "Negeer inactieve gebruikers"
 _charts:
   federation: "Federatie"
-  notesTotal: ''
 _timelines:
   home: "Startpagina"
 _notification:
@@ -394,141 +382,82 @@ _notification:
     renote: "Herdelen"
     quote: "Quote"
     reaction: "Reacties"
-    app: ''
   _actions:
     reply: "Antwoord"
     renote: "Herdelen"
-  youGotMessagingMessageFromUser: ''
 _deck:
   _columns:
     notifications: "Meldingen"
     tl: "Tijdlijn"
     list: "Lijsten"
     mentions: "Vermeldingen"
-  columnHeaderHeight: ''
   profile: ''
 selectList: Kies een lijst
 selectAntenna: Kies een antenne
 selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
-_channel:
-  edit: ''
 _menuDisplay:
   top: ''
-_wordMute:
-  muteWordsDescription: ''
 _ffVisibility:
   followers: ''
-emojis: ''
 inputNewFolderName: ''
-accept: ''
 thisYear: ''
-connectService: ''
 driveCapacityPerLocalAccount: ''
-pinnedPages: ''
 enableRecaptcha: ''
-antennaKeywords: ''
 withReplies: ''
-popularUsers: ''
 twoStepAuthentication: ''
-markAsReadAllTalkMessages: ''
 joinedGroups: ''
-text: ''
 noMessagesYet: ''
-unavailable: ''
 passwordNotMatched: ''
-useOsNativeEmojis: ''
 category: ''
-openImageInNewTab: ''
 clientSettings: ''
-objectStorageBaseUrlDesc: ''
 objectStorageRegionDesc: ''
-showFixedPostForm: ''
 details: ''
-installedDate: ''
 output: ''
-userSilenced: ''
 inboxUrl: ''
-useCw: ''
 leaveConfirm: ''
-height: ''
 tokenRequested: ''
-email: ''
 regexpError: ''
-overview: ''
 useGlobalSetting: ''
-sample: ''
 reporterOrigin: ''
-editTheseSettingsMayBreakAccount: ''
 clip: ''
-notesCount: ''
 receivedReactionsCount: ''
-noCrawleDescription: ''
 noteFavoritesCount: ''
-makeExplorable: ''
 reloadToApplySetting: ''
-accentColor: ''
 deleteConfirm: ''
-usageAmount: ''
 inChannelSearch: ''
-unlikeConfirm: ''
 unknown: ''
-botProtection: ''
 accounts: ''
-recentPosts: ''
 low: ''
-sent: ''
 whatIsNew: ''
-unresolved: ''
 manageAccounts: ''
-incorrectPassword: ''
 tablet: ''
-mutePeriod: ''
 rateLimitExceeded: ''
-document: ''
 maxUnicodeEmojiPicker: ''
 _permissions:
-  "read:favorites": ''
   "read:notifications": ''
-  "write:page-likes": ''
   "write:gallery-likes": ''
-_ad:
-  reduceFrequencyOfThisAd: ''
 _plugin:
   install: ''
-_aboutMisskey:
-  about: ''
 _instanceTicker:
   none: ''
-_instanceMute:
-  instanceMuteDescription2: ''
 _ago:
   daysAgo: ''
 _tutorial:
-  title: ''
   step3_3: ''
-  step6_1: ''
 _2fa:
   registerKey: ''
-_auth:
-  shareAccessAsk: ''
 _antennaSources:
   userList: ''
-_weekday:
-  saturday: ''
 _poll:
   after: ''
-  voted: ''
 _postForm:
   channelPlaceholder: ''
 _instanceCharts:
-  users: ''
   files: ''
 _pages:
-  pageSetting: ''
   unlike: ''
-  alignCenter: ''
 _relayStatus:
   accepted: ''
 _services: {}

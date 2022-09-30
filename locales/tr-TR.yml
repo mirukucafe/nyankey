@@ -54,205 +54,115 @@ smtpPass: "Şifre"
 user: "Kullanıcı"
 _mfm:
   search: "Arama"
-  hashtagDescription: ''
   smallDescription: ''
-  blockMath: ''
   flipDescription: ''
-  bounceDescription: ''
   x3Description: ''
-  rainbowDescription: ''
 _sfx:
   notification: "Bildirim"
 _widgets:
   notifications: "Bildirim"
   timeline: "Zaman çizelgesi"
-  photos: ''
   serverMetric: ''
 _profile:
   username: "Kullanıcı Adı"
-  metadataContent: ''
 _deck:
   _columns:
     notifications: "Bildirim"
     tl: "Zaman çizelgesi"
-  columnAlign: ''
   addColumn: ''
-_weekday:
-  friday: ''
 _permissions:
   "read:channels": ''
-  "read:blocks": ''
   "read:messaging": ''
-  "write:reactions": ''
 _antennaSources:
   all: ''
 _instanceCharts:
-  requests: ''
   files: ''
 _poll:
-  choiceN: ''
   deadlineTime: ''
-  remainingDays: ''
 _visibility:
   followers: ''
-_postForm:
-  channelPlaceholder: ''
 _exportOrImport:
   muteList: ''
 _notification:
-  _actions:
-    renote: ''
   youGotMessagingMessageFromGroup: ''
   _types:
-    follow: ''
     receiveFollowRequest: ''
 _charts:
-  activeUsers: ''
   storageUsageTotal: ''
 _pages:
-  created: ''
   viewSource: ''
-  title: ''
   eyeCatchingImageSet: ''
-_services:
-  _twitter:
-    disconnected: ''
+_services: {}
 nUsers: ''
-_emailUnavailable:
-  mx: ''
 _accountDelete:
   accountDelete: ''
-_forgotPassword:
-  enterEmail: ''
 _email:
   _receiveFollowRequest:
     title: ''
-_registry:
-  createKey: ''
 _nsfw:
   force: ''
 _channel:
-  create: ''
   notesCount: ''
-_wordMute:
-  softDescription: ''
 _instanceMute:
   instanceMuteDescription2: ''
 _theme:
-  builtinThemes: ''
   color: ''
-  alpha: ''
   keys:
     fg: ''
-    navHoverFg: ''
     modalBg: ''
-    infoWarnFg: ''
     inputBorder: ''
-    fgHighlighted: ''
 _ago:
   monthsAgo: ''
 _tutorial:
-  step1_2: ''
   step4_1: ''
-  step6_3: ''
 _2fa:
   step2: ''
-loggingIn: ''
 receiveFollowRequest: ''
-files: ''
 note: ''
-somethingHappened: ''
 makeFollowManuallyApprove: ''
-renote: ''
 clickToShow: ''
-unmarkAsSensitive: ''
 blockConfirm: ''
-editWidgetsExit: ''
 cacheRemoteFiles: ''
-autoAcceptFollowed: ''
 searchWith: ''
-federation: ''
 perHour: ''
-withNFiles: ''
 clearQueue: ''
-mutedUsers: ''
 preview: ''
-subscribing: ''
 retypedNotMatch: ''
-noSuchUser: ''
 saved: ''
-uploadFromUrlDescription: ''
 agreeTo: ''
-yearsOld: ''
 lightThemes: ''
-folderName: ''
 inputNewFileName: ''
-banner: ''
 unwatch: ''
-tosUrl: ''
 integration: ''
-invite: ''
 pinnedUsers: ''
-hcaptchaSiteKey: ''
 manageAntennas: ''
-enableServiceworker: ''
 silenceConfirm: ''
-exploreFediverse: ''
 moderator: ''
-resetPassword: ''
 markAsReadAllNotifications: ''
-createGroup: ''
 messagingWithGroup: ''
-quoteAttached: ''
 checking: ''
-strongPassword: ''
 uiLanguage: ''
-signinHistory: ''
 regenerate: ''
-weekOverWeekChanges: ''
 objectStorage: ''
-objectStorageEndpoint: ''
 objectStorageSetPublicRead: ''
-showInPage: ''
 install: ''
-ascendingOrder: ''
 deleteAllFilesConfirm: ''
-divider: ''
 invisibleNote: ''
-description: ''
 undeck: ''
-generateAccessToken: ''
 useStarForReactionFallback: ''
-smtpPort: ''
 userSaysSomething: ''
-channel: ''
 regenerateLoginTokenDescription: ''
-fillAbuseReportDescription: ''
 abuseMarkAsResolved: ''
-system: ''
 i18nInfo: ''
-followingCount: ''
 driveFilesCount: ''
-verificationEmailSent: ''
 clips: ''
-center: ''
 nNotes: ''
-createdAt: ''
 latestVersion: ''
-receiveAnnouncementFromInstance: ''
 clear: ''
-notSpecifiedMentionWarning: ''
 active: ''
-disabled: ''
 postToGallery: ''
-priority: ''
 customCssWarn: ''
-useBlurEffect: ''
 pubSub: ''
-unread: ''
 ffVisibility: ''
-leaveGroupConfirm: ''
 size: ''
-oneHour: ''
 recentNHours: ''
-confirmToUnclipAlreadyClippedNote: ''

@@ -494,25 +494,17 @@ _mfm:
   quote: "Citovat"
   emoji: "Vlastní emoji"
   search: "Vyhledávání"
-  mentionDescription: ''
   smallDescription: ''
-  blockMath: ''
   jellyDescription: ''
-  twitchDescription: ''
   x4Description: ''
-  rotate: ''
 _theme:
   description: "Popis"
   keys:
     mention: "Zmínění"
     renote: "Přeposlat"
-    fg: ''
     navHoverFg: ''
-    dateLabelFg: ''
     toastBg: ''
-    accentLighten: ''
   installed: ''
-  color: ''
   alpha: ''
 _sfx:
   note: "Poznámky"
@@ -524,17 +516,14 @@ _widgets:
   activity: "Aktivita"
   federation: "Federace"
   jobQueue: "Fronta úloh"
-  digitalClock: ''
 _cw:
   show: "Zobrazit více"
 _visibility:
   home: "Domů"
   followers: "Sledující"
-  public: ''
 _profile:
   name: "Jméno"
   username: "Uživatelské jméno"
-  changeAvatar: ''
 _exportOrImport:
   followingList: "Sledovaní"
   muteList: "Ztlumit"
@@ -542,7 +531,6 @@ _exportOrImport:
   userLists: "Seznamy"
 _charts:
   federation: "Federace"
-  notesTotal: ''
 _timelines:
   home: "Domů"
 _notification:
@@ -554,11 +542,9 @@ _notification:
     renote: "Přeposlat"
     quote: "Citovat"
     reaction: "Reakce"
-    app: ''
   _actions:
     reply: "Odpovědět"
     renote: "Přeposlat"
-  youGotMessagingMessageFromUser: ''
 _deck:
   _columns:
     notifications: "Oznámení"
@@ -566,106 +552,58 @@ _deck:
     antenna: "Antény"
     list: "Seznamy"
     mentions: "Zmínění"
-  addColumn: ''
 _services:
   _discord:
     disconnected: ''
-_ffVisibility:
-  public: ''
 _instanceCharts:
   cacheSize: ''
-_accountDelete:
-  mayTakeTime: ''
 _wordMute:
   muteWords: ''
 _tutorial:
-  step2_1: ''
   step3_1: ''
-  step5_3: ''
 _auth:
   shareAccessAsk: ''
 _pages:
-  created: ''
   viewPage: ''
-  url: ''
   eyeCatchingImageRemove: ''
-_emailUnavailable:
-  format: ''
 _forgotPassword:
   ifNoEmail: ''
-_registry:
-  keys: ''
 _instanceTicker:
   none: ''
-_channel:
-  edit: ''
 _menuDisplay:
   sideFull: ''
 _ago:
-  future: ''
   yearsAgo: ''
-_2fa:
-  step1: ''
 _permissions:
   "read:blocks": ''
-  "read:messaging": ''
   "write:reactions": ''
-  "read:channels": ''
 _antennaSources:
   users: ''
-_weekday:
-  friday: ''
 _poll:
   at: ''
-  showResult: ''
 _postForm:
   quotePlaceholder: ''
-_relayStatus:
-  requesting: ''
 clearCachedFilesConfirm: ''
-lookup: ''
 whenServerDisconnected: ''
-pinnedClipId: ''
 withFileAntenna: ''
-unsilenceConfirm: ''
 messagingWithUser: ''
-disableAnimatedMfm: ''
 objectStorageBaseUrl: ''
-objectStorageRegion: ''
 newNoteRecived: ''
-installedDate: ''
 relays: ''
-enablePlayer: ''
 undeck: ''
-pluginTokenRequestedDescription: ''
 regexpErrorDescription: ''
-useGlobalSettingDesc: ''
 abuseReported: ''
-openInNewTab: ''
 switchUi: ''
-manageAccessTokens: ''
 followersCount: ''
-driveUsage: ''
 notSet: ''
-experimentalFeatures: ''
 wide: ''
-myTheme: ''
 updatedAt: ''
-youAreRunningUpToDateClient: ''
 emailNotification: ''
-markAllAsRead: ''
 unknown: ''
-botProtection: ''
 accounts: ''
-recentPosts: ''
 low: ''
-sent: ''
 whatIsNew: ''
-unresolved: ''
 manageAccounts: ''
-continueThread: ''
 clickToFinishEmailVerification: ''
-instanceDefaultLightTheme: ''
 oneWeek: ''
-isSystemAccount: ''
 confirmToUnclipAlreadyClippedNote: ''

@@ -61,43 +61,30 @@ _mfm:
   mention: "Bder"
   search: "Nadi"
   font: "Tasefsit"
-  url: ''
   center: ''
-  blockMath: ''
   jelly: ''
-  shake: ''
   x3: ''
-  rainbowDescription: ''
 _theme:
   keys:
     mention: "Bder"
-    panel: ''
     link: ''
-    dateLabelFg: ''
     toastFg: ''
-    messageBg: ''
   description: ''
-  addConstant: ''
   argument: ''
 _sfx:
   notification: "Ilɣuyen"
 _permissions:
   "write:account": "Ẓreg talɣut n umiḍan-ik·im"
-  "read:following": ''
   "write:notifications": ''
-  "read:user-groups": ''
 _widgets:
   notifications: "Ilɣuyen"
-  activity: ''
   jobQueue: ''
 _cw:
   show: "Wali ugar"
 _visibility:
   followers: "Imeḍfaṛen"
-  specified: ''
 _profile:
   username: "Isem n umseqdac"
-  metadataContent: ''
 _exportOrImport:
   followingList: "Ig ṭṭafaṛ"
   muteList: "Sgugem"
@@ -109,168 +96,91 @@ _pages:
   fontSerif: "Serif"
   fontSansSerif: "Sans Serif"
   eyeCatchingImageRemove: "Kkes tugna i d-ijebden"
-  pageSetting: ''
   my: ''
-  eyeCatchingImageSet: ''
 _notification:
   youWereFollowed: "Yeṭṭafaṛ-ik·em-id"
   _types:
     follow: "Ig ṭṭafaṛ"
     mention: "Bder"
-    receiveFollowRequest: ''
   _actions:
     reply: "Err"
-  youGotPoll: ''
 _deck:
   _columns:
     notifications: "Ilɣuyen"
     list: "Tibdarin"
-  columnAlign: ''
   stackLeft: ''
-smtpSecureInfo: ''
 fetchingAsApObject: ''
-basicSettings: ''
 users: ''
-pin: ''
 searchUser: ''
-unfollowConfirm: ''
 retry: ''
-followRequests: ''
 cantReRenote: ''
-reactionSetting: ''
 block: ''
-selectAntenna: ''
 emojiUrl: ''
-flagAsCatDescription: ''
 wallpaper: ''
-selectUser: ''
 latestStatus: ''
-software: ''
 disk: ''
-blockedInstances: ''
 intro: ''
-blocked: ''
 instanceUsers: ''
-featured: ''
 deleteAreYouSure: ''
-fromUrl: ''
 startMessaging: ''
-images: ''
 light: ''
-selectFiles: ''
 addFile: ''
-hasChildFilesOrFolders: ''
 reload: ''
-instanceName: ''
 monthX: ''
-registration: ''
 backgroundImageUrl: ''
-hcaptcha: ''
 avoidMultiCaptchaConfirm: ''
-notifyAntenna: ''
 withFiles: ''
-recentlyDiscoveredUsers: ''
 moderator: ''
-reduceUiAnimation: ''
 markAsReadAllTalkMessages: ''
-joinedGroups: ''
 text: ''
-noMessagesYet: ''
 usernameInvalidFormat: ''
-signinFailed: ''
 joinOrCreateGroup: ''
-existingAccount: ''
 total: ''
-objectStorage: ''
 objectStorageEndpoint: ''
-objectStorageSetPublicRead: ''
 showInPage: ''
-install: ''
 descendingOrder: ''
-removeAllFollowing: ''
 addItem: ''
-enableInfiniteScroll: ''
 describeFile: ''
-useFullReactionPicker: ''
 enableAll: ''
-enableEmail: ''
 wordMute: ''
-metrics: ''
 notificationSettingDesc: ''
-sample: ''
 reporterOrigin: ''
-editTheseSettingsMayBreakAccount: ''
 createNew: ''
-renotesCount: ''
 pollVotedCount: ''
-alwaysMarkSensitive: ''
 contact: ''
-duplicate: ''
 clearCache: ''
-saveAs: ''
 registry: ''
-inUse: ''
 jumpToSpecifiedDate: ''
-addDescription: ''
 hideOnlineStatusDescription: ''
-enabled: ''
 configure: ''
-memo: ''
 customCss: ''
-troubleshooting: ''
 keepCw: ''
-emailRequiredForSignup: ''
 muteThread: ''
-hide: ''
 auto: ''
-indefinitely: ''
 cropImage: ''
-numberOfPageCacheDescription: ''
 check: ''
-_menuDisplay:
-  top: ''
 _emailUnavailable:
   mx: ''
-_accountDelete:
-  accountDelete: ''
 _forgotPassword:
   contactAdmin: ''
-_registry:
-  scope: ''
 _aboutMisskey:
   source: ''
-_channel:
-  setBanner: ''
 _wordMute:
   muteWordsDescription: ''
-_instanceMute:
-  instanceMuteDescription2: ''
 _ago:
   daysAgo: ''
 _tutorial:
-  title: ''
   step3_3: ''
-  step6_1: ''
 _2fa:
   registerKey: ''
-_auth:
-  shareAccessAsk: ''
 _antennaSources:
   userList: ''
-_weekday:
-  saturday: ''
 _poll:
   after: ''
-  voted: ''
 _postForm:
   channelPlaceholder: ''
 _charts:
-  apRequest: ''
   filesIncDec: ''
-_instanceCharts:
-  notesTotal: ''
 _timelines:
   local: ''
-_services:
-  _twitter:
-    connected: ''
+_services: {}

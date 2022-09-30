@@ -1463,6 +1463,4 @@ _deck:
     mentions: "Zmienky"
     direct: "Priame poznámky"
 _services: {}
-showLess: ''
 typeToConfirm: ''
-noEmailServerWarning: ''

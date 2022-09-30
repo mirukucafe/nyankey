@@ -134,44 +134,32 @@ _mfm:
   mention: "Menció"
   quote: "Citar"
   search: "Cercar"
-  urlDescription: ''
   centerDescription: ''
-  quoteDescription: ''
   tada: ''
-  twitch: ''
   x4: ''
-  rotate: ''
 _theme:
   keys:
     mention: "Menció"
     renote: "Renotar"
-    header: ''
     mentionMe: ''
-    infoWarnBg: ''
     buttonHoverBg: ''
-    accentLighten: ''
   installedThemes: ''
-  defaultValue: ''
   basedProp: ''
 _sfx:
   note: "Notes"
   notification: "Notificacions"
 _2fa:
   step2Url: "També pots inserir aquest enllaç i utilitzes una aplicació d'escriptori:"
-  securityKeyInfo: ''
 _widgets:
   notifications: "Notificacions"
   timeline: "Línia de temps"
-  photos: ''
   serverMetric: ''
 _cw:
   show: "Carregar més"
 _visibility:
   followers: "Seguidors"
-  localOnly: ''
 _profile:
   username: "Nom d'usuari"
-  metadataContent: ''
 _exportOrImport:
   followingList: "Seguint"
   userLists: "Llistes"
@@ -183,160 +171,88 @@ _notification:
     renote: "Renotar"
     quote: "Citar"
     reaction: "Reaccions"
-    app: ''
   _actions:
     reply: "Respondre"
     renote: "Renotar"
-  youGotMessagingMessageFromUser: ''
 _deck:
   _columns:
     notifications: "Notificacions"
     tl: "Línia de temps"
     list: "Llistes"
     mentions: "Mencions"
-  columnHeaderHeight: ''
   profile: ''
 _services: {}
 _ago:
-  daysAgo: ''
   yearsAgo: ''
-_charts:
-  remoteNotesIncDec: ''
 _instanceCharts:
   ff: ''
-  cacheSizeTotal: ''
 muteThread: ''
-unlimited: ''
 _ffVisibility:
   private: ''
-_accountDelete:
-  started: ''
 _gallery:
   liked: ''
-_registry:
-  keys: ''
 _nsfw:
   respect: ''
-_serverDisconnectedBehavior:
-  quiet: ''
 _channel:
   following: ''
-_wordMute:
-  muteWordsDescription: ''
 _instanceMute:
   instanceMuteDescription2: ''
 _tutorial:
-  step1_1: ''
   step3_4: ''
-  step6_2: ''
 _permissions:
   "write:blocks": ''
-  "write:messaging": ''
   "write:votes": ''
-  "write:channels": ''
 _auth:
   pleaseGoBack: ''
-_weekday:
-  sunday: ''
 _poll:
   choiceN: ''
-  deadlineTime: ''
   remainingDays: ''
-_postForm:
-  _placeholders:
-    b: ''
+_postForm: {}
 _pages:
   created: ''
-  viewSource: ''
   title: ''
-  eyeCatchingImageSet: ''
 unmute: ''
-unsuspendConfirm: ''
 emojis: ''
-flagAsBotDescription: ''
 showOnRemote: ''
-proxyAccount: ''
 latestRequestSentAt: ''
-blockThisInstance: ''
 cpuAndMemory: ''
-clearCachedFiles: ''
 editProfile: ''
-noJobs: ''
 instanceFollowers: ''
-attachFile: ''
 removed: ''
-keepOriginalUploadingDescription: ''
 messageRead: ''
-remoteUserCaution: ''
 themeForLightMode: ''
-fileName: ''
 renameFolder: ''
-inputNewFolderName: ''
 disconnectedFromServer: ''
-normal: ''
 today: ''
-enableLocalTimeline: ''
 inMb: ''
-pinnedPagesDescription: ''
 recaptchaSiteKey: ''
-antennaExcludeKeywords: ''
 connectedTo: ''
-recentlyUpdatedUsers: ''
 administrator: ''
-lastUsed: ''
 notFoundDescription: ''
-close: ''
 members: ''
-retype: ''
 signinRequired: ''
-tooLong: ''
 tapSecurityKey: ''
-youHaveNoGroups: ''
 docSource: ''
-local: ''
 numberOfDays: ''
-objectStorageBucketDesc: ''
 objectStorageUseSSLDesc: ''
-sounds: ''
 chooseEmoji: ''
-lastUsedDate: ''
 script: ''
-yourAccountSuspendedTitle: ''
 addedRelays: ''
-enablePlayer: ''
 manage: ''
-large: ''
 pluginTokenRequestedDescription: ''
-emailAddress: ''
 instanceMute: ''
-delayed: ''
 other: ''
-reportAbuse: ''
 forwardReportIsAnonymous: ''
-waitingFor: ''
 createNewClip: ''
-repliedCount: ''
 yes: ''
-loadRawImages: ''
 contact: ''
-duplicate: ''
 clearCache: ''
-saveAs: ''
 registry: ''
-inUse: ''
 typingUsers: ''
-quitFullView: ''
 hideOnlineStatus: ''
-selectAccount: ''
 noBotProtectionWarning: ''
-expiration: ''
 previewNoteText: ''
-hashtags: ''
 usernameInfo: ''
-itsOff: ''
 classic: ''
-useDrawerReactionPickerForMobile: ''
 numberOfColumn: ''
-oneDay: ''
 recentNDays: ''
-unclip: ''

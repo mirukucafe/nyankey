@@ -864,7 +864,6 @@ _mfm:
   font: "Шрифт"
   fontDescription: "Встановлює шрифт для контенту."
   rotate: "Обертати"
-  sparkleDescription: ''
 _instanceTicker:
   none: "Не відображати"
   remote: "Відображати для віддалених користувачів"
@@ -960,7 +959,6 @@ _theme:
     accentDarken: "Акцент (Затемлений)"
     accentLighten: "Акцент (Освітлений)"
     fgHighlighted: "Виділений текст"
-  alpha: ''
 _sfx:
   note: "Нотатки"
   noteMy: "Мої нотатки"
@@ -1020,7 +1018,6 @@ _tutorial:
   step7_3: "Насолоджуйтесь FoundKey! \U0001F680"
 _2fa:
   registerKey: "Зареєструвати новий ключ безпеки"
-  securityKeyInfo: ''
 _permissions:
   "read:account": "Переглядати дані профілю"
   "write:account": "Змінити дані акаунту"
@@ -1259,27 +1256,14 @@ _deck:
     list: "Списки"
     mentions: "Згадки"
     direct: "Особисте"
-_instanceMute:
-  title: ''
 fullView: ''
-hideOnlineStatus: ''
 selectAccount: ''
-noBotProtectionWarning: ''
 memo: ''
-squareAvatars: ''
 translate: ''
-breakFollow: ''
 makeReactionsPublic: ''
-deleteAccountConfirm: ''
 smartphone: ''
-instanceDefaultThemeDescription: ''
 failedToFetchAccountInformation: ''
-deleteAccount: ''
 thereIsUnresolvedAbuseReportWarning: ''
-_emailUnavailable:
-  smtp: ''
 _forgotPassword:
   ifNoEmail: ''
-_services:
-  _twitter:
-    connected: ''
+_services: {}

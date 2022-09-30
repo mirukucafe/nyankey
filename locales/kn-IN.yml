@@ -67,207 +67,117 @@ _email:
     title: "ಹಿಂಬಾಲಿಸಿದರು"
 _mfm:
   search: "ಹುಡುಕು"
-  url: ''
   center: ''
-  blockMath: ''
   flipDescription: ''
-  bounceDescription: ''
   x2Description: ''
-  fontDescription: ''
 _sfx:
   notification: "ಅಧಿಸೂಚನೆಗಳು"
 _widgets:
   notifications: "ಅಧಿಸೂಚನೆಗಳು"
   timeline: "ಸಮಯಸಾಲು"
-  photos: ''
   serverMetric: ''
 _cw:
   show: "ಇನ್ನಷ್ಟು ನೋಡು"
 _profile:
   username: "ಬಳಕೆಹೆಸರು"
-  metadataContent: ''
 _notification:
   youWereFollowed: "ಹಿಂಬಾಲಿಸಿದರು"
   _actions:
     reply: "ಉತ್ತರಿಸು"
-  youGotPoll: ''
   _types:
     all: ''
-    pollEnded: ''
 _deck:
   _columns:
     notifications: "ಅಧಿಸೂಚನೆಗಳು"
     tl: "ಸಮಯಸಾಲು"
     mentions: "ಹೆಸರಿಸಿದ"
-  columnMargin: ''
   popRight: ''
-width: ''
 deleteAndEdit: ''
-noLists: ''
 somethingHappened: ''
-makeFollowManuallyApprove: ''
 renote: ''
-clickToShow: ''
 enterFileName: ''
-unblockConfirm: ''
 customEmojis: ''
-cacheRemoteFilesDescription: ''
 addAccount: ''
-youHaveNoLists: ''
 federation: ''
-perHour: ''
 withNFiles: ''
-clearQueue: ''
 mutedUsers: ''
-preview: ''
 subscribing: ''
-currentPassword: ''
 lookup: ''
-messaging: ''
 uploadFromUrlRequested: ''
-tos: ''
 registeredDate: ''
-darkThemes: ''
 renameFile: ''
-unableToDelete: ''
 avatar: ''
-watch: ''
 maintainerEmail: ''
-pages: ''
 enableRegistration: ''
-basicInfo: ''
 enableHcaptcha: ''
-antennas: ''
 withFileAntenna: ''
-silence: ''
 exploreUsersCount: ''
-moderator: ''
 resetPassword: ''
-markAsReadAllNotifications: ''
 createGroup: ''
-messagingWithGroup: ''
 quoteAttached: ''
-checking: ''
 strongPassword: ''
-uiLanguage: ''
 signinHistory: ''
-regenerate: ''
 weekOverWeekChanges: ''
-objectStorage: ''
 objectStorageEndpoint: ''
-objectStorageSetPublicRead: ''
 showInPage: ''
-install: ''
 ascendingOrder: ''
-deleteAllFilesConfirm: ''
 divider: ''
-invisibleNote: ''
 description: ''
-undeck: ''
 enableAll: ''
-enableEmail: ''
 emptyToDisableSmtpAuth: ''
-makeActive: ''
 channel: ''
-regenerateLoginTokenDescription: ''
 fillAbuseReportDescription: ''
-abuseMarkAsResolved: ''
 system: ''
-i18nInfo: ''
 followingCount: ''
-driveFilesCount: ''
 verificationEmailSent: ''
-clips: ''
 center: ''
-nUsers: ''
 value: ''
-currentVersion: ''
 apply: ''
-showingPastTimeline: ''
 userPagePinTip: ''
-online: ''
 enabled: ''
-configure: ''
 memo: ''
-customCss: ''
 troubleshooting: ''
-usernameInfo: ''
 itsOff: ''
-classic: ''
 voteConfirm: ''
-tablet: ''
 mutePeriod: ''
-rateLimitExceeded: ''
 numberOfPageCache: ''
-recommended: ''
 _nsfw:
   force: ''
 _poll:
-  noOnlyOneChoice: ''
   deadlineTime: ''
-  remainingDays: ''
 _theme:
   code: ''
-  base: ''
   func: ''
-  deleteConstantConfirm: ''
   keys:
     header: ''
-    mention: ''
     infoBg: ''
-    toastFg: ''
     messageBg: ''
 _tutorial:
-  step1_3: ''
   step4_2: ''
-  step7_1: ''
 unlimited: ''
-_accountDelete:
-  mayTakeTime: ''
 _forgotPassword:
   ifNoEmail: ''
-_plugin:
-  manage: ''
 _aboutMisskey:
   allContributors: ''
-_serverDisconnectedBehavior:
-  quiet: ''
 _channel:
   following: ''
-_wordMute:
-  muteWordsDescription: ''
 _instanceMute:
   instanceMuteDescription2: ''
-_ago:
-  daysAgo: ''
 _2fa:
   step2: ''
 _permissions:
-  "write:blocks": ''
   "write:messaging": ''
-  "write:votes": ''
   "write:channels": ''
-_antennaSources:
-  userList: ''
 _weekday:
   saturday: ''
-_visibility:
-  specifiedDescription: ''
 _postForm:
   _placeholders:
     c: ''
-_exportOrImport:
-  userLists: ''
 _charts:
   notesIncDec: ''
 _instanceCharts:
-  requests: ''
   cacheSizeTotal: ''
 _pages:
-  editPage: ''
   invalidNameText: ''
-  featured: ''
   fontSerif: ''
-_services:
-  _discord:
-    disconnected: ''
+_services: {}

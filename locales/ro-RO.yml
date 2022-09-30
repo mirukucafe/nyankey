@@ -700,26 +700,18 @@ _mfm:
   quote: "Citează"
   emoji: "Emoji personalizat"
   search: "Caută"
-  dummy: ''
   bold: ''
-  blockCode: ''
   jellyDescription: ''
-  twitch: ''
   x4: ''
-  sparkle: ''
 _theme:
   description: "Descriere"
   keys:
     mention: "Mențiune"
     renote: "Re-notează"
     divider: "Separator"
-    header: ''
     mentionMe: ''
-    infoWarnFg: ''
     inputBorder: ''
-    fgHighlighted: ''
   builtinThemes: ''
-  refProp: ''
   darken: ''
 _sfx:
   note: "Note"
@@ -731,17 +723,14 @@ _widgets:
   activity: "Activitate"
   federation: "Federație"
   jobQueue: "coada de job-uri"
-  digitalClock: ''
 _cw:
   show: "Incarcă mai mult"
 _visibility:
   home: "Acasă"
   followers: "Urmăritori"
-  localOnlyDescription: ''
 _profile:
   name: "Nume"
   username: "Nume de utilizator"
-  changeAvatar: ''
 _exportOrImport:
   followingList: "Urmărești"
   muteList: "Amuțește"
@@ -749,7 +738,6 @@ _exportOrImport:
   userLists: "Liste"
 _charts:
   federation: "Federație"
-  notesTotal: ''
 _timelines:
   home: "Acasă"
 _notification:
@@ -761,11 +749,9 @@ _notification:
     renote: "Re-notează"
     quote: "Citează"
     reaction: "Reacție"
-    app: ''
   _actions:
     reply: "Răspunde"
     renote: "Re-notează"
-  youGotMessagingMessageFromUser: ''
 _deck:
   _columns:
     notifications: "Notificări"
@@ -773,84 +759,45 @@ _deck:
     antenna: "Antene"
     list: "Liste"
     mentions: "Mențiuni"
-  addColumn: ''
 unlimited: ''
-_instanceCharts:
-  cacheSize: ''
 rateLimitExceeded: ''
 _poll:
-  expiration: ''
   totalVotes: ''
-instanceTicker: ''
 accountInfo: ''
-sentReactionsCount: ''
 noCrawleDescription: ''
-noteFavoritesCount: ''
 makeExplorable: ''
-reloadToApplySetting: ''
 accentColor: ''
-deleteConfirm: ''
 usageAmount: ''
-inChannelSearch: ''
 unlikeConfirm: ''
-onlineStatus: ''
 instanceBlocking: ''
-noBotProtectionWarning: ''
 expiration: ''
-customCssWarn: ''
 useBlurEffect: ''
-pubSub: ''
 unread: ''
-unmuteThread: ''
 leaveGroup: ''
-themeColor: ''
 tenMinutes: ''
-recentNHours: ''
 unclip: ''
-_accountDelete:
-  mayTakeTime: ''
 _serverDisconnectedBehavior:
   reload: ''
-_ago:
-  minutesAgo: ''
 _auth:
   pleaseGoBack: ''
-_ffVisibility:
-  followers: ''
 _forgotPassword:
   ifNoEmail: ''
-_registry:
-  keys: ''
 _nsfw:
   respect: ''
-_channel:
-  edit: ''
 _menuDisplay:
   sideFull: ''
-_wordMute:
-  hardDescription: ''
 _time:
   second: ''
 _tutorial:
-  step2_1: ''
   step5_1: ''
-  step7_2: ''
 _2fa:
   step3: ''
-_weekday:
-  thursday: ''
 _permissions:
   "read:favorites": ''
-  "write:notes": ''
   "read:page-likes": ''
-  "read:gallery-likes": ''
 _postForm:
   quotePlaceholder: ''
 _pages:
-  newPage: ''
   invalidNameTitle: ''
-  liked: ''
   font: ''
-_services:
-  _discord:
-    connected: ''
+_services: {}

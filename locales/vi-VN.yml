@@ -1477,8 +1477,5 @@ _deck:
     list: "Danh sách"
     mentions: "Lượt nhắc"
     direct: "Nhắn riêng"
-typeToConfirm: ''
 noEmailServerWarning: ''
-_services:
-  _discord:
-    disconnected: ''
+_services: {}

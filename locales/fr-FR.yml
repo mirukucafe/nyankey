@@ -1498,9 +1498,6 @@ _deck:
     list: "Listes"
     mentions: "Mentions"
     direct: "Direct"
-_services:
-  _github:
-    connected: ''
+_services: {}
 attachmentRequired: ''
-recentNHours: ''
 file: ''

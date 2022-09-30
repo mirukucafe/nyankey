@@ -274,24 +274,16 @@ _mfm:
   quote: "Citat"
   emoji: "Anpassa emoji"
   search: "Sök"
-  url: ''
   center: ''
-  blockMathDescription: ''
   tada: ''
-  twitch: ''
   x4: ''
-  sparkle: ''
 _theme:
   keys:
     mention: "Nämn"
     renote: "Omnotera"
-    header: ''
     mentionMe: ''
-    buttonBg: ''
     accentDarken: ''
-    cwHoverBg: ''
   installed: ''
-  color: ''
   alpha: ''
 _sfx:
   note: "Noter"
@@ -302,16 +294,13 @@ _widgets:
   timeline: "Tidslinje"
   federation: "Federation"
   jobQueue: "Jobbkö"
-  photos: ''
   aichan: ''
 _cw:
   show: "Ladda mer"
 _visibility:
   followers: "Följare"
-  localOnly: ''
 _profile:
   username: "Användarnamn"
-  metadataContent: ''
 _exportOrImport:
   followingList: "Följer"
   muteList: "Tysta"
@@ -319,7 +308,6 @@ _exportOrImport:
   userLists: "Listor"
 _charts:
   federation: "Federation"
-  notesTotal: ''
 _notification:
   youWereFollowed: "följde dig"
   _types:
@@ -328,146 +316,80 @@ _notification:
     renote: "Omnotera"
     quote: "Citat"
     reaction: "Reaktioner"
-    all: ''
   _actions:
     reply: "Svara"
     renote: "Omnotera"
-  youGotMessagingMessageFromUser: ''
 _deck:
   _columns:
     notifications: "Notifikationer"
     tl: "Tidslinje"
     list: "Listor"
     mentions: "Omnämningar"
-  columnMargin: ''
   popRight: ''
-_ffVisibility:
-  private: ''
 _signup:
   almostThere: ''
-_ad:
-  reduceFrequencyOfThisAd: ''
 _plugin:
   install: ''
-_aboutMisskey:
-  about: ''
 _serverDisconnectedBehavior:
   reload: ''
-_channel:
-  featured: ''
 _menuDisplay:
   hide: ''
-_wordMute:
-  mutedNotes: ''
 _ago:
   minutesAgo: ''
-_time:
-  hour: ''
 _tutorial:
   step3_1: ''
-  step5_3: ''
 _permissions:
   "write:account": ''
-  "write:following": ''
   "read:reactions": ''
-  "write:user-groups": ''
 _auth:
   shareAccess: ''
-_antennaSources:
-  users: ''
 _weekday:
   saturday: ''
 _poll:
-  at: ''
   showResult: ''
-_postForm:
-  quotePlaceholder: ''
 _instanceCharts:
   requests: ''
-  cacheSizeTotal: ''
 _pages:
   editPage: ''
-  invalidNameText: ''
   featured: ''
-  fontSerif: ''
 _services:
   _discord:
     disconnected: ''
-_2fa:
-  alreadyRegistered: ''
 showLess: ''
-explore: ''
 home: ''
-theme: ''
 drive: ''
-createFolder: ''
 inputNewDescription: ''
-whenServerDisconnected: ''
 reject: ''
-thisMonth: ''
 disconnectService: ''
-driveCapacityPerRemoteAccount: ''
 pinnedPages: ''
-enableRecaptcha: ''
 antennaKeywords: ''
-withReplies: ''
 popularUsers: ''
-aboutMisskey: ''
 registerSecurityKey: ''
-notFound: ''
 inputMessageHere: ''
-groupName: ''
 retype: ''
-signinRequired: ''
 tooLong: ''
-tapSecurityKey: ''
 youHaveNoGroups: ''
-docSource: ''
 local: ''
-numberOfDays: ''
 objectStorageBucketDesc: ''
-objectStorageUseSSLDesc: ''
 sounds: ''
-chooseEmoji: ''
 lastUsedDate: ''
-updateRemoteUser: ''
 yourAccountSuspendedDescription: ''
-serviceworkerInfo: ''
 disablePlayer: ''
-plugins: ''
 medium: ''
-notificationType: ''
 smtpConfig: ''
-regexpErrorDescription: ''
 logs: ''
-useGlobalSettingDesc: ''
 abuseReports: ''
-forwardReport: ''
 instanceTicker: ''
-optional: ''
 renotesCount: ''
-pollVotedCount: ''
 alwaysMarkSensitive: ''
-pageLikedCount: ''
 showGapBetweenNotesInTimeline: ''
-showTitlebar: ''
 saveAs: ''
-registry: ''
 inUse: ''
-typingUsers: ''
 quitFullView: ''
-hideOnlineStatus: ''
 selectAccount: ''
-noMaintainerInformationWarning: ''
 shareWithNote: ''
-ratio: ''
 searchResult: ''
-translatedFrom: ''
 itsOn: ''
-makeReactionsPublicDescription: ''
 incorrectPassword: ''
-smartphone: ''
 instanceDefaultThemeDescription: ''
-failedToFetchAccountInformation: ''
 deleteAccount: ''
-thereIsUnresolvedAbuseReportWarning: ''

@@ -698,11 +698,8 @@ _mfm:
   blur: "ぼかし"
   font: "フォント"
   rotate: "回転"
-  x4Description: ''
   intro: ''
-  smallDescription: ''
   emojiDescription: ''
-  jump: ''
 _instanceTicker:
   none: "表示せん"
   remote: "リモートユーザーに表示"
@@ -813,11 +810,9 @@ _time:
   day: "日"
 _tutorial:
   step3_1: "プロフィール設定はええ感じにできたか？"
-  step1_3: ''
   step5_1: ''
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
-  securityKeyInfo: ''
 _permissions:
   "read:reactions": "リアクションを見る"
   "write:votes": "投票する"
@@ -826,9 +821,7 @@ _permissions:
   "write:page-likes": "ページのええやんを操作する"
   "read:user-groups": "ユーザーグループを見る"
   "read:channels": "チャンネルを見る"
-  "write:favorites": ''
   "read:notifications": ''
-  "read:gallery-likes": ''
 _auth:
   permissionAsk: "このアプリは次の権限を要求しとるで"
 _antennaSources:
@@ -879,7 +872,6 @@ _poll:
   duration: "期間"
   votesCount: "{n}票"
   vote: "投票する"
-  remainingMinutes: ''
 _visibility:
   publicDescription: "みんなに公開"
   home: "ホーム"
@@ -887,7 +879,6 @@ _visibility:
 _profile:
   name: "名前"
   username: "ユーザー名"
-  changeAvatar: ''
 _exportOrImport:
   allNotes: "全てのノート"
   followingList: "フォロー"
@@ -944,7 +935,6 @@ _pages:
   fontSansSerif: "サンセリフ"
   eyeCatchingImageSet: "アイキャッチ画像を設定"
   eyeCatchingImageRemove: "アイキャッチ画像を削除"
-  title: ''
 _notification:
   fileUploaded: "ファイルが無事アップロードされたで。"
   youGotMention: "{name}からのメンション"
@@ -965,7 +955,6 @@ _notification:
   _actions:
     reply: "返事"
     renote: "Renote"
-  emptyPushNotificationMessage: ''
 _deck:
   alwaysShowMainColumn: "いつもメインカラムを表示"
   columnAlign: "カラムの寄せ"
@@ -988,40 +977,21 @@ _deck:
     list: "リスト"
     mentions: "あんた宛て"
     direct: "ダイレクト"
-_emailUnavailable:
-  smtp: ''
 _accountDelete:
   accountDelete: ''
-_forgotPassword:
-  contactAdmin: ''
 _postForm:
   quotePlaceholder: ''
 _services: {}
-showLess: ''
 disableDrawer: ''
-yourAccountSuspendedTitle: ''
 visibility: ''
-enableAll: ''
 regexpError: ''
-abuseReported: ''
 createNewClip: ''
-repliedCount: ''
 lockedAccountInfo: ''
-useSystemFont: ''
 publish: ''
-unknown: ''
 botProtection: ''
-switch: ''
 popularPosts: ''
-accountDeletionInProgress: ''
 whatIsNew: ''
-unresolved: ''
 manageAccounts: ''
-continueThread: ''
 overridedDeviceKind: ''
-instanceDefaultDarkTheme: ''
 failedToFetchAccountInformation: ''
-deleteAccount: ''
 thereIsUnresolvedAbuseReportWarning: ''
-_instanceMute:
-  instanceMuteDescription: ''

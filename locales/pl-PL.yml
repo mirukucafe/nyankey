@@ -882,9 +882,7 @@ _mfm:
   font: "Czcionka"
   fontDescription: "Wybiera czcionkę do wyświetlania treści."
   rotate: "Obróć"
-  blockMathDescription: ''
   bounceDescription: ''
-  rainbow: ''
 _instanceTicker:
   none: "Nigdy nie pokazuj"
   remote: "Pokaż dla zdalnych użytkowników"
@@ -1017,7 +1015,6 @@ _tutorial:
     \ obserwować."
   step3_1: "Zakończyłeś(-aś) konfigurację profilu?"
   step3_3: "Wypełnij pole i kliknij przycisk w prawym górnym rogu by wysłać post."
-  step5_2: ''
   step7_3: ''
 _2fa:
   registerDevice: "Zarejestruj nowe urządzenie"
@@ -1050,7 +1047,6 @@ _permissions:
   "write:page-likes": "Edycja polubień na stronach"
   "read:user-groups": "Wyświetlanie grup użytkownika"
   "write:user-groups": "Edycja lub usuwanie grup użytkownika"
-  "read:gallery-likes": ''
 _auth:
   shareAccess: "Czy chcesz autoryzować „{name}” do dostępu do tego konta?"
   permissionAsk: "Ta aplikacja wymaga następujących uprawnień:"
@@ -1075,7 +1071,6 @@ _widgets:
   postForm: "Utwórz wpis"
   button: "Przycisk"
   jobQueue: "Kolejka zadań"
-  aichan: ''
 _cw:
   hide: "Ukryj"
   show: "Załaduj więcej"
@@ -1142,7 +1137,6 @@ _charts:
   apRequest: "Żądania"
   usersTotal: "Łącznie # użytkowników"
   activeUsers: "Aktywni użytkownicy"
-  storageUsageIncDec: ''
 _instanceCharts:
   requests: "Żądania"
   notesTotal: "Łącznie # wpisów"
@@ -1242,24 +1236,14 @@ _deck:
     list: "Listy"
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
-keepOriginalUploadingDescription: ''
 menu: ''
-forwardReportIsAnonymous: ''
 learnMore: ''
-lastCommunication: ''
 filter: ''
-ffVisibility: ''
 useDrawerReactionPickerForMobile: ''
-numberOfColumn: ''
 oneWeek: ''
-isSystemAccount: ''
 noEmailServerWarning: ''
-_emailUnavailable:
-  disposable: ''
 _accountDelete:
   sendEmail: ''
-_instanceMute:
-  heading: ''
 _services:
   _twitter:
     connected: ''

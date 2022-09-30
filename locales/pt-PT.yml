@@ -176,24 +176,16 @@ _mfm:
   quote: "Citar"
   emoji: "Emoji personalizado"
   search: "Pesquisar"
-  hashtag: ''
   smallDescription: ''
-  inlineMathDescription: ''
   jelly: ''
-  shake: ''
   x3: ''
-  sparkle: ''
 _theme:
   keys:
     mention: "Menção"
     renote: "Repostar"
-    header: ''
     mentionMe: ''
-    infoWarnBg: ''
     buttonHoverBg: ''
-    accentLighten: ''
   installedThemes: ''
-  defaultValue: ''
   basedProp: ''
 _sfx:
   note: "Posts"
@@ -201,16 +193,13 @@ _sfx:
 _widgets:
   notifications: "Notificações"
   timeline: "Timeline"
-  activity: ''
   serverMetric: ''
 _cw:
   show: "Carregar mais"
 _visibility:
   followers: "Seguidores"
-  localOnly: ''
 _profile:
   username: "Nome de usuário"
-  metadataContent: ''
 _exportOrImport:
   followingList: "Seguindo"
   muteList: "Silenciar"
@@ -273,146 +262,76 @@ _deck:
     list: "Listas"
     mentions: "Menções"
     direct: "Notas diretas"
-accentColor: ''
 _instanceCharts:
   ffTotal: ''
-_gallery:
-  unlike: ''
 autoAcceptFollowed: ''
-host: ''
 storageUsage: ''
-withNFiles: ''
 clearQueue: ''
-mutedUsers: ''
 preview: ''
-subscribing: ''
 currentPassword: ''
-lookup: ''
 messaging: ''
-uploadFromUrlRequested: ''
 start: ''
-location: ''
 fileName: ''
-renameFolder: ''
 circularReferenceFolder: ''
-reload: ''
 instanceName: ''
-dayX: ''
 disablingTimelinesInfo: ''
-bannerUrl: ''
 hcaptcha: ''
-avoidMultiCaptchaConfirm: ''
 notifyAntenna: ''
-withFiles: ''
 recentlyDiscoveredUsers: ''
-twoStepAuthentication: ''
 passwordLessLogin: ''
-markAsReadAllNotifications: ''
 createGroup: ''
-messagingWithGroup: ''
 quoteAttached: ''
-checking: ''
 strongPassword: ''
-uiLanguage: ''
 signinHistory: ''
-regenerate: ''
 weekOverWeekChanges: ''
-objectStorage: ''
 objectStorageEndpoint: ''
-objectStorageSetPublicRead: ''
 popout: ''
-uninstall: ''
 descendingOrder: ''
-removeAllFollowingDescription: ''
 relays: ''
-visibility: ''
 enterFileDescription: ''
-width: ''
 enableAll: ''
-enableEmail: ''
 smtpSecure: ''
-display: ''
 create: ''
-setMultipleBySeparatingWithSpace: ''
 abuseReported: ''
-openInNewTab: ''
 switchUi: ''
-manageAccessTokens: ''
 followersCount: ''
-driveUsage: ''
 notSet: ''
-makeExplorable: ''
 reloadToApplySetting: ''
-backgroundColor: ''
 deleteConfirm: ''
-usageAmount: ''
 useReactionPickerForContextMenu: ''
-fullView: ''
 onlineStatus: ''
-instanceBlocking: ''
 switch: ''
-popularPosts: ''
 emailNotConfiguredWarning: ''
-received: ''
 translate: ''
-breakFollow: ''
 makeReactionsPublic: ''
-deleteAccountConfirm: ''
 overridedDeviceKind: ''
-instanceDefaultDarkTheme: ''
 reflectMayTakeTime: ''
-typeToConfirm: ''
 noEmailServerWarning: ''
-_aboutMisskey:
-  contributors: ''
 _channel:
   featured: ''
-_ago:
-  secondsAgo: ''
 _timelines:
   social: ''
-_emailUnavailable:
-  used: ''
 _signup:
   almostThere: ''
-_accountDelete:
-  inProgress: ''
 _nsfw:
   ignore: ''
-maxCustomEmojiPicker: ''
 _wordMute:
   softDescription: ''
-_instanceMute:
-  heading: ''
 _tutorial:
   step1_3: ''
-  step4_2: ''
   step7_1: ''
-_2fa:
-  step2Url: ''
 _permissions:
   "read:drive": ''
-  "read:mutes": ''
   "read:pages": ''
-  "read:gallery": ''
 _auth:
   callback: ''
-_weekday:
-  monday: ''
 _poll:
   noMore: ''
-  duration: ''
   remainingHours: ''
-_postForm:
-  _placeholders:
-    c: ''
+_postForm: {}
 _charts:
   activeUsers: ''
-  storageUsageTotal: ''
 _pages:
   nameAlreadyExists: ''
-  my: ''
   hideTitleWhenPinned: ''
-_services:
-  _twitter:
-    connected: ''
+_services: {}

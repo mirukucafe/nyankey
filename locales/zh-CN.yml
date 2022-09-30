@@ -1385,6 +1385,4 @@ _deck:
     mentions: "提及"
     direct: "指定用户"
 _services: {}
-attachmentRequired: ''
 deleteAccount: ''
-thereIsUnresolvedAbuseReportWarning: ''

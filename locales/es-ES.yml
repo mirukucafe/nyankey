@@ -937,11 +937,8 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
-  inlineCodeDescription: ''
   jelly: ''
-  shake: ''
   x4Description: ''
-  rotateDescription: ''
 _instanceTicker:
   none: "No mostrar"
   remote: "Mostrar a usuarios remotos"
@@ -1363,15 +1360,9 @@ _deck:
     list: "Listas"
     mentions: "Menciones"
     direct: "Mensaje directo"
-_services:
-  _github:
-    connected: ''
+_services: {}
 _emailUnavailable:
   smtp: ''
-reporter: ''
 voteConfirm: ''
-auto: ''
 tenMinutes: ''
-cropImageAsk: ''
 document: ''
-maxUnicodeEmojiPicker: ''
