@@ -1,7 +1,7 @@
 import { defineAsyncComponent, reactive } from 'vue';
 import * as foundkey from 'foundkey-js';
-import { showSuspendedDialog } from './scripts/show-suspended-dialog';
-import { i18n } from './i18n';
+import { showSuspendedDialog } from '@/scripts/show-suspended-dialog';
+import { i18n } from '@/i18n';
 import { del, get, set } from '@/scripts/idb-proxy';
 import { apiUrl } from '@/config';
 import { waiting, api, popup, popupMenu, success, alert } from '@/os';

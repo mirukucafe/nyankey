@@ -1,9 +1,9 @@
 // PIZZAX --- A lightweight store
 
 import { onUnmounted, Ref, ref, watch } from 'vue';
-import { $i } from './account';
-import { api } from './os';
-import { stream } from './stream';
+import { $i } from '@/account';
+import { api } from '@/os';
+import { stream } from '@/stream';
 
 type StateDef = Record<string, {
 	where: 'account' | 'device' | 'deviceAccount';

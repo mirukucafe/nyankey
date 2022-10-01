@@ -1,6 +1,6 @@
 import { computed, reactive } from 'vue';
 import * as foundkey from 'foundkey-js';
-import { api } from './os';
+import { api } from '@/os';
 
 // TODO: 他のタブと永続化されたstateを同期
 

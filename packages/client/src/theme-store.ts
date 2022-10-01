@@ -1,4 +1,4 @@
-import { Theme } from './scripts/theme';
+import { Theme } from '@/scripts/theme';
 import { api } from '@/os';
 import { $i } from '@/account';
 
