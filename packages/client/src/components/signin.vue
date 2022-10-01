@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent } from 'vue';
 import { toUnicode } from 'punycode/';
-import { showSuspendedDialog } from '../scripts/show-suspended-dialog';
+import { showSuspendedDialog } from '@/scripts/show-suspended-dialog';
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
 import MkInfo from '@/components/ui/info.vue';
