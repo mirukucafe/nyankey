@@ -12,7 +12,7 @@ import { genId } from '@/misc/gen-id.js';
 import { isDuplicateKeyValueError } from '@/misc/is-duplicate-key-value-error.js';
 import { NoteReaction } from '@/models/entities/note-reaction.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
-import { createNotification } from '../../create-notification.js';
+import { createNotification } from '@/services/create-notification.js';
 import deleteReaction from './delete.js';
 
 export default async (user: { id: User['id']; host: User['host']; }, note: Note, reaction?: string) => {

@@ -16,7 +16,7 @@ import { LdSignature } from '@/remote/activitypub/misc/ld-signature.js';
 import { StatusError } from '@/misc/fetch.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { UserPublickey } from '@/models/entities/user-publickey.js';
-import { InboxJobData } from '../types.js';
+import { InboxJobData } from '@/queue/types.js';
 
 const logger = new Logger('inbox');
 

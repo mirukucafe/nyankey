@@ -8,8 +8,8 @@ import { downloadUrl } from '@/misc/download-url.js';
 import { genId } from '@/misc/gen-id.js';
 import { DriveFiles, Emojis } from '@/models/index.js';
 import { DbUserImportJobData } from '@/queue/types.js';
+import { queueLogger } from '@/queue/logger.js';
 import { addFile } from '@/services/drive/add-file.js';
-import { queueLogger } from '../../logger.js';
 
 const logger = queueLogger.createSubLogger('import-custom-emojis');
 

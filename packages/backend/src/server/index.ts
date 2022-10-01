@@ -19,7 +19,7 @@ import { genIdenticon } from '@/misc/gen-identicon.js';
 import { createTemp } from '@/misc/create-temp.js';
 import { publishMainStream } from '@/services/stream.js';
 import * as Acct from '@/misc/acct.js';
-import { envOption } from '../env.js';
+import { envOption } from '@/env.js';
 import activityPub from './activitypub.js';
 import nodeinfo from './nodeinfo.js';
 import wellKnown from './well-known.js';

@@ -1,6 +1,6 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { toSingle } from '@/prelude/array.js';
-import { IDelete, getApId, isTombstone, IObject, validPost, validActor } from '../../type.js';
+import { IDelete, getApId, isTombstone, IObject, validPost, validActor } from '@/remote/activitypub/type.js';
 import { deleteActor } from './actor.js';
 import deleteNote from './note.js';
 

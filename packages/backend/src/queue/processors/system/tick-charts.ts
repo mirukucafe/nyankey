@@ -1,7 +1,7 @@
 import Bull from 'bull';
 
 import { activeUsersChart, driveChart, federationChart, hashtagChart, instanceChart, notesChart, perUserDriveChart, perUserFollowingChart, perUserNotesChart, perUserReactionsChart, usersChart, apRequestChart } from '@/services/chart/index.js';
-import { queueLogger } from '../../logger.js';
+import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('tick-charts');
 

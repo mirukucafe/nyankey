@@ -9,7 +9,7 @@ import { Poll } from '@/models/entities/poll.js';
 import { Users, Notes, Polls } from '@/models/index.js';
 import { DbUserJobData } from '@/queue/types.js';
 import { addFile } from '@/services/drive/add-file.js';
-import { queueLogger } from '../../logger.js';
+import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('export-notes');
 

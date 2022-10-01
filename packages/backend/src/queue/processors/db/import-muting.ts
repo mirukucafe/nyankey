@@ -8,8 +8,8 @@ import { genId } from '@/misc/gen-id.js';
 import { Users, DriveFiles, Mutings } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
 import { DbUserImportJobData } from '@/queue/types.js';
+import { queueLogger } from '@/queue/logger.js';
 import { resolveUser } from '@/remote/resolve-user.js';
-import { queueLogger } from '../../logger.js';
 
 const logger = queueLogger.createSubLogger('import-muting');
 

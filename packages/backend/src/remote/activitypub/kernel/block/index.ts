@@ -1,8 +1,8 @@
 import block from '@/services/blocking/create.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
-import DbResolver from '../../db-resolver.js';
-import { IBlock } from '../../type.js';
+import DbResolver from '@/remote/activitypub/db-resolver.js';
+import { IBlock } from '@/remote/activitypub/type.js';
 
 export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<string> => {
 	// ※ activity.objectにブロック対象があり、それは存在するローカルユーザーのはず
