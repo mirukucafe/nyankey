@@ -9,7 +9,7 @@ import { DriveFiles, Users, UserLists, UserListJoinings } from '@/models/index.j
 import { DbUserImportJobData } from '@/queue/types.js';
 import { resolveUser } from '@/remote/resolve-user.js';
 import { pushUserToUserList } from '@/services/user-list/push.js';
-import { queueLogger } from '../../logger.js';
+import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('import-user-lists');
 

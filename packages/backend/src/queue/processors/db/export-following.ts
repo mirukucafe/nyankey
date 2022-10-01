@@ -8,8 +8,8 @@ import { createTemp } from '@/misc/create-temp.js';
 import { Following } from '@/models/entities/following.js';
 import { Users, Followings, Mutings } from '@/models/index.js';
 import { DbUserJobData } from '@/queue/types.js';
+import { queueLogger } from '@/queue/logger.js';
 import { addFile } from '@/services/drive/add-file.js';
-import { queueLogger } from '../../logger.js';
 
 const logger = queueLogger.createSubLogger('export-following');
 

@@ -25,7 +25,7 @@ import { publishInternalEvent } from '@/services/stream.js';
 import { db } from '@/db/postgre.js';
 import { apLogger } from '../logger.js';
 import { htmlToMfm } from '../misc/html-to-mfm.js';
-import { fromHtml } from '../../../mfm/from-html.js';
+import { fromHtml } from '@/mfm/from-html.js';
 import { isCollectionOrOrderedCollection, isCollection, IActor, getApId, getOneApHrefNullable, IObject, isPropertyValue, IApPropertyValue, getApType, isActor } from '../type.js';
 import Resolver from '../resolver.js';
 import { extractApHashtags } from './tag.js';

@@ -4,7 +4,7 @@ import { default as convertColor } from 'color-convert';
 import { format as dateFormat } from 'date-fns';
 import * as SyslogPro from 'syslog-pro';
 import config from '@/config/index.js';
-import { envOption } from '../env.js';
+import { envOption } from '@/env.js';
 
 type Domain = {
 	name: string;

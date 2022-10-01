@@ -4,7 +4,7 @@ import { CacheableUser } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { PollVotes, NoteWatchings, Polls, Blockings, NoteThreadMutings } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
-import { createNotification } from '../../create-notification.js';
+import { createNotification } from '@/services/create-notification.js';
 
 export default async function(user: CacheableUser, note: Note, choice: number) {
 	const poll = await Polls.findOneBy({ noteId: note.id });

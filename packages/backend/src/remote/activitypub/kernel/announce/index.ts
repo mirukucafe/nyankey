@@ -1,7 +1,7 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import { apLogger } from '../../logger.js';
-import Resolver from '../../resolver.js';
-import { IAnnounce, getApId } from '../../type.js';
+import { apLogger } from '@/remote/activitypub/logger.js';
+import Resolver from '@/remote/activitypub/resolver.js';
+import { IAnnounce, getApId } from '@/remote/activitypub/type.js';
 import announceNote from './note.js';
 
 const logger = apLogger;

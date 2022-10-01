@@ -3,7 +3,7 @@ import { MoreThan } from 'typeorm';
 import { Users, DriveFiles } from '@/models/index.js';
 import { deleteFileSync } from '@/services/drive/delete-file.js';
 import { DbUserJobData } from '@/queue/types.js';
-import { queueLogger } from '../../logger.js';
+import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('delete-drive-files');
 

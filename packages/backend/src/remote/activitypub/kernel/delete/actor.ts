@@ -1,7 +1,7 @@
 import { createDeleteAccountJob } from '@/queue/index.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
-import { apLogger } from '../../logger.js';
+import { apLogger } from '@/remote/activitypub/logger.js';
 
 const logger = apLogger;
 

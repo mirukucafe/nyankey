@@ -7,8 +7,8 @@ import { getFullApAccount } from '@/misc/convert-host.js';
 import { createTemp } from '@/misc/create-temp.js';
 import { Users, Mutings } from '@/models/index.js';
 import { DbUserJobData } from '@/queue/types.js';
+import { queueLogger } from '@/queue/logger.js';
 import { addFile } from '@/services/drive/add-file.js';
-import { queueLogger } from '../../logger.js';
 
 const logger = queueLogger.createSubLogger('export-mute');
 

@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import Xev from 'xev';
 
 import Logger from '@/services/logger.js';
-import { envOption } from '../env.js';
+import { envOption } from '@/env.js';
 
 // for typeorm
 import 'reflect-metadata';

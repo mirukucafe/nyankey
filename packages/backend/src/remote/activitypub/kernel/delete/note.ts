@@ -2,8 +2,8 @@ import { CacheableRemoteUser } from '@/models/entities/user.js';
 import deleteNode from '@/services/note/delete.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { deleteMessage } from '@/services/messages/delete.js';
-import DbResolver from '../../db-resolver.js';
-import { apLogger } from '../../logger.js';
+import DbResolver from '@/remote/activitypub/db-resolver.js';
+import { apLogger } from '@/remote/activitypub/logger.js';
 
 const logger = apLogger;
 

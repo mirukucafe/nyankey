@@ -3,7 +3,7 @@ import { MoreThan, Not, IsNull } from 'typeorm';
 
 import { DriveFiles } from '@/models/index.js';
 import { deleteFileSync } from '@/services/drive/delete-file.js';
-import { queueLogger } from '../../logger.js';
+import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('clean-remote-files');
 
