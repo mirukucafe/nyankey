@@ -43,8 +43,7 @@ onMounted(() => {
 					src: media.url,
 					w: media.properties.width,
 					h: media.properties.height,
-					alt: media.comment || media.name,
-					comment: media.comment,
+					alt: media.comment,
 				};
 				if (media.properties.orientation != null && media.properties.orientation >= 5) {
 					[item.w, item.h] = [item.h, item.w];
@@ -87,8 +86,7 @@ onMounted(() => {
 			[itemData.w, itemData.h] = [itemData.h, itemData.w];
 		}
 		itemData.msrc = file.thumbnailUrl;
-		itemData.alt = file.comment || file.name;
-		itemData.comment = file.comment;
+		itemData.alt = file.comment;
 		itemData.thumbCropped = true;
 	});
 
@@ -114,7 +112,7 @@ onMounted(() => {
 				el.onpointermove = preventProp;
 
 				pwsp.on('change', () => {
-					textBox.textContent = pwsp.currSlide.data.comment?.trim();
+					textBox.textContent = pwsp.currSlide.data.alt?.trim();
 				});
 			},
 		});
