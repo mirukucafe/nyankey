@@ -57,7 +57,7 @@ db:
 redis:
   host: localhost
   port: 6379
-  #family: 0  # 0=Both, 4=IPv4, 6=IPv6
+  #family: dual  # can be either a number or string (0/dual, 4/ipv4, 6/ipv6)
   #pass: example-pass
   #prefix: example-prefix
   #db: 1
@@ -92,9 +92,6 @@ redis:
 # Job attempts
 # deliverJobMaxAttempts: 12
 # inboxJobMaxAttempts: 8
-
-# IP address family used for outgoing requests (ipv4, ipv6 or dual)
-#outgoingAddressFamily: ipv4
 
 # Syslog option
 #syslog:

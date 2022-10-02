@@ -1,5 +1,5 @@
 /**
- * ユーザーが設定する必要のある情報
+ * Configuration options set up by the user
  */
 export type Source = {
 	repository_url?: string;
@@ -19,7 +19,7 @@ export type Source = {
 	redis: {
 		host: string;
 		port: number;
-		family?: number;
+		family?: number | 'dual' | 'ipv4' | 'ipv6';
 		pass: string;
 		db?: number;
 		prefix?: string;
@@ -46,8 +46,6 @@ export type Source = {
 	clusterLimit?: number;
 
 	id: string;
-
-	outgoingAddressFamily?: 'ipv4' | 'ipv6' | 'dual';
 
 	deliverJobConcurrency?: number;
 	inboxJobConcurrency?: number;

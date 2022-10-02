@@ -1,15 +1,10 @@
 import Bull from 'bull';
 import config from '@/config/index.js';
+import { getRedisOptions } from '@/config/redis.js';
 
-export function initialize<T>(name: string, limitPerSec = -1) {
+export function initialize<T>(name: string, limitPerSec = -1): Bull.Queue<T> {
 	return new Bull<T>(name, {
-		redis: {
-			port: config.redis.port,
-			host: config.redis.host,
-			family: config.redis.family ?? 0,
-			password: config.redis.pass,
-			db: config.redis.db || 0,
-		},
+		redis: getRedisOptions(),
 		prefix: config.redis.prefix ? `${config.redis.prefix}:queue` : 'queue',
 		limiter: limitPerSec > 0 ? {
 			max: limitPerSec,

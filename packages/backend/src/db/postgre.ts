@@ -68,6 +68,7 @@ import { UserPending } from '@/models/entities/user-pending.js';
 
 import { entities as charts } from '@/services/chart/entities.js';
 import { Webhook } from '@/models/entities/webhook.js';
+import { getRedisOptions } from '@/config/redis.js';
 import { dbLogger } from './logger.js';
 import { redisClient } from './redis.js';
 
@@ -186,14 +187,7 @@ export const db = new DataSource({
 	dropSchema: process.env.NODE_ENV === 'test',
 	cache: !config.db.disableCache ? {
 		type: 'ioredis',
-		options: {
-			host: config.redis.host,
-			port: config.redis.port,
-			family: config.redis.family ?? 0,
-			password: config.redis.pass,
-			keyPrefix: `${config.redis.prefix}:query:`,
-			db: config.redis.db || 0,
-		},
+		options: getRedisOptions(`${config.redis.prefix}:query:`),
 	} : false,
 	logging: log,
 	logger: log ? new MyCustomLogger() : undefined,
