@@ -6,7 +6,7 @@
 		<template #caption>
 			<I18n :src="i18n.ts.i18nInfo" tag="span">
 				<template #link>
-					<MkLink url="https://crowdin.com/project/misskey">Crowdin</MkLink>
+					<MkLink url="https://translate.akkoma.dev/projects/foundkey/foundkey/">Weblate</MkLink>
 				</template>
 			</I18n>
 		</template>
