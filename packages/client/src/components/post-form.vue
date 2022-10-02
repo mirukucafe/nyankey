@@ -511,7 +511,6 @@ const initialDraftData = JSON.parse(JSON.stringify({
 	visibility,
 	localOnly,
 	files,
-	poll,
 }));
 
 function saveDraft() {
@@ -525,15 +524,8 @@ function saveDraft() {
 		&& initialDraftData.visibility === visibility
 		&& initialDraftData.localOnly === localOnly
 		&& initialDraftData.files.each((file, i) => file.id === files[i].id)
-		&& (
-			(initialDraftData.poll == null && poll == null)
-			|| (
-				initialDraftData.poll.choices.each((choice, i) => choice === choices[i])
-				&& initialDraftData.poll.multiple === poll.multiple
-				&& initialDraftData.poll.expiresAt === poll.expiresAt
-				&& initialDraftData.poll.expiredAfter === poll.expiredAfter
-			)
-		)
+		// initial state is always poll == null
+		&& poll == null
 	) {
 		// This is the same as the initial draft data, no need to save it.
 		// If it was saved before, delete it.
