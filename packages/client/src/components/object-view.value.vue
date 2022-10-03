@@ -30,8 +30,8 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue';
-import number from '@/filters/number';
 import XValue from './object-view.value.vue';
+import number from '@/filters/number';
 
 const props = defineProps<{
 	value: any;

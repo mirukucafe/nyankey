@@ -78,20 +78,20 @@ export function getNoteMenu(props: {
 				const { includingTypes: value } = res;
 				let mutingNotificationTypes: string[] | undefined;
 				if (value != null) {
-					mutingNotificationTypes = foundkey.noteNotificationTypes.filter(x => !value.includes(x))
+					mutingNotificationTypes = foundkey.noteNotificationTypes.filter(x => !value.includes(x));
 				}
 
 				await os.apiWithDialog('notes/thread-muting/create', {
 					noteId: appearNote.id,
 					mutingNotificationTypes,
 				});
-			}
+			},
 		}, 'closed');
 	}
 
 	function unmuteThread(): void {
 		os.apiWithDialog('notes/thread-muting/delete', {
-			noteId: appearNote.id
+			noteId: appearNote.id,
 		});
 	}
 
