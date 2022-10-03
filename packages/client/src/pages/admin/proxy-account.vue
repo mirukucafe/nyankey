@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700" :margin-min="16" :margin-max="32">
 		<FormSuspense :p="init">
 			<MkInfo class="_formBlock">{{ i18n.ts.proxyAccountDescription }}</MkInfo>
@@ -51,10 +51,6 @@ function save() {
 		fetchInstance();
 	});
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.proxyAccount,

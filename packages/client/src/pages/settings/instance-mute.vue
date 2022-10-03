@@ -42,10 +42,6 @@ watch(instanceMutes, () => {
 	changed.value = true;
 });
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.instanceMute,
 	icon: 'fas fa-volume-mute',

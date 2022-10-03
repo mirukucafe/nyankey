@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700" :margin-min="16" :margin-max="32">
 		<FormSuspense :p="init">
 			<FormFolder class="_formBlock">
@@ -46,10 +46,6 @@ async function init() {
 	enableGithubIntegration = meta.enableGithubIntegration;
 	enableDiscordIntegration = meta.enableDiscordIntegration;
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.integration,

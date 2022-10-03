@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700">
 		<div class="qkcjvfiv">
 			<MkButton primary class="add" @click="create"><i class="fas fa-plus"></i> {{ i18n.ts.createList }}</MkButton>
@@ -39,10 +39,6 @@ async function create() {
 	await os.apiWithDialog('users/lists/create', { name });
 	pagingComponent.reload();
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.manageLists,

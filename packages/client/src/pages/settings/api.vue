@@ -35,10 +35,6 @@ function generateToken() {
 	}, 'closed');
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: 'API',
 	icon: 'fas fa-key',

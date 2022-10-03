@@ -49,10 +49,6 @@ const blockingPagination = {
 	limit: 10,
 };
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.muteAndBlock,
 	icon: 'fas fa-ban',

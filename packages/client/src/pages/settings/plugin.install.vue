@@ -113,10 +113,6 @@ async function install() {
 	});
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts._plugin.install,
 	icon: 'fas fa-download',

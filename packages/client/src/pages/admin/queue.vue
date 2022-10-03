@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><XHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="800">
 		<XQueue :connection="connection" domain="inbox">
 			<template #title>In</template>
@@ -59,8 +59,6 @@ const headerActions = $computed(() => [{
 		window.open(config.url + '/queue', '_blank');
 	},
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.jobQueue,

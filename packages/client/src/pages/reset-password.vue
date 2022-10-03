@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer v-if="token" :content-max="700" :margin-min="16" :margin-max="32">
 		<div class="_formRoot">
 			<FormInput v-model="password" type="password" class="_formBlock">
@@ -43,10 +43,6 @@ onMounted(() => {
 		mainRouter.push('/');
 	}
 });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.resetPassword,

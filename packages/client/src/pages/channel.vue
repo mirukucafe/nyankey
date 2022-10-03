@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="700">
 		<div v-if="channel">
 			<div class="wpgynlbz _panel _gap" :class="{ hide: !showBanner }">
@@ -74,8 +74,6 @@ const headerActions = $computed(() => channel && channel.userId ? [{
 	text: i18n.ts.edit,
 	handler: edit,
 }] : null);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => channel ? {
 	title: channel.name,

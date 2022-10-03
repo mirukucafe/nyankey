@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700">
 		<div class="_formRoot">
 			<MkInput v-model="name" class="_formBlock">
@@ -103,10 +103,6 @@ function setBannerImage(evt) {
 function removeBannerImage() {
 	bannerId = null;
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => props.channelId ? {
 	title: i18n.ts._channel.edit,

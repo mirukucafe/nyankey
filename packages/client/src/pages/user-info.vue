@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader v-model:tab="tab" :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader v-model:tab="tab" :tabs="headerTabs"/></template>
 	<MkSpacer :content-max="500" :margin-min="16" :margin-max="32">
 		<FormSuspense :p="init">
 			<div v-if="tab === 'overview'" class="_formRoot">
@@ -273,8 +273,6 @@ watch(() => user, () => {
 		ap = res;
 	});
 });
-
-const headerActions = $computed(() => []);
 
 const headerTabs = $computed(() => [{
 	key: 'overview',

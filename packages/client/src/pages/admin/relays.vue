@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><XHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="800">
 		<div v-for="relay in relays" :key="relay.inbox" class="relaycxt _panel _block" style="padding: 16px;">
 			<div>{{ relay.inbox }}</div>
@@ -71,8 +71,6 @@ const headerActions = $computed(() => [{
 	text: i18n.ts.addRelay,
 	handler: addRelay,
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.relays,

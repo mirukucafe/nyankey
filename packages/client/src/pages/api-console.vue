@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700">
 		<div class="_formRoot">
 			<div class="_formBlock">
@@ -77,10 +77,6 @@ function onEndpointChange(): void {
 		body.value = JSON5.stringify(endpointBody, null, 2);
 	});
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: 'API console',

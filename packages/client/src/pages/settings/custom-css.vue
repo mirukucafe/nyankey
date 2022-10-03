@@ -35,10 +35,6 @@ watch(localCustomCss, async () => {
 	await apply();
 });
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.customCss,
 	icon: 'fas fa-code',

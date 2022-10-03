@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<div style="overflow: clip;">
 		<MkSpacer :content-max="600" :margin-min="20">
 			<div class="_formRoot znqjceqz">
@@ -90,10 +90,6 @@ function iLoveFoundkey(): void {
 onBeforeUnmount(() => {
 	easterEggEngine?.stop();
 });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.aboutMisskey,

@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="800" :margin-min="16" :margin-max="32">
 		<FormSuspense :p="init">
 			<FormInput v-model="title">
@@ -116,10 +116,6 @@ watch(() => props.postId, () => {
 		isSensitive = post.isSensitive;
 	}) : Promise.resolve(null);
 }, { immediate: true });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => props.postId ? {
 	title: i18n.ts.edit,

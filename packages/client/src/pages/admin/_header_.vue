@@ -17,11 +17,9 @@
 		</div>
 	</template>
 	<div class="buttons right">
-		<template v-if="actions">
-			<template v-for="action in actions">
-				<MkButton v-if="action.asFullButton" class="fullButton" primary @click.stop="action.handler"><i :class="action.icon" style="margin-right: 6px;"></i>{{ action.text }}</MkButton>
-				<button v-else v-tooltip="action.text" class="_button button" :class="{ highlighted: action.highlighted }" @click.stop="action.handler" @touchstart="preventDrag"><i :class="action.icon"></i></button>
-			</template>
+		<template v-for="action in actions">
+			<MkButton v-if="action.asFullButton" class="fullButton" primary @click.stop="action.handler"><i :class="action.icon" style="margin-right: 6px;"></i>{{ action.text }}</MkButton>
+			<button v-else v-tooltip="action.text" class="_button button" :class="{ highlighted: action.highlighted }" @click.stop="action.handler" @touchstart="preventDrag"><i :class="action.icon"></i></button>
 		</template>
 	</div>
 </div>
@@ -44,7 +42,7 @@ type Tab = {
 	onClick?: (ev: MouseEvent) => void;
 };
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	tabs?: Tab[];
 	tab?: string;
 	actions?: {
@@ -53,8 +51,10 @@ const props = defineProps<{
 		asFullButton?: boolean;
 		handler: (ev: MouseEvent) => void;
 	}[];
-	thin?: boolean;
-}>();
+}>(), {
+	actions: () => [],
+	tabs: () => [],
+});
 
 const emit = defineEmits<{
 	(ev: 'update:tab', key: string);
@@ -66,9 +66,7 @@ const el = ref<HTMLElement>(null);
 const tabRefs = {};
 const tabHighlightEl = $ref<HTMLElement | null>(null);
 const bg = ref(null);
-const hasTabs = computed(() => {
-	return props.tabs && props.tabs.length > 0;
-});
+const hasTabs = computed(() => props.tabs.length > 0);
 
 const showTabsPopup = (ev: MouseEvent) => {
 	if (!hasTabs.value) return;

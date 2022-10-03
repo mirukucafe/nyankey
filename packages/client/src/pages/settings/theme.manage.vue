@@ -67,10 +67,6 @@ function uninstall() {
 	os.success();
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts._theme.manage,
 	icon: 'fas fa-folder-open',

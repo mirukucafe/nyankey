@@ -102,10 +102,6 @@ function switchAccountWithToken(token: string) {
 	login(token);
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.accounts,
 	icon: 'fas fa-users',

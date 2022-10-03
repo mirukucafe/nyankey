@@ -117,10 +117,6 @@ async function save() {
 	changed.value = false;
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.wordMute,
 	icon: 'fas fa-comment-slash',

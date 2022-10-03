@@ -112,10 +112,6 @@ onBeforeUnmount(() => {
 	queueStatsConnection.dispose();
 });
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.dashboard,
 	icon: 'fas fa-tachometer-alt',

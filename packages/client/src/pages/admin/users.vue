@@ -1,7 +1,7 @@
 <template>
 <div>
 	<MkStickyContainer>
-		<template #header><XHeader :actions="headerActions" :tabs="headerTabs"/></template>
+		<template #header><XHeader :actions="headerActions"/></template>
 		<MkSpacer :content-max="900">
 			<div class="lknzcolw">
 				<div class="users">
@@ -129,8 +129,6 @@ const headerActions = $computed(() => [{
 	text: i18n.ts.lookup,
 	handler: lookupUser,
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.users,

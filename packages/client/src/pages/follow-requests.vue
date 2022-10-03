@@ -58,10 +58,6 @@ function reject(user) {
 	});
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata(computed(() => ({
 	title: i18n.ts.followRequests,
 	icon: 'fas fa-user-clock',

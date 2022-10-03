@@ -141,10 +141,6 @@ function pin(pin) {
 
 watch(() => path, fetchPage, { immediate: true });
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata(computed(() => page ? {
 	title: computed(() => page.title || page.name),
 	avatar: page.user,

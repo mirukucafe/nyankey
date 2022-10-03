@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader :actions="headerActions"/></template>
 	<div ref="rootEl" v-size="{ min: [800] }" class="eqqrhokj">
 		<div v-if="queue > 0" class="new"><button class="_buttonPrimary" @click="top()">{{ i18n.ts.newNoteRecived }}</button></div>
 		<div class="tl _block">
@@ -73,8 +73,6 @@ const headerActions = $computed(() => list ? [{
 	text: i18n.ts.settings,
 	handler: settings,
 }] : []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => list ? {
 	title: list.name,

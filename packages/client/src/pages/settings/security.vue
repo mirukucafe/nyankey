@@ -101,10 +101,6 @@ function regenerateToken() {
 	});
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.security,
 	icon: 'fas fa-lock',

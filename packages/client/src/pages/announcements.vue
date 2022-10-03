@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="800">
 		<MkPagination v-slot="{items}" :pagination="pagination" class="ruryvtyk _content">
 			<section v-for="(announcement, i) in items" :key="announcement.id" class="_card announcement">
@@ -38,10 +38,6 @@ function read(items, announcement, i) {
 	};
 	os.api('i/read-announcement', { announcementId: announcement.id });
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.announcements,

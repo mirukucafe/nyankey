@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="1000" :margin-min="16" :margin-max="32">
 		<div class="_root">
 			<transition :name="defaultStore.state.animation ? 'fade' : ''" mode="out-in">
@@ -144,8 +144,6 @@ const headerActions = $computed(() => [{
 	text: i18n.ts.edit,
 	handler: edit,
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => post ? {
 	title: post.title,

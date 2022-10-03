@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="800">
 		<div v-size="{ max: [400] }" class="yweeujhr">
 			<MkButton primary class="start" @click="start"><i class="fas fa-plus"></i> {{ i18n.ts.startMessaging }}</MkButton>
@@ -151,10 +151,6 @@ onMounted(() => {
 onUnmounted(() => {
 	if (connection) connection.dispose();
 });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.messaging,

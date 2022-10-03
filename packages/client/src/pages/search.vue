@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="800">
 		<XNotes ref="notes" :pagination="pagination"/>
 	</MkSpacer>
@@ -26,10 +26,6 @@ const pagination = {
 		channelId: props.channel,
 	})),
 };
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.t('searchWith', { q: props.query }),

@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader v-model:tab="tab" :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader v-model:tab="tab" :tabs="headerTabs"/></template>
 	<MkSpacer v-if="tab === 'overview'" :content-max="600" :margin-min="20">
 		<div class="_formRoot">
 			<div class="_formBlock fwhjspax" :style="{ backgroundImage: `url(${ $instance.bannerUrl })` }">
@@ -125,8 +125,6 @@ let tab = $ref(headerTabs.some(({ key }) => key === props.initialTab) ? props.in
 const initStats = async (): Promise<void> => {
 	stats = await os.api('stats', {});
 };
-
-const headerActions = $computed(() => []);
 
 definePageMetadata(computed(() => ({
 	title: i18n.ts.instanceInfo,

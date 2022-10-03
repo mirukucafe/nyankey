@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700">
 		<div class="qtcaoidl">
 			<MkButton primary class="add" @click="create"><i class="fas fa-plus"></i> {{ i18n.ts.add }}</MkButton>
@@ -62,10 +62,6 @@ function onClipCreated() {
 function onClipDeleted() {
 	pagingComponent.reload();
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.clip,

@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader v-model:tab="src" :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader v-model:tab="src" :tabs="headerTabs"/></template>
 	<MkSpacer :content-max="800">
 		<div ref="rootEl" v-hotkey.global="keymap" class="cmuxhskf">
 			<XTutorial v-if="$store.reactiveState.tutorial.value != -1" class="tutorial _block"/>
@@ -108,8 +108,6 @@ async function timetravel(): Promise<void> {
 function focus(): void {
 	tlComponent.focus();
 }
-
-const headerActions = $computed(() => []);
 
 const headerTabs = $computed(() => [{
 	key: 'home',

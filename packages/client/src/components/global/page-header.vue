@@ -1,5 +1,5 @@
 <template>
-<div v-if="show" ref="el" class="fdidabkb" :class="{ slim: narrow, thin: thin_ }" :style="{ background: bg }" @click="onClick">
+<div v-if="show" ref="el" class="fdidabkb" :class="{ slim: narrow, thin }" :style="{ background: bg }" @click="onClick">
 	<template v-if="metadata">
 		<div v-if="!hideTitle" class="titleContainer" @click="showTabsPopup">
 			<MkAvatar v-if="metadata.avatar" class="avatar" :user="metadata.avatar" :disable-preview="true" :show-indicator="true"/>
@@ -49,7 +49,7 @@ type Tab = {
 	onClick?: (ev: MouseEvent) => void;
 };
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	tabs?: Tab[];
 	tab?: string;
 	actions?: {
@@ -58,7 +58,11 @@ const props = defineProps<{
 		handler: (ev: MouseEvent) => void;
 	}[];
 	thin?: boolean;
-}>();
+}>(), {
+	actions: () => [],
+	tabs: () => [],
+	thin: () =>  inject('shouldHeaderThin', false),
+});
 
 const emit = defineEmits<{
 	(ev: 'update:tab', key: string);
@@ -67,7 +71,6 @@ const emit = defineEmits<{
 const metadata = injectPageMetadata();
 
 const hideTitle = inject('shouldOmitHeaderTitle', false);
-const thin_ = props.thin || inject('shouldHeaderThin', false);
 
 const el = $ref<HTMLElement | null>(null);
 const tabRefs = {};
@@ -75,8 +78,8 @@ const tabHighlightEl = $ref<HTMLElement | null>(null);
 const bg = ref(null);
 let narrow = $ref(false);
 const height = ref(0);
-const hasTabs = $computed(() => props.tabs && props.tabs.length > 0);
-const hasActions = $computed(() => props.actions && props.actions.length > 0);
+const hasTabs = $computed(() => props.tabs.length > 0);
+const hasActions = $computed(() => props.actions.length > 0);
 const show = $computed(() => {
 	return !hideTitle || hasTabs || hasActions;
 });

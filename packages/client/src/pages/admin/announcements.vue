@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><XHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="900">
 		<div class="ztgjmzrw">
 			<section v-for="announcement in announcements" class="_card _gap announcements">
@@ -95,8 +95,6 @@ const headerActions = $computed(() => [{
 	text: i18n.ts.add,
 	handler: add,
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.announcements,

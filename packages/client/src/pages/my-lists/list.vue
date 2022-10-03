@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700">
 		<div class="mk-list-page">
 			<transition :name="$store.state.animation ? 'zoom' : ''" mode="out-in">
@@ -115,10 +115,6 @@ async function deleteList() {
 }
 
 watch(() => props.listId, fetchList, { immediate: true });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => list ? {
 	title: list.name,

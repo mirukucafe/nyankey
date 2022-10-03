@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><XHeader/></template>
 	<MkSpacer :content-max="900">
 		<div class="lcixvhis">
 			<div class="_section reports">
@@ -66,10 +66,6 @@ const pagination = {
 function resolved(reportId) {
 	reports.removeItem(item => item.id === reportId);
 }
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.abuseReports,

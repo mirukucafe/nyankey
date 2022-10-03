@@ -26,10 +26,6 @@ function onChangeInjectFeaturedNote(v) {
 	});
 }
 
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
-
 definePageMetadata({
 	title: i18n.ts.other,
 	icon: 'fas fa-ellipsis-h',

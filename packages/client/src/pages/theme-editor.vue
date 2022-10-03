@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="800" :margin-min="16" :margin-max="32">
 		<div class="cwepdizn _formRoot">
 			<FormFolder :default-open="true" class="_formBlock">
@@ -219,8 +219,6 @@ const headerActions = $computed(() => [{
 	text: i18n.ts.saveAs,
 	handler: saveAs,
 }]);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata({
 	title: i18n.ts.themeEditor,

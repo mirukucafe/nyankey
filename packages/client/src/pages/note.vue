@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><MkPageHeader :actions="headerActions" :tabs="headerTabs"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="800">
 		<div class="fcuexfpr">
 			<transition :name="$store.state.animation ? 'fade' : ''" mode="out-in">
@@ -120,10 +120,6 @@ function fetchNote() {
 watch(() => props.noteId, fetchNote, {
 	immediate: true,
 });
-
-const headerActions = $computed(() => []);
-
-const headerTabs = $computed(() => []);
 
 definePageMetadata(computed(() => note ? {
 	title: i18n.ts.note,
