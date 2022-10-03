@@ -1,9 +1,9 @@
 /**
- * Misskey Entry Point!
+ * FoundKey Entry Point!
  */
 
 import { EventEmitter } from 'node:events';
-import boot from './boot/index.js';
+import boot from '@/boot/index.js';
 
 Error.stackTraceLimit = Infinity;
 EventEmitter.defaultMaxListeners = 128;
