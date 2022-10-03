@@ -121,9 +121,9 @@ const cwInputEl = $ref<HTMLInputElement | null>(null);
 const hashtagsInputEl = $ref<HTMLInputElement | null>(null);
 const visibilityButton = $ref<HTMLElement | null>(null);
 
-let posting = $ref(false);
-let text = $ref(props.initialText ?? '');
-let files = $ref(props.initialFiles ?? []);
+let posting: boolean = $ref(false);
+let text: string = $ref(props.initialText ?? '');
+let files: foundkey.entities.DriveFile[] = $ref(props.initialFiles ?? []);
 let poll = $ref<{
 	choices: string[];
 	multiple: boolean;
@@ -502,21 +502,48 @@ function onDrop(ev): void {
 	//#endregion
 }
 
+// Save a copy of the initial data to detect whether it has been changed.
+// Cloning the data to make sure there are no remaining references.
+const initialDraftData = JSON.parse(JSON.stringify({
+	text,
+	useCw,
+	cw,
+	visibility,
+	localOnly,
+	files,
+}));
+
 function saveDraft() {
 	const draftData = JSON.parse(localStorage.getItem('drafts') || '{}');
 
-	draftData[draftKey] = {
-		updatedAt: new Date(),
-		data: {
-			text,
-			useCw,
-			cw,
-			visibility,
-			localOnly,
-			files,
-			poll,
-		},
-	};
+	if (
+		initialDraftData.text === text
+		&& initialDraftData.useCw === useCw
+		// don't compare cw for equality if it is disabled, since it won't be sent
+		&& (!useCw || initialDraftData.cw === cw)
+		&& initialDraftData.visibility === visibility
+		&& initialDraftData.localOnly === localOnly
+		&& initialDraftData.files.each((file, i) => file.id === files[i].id)
+		// initial state is always poll == null
+		&& poll == null
+	) {
+		// This is the same as the initial draft data, no need to save it.
+		// If it was saved before, delete it.
+		delete draftData[draftKey];
+	} else {
+		draftData[draftKey] = {
+			updatedAt: new Date(),
+			data: {
+				text,
+				useCw,
+				cw,
+				visibility,
+				localOnly,
+				files,
+				poll,
+			},
+		};
+	}
 
 	localStorage.setItem('drafts', JSON.stringify(draftData));
 }
