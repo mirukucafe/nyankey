@@ -74,7 +74,6 @@ export async function masterMain(): Promise<void> {
 	if (!envOption.noDaemons) {
 		import('../daemons/server-stats.js').then(x => x.serverStats());
 		import('../daemons/queue-stats.js').then(x => x.queueStats());
-		import('../daemons/janitor.js').then(x => x.janitor());
 	}
 }
 

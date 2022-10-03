@@ -314,7 +314,7 @@ export default function() {
 		removeOnComplete: true,
 	});
 
-	systemQueue.add('checkExpiredMutings', {
+	systemQueue.add('checkExpired', {
 	}, {
 		repeat: { cron: '*/5 * * * *' },
 		removeOnComplete: true,
