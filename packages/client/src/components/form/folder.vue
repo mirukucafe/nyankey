@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 const props = withDefaults(defineProps<{
-	defaultOpen: boolean;
+	defaultOpen?: boolean;
 }>(), {
 	defaultOpen: false,
 });
