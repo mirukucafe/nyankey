@@ -17,11 +17,11 @@ const emit = defineEmits<{
 	(ev: 'mounted'): void;
 }>();
 
-const props = defineProps<{
-	place: {
-		type: string;
-	};
-}>();
+const props = withDefaults(defineProps<{
+	place?: 'left' | null;
+}>(), {
+	place: null,
+});
 
 let editMode: boolean = $ref(false);
 

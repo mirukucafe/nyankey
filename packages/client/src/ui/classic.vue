@@ -7,7 +7,7 @@
 			<XSidebar/>
 		</div>
 		<div v-else ref="widgetsLeft" class="widgets left">
-			<XWidgets :place="'left'" @mounted="attachSticky(widgetsLeft)"/>
+			<XWidgets place="left" @mounted="attachSticky(widgetsLeft)"/>
 		</div>
 
 		<main class="main" :style="{ background: pageMetadata?.value?.bg }" @contextmenu.stop="onContextmenu">
@@ -17,7 +17,7 @@
 		</main>
 
 		<div v-if="isDesktop" ref="widgetsRight" class="widgets right">
-			<XWidgets :place="null" @mounted="attachSticky(widgetsRight)"/>
+			<XWidgets @mounted="attachSticky(widgetsRight)"/>
 		</div>
 	</div>
 
