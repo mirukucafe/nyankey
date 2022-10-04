@@ -45,7 +45,6 @@ import MkPagination from '@/components/ui/pagination.vue';
 import MkButton from '@/components/ui/button.vue';
 import MkContainer from '@/components/ui/container.vue';
 import MkAvatars from '@/components/avatars.vue';
-import MkTab from '@/components/tab.vue';
 import * as os from '@/os';
 import { definePageMetadata } from '@/scripts/page-metadata';
 import { i18n } from '@/i18n';

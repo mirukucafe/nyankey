@@ -1,9 +1,6 @@
 <template>
 <MkSpacer :content-max="800">
-	<MkTab v-model="tab" style="margin-bottom: var(--margin);">
-		<option value="notes">{{ i18n.ts.notes }}</option>
-		<option value="polls">{{ i18n.ts.poll }}</option>
-	</MkTab>
+	<MkTab v-model="tab" :options="tabs" style="margin-bottom: var(--margin);"/>
 	<XNotes v-if="tab === 'notes'" :pagination="paginationForNotes"/>
 	<XNotes v-else-if="tab === 'polls'" :pagination="paginationForPolls"/>
 </MkSpacer>
@@ -13,6 +10,14 @@
 import XNotes from '@/components/notes.vue';
 import MkTab from '@/components/tab.vue';
 import { i18n } from '@/i18n';
+
+const tabs = [{
+	value: 'notes',
+	label: i18n.ts.notes,
+}, {
+	value: 'polls',
+	label: i18n.ts.poll,
+}];
 
 const paginationForNotes = {
 	endpoint: 'notes/featured' as const,
