@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="900">
 		<div class="lcixvhis">
 			<div class="_section reports">
@@ -39,7 +39,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import XHeader from './_header_.vue';
 import MkSelect from '@/components/form/select.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import XAbuseReport from '@/components/abuse-report.vue';

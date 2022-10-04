@@ -27,7 +27,25 @@
 	</template>
 	<div class="buttons right">
 		<template v-for="action in actions">
-			<button v-tooltip="action.text" class="_button button" :class="{ highlighted: action.highlighted }" @click.stop="action.handler" @touchstart="preventDrag"><i :class="action.icon"></i></button>
+			<MkButton
+				v-if="action.asFullButton"
+				class="fullButton"
+				primary
+				@click.stop="action.handler"
+			>
+				<i :class="action.icon"></i>
+				{{ action.text }}
+			</MkButton>
+			<button
+				v-else
+				v-tooltip="action.text"
+				class="_button button"
+				:class="{ highlighted: action.highlighted }"
+				@click.stop="action.handler"
+				@touchstart="preventDrag"
+			>
+				<i :class="action.icon"></i>
+			</button>
 		</template>
 	</div>
 </div>
@@ -55,6 +73,7 @@ const props = withDefaults(defineProps<{
 	actions?: {
 		text: string;
 		icon: string;
+		asFullButton?: boolean;
 		handler: (ev: MouseEvent) => void;
 	}[];
 	thin?: boolean;

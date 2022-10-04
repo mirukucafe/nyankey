@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="[]" :tabs="[]"/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="900">
 		<XFederation/>
 	</MkSpacer>
@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-import XHeader from './_header_.vue';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 import XFederation from '@/components/federation.vue';

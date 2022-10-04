@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="headerActions"/></template>
+	<template #header><MkPageHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="900">
 		<div class="ztgjmzrw">
 			<section v-for="announcement in announcements" class="_card _gap announcements">
@@ -27,7 +27,6 @@
 </template>
 
 <script lang="ts" setup>
-import XHeader from './_header_.vue';
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
 import MkTextarea from '@/components/form/textarea.vue';

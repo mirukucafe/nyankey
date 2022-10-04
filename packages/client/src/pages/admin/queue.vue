@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader :actions="headerActions"/></template>
+	<template #header><MkPageHeader :actions="headerActions"/></template>
 	<MkSpacer :content-max="800">
 		<XQueue :connection="connection" domain="inbox">
 			<template #title>In</template>
@@ -16,7 +16,6 @@
 <script lang="ts" setup>
 import { markRaw, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import XQueue from './queue.chart.vue';
-import XHeader from './_header_.vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { stream } from '@/stream';

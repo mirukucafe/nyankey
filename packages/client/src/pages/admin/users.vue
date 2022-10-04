@@ -1,7 +1,7 @@
 <template>
 <div>
 	<MkStickyContainer>
-		<template #header><XHeader :actions="headerActions"/></template>
+		<template #header><MkPageHeader :actions="headerActions"/></template>
 		<MkSpacer :content-max="900">
 			<div class="lknzcolw">
 				<div class="users">
@@ -54,7 +54,6 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import XHeader from './_header_.vue';
 import MkInput from '@/components/form/input.vue';
 import MkSelect from '@/components/form/select.vue';
 import MkPagination from '@/components/ui/pagination.vue';

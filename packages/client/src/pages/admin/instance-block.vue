@@ -1,6 +1,6 @@
 <template>
 <MkStickyContainer>
-	<template #header><XHeader/></template>
+	<template #header><MkPageHeader/></template>
 	<MkSpacer :content-max="700" :margin-min="16" :margin-max="32">
 		<FormSuspense :p="init">
 			<FormTextarea v-model="blockedHosts" class="_formBlock">
@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import XHeader from './_header_.vue';
 import FormButton from '@/components/ui/button.vue';
 import FormTextarea from '@/components/form/textarea.vue';
 import FormSuspense from '@/components/form/suspense.vue';
