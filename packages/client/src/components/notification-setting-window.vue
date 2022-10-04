@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<{
 	message?: string,
 }>(), {
 	includingTypes: () => [],
-	notificationTypes: () => [],
+	notificationTypes: foundkey.notificationTypes,
 	showGlobalToggle: true,
 	message: i18n.ts.notificationSettingDesc,
 });
