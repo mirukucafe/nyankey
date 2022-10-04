@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, nextTick, ref, watch, computed, toRefs, VNode, useSlots } from 'vue';
+import { onMounted, nextTick, ref, watch, toRefs, VNode, useSlots } from 'vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { useInterval } from '@/scripts/use-interval';

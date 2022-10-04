@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, inject, nextTick, onMounted, onUnmounted, provide, watch } from 'vue';
+import { defineAsyncComponent, nextTick, onMounted, onUnmounted, provide, watch } from 'vue';
 import { i18n } from '@/i18n';
 import MkSuperMenu from '@/components/ui/super-menu.vue';
 import MkInfo from '@/components/ui/info.vue';
@@ -32,7 +32,7 @@ import { instance } from '@/instance';
 import * as os from '@/os';
 import { lookupUser } from '@/scripts/lookup-user';
 import { useRouter } from '@/router';
-import { definePageMetadata, provideMetadataReceiver } from '@/scripts/page-metadata';
+import { definePageMetadata } from '@/scripts/page-metadata';
 
 const isEmpty = (x: string | null) => x == null || x === '';
 
@@ -51,10 +51,9 @@ const props = defineProps<{
 provide('shouldOmitHeaderTitle', false);
 
 let INFO = $ref(indexInfo);
-let childInfo = $ref(null);
+// FIXME use page instead of props.initialPage
 let page = $ref(props.initialPage);
 let narrow = $ref(false);
-let view = $ref(null);
 let el = $ref(null);
 let pageProps = $ref({});
 let noMaintainerInformation = isEmpty(instance.maintainerName) || isEmpty(instance.maintainerEmail);
@@ -70,7 +69,7 @@ os.api('admin/abuse-user-reports', {
 });
 
 const NARROW_THRESHOLD = 600;
-const ro = new ResizeObserver((entries, observer) => {
+const ro = new ResizeObserver((entries) => {
 	if (entries.length === 0) return;
 	narrow = entries[0].borderBoxSize[0].inlineSize < NARROW_THRESHOLD;
 });
@@ -242,14 +241,6 @@ onMounted(() => {
 
 onUnmounted(() => {
 	ro.disconnect();
-});
-
-provideMetadataReceiver((info) => {
-	if (info == null) {
-		childInfo = null;
-	} else {
-		childInfo = info;
-	}
 });
 
 const invite = () => {

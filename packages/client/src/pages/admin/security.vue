@@ -35,10 +35,7 @@
 <script lang="ts" setup>
 import XBotProtection from './bot-protection.vue';
 import FormFolder from '@/components/form/folder.vue';
-import FormSwitch from '@/components/form/switch.vue';
-import FormInfo from '@/components/ui/info.vue';
 import FormSuspense from '@/components/form/suspense.vue';
-import FormSection from '@/components/form/section.vue';
 import FormInput from '@/components/form/input.vue';
 import FormButton from '@/components/ui/button.vue';
 import * as os from '@/os';
@@ -50,14 +47,14 @@ let summalyProxy: string = $ref('');
 let enableHcaptcha: boolean = $ref(false);
 let enableRecaptcha: boolean = $ref(false);
 
-async function init() {
+async function init(): Promise<void> {
 	const meta = await os.api('admin/meta');
 	summalyProxy = meta.summalyProxy;
 	enableHcaptcha = meta.enableHcaptcha;
 	enableRecaptcha = meta.enableRecaptcha;
 }
 
-function save() {
+function save(): void {
 	os.apiWithDialog('admin/update-meta', {
 		summalyProxy,
 	}).then(() => {

@@ -30,7 +30,6 @@ import XWindow from '@/components/ui/window.vue';
 import { popout as _popout } from '@/scripts/popout';
 import copyToClipboard from '@/scripts/copy-to-clipboard';
 import { url } from '@/config';
-import * as os from '@/os';
 import { mainRouter, routes } from '@/router';
 import { Router } from '@/nirax';
 import { i18n } from '@/i18n';

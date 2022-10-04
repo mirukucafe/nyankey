@@ -21,7 +21,6 @@ import 'photoswipe/style.css';
 import XBanner from './media-banner.vue';
 import XImage from './media-image.vue';
 import XVideo from './media-video.vue';
-import * as os from '@/os';
 import { FILE_TYPE_BROWSERSAFE } from '@/const';
 
 const props = defineProps<{

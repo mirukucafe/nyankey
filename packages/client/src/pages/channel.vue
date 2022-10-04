@@ -32,8 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, watch } from 'vue';
-import MkContainer from '@/components/ui/container.vue';
+import { computed, watch } from 'vue';
 import XPostForm from '@/components/post-form.vue';
 import XTimeline from '@/components/timeline.vue';
 import XChannelFollowButton from '@/components/channel-follow-button.vue';
@@ -51,13 +50,6 @@ const props = defineProps<{
 
 let channel = $ref(null);
 let showBanner = $ref(true);
-const pagination = {
-	endpoint: 'channels/timeline' as const,
-	limit: 10,
-	params: computed(() => ({
-		channelId: props.channelId,
-	})),
-};
 
 watch(() => props.channelId, async () => {
 	channel = await os.api('channels/show', {
@@ -65,11 +57,11 @@ watch(() => props.channelId, async () => {
 	});
 }, { immediate: true });
 
-function edit() {
+function edit(): void {
 	router.push(`/channels/${channel.id}/edit`);
 }
 
-const headerActions = $computed(() => channel && channel.userId ? [{
+const headerActions = $computed(() => channel?.userId ? [{
 	icon: 'fas fa-cog',
 	text: i18n.ts.edit,
 	handler: edit,

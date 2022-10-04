@@ -36,7 +36,6 @@
 <script lang="ts" setup>
 import MkModal from '@/components/ui/modal.vue';
 import { menuDef } from '@/menu';
-import { instanceName } from '@/config';
 import { defaultStore } from '@/store';
 import { i18n } from '@/i18n';
 import { deviceKind } from '@/scripts/device-kind';

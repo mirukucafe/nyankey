@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, onUnmounted, watch } from 'vue';
+import { inject, onUnmounted } from 'vue';
 import { Router } from '@/nirax';
 import { defaultStore } from '@/store';
 

@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, watch } from 'vue';
+import { computed, watch } from 'vue';
 import MkTextarea from '@/components/form/textarea.vue';
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
@@ -59,7 +59,7 @@ watch(() => bannerId, async () => {
 	}
 });
 
-async function fetchChannel() {
+async function fetchChannel(): Promise<void> {
 	if (props.channelId == null) return;
 
 	channel = await os.api('channels/show', {
@@ -74,7 +74,7 @@ async function fetchChannel() {
 
 fetchChannel();
 
-function save() {
+function save(): void {
 	const params = {
 		name,
 		description,
@@ -94,13 +94,13 @@ function save() {
 	}
 }
 
-function setBannerImage(evt) {
+function setBannerImage(evt): void {
 	selectFile(evt.currentTarget ?? evt.target, null).then(file => {
 		bannerId = file.id;
 	});
 }
 
-function removeBannerImage() {
+function removeBannerImage(): void {
 	bannerId = null;
 }
 

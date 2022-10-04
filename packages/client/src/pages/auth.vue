@@ -62,19 +62,19 @@ onMounted(() => {
 		} else {
 			state = 'waiting';
 		}
-	}).catch(error => {
+	}).catch(() => {
 		state = 'fetch-session-error';
 	});
 });
 
-function accepted() {
+function accepted(): void {
 	state = 'accepted';
 	if (session.app.callbackUrl) {
 		location.href = appendQuery(session.app.callbackUrl, query({ token: session.token }));
 	}
 }
 
-function onLogin(res) {
+function onLogin(res): void {
 	login(res.i);
 }
 </script>

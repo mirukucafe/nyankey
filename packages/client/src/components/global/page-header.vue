@@ -18,9 +18,9 @@
 			</div>
 		</div>
 		<div v-if="!narrow || hideTitle" class="tabs">
-			<button v-for="tab in tabs" :ref="(el) => tabRefs[tab.key] = el" v-tooltip="tab.title" class="tab _button" :class="{ active: tab.key != null && tab.key === props.tab }" @mousedown="() => onTabMousedown(tab)" @click="(ev) => onTabClick(tab, ev)">
-				<i v-if="tab.icon" class="icon" :class="tab.icon"></i>
-				<span v-if="!tab.iconOnly" class="title">{{ tab.title }}</span>
+			<button v-for="item in tabs" :key="item.key" :ref="(el) => tabRefs[item.key] = el" v-tooltip="item.title" class="tab _button" :class="{ active: item.key != null && item.key === props.tab }" @mousedown="() => onTabMousedown(item)" @click="(ev) => onTabClick(item, ev)">
+				<i v-if="item.icon" class="icon" :class="item.icon"></i>
+				<span v-if="!item.iconOnly" class="title">{{ item.title }}</span>
 			</button>
 			<div ref="tabHighlightEl" class="highlight"></div>
 		</div>
@@ -29,6 +29,7 @@
 		<template v-for="action in actions">
 			<MkButton
 				v-if="action.asFullButton"
+				:key="action.text"
 				class="fullButton"
 				primary
 				@click.stop="action.handler"
@@ -38,6 +39,7 @@
 			</MkButton>
 			<button
 				v-else
+				:key="action.text"
 				v-tooltip="action.text"
 				class="_button button"
 				:class="{ highlighted: action.highlighted }"
@@ -69,7 +71,7 @@ type Tab = {
 
 const props = withDefaults(defineProps<{
 	tabs?: Tab[];
-	tab?: string;
+	tab?: string | null;
 	actions?: {
 		text: string;
 		icon: string;
@@ -80,7 +82,8 @@ const props = withDefaults(defineProps<{
 }>(), {
 	actions: () => [],
 	tabs: () => [],
-	thin: () =>  inject('shouldHeaderThin', false),
+	tab: null,
+	thin: () => inject('shouldHeaderThin', false),
 });
 
 const emit = defineEmits<{
@@ -96,14 +99,11 @@ const tabRefs = {};
 const tabHighlightEl = $ref<HTMLElement | null>(null);
 const bg = ref(null);
 let narrow = $ref(false);
-const height = ref(0);
 const hasTabs = $computed(() => props.tabs.length > 0);
 const hasActions = $computed(() => props.actions.length > 0);
-const show = $computed(() => {
-	return !hideTitle || hasTabs || hasActions;
-});
+const show = $computed(() => !hideTitle || hasTabs || hasActions);
 
-const showTabsPopup = (ev: MouseEvent) => {
+function showTabsPopup(ev: MouseEvent): void {
 	if (!hasTabs) return;
 	if (!narrow) return;
 	ev.preventDefault();
@@ -112,20 +112,20 @@ const showTabsPopup = (ev: MouseEvent) => {
 		text: tab.title,
 		icon: tab.icon,
 		active: tab.key != null && tab.key === props.tab,
-		action: (ev) => {
-			onTabClick(tab, ev);
+		action: (tabEv) => {
+			onTabClick(tab, tabEv);
 		},
 	}));
 	popupMenu(menu, ev.currentTarget ?? ev.target);
 };
 
-const preventDrag = (ev: TouchEvent) => {
+function preventDrag(ev: TouchEvent): void {
 	ev.stopPropagation();
-};
+}
 
-const onClick = () => {
+function onClick(): void {
 	scrollToTop(el, { behavior: 'smooth' });
-};
+}
 
 function onTabMousedown(tab: Tab): void {
 	// ユーザビリティの観点からmousedown時にはonClickは呼ばない
@@ -159,8 +159,17 @@ onMounted(() => {
 	globalEvents.on('themeChanged', calcBg);
 
 	watch(() => [props.tab, props.tabs], () => {
+		if (!hasTabs) {
+			return;
+		} else if (props.tab == null) {
+			props.tab = props.tabs[0].key;
+		}
+		if (props.tab == null) {
+			return;
+		}
+
 		nextTick(() => {
-			const tabEl = tabRefs[props.tab];
+			const tabEl = tabRefs[props.tab!];
 			if (tabEl && tabHighlightEl) {
 				// offsetWidth や offsetLeft は少数を丸めてしまうため getBoundingClientRect を使う必要がある
 				// https://developer.mozilla.org/ja/docs/Web/API/HTMLElement/offsetWidth#%E5%80%A4

@@ -70,7 +70,7 @@ import MkNumberDiff from '@/components/number-diff.vue';
 import MkContainer from '@/components/ui/container.vue';
 import MkFolder from '@/components/ui/folder.vue';
 import MkQueueChart from '@/components/queue-chart.vue';
-import { version, url } from '@/config';
+import { version } from '@/config';
 import number from '@/filters/number';
 import * as os from '@/os';
 import { stream } from '@/stream';

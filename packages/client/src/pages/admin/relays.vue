@@ -33,7 +33,7 @@ async function addRelay() {
 	if (canceled) return;
 	os.api('admin/relays/add', {
 		inbox,
-	}).then((relay: any) => {
+	}).then(() => {
 		refresh();
 	}).catch((err: any) => {
 		os.alert({

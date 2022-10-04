@@ -88,7 +88,7 @@ function tick(): void {
 }
 
 onMounted(() => {
-	const update = () => {
+	const update = (): void => {
 		if (enabled.value) {
 			tick();
 			window.setTimeout(update, 1000);

@@ -31,7 +31,6 @@ const emit = defineEmits<{
 	(ev: 'removeFolder', v: foundkey.entities.DriveFolder['id']): void;
 }>();
 
-const hover = ref(false);
 const draghover = ref(false);
 
 function onClick() {

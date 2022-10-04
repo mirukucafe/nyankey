@@ -30,11 +30,11 @@
 						</MkSelect>
 					</div>
 					<div class="inputs">
-						<MkInput v-model="searchUsername" style="flex: 1;" type="text" :spellcheck="false" @update:modelValue="$refs.users.reload()">
+						<MkInput v-model="searchUsername" style="flex: 1;" type="text" :spellcheck="false" @update:model-value="$refs.users.reload()">
 							<template #prefix>@</template>
 							<template #label>{{ i18n.ts.username }}</template>
 						</MkInput>
-						<MkInput v-model="searchHost" style="flex: 1;" type="text" :spellcheck="false" :disabled="pagination.params.origin === 'local'" @update:modelValue="$refs.users.reload()">
+						<MkInput v-model="searchHost" style="flex: 1;" type="text" :spellcheck="false" :disabled="pagination.params.origin === 'local'" @update:model-value="$refs.users.reload()">
 							<template #prefix>@</template>
 							<template #label>{{ i18n.ts.host }}</template>
 						</MkInput>
@@ -83,13 +83,13 @@ const pagination = {
 	offsetMode: true,
 };
 
-function searchUser() {
+function searchUser(): void {
 	os.selectUser().then(user => {
 		show(user);
 	});
 }
 
-async function addUser() {
+async function addUser(): Promise<void> {
 	const { canceled: canceled1, result: username } = await os.inputText({
 		title: i18n.ts.username,
 	});
@@ -104,12 +104,12 @@ async function addUser() {
 	os.apiWithDialog('admin/accounts/create', {
 		username,
 		password,
-	}).then(res => {
+	}).then(() => {
 		paginationComponent.reload();
 	});
 }
 
-function show(user) {
+function show(user): void {
 	os.pageWindow(`/user-info/${user.id}`);
 }
 
