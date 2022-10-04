@@ -56,6 +56,7 @@ import MkButton from './ui/button.vue';
 import { formatDateTimeString } from '@/scripts/format-time-string';
 import { addTime } from '@/scripts/time';
 import { i18n } from '@/i18n';
+import { DAY, HOUR, MINUTE, SECOND } from '@/const';
 
 const props = defineProps<{
 	modelValue: {
@@ -92,11 +93,11 @@ if (props.modelValue.expiresAt) {
 	expiration.value = 'infinite';
 }
 
-function onInput(i, value) {
+function onInput(i: number, value: string): void {
 	choices.value[i] = value;
 }
 
-function add() {
+function add(): void {
 	choices.value.push('');
 	// TODO
 	// nextTick(() => {
@@ -104,25 +105,22 @@ function add() {
 	// });
 }
 
-function remove(i) {
+function remove(i: number): void {
 	choices.value = choices.value.filter((_, _i) => _i !== i);
 }
 
 function get() {
-	const calcAt = () => {
+	const calcAt = (): number => {
 		return new Date(`${atDate.value} ${atTime.value}`).getTime();
 	};
 
-	const calcAfter = () => {
+	const calcAfter = (): number | null => {
 		let base = parseInt(after.value);
 		switch (unit.value) {
-			case 'day': base *= 24;
-				// fallthrough
-			case 'hour': base *= 60;
-				// fallthrough
-			case 'minute': base *= 60;
-				// fallthrough
-			case 'second': return base *= 1000;
+			case 'day': return base * DAY;
+			case 'hour': return base * HOUR;
+			case 'minute': return base * MINUTE;
+			case 'second': return base * SECOND;
 			default: return null;
 		}
 	};

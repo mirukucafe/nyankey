@@ -61,6 +61,7 @@ import * as os from '@/os';
 import { login } from '@/account';
 import { instance } from '@/instance';
 import { i18n } from '@/i18n';
+import { MINUTE } from '@/const';
 
 let signing = $ref(false);
 let user = $ref(null);
@@ -124,7 +125,7 @@ function queryKey() {
 				type: 'public-key',
 				transports: ['usb', 'nfc', 'ble', 'internal'],
 			})),
-			timeout: 60 * 1000,
+			timeout: MINUTE,
 		},
 	}).catch(() => {
 		queryingKey = false;

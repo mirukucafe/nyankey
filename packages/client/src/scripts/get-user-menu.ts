@@ -7,11 +7,12 @@ import * as os from '@/os';
 import { userActions } from '@/store';
 import { $i, iAmModerator } from '@/account';
 import { mainRouter } from '@/router';
+import { DAY, HOUR, MINUTE, WEEK } from '@/const';
 
 export function getUserMenu(user) {
 	const meId = $i ? $i.id : null;
 
-	async function pushList() {
+	async function pushList(): Promise<void> {
 		const t = i18n.ts.selectList; // なぜか後で参照すると null になるので最初にメモリに確保しておく
 		const lists = await os.api('users/lists/list');
 		if (lists.length === 0) {
@@ -34,7 +35,7 @@ export function getUserMenu(user) {
 		});
 	}
 
-	async function inviteGroup() {
+	async function inviteGroup(): Promise<void> {
 		const groups = await os.api('users/groups/owned');
 		if (groups.length === 0) {
 			os.alert({
@@ -56,7 +57,7 @@ export function getUserMenu(user) {
 		});
 	}
 
-	async function toggleMute() {
+	async function toggleMute(): Promise<void> {
 		if (user.isMuted) {
 			os.apiWithDialog('mute/delete', {
 				userId: user.id,
@@ -82,10 +83,10 @@ export function getUserMenu(user) {
 			if (canceled) return;
 
 			const expiresAt = period === 'indefinitely' ? null
-				: period === 'tenMinutes' ? Date.now() + (1000 * 60 * 10)
-				: period === 'oneHour' ? Date.now() + (1000 * 60 * 60)
-				: period === 'oneDay' ? Date.now() + (1000 * 60 * 60 * 24)
-				: period === 'oneWeek' ? Date.now() + (1000 * 60 * 60 * 24 * 7)
+				: period === 'tenMinutes' ? Date.now() + (MINUTE * 10)
+				: period === 'oneHour' ? Date.now() + HOUR
+				: period === 'oneDay' ? Date.now() + DAY
+				: period === 'oneWeek' ? Date.now() + WEEK
 				: null;
 
 			os.apiWithDialog('mute/create', {
@@ -97,7 +98,7 @@ export function getUserMenu(user) {
 		}
 	}
 
-	async function toggleBlock() {
+	async function toggleBlock(): Promise<void> {
 		if (!await getConfirmed(user.isBlocking ? i18n.ts.unblockConfirm : i18n.ts.blockConfirm)) return;
 
 		os.apiWithDialog(user.isBlocking ? 'blocking/delete' : 'blocking/create', {
@@ -107,7 +108,7 @@ export function getUserMenu(user) {
 		});
 	}
 
-	async function toggleSilence() {
+	async function toggleSilence(): Promise<void> {
 		if (!await getConfirmed(i18n.t(user.isSilenced ? 'unsilenceConfirm' : 'silenceConfirm'))) return;
 
 		os.apiWithDialog(user.isSilenced ? 'admin/unsilence-user' : 'admin/silence-user', {
@@ -117,7 +118,7 @@ export function getUserMenu(user) {
 		});
 	}
 
-	async function toggleSuspend() {
+	async function toggleSuspend(): Promise<void> {
 		if (!await getConfirmed(i18n.t(user.isSuspended ? 'unsuspendConfirm' : 'suspendConfirm'))) return;
 
 		os.apiWithDialog(user.isSuspended ? 'admin/unsuspend-user' : 'admin/suspend-user', {
@@ -127,7 +128,7 @@ export function getUserMenu(user) {
 		});
 	}
 
-	function reportAbuse() {
+	function reportAbuse(): void {
 		os.popup(defineAsyncComponent(() => import('@/components/abuse-report-window.vue')), {
 			user,
 		}, {}, 'closed');
@@ -143,7 +144,7 @@ export function getUserMenu(user) {
 		return !confirm.canceled;
 	}
 
-	async function invalidateFollow() {
+	async function invalidateFollow(): Promise<void> {
 		os.apiWithDialog('following/invalidate', {
 			userId: user.id,
 		}).then(() => {

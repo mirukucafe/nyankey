@@ -10,6 +10,7 @@
 import { onUnmounted } from 'vue';
 import { i18n } from '@/i18n';
 import { lang } from '@/config';
+import { DAY, WEEK, MONTH, YEAR, HOUR, MINUTE, SECOND } from '@/const';
 
 const props = withDefaults(defineProps<{
 	time: Date | string;
@@ -34,26 +35,26 @@ const absolute = ((): string => {
 
 let now = $ref(new Date());
 const relative = $computed(() => {
-	const ago = (now.getTime() - _time.getTime()) / 1000/*ms*/;
+	const ago = now.getTime() - _time.getTime();
 
-	if (ago >= 31536000) {
-		return i18n.t('_ago.yearsAgo', { n: Math.round(ago / 31536000).toString() });
-	} else if (ago >= 2592000) {
-		return i18n.t('_ago.monthsAgo', { n: Math.round(ago / 2592000).toString() });
-	} else if (ago >= 604800) {
-		return i18n.t('_ago.weeksAgo', { n: Math.round(ago / 604800).toString() });
-	} else if (ago >= 86400) {
-		return i18n.t('_ago.daysAgo', { n: Math.round(ago / 86400).toString() });
+	if (ago >= YEAR) {
+		return i18n.t('_ago.yearsAgo', { n: Math.round(ago / YEAR).toString() });
+	} else if (ago >= MONTH) {
+		return i18n.t('_ago.monthsAgo', { n: Math.round(ago / MONTH).toString() });
+	} else if (ago >= WEEK) {
+		return i18n.t('_ago.weeksAgo', { n: Math.round(ago / WEEK).toString() });
+	} else if (ago >= DAY) {
+		return i18n.t('_ago.daysAgo', { n: Math.round(ago / DAY).toString() });
 	}
 
 	// if the format is 'date', the relative date precision is no more than days ago
 	if (props.format !== 'date') {
-		if (ago >= 3600) {
-			return i18n.t('_ago.hoursAgo', { n: Math.round(ago / 3600).toString() });
-		} else if (ago >= 60) {
-			return i18n.t('_ago.minutesAgo', { n: (~~(ago / 60)).toString() });
-		} else if (ago >= 10) {
-			return i18n.t('_ago.secondsAgo', { n: (~~(ago % 60)).toString() });
+		if (ago >= HOUR) {
+			return i18n.t('_ago.hoursAgo', { n: Math.round(ago / HOUR).toString() });
+		} else if (ago >= MINUTE) {
+			return i18n.t('_ago.minutesAgo', { n: (~~(ago / MINUTE)).toString() });
+		} else if (ago >= 10 * SECOND) {
+			return i18n.t('_ago.secondsAgo', { n: (~~(ago % MINUTE)).toString() });
 		}
 	}
 

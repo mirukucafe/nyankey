@@ -4,6 +4,7 @@
 <script lang="ts" setup>
 import MkTime from '@/components/global/time.vue';
 import { i18n } from '@/i18n';
+import { YEAR } from '@/const';
 
 const props = defineProps<{
 	birthday: Date | string;
@@ -13,7 +14,7 @@ const age = $computed(() => {
 	const now = new Date();
 	const birthday = (typeof props.birthday === 'string') ? new Date(props.birthday) : props.birthday;
 
-	return Math.floor((now.getTime() - birthday.getTime()) / 1000 / 31536000);
+	return Math.floor((now.getTime() - birthday.getTime()) / YEAR);
 });
 
 </script>

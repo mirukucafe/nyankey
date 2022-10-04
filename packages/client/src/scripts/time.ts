@@ -1,6 +1,8 @@
+import { DAY, HOUR } from '@/const';
+
 const dateTimeIntervals = {
-	'day': 86400000,
-	'hour': 3600000,
+	'day': DAY,
+	'hour': HOUR,
 	'ms': 1,
 };
 

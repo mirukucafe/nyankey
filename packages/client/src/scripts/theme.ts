@@ -13,6 +13,7 @@ export type Theme = {
 
 import lightTheme from '@/themes/_light.json5';
 import darkTheme from '@/themes/_dark.json5';
+import { SECOND } from '@/const';
 
 export const themeProps = Object.keys(lightTheme.props).filter(key => !key.startsWith('X'));
 
@@ -53,7 +54,7 @@ export function applyTheme(theme: Theme, persist = true) {
 
 	timeout = window.setTimeout(() => {
 		document.documentElement.classList.remove('_themeChanging_');
-	}, 1000);
+	}, SECOND);
 
 	// Deep copy
 	const _theme = JSON.parse(JSON.stringify(theme));

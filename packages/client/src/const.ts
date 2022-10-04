@@ -1,6 +1,15 @@
-// ブラウザで直接表示することを許可するファイルの種類のリスト
-// ここに含まれないものは application/octet-stream としてレスポンスされる
-// SVGはXSSを生むので許可しない
+// Time constants
+export const SECOND = 1000;
+export const MINUTE = 60 * SECOND;
+export const HOUR = 60 * MINUTE;
+export const DAY = 24 * HOUR;
+export const WEEK = 7 * DAY;
+export const MONTH = 30 * DAY;
+export const YEAR = 365 * DAY;
+
+// List of file types allowed to be viewed directly in the browser.
+// Anything not included here will be reported as application/octet-stream
+// SVG is not allowed because it can lead to XSS
 export const FILE_TYPE_BROWSERSAFE = [
 	// Images
 	'image/png',

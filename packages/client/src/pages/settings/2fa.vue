@@ -75,6 +75,7 @@ import MkSwitch from '@/components/form/switch.vue';
 import * as os from '@/os';
 import { $i } from '@/account';
 import { i18n } from '@/i18n';
+import { MINUTE } from '@/const';
 
 const twoFactorData = ref<any>(null);
 const supportsCredentials = ref(!!navigator.credentials);
@@ -188,7 +189,7 @@ function addSecurityKey() {
 						displayName: $i!.name,
 					},
 					pubKeyCredParams: [{ alg: -7, type: 'public-key' }],
-					timeout: 60000,
+					timeout: MINUTE,
 					attestation: 'direct',
 				},
 				saving: true,

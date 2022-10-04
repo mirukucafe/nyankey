@@ -16,6 +16,7 @@ import { GetFormResultType } from '@/scripts/form';
 import MkContainer from '@/components/ui/container.vue';
 import { defaultStore } from '@/store';
 import { i18n } from '@/i18n';
+import { SECOND } from '@/const';
 
 const name = 'memo';
 
@@ -54,7 +55,7 @@ const saveMemo = (): void => {
 const onChange = (): void => {
 	changed.value = true;
 	window.clearTimeout(timeoutId);
-	timeoutId = window.setTimeout(saveMemo, 1000);
+	timeoutId = window.setTimeout(saveMemo, SECOND);
 };
 
 watch(() => defaultStore.reactiveState.memo, newText => {
