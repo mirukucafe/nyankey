@@ -1,28 +1,28 @@
 <template>
 <div class="mvcprjjd" :class="{ iconOnly }">
 	<div>
-		<button v-click-anime class="item _button account" @click="openAccountMenu">
+		<button class="item _button account" @click="openAccountMenu">
 			<MkAvatar :user="$i" class="avatar"/><MkAcct class="text" :user="$i"/>
 		</button>
-		<MkA v-click-anime class="item index" active-class="active" to="/" exact>
+		<MkA class="item index" active-class="active" to="/" exact>
 			<i class="fas fa-home fa-fw"></i><span class="text">{{ i18n.ts.timeline }}</span>
 		</MkA>
 		<template v-for="item in menu">
 			<div v-if="item === '-'" class="divider"></div>
-			<component :is="menuDef[item].to ? 'MkA' : 'button'" v-else-if="menuDef[item] && (menuDef[item].show !== false)" v-click-anime class="item _button" :class="[item, { active: menuDef[item].active }]" active-class="active" :to="menuDef[item].to" v-on="menuDef[item].action ? { click: menuDef[item].action } : {}">
+			<component :is="menuDef[item].to ? 'MkA' : 'button'" v-else-if="menuDef[item] && (menuDef[item].show !== false)" class="item _button" :class="[item, { active: menuDef[item].active }]" active-class="active" :to="menuDef[item].to" v-on="menuDef[item].action ? { click: menuDef[item].action } : {}">
 				<i class="fa-fw" :class="menuDef[item].icon"></i><span class="text">{{ i18n.ts[menuDef[item].title] }}</span>
 				<span v-if="menuDef[item].indicated" class="indicator"><i class="fas fa-circle"></i></span>
 			</component>
 		</template>
 		<div class="divider"></div>
-		<MkA v-if="$i.isAdmin || $i.isModerator" v-click-anime class="item" active-class="active" to="/admin">
+		<MkA v-if="$i.isAdmin || $i.isModerator" class="item" active-class="active" to="/admin">
 			<i class="fas fa-door-open fa-fw"></i><span class="text">{{ i18n.ts.controlPanel }}</span>
 		</MkA>
-		<button v-click-anime class="item _button" @click="more">
+		<button class="item _button" @click="more">
 			<i class="fa fa-ellipsis-h fa-fw"></i><span class="text">{{ i18n.ts.more }}</span>
 			<span v-if="otherMenuItemIndicated" class="indicator"><i class="fas fa-circle"></i></span>
 		</button>
-		<MkA v-click-anime class="item" active-class="active" to="/settings">
+		<MkA class="item" active-class="active" to="/settings">
 			<i class="fas fa-cog fa-fw"></i><span class="text">{{ i18n.ts.settings }}</span>
 		</MkA>
 		<button class="item _button post" data-cy-open-post-form @click="os.post">
