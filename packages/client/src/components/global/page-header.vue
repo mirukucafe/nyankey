@@ -54,8 +54,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, inject, watch, nextTick } from 'vue';
+import { onMounted, onUnmounted, inject, watch, nextTick } from 'vue';
 import tinycolor from 'tinycolor2';
+import MkButton from '@/components/ui/button.vue';
 import { popupMenu } from '@/os';
 import { scrollToTop } from '@/scripts/scroll';
 import { globalEvents } from '@/events';
@@ -91,17 +92,16 @@ const emit = defineEmits<{
 }>();
 
 const metadata = injectPageMetadata();
-
 const hideTitle = inject('shouldOmitHeaderTitle', false);
-
-const el = $ref<HTMLElement | null>(null);
 const tabRefs = {};
-const tabHighlightEl = $ref<HTMLElement | null>(null);
-const bg = ref(null);
+
+let el = $ref<HTMLElement | null>(null);
+let tabHighlightEl = $ref<HTMLElement | null>(null);
+let bg = $ref(null);
 let narrow = $ref(false);
-const hasTabs = $computed(() => props.tabs.length > 0);
-const hasActions = $computed(() => props.actions.length > 0);
-const show = $computed(() => !hideTitle || hasTabs || hasActions);
+let hasTabs = $computed(() => props.tabs.length > 0);
+let hasActions = $computed(() => props.actions.length > 0);
+let show = $computed(() => !hideTitle || hasTabs || hasActions);
 
 function showTabsPopup(ev: MouseEvent): void {
 	if (!hasTabs) return;
@@ -149,7 +149,7 @@ const calcBg = () => {
 	const rawBg = metadata?.bg || 'var(--bg)';
 	const tinyBg = tinycolor(rawBg.startsWith('var(') ? getComputedStyle(document.documentElement).getPropertyValue(rawBg.slice(4, -1)) : rawBg);
 	tinyBg.setAlpha(0.85);
-	bg.value = tinyBg.toRgbString();
+	bg = tinyBg.toRgbString();
 };
 
 let ro: ResizeObserver | null;
