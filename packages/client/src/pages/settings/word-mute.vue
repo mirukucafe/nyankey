@@ -1,9 +1,6 @@
 <template>
 <div class="_formRoot">
-	<MkTab v-model="tab" class="_formBlock">
-		<option value="soft">{{ i18n.ts._wordMute.soft }}</option>
-		<option value="hard">{{ i18n.ts._wordMute.hard }}</option>
-	</MkTab>
+	<MkTab v-model="tab" :options="tabs" class="_formBlock"/>
 	<div class="_formBlock">
 		<div v-show="tab === 'soft'">
 			<MkInfo class="_formBlock">{{ i18n.ts._wordMute.softDescription }}</MkInfo>
@@ -49,6 +46,14 @@ const render = (mutedWords) => mutedWords.map(x => {
 		return x;
 	}
 }).join('\n');
+
+const tabs = [{
+	value: 'soft',
+	label: i18n.ts._wordMute.soft,
+}, {
+	value: 'hard',
+	label: i18n.ts._wordMute.hard,
+}];
 
 const tab = ref('soft');
 const softMutedWords = ref(render(defaultStore.state.mutedWords));

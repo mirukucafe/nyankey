@@ -47,7 +47,6 @@ import XUserList from '@/components/user-list.vue';
 import MkFolder from '@/components/ui/folder.vue';
 import MkInput from '@/components/form/input.vue';
 import MkButton from '@/components/ui/button.vue';
-import MkTab from '@/components/tab.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkGalleryPostPreview from '@/components/gallery-post-preview.vue';
 import number from '@/filters/number';

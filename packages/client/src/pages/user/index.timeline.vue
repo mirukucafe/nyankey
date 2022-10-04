@@ -1,16 +1,12 @@
 <template>
 <div v-sticky-container class="yrzkoczt">
-	<MkTab v-model="include" class="tab">
-		<option :value="null">{{ i18n.ts.notes }}</option>
-		<option value="replies">{{ i18n.ts.notesAndReplies }}</option>
-		<option value="files">{{ i18n.ts.withFiles }}</option>
-	</MkTab>
+	<MkTab v-model="include" :options="tabs" class="tab"/>
 	<XNotes :no-gap="true" :pagination="pagination"/>
 </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import * as foundkey from 'foundkey-js';
 import XNotes from '@/components/notes.vue';
 import MkTab from '@/components/tab.vue';
@@ -21,15 +17,26 @@ const props = defineProps<{
 	user: foundkey.entities.UserDetailed;
 }>();
 
-const include = ref<string | null>(null);
+const tabs = [{
+	value: 'notes',
+	label: i18n.ts.notes,
+}, {
+	value: 'replies',
+	label: i18n.ts.notesAndReplies,
+}, {
+	value: 'files',
+	label: i18n.ts.withFiles,
+}];
+
+let include: string = $ref('notes');
 
 const pagination = {
 	endpoint: 'users/notes' as const,
 	limit: 10,
 	params: computed(() => ({
 		userId: props.user.id,
-		includeReplies: include.value === 'replies',
-		withFiles: include.value === 'files',
+		includeReplies: include === 'replies',
+		withFiles: include === 'files',
 	})),
 };
 </script>
