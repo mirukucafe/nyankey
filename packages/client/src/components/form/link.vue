@@ -20,16 +20,20 @@
 </template>
 
 <script lang="ts" setup>
-
 type Behavior = 'window' | 'browser' | 'modalWindow';
 
-defineProps<{
+withDefaults(defineProps<{
 	to: string;
 	active?: boolean;
 	external?: boolean;
-	behavior?: Behavior;
+	behavior?: null | Behavior;
 	inline?: boolean;
-}>();
+}>(), {
+	active: false,
+	external: false,
+	behavior: null,
+	inline: false,
+});
 </script>
 
 <style lang="scss" scoped>
