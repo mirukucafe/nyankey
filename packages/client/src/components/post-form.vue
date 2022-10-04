@@ -523,7 +523,7 @@ function saveDraft() {
 		&& (!useCw || initialDraftData.cw === cw)
 		&& initialDraftData.visibility === visibility
 		&& initialDraftData.localOnly === localOnly
-		&& initialDraftData.files.each((file, i) => file.id === files[i].id)
+		&& initialDraftData.files.every((file, i) => file.id === files[i].id)
 		// initial state is always poll == null
 		&& poll == null
 	) {
