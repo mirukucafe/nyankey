@@ -21,11 +21,11 @@ import { onMounted, onUnmounted } from 'vue';
 import MkModal from './modal.vue';
 
 withDefaults(defineProps<{
-	withOkButton: boolean;
-	okButtonDisabled: boolean;
-	width: number;
-	height: number | null;
-	scroll: boolean;
+	withOkButton?: boolean;
+	okButtonDisabled?: boolean;
+	width?: number;
+	height?: number | null;
+	scroll?: boolean;
 }>(), {
 	withOkButton: false,
 	okButtonDisabled: false,
