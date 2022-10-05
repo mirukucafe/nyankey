@@ -52,9 +52,9 @@ const relative = $computed(() => {
 		if (ago >= HOUR) {
 			return i18n.t('_ago.hoursAgo', { n: Math.round(ago / HOUR).toString() });
 		} else if (ago >= MINUTE) {
-			return i18n.t('_ago.minutesAgo', { n: (~~(ago / MINUTE)).toString() });
+			return i18n.t('_ago.minutesAgo', { n: Math.floor(ago / MINUTE).toString() });
 		} else if (ago >= 10 * SECOND) {
-			return i18n.t('_ago.secondsAgo', { n: (~~(ago % MINUTE)).toString() });
+			return i18n.t('_ago.secondsAgo', { n: Math.floor(ago / SECOND).toString() });
 		}
 	}
 
