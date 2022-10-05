@@ -8,9 +8,9 @@ export const DAY = 24 * HOUR;
 export const USER_ONLINE_THRESHOLD = 1000 * 60 * 10; // 10min
 export const USER_ACTIVE_THRESHOLD = 1000 * 60 * 60 * 24 * 3; // 3days
 
-// ブラウザで直接表示することを許可するファイルの種類のリスト
-// ここに含まれないものは application/octet-stream としてレスポンスされる
-// SVGはXSSを生むので許可しない
+// List of file types allowed to be viewed directly in the browser.
+// Anything not included here will be reported as application/octet-stream
+// SVG is not allowed because it can lead to XSS
 export const FILE_TYPE_BROWSERSAFE = [
 	// Images
 	'image/png',
