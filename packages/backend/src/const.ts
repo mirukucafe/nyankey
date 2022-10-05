@@ -1,12 +1,13 @@
 export const MAX_NOTE_TEXT_LENGTH = 3000;
 
+// Time constants
 export const SECOND = 1000;
 export const MINUTE = 60 * SECOND;
 export const HOUR = 60 * MINUTE;
 export const DAY = 24 * HOUR;
 
-export const USER_ONLINE_THRESHOLD = 1000 * 60 * 10; // 10min
-export const USER_ACTIVE_THRESHOLD = 1000 * 60 * 60 * 24 * 3; // 3days
+export const USER_ONLINE_THRESHOLD = 10 * MINUTE;
+export const USER_ACTIVE_THRESHOLD = 3 * DAY;
 
 // List of file types allowed to be viewed directly in the browser.
 // Anything not included here will be reported as application/octet-stream
