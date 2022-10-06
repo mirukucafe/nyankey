@@ -479,7 +479,8 @@ youHaveNoGroups: "You have no groups"
 joinOrCreateGroup: "Get invited to a group or create your own."
 noHistory: "No history available"
 signinHistory: "Login history"
-signinHistoryExpires: "Data about past login attempts is automatically deleted after 60 days to comply with privacy regulations."
+signinHistoryExpires: "Data about past login attempts is automatically deleted after\
+  \ 60 days to comply with privacy regulations."
 disableAnimatedMfm: "Disable MFM with animation"
 doing: "Processing..."
 category: "Category"
@@ -864,7 +865,8 @@ makeReactionsPublicDescription: "This will make the list of all your past reacti
 classic: "Classic"
 muteThread: "Mute thread"
 unmuteThread: "Unmute thread"
-threadMuteNotificationsDesc: "Select the notifications you wish to view from this thread. Global notification settings also apply. Disabling takes precedence."
+threadMuteNotificationsDesc: "Select the notifications you wish to view from this\
+  \ thread. Global notification settings also apply. Disabling takes precedence."
 ffVisibility: "Follows/Followers Visibility"
 ffVisibilityDescription: "Allows you to configure who can see who you follow and who\
   \ follows you."
