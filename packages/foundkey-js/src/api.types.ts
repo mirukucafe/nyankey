@@ -411,6 +411,9 @@ export type Endpoints = {
 	'mute/create': { req: TODO; res: TODO; };
 	'mute/delete': { req: { userId: User['id'] }; res: null; };
 	'mute/list': { req: TODO; res: TODO; };
+	'renote-mute/create': { req: TODO; res: TODO; };
+	'renote-mute/delete': { req: { userId: User['id'] }; res: null; };
+	'renote-mute/list': { req: TODO; res: TODO; };
 	'my/apps': { req: TODO; res: TODO; };
 	'notes': { req: { limit?: number; sinceId?: Note['id']; untilId?: Note['id']; }; res: Note[]; };
 	'notes/children': { req: { noteId: Note['id']; limit?: number; sinceId?: Note['id']; untilId?: Note['id']; }; res: Note[]; };

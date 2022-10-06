@@ -53,6 +53,7 @@ export type UserDetailed = UserLite & {
 	isLocked: boolean;
 	isModerator: boolean;
 	isMuted: boolean;
+	isRenoteMuted: boolean;
 	isSilenced: boolean;
 	isSuspended: boolean;
 	lang: string | null;

@@ -98,6 +98,14 @@ export function getUserMenu(user) {
 		}
 	}
 
+	async function toggleRenoteMute(): Promise<void> {
+		os.apiWithDialog(user.isRenoteMuted ? 'renote-mute/delete' : 'renote-mute/create', {
+			userId: user.id,
+		}).then(() => {
+			user.isRenoteMuted = !user.isRenoteMuted;
+		});
+	}
+
 	async function toggleBlock(): Promise<void> {
 		if (!await getConfirmed(user.isBlocking ? i18n.ts.unblockConfirm : i18n.ts.blockConfirm)) return;
 
@@ -187,6 +195,10 @@ export function getUserMenu(user) {
 
 	if ($i && meId !== user.id) {
 		menu = menu.concat([null, {
+			icon: user.isRenoteMuted ? 'fas fa-eye' : 'fas fa-eye-slash',
+			text: user.isRenoteMuted ? i18n.ts.renoteUnmute : i18n.ts.renoteMute,
+			action: toggleRenoteMute,
+		}, {
 			icon: user.isMuted ? 'fas fa-eye' : 'fas fa-eye-slash',
 			text: user.isMuted ? i18n.ts.unmute : i18n.ts.mute,
 			action: toggleMute,
