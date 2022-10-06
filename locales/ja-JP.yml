@@ -852,8 +852,6 @@ typeToConfirm: "この操作を行うには {x} と入力してください"
 deleteAccount: "アカウント削除"
 numberOfPageCache: "ページキャッシュ数"
 numberOfPageCacheDescription: "多くすると利便性が向上しますが、負荷とメモリ使用量が増えます。"
-document: "ドキュメント"
-
 _emailUnavailable:
   used: "既に使用されています"
   format: "形式が正しくありません"
