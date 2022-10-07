@@ -23,21 +23,34 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+type MenuItem = {
+	text: string;
+	icon?: string;
+	danger?: boolean;
+	active?: boolean;
+	i?: number;
+} & (
+	{
+		type: 'a';
+		href: string;
+		target?: string;
+	} | {
+		type: 'button';
+		action(MouseEvent): void;
+	} | {
+		to: string;
+	}
+);
 
-export default defineComponent({
-	props: {
-		def: {
-			type: Array,
-			required: true,
-		},
-		grid: {
-			type: Boolean,
-			required: false,
-			default: false,
-		},
-	},
+withDefaults(defineProps<{
+	def: {
+		title?: string;
+		items: MenuItem[];
+	}[];
+	grid?: boolean;
+}>(), {
+	grid: false,
 });
 </script>
 
