@@ -58,7 +58,7 @@ const relative = $computed(() => {
 		}
 	}
 
-	if (ago >= -5) {
+	if (ago >= -5 * SECOND) {
 		if (props.format === 'date') {
 			// this is also the catch-all for the formats with hour/minute/second precision
 			return i18n.ts.today;
