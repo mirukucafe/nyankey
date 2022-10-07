@@ -1,104 +1,75 @@
-<script lang="ts">
-import { h, onMounted, onUnmounted, ref, watch } from 'vue';
+<template>
+<div class="marquee">
+	<span ref="contentEl" :class="{ content: true, paused, reverse }">
+		<span v-for="i in repeat" :key="i" class="text">
+			<slot></slot>
+		</span>
+	</span>
+</div>
+</template>
 
-export default {
-	name: 'MarqueeText',
-	props: {
-		duration: {
-			type: Number,
-			default: 15,
-		},
-		repeat: {
-			type: Number,
-			default: 2,
-		},
-		paused: {
-			type: Boolean,
-			default: false,
-		},
-		reverse: {
-			type: Boolean,
-			default: false,
-		},
-	},
-	setup(props) {
-		const contentEl = ref();
+<script lang="ts" setup>
+import { watch, onMounted } from 'vue';
 
-		function calc() {
-			const eachLength = contentEl.value.offsetWidth / props.repeat;
-			const factor = 3000;
-			const duration = props.duration / ((1 / eachLength) * factor);
+const props = withDefaults(defineProps<{
+	duration?: number;
+	repeat?: number;
+	paused?: boolean;
+	reverse?: boolean;
+}>(), {
+	duration: 15,
+	repeat: 2,
+	paused: false,
+	reverse: false,
+});
 
-			contentEl.value.style.animationDuration = `${duration}s`;
-		}
+let contentEl = $ref();
 
-		watch(() => props.duration, calc);
+function calc() {
+	const eachLength = contentEl.offsetWidth / props.repeat;
+	const factor = 3000;
+	const duration = props.duration / ((1 / eachLength) * factor);
 
-		onMounted(() => {
-			calc();
-		});
+	contentEl.style.animationDuration = `${duration}s`;
+}
 
-		onUnmounted(() => {
-		});
-
-		return {
-			contentEl,
-		};
-	},
-	render({
-		$slots, $style, $props: {
-			repeat, paused, reverse,
-		},
-	}) {
-		return h('div', { class: [$style.wrap] }, [
-			h('span', {
-				ref: 'contentEl',
-				class: [
-					paused
-						? $style.paused
-						: undefined,
-					$style.content,
-				],
-			}, Array(repeat).fill(
-				h('span', {
-					class: $style.text,
-					style: {
-						animationDirection: reverse
-							? 'reverse'
-							: undefined,
-					},
-				}, $slots.default()),
-			)),
-		]);
-	},
-};
+watch(() => props.duration, calc);
+onMounted(calc);
 </script>
 
-<style lang="scss" module>
-.wrap {
+<style lang="scss" scoped>
+.marquee {
 	overflow: clip;
 	animation-play-state: running;
 
 	&:hover {
 		animation-play-state: paused;
 	}
+
+	> .content {
+		display: inline-block;
+		white-space: nowrap;
+		animation-play-state: inherit;
+
+		&.paused {
+			animation-play-state: paused;
+		}
+
+		&.reverse {
+			animation-direction: reverse;
+		}
+
+		> .text {
+			display: inline-block;
+			animation-name: marquee;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+			animation-duration: inherit;
+			animation-play-state: inherit;
+		}
+	}
 }
-.content {
-	display: inline-block;
-	white-space: nowrap;
-	animation-play-state: inherit;
-}
-.text {
-	display: inline-block;
-	animation-name: marquee;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-duration: inherit;
-	animation-play-state: inherit;
-}
-.paused .text {
-	animation-play-state: paused;
-}
+
 @keyframes marquee {
 	0% { transform:translateX(0); }
 	100% { transform:translateX(-100%); }
