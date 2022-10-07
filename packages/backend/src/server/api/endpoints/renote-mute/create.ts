@@ -74,5 +74,5 @@ export default define(meta, paramDef, async (ps, user) => {
 		muteeId: mutee.id,
 	} as RenoteMuting);
 
-	// publishUserEvent(user.id, 'mute', mutee);
+	publishUserEvent(user.id, 'muteRenote', mutee);
 });

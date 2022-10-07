@@ -69,5 +69,5 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: exist.id,
 	});
 
-	// publishUserEvent(user.id, 'unmute', mutee);
+	publishUserEvent(user.id, 'unmuteRenote', mutee);
 });

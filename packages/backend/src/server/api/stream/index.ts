@@ -84,8 +84,21 @@ export default class Connection {
 				this.muting.delete(data.body.id);
 				break;
 
-				// TODO: renote mute events
-				// TODO: block events
+			case 'block':
+				this.blocking.add(data.body.id);
+				break;
+
+			case 'unblock':
+				this.blocking.delete(data.body.id);
+				break;
+
+			case 'muteRenote':
+				this.renoteMuting.add(data.body.id);
+				break;
+
+			case 'unmuteRenote':
+				this.renoteMuting.delete(data.body.id);
+				break;
 
 			case 'followChannel':
 				this.followingChannels.add(data.body.id);

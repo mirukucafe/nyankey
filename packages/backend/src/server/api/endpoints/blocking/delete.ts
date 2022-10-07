@@ -83,4 +83,6 @@ export default define(meta, paramDef, async (ps, user) => {
 	return await Users.pack(blockee.id, blocker, {
 		detail: true,
 	});
+
+	publishUserEvent(user.id, 'unblock', blockee);
 });
