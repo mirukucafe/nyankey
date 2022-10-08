@@ -3989,10 +3989,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browser-image-resizer@git+https://github.com/misskey-dev/browser-image-resizer#v2.2.1-misskey.2":
-  version: 2.2.1-misskey.2
-  resolution: "browser-image-resizer@https://github.com/misskey-dev/browser-image-resizer.git#commit=a58834f5fe2af9f9f31ff115121aef3de6f9d416"
-  checksum: eb5ddfe7f6a2de96340ef420df9be03a75f2bfd8f568a60be22cc8f2ccdcb754105b7799cf706c09add3f9d82b7ce1c6f963842f80a85f234b26ef6bf1b8da09
+"browser-image-resizer@npm:2.4.1":
+  version: 2.4.1
+  resolution: "browser-image-resizer@npm:2.4.1"
+  checksum: b2f705696f2643240880314926f976b473452a7ef1335dcc888993281c8a8e57eba2cda255965843526511a206b722be0031df770bd31ddd944bc8730521ddb6
   languageName: node
   linkType: hard
 
@@ -4699,7 +4699,7 @@ __metadata:
     autwh: 0.1.0
     blurhash: 1.1.5
     broadcast-channel: 4.13.0
-    browser-image-resizer: "git+https://github.com/misskey-dev/browser-image-resizer#v2.2.1-misskey.2"
+    browser-image-resizer: 2.4.1
     chart.js: 3.8.0
     chartjs-adapter-date-fns: 2.0.0
     chartjs-plugin-gradient: 0.5.0
