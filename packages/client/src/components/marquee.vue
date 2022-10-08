@@ -23,9 +23,9 @@ const props = withDefaults(defineProps<{
 	reverse: false,
 });
 
-let contentEl = $ref();
+let contentEl: HTMLElement = $ref();
 
-function calc() {
+function calc(): void {
 	const eachLength = contentEl.offsetWidth / props.repeat;
 	const factor = 3000;
 	const duration = props.duration / ((1 / eachLength) * factor);
