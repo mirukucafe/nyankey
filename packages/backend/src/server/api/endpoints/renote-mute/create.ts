@@ -1,6 +1,7 @@
 import { genId } from '@/misc/gen-id.js';
 import { RenoteMutings } from '@/models/index.js';
 import { RenoteMuting } from '@/models/entities/renote-muting.js';
+import { publishUserEvent } from '@/services/stream.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
 import { getUser } from '../../common/getters.js';
