@@ -14,7 +14,7 @@ import { AbuseUserReport } from '@/models/entities/abuse-user-report.js';
 import { Signin } from '@/models/entities/signin.js';
 import { Page } from '@/models/entities/page.js';
 import { Packed } from '@/misc/schema.js';
-import { Webhook } from '@/models/entities/webhook';
+import { Webhook } from '@/models/entities/webhook.js';
 
 //#region Stream type-body definitions
 export interface InternalStreamTypes {
