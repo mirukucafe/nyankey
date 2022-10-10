@@ -425,7 +425,7 @@ export async function addFile({
 	file.createdAt = new Date();
 	file.userId = user ? user.id : null;
 	file.userHost = user ? user.host : null;
-	file.folderId = folder !== null ? folder.id : null;
+	file.folderId = folder?.id;
 	file.comment = comment;
 	file.properties = properties;
 	file.blurhash = info.blurhash || null;

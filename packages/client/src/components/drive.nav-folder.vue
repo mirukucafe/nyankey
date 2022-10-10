@@ -9,7 +9,7 @@
 	@drop.stop="onDrop"
 >
 	<i v-if="folder == null" class="fas fa-cloud"></i>
-	<span>{{ folder == null ? i18n.ts.drive : folder.name }}</span>
+	<span>{{ folder?.name ?? i18n.ts.drive }}</span>
 </div>
 </template>
 

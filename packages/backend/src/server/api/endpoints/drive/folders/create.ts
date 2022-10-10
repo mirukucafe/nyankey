@@ -56,7 +56,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: genId(),
 		createdAt: new Date(),
 		name: ps.name,
-		parentId: parent !== null ? parent.id : null,
+		parentId: parent?.id,
 		userId: user.id,
 	}).then(x => DriveFolders.findOneByOrFail(x.identifiers[0]));
 

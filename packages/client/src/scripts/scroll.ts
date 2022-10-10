@@ -12,7 +12,7 @@ export function getScrollContainer(el: HTMLElement | null): HTMLElement | null {
 
 export function getScrollPosition(el: Element | null): number {
 	const container = getScrollContainer(el);
-	return container == null ? window.scrollY : container.scrollTop;
+	return container?.scrollTop ?? window.scrollY;
 }
 
 export function isTopVisible(el: Element | null): boolean {
