@@ -1,5 +1,5 @@
 <template>
-<div class="pxhvhrfw" v-size="{ max: [500] }">
+<div v-size="{ max: [500] }" class="pxhvhrfw">
 	<button
 		v-for="option in options"
 		:key="option.value"

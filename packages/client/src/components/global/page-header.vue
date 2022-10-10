@@ -117,7 +117,7 @@ function showTabsPopup(ev: MouseEvent): void {
 		},
 	}));
 	popupMenu(menu, ev.currentTarget ?? ev.target);
-};
+}
 
 function preventDrag(ev: TouchEvent): void {
 	ev.stopPropagation();
