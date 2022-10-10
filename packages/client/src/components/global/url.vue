@@ -34,15 +34,15 @@ const props = withDefaults(defineProps<{
 });
 
 const self = props.url.startsWith(local);
-const url = new URL(props.url);
+const uri = new URL(props.url);
 let el: HTMLElement | null = $ref(null);
 
-let schema = $ref(url.protocol);
-let hostname = $ref(decodePunycode(url.hostname));
-let port = $ref(url.port);
-let pathname = $ref(safeURIDecode(url.pathname));
-let query = $ref(safeURIDecode(url.search));
-let hash = $ref(safeURIDecode(url.hash));
+let schema = $ref(uri.protocol);
+let hostname = $ref(decodePunycode(uri.hostname));
+let port = $ref(uri.port);
+let pathname = $ref(safeURIDecode(uri.pathname));
+let query = $ref(safeURIDecode(uri.search));
+let hash = $ref(safeURIDecode(uri.hash));
 let attr = $ref(self ? 'to' : 'href');
 let target = $ref(self ? null : '_blank');
 
