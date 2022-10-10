@@ -85,7 +85,7 @@ async function edit(type) {
 			type: 'enum',
 			enum: soundsTypes.map(x => ({
 				value: x,
-				label: x == null ? i18n.ts.none : x,
+				label: x ?? i18n.ts.none,
 			})),
 			label: i18n.ts.sound,
 			default: sounds.value[type].type,
