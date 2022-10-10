@@ -46,7 +46,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const muter = user;
 
-	// 自分自身
+	// Check if the mutee is yourself
 	if (user.id === ps.userId) {
 		throw new ApiError(meta.errors.muteeIsYourself);
 	}

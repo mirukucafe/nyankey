@@ -2,7 +2,7 @@ import { Brackets, SelectQueryBuilder } from 'typeorm';
 import { User } from '@/models/entities/user.js';
 import { RenoteMutings } from '@/models/index.js';
 
-export function generateMutedUserRenotesQueryForNotes(q: SelectQueryBuilder<any>, me: { id: User['id'] }): void {
+export function generateMutedRenotesQuery(q: SelectQueryBuilder<any>, me: { id: User['id'] }): void {
 	const mutingQuery = RenoteMutings.createQueryBuilder('renote_muting')
 		.select('renote_muting.muteeId')
 		.where('renote_muting.muterId = :muterId', { muterId: me.id });
