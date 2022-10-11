@@ -139,11 +139,11 @@ async function deliverToConcerned(user: { id: ILocalUser['id']; host: null; }, n
 		manager.addDirectRecipe(remoteUser);
 	}
 
-	if (['public', 'home', 'followers'].contains(note.visibility)) {
+	if (['public', 'home', 'followers'].includes(note.visibility)) {
 		manager.addFollowersRecipe();
 	}
 
-	if (['public', 'home'].contains(note.visibility)) {
+	if (['public', 'home'].includes(note.visibility)) {
 		manager.addEveryone();
 	}
 
