@@ -65,6 +65,8 @@ directNotes: "Direct notes"
 importAndExport: "Import / Export"
 import: "Import"
 export: "Export"
+exportAll: "Export all"
+exportSelected: "Export selected"
 files: "Files"
 download: "Download"
 driveFileDeleteConfirm: "Are you sure you want to delete the file \"{name}\"? Notes\

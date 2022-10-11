@@ -18,6 +18,7 @@
 						<MkButton inline @click="addTagBulk">{{ i18n.ts.addTag }}</MkButton>
 						<MkButton inline @click="removeTagBulk">{{ i18n.ts.removeTag }}</MkButton>
 						<MkButton inline @click="setTagBulk">{{ i18n.ts.setTag }}</MkButton>
+						<MkButton inline @click="exportSelected">{{ i18n.ts.exportSelected }}</MkButton>
 						<MkButton inline danger @click="delBulk">{{ i18n.ts.delete }}</MkButton>
 					</div>
 					<MkPagination ref="emojisPaginationComponent" :pagination="pagination">
@@ -170,7 +171,7 @@ const remoteMenu = (emoji, ev: MouseEvent) => {
 const menu = (ev: MouseEvent) => {
 	os.popupMenu([{
 		icon: 'fas fa-download',
-		text: i18n.ts.export,
+		text: i18n.ts.exportAll,
 		action: async () => {
 			os.api('export-custom-emojis', {
 			})
@@ -255,6 +256,23 @@ const setTagBulk = async () => {
 		aliases: result.split(' '),
 	});
 	emojisPaginationComponent.value.reload();
+};
+
+const exportSelected = async () => {
+	os.api('export-custom-emojis', {
+		ids: selectedEmojis.value,
+	})
+	.then(() => {
+		os.alert({
+			type: 'info',
+			text: i18n.ts.exportRequested,
+		});
+	}).catch((err) => {
+		os.alert({
+			type: 'error',
+			text: err.message,
+		});
+	});
 };
 
 const delBulk = async () => {
