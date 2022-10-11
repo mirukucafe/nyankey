@@ -84,7 +84,7 @@ export function groupOn<T, S>(f: (x: T) => S, xs: T[]): T[][] {
 	return groupBy((a, b) => f(a) === f(b), xs);
 }
 
-export function groupByX<T>(collections: T[], keySelector: (x: T) => string) {
+export function groupByX<T>(collections: T[], keySelector: (x: T) => string): Record<string, T[]> {
 	return collections.reduce((obj: Record<string, T[]>, item: T) => {
 		const key = keySelector(item);
 		if (!Object.prototype.hasOwnProperty.call(obj, key)) {
