@@ -1,8 +1,6 @@
 <template>
-<div v-if="meta">
-	<XSetup v-if="meta.requireSetup"/>
+	<XSetup v-if="instance.requireSetup"/>
 	<XEntrance v-else/>
-</div>
 </template>
 
 <script lang="ts" setup>
@@ -10,14 +8,9 @@ import { computed } from 'vue';
 import XSetup from './welcome.setup.vue';
 import XEntrance from './welcome.entrance.a.vue';
 import { instanceName } from '@/config';
+import { instance } from '@/instance';
 import * as os from '@/os';
 import { definePageMetadata } from '@/scripts/page-metadata';
-
-let meta = $ref(null);
-
-os.api('meta', { detail: true }).then(res => {
-	meta = res;
-});
 
 definePageMetadata(computed(() => ({
 	title: instanceName,

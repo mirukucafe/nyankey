@@ -10,6 +10,9 @@ export const meta = {
 
 	requireCredential: false,
 
+	allowGet: true,
+	cacheSec: 60,
+
 	res: {
 		type: 'object',
 		optional: false, nullable: false,
@@ -253,7 +256,12 @@ export const meta = {
 export const paramDef = {
 	type: 'object',
 	properties: {
-		detail: { type: 'boolean', default: true },
+		detail: {
+			deprecated: true,
+			description: 'This parameter is ignored. You will always get all details (as if it was `true`).',
+			type: 'boolean',
+			default: true,
+		},
 	},
 	required: [],
 } as const;
@@ -276,7 +284,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		},
 	});
 
-	const response: any = {
+	return {
 		maintainerName: instance.maintainerName,
 		maintainerEmail: instance.maintainerEmail,
 
@@ -317,21 +325,16 @@ export default define(meta, paramDef, async (ps, me) => {
 
 		translatorAvailable: instance.deeplAuthKey != null,
 
-		...(ps.detail ? {
-			pinnedPages: instance.pinnedPages,
-			pinnedClipId: instance.pinnedClipId,
-			cacheRemoteFiles: instance.cacheRemoteFiles,
-			requireSetup: (await Users.countBy({
-				host: IsNull(),
-			})) === 0,
-		} : {}),
-	};
+		pinnedPages: instance.pinnedPages,
+		pinnedClipId: instance.pinnedClipId,
+		cacheRemoteFiles: instance.cacheRemoteFiles,
+		requireSetup: (await Users.countBy({
+			host: IsNull(),
+		})) === 0,
 
-	if (ps.detail) {
-		const proxyAccount = instance.proxyAccountId ? await Users.pack(instance.proxyAccountId).catch(() => null) : null;
+		proxyAccountName: instance.proxyAccountId ? (await Users.pack(instance.proxyAccountId).catch(() => null))?.username : null,
 
-		response.proxyAccountName = proxyAccount ? proxyAccount.username : null;
-		response.features = {
+		features: {
 			registration: !instance.disableRegistration,
 			localTimeLine: !instance.disableLocalTimeline,
 			globalTimeLine: !instance.disableGlobalTimeline,
@@ -345,8 +348,6 @@ export default define(meta, paramDef, async (ps, me) => {
 			discord: instance.enableDiscordIntegration,
 			serviceWorker: instance.enableServiceWorker,
 			miauth: true,
-		};
-	}
-
-	return response;
+		},
+	};
 });

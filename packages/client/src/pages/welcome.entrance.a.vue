@@ -1,5 +1,5 @@
 <template>
-<div v-if="meta" class="rsqzvsbo">
+<div class="rsqzvsbo">
 	<div class="top">
 		<MkFeaturedPhotos class="bg"/>
 		<XTimeline class="tl"/>
@@ -19,12 +19,12 @@
 			<div class="fg">
 				<h1>
 					<!-- 背景色によってはロゴが見えなくなるのでとりあえず無効に -->
-					<!-- <img class="logo" v-if="meta.logoImageUrl" :src="meta.logoImageUrl"><span v-else class="text">{{ instanceName }}</span> -->
+					<!-- <img class="logo" v-if="instance.logoImageUrl" :src="instance.logoImageUrl"><span v-else class="text">{{ instanceName }}</span> -->
 					<span class="text">{{ instanceName }}</span>
 				</h1>
 				<div class="about">
 					<!-- eslint-disable-next-line vue/no-v-html -->
-					<div class="desc" v-html="meta.description || i18n.ts.headlineMisskey"></div>
+					<div class="desc" v-html="instance.description || i18n.ts.headlineMisskey"></div>
 				</div>
 				<div class="action">
 					<MkButton inline rounded gradate data-cy-signup style="margin-right: 12px;" @click="signup()">{{ i18n.ts.signup }}</MkButton>
@@ -58,16 +58,12 @@ import { host, instanceName } from '@/config';
 import * as os from '@/os';
 import number from '@/filters/number';
 import { i18n } from '@/i18n';
+import { instance } from '@/instance';
 
-let meta = $ref();
 let stats = $ref();
 let tags = $ref();
 let onlineUsersCount = $ref();
 let instances = $ref();
-
-os.api('meta', { detail: true }).then(_meta => {
-	meta = _meta;
-});
 
 os.api('stats').then(_stats => {
 	stats = _stats;

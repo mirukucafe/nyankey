@@ -1,6 +1,6 @@
 import { computed, reactive } from 'vue';
 import * as foundkey from 'foundkey-js';
-import { api } from '@/os';
+import { apiGet } from '@/os';
 
 // TODO: 他のタブと永続化されたstateを同期
 
@@ -13,13 +13,7 @@ export const instance: foundkey.entities.InstanceMetadata = reactive(instanceDat
 });
 
 export async function fetchInstance(): Promise<void> {
-	const meta = await api('meta', {
-		detail: false,
-	});
-
-	for (const [k, v] of Object.entries(meta)) {
-		instance[k] = v;
-	}
+	Object.assign(instance, await apiGet('meta'));
 
 	localStorage.setItem('instance', JSON.stringify(instance));
 }
