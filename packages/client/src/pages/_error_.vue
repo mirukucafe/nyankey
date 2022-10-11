@@ -4,7 +4,7 @@
 	<div v-show="loaded" class="mjndxjch">
 		<img src="https://xn--931a.moe/assets/error.jpg" class="_ghost"/>
 		<p><b><i class="fas fa-exclamation-triangle"></i> {{ i18n.ts.pageLoadError }}</b></p>
-		<p v-if="meta && (version === meta.version)">{{ i18n.ts.pageLoadErrorDescription }}</p>
+		<p v-if="version === instance.version">{{ i18n.ts.pageLoadErrorDescription }}</p>
 		<p v-else-if="serverIsDead">{{ i18n.ts.serverIsDead }}</p>
 		<template v-else>
 			<p>{{ i18n.ts.newVersionOfClientAvailable }}</p>
@@ -21,6 +21,7 @@
 import * as foundkey from 'foundkey-js';
 import MkButton from '@/components/ui/button.vue';
 import { version } from '@/config';
+import { instance } from '@/instance';
 import * as os from '@/os';
 import { unisonReload } from '@/scripts/unison-reload';
 import { i18n } from '@/i18n';
@@ -34,15 +35,11 @@ withDefaults(defineProps<{
 
 let loaded = $ref(false);
 let serverIsDead = $ref(false);
-let meta = $ref<foundkey.entities.LiteInstanceMetadata | null>(null);
 
-os.api('meta', {
-	detail: false,
-}).then(res => {
+// just checking whether the server is alive or dead
+os.api('ping').then(() => {
 	loaded = true;
 	serverIsDead = false;
-	meta = res;
-	localStorage.setItem('v', res.version);
 }, () => {
 	loaded = true;
 	serverIsDead = true;
