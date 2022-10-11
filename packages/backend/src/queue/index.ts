@@ -131,9 +131,10 @@ export function createDeleteDriveFilesJob(user: ThinUser) {
 	});
 }
 
-export function createExportCustomEmojisJob(user: ThinUser) {
+export function createExportCustomEmojisJob(user: ThinUser, ids: string[] | undefined) {
 	return dbQueue.add('exportCustomEmojis', {
 		user,
+		ids,
 	}, {
 		removeOnComplete: true,
 		removeOnFail: true,

@@ -3,7 +3,7 @@ import archiver from 'archiver';
 import Bull from 'bull';
 import { format as dateFormat } from 'date-fns';
 import mime from 'mime-types';
-import { IsNull } from 'typeorm';
+import { In, IsNull } from 'typeorm';
 import config from '@/config/index.js';
 import { createTemp, createTempDir } from '@/misc/create-temp.js';
 import { downloadUrl } from '@/misc/download-url.js';
@@ -50,6 +50,7 @@ export async function exportCustomEmojis(job: Bull.Job, done: () => void): Promi
 	const customEmojis = await Emojis.find({
 		where: {
 			host: IsNull(),
+			...(job.data.ids ? { id: In(job.data.ids) } : {}),
 		},
 		order: {
 			id: 'ASC',
