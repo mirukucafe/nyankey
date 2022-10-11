@@ -10,15 +10,15 @@
 						<template #label>{{ i18n.ts.search }}</template>
 					</MkInput>
 					<MkSwitch v-model="selectMode" style="margin: 8px 0;">
-						<template #label>Select mode</template>
+						<template #label>{{ i18n.ts.selectMode }}</template>
 					</MkSwitch>
 					<div v-if="selectMode" style="display: flex; gap: var(--margin); flex-wrap: wrap;">
-						<MkButton inline @click="selectAll">Select all</MkButton>
-						<MkButton inline @click="setCategoryBulk">Set category</MkButton>
-						<MkButton inline @click="addTagBulk">Add tag</MkButton>
-						<MkButton inline @click="removeTagBulk">Remove tag</MkButton>
-						<MkButton inline @click="setTagBulk">Set tag</MkButton>
-						<MkButton inline danger @click="delBulk">Delete</MkButton>
+						<MkButton inline @click="selectAll">{{ i18n.ts.selectAll }}</MkButton>
+						<MkButton inline @click="setCategoryBulk">{{ i18n.ts.setCategory }}</MkButton>
+						<MkButton inline @click="addTagBulk">{{ i18n.ts.addTag }}</MkButton>
+						<MkButton inline @click="removeTagBulk">{{ i18n.ts.removeTag }}</MkButton>
+						<MkButton inline @click="setTagBulk">{{ i18n.ts.setTag }}</MkButton>
+						<MkButton inline danger @click="delBulk">{{ i18n.ts.delete }}</MkButton>
 					</div>
 					<MkPagination ref="emojisPaginationComponent" :pagination="pagination">
 						<template #empty><span>{{ i18n.ts.noCustomEmojis }}</span></template>
