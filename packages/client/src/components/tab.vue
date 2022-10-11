@@ -17,12 +17,12 @@ const emit = defineEmits<{
 	(ev: 'update:modelValue', value: string): void;
 }>();
 
-const props = defineProps<{
+defineProps<{
 	modelValue: string;
 	options: {
 		value: string;
 		label: string;
-	};
+	}[];
 }>();
 </script>
 
