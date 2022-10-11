@@ -103,12 +103,12 @@ export default class DeliverManager {
 			// deliver to all of known network
 			const sharedInboxes = await Users.createQueryBuilder('users')
 				.select('users.sharedInbox', 'sharedInbox')
+				// so we don't have to make our inboxes Set work as hard
+				.distinct(true)
 				// can't deliver to unknown shared inbox
 				.where('users.sharedInbox IS NOT NULL')
 				// don't deliver to ourselves
 				.andWhere('users.host IS NOT NULL')
-				// so we don't have to make our inboxes Set work as hard
-				.groupBy('users.sharedInbox')
 				.getRawMany();
 
 			for (const inbox of sharedInboxes) {
