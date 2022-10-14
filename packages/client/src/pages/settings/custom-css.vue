@@ -5,6 +5,8 @@
 	<FormTextarea v-model="localCustomCss" manual-save tall class="_monospace _formBlock" style="tab-size: 2;">
 		<template #label>CSS</template>
 	</FormTextarea>
+
+	<a href="https://github.com/JakeMBauer/Misskey-Extras/tree/master/custom-css">{{ i18n.ts.externalCssSnippets }}</a>
 </div>
 </template>
 

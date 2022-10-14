@@ -928,6 +928,7 @@ setCategory: "Set category"
 setTag: "Set tag"
 addTag: "Add tag"
 removeTag: "Remove tag"
+externalCssSnippets: "Some CSS snippets for your inspiration (not managed by FoundKey)"
 _emailUnavailable:
   used: "This email address is already being used"
   format: "The format of this email address is invalid"
