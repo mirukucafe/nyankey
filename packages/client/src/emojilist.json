@@ -750,7 +750,7 @@
 	{ "category": "food_and_drink", "char": "🫖", "name": "teapot", "keywords": [] },
 	{ "category": "food_and_drink", "char": "🧋", "name": "bubble_tea", "keywords": ["tapioca"] },
 	{ "category": "food_and_drink", "char": "🍼", "name": "baby_bottle", "keywords": ["food", "container", "milk"] },
-	{ "category": "food_and_drink", "char": "🧃", "name": "beverage_box", "keywords": ["food", "drink"] },
+	{ "category": "food_and_drink", "char": "🧃", "name": "beverage_box", "keywords": ["food", "drink", "juice", "straw"] },
 	{ "category": "food_and_drink", "char": "🧉", "name": "mate", "keywords": ["food", "drink"] },
 	{ "category": "food_and_drink", "char": "🧊", "name": "ice_cube", "keywords": ["food"] },
 	{ "category": "food_and_drink", "char": "🧂", "name": "salt", "keywords": ["condiment", "shaker"] },
