@@ -247,7 +247,7 @@ export function inputText(props: {
 			input: {
 				type: props.type,
 				placeholder: props.placeholder,
-				default: props.default,
+				default: props.default ?? '',
 			},
 		}, {
 			done: result => {
