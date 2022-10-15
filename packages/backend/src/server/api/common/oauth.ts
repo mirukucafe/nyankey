@@ -1,0 +1,94 @@
+import Koa from 'koa';
+import { IsNull, Not } from 'typeorm';
+import { Apps, AuthSessions, AccessTokens } from '@/models/index.js';
+import config from '@/config/index.js';
+
+export async function oauth(ctx: Koa.Context): void {
+	const {
+		grant_type,
+		code,
+		// TODO: check redirect_uri
+		// since this is also not checked in the legacy app authentication
+		// it seems pointless to check it here, and it is also not stored.
+		redirect_uri,
+	} = ctx.request.body;
+
+	// check if any of the parameters are null or empty string
+	if ([grant_type, code].some(x => !x)) {
+		ctx.response.status = 400;
+		ctx.response.body = {
+			error: 'invalid_request',
+		};
+		return;
+	}
+
+	if (grant_type !== 'authorization_code') {
+		ctx.response.status = 400;
+		ctx.response.body = {
+			error: 'unsupported_grant_type',
+			error_description: 'only authorization_code grants are supported',
+		};
+		return;
+	}
+
+	const authHeader = ctx.headers.authorization;
+	if (!authHeader?.toLowerCase().startsWith('basic ')) {
+		ctx.response.status = 401;
+		ctx.response.set('WWW-Authenticate', 'Basic');
+		ctx.response.body = {
+			error: 'invalid_client',
+			error_description: 'HTTP Basic Authentication required',
+		};
+		return;
+	}
+
+	const [client_id, client_secret] = new Buffer(authHeader.slice(6), 'base64')
+		.toString('ascii')
+		.split(':', 2);
+
+	const [app, session] = await Promise.all([
+		Apps.findOneBy({
+			id: client_id,
+			secret: client_secret,
+		}),
+		AuthSessions.findOneBy({
+			appId: client_id,
+			token: code,
+			// only check for approved auth sessions
+			userId: Not(IsNull()),
+		}),
+	]);
+	if (app == null) {
+		ctx.response.status = 401;
+		ctx.response.set('WWW-Authenticate', 'Basic');
+		ctx.response.body = {
+			error: 'invalid_client',
+			error_description: 'authentication failed',
+		};
+		return;
+	}
+	if (session == null) {
+		ctx.response.status = 400;
+		ctx.response.body = {
+			error: 'invalid_grant',
+		};
+		return;
+	}
+
+	const [ token ] = await Promise.all([
+		AccessTokens.findOneByOrFail({
+			appId: client_id,
+			userId: session.userId,
+		}),
+		// session is single use
+		AuthSessions.delete(session.id),
+	]);
+
+	ctx.response.status = 200;
+	ctx.response.body = {
+		access_token: token.token,
+		token_type: 'bearer',
+		// FIXME: per-token permissions
+		scope: app.permission.join(' '),
+	};
+};
