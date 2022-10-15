@@ -95,6 +95,9 @@ export const routes = [{
 	path: '/preview',
 	component: page(() => import('./pages/preview.vue')),
 }, {
+	path: '/auth',
+	component: page(() => import('./pages/auth.vue')),
+}, {
 	path: '/auth/:token',
 	component: page(() => import('./pages/auth.vue')),
 }, {

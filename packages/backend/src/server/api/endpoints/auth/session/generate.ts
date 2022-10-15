@@ -23,6 +23,19 @@ export const meta = {
 				optional: false, nullable: false,
 				format: 'url',
 			},
+			// stuff that auth/session/show would respond with
+			id: {
+				type: 'string',
+				description: 'The ID of the authentication session. Same as returned by `auth/session/show`.',
+				optional: false, nullable: false,
+				format: 'id',
+			},
+			app: {
+				type: 'object',
+				description: 'The App requesting permissions. Same as returned by `auth/session/show`.',
+				optional: false, nullable: false,
+				ref: 'App',
+			},
 		},
 	},
 
@@ -30,17 +43,27 @@ export const meta = {
 } as const;
 
 export const paramDef = {
-	type: 'object',
-	properties: {
-		appSecret: { type: 'string' },
-	},
-	required: ['appSecret'],
+	oneOf: [{
+		type: 'object',
+		properties: {
+			clientId: { type: 'string' },
+		},
+		required: ['clientId']
+	}, {
+		type: 'object',
+		properties: {
+			appSecret: { type: 'string' },
+		},
+		required: ['appSecret'],
+	}],
 } as const;
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps) => {
 	// Lookup app
-	const app = await Apps.findOneBy({
+	const app = await Apps.findOneBy(ps.clientId ? {
+		id: ps.clientId,
+	} : {
 		secret: ps.appSecret,
 	});
 
@@ -50,10 +73,11 @@ export default define(meta, paramDef, async (ps) => {
 
 	// Generate token
 	const token = uuid();
+	const id = genId();
 
 	// Create session token document
 	const doc = await AuthSessions.insert({
-		id: genId(),
+		id,
 		createdAt: new Date(),
 		appId: app.id,
 		token,
@@ -62,5 +86,7 @@ export default define(meta, paramDef, async (ps) => {
 	return {
 		token: doc.token,
 		url: `${config.authUrl}/${doc.token}`,
+		id,
+		app: await Apps.pack(app),
 	};
 });

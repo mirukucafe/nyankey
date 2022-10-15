@@ -6,7 +6,7 @@
 		ref="form"
 		class="form"
 		:session="session"
-		@denied="state = 'denied'"
+		@denied="denied"
 		@accepted="accepted"
 	/>
 	<div v-else-if="state == 'denied'" class="denied">
@@ -19,6 +19,9 @@
 	</div>
 	<div v-else-if="state == 'fetch-session-error'" class="error">
 		<p>{{ i18n.ts.somethingHappened }}</p>
+	</div>
+	<div v-else-if="state == 'oauth-error'" class="error">
+		<p>{{ i18n.ts.oauthErrorGoBack }}</p>
 	</div>
 </div>
 <div v-else class="signin">
@@ -37,40 +40,112 @@ import { i18n } from '@/i18n';
 import { query, appendQuery } from '@/scripts/url';
 
 const props = defineProps<{
-	token: string;
+	token?: string;
 }>();
 
-let state: 'fetching' | 'waiting' | 'denied' | 'accepted' | 'fetch-session-error' = $ref('fetching');
+let state: 'fetching' | 'waiting' | 'denied' | 'accepted' | 'fetch-session-error' | 'oauth-error' = $ref('fetching');
 let session = $ref(null);
 
-onMounted(() => {
+// if this is an OAuth request, will contain the respective parameters
+let oauth: { state: string | null, callback: string } | null = null;
+
+onMounted(async () => {
 	if (!$i) return;
 
-	// Fetch session
-	os.api('auth/session/show', {
-		token: props.token,
-	}).then(fetchedSession => {
-		session = fetchedSession;
+	// detect whether this is actual OAuth or "legacy" auth
+	const params = new URLSearchParams(location.search);
+	if (params.get('response_type') === 'code') {
+		// OAuth request detected!
 
-		// 既に連携していた場合
-		if (session.app.isAuthorized) {
-			os.api('auth/accept', {
-				token: session.token,
-			}).then(() => {
-				this.accepted();
-			});
-		} else {
-			state = 'waiting';
+		// as a kind of hack, we first have to start the session for the OAuth client
+		const clientId = params.get('client_id');
+		if (!clientId) {
+			state = 'fetch-session-error';
+			return;
 		}
-	}).catch(() => {
+
+		session = await os.api('auth/session/generate', {
+			clientId,
+		}).catch(e => {
+			const response = {
+				error: 'server_error',
+				...(oauth.state ? { state: oauth.state } : {}),
+			};
+			// try to determine the cause of the error
+			if (e.code === 'NO_SUCH_APP') {
+				response.error = 'invalid_request';
+				response.error_description = 'unknown client_id';
+			} else if (e.message) {
+				response.error_description = e.message;
+			}
+
+			if (params.has('redirect_uri')) {
+				location.href = appendQuery(params.get('redirect_uri'), query(response));
+			} else {
+				state = 'oauth-error';
+			}
+		});
+
+		oauth = {
+			state: params.get('state'),
+			callback: params.get('redirect_uri') ?? session.app.callbackUrl,
+		};
+	} else if (!props.token) {
 		state = 'fetch-session-error';
-	});
+	} else {
+		session = await os.api('auth/session/show', {
+			token: props.token,
+		}).catch(() => {
+			state = 'fetch-session-error';
+		});
+	}
+
+	// abort if an error occurred
+	if (['fetch-session-error', 'oauth-error'].includes(state)) return;
+
+	// check whether the user already authorized the app earlier
+	if (session.app.isAuthorized) {
+		// already authorized, move on through!
+		os.api('auth/accept', {
+			token: session.token,
+		}).then(() => {
+			accepted();
+		});
+	} else {
+		// user still has to give consent
+		state = 'waiting';
+	}
 });
 
 function accepted(): void {
 	state = 'accepted';
-	if (session.app.callbackUrl) {
+	if (oauth) {
+		// redirect with authorization token
+		const params = {
+			code: session.token,
+			...(oauth.state ? { state: oauth.state } : {}),
+		};
+
+		location.href = appendQuery(oauth.callback, query(params));
+	} else if (session.app.callbackUrl) {
+		// do whatever the legacy auth did
 		location.href = appendQuery(session.app.callbackUrl, query({ token: session.token }));
+	}
+}
+
+function denied(): void {
+	state = 'denied';
+	if (oauth) {
+		// redirect with error code
+		const params = {
+			error: 'access_denied',
+			error_description: 'The user denied permission.',
+			...(oauth.state ? { state: oauth.state } : {}),
+		};
+
+		location.href = appendQuery(oauth.callback, query(params));
+	} else {
+		// legacy auth didn't do anything in this case...
 	}
 }
 
