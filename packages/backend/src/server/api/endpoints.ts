@@ -67,6 +67,7 @@ import * as ep___ap_show from './endpoints/ap/show.js';
 import * as ep___app_create from './endpoints/app/create.js';
 import * as ep___app_show from './endpoints/app/show.js';
 import * as ep___auth_accept from './endpoints/auth/accept.js';
+import * as ep___auth_deny from './endpoints/auth/deny.js';
 import * as ep___auth_session_generate from './endpoints/auth/session/generate.js';
 import * as ep___auth_session_show from './endpoints/auth/session/show.js';
 import * as ep___auth_session_userkey from './endpoints/auth/session/userkey.js';
@@ -375,6 +376,7 @@ const eps = [
 	['app/create', ep___app_create],
 	['app/show', ep___app_show],
 	['auth/accept', ep___auth_accept],
+	['auth/deny', ep___auth_deny],
 	['auth/session/generate', ep___auth_session_generate],
 	['auth/session/show', ep___auth_session_show],
 	['auth/session/userkey', ep___auth_session_userkey],
