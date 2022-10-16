@@ -12,11 +12,11 @@ import { deliverToFollowers } from '@/remote/activitypub/deliver-manager.js';
 import { deliverToRelays } from '../relay.js';
 
 /**
- * 指定した投稿をピン留めします
- * @param user
- * @param noteId
+ * Pin a given post to a user profile.
+ * @param user the user to pin the note to
+ * @param noteId ID of note to pin
  */
-export async function addPinned(user: { id: User['id']; host: User['host']; }, noteId: Note['id']) {
+export async function addPinned(user: { id: User['id']; host: User['host']; }, noteId: Note['id']): Promise<void> {
 	// Fetch pinee
 	const note = await Notes.findOneBy({
 		id: noteId,
@@ -51,11 +51,11 @@ export async function addPinned(user: { id: User['id']; host: User['host']; }, n
 }
 
 /**
- * 指定した投稿のピン留めを解除します
- * @param user
- * @param noteId
+ * Unpin a given post from a user profile.
+ * @param user the user to unpin a note from
+ * @param noteId ID of note to unpin
  */
-export async function removePinned(user: { id: User['id']; host: User['host']; }, noteId: Note['id']) {
+export async function removePinned(user: { id: User['id']; host: User['host']; }, noteId: Note['id']): Promise<void> {
 	// Fetch unpinee
 	const note = await Notes.findOneBy({
 		id: noteId,
@@ -77,7 +77,13 @@ export async function removePinned(user: { id: User['id']; host: User['host']; }
 	}
 }
 
-export async function deliverPinnedChange(userId: User['id'], noteId: Note['id'], isAddition: boolean) {
+/**
+ * Notify followers and relays when a note is pinned/unpinned.
+ * @param userId ID of user
+ * @param noteId ID of note
+ * @param isAddition whether the note was pinned or unpinned
+ */
+export async function deliverPinnedChange(userId: User['id'], noteId: Note['id'], isAddition: boolean): Promise<void> {
 	const user = await Users.findOneBy({ id: userId });
 	if (user == null) throw new Error('user not found');
 
