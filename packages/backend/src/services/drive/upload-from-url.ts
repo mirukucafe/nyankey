@@ -58,7 +58,7 @@ export async function uploadFromUrl({
 			sensitive,
 		});
 		logger.succ(`Got: ${driveFile.id}`);
-		return driveFile!;
+		return driveFile;
 	} catch (e) {
 		logger.error(`Failed to create drive file: ${e}`, {
 			url,

@@ -11,7 +11,7 @@ export type IImage = {
  *   with resize, remove metadata, resolve orientation, stop animation
  */
 export async function convertToJpeg(path: string, width: number, height: number): Promise<IImage> {
-	return convertSharpToJpeg(await sharp(path), width, height);
+	return convertSharpToJpeg(sharp(path), width, height);
 }
 
 export async function convertSharpToJpeg(sharp: sharp.Sharp, width: number, height: number): Promise<IImage> {
@@ -39,7 +39,7 @@ export async function convertSharpToJpeg(sharp: sharp.Sharp, width: number, heig
  *   with resize, remove metadata, resolve orientation, stop animation
  */
 export async function convertToWebp(path: string, width: number, height: number, quality = 85): Promise<IImage> {
-	return convertSharpToWebp(await sharp(path), width, height, quality);
+	return convertSharpToWebp(sharp(path), width, height, quality);
 }
 
 export async function convertSharpToWebp(sharp: sharp.Sharp, width: number, height: number, quality = 85): Promise<IImage> {
@@ -66,7 +66,7 @@ export async function convertSharpToWebp(sharp: sharp.Sharp, width: number, heig
  *   with resize, remove metadata, resolve orientation, stop animation
  */
 export async function convertToPng(path: string, width: number, height: number): Promise<IImage> {
-	return convertSharpToPng(await sharp(path), width, height);
+	return convertSharpToPng(sharp(path), width, height);
 }
 
 export async function convertSharpToPng(sharp: sharp.Sharp, width: number, height: number): Promise<IImage> {

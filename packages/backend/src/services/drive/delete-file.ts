@@ -7,7 +7,7 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { InternalStorage } from './internal-storage.js';
 import { getS3 } from './s3.js';
 
-export async function deleteFile(file: DriveFile, isExpired = false) {
+export async function deleteFile(file: DriveFile, isExpired = false): Promise<void> {
 	if (file.storedInternal) {
 		InternalStorage.del(file.accessKey!);
 
@@ -33,7 +33,7 @@ export async function deleteFile(file: DriveFile, isExpired = false) {
 	postProcess(file, isExpired);
 }
 
-export async function deleteFileSync(file: DriveFile, isExpired = false) {
+export async function deleteFileSync(file: DriveFile, isExpired = false): Promise<void> {
 	if (file.storedInternal) {
 		InternalStorage.del(file.accessKey!);
 
@@ -63,7 +63,7 @@ export async function deleteFileSync(file: DriveFile, isExpired = false) {
 	postProcess(file, isExpired);
 }
 
-async function postProcess(file: DriveFile, isExpired = false) {
+async function postProcess(file: DriveFile, isExpired = false): Promise<void> {
 	// リモートファイル期限切れ削除後は直リンクにする
 	if (isExpired && file.userHost !== null && file.uri != null) {
 		DriveFiles.update(file.id, {
@@ -89,7 +89,7 @@ async function postProcess(file: DriveFile, isExpired = false) {
 	}
 }
 
-export async function deleteObjectStorageFile(key: string) {
+export async function deleteObjectStorageFile(key: string): Promise<void> {
 	const meta = await fetchMeta();
 
 	const s3 = getS3(meta);

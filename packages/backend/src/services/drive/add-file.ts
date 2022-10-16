@@ -16,6 +16,7 @@ import { IRemoteUser, User } from '@/models/entities/user.js';
 import { driveChart, perUserDriveChart, instanceChart } from '@/services/chart/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { isDuplicateKeyValueError } from '@/misc/is-duplicate-key-value-error.js';
+import { DriveFolder } from '@/models/entities/drive-folder.js';
 import { deleteFile } from './delete-file.js';
 import { GenerateVideoThumbnail } from './generate-video-thumbnail.js';
 import { driveLogger } from './logger.js';
@@ -153,7 +154,10 @@ async function save(file: DriveFile, path: string, name: string, type: string, h
  * @param type Content-Type for original
  * @param generateWeb Generate webpublic or not
  */
-export async function generateAlts(path: string, type: string, generateWeb: boolean) {
+export async function generateAlts(path: string, type: string, generateWeb: boolean): Promise<{
+	webpublic: IImage | null;
+	thumbnail: IImage | null;
+}> {
 	if (type.startsWith('video/')) {
 		try {
 			const thumbnail = await GenerateVideoThumbnail(path);
@@ -256,7 +260,7 @@ export async function generateAlts(path: string, type: string, generateWeb: bool
 /**
  * Upload to ObjectStorage
  */
-async function upload(key: string, stream: fs.ReadStream | Buffer, _type: string, filename?: string) {
+async function upload(key: string, stream: fs.ReadStream | Buffer, _type: string, filename?: string): Promise<void> {
 	const type = (_type === 'image/apng')
 		? 'image/png'
 		: (FILE_TYPE_BROWSERSAFE.includes(_type))
@@ -286,7 +290,7 @@ async function upload(key: string, stream: fs.ReadStream | Buffer, _type: string
 	if (result) logger.debug(`Uploaded: ${result.Bucket}/${result.Key} => ${result.Location}`);
 }
 
-async function deleteOldFile(user: IRemoteUser) {
+async function deleteOldFile(user: IRemoteUser): Promise<void> {
 	const q = DriveFiles.createQueryBuilder('file')
 		.where('file.userId = :userId', { userId: user.id })
 		.andWhere('file.isLink = FALSE');
@@ -387,7 +391,7 @@ export async function addFile({
 	}
 	//#endregion
 
-	const fetchFolder = async () => {
+	const fetchFolder = async (): Promise<DriveFolder | null> => {
 		if (!folderId) {
 			return null;
 		}
@@ -425,7 +429,7 @@ export async function addFile({
 	file.createdAt = new Date();
 	file.userId = user ? user.id : null;
 	file.userHost = user ? user.host : null;
-	file.folderId = folder?.id;
+	file.folderId = folder?.id ?? null;
 	file.comment = comment;
 	file.properties = properties;
 	file.blurhash = info.blurhash || null;
