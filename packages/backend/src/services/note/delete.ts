@@ -109,7 +109,7 @@ async function getMentionedRemoteUsers(note: Note): Promise<IRemoteUser[]> {
 	const where = [] as any[];
 
 	// mention / reply / dm
-	if (note.mentions > 0) {
+	if (note.mentions.length > 0) {
 		where.push({
 			id: In(note.mentions),
 			// only remote users, local users are on the server and do not need to be notified
