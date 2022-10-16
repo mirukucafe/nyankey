@@ -1,5 +1,5 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import deleteReaction from '@/services/note/reaction/delete.js';
+import { deleteReaction } from '@/services/note/reaction/delete.js';
 import { ILike, getApId } from '@/remote/activitypub/type.js';
 import { fetchNote } from '@/remote/activitypub/models/note.js';
 

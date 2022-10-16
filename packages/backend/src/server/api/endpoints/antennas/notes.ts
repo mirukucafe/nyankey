@@ -1,4 +1,4 @@
-import readNote from '@/services/note/read.js';
+import { readNote } from '@/services/note/read.js';
 import { Antennas, Notes, AntennaNotes } from '@/models/index.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';

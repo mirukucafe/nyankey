@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import * as websocket from 'websocket';
-import readNote from '@/services/note/read.js';
+import { readNote } from '@/services/note/read.js';
 import { User } from '@/models/entities/user.js';
 import { Channel as ChannelModel } from '@/models/entities/channel.js';
 import { Followings, Mutings, RenoteMutings, UserProfiles, ChannelFollowings, Blockings } from '@/models/index.js';

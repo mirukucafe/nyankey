@@ -1,6 +1,6 @@
 import { Brackets } from 'typeorm';
 import { noteVisibilities } from 'foundkey-js';
-import read from '@/services/note/read.js';
+import { readNote } from '@/services/note/read.js';
 import { Notes, Followings } from '@/models/index.js';
 import define from '../../define.js';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
@@ -79,7 +79,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	const mentions = await query.take(ps.limit).getMany();
 
-	read(user.id, mentions);
+	readNote(user.id, mentions);
 
 	return await Notes.packMany(mentions, user);
 });

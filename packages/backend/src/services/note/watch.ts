@@ -4,7 +4,7 @@ import { NoteWatchings } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { NoteWatching } from '@/models/entities/note-watching.js';
 
-export default async (me: User['id'], note: Note) => {
+export async function watch(me: User['id'], note: Note): Promise<void> {
 	// 自分の投稿はwatchできない
 	if (me === note.userId) {
 		return;
@@ -17,4 +17,4 @@ export default async (me: User['id'], note: Note) => {
 		userId: me,
 		noteUserId: note.userId,
 	} as NoteWatching);
-};
+}
