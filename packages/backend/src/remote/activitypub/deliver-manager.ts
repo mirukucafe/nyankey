@@ -8,6 +8,10 @@ interface IRecipe {
 	type: string;
 }
 
+interface IEveryoneRecipe extends IRecipe {
+	type: 'Everyone';
+}
+
 interface IFollowersRecipe extends IRecipe {
 	type: 'Followers';
 }
@@ -16,6 +20,9 @@ interface IDirectRecipe extends IRecipe {
 	type: 'Direct';
 	to: IRemoteUser;
 }
+
+const isEveryone = (recipe: any): recipe is IEveryoneRecipe =>
+	recipe.type === 'Everyone';
 
 const isFollowers = (recipe: any): recipe is IFollowersRecipe =>
 	recipe.type === 'Followers';
@@ -64,6 +71,13 @@ export default class DeliverManager {
 	}
 
 	/**
+	 * Add recipe to send this activity to all known sharedInboxes
+	 */
+	public addEveryone() {
+		this.addRecipe({ type: 'Everyone' } as IEveryoneRecipe);
+	}
+
+	/**
 	 * Add recipe
 	 * @param recipe Recipe
 	 */
@@ -82,9 +96,26 @@ export default class DeliverManager {
 		/*
 		build inbox list
 
-		Process follower recipes first to avoid duplication when processing
-		direct recipes later.
+		Processing order matters to avoid duplication.
 		*/
+
+		if (this.recipes.some(r => isEveryone(r))) {
+			// deliver to all of known network
+			const sharedInboxes = await Users.createQueryBuilder('users')
+				.select('users.sharedInbox', 'sharedInbox')
+				// so we don't have to make our inboxes Set work as hard
+				.distinct(true)
+				// can't deliver to unknown shared inbox
+				.where('users.sharedInbox IS NOT NULL')
+				// don't deliver to ourselves
+				.andWhere('users.host IS NOT NULL')
+				.getRawMany();
+
+			for (const inbox of sharedInboxes) {
+				inboxes.add(inbox.sharedInbox);
+			}
+		}
+
 		if (this.recipes.some(r => isFollowers(r))) {
 			// followers deliver
 			// TODO: SELECT DISTINCT ON ("followerSharedInbox") "followerSharedInbox" みたいな問い合わせにすればよりパフォーマンス向上できそう
