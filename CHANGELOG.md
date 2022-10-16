@@ -11,37 +11,84 @@ Unreleased changes should not be listed in this file.
 Instead, run `git shortlog --format='%h %s' --group=trailer:changelog <last tag>..` to see unreleased changes; replace `<last tag>` with the tag you wish to compare from.
 If you are a contributor, please read [CONTRIBUTING.md, section "Changelog Trailer"](./CONTRIBUTING.md#changelog-trailer) on what to do instead.
 
-## Unreleased
+## 13.0.0-preview2 - 2022-10-16
+### Security
+- server: Update `multer` dependency to resolve [CVE-2022-24434](https://nvd.nist.gov/vuln/detail/CVE-2022-24434)
+- server: Update `file-type`, `got`, and `sharp` dependencies to fix various security issues
+
 ### Added
-- Client: Show instance info in ticker
-- Client: Readded group pages
-- Client: add re-collapsing to quoted notes
+- allow to mute only renotes of a user
+- allow to export only selected custom emoji
+- client: improve emoji picker search
+- client: Extend Emoji list
+- client: show alt text in image viewer
+- client: Show instance info in ticker
+- client: Readded group pages
+- client: add re-collapsing to quoted notes
+- server: allow files storage path to be set explicitly
+- server: refactor expiring data and expire signins after 60 days
+- server: send delete activity to all known instances
+- server: add automatic dead instance detection
 
 ### Changed
-- Client: Use consistent date formatting based on language setting
-- Client: Add threshold to reduce occurances of "future" timestamps
-- Pages have been considerably simplified, several of the very complex features have been removed.
+- foundkey-js: Sync possible endpoints from backend
+- foundkey-js: update LiteInstanceMetadata fields
+- meta: use parallel and incremental builds
+- meta: update WORKDIR to foundkey
+- meta: update dependencies
+- client: consolidate about & notifications pages
+- client: include renote in visibility computation
+- client: make emoji amount slider more intuitive
+- client: sort emojis by query similarity in fuzzy picker
+- client: discard drafts that are just the default state
+- client: Use consistent date formatting based on language setting
+- client: Add threshold to reduce occurances of "future" timestamps
+- server: mute notifications in muted threads
+- server: allow for source lang to be overridden in note/translate
+- server: allow redis family to be specified as a string
+- server: increase image description limit to 2048 characters
+- server: Pages have been considerably simplified, several of the very complex features have been removed.
   Pages are now MFM only.
   **For admins:** There is a migration in place to convert page contents to text, but not everything can be migrated.
   You might want to check if you have any more complex pages on your instance and ask users to migrate them by hand.
   Or generally advise all users to simplify their pages to only text.
 
-### Removed
-- Okteto config and Helm chart
-- Client: acrylic styling
-- Client: Twitter embeds, the standard URL preview is used instead.
-- Promotion entities and endpoints
-- Server: The configuration item `signToActivityPubGet` has been removed and will be ignored if set explicitly.
-  Foundkey will now work as if it was set to `true`.
-
 ### Fixed
-- Client: Notifications for ended polls can now be turned off
-- Client: Emoji picker should load faster now
-- Server: Blocking remote accounts
+- client: alt text dialog properly handles non-images
+- client: Fix style scoping in MkMention
+- client: default instance ticker name to instance's domain name
+- client: improve error message for empty gallery posts
+- client: fix default-selected reply scopes
+- client: Make MFM cheatsheet interactive again
+- client: Fix reports not showing in control panel
+- client: make hard coded strings in emoji admin panel internationalized
+- client: Notifications for ended polls can now be turned off
+- client: improve emoji picker performance
+- server: Blocking remote accounts
+- server: fix table name used in toHtml
+- server: Fix appendChildren TypeError
+- server: ensure only own notifications can be marked as read
+- server: render HTML mentions correctly
+- server: increase requestId max size for GNU Social
+- server: fix HTTP GET parameters in OpenAPI docs
+- server: proper error messages for creating accounts
+- server: Fix thread muting queries
+- docker: add built foundkey-js files to container
+- service worker: Remove fetch handler from service worker
 
-### Security
-- Server: Update `multer` dependency to resolve [CVE-2022-24434](https://nvd.nist.gov/vuln/detail/CVE-2022-24434)
-- Server: Update `file-type`, `got`, and `sharp` dependencies to fix various security issues
+### Removed
+- remove misskey-assets submodule
+- server: remove room data from user
+- client: remove ai mode
+- client: remove "Disable AiScript on Pages" setting
+- client: acrylic styling
+- client: Twitter embeds, the standard URL preview is used instead.
+- foundkey-js: remove room api endpoints
+- server: remove unusable setting to send error reports
+- server: ignore detail parameter on meta endpoint
+- server: Promotion entities and endpoints
+- server: The configuration item `signToActivityPubGet` has been removed and will be ignored if set explicitly.
+  Foundkey will now work as if it was set to `true`.
 
 ## 13.0.0-preview1 - 2022-08-05
 ### Added
