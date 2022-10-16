@@ -13,15 +13,13 @@ import { Instance } from '@/models/entities/instance.js';
 import { StatusError } from '@/misc/fetch.js';
 import { DeliverJobData } from '@/queue/types.js';
 import { LessThan } from 'typeorm';
+import { DAY } from '@/const.ts';
 
 const logger = new Logger('deliver');
 
 let latest: string | null = null;
 
-const suspendedHostsCache = new Cache<Instance[]>(1000 * 60 * 60);
-// dead host list is a linear scan, so cache it longer
-const deadHostsCache = new Cache<Instance[]>(1000 * 60 * 60 * 24);
-const deadThreshold = 1000 * 60 * 60 * 24 * 30; // 1 month
+const deadThreshold = 30 * DAY;
 
 export default async (job: Bull.Job<DeliverJobData>) => {
 	const { host } = new URL(job.data.to);
@@ -33,29 +31,12 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 		return 'skip (blocked)';
 	}
 
-	// isSuspended
-	let suspendedHosts = suspendedHostsCache.get(null);
-	if (suspendedHosts == null) {
-		suspendedHosts = await Instances.findBy({
-			isSuspended: true,
-		});
-		suspendedHostsCache.set(null, suspendedHosts);
-	}
-	if (suspendedHosts.some(x => x.host == puny)) {
-		return 'skip (suspended)';
-	}
-
-	// dead
-	let deadHosts = deadHostsCache.get(null);
-	if (deadHosts == null) {
-		const deadTime = new Date(Date.now() - deadThreshold);
-		deadHosts = await Instances.findBy({
-			lastCommunicatedAt: LessThan(deadTime),
-		});
-		deadHostsCache.set(null, deadHosts);
-	}
-	if (deadHosts.some(x => x.host == puny)) {
-		return 'skip (dead instance)';
+	const isSuspendedOrDead = await Instances.countBy([
+		{ host: puny, isSuspended: true },
+		{ host: puny, lastCommunicatedAt: LessThan(deadTime) },
+	]);
+	if (isSuspendedOrDead) {
+		return 'skip (suspended or dead)';
 	}
 
 	try {
