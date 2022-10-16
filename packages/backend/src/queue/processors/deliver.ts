@@ -13,7 +13,7 @@ import { Instance } from '@/models/entities/instance.js';
 import { StatusError } from '@/misc/fetch.js';
 import { DeliverJobData } from '@/queue/types.js';
 import { LessThan } from 'typeorm';
-import { DAY } from '@/const.ts';
+import { DAY } from '@/const.js';
 
 const logger = new Logger('deliver');
 
@@ -31,6 +31,7 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 		return 'skip (blocked)';
 	}
 
+	const deadTime = new Date(Date.now() - deadThreshold);
 	const isSuspendedOrDead = await Instances.countBy([
 		{ host: puny, isSuspended: true },
 		{ host: puny, lastCommunicatedAt: LessThan(deadTime) },
