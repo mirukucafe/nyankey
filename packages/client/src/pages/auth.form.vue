@@ -3,14 +3,16 @@
 	<div class="_title">{{ i18n.t('_auth.shareAccess', { name: app.name }) }}</div>
 	<div class="_content">
 		<h2>{{ app.name }}</h2>
-		<p class="id">{{ app.id }}</p>
 		<p class="description">{{ app.description }}</p>
 	</div>
 	<div class="_content">
 		<h2>{{ i18n.ts._auth.permissionAsk }}</h2>
-		<ul>
+		<ul v-if="app.permission.length > 0">
 			<li v-for="p in app.permission" :key="p">{{ i18n.t(`_permissions.${p}`) }}</li>
 		</ul>
+		<template v-else>
+			{{ i18n.ts.noPermissionRequested }}
+		</template>
 	</div>
 	<div class="_footer">
 		<MkButton inline @click="cancel">{{ i18n.ts.cancel }}</MkButton>

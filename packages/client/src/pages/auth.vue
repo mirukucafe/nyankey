@@ -1,32 +1,37 @@
 <template>
-<div v-if="$i">
-	<MkLoading v-if="state == 'fetching'"/>
-	<XForm
-		v-else-if="state == 'waiting'"
-		ref="form"
-		class="form"
-		:session="session"
-		@denied="denied"
-		@accepted="accepted"
-	/>
-	<div v-else-if="state == 'denied'" class="denied">
-		<h1>{{ i18n.ts._auth.denied }}</h1>
-	</div>
-	<div v-else-if="state == 'accepted'" class="accepted">
-		<h1>{{ session.app.isAuthorized ? i18n.t('already-authorized') : i18n.ts.allowed }}</h1>
-		<p v-if="session.app.callbackUrl">{{ i18n.ts._auth.callback }}<MkEllipsis/></p>
-		<p v-if="!session.app.callbackUrl">{{ i18n.ts._auth.pleaseGoBack }}</p>
-	</div>
-	<div v-else-if="state == 'fetch-session-error'" class="error">
-		<p>{{ i18n.ts.somethingHappened }}</p>
-	</div>
-	<div v-else-if="state == 'oauth-error'" class="error">
-		<p>{{ i18n.ts.oauthErrorGoBack }}</p>
-	</div>
-</div>
-<div v-else class="signin">
-	<MkSignin @login="onLogin"/>
-</div>
+<MkStickyContainer>
+	<template #header><MkPageHeader/></template>
+	<MkSpacer :max-content="700">
+		<div v-if="$i">
+			<MkLoading v-if="state == 'fetching'"/>
+			<XForm
+				v-else-if="state == 'waiting'"
+				ref="form"
+				class="form"
+				:session="session"
+				@denied="denied"
+				@accepted="accepted"
+			/>
+			<div v-else-if="state == 'denied'" class="denied">
+				<h1>{{ i18n.ts._auth.denied }}</h1>
+			</div>
+			<div v-else-if="state == 'accepted'" class="accepted">
+				<h1>{{ session.app.isAuthorized ? i18n.t('already-authorized') : i18n.ts.allowed }}</h1>
+				<p v-if="session.app.callbackUrl">{{ i18n.ts._auth.callback }}<MkEllipsis/></p>
+				<p v-if="!session.app.callbackUrl">{{ i18n.ts._auth.pleaseGoBack }}</p>
+			</div>
+			<div v-else-if="state == 'fetch-session-error'" class="error">
+				<p>{{ i18n.ts.somethingHappened }}</p>
+			</div>
+			<div v-else-if="state == 'oauth-error'" class="error">
+				<p>{{ i18n.ts.oauthErrorGoBack }}</p>
+			</div>
+		</div>
+		<div v-else class="signin">
+			<MkSignin @login="onLogin"/>
+		</div>
+	</MkSpacer>
+</MkStickyContainer>
 </template>
 
 <script lang="ts" setup>
@@ -36,7 +41,7 @@ import MkSignin from '@/components/signin.vue';
 import * as os from '@/os';
 import { login , $i } from '@/account';
 import { i18n } from '@/i18n';
-
+import { definePageMetadata } from '@/scripts/page-metadata';
 import { query, appendQuery } from '@/scripts/url';
 
 const props = defineProps<{
@@ -152,4 +157,9 @@ function denied(): void {
 function onLogin(res): void {
 	login(res.i);
 }
+
+definePageMetadata({
+	title: i18n.ts.appAuthorization,
+	icon: 'fas fa-shield',
+});
 </script>

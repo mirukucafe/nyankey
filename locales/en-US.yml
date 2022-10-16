@@ -830,6 +830,8 @@ removeTag: "Remove tag"
 externalCssSnippets: "Some CSS snippets for your inspiration (not managed by FoundKey)"
 oauthErrorGoBack: "An error happened while trying to authenticate a 3rd party app.\
     \ Please go back and try again."
+appAuthorization: "App authorization"
+noPermissionsRequested: "(No permissions requested.)"
 _emailUnavailable:
   used: "This email address is already being used"
   format: "The format of this email address is invalid"
