@@ -86,7 +86,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 async function findCascadingNotes(note: Note): Promise<Note[]> {
 	const cascadingNotes: Note[] = [];
 
-	const recursive = async (noteId: string) => {
+	const recursive = async (noteId: string): Promise<void> => {
 		const query = Notes.createQueryBuilder('note')
 			.where('note.replyId = :noteId', { noteId })
 			.orWhere(new Brackets(q => {
@@ -131,7 +131,7 @@ async function getMentionedRemoteUsers(note: Note): Promise<IRemoteUser[]> {
 	}) as IRemoteUser[];
 }
 
-async function deliverToConcerned(user: { id: ILocalUser['id']; host: null; }, note: Note, content: any) {
+async function deliverToConcerned(user: { id: ILocalUser['id']; host: null; }, note: Note, content: any): Promise<void> {
 	const manager = new DeliverManager(user, content);
 
 	const remoteUsers = await getMentionedRemoteUsers(note);
