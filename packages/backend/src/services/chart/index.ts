@@ -1,5 +1,6 @@
 import { beforeShutdown } from '@/misc/before-shutdown.js';
 
+import { MINUTE } from '@/const.js';
 import FederationChart from './charts/federation.js';
 import NotesChart from './charts/notes.js';
 import UsersChart from './charts/users.js';
@@ -41,11 +42,11 @@ const charts = [
 	apRequestChart,
 ];
 
-// 20分おきにメモリ情報をDBに書き込み
+// Write memory information to DB every 20 minutes
 setInterval(() => {
 	for (const chart of charts) {
 		chart.save();
 	}
-}, 1000 * 60 * 20);
+}, 20 * MINUTE);
 
 beforeShutdown(() => Promise.all(charts.map(chart => chart.save())));
