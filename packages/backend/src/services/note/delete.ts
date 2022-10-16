@@ -1,4 +1,4 @@
-import { Brackets, In, IsNull, Not } from 'typeorm';
+import { Brackets, FindOptionsWhere, In, IsNull, Not } from 'typeorm';
 import { publishNoteStream } from '@/services/stream.js';
 import renderDelete from '@/remote/activitypub/renderer/delete.js';
 import renderAnnounce from '@/remote/activitypub/renderer/announce.js';
@@ -41,10 +41,12 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 		if (Users.isLocalUser(user) && !note.localOnly) {
 			let renote: Note | null = null;
 
-			// if deletd note is renote
+			// if deleted note is renote
 			if (isPureRenote(note)) {
 				renote = await Notes.findOneBy({
-					id: note.renoteId,
+					// isPureRenote checks if note.renoteId is null already, so renoteId should be non-null.
+					// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+					id: note.renoteId!,
 				});
 			}
 
@@ -106,7 +108,7 @@ async function findCascadingNotes(note: Note): Promise<Note[]> {
 }
 
 async function getMentionedRemoteUsers(note: Note): Promise<IRemoteUser[]> {
-	const where = [] as any[];
+	const where: FindOptionsWhere<User>[] = [];
 
 	// mention / reply / dm
 	if (note.mentions.length > 0) {

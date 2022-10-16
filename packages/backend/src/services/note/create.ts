@@ -35,6 +35,7 @@ import { webhookDeliver } from '@/queue/index.js';
 import { Cache } from '@/misc/cache.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
+import { IActivity } from '@/remote/activitypub/type.js';
 import { updateHashtags } from '../update-hashtag.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import { createNotification } from '../create-notification.js';
@@ -59,8 +60,8 @@ class NotificationManager {
 		this.queue = [];
 	}
 
-	public push(notifiee: ILocalUser['id'], reason: NotificationType) {
-		// 自分自身へは通知しない
+	public push(notifiee: ILocalUser['id'], reason: NotificationType): void {
+		// No notification to yourself.
 		if (this.notifier.id === notifiee) return;
 
 		const exist = this.queue.find(x => x.target === notifiee);
@@ -78,7 +79,7 @@ class NotificationManager {
 		}
 	}
 
-	public async deliver() {
+	public async deliver(): Promise<void> {
 		for (const x of this.queue) {
 			// check if the sender or thread are muted
 			const userMuted = await Mutings.findOneBy({
@@ -119,7 +120,7 @@ type Option = {
 	poll?: IPoll | null;
 	localOnly?: boolean | null;
 	cw?: string | null;
-	visibility?: string;
+	visibility?: 'home' | 'public' | 'followers' | 'specified';
 	visibleUsers?: MinimumUser[] | null;
 	channel?: Channel | null;
 	apMentions?: MinimumUser[] | null;
@@ -130,7 +131,7 @@ type Option = {
 	app?: App | null;
 };
 
-export default async (user: { id: User['id']; username: User['username']; host: User['host']; isSilenced: User['isSilenced']; createdAt: User['createdAt']; }, data: Option, silent = false) => new Promise<Note>(async (res, rej) => {
+export default async (user: { id: User['id']; username: User['username']; host: User['host']; isSilenced: User['isSilenced']; createdAt: User['createdAt']; }, data: Option, silent = false): Promise<Note> => new Promise<Note>(async (res, rej) => {
 	// チャンネル外にリプライしたら対象のスコープに合わせる
 	// (クライアントサイドでやっても良い処理だと思うけどとりあえずサーバーサイドで)
 	if (data.reply && data.channel && data.reply.channelId !== data.channel.id) {
@@ -214,7 +215,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	tags = tags.filter(tag => Array.from(tag || '').length <= 128).splice(0, 32);
 
 	if (data.reply && (user.id !== data.reply.userId) && !mentionedUsers.some(u => u.id === data.reply!.userId)) {
-		mentionedUsers.push(await Users.findOneByOrFail({ id: data.reply!.userId }));
+		mentionedUsers.push(await Users.findOneByOrFail({ id: data.reply.userId }));
 	}
 
 	if (data.visibility === 'specified') {
@@ -226,8 +227,8 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			}
 		}
 
-		if (data.reply && !data.visibleUsers.some(x => x.id === data.reply!.userId)) {
-			data.visibleUsers.push(await Users.findOneByOrFail({ id: data.reply!.userId }));
+		if (data.reply && !data.visibleUsers.some(x => x.id === data.reply?.userId)) {
+			data.visibleUsers.push(await Users.findOneByOrFail({ id: data.reply.userId }));
 		}
 	}
 
@@ -477,7 +478,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	index(note);
 });
 
-async function renderNoteOrRenoteActivity(data: Option, note: Note) {
+async function renderNoteOrRenoteActivity(data: Option, note: Note): Promise<IActivity | null> {
 	if (data.localOnly) return null;
 
 	const content = data.renote && data.text == null && data.poll == null && (data.files == null || data.files.length === 0)
@@ -487,7 +488,7 @@ async function renderNoteOrRenoteActivity(data: Option, note: Note) {
 	return renderActivity(content);
 }
 
-function incRenoteCount(renote: Note) {
+function incRenoteCount(renote: Note): void {
 	Notes.createQueryBuilder().update()
 		.set({
 			renoteCount: () => '"renoteCount" + 1',
@@ -497,10 +498,12 @@ function incRenoteCount(renote: Note) {
 		.execute();
 }
 
-async function insertNote(user: { id: User['id']; host: User['host']; }, data: Option, tags: string[], emojis: string[], mentionedUsers: MinimumUser[]) {
+async function insertNote(user: { id: User['id']; host: User['host']; }, data: Option, tags: string[], emojis: string[], mentionedUsers: MinimumUser[]): Promise<Note> {
+	const createdAt = data.createdAt ?? new Date();
+
 	const insert = new Note({
-		id: genId(data.createdAt!),
-		createdAt: data.createdAt!,
+		id: genId(createdAt),
+		createdAt,
 		fileIds: data.files ? data.files.map(file => file.id) : [],
 		replyId: data.reply ? data.reply.id : null,
 		renoteId: data.renote ? data.renote.id : null,
@@ -517,8 +520,8 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		tags: tags.map(tag => normalizeForSearch(tag)),
 		emojis,
 		userId: user.id,
-		localOnly: data.localOnly!,
-		visibility: data.visibility as any,
+		localOnly: data.localOnly ?? false,
+		visibility: data.visibility,
 		visibleUserIds: data.visibility === 'specified'
 			? data.visibleUsers
 				? data.visibleUsers.map(u => u.id)
@@ -543,29 +546,26 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		insert.mentions = mentionedUsers.map(u => u.id);
 	}
 
-	// 投稿を作成
+	// Create a post
 	try {
-		if (insert.hasPoll) {
-			// Start transaction
-			await db.transaction(async transactionalEntityManager => {
-				await transactionalEntityManager.insert(Note, insert);
+		// Start transaction
+		await db.transaction(async transactionalEntityManager => {
+			await transactionalEntityManager.insert(Note, insert);
 
+			if (data.poll != null) {
 				const poll = new Poll({
 					noteId: insert.id,
-					choices: data.poll!.choices,
-					expiresAt: data.poll!.expiresAt,
-					multiple: data.poll!.multiple,
-					votes: new Array(data.poll!.choices.length).fill(0),
+					choices: data.poll.choices,
+					expiresAt: data.poll.expiresAt,
+					multiple: data.poll.multiple,
+					votes: new Array(data.poll.choices.length).fill(0),
 					noteVisibility: insert.visibility,
 					userId: user.id,
 					userHost: user.host,
 				});
-
 				await transactionalEntityManager.insert(Poll, poll);
-			});
-		} else {
-			await Notes.insert(insert);
-		}
+			}
+		});
 
 		return insert;
 	} catch (e) {
@@ -582,10 +582,10 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 	}
 }
 
-function index(note: Note) {
+function index(note: Note): void {
 	if (note.text == null || config.elasticsearch == null) return;
 
-	es!.index({
+	es.index({
 		index: config.elasticsearch.index || 'misskey_note',
 		id: note.id.toString(),
 		body: {
@@ -596,7 +596,7 @@ function index(note: Note) {
 	});
 }
 
-async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }, nm: NotificationManager, type: NotificationType) {
+async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }, nm: NotificationManager, type: NotificationType): Promise<void> {
 	const watchers = await NoteWatchings.findBy({
 		noteId: renote.id,
 		userId: Not(user.id),
@@ -607,7 +607,7 @@ async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }
 	}
 }
 
-async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; }, nm: NotificationManager) {
+async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; }, nm: NotificationManager): Promise<void> {
 	const watchers = await NoteWatchings.findBy({
 		noteId: reply.id,
 		userId: Not(user.id),
@@ -618,7 +618,7 @@ async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; },
 	}
 }
 
-async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, nm: NotificationManager) {
+async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, nm: NotificationManager): Promise<void> {
 	for (const u of mentionedUsers.filter(u => Users.isLocalUser(u))) {
 		const threadMuted = await NoteThreadMutings.findOneBy({
 			userId: u.id,
@@ -653,11 +653,11 @@ async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, 
 	}
 }
 
-function saveReply(reply: Note, note: Note) {
+function saveReply(reply: Note, note: Note): void {
 	Notes.increment({ id: reply.id }, 'repliesCount', 1);
 }
 
-function incNotesCountOfUser(user: { id: User['id']; }) {
+function incNotesCountOfUser(user: { id: User['id']; }): void {
 	Users.createQueryBuilder().update()
 		.set({
 			updatedAt: new Date(),
@@ -668,7 +668,7 @@ function incNotesCountOfUser(user: { id: User['id']; }) {
 }
 
 async function extractMentionedUsers(user: { host: User['host']; }, tokens: mfm.MfmNode[]): Promise<User[]> {
-	if (tokens == null) return [];
+	if (tokens.length === 0) return [];
 
 	const mentions = extractMentions(tokens);
 
