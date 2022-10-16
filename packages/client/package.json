@@ -1,6 +1,6 @@
 {
 	"name": "client",
-	"version": "13.0.0-preview1",
+	"version": "13.0.0-preview2",
 	"private": true,
 	"scripts": {
 		"watch": "vite build --watch --mode development",
