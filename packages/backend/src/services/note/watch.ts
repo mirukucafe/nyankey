@@ -5,7 +5,7 @@ import { genId } from '@/misc/gen-id.js';
 import { NoteWatching } from '@/models/entities/note-watching.js';
 
 export async function watch(me: User['id'], note: Note): Promise<void> {
-	// 自分の投稿はwatchできない
+	// User can't watch their own posts.
 	if (me === note.userId) {
 		return;
 	}

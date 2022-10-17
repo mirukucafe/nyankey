@@ -67,7 +67,7 @@ class NotificationManager {
 		const exist = this.queue.find(x => x.target === notifiee);
 
 		if (exist) {
-			// 「メンションされているかつ返信されている」場合は、メンションとしての通知ではなく返信としての通知にする
+			// If you have been "mentioned and replied to," make the notification as a reply, not as a mention.
 			if (reason !== 'mention') {
 				exist.reason = reason;
 			}
@@ -132,8 +132,8 @@ type Option = {
 };
 
 export default async (user: { id: User['id']; username: User['username']; host: User['host']; isSilenced: User['isSilenced']; createdAt: User['createdAt']; }, data: Option, silent = false): Promise<Note> => new Promise<Note>(async (res, rej) => {
-	// チャンネル外にリプライしたら対象のスコープに合わせる
-	// (クライアントサイドでやっても良い処理だと思うけどとりあえずサーバーサイドで)
+	// If you reply outside the channel, adjust to the scope of the target
+	// (I think this could be done client-side, but server-side for now)
 	if (data.reply && data.channel && data.reply.channelId !== data.channel.id) {
 		if (data.reply.channelId) {
 			data.channel = await Channels.findOneBy({ id: data.reply.channelId });
@@ -155,32 +155,32 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	if (data.channel != null) data.visibleUsers = [];
 	if (data.channel != null) data.localOnly = true;
 
-	// サイレンス
+	// silence
 	if (user.isSilenced && data.visibility === 'public' && data.channel == null) {
 		data.visibility = 'home';
 	}
 
-	// Renote対象が「ホームまたは全体」以外の公開範囲ならreject
+	// Reject if the target of the renote is not Home or Public.
 	if (data.renote && data.renote.visibility !== 'public' && data.renote.visibility !== 'home' && data.renote.userId !== user.id) {
 		return rej('Renote target is not public or home');
 	}
 
-	// Renote対象がpublicではないならhomeにする
+	// If the target of the renote is not public, make it home.
 	if (data.renote && data.renote.visibility !== 'public' && data.visibility === 'public') {
 		data.visibility = 'home';
 	}
 
-	// Renote対象がfollowersならfollowersにする
+	// If the target of Renote is followers, make it followers.
 	if (data.renote && data.renote.visibility === 'followers') {
 		data.visibility = 'followers';
 	}
 
-	// ローカルのみをRenoteしたらローカルのみにする
+	// Ff the original note is local-only, make the renote also local-only.
 	if (data.renote && data.renote.localOnly && data.channel == null) {
 		data.localOnly = true;
 	}
 
-	// ローカルのみにリプライしたらローカルのみにする
+	// If you reply to local only, make it local only.
 	if (data.reply && data.reply.localOnly && data.channel == null) {
 		data.localOnly = true;
 	}
@@ -236,7 +236,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 	res(note);
 
-	// 統計を更新
+	// Update Statistics
 	notesChart.update(note, true);
 	perUserNotesChart.update(user, note, true);
 
@@ -248,7 +248,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		});
 	}
 
-	// ハッシュタグ更新
+	// Hashtag Update
 	if (data.visibility === 'public' || data.visibility === 'home') {
 		updateHashtags(user, tags);
 	}
@@ -302,7 +302,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		saveReply(data.reply, note);
 	}
 
-	// この投稿を除く指定したユーザーによる指定したノートのリノートが存在しないとき
+	// When there is no re-note of the specified note by the specified user except for this post
 	if (data.renote && (await countSameRenotes(user.id, data.renote.id, note.id) === 0)) {
 		incRenoteCount(data.renote);
 	}
@@ -320,12 +320,12 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	if (!silent) {
 		if (Users.isLocalUser(user)) activeUsersChart.write(user);
 
-		// 未読通知を作成
+		// Create unread notifications
 		if (data.visibility === 'specified') {
 			if (data.visibleUsers == null) throw new Error('invalid param');
 
 			for (const u of data.visibleUsers) {
-				// ローカルユーザーのみ
+				// Local users only
 				if (!Users.isLocalUser(u)) continue;
 
 				insertNoteUnread(u.id, note, {
@@ -335,7 +335,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			}
 		} else {
 			for (const u of mentionedUsers) {
-				// ローカルユーザーのみ
+				// Local users only
 				if (!Users.isLocalUser(u)) continue;
 
 				insertNoteUnread(u.id, note, {
@@ -424,24 +424,24 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 				const noteActivity = await renderNoteOrRenoteActivity(data, note);
 				const dm = new DeliverManager(user, noteActivity);
 
-				// メンションされたリモートユーザーに配送
+				// Delivered to remote users who have been mentioned
 				for (const u of mentionedUsers.filter(u => Users.isRemoteUser(u))) {
 					dm.addDirectRecipe(u as IRemoteUser);
 				}
 
-				// 投稿がリプライかつ投稿者がローカルユーザーかつリプライ先の投稿の投稿者がリモートユーザーなら配送
+				// If the post is a reply and the poster is a local user and the poster of the post to which you are replying is a remote user, deliver
 				if (data.reply && data.reply.userHost !== null) {
 					const u = await Users.findOneBy({ id: data.reply.userId });
 					if (u && Users.isRemoteUser(u)) dm.addDirectRecipe(u);
 				}
 
-				// 投稿がRenoteかつ投稿者がローカルユーザーかつRenote元の投稿の投稿者がリモートユーザーなら配送
+				// If the post is a Renote and the poster is a local user and the poster of the original Renote post is a remote user, deliver
 				if (data.renote && data.renote.userHost !== null) {
 					const u = await Users.findOneBy({ id: data.renote.userId });
 					if (u && Users.isRemoteUser(u)) dm.addDirectRecipe(u);
 				}
 
-				// フォロワーに配送
+				// Deliver to followers
 				if (['public', 'home', 'followers'].includes(note.visibility)) {
 					dm.addFollowersRecipe();
 				}
