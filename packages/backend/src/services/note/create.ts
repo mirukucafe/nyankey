@@ -142,9 +142,9 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		}
 	}
 
-	// チャンネル内にリプライしたら対象のスコープに合わせる
-	// (クライアントサイドでやっても良い処理だと思うけどとりあえずサーバーサイドで)
-	if (data.reply && (data.channel == null) && data.reply.channelId) {
+	// When you reply to a channel, adjust the scope to that of the target.
+	// (I think this could be done client-side, but server-side for now)
+	if (data.reply?.channelId && (data.channel == null)) {
 		data.channel = await Channels.findOneBy({ id: data.reply.channelId });
 	}
 
@@ -197,10 +197,10 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 	// Parse MFM if needed
 	if (!tags || !emojis || !mentionedUsers) {
-		const tokens = data.text ? mfm.parse(data.text)! : [];
-		const cwTokens = data.cw ? mfm.parse(data.cw)! : [];
-		const choiceTokens = data.poll && data.poll.choices
-			? concat(data.poll.choices.map(choice => mfm.parse(choice)!))
+		const tokens = data.text ? mfm.parse(data.text) : [];
+		const cwTokens = data.cw ? mfm.parse(data.cw) : [];
+		const choiceTokens = data.poll?.choices
+			? concat(data.poll.choices.map(choice => mfm.parse(choice)))
 			: [];
 
 		const combinedTokens = tokens.concat(cwTokens).concat(choiceTokens);
@@ -214,7 +214,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 	tags = tags.filter(tag => Array.from(tag || '').length <= 128).splice(0, 32);
 
-	if (data.reply && (user.id !== data.reply.userId) && !mentionedUsers.some(u => u.id === data.reply!.userId)) {
+	if (data.reply && (user.id !== data.reply.userId) && !mentionedUsers.some(u => u.id === data.reply?.userId)) {
 		mentionedUsers.push(await Users.findOneByOrFail({ id: data.reply.userId }));
 	}
 
@@ -465,13 +465,13 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		Notes.countBy({
 			userId: user.id,
 			channelId: data.channel.id,
-		}).then(count => {
-			// この処理が行われるのはノート作成後なので、ノートが一つしかなかったら最初の投稿だと判断できる
-			// TODO: とはいえノートを削除して何回も投稿すればその分だけインクリメントされる雑さもあるのでどうにかしたい
-			if (count === 1) {
-				Channels.increment({ id: data.channel!.id }, 'usersCount', 1);
-			}
 		});
+
+		// This process takes place after the note is created, so if there is only one note, you can determine that it is the first submission.
+		// TODO: but there's also the messiness of deleting a note and posting it multiple times, which is incremented by the number of times it's posted, so I'd like to do something about that.
+		if (count === 1) {
+			Channels.increment({ id: data.channel.id }, 'usersCount', 1);
+		}
 	}
 
 	// Register to search database
@@ -504,15 +504,11 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 	const insert = new Note({
 		id: genId(createdAt),
 		createdAt,
-		fileIds: data.files ? data.files.map(file => file.id) : [],
-		replyId: data.reply ? data.reply.id : null,
-		renoteId: data.renote ? data.renote.id : null,
-		channelId: data.channel ? data.channel.id : null,
-		threadId: data.reply
-			? data.reply.threadId
-				? data.reply.threadId
-				: data.reply.id
-			: null,
+		fileIds: data.files?.map(file => file.id) ?? [],
+		replyId: data.reply?.id ?? null,
+		renoteId: data.renote?.id ?? null,
+		channelId: data.channel?.id ?? null,
+		threadId: data.reply?.threadId ?? data.reply?.id ?? null,
 		name: data.name,
 		text: data.text,
 		hasPoll: data.poll != null,
@@ -523,12 +519,10 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		localOnly: data.localOnly ?? false,
 		visibility: data.visibility,
 		visibleUserIds: data.visibility === 'specified'
-			? data.visibleUsers
-				? data.visibleUsers.map(u => u.id)
-				: []
+			? data.visibleUsers?.map(u => u.id) ?? []
 			: [],
 
-		attachedFileTypes: data.files ? data.files.map(file => file.type) : [],
+		attachedFileTypes: data.files?.map(file => file.type) ?? [],
 
 		// denormalized data below
 		replyUserId: data.reply?.userId,
