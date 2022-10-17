@@ -28,7 +28,7 @@
 	</nav>
 	<div
 		ref="main" class="main"
-		:class="{ uploading: uploadings.length > 0, fetching }"
+		:class="{ uploading: uploadings.length > 0 }"
 		@dragover.prevent.stop="onDragover"
 		@dragenter="onDragenter"
 		@dragleave="onDragleave"
@@ -36,51 +36,77 @@
 		@contextmenu.stop="onContextmenu"
 	>
 		<div ref="contents" class="contents">
-			<div v-show="folders.length > 0" ref="foldersContainer" class="folders">
-				<XFolder
-					v-for="(f, i) in folders"
-					:key="f.id"
-					v-anim="i"
-					class="folder"
-					:folder="f"
-					:select-mode="select === 'folder'"
-					:is-selected="selectedFolders.some(x => x.id === f.id)"
-					@chosen="chooseFolder"
-					@move="move"
-					@upload="upload"
-					@removeFile="removeFile"
-					@removeFolder="removeFolder"
-					@dragstart="isDragSource = true"
-					@dragend="isDragSource = false"
-				/>
-				<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-				<div v-for="(n, i) in 16" :key="i" class="padding"></div>
-				<MkButton v-if="moreFolders" ref="moreFolders">{{ i18n.ts.loadMore }}</MkButton>
-			</div>
-			<div v-show="files.length > 0" ref="filesContainer" class="files">
-				<XFile
-					v-for="(file, i) in files"
-					:key="file.id"
-					v-anim="i"
-					class="file"
-					:file="file"
-					:select-mode="select === 'file'"
-					:is-selected="selectedFiles.some(x => x.id === file.id)"
-					@chosen="chooseFile"
-					@dragstart="isDragSource = true"
-					@dragend="isDragSource = false"
-				/>
-				<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-				<div v-for="(n, i) in 16" :key="i" class="padding"></div>
-				<MkButton v-show="moreFiles" ref="loadMoreFiles" @click="fetchMoreFiles">{{ i18n.ts.loadMore }}</MkButton>
-			</div>
-			<div v-if="files.length == 0 && folders.length == 0 && !fetching" class="empty">
-				<p v-if="draghover">{{ i18n.t('empty-draghover') }}</p>
-				<p v-if="!draghover && folder == null"><strong>{{ i18n.ts.emptyDrive }}</strong><br/>{{ i18n.t('empty-drive-description') }}</p>
-				<p v-if="!draghover && folder != null">{{ i18n.ts.emptyFolder }}</p>
+			<MkPagination
+				ref="foldersPaginationElem"
+				:pagination="foldersPagination"
+				class="folders"
+				@loaded="foldersLoading = false"
+			>
+				<template #empty>
+					<!--
+						Don't display anything here if there are no folders,
+						there is a separate check if both paginations are empty.
+					-->
+					{{ null }}
+				</template>
+
+				<template #default="{ items: folders }">
+					<XFolder
+						v-for="(f, i) in folders"
+						:key="f.id"
+						v-anim="i"
+						class="folder"
+						:folder="f"
+						:select-mode="select === 'folder'"
+						:is-selected="selectedFolders.some(x => x.id === f.id)"
+						@chosen="chooseFolder"
+						@move="move"
+						@upload="upload"
+						@removeFile="removeFile"
+						@removeFolder="removeFolder"
+						@dragstart="isDragSource = true"
+						@dragend="isDragSource = false"
+					/>
+					<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
+					<div v-for="(n, i) in 16" :key="i" class="padding"></div>
+				</template>
+			</MkPagination>
+			<MkPagination
+				ref="filesPaginationElem"
+				:pagination="filesPagination"
+				class="files"
+				@loaded="filesLoading = false"
+			>
+				<template #empty>
+					<!--
+						Don't display anything here if there are no files,
+						there is a separate check if both paginations are empty.
+					-->
+					{{ null }}
+				</template>
+
+				<template #default="{ items: files }">
+					<XFile
+						v-for="(file, i) in files"
+						:key="file.id"
+						v-anim="i"
+						class="file"
+						:file="file"
+						:select-mode="select === 'file'"
+						:is-selected="selectedFiles.some(x => x.id === file.id)"
+						@chosen="chooseFile"
+						@dragstart="isDragSource = true"
+						@dragend="isDragSource = false"
+					/>
+					<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
+					<div v-for="(n, i) in 16" :key="i" class="padding"></div>
+				</template>
+			</MkPagination>
+			<div v-if="empty" class="empty">
+				<p v-if="folder == null"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
+				<p v-else>{{ i18n.ts.emptyFolder }}</p>
 			</div>
 		</div>
-		<MkLoading v-if="fetching"/>
 	</div>
 	<div v-if="draghover" class="dropzone"></div>
 	<input ref="fileInput" type="file" accept="*/*" multiple tabindex="-1" @change="onChangeFileInput"/>
@@ -88,12 +114,13 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onActivated, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue';
 import * as foundkey from 'foundkey-js';
 import XNavFolder from './drive.nav-folder.vue';
 import XFolder from './drive.folder.vue';
 import XFile from './drive.file.vue';
 import MkButton from './ui/button.vue';
+import MkPagination from './ui/pagination.vue';
 import * as os from '@/os';
 import { stream } from '@/stream';
 import { defaultStore } from '@/store';
@@ -118,42 +145,40 @@ const emit = defineEmits<{
 	(ev: 'open-folder', v: foundkey.entities.DriveFolder): void;
 }>();
 
-const loadMoreFiles = ref<InstanceType<typeof MkButton>>();
-const fileInput = ref<HTMLInputElement>();
+let foldersPaginationElem = $ref<InstanceType<typeof MkPagination>>();
+let filesPaginationElem = $ref<InstanceType<typeof MkPagination>>();
 
-const folder = ref<foundkey.entities.DriveFolder | null>(null);
-const files = ref<foundkey.entities.DriveFile[]>([]);
-const folders = ref<foundkey.entities.DriveFolder[]>([]);
-const moreFiles = ref(false);
-const moreFolders = ref(false);
-const hierarchyFolders = ref<foundkey.entities.DriveFolder[]>([]);
-const selectedFiles = ref<foundkey.entities.DriveFile[]>([]);
-const selectedFolders = ref<foundkey.entities.DriveFolder[]>([]);
+let foldersLoading = $ref<boolean>(true);
+let filesLoading = $ref<boolean>(true);
+const empty = $computed(() => !foldersLoading && !filesLoading
+	&& foldersPaginationElem?.items.length === 0 && filesPaginationElem?.items.length === 0);
+
+let fileInput = $ref<HTMLInputElement>();
+
 const uploadings = uploads;
 const connection = stream.useChannel('drive');
-const keepOriginal = ref<boolean>(defaultStore.state.keepOriginalUploading); // 外部渡しが多いので$refは使わないほうがよい
+
+let folder = $ref<foundkey.entities.DriveFolder | null>(null);
+let hierarchyFolders = $ref<foundkey.entities.DriveFolder[]>([]);
+let selectedFiles = $ref<foundkey.entities.DriveFile[]>([]);
+let selectedFolders = $ref<foundkey.entities.DriveFolder[]>([]);
+let keepOriginal = $ref<boolean>(defaultStore.state.keepOriginalUploading);
 
 // ドロップされようとしているか
-const draghover = ref(false);
+let draghover = $ref(false);
 
 // 自身の所有するアイテムがドラッグをスタートさせたか
 // (自分自身の階層にドロップできないようにするためのフラグ)
-const isDragSource = ref(false);
+let isDragSource = $ref(false);
 
-const fetching = ref(true);
-
-const ilFilesObserver = new IntersectionObserver(
-	(entries) => entries.some((entry) => entry.isIntersecting) && !fetching.value && moreFiles.value && fetchMoreFiles(),
-);
-
-watch(folder, () => emit('cd', folder.value));
+watch($$(folder), () => emit('cd', folder));
 
 function onStreamDriveFileCreated(file: foundkey.entities.DriveFile) {
 	addFile(file, true);
 }
 
 function onStreamDriveFileUpdated(file: foundkey.entities.DriveFile) {
-	const current = folder.value ? folder.value.id : null;
+	const current = folder?.id ?? null;
 	if (current !== file.folderId) {
 		removeFile(file);
 	} else {
@@ -170,7 +195,7 @@ function onStreamDriveFolderCreated(createdFolder: foundkey.entities.DriveFolder
 }
 
 function onStreamDriveFolderUpdated(updatedFolder: foundkey.entities.DriveFolder) {
-	const current = folder.value ? folder.value.id : null;
+	const current = folder?.id ?? null;
 	if (current !== updatedFolder.parentId) {
 		removeFolder(updatedFolder);
 	} else {
@@ -186,7 +211,7 @@ function onDragover(ev: DragEvent): any {
 	if (!ev.dataTransfer) return;
 
 	// ドラッグ元が自分自身の所有するアイテムだったら
-	if (isDragSource.value) {
+	if (isDragSource) {
 		// 自分自身にはドロップさせない
 		ev.dataTransfer.dropEffect = 'none';
 		return;
@@ -205,22 +230,22 @@ function onDragover(ev: DragEvent): any {
 }
 
 function onDragenter() {
-	if (!isDragSource.value) draghover.value = true;
+	if (!isDragSource) draghover = true;
 }
 
 function onDragleave() {
-	draghover.value = false;
+	draghover = false;
 }
 
 function onDrop(ev: DragEvent): any {
-	draghover.value = false;
+	draghover = false;
 
 	if (!ev.dataTransfer) return;
 
 	// ドロップされてきたものがファイルだったら
 	if (ev.dataTransfer.files.length > 0) {
 		for (const file of Array.from(ev.dataTransfer.files)) {
-			upload(file, folder.value);
+			upload(file, folder);
 		}
 		return;
 	}
@@ -229,11 +254,14 @@ function onDrop(ev: DragEvent): any {
 	const driveFile = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FILE_);
 	if (driveFile != null && driveFile !== '') {
 		const file = JSON.parse(driveFile);
-		if (files.value.some(f => f.id === file.id)) return;
+
+		// cannot move file within parent folder
+		if (folder.id === file.folderId) return;
+
 		removeFile(file.id);
 		os.api('drive/files/update', {
 			fileId: file.id,
-			folderId: folder.value ? folder.value.id : null,
+			folderId: folder?.id ?? null,
 		});
 	}
 	//#endregion
@@ -243,15 +271,15 @@ function onDrop(ev: DragEvent): any {
 	if (driveFolder != null && driveFolder !== '') {
 		const droppedFolder = JSON.parse(driveFolder);
 
-		// 移動先が自分自身ならreject
-		if (folder.value && droppedFolder.id === folder.value.id) return false;
-		if (folders.value.some(f => f.id === droppedFolder.id)) return false;
+		// cannot move folder into itself
+		if (droppedFolder.id === folder?.id) return false;
+		// cannot move folder within parent folder
+		if (foldersPaginationElem.items.some(f => f.id === droppedFolder.id)) return false;
+
 		removeFolder(droppedFolder.id);
 		os.api('drive/folders/update', {
 			folderId: droppedFolder.id,
-			parentId: folder.value ? folder.value.id : null,
-		}).then(() => {
-			// noop
+			parentId: folder?.id ?? null,
 		}).catch(err => {
 			switch (err) {
 				case 'detected-circular-definition':
@@ -272,7 +300,7 @@ function onDrop(ev: DragEvent): any {
 }
 
 function selectLocalFile() {
-	fileInput.value?.click();
+	fileInput?.click();
 }
 
 function urlUpload() {
@@ -284,7 +312,7 @@ function urlUpload() {
 		if (canceled || !url) return;
 		os.api('drive/files/upload-from-url', {
 			url,
-			folderId: folder.value ? folder.value.id : undefined,
+			folderId: folder?.id ?? undefined,
 		});
 
 		os.alert({
@@ -302,7 +330,7 @@ function createFolder() {
 		if (canceled) return;
 		os.api('drive/folders/create', {
 			name,
-			parentId: folder.value ? folder.value.id : undefined,
+			parentId: folder?.id ?? undefined,
 		}).then(createdFolder => {
 			addFolder(createdFolder, true);
 		});
@@ -351,57 +379,61 @@ function deleteFolder(folderToDelete: foundkey.entities.DriveFolder) {
 }
 
 function onChangeFileInput() {
-	if (!fileInput.value?.files) return;
-	for (const file of Array.from(fileInput.value.files)) {
-		upload(file, folder.value);
+	if (!fileInput?.files) return;
+	for (const file of Array.from(fileInput.files)) {
+		upload(file, folder);
 	}
 }
 
 function upload(file: File, folderToUpload?: foundkey.entities.DriveFolder | null) {
-	uploadFile(file, (folderToUpload && typeof folderToUpload === 'object') ? folderToUpload.id : null, undefined, keepOriginal.value).then(res => {
+	uploadFile(file, (typeof folderToUpload === 'object') ? folderToUpload.id : null, undefined, keepOriginal).then(res => {
 		addFile(res, true);
 	});
 }
 
 function chooseFile(file: foundkey.entities.DriveFile) {
-	const isAlreadySelected = selectedFiles.value.some(f => f.id === file.id);
+	const isAlreadySelected = selectedFiles.some(f => f.id === file.id);
 	if (props.multiple) {
 		if (isAlreadySelected) {
-			selectedFiles.value = selectedFiles.value.filter(f => f.id !== file.id);
+			selectedFiles = selectedFiles.filter(f => f.id !== file.id);
 		} else {
-			selectedFiles.value.push(file);
+			selectedFiles.push(file);
 		}
-		emit('change-selection', selectedFiles.value);
+		emit('change-selection', selectedFiles);
 	} else {
 		if (isAlreadySelected) {
 			emit('selected', file);
 		} else {
-			selectedFiles.value = [file];
+			selectedFiles = [file];
 			emit('change-selection', [file]);
 		}
 	}
 }
 
 function chooseFolder(folderToChoose: foundkey.entities.DriveFolder) {
-	const isAlreadySelected = selectedFolders.value.some(f => f.id === folderToChoose.id);
+	const isAlreadySelected = selectedFolders.some(f => f.id === folderToChoose.id);
 	if (props.multiple) {
 		if (isAlreadySelected) {
-			selectedFolders.value = selectedFolders.value.filter(f => f.id !== folderToChoose.id);
+			selectedFolders = selectedFolders.filter(f => f.id !== folderToChoose.id);
 		} else {
-			selectedFolders.value.push(folderToChoose);
+			selectedFolders.push(folderToChoose);
 		}
-		emit('change-selection', selectedFolders.value);
+		emit('change-selection', selectedFolders);
 	} else {
 		if (isAlreadySelected) {
 			emit('selected', folderToChoose);
 		} else {
-			selectedFolders.value = [folderToChoose];
+			selectedFolders = [folderToChoose];
 			emit('change-selection', [folderToChoose]);
 		}
 	}
 }
 
 function move(target?: string | foundkey.entities.DriveFolder) {
+	// reset loading state
+	foldersLoading = true;
+	filesLoading = true;
+
 	if (!target) {
 		goRoot();
 		return;
@@ -409,165 +441,92 @@ function move(target?: string | foundkey.entities.DriveFolder) {
 
 	const targetId = typeof target === 'string' ? target : target.id;
 
-	fetching.value = true;
-
 	os.api('drive/folders/show', {
 		folderId: targetId,
 	}).then(folderToMove => {
-		folder.value = folderToMove;
-		hierarchyFolders.value = [];
+		folder = folderToMove;
 
-		const dive = folderToDive => {
-			hierarchyFolders.value.unshift(folderToDive);
-			if (folderToDive.parent) dive(folderToDive.parent);
-		};
-
-		if (folderToMove.parent) dive(folderToMove.parent);
+		// display new folder hierarchy appropriately
+		hierarchyFolders = [];
+		let parent = folderToMove.parent;
+		while (parent) {
+			hierarchyFolders.unshift(parent);
+			parent = parent.parent;
+		}
 
 		emit('open-folder', folderToMove);
-		fetch();
 	});
 }
 
 function addFolder(folderToAdd: foundkey.entities.DriveFolder, unshift = false) {
-	const current = folder.value ? folder.value.id : null;
+	const current = folder?.id ?? null;
 	if (current !== folderToAdd.parentId) return;
 
-	if (folders.value.some(f => f.id === folderToAdd.id)) {
-		const exist = folders.value.map(f => f.id).indexOf(folderToAdd.id);
-		folders.value[exist] = folderToAdd;
-		return;
-	}
-
-	if (unshift) {
-		folders.value.unshift(folderToAdd);
+	const exist = foldersPaginationElem.items.some(f => f.id === folderToAdd.id);
+	if (exist) {
+		foldersPaginationElem.updateItem(folderToAdd.id, () => folderToAdd);
+	} else if (unshift) {
+		foldersPaginationElem.prepend(folderToAdd);
 	} else {
-		folders.value.push(folderToAdd);
+		foldersPaginationElem.append(folderToAdd);
 	}
 }
 
 function addFile(fileToAdd: foundkey.entities.DriveFile, unshift = false) {
-	const current = folder.value ? folder.value.id : null;
+	const current = folder?.id ?? null;
 	if (current !== fileToAdd.folderId) return;
 
-	if (files.value.some(f => f.id === fileToAdd.id)) {
-		const exist = files.value.map(f => f.id).indexOf(fileToAdd.id);
-		files.value[exist] = fileToAdd;
-		return;
-	}
-
-	if (unshift) {
-		files.value.unshift(fileToAdd);
+	const exist = filesPaginationElem.items.some(f => f.id === fileToAdd.id);
+	if (exist) {
+		filesPaginationElem.updateItem(fileToAdd.id, () => fileToAdd);
+	} else if (unshift) {
+		filesPaginationElem.prepend(fileToAdd);
 	} else {
-		files.value.push(fileToAdd);
+		filesPaginationElem.append(fileToAdd);
 	}
 }
 
-function removeFolder(folderToRemove: foundkey.entities.DriveFolder | string) {
+function removeFolder(folderToRemove: foundkey.entities.DriveFolder | string): void {
 	const folderIdToRemove = typeof folderToRemove === 'object' ? folderToRemove.id : folderToRemove;
-	folders.value = folders.value.filter(f => f.id !== folderIdToRemove);
+	foldersPaginationElem.removeItem(item => item.id === folderIdToRemove);
 }
 
-function removeFile(file: foundkey.entities.DriveFile | string) {
-	const fileId = typeof file === 'object' ? file.id : file;
-	files.value = files.value.filter(f => f.id !== fileId);
+function removeFile(fileToRemove: foundkey.entities.DriveFile | string): void {
+	const fileIdToRemove = typeof fileToRemove === 'object' ? fileToRemove.id : fileToRemove;
+	filesPaginationElem.removeItem(item => item.id === fileIdToRemove);
 }
 
-function appendFile(file: foundkey.entities.DriveFile) {
-	addFile(file);
-}
-
-function appendFolder(folderToAppend: foundkey.entities.DriveFolder) {
-	addFolder(folderToAppend);
-}
-/*
-function prependFile(file: foundkey.entities.DriveFile) {
-	addFile(file, true);
-}
-
-function prependFolder(folderToPrepend: foundkey.entities.DriveFolder) {
-	addFolder(folderToPrepend, true);
-}
-*/
 function goRoot() {
-	// 既にrootにいるなら何もしない
-	if (folder.value == null) return;
+	// do nothing if already at root
+	if (folder == null) return;
 
-	folder.value = null;
-	hierarchyFolders.value = [];
+	folder = null;
+	hierarchyFolders = [];
 	emit('move-root');
-	fetch();
 }
 
-async function fetch() {
-	folders.value = [];
-	files.value = [];
-	moreFolders.value = false;
-	moreFiles.value = false;
-	fetching.value = true;
+const foldersPagination = {
+	endpoint: 'drive/folders' as const,
+	limit: 30,
+	params: computed(() => ({
+		folderId: folder?.id ?? null,
+	})),
+};
 
-	const foldersMax = 30;
-	const filesMax = 30;
-
-	const foldersPromise = os.api('drive/folders', {
-		folderId: folder.value ? folder.value.id : null,
-		limit: foldersMax + 1,
-	}).then(fetchedFolders => {
-		if (fetchedFolders.length === foldersMax + 1) {
-			moreFolders.value = true;
-			fetchedFolders.pop();
-		}
-		return fetchedFolders;
-	});
-
-	const filesPromise = os.api('drive/files', {
-		folderId: folder.value ? folder.value.id : null,
+const filesPagination = {
+	endpoint: 'drive/files' as const,
+	limit: 30,
+	params: computed(() => ({
+		folderId: folder?.id ?? null,
 		type: props.type,
-		limit: filesMax + 1,
-	}).then(fetchedFiles => {
-		if (fetchedFiles.length === filesMax + 1) {
-			moreFiles.value = true;
-			fetchedFiles.pop();
-		}
-		return fetchedFiles;
-	});
-
-	const [fetchedFolders, fetchedFiles] = await Promise.all([foldersPromise, filesPromise]);
-
-	for (const x of fetchedFolders) appendFolder(x);
-	for (const x of fetchedFiles) appendFile(x);
-
-	fetching.value = false;
-}
-
-function fetchMoreFiles() {
-	fetching.value = true;
-
-	const max = 30;
-
-	// ファイル一覧取得
-	os.api('drive/files', {
-		folderId: folder.value ? folder.value.id : null,
-		type: props.type,
-		untilId: files.value[files.value.length - 1].id,
-		limit: max + 1,
-	}).then(files => {
-		if (files.length === max + 1) {
-			moreFiles.value = true;
-			files.pop();
-		} else {
-			moreFiles.value = false;
-		}
-		for (const x of files) appendFile(x);
-		fetching.value = false;
-	});
-}
+	})),
+};
 
 function getMenu() {
 	return [{
 		type: 'switch',
 		text: i18n.ts.keepOriginalUploading,
-		ref: keepOriginal,
+		ref: $$(keepOriginal),
 	}, null, {
 		text: i18n.ts.addFile,
 		type: 'label',
@@ -580,16 +539,16 @@ function getMenu() {
 		icon: 'fas fa-link',
 		action: () => { urlUpload(); },
 	}, null, {
-		text: folder.value ? folder.value.name : i18n.ts.drive,
+		text: folder?.name ?? i18n.ts.drive,
 		type: 'label',
-	}, folder.value ? {
+	}, folder != null ? {
 		text: i18n.ts.renameFolder,
 		icon: 'fas fa-i-cursor',
-		action: () => { renameFolder(folder.value); },
-	} : undefined, folder.value ? {
+		action: () => { renameFolder(folder); },
+	} : undefined, folder != null ? {
 		text: i18n.ts.deleteFolder,
 		icon: 'fas fa-trash-alt',
-		action: () => { deleteFolder(folder.value as foundkey.entities.DriveFolder); },
+		action: () => { deleteFolder(folder as foundkey.entities.DriveFolder); },
 	} : undefined, {
 		text: i18n.ts.createFolder,
 		icon: 'fas fa-folder-plus',
@@ -606,12 +565,6 @@ function onContextmenu(ev: MouseEvent) {
 }
 
 onMounted(() => {
-	if (defaultStore.state.enableInfiniteScroll && loadMoreFiles.value) {
-		nextTick(() => {
-			ilFilesObserver.observe(loadMoreFiles.value?.$el);
-		});
-	}
-
 	connection.on('fileCreated', onStreamDriveFileCreated);
 	connection.on('fileUpdated', onStreamDriveFileUpdated);
 	connection.on('fileDeleted', onStreamDriveFileDeleted);
@@ -621,22 +574,11 @@ onMounted(() => {
 
 	if (props.initialFolder) {
 		move(props.initialFolder);
-	} else {
-		fetch();
-	}
-});
-
-onActivated(() => {
-	if (defaultStore.state.enableInfiniteScroll) {
-		nextTick(() => {
-			ilFilesObserver.observe(loadMoreFiles.value?.$el);
-		});
 	}
 });
 
 onBeforeUnmount(() => {
 	connection.dispose();
-	ilFilesObserver.disconnect();
 });
 </script>
 
@@ -716,18 +658,6 @@ onBeforeUnmount(() => {
 
 		&, * {
 			user-select: none;
-		}
-
-		&.fetching {
-			cursor: wait !important;
-
-			* {
-				pointer-events: none;
-			}
-
-			> .contents {
-				opacity: 0.5;
-			}
 		}
 
 		&.uploading {

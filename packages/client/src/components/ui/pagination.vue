@@ -70,6 +70,8 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
 	(ev: 'queue', count: number): void;
+	(ev: 'loaded'): void;
+	(ev: 'error'): void;
 }>();
 
 type Item = { id: string; [another: string]: unknown; };
@@ -105,9 +107,11 @@ const init = async (): Promise<void> => {
 		offset.value = res.length;
 		error.value = false;
 		fetching.value = false;
+		emit('loaded');
 	}, () => {
 		error.value = true;
 		fetching.value = false;
+		emit('error');
 	});
 };
 
