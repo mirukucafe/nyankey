@@ -462,7 +462,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			lastNotedAt: new Date(),
 		});
 
-		Notes.countBy({
+		const count = await Notes.countBy({
 			userId: user.id,
 			channelId: data.channel.id,
 		});
