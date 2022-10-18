@@ -124,6 +124,9 @@ redis:
 # Upload or download file size limits (bytes)
 #maxFileSize: 262144000
 
+# Max note text length (in characters)
+#maxNoteTextLength: 3000
+
 #allowedPrivateNetworks: [
 #  '127.0.0.1/32'
 #]

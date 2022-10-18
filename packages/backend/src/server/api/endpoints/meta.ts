@@ -2,7 +2,6 @@ import { IsNull } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Emojis, Users } from '@/models/index.js';
-import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
 import define from '../define.js';
 
 export const meta = {
@@ -311,7 +310,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		iconUrl: instance.iconUrl,
 		backgroundImageUrl: instance.backgroundImageUrl,
 		logoImageUrl: instance.logoImageUrl,
-		maxNoteTextLength: MAX_NOTE_TEXT_LENGTH, // 後方互換性のため
+		maxNoteTextLength: config.maxNoteTextLength,
 		emojis: await Emojis.packMany(emojis),
 		defaultLightTheme: instance.defaultLightTheme,
 		defaultDarkTheme: instance.defaultDarkTheme,

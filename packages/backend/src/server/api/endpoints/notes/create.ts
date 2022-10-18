@@ -6,8 +6,9 @@ import { Users, DriveFiles, Notes, Channels, Blockings } from '@/models/index.js
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { Note } from '@/models/entities/note.js';
 import { Channel } from '@/models/entities/channel.js';
-import { MAX_NOTE_TEXT_LENGTH, HOUR } from '@/const.js';
+import { HOUR } from '@/const.js';
 import { isPureRenote } from '@/misc/renote.js';
+import config from '@/config/index.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
 import { getNote } from '../../common/getters.js';
@@ -99,7 +100,7 @@ export const paramDef = {
 		visibleUserIds: { type: 'array', uniqueItems: true, items: {
 			type: 'string', format: 'misskey:id',
 		} },
-		text: { type: 'string', maxLength: MAX_NOTE_TEXT_LENGTH, nullable: true },
+		text: { type: 'string', maxLength: config.maxNoteTextLength, nullable: true },
 		cw: { type: 'string', nullable: true, maxLength: 100 },
 		localOnly: { type: 'boolean', default: false },
 		noExtractMentions: { type: 'boolean', default: false },
@@ -146,7 +147,7 @@ export const paramDef = {
 		{
 			// (re)note with text, files and poll are optional
 			properties: {
-				text: { type: 'string', minLength: 1, maxLength: MAX_NOTE_TEXT_LENGTH, nullable: false },
+				text: { type: 'string', minLength: 1, maxLength: config.maxNoteTextLength, nullable: false },
 			},
 			required: ['text'],
 		},

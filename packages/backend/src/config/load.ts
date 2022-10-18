@@ -38,6 +38,8 @@ export default function load(): Config {
 
 	config.port = config.port || parseInt(process.env.PORT || '', 10);
 
+	if (!config.maxNoteTextLength) config.maxNoteTextLength = 3000;
+
 	mixin.version = meta.version;
 	mixin.host = url.host;
 	mixin.hostname = url.hostname;

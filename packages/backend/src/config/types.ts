@@ -41,6 +41,8 @@ export type Source = {
 
 	maxFileSize?: number;
 
+	maxNoteTextLength?: number;
+
 	accesslog?: string;
 
 	clusterLimit?: number;
