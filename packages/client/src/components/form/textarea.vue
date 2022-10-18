@@ -67,6 +67,8 @@ const { modelValue } = toRefs(props);
 // modelValue is read only, so a separate ref is needed.
 const v = $ref(modelValue.value);
 
+watch(modelValue, () => v = modelValue.value);
+
 let focused = $ref(false);
 let changed = $ref(false);
 let inputEl: HTMLTextAreaElement | null = $ref(null);
