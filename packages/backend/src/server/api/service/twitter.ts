@@ -26,8 +26,6 @@ function compareOrigin(ctx: Koa.BaseContext): boolean {
 	return (normalizeUrl(referer) === normalizeUrl(config.url));
 }
 
-const locales = await import('../../../../../../locales/index.js').then(mod => mod.default);
-
 // Init router
 const router = new Router();
 
@@ -49,8 +47,7 @@ router.get('/disconnect/twitter', async ctx => {
 	});
 
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
-	const locale = locales[profile.lang || 'en-US'];
-	const i18n = new I18n(locale);
+	const i18n = new I18n(profile.lang ?? 'en-US');
 
 	delete profile.integrations.twitter;
 
@@ -180,8 +177,7 @@ router.get('/tw/cb', async ctx => {
 		});
 
 		const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
-		const locale = locales[profile.lang || 'en-US'];
-		const i18n = new I18n(locale);
+		const i18n = new I18n(profile.lang ?? 'en-US');
 
 		await UserProfiles.update(user.id, {
 			integrations: {
