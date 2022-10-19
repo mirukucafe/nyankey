@@ -22,6 +22,13 @@ export const meta = {
 			code: 'NO_SUCH_NOTE',
 			id: 'aff017de-190e-434b-893e-33a9ff5049d8',
 		},
+
+		notClipped: {
+			message: 'That note is not added to this clip.',
+			code: 'NOT_CLIPPED',
+			id: '6b20c697-6e51-4120-b340-0e47899c7a20',
+			httpStatusCode: 409,
+		},
 	},
 } as const;
 
@@ -50,8 +57,12 @@ export default define(meta, paramDef, async (ps, user) => {
 		throw e;
 	});
 
-	await ClipNotes.delete({
+	const { affected } = await ClipNotes.delete({
 		noteId: note.id,
 		clipId: clip.id,
 	});
+
+	if (affected == 0) {
+		throw new ApiError(meta.errors.notClipped);
+	}
 });
