@@ -1,4 +1,4 @@
-const locales = import('../../../../locales/index.js').then(mod => mod.default);
+const locales = await import('../../../../locales/index.js').then(mod => mod.default);
 
 export class I18n {
 	public ts: Record<string, any>;
