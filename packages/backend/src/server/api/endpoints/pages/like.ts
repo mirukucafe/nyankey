@@ -17,12 +17,6 @@ export const meta = {
 			id: 'cc98a8a2-0dc3-4123-b198-62c71df18ed3',
 		},
 
-		yourPage: {
-			message: 'You cannot like your page.',
-			code: 'YOUR_PAGE',
-			id: '28800466-e6db-40f2-8fae-bf9e82aa92b8',
-		},
-
 		alreadyLiked: {
 			message: 'The page has already been liked.',
 			code: 'ALREADY_LIKED',
@@ -44,10 +38,6 @@ export default define(meta, paramDef, async (ps, user) => {
 	const page = await Pages.findOneBy({ id: ps.pageId });
 	if (page == null) {
 		throw new ApiError(meta.errors.noSuchPage);
-	}
-
-	if (page.userId === user.id) {
-		throw new ApiError(meta.errors.yourPage);
 	}
 
 	// if already liked
