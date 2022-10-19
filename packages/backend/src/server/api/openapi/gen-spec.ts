@@ -3,7 +3,10 @@ import { errors as errorDefinitions } from '../error.js';
 import endpoints from '../endpoints.js';
 import { schemas, convertSchemaToOpenApiSchema } from './schemas.js';
 import { httpCodes } from './http-codes.js';
-import { descriptions as scopes } from '@/misc/api-permissions.js';
+import { kinds } from '@/misc/api-permissions.js';
+import { I18n } from '@/misc/i18n.js';
+
+const i18n = new I18n('en-US');
 
 export function genOpenapiSpec() {
 	const spec = {
@@ -41,7 +44,10 @@ export function genOpenapiSpec() {
 						authorizationCode: {
 							authorizationUrl: `${config.url}/auth`,
 							tokenUrl: `${config.apiUrl}/auth/session/oauth`,
-							scopes,
+							scopes: kinds.reduce((acc, kind) => {
+								acc[kind] = i18n.ts['_permissions'][kind];
+								return acc;
+							}, {}),
 						},
 					},
 				},
