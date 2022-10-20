@@ -37,7 +37,7 @@ export const paramDef = {
 	properties: {
 		noteId: { type: 'string', format: 'misskey:id' },
 		type: {
-			description: 'A Unicode emoji or custom emoji code. A custom emoji should look like `:name:` or `:name@example.com`.',
+			description: 'A Unicode emoji or custom emoji code. A custom emoji should look like `:name:` or `:name@example.com:`.',
 			type: 'string',
 			nullable: true,
 		},
