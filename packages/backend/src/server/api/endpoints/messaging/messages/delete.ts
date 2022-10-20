@@ -17,13 +17,7 @@ export const meta = {
 		minInterval: SECOND,
 	},
 
-	errors: {
-		noSuchMessage: {
-			message: 'No such message.',
-			code: 'NO_SUCH_MESSAGE',
-			id: '54b5b326-7925-42cf-8019-130fda8b56af',
-		},
-	},
+	errors: ['NO_SUCH_MESSAGE'],
 } as const;
 
 export const paramDef = {
@@ -41,9 +35,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (message == null) {
-		throw new ApiError(meta.errors.noSuchMessage);
-	}
+	if (message == null) throw new ApiError('NO_SUCH_MESSAGE');
 
 	await deleteMessage(message);
 });

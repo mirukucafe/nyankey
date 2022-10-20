@@ -28,22 +28,16 @@ export default function <T extends IEndpointMeta, Ps extends Schema>(meta: T, pa
 			fs.unlink(file.path, () => {});
 		}
 
-		if (meta.requireFile && file == null) return Promise.reject(new ApiError({
-			message: 'File required.',
-			code: 'FILE_REQUIRED',
-			id: '4267801e-70d1-416a-b011-4ee502885d8b',
-		}));
+		if (meta.requireFile && file == null) {
+			return Promise.reject(new ApiError('FILE_REQUIRED'));
+		}
 
 		const valid = validate(params);
 		if (!valid) {
 			if (file) cleanup();
 
 			const errors = validate.errors!;
-			const err = new ApiError({
-				message: 'Invalid param.',
-				code: 'INVALID_PARAM',
-				id: '3d81ceae-475f-4600-b2a8-2bc116157532',
-			}, {
+			const err = new ApiError('INVALID_PARAM', {
 				param: errors[0].schemaPath,
 				reason: errors[0].message,
 			});

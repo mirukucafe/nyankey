@@ -10,13 +10,7 @@ export const meta = {
 
 	kind: 'write:channels',
 
-	errors: {
-		noSuchChannel: {
-			message: 'No such channel.',
-			code: 'NO_SUCH_CHANNEL',
-			id: '19959ee9-0153-4c51-bbd9-a98c49dc59d6',
-		},
-	},
+	errors: ['NO_SUCH_CHANNEL'],
 } as const;
 
 export const paramDef = {
@@ -33,9 +27,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: ps.channelId,
 	});
 
-	if (channel == null) {
-		throw new ApiError(meta.errors.noSuchChannel);
-	}
+	if (channel == null) throw new ApiError('NO_SUCH_CHANNEL');
 
 	await ChannelFollowings.delete({
 		followerId: user.id,

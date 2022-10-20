@@ -10,25 +10,7 @@ export const meta = {
 
 	kind: 'write:account',
 
-	errors: {
-		noSuchAntenna: {
-			message: 'No such antenna.',
-			code: 'NO_SUCH_ANTENNA',
-			id: '10c673ac-8852-48eb-aa1f-f5b67f069290',
-		},
-
-		noSuchUserList: {
-			message: 'No such user list.',
-			code: 'NO_SUCH_USER_LIST',
-			id: '1c6b35c9-943e-48c2-81e4-2844989407f7',
-		},
-
-		noSuchUserGroup: {
-			message: 'No such user group.',
-			code: 'NO_SUCH_USER_GROUP',
-			id: '109ed789-b6eb-456e-b8a9-6059d567d385',
-		},
-	},
+	errors: ['NO_SUCH_ANTENNA', 'NO_SUCH_USER_LIST', 'NO_SUCH_GROUP'],
 
 	res: {
 		type: 'object',
@@ -74,9 +56,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (antenna == null) {
-		throw new ApiError(meta.errors.noSuchAntenna);
-	}
+	if (antenna == null) throw new ApiError('NO_SUCH_ANTENNA');
 
 	let userList;
 	let userGroupJoining;
@@ -87,18 +67,14 @@ export default define(meta, paramDef, async (ps, user) => {
 			userId: user.id,
 		});
 
-		if (userList == null) {
-			throw new ApiError(meta.errors.noSuchUserList);
-		}
+		if (userList == null) throw new ApiError('NO_SUCH_USER_LIST');
 	} else if (ps.src === 'group' && ps.userGroupId) {
 		userGroupJoining = await UserGroupJoinings.findOneBy({
 			userGroupId: ps.userGroupId,
 			userId: user.id,
 		});
 
-		if (userGroupJoining == null) {
-			throw new ApiError(meta.errors.noSuchUserGroup);
-		}
+		if (userGroupJoining == null) throw new ApiError('NO_SUCH_GROUP');
 	}
 
 	await Antennas.update(antenna.id, {

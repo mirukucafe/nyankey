@@ -26,13 +26,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		ltlDisabled: {
-			message: 'Local timeline has been disabled.',
-			code: 'LTL_DISABLED',
-			id: '45a6eb02-7695-4393-b023-dd3be9aaaefd',
-		},
-	},
+	errors: ['TIMELINE_DISABLED'],
 } as const;
 
 export const paramDef = {
@@ -61,7 +55,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const m = await fetchMeta();
 	if (m.disableLocalTimeline) {
 		if (user == null || (!user.isAdmin && !user.isModerator)) {
-			throw new ApiError(meta.errors.ltlDisabled);
+			throw new ApiError('TIMELINE_DISABLED');
 		}
 	}
 

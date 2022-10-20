@@ -17,25 +17,7 @@ export const meta = {
 
 	kind: 'write:following',
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '5b12c78d-2b28-4dca-99d2-f56139b42ff8',
-		},
-
-		followerIsYourself: {
-			message: 'Follower is yourself.',
-			code: 'FOLLOWER_IS_YOURSELF',
-			id: '07dc03b9-03da-422d-885b-438313707662',
-		},
-
-		notFollowing: {
-			message: 'The other use is not following you.',
-			code: 'NOT_FOLLOWING',
-			id: '5dbf82f5-c92b-40b1-87d1-6c8c0741fd09',
-		},
-	},
+	errors: ['FOLLOWER_IS_YOURSELF', 'NO_SUCH_USER', 'NOT_FOLLOWING'],
 
 	res: {
 		type: 'object',
@@ -57,13 +39,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	const followee = user;
 
 	// Check if the follower is yourself
-	if (user.id === ps.userId) {
-		throw new ApiError(meta.errors.followerIsYourself);
-	}
+	if (user.id === ps.userId) throw new ApiError('FOLLOWER_IS_YOURSELF');
 
 	// Get follower
 	const follower = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -73,9 +53,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		followeeId: followee.id,
 	});
 
-	if (exist == null) {
-		throw new ApiError(meta.errors.notFollowing);
-	}
+	if (exist == null) throw new ApiError('NOT_FOLLOWING');
 
 	await deleteFollowing(follower, followee);
 

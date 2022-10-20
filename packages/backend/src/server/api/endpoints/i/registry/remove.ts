@@ -7,13 +7,7 @@ export const meta = {
 
 	secure: true,
 
-	errors: {
-		noSuchKey: {
-			message: 'No such key.',
-			code: 'NO_SUCH_KEY',
-			id: '1fac4e8a-a6cd-4e39-a4a5-3a7e11f1b019',
-		},
-	},
+	errors: ['NO_SUCH_KEY'],
 } as const;
 
 export const paramDef = {
@@ -37,9 +31,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	const item = await query.getOne();
 
-	if (item == null) {
-		throw new ApiError(meta.errors.noSuchKey);
-	}
+	if (item == null) throw new ApiError('NO_SUCH_KEY');
 
 	await RegistryItems.remove(item);
 });

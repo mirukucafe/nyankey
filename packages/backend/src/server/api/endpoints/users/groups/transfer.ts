@@ -18,25 +18,7 @@ export const meta = {
 		ref: 'UserGroup',
 	},
 
-	errors: {
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: '8e31d36b-2f88-4ccd-a438-e2d78a9162db',
-		},
-
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '711f7ebb-bbb9-4dfa-b540-b27809fed5e9',
-		},
-
-		noSuchGroupMember: {
-			message: 'No such group member.',
-			code: 'NO_SUCH_GROUP_MEMBER',
-			id: 'd31bebee-196d-42c2-9a3e-9474d4be6cc4',
-		},
-	},
+	errors: ['NO_SUCH_GROUP', 'NO_SUCH_USER'],
 } as const;
 
 export const paramDef = {
@@ -56,13 +38,11 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (userGroup == null) {
-		throw new ApiError(meta.errors.noSuchGroup);
-	}
+	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 	// Fetch the user
 	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -71,9 +51,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: user.id,
 	});
 
-	if (joining == null) {
-		throw new ApiError(meta.errors.noSuchGroupMember);
-	}
+	if (joining == null) throw new ApiError('NO_SUCH_USER', 'The user exists but is not a member of the group.');
 
 	await UserGroups.update(userGroup.id, {
 		userId: ps.userId,

@@ -5,13 +5,7 @@ import { ApiError } from '../../error.js';
 export const meta = {
 	tags: ['app'],
 
-	errors: {
-		noSuchApp: {
-			message: 'No such app.',
-			code: 'NO_SUCH_APP',
-			id: 'dce83913-2dc6-4093-8a7b-71dbb11718a3',
-		},
-	},
+	errors: ['NO_SUCH_APP'],
 
 	res: {
 		type: 'object',
@@ -33,14 +27,12 @@ export default define(meta, paramDef, async (ps, user, token) => {
 	const isSecure = user != null && token == null;
 
 	// Lookup app
-	const ap = await Apps.findOneBy({ id: ps.appId });
+	const app = await Apps.findOneBy({ id: ps.appId });
 
-	if (ap == null) {
-		throw new ApiError(meta.errors.noSuchApp);
-	}
+	if (app == null) throw new ApiError('NO_SUCH_APP');
 
-	return await Apps.pack(ap, user, {
+	return await Apps.pack(app, user, {
 		detail: true,
-		includeSecret: isSecure && (ap.userId === user!.id),
+		includeSecret: isSecure && (app.userId === user!.id),
 	});
 });

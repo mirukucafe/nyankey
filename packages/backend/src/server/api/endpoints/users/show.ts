@@ -30,20 +30,7 @@ export const meta = {
 		],
 	},
 
-	errors: {
-		failedToResolveRemoteUser: {
-			message: 'Failed to resolve remote user.',
-			code: 'FAILED_TO_RESOLVE_REMOTE_USER',
-			id: 'ef7b9be4-9cba-4e6f-ab41-90ed171c7d3c',
-			kind: 'server',
-		},
-
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '4362f8dc-731f-4ad8-a694-be5a88922a24',
-		},
-	},
+	errors: ['FAILED_TO_RESOLVE_REMOTE_USER', 'NO_SUCH_USER'],
 } as const;
 
 export const paramDef = {
@@ -109,7 +96,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		if (typeof ps.host === 'string' && typeof ps.username === 'string') {
 			user = await resolveUser(ps.username, ps.host).catch(e => {
 				apiLogger.warn(`failed to resolve remote user: ${e}`);
-				throw new ApiError(meta.errors.failedToResolveRemoteUser);
+				throw new ApiError('FAILED_TO_RESOLVE_REMOTE_USER');
 			});
 		} else {
 			const q: FindOptionsWhere<User> = ps.userId != null
@@ -120,7 +107,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		}
 
 		if (user == null || (!isAdminOrModerator && user.isSuspended)) {
-			throw new ApiError(meta.errors.noSuchUser);
+			throw new ApiError('NO_SUCH_USER');
 		}
 
 		return await Users.pack(user, me, {

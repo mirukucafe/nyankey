@@ -17,19 +17,7 @@ export const meta = {
 		minInterval: 3 * SECOND,
 	},
 
-	errors: {
-		noSuchNote: {
-			message: 'No such note.',
-			code: 'NO_SUCH_NOTE',
-			id: '764d9fce-f9f2-4a0e-92b1-6ceac9a7ad37',
-		},
-
-		notReacted: {
-			message: 'You are not reacting to that note.',
-			code: 'NOT_REACTED',
-			id: '92f4426d-4196-4125-aa5b-02943e2ec8fc',
-		},
-	},
+	errors: ['NO_SUCH_NOTE', 'NOT_REACTED'],
 } as const;
 
 export const paramDef = {
@@ -43,11 +31,11 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const note = await getNote(ps.noteId, user).catch(err => {
-		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
 		throw err;
 	});
 	await deleteReaction(user, note).catch(e => {
-		if (e.id === '60527ec9-b4cb-4a88-a6bd-32d3ad26817d') throw new ApiError(meta.errors.notReacted);
+		if (e.id === '60527ec9-b4cb-4a88-a6bd-32d3ad26817d') throw new ApiError('NOT_REACTED');
 		throw e;
 	});
 });

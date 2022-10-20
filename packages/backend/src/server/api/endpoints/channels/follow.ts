@@ -11,13 +11,7 @@ export const meta = {
 
 	kind: 'write:channels',
 
-	errors: {
-		noSuchChannel: {
-			message: 'No such channel.',
-			code: 'NO_SUCH_CHANNEL',
-			id: 'c0031718-d573-4e85-928e-10039f1fbb68',
-		},
-	},
+	errors: ['NO_SUCH_CHANNEL'],
 } as const;
 
 export const paramDef = {
@@ -34,9 +28,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: ps.channelId,
 	});
 
-	if (channel == null) {
-		throw new ApiError(meta.errors.noSuchChannel);
-	}
+	if (channel == null) throw new ApiError('NO_SUCH_CHANNEL');
 
 	await ChannelFollowings.insert({
 		id: genId(),

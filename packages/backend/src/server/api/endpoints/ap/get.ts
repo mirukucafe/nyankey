@@ -12,9 +12,6 @@ export const meta = {
 		max: 30,
 	},
 
-	errors: {
-	},
-
 	res: {
 		type: 'object',
 		optional: false, nullable: false,

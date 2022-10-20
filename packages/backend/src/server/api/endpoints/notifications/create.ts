@@ -7,9 +7,6 @@ export const meta = {
 	requireCredential: true,
 
 	kind: 'write:notifications',
-
-	errors: {
-	},
 } as const;
 
 export const paramDef = {

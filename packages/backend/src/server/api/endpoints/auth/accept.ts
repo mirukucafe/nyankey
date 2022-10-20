@@ -12,13 +12,7 @@ export const meta = {
 
 	secure: true,
 
-	errors: {
-		noSuchSession: {
-			message: 'No such session.',
-			code: 'NO_SUCH_SESSION',
-			id: '9c72d8de-391a-43c1-9d06-08d29efde8df',
-		},
-	},
+	errors: ['NO_SUCH_SESSION'],
 } as const;
 
 export const paramDef = {
@@ -35,9 +29,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const session = await AuthSessions
 		.findOneBy({ token: ps.token });
 
-	if (session == null) {
-		throw new ApiError(meta.errors.noSuchSession);
-	}
+	if (session == null) throw new ApiError('NO_SUCH_SESSION');
 
 	// Generate access token
 	const accessToken = secureRndstr(32, true);

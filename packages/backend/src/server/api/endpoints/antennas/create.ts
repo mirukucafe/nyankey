@@ -11,19 +11,7 @@ export const meta = {
 
 	kind: 'write:account',
 
-	errors: {
-		noSuchUserList: {
-			message: 'No such user list.',
-			code: 'NO_SUCH_USER_LIST',
-			id: '95063e93-a283-4b8b-9aa5-bcdb8df69a7f',
-		},
-
-		noSuchUserGroup: {
-			message: 'No such user group.',
-			code: 'NO_SUCH_USER_GROUP',
-			id: 'aa3c0b9a-8cae-47c0-92ac-202ce5906682',
-		},
-	},
+	errors: ['NO_SUCH_USER_LIST', 'NO_SUCH_GROUP'],
 
 	res: {
 		type: 'object',
@@ -71,18 +59,14 @@ export default define(meta, paramDef, async (ps, user) => {
 			userId: user.id,
 		});
 
-		if (userList == null) {
-			throw new ApiError(meta.errors.noSuchUserList);
-		}
+		if (userList == null) throw new ApiError('NO_SUCH_USER_LIST');
 	} else if (ps.src === 'group' && ps.userGroupId) {
 		userGroupJoining = await UserGroupJoinings.findOneBy({
 			userGroupId: ps.userGroupId,
 			userId: user.id,
 		});
 
-		if (userGroupJoining == null) {
-			throw new ApiError(meta.errors.noSuchUserGroup);
-		}
+		if (userGroupJoining == null) throw new ApiError('NO_SUCH_GROUP');
 	}
 
 	const antenna = await Antennas.insert({

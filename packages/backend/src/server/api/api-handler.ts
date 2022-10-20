@@ -13,7 +13,7 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 			: ctx.request.body;
 
 	const error = (e: ApiError): void => {
-		ctx.status = e.httpStatusCode ?? 500;
+		ctx.status = e.httpStatusCode;
 		if (e.httpStatusCode === 401) {
 			ctx.response.set('WWW-Authenticate', 'Bearer');
 		}
@@ -47,12 +47,7 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 		});
 	}).catch(e => {
 		if (e instanceof AuthenticationError) {
-			error({
-				message: 'Authentication failed: ' + e.message,
-				code: 'AUTHENTICATION_FAILED',
-				id: 'b0a7f5f8-dc2f-4171-b91f-de88ad238e14',
-				httpStatusCode: 401,
-			});
+			error(new ApiError('AUTHENTICATION_FAILED', e.message));
 		} else {
 			error(new ApiError());
 		}

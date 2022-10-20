@@ -13,13 +13,7 @@ export const meta = {
 
 	kind: 'read:account',
 
-	errors: {
-		noSuchClip: {
-			message: 'No such clip.',
-			code: 'NO_SUCH_CLIP',
-			id: '1d7645e6-2b6d-4635-b0fe-fe22b0e72e00',
-		},
-	},
+	errors: ['NO_SUCH_CLIP'],
 
 	res: {
 		type: 'array',
@@ -49,12 +43,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: ps.clipId,
 	});
 
-	if (clip == null) {
-		throw new ApiError(meta.errors.noSuchClip);
-	}
+	if (clip == null) throw new ApiError('NO_SUCH_CLIP');
 
 	if (!clip.isPublic && (user == null || (clip.userId !== user.id))) {
-		throw new ApiError(meta.errors.noSuchClip);
+		throw new ApiError('NO_SUCH_CLIP');
 	}
 
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId)

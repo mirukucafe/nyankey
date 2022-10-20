@@ -21,13 +21,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchList: {
-			message: 'No such list.',
-			code: 'NO_SUCH_LIST',
-			id: '8fb1fbd5-e476-4c37-9fb0-43d55b63a2ff',
-		},
-	},
+	errors: ['NO_SUCH_USER_LIST'],
 } as const;
 
 export const paramDef = {
@@ -58,9 +52,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (list == null) {
-		throw new ApiError(meta.errors.noSuchList);
-	}
+	if (list == null) throw new ApiError('NO_SUCH_USER_LIST');
 
 	//#region Construct query
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId)

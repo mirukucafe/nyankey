@@ -26,13 +26,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchApp: {
-			message: 'No such app.',
-			code: 'NO_SUCH_APP',
-			id: '92f93e63-428e-4f2f-a5a4-39e1407fe998',
-		},
-	},
+	errors: ['NO_SUCH_APP'],
 } as const;
 
 export const paramDef = {
@@ -51,7 +45,7 @@ export default define(meta, paramDef, async (ps) => {
 	});
 
 	if (app == null) {
-		throw new ApiError(meta.errors.noSuchApp);
+		throw new ApiError('NO_SUCH_APP');
 	}
 
 	// Generate token

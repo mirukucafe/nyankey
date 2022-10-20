@@ -28,13 +28,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		stlDisabled: {
-			message: 'Hybrid timeline has been disabled.',
-			code: 'STL_DISABLED',
-			id: '620763f4-f621-4533-ab33-0577a1a3c342',
-		},
-	},
+	errors: ['TIMELINE_DISABLED'],
 } as const;
 
 export const paramDef = {
@@ -61,7 +55,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const m = await fetchMeta();
 	if (m.disableLocalTimeline && (!user.isAdmin && !user.isModerator)) {
-		throw new ApiError(meta.errors.stlDisabled);
+		throw new ApiError('TIMELINE_DISABLED');
 	}
 
 	//#region Construct query

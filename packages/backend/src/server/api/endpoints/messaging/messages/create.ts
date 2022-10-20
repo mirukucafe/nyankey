@@ -19,51 +19,11 @@ export const meta = {
 		ref: 'MessagingMessage',
 	},
 
-	errors: {
-		recipientIsYourself: {
-			message: 'You can not send a message to yourself.',
-			code: 'RECIPIENT_IS_YOURSELF',
-			id: '17e2ba79-e22a-4cbc-bf91-d327643f4a7e',
-		},
-
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '11795c64-40ea-4198-b06e-3c873ed9039d',
-		},
-
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: 'c94e2a5d-06aa-4914-8fa6-6a42e73d6537',
-		},
-
-		groupAccessDenied: {
-			message: 'You can not send messages to groups that you have not joined.',
-			code: 'GROUP_ACCESS_DENIED',
-			id: 'd96b3cca-5ad1-438b-ad8b-02f931308fbd',
-		},
-
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: '4372b8e2-185d-4146-8749-2f68864a3e5f',
-		},
-
-		youHaveBeenBlocked: {
-			message: 'You cannot send a message because you have been blocked by this user.',
-			code: 'YOU_HAVE_BEEN_BLOCKED',
-			id: 'c15a5199-7422-4968-941a-2a462c478f7d',
-		},
-	},
+	errors: ['ACCESS_DENIED', 'BLOCKED', 'NO_SUCH_FILE', 'NO_SUCH_USER', 'NO_SUCH_GROUP', 'RECIPIENT_IS_YOURSELF'],
 } as const;
 
 export const paramDef = {
 	type: 'object',
-	properties: {
-		text: { type: 'string', nullable: true, maxLength: 3000 },
-		fileId: { type: 'string', format: 'misskey:id' },
-	},
 	anyOf: [
 		{
 			properties: {
@@ -137,13 +97,11 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	if (ps.userId != null) {
 		// Myself
-		if (ps.userId === user.id) {
-			throw new ApiError(meta.errors.recipientIsYourself);
-		}
+		if (ps.userId === user.id) throw new ApiError('RECIPIENT_IS_YOURSELF');
 
 		// Fetch recipient (user)
 		recipientUser = await getUser(ps.userId).catch(e => {
-			if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+			if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 			throw e;
 		});
 
@@ -152,16 +110,12 @@ export default define(meta, paramDef, async (ps, user) => {
 			blockerId: recipientUser.id,
 			blockeeId: user.id,
 		});
-		if (block) {
-			throw new ApiError(meta.errors.youHaveBeenBlocked);
-		}
+		if (block) throw new ApiError('BLOCKED');
 	} else if (ps.groupId != null) {
 		// Fetch recipient (group)
 		recipientGroup = await UserGroups.findOneBy({ id: ps.groupId! });
 
-		if (recipientGroup == null) {
-			throw new ApiError(meta.errors.noSuchGroup);
-		}
+		if (recipientGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 		// check joined
 		const joining = await UserGroupJoinings.findOneBy({
@@ -169,9 +123,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			userGroupId: recipientGroup.id,
 		});
 
-		if (joining == null) {
-			throw new ApiError(meta.errors.groupAccessDenied);
-		}
+		if (joining == null) throw new ApiError('ACCESS_DENIED', 'You have to join a group to send a message in it.');
 	}
 
 	let file = null;
@@ -181,9 +133,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			userId: user.id,
 		});
 
-		if (file == null) {
-			throw new ApiError(meta.errors.noSuchFile);
-		}
+		if (file == null) throw new ApiError('NO_SUCH_FILE');
 	}
 
 	return await createMessage(user, recipientUser, recipientGroup, ps.text, file);

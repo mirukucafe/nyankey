@@ -10,19 +10,7 @@ export const meta = {
 
 	kind: 'write:favorites',
 
-	errors: {
-		noSuchNote: {
-			message: 'No such note.',
-			code: 'NO_SUCH_NOTE',
-			id: '80848a2c-398f-4343-baa9-df1d57696c56',
-		},
-
-		notFavorited: {
-			message: 'You have not marked that note a favorite.',
-			code: 'NOT_FAVORITED',
-			id: 'b625fc69-635e-45e9-86f4-dbefbef35af5',
-		},
-	},
+	errors: ['NO_SUCH_NOTE', 'NOT_FAVORITED'],
 } as const;
 
 export const paramDef = {
@@ -37,7 +25,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	// Get favoritee
 	const note = await getNote(ps.noteId, user).catch(err => {
-		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
 		throw err;
 	});
 
@@ -47,9 +35,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (exist == null) {
-		throw new ApiError(meta.errors.notFavorited);
-	}
+	if (exist == null) throw new ApiError('NOT_FAVORITED');
 
 	// Delete favorite
 	await NoteFavorites.delete(exist.id);

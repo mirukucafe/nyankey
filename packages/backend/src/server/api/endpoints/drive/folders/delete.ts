@@ -10,19 +10,7 @@ export const meta = {
 
 	kind: 'write:drive',
 
-	errors: {
-		noSuchFolder: {
-			message: 'No such folder.',
-			code: 'NO_SUCH_FOLDER',
-			id: '1069098f-c281-440f-b085-f9932edbe091',
-		},
-
-		hasChildFilesOrFolders: {
-			message: 'This folder has child files or folders.',
-			code: 'HAS_CHILD_FILES_OR_FOLDERS',
-			id: 'b0fc8a17-963c-405d-bfbc-859a487295e1',
-		},
-	},
+	errors: ['HAS_CHILD_FILES_OR_FOLDERS', 'NO_SUCH_FOLDER'],
 } as const;
 
 export const paramDef = {
@@ -41,9 +29,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (folder == null) {
-		throw new ApiError(meta.errors.noSuchFolder);
-	}
+	if (folder == null) throw new ApiError('NO_SUCH_FOLDER');
 
 	const [childFoldersCount, childFilesCount] = await Promise.all([
 		DriveFolders.countBy({ parentId: folder.id }),
@@ -51,7 +37,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	]);
 
 	if (childFoldersCount !== 0 || childFilesCount !== 0) {
-		throw new ApiError(meta.errors.hasChildFilesOrFolders);
+		throw new ApiError('HAS_CHILD_FILES_OR_FOLDERS');
 	}
 
 	await DriveFolders.delete(folder.id);

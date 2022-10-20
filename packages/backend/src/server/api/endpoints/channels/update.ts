@@ -15,25 +15,7 @@ export const meta = {
 		ref: 'Channel',
 	},
 
-	errors: {
-		noSuchChannel: {
-			message: 'No such channel.',
-			code: 'NO_SUCH_CHANNEL',
-			id: 'f9c5467f-d492-4c3c-9a8d-a70dacc86512',
-		},
-
-		accessDenied: {
-			message: 'You do not have edit privilege of the channel.',
-			code: 'ACCESS_DENIED',
-			id: '1fb7cb09-d46a-4fdf-b8df-057788cce513',
-		},
-
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'e86c14a4-0da2-4032-8df3-e737a04c7f3b',
-		},
-	},
+	errors: ['ACCESS_DENIED', 'NO_SUCH_CHANNEL', 'NO_SUCH_FILE'],
 } as const;
 
 export const paramDef = {
@@ -53,13 +35,9 @@ export default define(meta, paramDef, async (ps, me) => {
 		id: ps.channelId,
 	});
 
-	if (channel == null) {
-		throw new ApiError(meta.errors.noSuchChannel);
-	}
+	if (channel == null) throw new ApiError('NO_SUCH_CHANNEL');
 
-	if (channel.userId !== me.id) {
-		throw new ApiError(meta.errors.accessDenied);
-	}
+	if (channel.userId !== me.id) throw new ApiError('ACCESS_DENIED', 'You are not the owner of this channel.');
 
 	// eslint:disable-next-line:no-unnecessary-initializer
 	let banner = undefined;
@@ -69,9 +47,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			userId: me.id,
 		});
 
-		if (banner == null) {
-			throw new ApiError(meta.errors.noSuchFile);
-		}
+		if (banner == null) throw new ApiError('NO_SUCH_FILE');
 	} else if (ps.bannerId === null) {
 		banner = null;
 	}

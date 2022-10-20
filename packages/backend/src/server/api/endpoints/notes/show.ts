@@ -14,13 +14,7 @@ export const meta = {
 		ref: 'Note',
 	},
 
-	errors: {
-		noSuchNote: {
-			message: 'No such note.',
-			code: 'NO_SUCH_NOTE',
-			id: '24fcbfc6-2e37-42b6-8388-c29b3861a08d',
-		},
-	},
+	errors: ['NO_SUCH_NOTE'],
 } as const;
 
 export const paramDef = {
@@ -34,7 +28,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const note = await getNote(ps.noteId, user).catch(err => {
-		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
 		throw err;
 	});
 
@@ -42,7 +36,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		// FIXME: packing with detail may throw an error if the reply or renote is not visible (#8774)
 		detail: true,
 	}).catch(err => {
-		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
 		throw err;
 	});
 });

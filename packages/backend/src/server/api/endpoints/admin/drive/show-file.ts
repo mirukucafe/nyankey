@@ -8,13 +8,7 @@ export const meta = {
 	requireCredential: true,
 	requireModerator: true,
 
-	errors: {
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'caf3ca38-c6e5-472e-a30c-b05377dcc240',
-		},
-	},
+	errors: ['NO_SUCH_FILE'],
 
 	res: {
 		type: 'object',
@@ -180,9 +174,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		}],
 	});
 
-	if (file == null) {
-		throw new ApiError(meta.errors.noSuchFile);
-	}
+	if (file == null) throw new ApiError('NO_SUCH_FILE');
 
 	return file;
 });

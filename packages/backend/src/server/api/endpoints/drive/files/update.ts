@@ -12,31 +12,7 @@ export const meta = {
 
 	description: 'Update the properties of a drive file.',
 
-	errors: {
-		invalidFileName: {
-			message: 'Invalid file name.',
-			code: 'INVALID_FILE_NAME',
-			id: '395e7156-f9f0-475e-af89-53c3c23080c2',
-		},
-
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'e7778c7e-3af9-49cd-9690-6dbc3e6c972d',
-		},
-
-		accessDenied: {
-			message: 'Access denied.',
-			code: 'ACCESS_DENIED',
-			id: '01a53b27-82fc-445b-a0c1-b558465a8ed2',
-		},
-
-		noSuchFolder: {
-			message: 'No such folder.',
-			code: 'NO_SUCH_FOLDER',
-			id: 'ea8fb7a5-af77-4a08-b608-c0218176cd73',
-		},
-	},
+	errors: ['ACCESS_DENIED', 'INVALID_FILE_NAME', 'NO_SUCH_FILE', 'NO_SUCH_FOLDER'],
 
 	res: {
 		type: 'object',
@@ -61,17 +37,15 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const file = await DriveFiles.findOneBy({ id: ps.fileId });
 
-	if (file == null) {
-		throw new ApiError(meta.errors.noSuchFile);
-	}
+	if (file == null) throw new ApiError('NO_SUCH_FILE');
 
 	if ((!user.isAdmin && !user.isModerator) && (file.userId !== user.id)) {
-		throw new ApiError(meta.errors.accessDenied);
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	if (ps.name) file.name = ps.name;
 	if (!DriveFiles.validateFileName(file.name)) {
-		throw new ApiError(meta.errors.invalidFileName);
+		throw new ApiError('INVALID_FILE_NAME');
 	}
 
 	if (ps.comment !== undefined) file.comment = ps.comment;
@@ -87,9 +61,7 @@ export default define(meta, paramDef, async (ps, user) => {
 				userId: user.id,
 			});
 
-			if (folder == null) {
-				throw new ApiError(meta.errors.noSuchFolder);
-			}
+			if (folder == null) throw new ApiError('NO_SUCH_FOLDER');
 
 			file.folderId = folder.id;
 		}

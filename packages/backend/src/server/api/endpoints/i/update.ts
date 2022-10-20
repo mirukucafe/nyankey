@@ -22,43 +22,7 @@ export const meta = {
 
 	kind: 'write:account',
 
-	errors: {
-		noSuchAvatar: {
-			message: 'No such avatar file.',
-			code: 'NO_SUCH_AVATAR',
-			id: '539f3a45-f215-4f81-a9a8-31293640207f',
-		},
-
-		noSuchBanner: {
-			message: 'No such banner file.',
-			code: 'NO_SUCH_BANNER',
-			id: '0d8f5629-f210-41c2-9433-735831a58595',
-		},
-
-		avatarNotAnImage: {
-			message: 'The file specified as an avatar is not an image.',
-			code: 'AVATAR_NOT_AN_IMAGE',
-			id: 'f419f9f8-2f4d-46b1-9fb4-49d3a2fd7191',
-		},
-
-		bannerNotAnImage: {
-			message: 'The file specified as a banner is not an image.',
-			code: 'BANNER_NOT_AN_IMAGE',
-			id: '75aedb19-2afd-4e6d-87fc-67941256fa60',
-		},
-
-		noSuchPage: {
-			message: 'No such page.',
-			code: 'NO_SUCH_PAGE',
-			id: '8e01b590-7eb9-431b-a239-860e086c408e',
-		},
-
-		invalidRegexp: {
-			message: 'Invalid Regular Expression.',
-			code: 'INVALID_REGEXP',
-			id: '0d786918-10df-41cd-8f33-8dec7d9a89a5',
-		},
-	},
+	errors: ['INVALID_REGEXP', 'NO_SUCH_FILE', 'NO_SUCH_PAGE', 'NOT_AN_IMAGE'],
 
 	res: {
 		type: 'object',
@@ -142,12 +106,12 @@ export default define(meta, paramDef, async (ps, _user, token) => {
 		// validate regular expression syntax
 		ps.mutedWords.filter(x => !Array.isArray(x)).forEach(x => {
 			const regexp = x.match(/^\/(.+)\/(.*)$/);
-			if (!regexp) throw new ApiError(meta.errors.invalidRegexp);
+			if (!regexp) throw new ApiError('INVALID_REGEXP');
 
 			try {
 				new RE2(regexp[1], regexp[2]);
 			} catch (err) {
-				throw new ApiError(meta.errors.invalidRegexp);
+				throw new ApiError('INVALID_REGEXP');
 			}
 		});
 
@@ -174,21 +138,21 @@ export default define(meta, paramDef, async (ps, _user, token) => {
 	if (ps.avatarId) {
 		const avatar = await DriveFiles.findOneBy({ id: ps.avatarId });
 
-		if (avatar == null || avatar.userId !== user.id) throw new ApiError(meta.errors.noSuchAvatar);
-		if (!avatar.type.startsWith('image/')) throw new ApiError(meta.errors.avatarNotAnImage);
+		if (avatar == null || avatar.userId !== user.id) throw new ApiError('NO_SUCH_FILE', 'Avatar file not found.');
+		if (!avatar.type.startsWith('image/')) throw new ApiError('NOT_AN_IMAGE', 'Avatar file is not an image.');
 	}
 
 	if (ps.bannerId) {
 		const banner = await DriveFiles.findOneBy({ id: ps.bannerId });
 
-		if (banner == null || banner.userId !== user.id) throw new ApiError(meta.errors.noSuchBanner);
-		if (!banner.type.startsWith('image/')) throw new ApiError(meta.errors.bannerNotAnImage);
+		if (banner == null || banner.userId !== user.id) throw new ApiError('NO_SUCH_FILE', 'Banner file not found.');
+		if (!banner.type.startsWith('image/')) throw new ApiError('BANNER_NOT_AN_IMAGE', 'Banner file is not an image.');
 	}
 
 	if (ps.pinnedPageId) {
 		const page = await Pages.findOneBy({ id: ps.pinnedPageId });
 
-		if (page == null || page.userId !== user.id) throw new ApiError(meta.errors.noSuchPage);
+		if (page == null || page.userId !== user.id) throw new ApiError('NO_SUCH_PAGE');
 
 		profileUpdates.pinnedPageId = page.id;
 	} else if (ps.pinnedPageId === null) {

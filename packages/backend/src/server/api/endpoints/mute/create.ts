@@ -13,25 +13,7 @@ export const meta = {
 
 	kind: 'write:mutes',
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '6fef56f3-e765-4957-88e5-c6f65329b8a5',
-		},
-
-		muteeIsYourself: {
-			message: 'Mutee is yourself.',
-			code: 'MUTEE_IS_YOURSELF',
-			id: 'a4619cb2-5f23-484b-9301-94c903074e10',
-		},
-
-		alreadyMuting: {
-			message: 'You are already muting that user.',
-			code: 'ALREADY_MUTING',
-			id: '7e7359cb-160c-4956-b08f-4d1c653cd007',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'MUTEE_IS_YOURSELF', 'ALREADY_MUTING'],
 } as const;
 
 export const paramDef = {
@@ -52,13 +34,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	const muter = user;
 
 	// 自分自身
-	if (user.id === ps.userId) {
-		throw new ApiError(meta.errors.muteeIsYourself);
-	}
+	if (user.id === ps.userId) throw new ApiError('MUTEE_IS_YOURSELF');
 
 	// Get mutee
 	const mutee = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -68,9 +48,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		muteeId: mutee.id,
 	});
 
-	if (exist != null) {
-		throw new ApiError(meta.errors.alreadyMuting);
-	}
+	if (exist != null) throw new ApiError('ALREADY_MUTING');
 
 	if (ps.expiresAt && ps.expiresAt <= Date.now()) {
 		return;

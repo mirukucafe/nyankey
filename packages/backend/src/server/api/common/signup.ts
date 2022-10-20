@@ -24,25 +24,13 @@ export async function signup(opts: {
 
 	// Validate username
 	if (!Users.validateLocalUsername(username)) {
-		throw new ApiError({
-			message: 'This username is invalid.',
-			code: 'INVALID_USERNAME',
-			id: 'ece89f3c-d845-4d9a-850b-1735285e8cd4',
-			kind: 'client',
-			httpStatusCode: 400,
-		});
+		throw new ApiError('INVALID_USERNAME');
 	}
 
 	if (password != null && passwordHash == null) {
 		// Validate password
 		if (!Users.validatePassword(password)) {
-			throw new ApiError({
-				message: 'This password is invalid.',
-				code: 'INVALID_PASSWORD',
-				id: 'a941905b-fe7b-43e2-8ecd-50ad3a2287ab',
-				kind: 'client',
-				httpStatusCode: 400,
-			});
+			throw new ApiError('INVALID_PASSWORD');
 		}
 
 		// Generate hash of password
@@ -53,22 +41,14 @@ export async function signup(opts: {
 	// Generate secret
 	const secret = generateUserToken();
 
-	const duplicateUsernameError = {
-		message: 'This username is not available.',
-		code: 'USED_USERNAME',
-		id: '7ddd595e-6860-4593-93c5-9fdbcb80cd81',
-		kind: 'client',
-		httpStatusCode: 409,
-	};
-
 	// Check username duplication
 	if (await Users.findOneBy({ usernameLower: username.toLowerCase(), host: IsNull() })) {
-		throw new ApiError(duplicateUsernameError);
+		throw new ApiError('USED_USERNAME');
 	}
 
 	// Check deleted username duplication
 	if (await UsedUsernames.findOneBy({ username: username.toLowerCase() })) {
-		throw new ApiError(duplicateUsernameError);
+		throw new ApiError('USED_USERNAME');
 	}
 
 	const keyPair = await new Promise<string[]>((res, rej) =>
@@ -97,7 +77,7 @@ export async function signup(opts: {
 			host: IsNull(),
 		});
 
-		if (exist) throw new ApiError(duplicateUsernameError);
+		if (exist) throw new ApiError('USED_USERNAME');
 
 		account = await transactionalEntityManager.save(new User({
 			id: genId(),

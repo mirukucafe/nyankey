@@ -17,13 +17,7 @@ export const meta = {
 		ref: 'Channel',
 	},
 
-	errors: {
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'cd1e9f3e-5a12-4ab4-96f6-5d0a2cc32050',
-		},
-	},
+	errors: ['NO_SUCH_FILE'],
 } as const;
 
 export const paramDef = {
@@ -45,9 +39,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			userId: user.id,
 		});
 
-		if (banner == null) {
-			throw new ApiError(meta.errors.noSuchFile);
-		}
+		if (banner == null) throw new ApiError('NO_SUCH_FILE');
 	}
 
 	const channel = await Channels.insert({

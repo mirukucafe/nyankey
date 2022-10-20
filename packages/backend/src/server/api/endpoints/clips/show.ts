@@ -9,13 +9,7 @@ export const meta = {
 
 	kind: 'read:account',
 
-	errors: {
-		noSuchClip: {
-			message: 'No such clip.',
-			code: 'NO_SUCH_CLIP',
-			id: 'c3c5fe33-d62c-44d2-9ea5-d997703f5c20',
-		},
-	},
+	errors: ['NO_SUCH_CLIP'],
 
 	res: {
 		type: 'object',
@@ -39,12 +33,10 @@ export default define(meta, paramDef, async (ps, me) => {
 		id: ps.clipId,
 	});
 
-	if (clip == null) {
-		throw new ApiError(meta.errors.noSuchClip);
-	}
+	if (clip == null) throw new ApiError('NO_SUCH_CLIP');
 
 	if (!clip.isPublic && (me == null || (clip.userId !== me.id))) {
-		throw new ApiError(meta.errors.noSuchClip);
+		throw new ApiError('NO_SUCH_CLIP');
 	}
 
 	return await Clips.pack(clip);

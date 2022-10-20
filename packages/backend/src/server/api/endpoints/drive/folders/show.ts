@@ -15,13 +15,7 @@ export const meta = {
 		ref: 'DriveFolder',
 	},
 
-	errors: {
-		noSuchFolder: {
-			message: 'No such folder.',
-			code: 'NO_SUCH_FOLDER',
-			id: 'd74ab9eb-bb09-4bba-bf24-fb58f761e1e9',
-		},
-	},
+	errors: ['NO_SUCH_FOLDER'],
 } as const;
 
 export const paramDef = {
@@ -40,9 +34,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (folder == null) {
-		throw new ApiError(meta.errors.noSuchFolder);
-	}
+	if (folder == null) throw new ApiError('NO_SUCH_FOLDER');
 
 	return await DriveFolders.pack(folder, {
 		detail: true,

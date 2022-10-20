@@ -9,13 +9,7 @@ export const meta = {
 	requireCredential: true,
 	requireModerator: true,
 
-	errors: {
-		invalidUrl: {
-			message: 'Invalid URL',
-			code: 'INVALID_URL',
-			id: 'fb8c92d3-d4e5-44e7-b3d4-800d5cef8b2c',
-		},
-	},
+	errors: ['INVALID_URL'],
 
 	res: {
 		type: 'object',
@@ -58,8 +52,8 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	try {
 		if (new URL(ps.inbox).protocol !== 'https:') throw new Error('https only');
-	} catch {
-		throw new ApiError(meta.errors.invalidUrl);
+	} catch (e) {
+		throw new ApiError('INVALID_URL', e);
 	}
 
 	return await addRelay(ps.inbox);

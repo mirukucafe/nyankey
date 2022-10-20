@@ -10,13 +10,7 @@ export const meta = {
 
 	kind: 'write:account',
 
-	errors: {
-		noSuchWebhook: {
-			message: 'No such webhook.',
-			code: 'NO_SUCH_WEBHOOK',
-			id: 'bae73e5a-5522-4965-ae19-3a8688e71d82',
-		},
-	},
+	errors: ['NO_SUCH_WEBHOOK'],
 } as const;
 
 export const paramDef = {
@@ -34,9 +28,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (webhook == null) {
-		throw new ApiError(meta.errors.noSuchWebhook);
-	}
+	if (webhook == null) throw new ApiError('NO_SUCH_WEBHOOK');
 
 	await Webhooks.delete(webhook.id);
 

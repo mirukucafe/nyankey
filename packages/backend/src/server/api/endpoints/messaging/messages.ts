@@ -23,25 +23,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '11795c64-40ea-4198-b06e-3c873ed9039d',
-		},
-
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: 'c4d9f88c-9270-4632-b032-6ed8cee36f7f',
-		},
-
-		groupAccessDenied: {
-			message: 'You can not read messages of groups that you have not joined.',
-			code: 'GROUP_ACCESS_DENIED',
-			id: 'a053a8dd-a491-4718-8f87-50775aad9284',
-		},
-	},
+	errors: ['ACCESS_DENIED', 'NO_SUCH_USER', 'NO_SUCH_GROUP'],
 } as const;
 
 export const paramDef = {
@@ -73,7 +55,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	if (ps.userId != null) {
 		// Fetch recipient (user)
 		const recipient = await getUser(ps.userId).catch(e => {
-			if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+			if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 			throw e;
 		});
 
@@ -110,9 +92,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		// Fetch recipient (group)
 		const recipientGroup = await UserGroups.findOneBy({ id: ps.groupId });
 
-		if (recipientGroup == null) {
-			throw new ApiError(meta.errors.noSuchGroup);
-		}
+		if (recipientGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 		// check joined
 		const joining = await UserGroupJoinings.findOneBy({
@@ -120,9 +100,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			userGroupId: recipientGroup.id,
 		});
 
-		if (joining == null) {
-			throw new ApiError(meta.errors.groupAccessDenied);
-		}
+		if (joining == null) throw new ApiError('ACCESS_DENIED', 'You have to join a group to read messages in it.');
 
 		const query = makePaginationQuery(MessagingMessages.createQueryBuilder('message'), ps.sinceId, ps.untilId)
 			.andWhere('message.groupId = :groupId', { groupId: recipientGroup.id });

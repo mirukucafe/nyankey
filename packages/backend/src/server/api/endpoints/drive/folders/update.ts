@@ -10,25 +10,7 @@ export const meta = {
 
 	kind: 'write:drive',
 
-	errors: {
-		noSuchFolder: {
-			message: 'No such folder.',
-			code: 'NO_SUCH_FOLDER',
-			id: 'f7974dac-2c0d-4a27-926e-23583b28e98e',
-		},
-
-		noSuchParentFolder: {
-			message: 'No such parent folder.',
-			code: 'NO_SUCH_PARENT_FOLDER',
-			id: 'ce104e3a-faaf-49d5-b459-10ff0cbbcaa1',
-		},
-
-		recursiveNesting: {
-			message: 'It can not be structured like nesting folders recursively.',
-			code: 'NO_SUCH_PARENT_FOLDER',
-			id: 'ce104e3a-faaf-49d5-b459-10ff0cbbcaa1',
-		},
-	},
+	errors: ['NO_SUCH_FOLDER', 'NO_SUCH_PARENT_FOLDER', 'RECURSIVE_FOLDER'],
 
 	res: {
 		type: 'object',
@@ -55,15 +37,13 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (folder == null) {
-		throw new ApiError(meta.errors.noSuchFolder);
-	}
+	if (folder == null) throw new ApiError('NO_SUCH_FOLDER');
 
 	if (ps.name) folder.name = ps.name;
 
 	if (ps.parentId !== undefined) {
 		if (ps.parentId === folder.id) {
-			throw new ApiError(meta.errors.recursiveNesting);
+			throw new ApiError('RECURSIVE_FOLDER');
 		} else if (ps.parentId === null) {
 			folder.parentId = null;
 		} else {
@@ -73,9 +53,7 @@ export default define(meta, paramDef, async (ps, user) => {
 				userId: user.id,
 			});
 
-			if (parent == null) {
-				throw new ApiError(meta.errors.noSuchParentFolder);
-			}
+			if (parent == null) throw new ApiError('NO_SUCH_PARENT_FOLDER');
 
 			// Check if the circular reference will occur
 			async function checkCircle(folderId: string): Promise<boolean> {
@@ -95,7 +73,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 			if (parent.parentId !== null) {
 				if (await checkCircle(parent.parentId)) {
-					throw new ApiError(meta.errors.recursiveNesting);
+					throw new ApiError('RECURSIVE_FOLDER');
 				}
 			}
 

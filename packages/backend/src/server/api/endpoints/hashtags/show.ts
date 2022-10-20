@@ -14,13 +14,7 @@ export const meta = {
 		ref: 'Hashtag',
 	},
 
-	errors: {
-		noSuchHashtag: {
-			message: 'No such hashtag.',
-			code: 'NO_SUCH_HASHTAG',
-			id: '110ee688-193e-4a3a-9ecf-c167b2e6981e',
-		},
-	},
+	errors: ['NO_SUCH_HASHTAG'],
 } as const;
 
 export const paramDef = {
@@ -34,9 +28,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const hashtag = await Hashtags.findOneBy({ name: normalizeForSearch(ps.tag) });
-	if (hashtag == null) {
-		throw new ApiError(meta.errors.noSuchHashtag);
-	}
+	if (hashtag == null) throw new ApiError('NO_SUCH_HASHTAG');
 
 	return await Hashtags.pack(hashtag);
 });

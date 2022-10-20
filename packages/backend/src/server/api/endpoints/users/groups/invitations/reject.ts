@@ -11,13 +11,7 @@ export const meta = {
 
 	description: 'Delete an existing group invitation for the authenticated user without joining the group.',
 
-	errors: {
-		noSuchInvitation: {
-			message: 'No such invitation.',
-			code: 'NO_SUCH_INVITATION',
-			id: 'ad7471d4-2cd9-44b4-ac68-e7136b4ce656',
-		},
-	},
+	errors: ['NO_SUCH_INVITATION'],
 } as const;
 
 export const paramDef = {
@@ -33,15 +27,10 @@ export default define(meta, paramDef, async (ps, user) => {
 	// Fetch the invitation
 	const invitation = await UserGroupInvitations.findOneBy({
 		id: ps.invitationId,
+		userId: user.id,
 	});
 
-	if (invitation == null) {
-		throw new ApiError(meta.errors.noSuchInvitation);
-	}
-
-	if (invitation.userId !== user.id) {
-		throw new ApiError(meta.errors.noSuchInvitation);
-	}
+	if (invitation == null) throw new ApiError('NO_SUCH_INVITATION');
 
 	await UserGroupInvitations.delete(invitation.id);
 });
