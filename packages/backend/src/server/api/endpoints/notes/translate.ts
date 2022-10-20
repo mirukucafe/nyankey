@@ -8,6 +8,36 @@ import { ApiError } from '../../error.js';
 import { getNote } from '../../common/getters.js';
 import define from '../../define.js';
 
+const sourceLangs = [
+	'BG',
+	'CS',
+	'DA',
+	'DE',
+	'EL',
+	'EN',
+	'ES',
+	'ET',
+	'FI',
+	'FR',
+	'HU',
+	'ID',
+	'IT',
+	'JA',
+	'LT',
+	'LV',
+	'NL',
+	'PL',
+	'PT',
+	'RO',
+	'RU',
+	'SK',
+	'SL',
+	'SV',
+	'TR',
+	'UK',
+	'ZH',
+];
+
 export const meta = {
 	tags: ['notes'],
 
@@ -16,6 +46,13 @@ export const meta = {
 	res: {
 		type: 'object',
 		optional: false, nullable: false,
+		properties: {
+			sourceLang: {
+				type: 'string',
+				enum: sourceLangs,
+			},
+			text: { type: 'string' },
+		},
 	},
 
 	errors: {
@@ -34,35 +71,7 @@ export const paramDef = {
 		noteId: { type: 'string', format: 'misskey:id' },
 		sourceLang: { 
 			type: 'string',
-			enum: [
-				'BG',
-				'CS',
-				'DA',
-				'DE',
-				'EL',
-				'EN',
-				'ES',
-				'ET',
-				'FI',
-				'FR',
-				'HU',
-				'ID',
-				'IT',
-				'JA',
-				'LT',
-				'LV',
-				'NL',
-				'PL',
-				'PT',
-				'RO',
-				'RU',
-				'SK',
-				'SL',
-				'SV',
-				'TR',
-				'UK',
-				'ZH',
-			],
+			enum: sourceLangs,
 		},
 		targetLang: {
 			type: 'string',

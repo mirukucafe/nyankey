@@ -1,4 +1,5 @@
 import { Brackets } from 'typeorm';
+import { noteVisibilities } from 'foundkey-js';
 import read from '@/services/note/read.js';
 import { Notes, Followings } from '@/models/index.js';
 import define from '../../define.js';
@@ -31,7 +32,10 @@ export const paramDef = {
 		limit: { type: 'integer', minimum: 1, maximum: 100, default: 10 },
 		sinceId: { type: 'string', format: 'misskey:id' },
 		untilId: { type: 'string', format: 'misskey:id' },
-		visibility: { type: 'string' },
+		visibility: {
+			type: 'string',
+			enum: noteVisibilities,
+		},
 	},
 	required: [],
 } as const;
