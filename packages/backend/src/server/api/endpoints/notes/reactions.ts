@@ -36,7 +36,11 @@ export const paramDef = {
 	type: 'object',
 	properties: {
 		noteId: { type: 'string', format: 'misskey:id' },
-		type: { type: 'string', nullable: true },
+		type: {
+			description: 'A Unicode emoji or custom emoji code. A custom emoji should look like `:name:` or `:name@example.com`.',
+			type: 'string',
+			nullable: true,
+		},
 		limit: { type: 'integer', minimum: 1, maximum: 100, default: 10 },
 		offset: { type: 'integer', default: 0 },
 		sinceId: { type: 'string', format: 'misskey:id' },
