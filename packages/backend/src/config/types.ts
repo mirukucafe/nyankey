@@ -24,7 +24,7 @@ export type Source = {
 		db?: number;
 		prefix?: string;
 	};
-	elasticsearch: {
+	elasticsearch?: {
 		host: string;
 		port: number;
 		ssl?: boolean;

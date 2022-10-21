@@ -1,7 +1,7 @@
 import { noteNotificationTypes } from 'foundkey-js';
 import { Notes, NoteThreadMutings, NoteWatchings } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
-import readNote from '@/services/note/read.js';
+import { readNote } from '@/services/note/read.js';
 import define from '../../../define.js';
 import { getNote } from '../../../common/getters.js';
 import { ApiError } from '../../../error.js';

@@ -12,14 +12,14 @@ import { Packed } from '@/misc/schema.js';
 /**
  * Mark notes as read
  */
-export default async function(
+export async function readNote(
 	userId: User['id'],
 	notes: (Note | Packed<'Note'>)[],
 	info?: {
 		following: Set<User['id']>;
 		followingChannels: Set<Channel['id']>;
 	},
-) {
+): Promise<void> {
 	const following = info?.following ? info.following : new Set<string>((await Followings.find({
 		where: {
 			followerId: userId,

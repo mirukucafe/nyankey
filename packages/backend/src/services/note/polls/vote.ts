@@ -6,7 +6,7 @@ import { PollVotes, NoteWatchings, Polls, Blockings, NoteThreadMutings } from '@
 import { genId } from '@/misc/gen-id.js';
 import { createNotification } from '@/services/create-notification.js';
 
-export default async function(user: CacheableUser, note: Note, choice: number) {
+export async function vote(user: CacheableUser, note: Note, choice: number): Promise<void> {
 	const poll = await Polls.findOneBy({ noteId: note.id });
 
 	if (poll == null) throw new Error('poll not found');

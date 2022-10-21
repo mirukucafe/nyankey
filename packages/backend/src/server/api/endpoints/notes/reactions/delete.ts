@@ -1,4 +1,4 @@
-import deleteReaction from '@/services/note/reaction/delete.js';
+import { deleteReaction } from '@/services/note/reaction/delete.js';
 import { SECOND, HOUR } from '@/const.js';
 import define from '../../../define.js';
 import { getNote } from '../../../common/getters.js';

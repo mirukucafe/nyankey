@@ -1,4 +1,4 @@
-import createReaction from '@/services/note/reaction/create.js';
+import { createReaction } from '@/services/note/reaction/create.js';
 import define from '../../../define.js';
 import { getNote } from '../../../common/getters.js';
 import { ApiError } from '../../../error.js';

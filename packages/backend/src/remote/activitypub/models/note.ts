@@ -4,7 +4,7 @@ import config from '@/config/index.js';
 import post from '@/services/note/create.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { unique, toArray, toSingle } from '@/prelude/array.js';
-import vote from '@/services/note/polls/vote.js';
+import { vote } from '@/services/note/polls/vote.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { deliverQuestionUpdate } from '@/services/note/polls/update.js';
 import { extractDbHost, toPuny } from '@/misc/convert-host.js';

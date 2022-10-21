@@ -9,7 +9,7 @@ import { Note } from '@/models/entities/note.js';
 import { NoteReactions, Users, Notes } from '@/models/index.js';
 import { decodeReaction } from '@/misc/reaction-lib.js';
 
-export default async (user: { id: User['id']; host: User['host']; }, note: Note) => {
+export async function deleteReaction(user: { id: User['id']; host: User['host']; }, note: Note): Promise<void> {
 	// if already unreacted
 	const exist = await NoteReactions.findOneBy({
 		noteId: note.id,
@@ -55,4 +55,4 @@ export default async (user: { id: User['id']; host: User['host']; }, note: Note)
 		dm.execute();
 	}
 	//#endregion
-};
+}

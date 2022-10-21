@@ -35,6 +35,7 @@ import { webhookDeliver } from '@/queue/index.js';
 import { Cache } from '@/misc/cache.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
+import { IActivity } from '@/remote/activitypub/type.js';
 import { updateHashtags } from '../update-hashtag.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import { createNotification } from '../create-notification.js';
@@ -59,14 +60,14 @@ class NotificationManager {
 		this.queue = [];
 	}
 
-	public push(notifiee: ILocalUser['id'], reason: NotificationType) {
-		// 自分自身へは通知しない
+	public push(notifiee: ILocalUser['id'], reason: NotificationType): void {
+		// No notification to yourself.
 		if (this.notifier.id === notifiee) return;
 
 		const exist = this.queue.find(x => x.target === notifiee);
 
 		if (exist) {
-			// 「メンションされているかつ返信されている」場合は、メンションとしての通知ではなく返信としての通知にする
+			// If you have been "mentioned and replied to," make the notification as a reply, not as a mention.
 			if (reason !== 'mention') {
 				exist.reason = reason;
 			}
@@ -78,7 +79,7 @@ class NotificationManager {
 		}
 	}
 
-	public async deliver() {
+	public async deliver(): Promise<void> {
 		for (const x of this.queue) {
 			// check if the sender or thread are muted
 			const userMuted = await Mutings.findOneBy({
@@ -119,7 +120,7 @@ type Option = {
 	poll?: IPoll | null;
 	localOnly?: boolean | null;
 	cw?: string | null;
-	visibility?: string;
+	visibility?: 'home' | 'public' | 'followers' | 'specified';
 	visibleUsers?: MinimumUser[] | null;
 	channel?: Channel | null;
 	apMentions?: MinimumUser[] | null;
@@ -130,9 +131,9 @@ type Option = {
 	app?: App | null;
 };
 
-export default async (user: { id: User['id']; username: User['username']; host: User['host']; isSilenced: User['isSilenced']; createdAt: User['createdAt']; }, data: Option, silent = false) => new Promise<Note>(async (res, rej) => {
-	// チャンネル外にリプライしたら対象のスコープに合わせる
-	// (クライアントサイドでやっても良い処理だと思うけどとりあえずサーバーサイドで)
+export default async (user: { id: User['id']; username: User['username']; host: User['host']; isSilenced: User['isSilenced']; createdAt: User['createdAt']; }, data: Option, silent = false): Promise<Note> => new Promise<Note>(async (res, rej) => {
+	// If you reply outside the channel, adjust to the scope of the target
+	// (I think this could be done client-side, but server-side for now)
 	if (data.reply && data.channel && data.reply.channelId !== data.channel.id) {
 		if (data.reply.channelId) {
 			data.channel = await Channels.findOneBy({ id: data.reply.channelId });
@@ -141,9 +142,9 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		}
 	}
 
-	// チャンネル内にリプライしたら対象のスコープに合わせる
-	// (クライアントサイドでやっても良い処理だと思うけどとりあえずサーバーサイドで)
-	if (data.reply && (data.channel == null) && data.reply.channelId) {
+	// When you reply to a channel, adjust the scope to that of the target.
+	// (I think this could be done client-side, but server-side for now)
+	if (data.reply?.channelId && (data.channel == null)) {
 		data.channel = await Channels.findOneBy({ id: data.reply.channelId });
 	}
 
@@ -154,32 +155,32 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	if (data.channel != null) data.visibleUsers = [];
 	if (data.channel != null) data.localOnly = true;
 
-	// サイレンス
+	// silence
 	if (user.isSilenced && data.visibility === 'public' && data.channel == null) {
 		data.visibility = 'home';
 	}
 
-	// Renote対象が「ホームまたは全体」以外の公開範囲ならreject
+	// Reject if the target of the renote is not Home or Public.
 	if (data.renote && data.renote.visibility !== 'public' && data.renote.visibility !== 'home' && data.renote.userId !== user.id) {
 		return rej('Renote target is not public or home');
 	}
 
-	// Renote対象がpublicではないならhomeにする
+	// If the target of the renote is not public, make it home.
 	if (data.renote && data.renote.visibility !== 'public' && data.visibility === 'public') {
 		data.visibility = 'home';
 	}
 
-	// Renote対象がfollowersならfollowersにする
+	// If the target of Renote is followers, make it followers.
 	if (data.renote && data.renote.visibility === 'followers') {
 		data.visibility = 'followers';
 	}
 
-	// ローカルのみをRenoteしたらローカルのみにする
+	// Ff the original note is local-only, make the renote also local-only.
 	if (data.renote && data.renote.localOnly && data.channel == null) {
 		data.localOnly = true;
 	}
 
-	// ローカルのみにリプライしたらローカルのみにする
+	// If you reply to local only, make it local only.
 	if (data.reply && data.reply.localOnly && data.channel == null) {
 		data.localOnly = true;
 	}
@@ -196,10 +197,10 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 	// Parse MFM if needed
 	if (!tags || !emojis || !mentionedUsers) {
-		const tokens = data.text ? mfm.parse(data.text)! : [];
-		const cwTokens = data.cw ? mfm.parse(data.cw)! : [];
-		const choiceTokens = data.poll && data.poll.choices
-			? concat(data.poll.choices.map(choice => mfm.parse(choice)!))
+		const tokens = data.text ? mfm.parse(data.text) : [];
+		const cwTokens = data.cw ? mfm.parse(data.cw) : [];
+		const choiceTokens = data.poll?.choices
+			? concat(data.poll.choices.map(choice => mfm.parse(choice)))
 			: [];
 
 		const combinedTokens = tokens.concat(cwTokens).concat(choiceTokens);
@@ -213,8 +214,8 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 	tags = tags.filter(tag => Array.from(tag || '').length <= 128).splice(0, 32);
 
-	if (data.reply && (user.id !== data.reply.userId) && !mentionedUsers.some(u => u.id === data.reply!.userId)) {
-		mentionedUsers.push(await Users.findOneByOrFail({ id: data.reply!.userId }));
+	if (data.reply && (user.id !== data.reply.userId) && !mentionedUsers.some(u => u.id === data.reply?.userId)) {
+		mentionedUsers.push(await Users.findOneByOrFail({ id: data.reply.userId }));
 	}
 
 	if (data.visibility === 'specified') {
@@ -226,8 +227,8 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			}
 		}
 
-		if (data.reply && !data.visibleUsers.some(x => x.id === data.reply!.userId)) {
-			data.visibleUsers.push(await Users.findOneByOrFail({ id: data.reply!.userId }));
+		if (data.reply && !data.visibleUsers.some(x => x.id === data.reply?.userId)) {
+			data.visibleUsers.push(await Users.findOneByOrFail({ id: data.reply.userId }));
 		}
 	}
 
@@ -235,7 +236,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 	res(note);
 
-	// 統計を更新
+	// Update Statistics
 	notesChart.update(note, true);
 	perUserNotesChart.update(user, note, true);
 
@@ -247,7 +248,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		});
 	}
 
-	// ハッシュタグ更新
+	// Hashtag Update
 	if (data.visibility === 'public' || data.visibility === 'home') {
 		updateHashtags(user, tags);
 	}
@@ -301,7 +302,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		saveReply(data.reply, note);
 	}
 
-	// この投稿を除く指定したユーザーによる指定したノートのリノートが存在しないとき
+	// When there is no re-note of the specified note by the specified user except for this post
 	if (data.renote && (await countSameRenotes(user.id, data.renote.id, note.id) === 0)) {
 		incRenoteCount(data.renote);
 	}
@@ -319,12 +320,12 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	if (!silent) {
 		if (Users.isLocalUser(user)) activeUsersChart.write(user);
 
-		// 未読通知を作成
+		// Create unread notifications
 		if (data.visibility === 'specified') {
 			if (data.visibleUsers == null) throw new Error('invalid param');
 
 			for (const u of data.visibleUsers) {
-				// ローカルユーザーのみ
+				// Local users only
 				if (!Users.isLocalUser(u)) continue;
 
 				insertNoteUnread(u.id, note, {
@@ -334,7 +335,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			}
 		} else {
 			for (const u of mentionedUsers) {
-				// ローカルユーザーのみ
+				// Local users only
 				if (!Users.isLocalUser(u)) continue;
 
 				insertNoteUnread(u.id, note, {
@@ -423,24 +424,24 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 				const noteActivity = await renderNoteOrRenoteActivity(data, note);
 				const dm = new DeliverManager(user, noteActivity);
 
-				// メンションされたリモートユーザーに配送
+				// Delivered to remote users who have been mentioned
 				for (const u of mentionedUsers.filter(u => Users.isRemoteUser(u))) {
 					dm.addDirectRecipe(u as IRemoteUser);
 				}
 
-				// 投稿がリプライかつ投稿者がローカルユーザーかつリプライ先の投稿の投稿者がリモートユーザーなら配送
+				// If the post is a reply and the poster is a local user and the poster of the post to which you are replying is a remote user, deliver
 				if (data.reply && data.reply.userHost !== null) {
 					const u = await Users.findOneBy({ id: data.reply.userId });
 					if (u && Users.isRemoteUser(u)) dm.addDirectRecipe(u);
 				}
 
-				// 投稿がRenoteかつ投稿者がローカルユーザーかつRenote元の投稿の投稿者がリモートユーザーなら配送
+				// If the post is a Renote and the poster is a local user and the poster of the original Renote post is a remote user, deliver
 				if (data.renote && data.renote.userHost !== null) {
 					const u = await Users.findOneBy({ id: data.renote.userId });
 					if (u && Users.isRemoteUser(u)) dm.addDirectRecipe(u);
 				}
 
-				// フォロワーに配送
+				// Deliver to followers
 				if (['public', 'home', 'followers'].includes(note.visibility)) {
 					dm.addFollowersRecipe();
 				}
@@ -461,23 +462,23 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 			lastNotedAt: new Date(),
 		});
 
-		Notes.countBy({
+		const count = await Notes.countBy({
 			userId: user.id,
 			channelId: data.channel.id,
-		}).then(count => {
-			// この処理が行われるのはノート作成後なので、ノートが一つしかなかったら最初の投稿だと判断できる
-			// TODO: とはいえノートを削除して何回も投稿すればその分だけインクリメントされる雑さもあるのでどうにかしたい
-			if (count === 1) {
-				Channels.increment({ id: data.channel!.id }, 'usersCount', 1);
-			}
 		});
+
+		// This process takes place after the note is created, so if there is only one note, you can determine that it is the first submission.
+		// TODO: but there's also the messiness of deleting a note and posting it multiple times, which is incremented by the number of times it's posted, so I'd like to do something about that.
+		if (count === 1) {
+			Channels.increment({ id: data.channel.id }, 'usersCount', 1);
+		}
 	}
 
 	// Register to search database
 	index(note);
 });
 
-async function renderNoteOrRenoteActivity(data: Option, note: Note) {
+async function renderNoteOrRenoteActivity(data: Option, note: Note): Promise<IActivity | null> {
 	if (data.localOnly) return null;
 
 	const content = data.renote && data.text == null && data.poll == null && (data.files == null || data.files.length === 0)
@@ -487,7 +488,7 @@ async function renderNoteOrRenoteActivity(data: Option, note: Note) {
 	return renderActivity(content);
 }
 
-function incRenoteCount(renote: Note) {
+function incRenoteCount(renote: Note): void {
 	Notes.createQueryBuilder().update()
 		.set({
 			renoteCount: () => '"renoteCount" + 1',
@@ -497,19 +498,17 @@ function incRenoteCount(renote: Note) {
 		.execute();
 }
 
-async function insertNote(user: { id: User['id']; host: User['host']; }, data: Option, tags: string[], emojis: string[], mentionedUsers: MinimumUser[]) {
+async function insertNote(user: { id: User['id']; host: User['host']; }, data: Option, tags: string[], emojis: string[], mentionedUsers: MinimumUser[]): Promise<Note> {
+	const createdAt = data.createdAt ?? new Date();
+
 	const insert = new Note({
-		id: genId(data.createdAt!),
-		createdAt: data.createdAt!,
-		fileIds: data.files ? data.files.map(file => file.id) : [],
-		replyId: data.reply ? data.reply.id : null,
-		renoteId: data.renote ? data.renote.id : null,
-		channelId: data.channel ? data.channel.id : null,
-		threadId: data.reply
-			? data.reply.threadId
-				? data.reply.threadId
-				: data.reply.id
-			: null,
+		id: genId(createdAt),
+		createdAt,
+		fileIds: data.files?.map(file => file.id) ?? [],
+		replyId: data.reply?.id ?? null,
+		renoteId: data.renote?.id ?? null,
+		channelId: data.channel?.id ?? null,
+		threadId: data.reply?.threadId ?? data.reply?.id ?? null,
 		name: data.name,
 		text: data.text,
 		hasPoll: data.poll != null,
@@ -517,15 +516,13 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		tags: tags.map(tag => normalizeForSearch(tag)),
 		emojis,
 		userId: user.id,
-		localOnly: data.localOnly!,
-		visibility: data.visibility as any,
+		localOnly: data.localOnly ?? false,
+		visibility: data.visibility,
 		visibleUserIds: data.visibility === 'specified'
-			? data.visibleUsers
-				? data.visibleUsers.map(u => u.id)
-				: []
+			? data.visibleUsers?.map(u => u.id) ?? []
 			: [],
 
-		attachedFileTypes: data.files ? data.files.map(file => file.type) : [],
+		attachedFileTypes: data.files?.map(file => file.type) ?? [],
 
 		// denormalized data below
 		replyUserId: data.reply?.userId,
@@ -543,29 +540,26 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 		insert.mentions = mentionedUsers.map(u => u.id);
 	}
 
-	// 投稿を作成
+	// Create a post
 	try {
-		if (insert.hasPoll) {
-			// Start transaction
-			await db.transaction(async transactionalEntityManager => {
-				await transactionalEntityManager.insert(Note, insert);
+		// Start transaction
+		await db.transaction(async transactionalEntityManager => {
+			await transactionalEntityManager.insert(Note, insert);
 
+			if (data.poll != null) {
 				const poll = new Poll({
 					noteId: insert.id,
-					choices: data.poll!.choices,
-					expiresAt: data.poll!.expiresAt,
-					multiple: data.poll!.multiple,
-					votes: new Array(data.poll!.choices.length).fill(0),
+					choices: data.poll.choices,
+					expiresAt: data.poll.expiresAt,
+					multiple: data.poll.multiple,
+					votes: new Array(data.poll.choices.length).fill(0),
 					noteVisibility: insert.visibility,
 					userId: user.id,
 					userHost: user.host,
 				});
-
 				await transactionalEntityManager.insert(Poll, poll);
-			});
-		} else {
-			await Notes.insert(insert);
-		}
+			}
+		});
 
 		return insert;
 	} catch (e) {
@@ -582,10 +576,10 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 	}
 }
 
-function index(note: Note) {
+function index(note: Note): void {
 	if (note.text == null || config.elasticsearch == null) return;
 
-	es!.index({
+	es.index({
 		index: config.elasticsearch.index || 'misskey_note',
 		id: note.id.toString(),
 		body: {
@@ -596,7 +590,7 @@ function index(note: Note) {
 	});
 }
 
-async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }, nm: NotificationManager, type: NotificationType) {
+async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }, nm: NotificationManager, type: NotificationType): Promise<void> {
 	const watchers = await NoteWatchings.findBy({
 		noteId: renote.id,
 		userId: Not(user.id),
@@ -607,7 +601,7 @@ async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }
 	}
 }
 
-async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; }, nm: NotificationManager) {
+async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; }, nm: NotificationManager): Promise<void> {
 	const watchers = await NoteWatchings.findBy({
 		noteId: reply.id,
 		userId: Not(user.id),
@@ -618,7 +612,7 @@ async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; },
 	}
 }
 
-async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, nm: NotificationManager) {
+async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, nm: NotificationManager): Promise<void> {
 	for (const u of mentionedUsers.filter(u => Users.isLocalUser(u))) {
 		const threadMuted = await NoteThreadMutings.findOneBy({
 			userId: u.id,
@@ -653,11 +647,11 @@ async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, 
 	}
 }
 
-function saveReply(reply: Note, note: Note) {
+function saveReply(reply: Note, note: Note): void {
 	Notes.increment({ id: reply.id }, 'repliesCount', 1);
 }
 
-function incNotesCountOfUser(user: { id: User['id']; }) {
+function incNotesCountOfUser(user: { id: User['id']; }): void {
 	Users.createQueryBuilder().update()
 		.set({
 			updatedAt: new Date(),
@@ -668,7 +662,7 @@ function incNotesCountOfUser(user: { id: User['id']; }) {
 }
 
 async function extractMentionedUsers(user: { host: User['host']; }, tokens: mfm.MfmNode[]): Promise<User[]> {
-	if (tokens == null) return [];
+	if (tokens.length === 0) return [];
 
 	const mentions = extractMentions(tokens);
 
