@@ -62,7 +62,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		clipId: clip.id,
 	});
 
-	if (affected == 0) {
+	if (affected === 0) {
 		throw new ApiError(meta.errors.notClipped);
 	}
 });
