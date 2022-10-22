@@ -5,7 +5,7 @@ import define from '../../define.js';
 export const meta = {
 	tags: ['federation'],
 
-	requireCredential: false,
+	requireCredential: true,
 
 	res: {
 		type: 'array',
