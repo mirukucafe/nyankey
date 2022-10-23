@@ -270,14 +270,12 @@ import * as ep___serverInfo from './endpoints/server-info.js';
 import * as ep___stats from './endpoints/stats.js';
 import * as ep___sw_register from './endpoints/sw/register.js';
 import * as ep___sw_unregister from './endpoints/sw/unregister.js';
-import * as ep___test from './endpoints/test.js';
 import * as ep___username_available from './endpoints/username/available.js';
 import * as ep___users from './endpoints/users.js';
 import * as ep___users_clips from './endpoints/users/clips.js';
 import * as ep___users_followers from './endpoints/users/followers.js';
 import * as ep___users_following from './endpoints/users/following.js';
 import * as ep___users_gallery_posts from './endpoints/users/gallery/posts.js';
-import * as ep___users_getFrequentlyRepliedUsers from './endpoints/users/get-frequently-replied-users.js';
 import * as ep___users_groups_create from './endpoints/users/groups/create.js';
 import * as ep___users_groups_delete from './endpoints/users/groups/delete.js';
 import * as ep___users_groups_invitations_accept from './endpoints/users/groups/invitations/accept.js';
@@ -580,14 +578,12 @@ const eps = [
 	['stats', ep___stats],
 	['sw/register', ep___sw_register],
 	['sw/unregister', ep___sw_unregister],
-	['test', ep___test],
 	['username/available', ep___username_available],
 	['users', ep___users],
 	['users/clips', ep___users_clips],
 	['users/followers', ep___users_followers],
 	['users/following', ep___users_following],
 	['users/gallery/posts', ep___users_gallery_posts],
-	['users/get-frequently-replied-users', ep___users_getFrequentlyRepliedUsers],
 	['users/groups/create', ep___users_groups_create],
 	['users/groups/delete', ep___users_groups_delete],
 	['users/groups/invitations/accept', ep___users_groups_invitations_accept],

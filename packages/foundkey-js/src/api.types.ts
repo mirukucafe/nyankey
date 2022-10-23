@@ -484,14 +484,12 @@ export type Endpoints = {
 	'stats': { req: NoParams; res: Stats; };
 	'sw/register': { req: TODO; res: TODO; };
 	'sw/unregister': { req: TODO; res: TODO; };
-	'test': { req: TODO; res: TODO; };
 	'username/available': { req: { username: string; }; res: { available: boolean; }; };
 	'users': { req: { limit?: number; offset?: number; sort?: UserSorting; origin?: OriginType; }; res: User[]; };
 	'users/clips': { req: TODO; res: TODO; };
 	'users/followers': { req: { userId?: User['id']; username?: User['username']; host?: User['host'] | null; limit?: number; sinceId?: Following['id']; untilId?: Following['id']; }; res: FollowingFollowerPopulated[]; };
 	'users/following': { req: { userId?: User['id']; username?: User['username']; host?: User['host'] | null; limit?: number; sinceId?: Following['id']; untilId?: Following['id']; }; res: FollowingFolloweePopulated[]; };
 	'users/gallery/posts': { req: TODO; res: TODO; };
-	'users/get-frequently-replied-users': { req: TODO; res: TODO; };
 	'users/groups/create': { req: TODO; res: TODO; };
 	'users/groups/delete': { req: { groupId: UserGroup['id'] }; res: null; };
 	'users/groups/invitations/accept': { req: TODO; res: TODO; };

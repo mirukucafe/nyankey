@@ -1977,10 +1977,6 @@ export type Endpoints = {
         req: TODO;
         res: TODO;
     };
-    'users/get-frequently-replied-users': {
-        req: TODO;
-        res: TODO;
-    };
     'users/groups/create': {
         req: TODO;
         res: TODO;
