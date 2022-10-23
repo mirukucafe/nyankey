@@ -1,6 +1,6 @@
 import Bull from 'bull';
 import { In, LessThan } from 'typeorm';
-import { AttestationChallenges, Mutings, Signins } from '@/models/index.js';
+import { AttestationChallenges, Mutings, PasswordResetRequests, Signins } from '@/models/index.js';
 import { publishUserEvent } from '@/services/stream.js';
 import { MINUTE, DAY } from '@/const.js';
 import { queueLogger } from '@/queue/logger.js';
@@ -33,6 +33,11 @@ export async function checkExpired(job: Bull.Job<Record<string, unknown>>, done:
 
 	await AttestationChallenges.delete({
 		createdAt: LessThan(new Date(new Date().getTime() - 5 * MINUTE)),
+	});
+
+	await PasswordResetRequests.delete({
+		// this timing should be the same as in @/server/api/endpoints/reset-password.ts
+		createdAt: LessThan(new Date(new Date().getTime() - 30 * MINUTE)),
 	});
 
 	logger.succ('Deleted expired mutes, signins and attestation challenges.');
