@@ -139,6 +139,14 @@ To generate the changelog, we use a standard shortlog command: `git shortlog --f
 The person performing the release process should build the next CHANGELOG section based on this output, not use it as-is.
 Full releases should also remove any pre-release CHANGELOG sections.
 
+Here is the step by step checklist:
+1. If **stable** release, announce the comment period. Restart the comment period if a blocker bug is found and fixed.
+2. Edit various `package.json`s to the new version.
+3. Write a new entry into the changelog.
+   You should use the `git shortlog --format='%h %s' --group=trailer:changelog LAST_TAG..` command to get general data,
+   then rewrite it in a human way.
+4. Tag the commit with the changes in 2 and 3 (if together, else the latter).
+
 ## Translation
 
 [![Translation status](http://translate.akkoma.dev/widgets/foundkey/-/svg-badge.svg)](http://translate.akkoma.dev/engage/foundkey/)
