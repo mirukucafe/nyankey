@@ -17,12 +17,6 @@ export const meta = {
 			id: '56c06af3-1287-442f-9701-c93f7c4a62ff',
 		},
 
-		yourPost: {
-			message: 'You cannot like your post.',
-			code: 'YOUR_POST',
-			id: 'f78f1511-5ebc-4478-a888-1198d752da68',
-		},
-
 		alreadyLiked: {
 			message: 'The post has already been liked.',
 			code: 'ALREADY_LIKED',
@@ -44,10 +38,6 @@ export default define(meta, paramDef, async (ps, user) => {
 	const post = await GalleryPosts.findOneBy({ id: ps.postId });
 	if (post == null) {
 		throw new ApiError(meta.errors.noSuchPost);
-	}
-
-	if (post.userId === user.id) {
-		throw new ApiError(meta.errors.yourPost);
 	}
 
 	// if already liked
