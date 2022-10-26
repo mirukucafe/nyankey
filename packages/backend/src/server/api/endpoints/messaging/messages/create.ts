@@ -50,12 +50,6 @@ export const meta = {
 			id: '4372b8e2-185d-4146-8749-2f68864a3e5f',
 		},
 
-		contentRequired: {
-			message: 'Content required. You need to set text or fileId.',
-			code: 'CONTENT_REQUIRED',
-			id: '25587321-b0e6-449c-9239-f8925092942c',
-		},
-
 		youHaveBeenBlocked: {
 			message: 'You cannot send a message because you have been blocked by this user.',
 			code: 'YOU_HAVE_BEEN_BLOCKED',
@@ -73,15 +67,65 @@ export const paramDef = {
 	anyOf: [
 		{
 			properties: {
-				userId: { type: 'string', format: 'misskey:id' },
+				text: {
+					type: 'string',
+					minLength: 1,
+					maxLength: 3000,
+				},
+				fileId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
+				userId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
 			},
-			required: ['userId'],
+			required: ['text', 'userId'],
 		},
 		{
 			properties: {
-				groupId: { type: 'string', format: 'misskey:id' },
+				fileId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
+				userId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
 			},
-			required: ['groupId'],
+			required: ['fileId', 'userId'],
+		},
+		{
+			properties: {
+				text: {
+					type: 'string',
+					minLength: 1,
+					maxLength: 3000,
+				},
+				fileId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
+				groupId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
+			},
+			required: ['text', 'groupId'],
+		},
+		{
+			properties: {
+				fileId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
+				groupId: {
+					type: 'string',
+					format: 'misskey:id',
+				},
+			},
+			required: ['fileId', 'groupId'],
 		},
 	],
 } as const;
@@ -140,11 +184,6 @@ export default define(meta, paramDef, async (ps, user) => {
 		if (file == null) {
 			throw new ApiError(meta.errors.noSuchFile);
 		}
-	}
-
-	// テキストが無いかつ添付ファイルも無かったらエラー
-	if (ps.text == null && file == null) {
-		throw new ApiError(meta.errors.contentRequired);
 	}
 
 	return await createMessage(user, recipientUser, recipientGroup, ps.text, file);
