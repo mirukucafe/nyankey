@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { UserProfiles, PasswordResetRequests } from '@/models/index.js';
-import { MINUTE } from '@/const.js';
+import { DAY, MINUTE } from '@/const.js';
 import define from '../define.js';
 
 export const meta = {
@@ -11,8 +11,8 @@ export const meta = {
 	description: 'Complete the password reset that was previously requested.',
 
 	limit: {
-		duration: HOUR,
-		max: 3,
+		duration: DAY,
+		max: 1,
 	},
 
 	errors: {

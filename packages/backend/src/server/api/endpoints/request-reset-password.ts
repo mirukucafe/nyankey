@@ -4,7 +4,7 @@ import config from '@/config/index.js';
 import { Users, UserProfiles, PasswordResetRequests } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
 import { genId } from '@/misc/gen-id.js';
-import { HOUR } from '@/const.js';
+import { DAY } from '@/const.js';
 import define from '../define.js';
 
 export const meta = {
@@ -15,12 +15,8 @@ export const meta = {
 	description: 'Request a users password to be reset.',
 
 	limit: {
-		duration: HOUR,
-		max: 3,
-	},
-
-	errors: {
-
+		duration: DAY,
+		max: 1,
 	},
 } as const;
 
