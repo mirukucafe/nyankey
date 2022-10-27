@@ -36,19 +36,21 @@ export const schemas = {
 				properties: {
 					code: {
 						type: 'string',
-						description: 'An error code. Unique within the endpoint.',
+						description: 'A machine and human readable error code.',
+					},
+					endpoint: {
+						type: 'string',
+						description: 'Name of the API endpoint the error happened in.',
 					},
 					message: {
 						type: 'string',
-						description: 'An error message.',
+						description: 'A human readable error description in English.',
 					},
-					id: {
-						type: 'string',
-						format: 'uuid',
-						description: 'An error ID. This ID is static.',
-					},
+					info: {
+						description: 'Potentially more information, primarily intended for developers.',
+					}
 				},
-				required: ['code', 'id', 'message'],
+				required: ['code', 'endpoint', 'message'],
 			},
 		},
 		required: ['error'],
