@@ -1,4 +1,5 @@
 import { Schema } from '@/misc/schema.js';
+import { errors } from './error.js';
 
 import * as ep___admin_meta from './endpoints/admin/meta.js';
 import * as ep___admin_abuseUserReports from './endpoints/admin/abuse-user-reports.js';
@@ -621,13 +622,7 @@ export interface IEndpointMeta {
 
 	readonly tags?: ReadonlyArray<string>;
 
-	readonly errors?: {
-		readonly [key: string]: {
-			readonly message: string;
-			readonly code: string;
-			readonly id: string;
-		};
-	};
+	readonly errors?: Array<keyof errors>;
 
 	readonly res?: Schema;
 
