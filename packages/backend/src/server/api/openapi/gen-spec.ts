@@ -1,7 +1,8 @@
 import config from '@/config/index.js';
+import { errors as errorDefinitions } from '../error.js';
 import endpoints from '../endpoints.js';
-import { errors as basicErrors } from './errors.js';
 import { schemas, convertSchemaToOpenApiSchema } from './schemas.js';
+import { httpCodes } from './http-codes.js';
 
 export function genOpenapiSpec() {
 	const spec = {
@@ -43,19 +44,75 @@ export function genOpenapiSpec() {
 	};
 
 	for (const endpoint of endpoints.filter(ep => !ep.meta.secure)) {
-		const errors = {} as any;
+		// generate possible responses, first starting with errors
+		const responses = [
+			// general error codes that can always happen
+			'INVALID_PARAM',
+			'INTERNAL_ERROR',
+			// error codes that happen only if authentication is required
+			...(!endpoint.meta.requireCredential ? [] : [
+				'ACCESS_DENIED',
+				'AUTHENTICATION_REQUIRED',
+				'AUTHENTICATION_FAILED',
+				'SUSPENDED',
+			]),
+			// error codes that happen only if a rate limit is defined
+			...(!endpoint.meta.limit ? [] : [
+				'RATE_LIMIT_EXCEEDED',
+			]),
+			// error codes that happen only if a file is required
+			...(!endpoint.meta.requireFile ? [] : [
+				'FILE_REQUIRED',
+			]),
+			// endpoint specific error codes
+			...(endpoint.meta.errors ?? []),
+		]
+		.reduce((acc, code) => {
+			const { message, httpStatusCode } = errorDefinitions[code];
+			const httpCode = httpStatusCode.toString();
 
-		if (endpoint.meta.errors) {
-			for (const e of Object.values(endpoint.meta.errors)) {
-				errors[e.code] = {
-					value: {
-						error: e,
+			if (!(httpCode in acc)) {
+				acc[httpCode] = {
+					description: httpCodes[httpCode],
+					content: {
+						'application/json': {
+							schema: {
+								'$ref': '#/components/schemas/Error',
+							},
+							examples: {},
+						},
 					},
 				};
 			}
-		}
 
-		const resSchema = endpoint.meta.res ? convertSchemaToOpenApiSchema(endpoint.meta.res) : {};
+			acc[httpCode].content['application/json'].examples[code] = {
+				value: {
+					error: {
+						code,
+						message,
+						endpoint: endpoint.name,
+					},
+				},
+			};
+
+			return acc;
+		}, {});
+
+		// add successful response
+		if (endpoint.meta.res) {
+			responses['200'] = {
+				description: 'OK',
+				content: {
+					'application/json': {
+						schema: convertSchemaToOpenApiSchema(endpoint.meta.res),
+					},
+				},
+			};
+		} else {
+			responses['204'] = {
+				description: 'No Content',
+			};
+		}
 
 		let desc = (endpoint.meta.description ? endpoint.meta.description : 'No description provided.') + '\n\n';
 		desc += `**Credential required**: *${endpoint.meta.requireCredential ? 'Yes' : 'No'}*`;
@@ -107,90 +164,7 @@ export function genOpenapiSpec() {
 					},
 				},
 			},
-			responses: {
-				...(endpoint.meta.res ? {
-					'200': {
-						description: 'OK (with results)',
-						content: {
-							'application/json': {
-								schema: resSchema,
-							},
-						},
-					},
-				} : {
-					'204': {
-						description: 'OK (without any results)',
-					},
-				}),
-				'400': {
-					description: 'Client error',
-					content: {
-						'application/json': {
-							schema: {
-								$ref: '#/components/schemas/Error',
-							},
-							examples: { ...errors, ...basicErrors['400'] },
-						},
-					},
-				},
-				'401': {
-					description: 'Authentication error',
-					content: {
-						'application/json': {
-							schema: {
-								$ref: '#/components/schemas/Error',
-							},
-							examples: basicErrors['401'],
-						},
-					},
-				},
-				'403': {
-					description: 'Forbidden error',
-					content: {
-						'application/json': {
-							schema: {
-								$ref: '#/components/schemas/Error',
-							},
-							examples: basicErrors['403'],
-						},
-					},
-				},
-				'418': {
-					description: 'I\'m Ai',
-					content: {
-						'application/json': {
-							schema: {
-								$ref: '#/components/schemas/Error',
-							},
-							examples: basicErrors['418'],
-						},
-					},
-				},
-				...(endpoint.meta.limit ? {
-					'429': {
-						description: 'Too many requests',
-						content: {
-							'application/json': {
-								schema: {
-									$ref: '#/components/schemas/Error',
-								},
-								examples: basicErrors['429'],
-							},
-						},
-					},
-				} : {}),
-				'500': {
-					description: 'Internal server error',
-					content: {
-						'application/json': {
-							schema: {
-								$ref: '#/components/schemas/Error',
-							},
-							examples: basicErrors['500'],
-						},
-					},
-				},
-			},
+			responses,
 		};
 
 		const path = {
@@ -200,6 +174,7 @@ export function genOpenapiSpec() {
 			path.get = { ...info };
 			// API Key authentication is not permitted for GET requests
 			path.get.security = path.get.security.filter(elem => !Object.prototype.hasOwnProperty.call(elem, 'ApiKeyAuth'));
+
 			// fix the way parameters are passed
 			delete path.get.requestBody;
 			path.get.parameters = [];

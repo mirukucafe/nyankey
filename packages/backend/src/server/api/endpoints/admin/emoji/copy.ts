@@ -13,13 +13,7 @@ export const meta = {
 	requireCredential: true,
 	requireModerator: true,
 
-	errors: {
-		noSuchEmoji: {
-			message: 'No such emoji.',
-			code: 'NO_SUCH_EMOJI',
-			id: 'e2785b66-dca3-4087-9cac-b93c541cc425',
-		},
-	},
+	errors: ['NO_SUCH_EMOJI', 'INTERNAL_ERROR'],
 
 	res: {
 		type: 'object',
@@ -46,9 +40,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, me) => {
 	const emoji = await Emojis.findOneBy({ id: ps.emojiId });
 
-	if (emoji == null) {
-		throw new ApiError(meta.errors.noSuchEmoji);
-	}
+	if (emoji == null) throw new ApiError('NO_SUCH_EMOJI');
 
 	let driveFile: DriveFile;
 
@@ -56,7 +48,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		// Create file
 		driveFile = await uploadFromUrl({ url: emoji.originalUrl, user: null, force: true });
 	} catch (e) {
-		throw new ApiError();
+		throw new ApiError('INTERNAL_ERROR', e);
 	}
 
 	const copied = await Emojis.insert({

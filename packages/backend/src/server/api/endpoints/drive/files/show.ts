@@ -18,19 +18,7 @@ export const meta = {
 		ref: 'DriveFile',
 	},
 
-	errors: {
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: '067bc436-2718-4795-b0fb-ecbe43949e31',
-		},
-
-		accessDenied: {
-			message: 'Access denied.',
-			code: 'ACCESS_DENIED',
-			id: '25b73c73-68b1-41d0-bad1-381cfdf6579f',
-		},
-	},
+	errors: ['ACCESS_DENIED', 'NO_SUCH_FILE'],
 } as const;
 
 export const paramDef = {
@@ -69,12 +57,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		});
 	}
 
-	if (file == null) {
-		throw new ApiError(meta.errors.noSuchFile);
-	}
+	if (file == null) throw new ApiError('NO_SUCH_FILE');
 
 	if ((!user.isAdmin && !user.isModerator) && (file.userId !== user.id)) {
-		throw new ApiError(meta.errors.accessDenied);
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	return await DriveFiles.pack(file, {

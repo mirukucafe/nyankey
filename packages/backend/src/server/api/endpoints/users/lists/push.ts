@@ -13,31 +13,7 @@ export const meta = {
 
 	description: 'Add a user to an existing list.',
 
-	errors: {
-		noSuchList: {
-			message: 'No such list.',
-			code: 'NO_SUCH_LIST',
-			id: '2214501d-ac96-4049-b717-91e42272a711',
-		},
-
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: 'a89abd3d-f0bc-4cce-beb1-2f446f4f1e6a',
-		},
-
-		alreadyAdded: {
-			message: 'That user has already been added to that list.',
-			code: 'ALREADY_ADDED',
-			id: '1de7c884-1595-49e9-857e-61f12f4d4fc5',
-		},
-
-		youHaveBeenBlocked: {
-			message: 'You cannot push this user because you have been blocked by this user.',
-			code: 'YOU_HAVE_BEEN_BLOCKED',
-			id: '990232c5-3f9d-4d83-9f3f-ef27b6332a4b',
-		},
-	},
+	errors: ['ALREADY_ADDED', 'BLOCKED', 'NO_SUCH_USER', 'NO_SUCH_USER_LIST'],
 } as const;
 
 export const paramDef = {
@@ -57,13 +33,11 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (userList == null) {
-		throw new ApiError(meta.errors.noSuchList);
-	}
+	if (userList == null) throw new ApiError('NO_SUCH_USER_LIST');
 
 	// Fetch the user
 	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -73,9 +47,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			blockerId: user.id,
 			blockeeId: me.id,
 		});
-		if (block) {
-			throw new ApiError(meta.errors.youHaveBeenBlocked);
-		}
+		if (block) throw new ApiError('BLOCKED');
 	}
 
 	const exist = await UserListJoinings.findOneBy({
@@ -83,9 +55,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: user.id,
 	});
 
-	if (exist) {
-		throw new ApiError(meta.errors.alreadyAdded);
-	}
+	if (exist) throw new ApiError('ALREADY_ADDED');
 
 	// Push the user
 	await pushUserToUserList(user, userList);

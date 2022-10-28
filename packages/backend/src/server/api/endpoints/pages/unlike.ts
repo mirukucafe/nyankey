@@ -9,19 +9,7 @@ export const meta = {
 
 	kind: 'write:page-likes',
 
-	errors: {
-		noSuchPage: {
-			message: 'No such page.',
-			code: 'NO_SUCH_PAGE',
-			id: 'a0d41e20-1993-40bd-890e-f6e560ae648e',
-		},
-
-		notLiked: {
-			message: 'You have not liked that page.',
-			code: 'NOT_LIKED',
-			id: 'f5e586b0-ce93-4050-b0e3-7f31af5259ee',
-		},
-	},
+	errors: ['NO_SUCH_PAGE', 'NOT_LIKED'],
 } as const;
 
 export const paramDef = {
@@ -35,18 +23,14 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const page = await Pages.findOneBy({ id: ps.pageId });
-	if (page == null) {
-		throw new ApiError(meta.errors.noSuchPage);
-	}
+	if (page == null) throw new ApiError('NO_SUCH_PAGE');
 
 	const exist = await PageLikes.findOneBy({
 		pageId: page.id,
 		userId: user.id,
 	});
 
-	if (exist == null) {
-		throw new ApiError(meta.errors.notLiked);
-	}
+	if (exist == null) throw new ApiError('NOT_LIKED');
 
 	// Delete like
 	await PageLikes.delete(exist.id);

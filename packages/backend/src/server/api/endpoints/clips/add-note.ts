@@ -11,25 +11,7 @@ export const meta = {
 
 	kind: 'write:account',
 
-	errors: {
-		noSuchClip: {
-			message: 'No such clip.',
-			code: 'NO_SUCH_CLIP',
-			id: 'd6e76cc0-a1b5-4c7c-a287-73fa9c716dcf',
-		},
-
-		noSuchNote: {
-			message: 'No such note.',
-			code: 'NO_SUCH_NOTE',
-			id: 'fc8c0b49-c7a3-4664-a0a6-b418d386bb8b',
-		},
-
-		alreadyClipped: {
-			message: 'The note has already been clipped.',
-			code: 'ALREADY_CLIPPED',
-			id: '734806c4-542c-463a-9311-15c512803965',
-		},
-	},
+	errors: ['ALREADY_CLIPPED', 'NO_SUCH_CLIP', 'NO_SUCH_NOTE'],
 } as const;
 
 export const paramDef = {
@@ -48,12 +30,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (clip == null) {
-		throw new ApiError(meta.errors.noSuchClip);
-	}
+	if (clip == null) throw new ApiError('NO_SUCH_CLIP');
 
 	const note = await getNote(ps.noteId, user).catch(err => {
-		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
 		throw err;
 	});
 
@@ -62,9 +42,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		clipId: clip.id,
 	});
 
-	if (exist != null) {
-		throw new ApiError(meta.errors.alreadyClipped);
-	}
+	if (exist != null) throw new ApiError('ALREADY_CLIPPED');
 
 	await ClipNotes.insert({
 		id: genId(),

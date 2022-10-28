@@ -11,13 +11,7 @@ export const meta = {
 
 	description: 'Delete an existing list of users.',
 
-	errors: {
-		noSuchList: {
-			message: 'No such list.',
-			code: 'NO_SUCH_LIST',
-			id: '78436795-db79-42f5-b1e2-55ea2cf19166',
-		},
-	},
+	errors: ['NO_SUCH_USER_LIST'],
 } as const;
 
 export const paramDef = {
@@ -35,9 +29,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (userList == null) {
-		throw new ApiError(meta.errors.noSuchList);
-	}
+	if (userList == null) throw new ApiError('NO_SUCH_USER_LIST');
 
 	await UserLists.delete(userList.id);
 });

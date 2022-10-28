@@ -17,25 +17,7 @@ export const meta = {
 
 	kind: 'write:blocks',
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '7cc4f851-e2f1-4621-9633-ec9e1d00c01e',
-		},
-
-		blockeeIsYourself: {
-			message: 'Blockee is yourself.',
-			code: 'BLOCKEE_IS_YOURSELF',
-			id: '88b19138-f28d-42c0-8499-6a31bbd0fdc6',
-		},
-
-		alreadyBlocking: {
-			message: 'You are already blocking that user.',
-			code: 'ALREADY_BLOCKING',
-			id: '787fed64-acb9-464a-82eb-afbd745b9614',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'BLOCKEE_IS_YOURSELF', 'ALREADY_BLOCKING'],
 
 	res: {
 		type: 'object',
@@ -57,13 +39,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	const blocker = await Users.findOneByOrFail({ id: user.id });
 
 	// 自分自身
-	if (user.id === ps.userId) {
-		throw new ApiError(meta.errors.blockeeIsYourself);
-	}
+	if (user.id === ps.userId) throw new ApiError('BLOCKEE_IS_YOURSELF');
 
 	// Get blockee
 	const blockee = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -73,9 +53,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		blockeeId: blockee.id,
 	});
 
-	if (exist != null) {
-		throw new ApiError(meta.errors.alreadyBlocking);
-	}
+	if (exist != null) throw new ApiError('ALREADY_BLOCKING');
 
 	await create(blocker, blockee);
 

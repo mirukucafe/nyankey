@@ -10,13 +10,8 @@ export const meta = {
 
 	description: 'Mark a notification as read.',
 
-	errors: {
-		noSuchNotification: {
-			message: 'No such notification.',
-			code: 'NO_SUCH_NOTIFICATION',
-			id: 'efa929d5-05b5-47d1-beec-e6a4dbed011e',
-		},
-	},
+	// FIXME: This error makes sense here but will never be thrown here.
+	// errors: ['NO_SUCH_NOTIFICATION'],
 } as const;
 
 export const paramDef = {

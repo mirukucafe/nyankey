@@ -10,19 +10,7 @@ export const meta = {
 
 	kind: 'write:gallery-likes',
 
-	errors: {
-		noSuchPost: {
-			message: 'No such post.',
-			code: 'NO_SUCH_POST',
-			id: '56c06af3-1287-442f-9701-c93f7c4a62ff',
-		},
-
-		alreadyLiked: {
-			message: 'The post has already been liked.',
-			code: 'ALREADY_LIKED',
-			id: '40e9ed56-a59c-473a-bf3f-f289c54fb5a7',
-		},
-	},
+	errors: ['NO_SUCH_POST', 'ALREADY_LIKED'],
 } as const;
 
 export const paramDef = {
@@ -36,9 +24,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const post = await GalleryPosts.findOneBy({ id: ps.postId });
-	if (post == null) {
-		throw new ApiError(meta.errors.noSuchPost);
-	}
+	if (post == null) throw new ApiError('NO_SUCH_POST');
 
 	// if already liked
 	const exist = await GalleryLikes.findOneBy({
@@ -46,9 +32,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (exist != null) {
-		throw new ApiError(meta.errors.alreadyLiked);
-	}
+	if (exist != null) throw new ApiError('ALREADY_LIKED');
 
 	// Create like
 	await GalleryLikes.insert({

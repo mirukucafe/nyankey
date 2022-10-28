@@ -17,13 +17,7 @@ export const meta = {
 		ref: 'UserGroup',
 	},
 
-	errors: {
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: '9081cda3-7a9e-4fac-a6ce-908d70f282f6',
-		},
-	},
+	errors: ['NO_SUCH_GROUP'],
 } as const;
 
 export const paramDef = {
@@ -43,9 +37,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (userGroup == null) {
-		throw new ApiError(meta.errors.noSuchGroup);
-	}
+	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 	await UserGroups.update(userGroup.id, {
 		name: ps.name,

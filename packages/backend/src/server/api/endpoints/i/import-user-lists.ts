@@ -12,31 +12,7 @@ export const meta = {
 		max: 1,
 	},
 
-	errors: {
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'ea9cc34f-c415-4bc6-a6fe-28ac40357049',
-		},
-
-		unexpectedFileType: {
-			message: 'We need csv file.',
-			code: 'UNEXPECTED_FILE_TYPE',
-			id: 'a3c9edda-dd9b-4596-be6a-150ef813745c',
-		},
-
-		tooBigFile: {
-			message: 'That file is too big.',
-			code: 'TOO_BIG_FILE',
-			id: 'ae6e7a22-971b-4b52-b2be-fc0b9b121fe9',
-		},
-
-		emptyFile: {
-			message: 'That file is empty.',
-			code: 'EMPTY_FILE',
-			id: '99efe367-ce6e-4d44-93f8-5fae7b040356',
-		},
-	},
+	errors: ['EMPTY_FILE', 'FILE_TOO_BIG', 'NO_SUCH_FILE'],
 } as const;
 
 export const paramDef = {
@@ -51,10 +27,9 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const file = await DriveFiles.findOneBy({ id: ps.fileId });
 
-	if (file == null) throw new ApiError(meta.errors.noSuchFile);
-	//if (!file.type.endsWith('/csv')) throw new ApiError(meta.errors.unexpectedFileType);
-	if (file.size > 30000) throw new ApiError(meta.errors.tooBigFile);
-	if (file.size === 0) throw new ApiError(meta.errors.emptyFile);
+	if (file == null) throw new ApiError('NO_SUCH_FILE');
+	if (file.size > 30000) throw new ApiError('FILE_TOO_BIG');
+	if (file.size === 0) throw new ApiError('EMPTY_FILE');
 
 	createImportUserListsJob(user, file.id);
 });

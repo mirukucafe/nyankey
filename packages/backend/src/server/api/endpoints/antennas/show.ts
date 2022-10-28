@@ -9,13 +9,7 @@ export const meta = {
 
 	kind: 'read:account',
 
-	errors: {
-		noSuchAntenna: {
-			message: 'No such antenna.',
-			code: 'NO_SUCH_ANTENNA',
-			id: 'c06569fb-b025-4f23-b22d-1fcd20d2816b',
-		},
-	},
+	errors: ['NO_SUCH_ANTENNA'],
 
 	res: {
 		type: 'object',
@@ -40,9 +34,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (antenna == null) {
-		throw new ApiError(meta.errors.noSuchAntenna);
-	}
+	if (antenna == null) throw new ApiError('NO_SUCH_ANTENNA');
 
 	return await Antennas.pack(antenna);
 });

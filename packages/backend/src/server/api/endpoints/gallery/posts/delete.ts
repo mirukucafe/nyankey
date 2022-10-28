@@ -9,13 +9,7 @@ export const meta = {
 
 	kind: 'write:gallery',
 
-	errors: {
-		noSuchPost: {
-			message: 'No such post.',
-			code: 'NO_SUCH_POST',
-			id: 'ae52f367-4bd7-4ecd-afc6-5672fff427f5',
-		},
-	},
+	errors: ['NO_SUCH_POST'],
 } as const;
 
 export const paramDef = {
@@ -33,9 +27,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (post == null) {
-		throw new ApiError(meta.errors.noSuchPost);
-	}
+	if (post == null) throw new ApiError('NO_SUCH_POST');
 
 	await GalleryPosts.delete(post.id);
 });

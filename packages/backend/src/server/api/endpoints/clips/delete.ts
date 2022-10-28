@@ -9,13 +9,7 @@ export const meta = {
 
 	kind: 'write:account',
 
-	errors: {
-		noSuchClip: {
-			message: 'No such clip.',
-			code: 'NO_SUCH_CLIP',
-			id: '70ca08ba-6865-4630-b6fb-8494759aa754',
-		},
-	},
+	errors: ['NO_SUCH_CLIP'],
 } as const;
 
 export const paramDef = {
@@ -33,9 +27,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (clip == null) {
-		throw new ApiError(meta.errors.noSuchClip);
-	}
+	if (clip == null) throw new ApiError('NO_SUCH_CLIP');
 
 	await Clips.delete(clip.id);
 });

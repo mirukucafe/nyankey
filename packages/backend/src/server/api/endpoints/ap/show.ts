@@ -24,13 +24,7 @@ export const meta = {
 		max: 30,
 	},
 
-	errors: {
-		noSuchObject: {
-			message: 'No such object.',
-			code: 'NO_SUCH_OBJECT',
-			id: 'dc94d745-1262-4e63-a17d-fecaa57efc82',
-		},
-	},
+	errors: ['NO_SUCH_OBJECT'],
 
 	res: {
 		optional: false, nullable: false,
@@ -83,7 +77,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	if (object) {
 		return object;
 	} else {
-		throw new ApiError(meta.errors.noSuchObject);
+		throw new ApiError('NO_SUCH_OBJECT');
 	}
 });
 

@@ -23,13 +23,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchNote: {
-			message: 'No such note.',
-			code: 'NO_SUCH_NOTE',
-			id: '263fff3d-d0e1-4af4-bea7-8408059b451a',
-		},
-	},
+	errors: ['NO_SUCH_NOTE'],
 } as const;
 
 export const paramDef = {
@@ -53,7 +47,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	// check note visibility
 	const note = await getNote(ps.noteId, user).catch(err => {
-		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError(meta.errors.noSuchNote);
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
 		throw err;
 	});
 

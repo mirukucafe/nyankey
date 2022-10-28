@@ -19,13 +19,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchChannel: {
-			message: 'No such channel.',
-			code: 'NO_SUCH_CHANNEL',
-			id: '4d0eeeba-a02c-4c3c-9966-ef60d38d2e7f',
-		},
-	},
+	errors: ['NO_SUCH_CHANNEL'],
 } as const;
 
 export const paramDef = {
@@ -47,9 +41,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: ps.channelId,
 	});
 
-	if (channel == null) {
-		throw new ApiError(meta.errors.noSuchChannel);
-	}
+	if (channel == null) throw new ApiError('NO_SUCH_CHANNEL');
 
 	//#region Construct query
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId, ps.sinceDate, ps.untilDate)

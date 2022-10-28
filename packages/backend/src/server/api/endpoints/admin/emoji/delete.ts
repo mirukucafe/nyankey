@@ -10,13 +10,7 @@ export const meta = {
 	requireCredential: true,
 	requireModerator: true,
 
-	errors: {
-		noSuchEmoji: {
-			message: 'No such emoji.',
-			code: 'NO_SUCH_EMOJI',
-			id: 'be83669b-773a-44b7-b1f8-e5e5170ac3c2',
-		},
-	},
+	errors: ['NO_SUCH_EMOJI'],
 } as const;
 
 export const paramDef = {
@@ -31,7 +25,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, me) => {
 	const emoji = await Emojis.findOneBy({ id: ps.id });
 
-	if (emoji == null) throw new ApiError(meta.errors.noSuchEmoji);
+	if (emoji == null) throw new ApiError('NO_SUCH_EMOJI');
 
 	await Emojis.delete(emoji.id);
 

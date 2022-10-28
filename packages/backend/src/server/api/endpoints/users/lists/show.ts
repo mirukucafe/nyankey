@@ -17,13 +17,7 @@ export const meta = {
 		ref: 'UserList',
 	},
 
-	errors: {
-		noSuchList: {
-			message: 'No such list.',
-			code: 'NO_SUCH_LIST',
-			id: '7bc05c21-1d7a-41ae-88f1-66820f4dc686',
-		},
-	},
+	errors: ['NO_SUCH_USER_LIST'],
 } as const;
 
 export const paramDef = {
@@ -42,9 +36,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (userList == null) {
-		throw new ApiError(meta.errors.noSuchList);
-	}
+	if (userList == null) throw new ApiError('NO_SUCH_USER_LIST');
 
 	return await UserLists.pack(userList);
 });

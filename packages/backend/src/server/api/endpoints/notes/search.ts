@@ -22,9 +22,6 @@ export const meta = {
 			ref: 'Note',
 		},
 	},
-
-	errors: {
-	},
 } as const;
 
 export const paramDef = {

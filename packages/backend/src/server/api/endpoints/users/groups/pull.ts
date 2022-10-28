@@ -12,25 +12,7 @@ export const meta = {
 
 	description: 'Removes a specified user from a group. The owner can not be removed.',
 
-	errors: {
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: '4662487c-05b1-4b78-86e5-fd46998aba74',
-		},
-
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '0b5cc374-3681-41da-861e-8bc1146f7a55',
-		},
-
-		isOwner: {
-			message: 'The user is the owner.',
-			code: 'IS_OWNER',
-			id: '1546eed5-4414-4dea-81c1-b0aec4f6d2af',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'NO_SUCH_GROUP', 'GROUP_OWNER'],
 } as const;
 
 export const paramDef = {
@@ -50,19 +32,15 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (userGroup == null) {
-		throw new ApiError(meta.errors.noSuchGroup);
-	}
+	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 	// Fetch the user
 	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
-	if (user.id === userGroup.userId) {
-		throw new ApiError(meta.errors.isOwner);
-	}
+	if (user.id === userGroup.userId) throw new ApiError('GROUP_OWNER');
 
 	// Pull the user
 	await UserGroupJoinings.delete({ userGroupId: userGroup.id, userId: user.id });

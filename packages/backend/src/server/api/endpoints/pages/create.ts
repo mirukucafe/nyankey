@@ -23,18 +23,7 @@ export const meta = {
 		ref: 'Page',
 	},
 
-	errors: {
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'b7b97489-0f66-4b12-a5ff-b21bd63f6e1c',
-		},
-		nameAlreadyExists: {
-			message: 'Specified name already exists.',
-			code: 'NAME_ALREADY_EXISTS',
-			id: '4650348e-301c-499a-83c9-6aa988c66bc1',
-		},
-	},
+	errors: ['NO_SUCH_FILE', 'NAME_ALREADY_EXISTS'],
 } as const;
 
 export const paramDef = {
@@ -61,9 +50,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			userId: user.id,
 		});
 
-		if (eyeCatchingImage == null) {
-			throw new ApiError(meta.errors.noSuchFile);
-		}
+		if (eyeCatchingImage == null) throw new ApiError('NO_SUCH_FILE');
 	}
 
 	await Pages.findBy({
@@ -71,7 +58,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		name: ps.name,
 	}).then(result => {
 		if (result.length > 0) {
-			throw new ApiError(meta.errors.nameAlreadyExists);
+			throw new ApiError('NAME_ALREADY_EXISTS');
 		}
 	});
 

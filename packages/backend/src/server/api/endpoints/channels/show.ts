@@ -13,13 +13,7 @@ export const meta = {
 		ref: 'Channel',
 	},
 
-	errors: {
-		noSuchChannel: {
-			message: 'No such channel.',
-			code: 'NO_SUCH_CHANNEL',
-			id: '6f6c314b-7486-4897-8966-c04a66a02923',
-		},
-	},
+	errors: ['NO_SUCH_CHANNEL'],
 } as const;
 
 export const paramDef = {
@@ -36,9 +30,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		id: ps.channelId,
 	});
 
-	if (channel == null) {
-		throw new ApiError(meta.errors.noSuchChannel);
-	}
+	if (channel == null) throw new ApiError('NO_SUCH_CHANNEL');
 
 	return await Channels.pack(channel, me);
 });

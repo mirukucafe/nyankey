@@ -24,25 +24,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchApp: {
-			message: 'No such app.',
-			code: 'NO_SUCH_APP',
-			id: 'fcab192a-2c5a-43b7-8ad8-9b7054d8d40d',
-		},
-
-		noSuchSession: {
-			message: 'No such session.',
-			code: 'NO_SUCH_SESSION',
-			id: '5b5a1503-8bc8-4bd0-8054-dc189e8cdcb3',
-		},
-
-		pendingSession: {
-			message: 'This session is not completed yet.',
-			code: 'PENDING_SESSION',
-			id: '8c8a4145-02cc-4cca-8e66-29ba60445a8e',
-		},
-	},
+	errors: ['NO_SUCH_APP', 'NO_SUCH_SESSION', 'PENDING_SESSION'],
 } as const;
 
 export const paramDef = {
@@ -61,9 +43,7 @@ export default define(meta, paramDef, async (ps) => {
 		secret: ps.appSecret,
 	});
 
-	if (app == null) {
-		throw new ApiError(meta.errors.noSuchApp);
-	}
+	if (app == null) throw new ApiError('NO_SUCH_APP');
 
 	// Fetch token
 	const session = await AuthSessions.findOneBy({
@@ -71,13 +51,9 @@ export default define(meta, paramDef, async (ps) => {
 		appId: app.id,
 	});
 
-	if (session == null) {
-		throw new ApiError(meta.errors.noSuchSession);
-	}
+	if (session == null) throw new ApiError('NO_SUCH_SESSION');
 
-	if (session.userId == null) {
-		throw new ApiError(meta.errors.pendingSession);
-	}
+	if (session.userId == null) throw new ApiError('PENDING_SESSION');
 
 	// Lookup access token
 	const accessToken = await AccessTokens.findOneByOrFail({

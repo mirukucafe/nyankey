@@ -7,13 +7,7 @@ export const meta = {
 
 	requireCredential: false,
 
-	errors: {
-		noSuchSession: {
-			message: 'No such session.',
-			code: 'NO_SUCH_SESSION',
-			id: 'bd72c97d-eba7-4adb-a467-f171b8847250',
-		},
-	},
+	errors: ['NO_SUCH_SESSION'],
 
 	res: {
 		type: 'object',
@@ -52,9 +46,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		token: ps.token,
 	});
 
-	if (session == null) {
-		throw new ApiError(meta.errors.noSuchSession);
-	}
+	if (session == null) throw new ApiError('NO_SUCH_SESSION');
 
 	return await AuthSessions.pack(session, user);
 });

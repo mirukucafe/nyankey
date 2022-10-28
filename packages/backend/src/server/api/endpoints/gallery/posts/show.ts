@@ -7,13 +7,7 @@ export const meta = {
 
 	requireCredential: false,
 
-	errors: {
-		noSuchPost: {
-			message: 'No such post.',
-			code: 'NO_SUCH_POST',
-			id: '1137bf14-c5b0-4604-85bb-5b5371b1cd45',
-		},
-	},
+	errors: ['NO_SUCH_POST'],
 
 	res: {
 		type: 'object',
@@ -36,9 +30,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		id: ps.postId,
 	});
 
-	if (post == null) {
-		throw new ApiError(meta.errors.noSuchPost);
-	}
+	if (post == null) throw new ApiError('NO_SUCH_POST');
 
 	return await GalleryPosts.pack(post, me);
 });

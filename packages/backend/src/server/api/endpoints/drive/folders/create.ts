@@ -11,13 +11,7 @@ export const meta = {
 
 	kind: 'write:drive',
 
-	errors: {
-		noSuchFolder: {
-			message: 'No such folder.',
-			code: 'NO_SUCH_FOLDER',
-			id: '53326628-a00d-40a6-a3cd-8975105c0f95',
-		},
-	},
+	errors: ['NO_SUCH_FOLDER'],
 
 	res: {
 		type: 'object' as const,
@@ -46,9 +40,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			userId: user.id,
 		});
 
-		if (parent == null) {
-			throw new ApiError(meta.errors.noSuchFolder);
-		}
+		if (parent == null) throw new ApiError('NO_SUCH_FOLDER');
 	}
 
 	// Create folder

@@ -22,10 +22,6 @@ export const meta = {
 		optional: false, nullable: false,
 		ref: 'GalleryPost',
 	},
-
-	errors: {
-
-	},
 } as const;
 
 export const paramDef = {

@@ -28,13 +28,7 @@ export const meta = {
 		ref: 'DriveFile',
 	},
 
-	errors: {
-		invalidFileName: {
-			message: 'Invalid file name.',
-			code: 'INVALID_FILE_NAME',
-			id: 'f449b209-0c60-4e51-84d5-29486263bfd4',
-		},
-	},
+	errors: ['INTERNAL_ERROR', 'INVALID_FILE_NAME'],
 } as const;
 
 export const paramDef = {
@@ -60,7 +54,7 @@ export default define(meta, paramDef, async (ps, user, _, file, cleanup) => {
 		} else if (name === 'blob') {
 			name = null;
 		} else if (!DriveFiles.validateFileName(name)) {
-			throw new ApiError(meta.errors.invalidFileName);
+			throw new ApiError('INVALID_FILE_NAME');
 		}
 	} else {
 		name = null;
@@ -74,7 +68,7 @@ export default define(meta, paramDef, async (ps, user, _, file, cleanup) => {
 		if (e instanceof Error || typeof e === 'string') {
 			apiLogger.error(e);
 		}
-		throw new ApiError();
+		throw new ApiError('INTERNAL_ERROR');
 	} finally {
 		cleanup!();
 	}

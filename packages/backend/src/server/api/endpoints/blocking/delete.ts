@@ -17,25 +17,7 @@ export const meta = {
 
 	kind: 'write:blocks',
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '8621d8bf-c358-4303-a066-5ea78610eb3f',
-		},
-
-		blockeeIsYourself: {
-			message: 'Blockee is yourself.',
-			code: 'BLOCKEE_IS_YOURSELF',
-			id: '06f6fac6-524b-473c-a354-e97a40ae6eac',
-		},
-
-		notBlocking: {
-			message: 'You are not blocking that user.',
-			code: 'NOT_BLOCKING',
-			id: '291b2efa-60c6-45c0-9f6a-045c8f9b02cd',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'BLOCKEE_IS_YOURSELF', 'NOT_BLOCKING'],
 
 	res: {
 		type: 'object',
@@ -54,16 +36,14 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
-	const blocker = await Users.findOneByOrFail({ id: user.id });
-
 	// Check if the blockee is yourself
-	if (user.id === ps.userId) {
-		throw new ApiError(meta.errors.blockeeIsYourself);
-	}
+	if (user.id === ps.userId) throw new ApiError('BLOCKEE_IS_YOURSELF');
+
+	const blocker = await Users.findOneByOrFail({ id: user.id });
 
 	// Get blockee
 	const blockee = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -73,9 +53,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		blockeeId: blockee.id,
 	});
 
-	if (exist == null) {
-		throw new ApiError(meta.errors.notBlocking);
-	}
+	if (exist == null) throw new ApiError('NOT_BLOCKING');
 
 	// Delete blocking
 	await deleteBlocking(blocker, blockee);

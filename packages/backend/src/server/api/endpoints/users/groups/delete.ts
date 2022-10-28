@@ -11,13 +11,7 @@ export const meta = {
 
 	description: 'Delete an existing group.',
 
-	errors: {
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: '63dbd64c-cd77-413f-8e08-61781e210b38',
-		},
-	},
+	errors: ['NO_SUCH_GROUP'],
 } as const;
 
 export const paramDef = {
@@ -35,9 +29,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (userGroup == null) {
-		throw new ApiError(meta.errors.noSuchGroup);
-	}
+	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 	await UserGroups.delete(userGroup.id);
 });

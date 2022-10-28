@@ -13,13 +13,7 @@ export const meta = {
 
 	description: 'Join a group the authenticated user has been invited to.',
 
-	errors: {
-		noSuchInvitation: {
-			message: 'No such invitation.',
-			code: 'NO_SUCH_INVITATION',
-			id: '98c11eca-c890-4f42-9806-c8c8303ebb5e',
-		},
-	},
+	errors: ['NO_SUCH_INVITATION'],
 } as const;
 
 export const paramDef = {
@@ -35,15 +29,10 @@ export default define(meta, paramDef, async (ps, user) => {
 	// Fetch the invitation
 	const invitation = await UserGroupInvitations.findOneBy({
 		id: ps.invitationId,
+		userId: user.id,
 	});
 
-	if (invitation == null) {
-		throw new ApiError(meta.errors.noSuchInvitation);
-	}
-
-	if (invitation.userId !== user.id) {
-		throw new ApiError(meta.errors.noSuchInvitation);
-	}
+	if (invitation == null) throw new ApiError('NO_SUCH_INVITATION');
 
 	// Push the user
 	await UserGroupJoinings.insert({

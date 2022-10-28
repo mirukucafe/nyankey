@@ -21,13 +21,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		reactionsNotPublic: {
-			message: 'Reactions of the user is not public.',
-			code: 'REACTIONS_NOT_PUBLIC',
-			id: '673a7dd2-6924-1093-e0c0-e68456ceae5c',
-		},
-	},
+	errors: ['ACCESS_DENIED'],
 } as const;
 
 export const paramDef = {
@@ -48,7 +42,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	const profile = await UserProfiles.findOneByOrFail({ userId: ps.userId });
 
 	if (me == null || (me.id !== ps.userId && !profile.publicReactions)) {
-		throw new ApiError(meta.errors.reactionsNotPublic);
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	const query = makePaginationQuery(NoteReactions.createQueryBuilder('reaction'),

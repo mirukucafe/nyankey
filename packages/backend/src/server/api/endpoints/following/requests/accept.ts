@@ -10,18 +10,7 @@ export const meta = {
 
 	kind: 'write:following',
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '66ce1645-d66c-46bb-8b79-96739af885bd',
-		},
-		noFollowRequest: {
-			message: 'No follow request.',
-			code: 'NO_FOLLOW_REQUEST',
-			id: 'bcde4f8b-0913-4614-8881-614e522fb041',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'NO_SUCH_FOLLOW_REQUEST'],
 } as const;
 
 export const paramDef = {
@@ -36,12 +25,12 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	// Fetch follower
 	const follower = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
 	await acceptFollowRequest(user, follower).catch(e => {
-		if (e.id === '8884c2dd-5795-4ac9-b27e-6a01d38190f9') throw new ApiError(meta.errors.noFollowRequest);
+		if (e.id === '8884c2dd-5795-4ac9-b27e-6a01d38190f9') throw new ApiError('NO_SUCH_FOLLOW_REQUEST');
 		throw e;
 	});
 

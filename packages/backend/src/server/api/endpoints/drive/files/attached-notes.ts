@@ -21,13 +21,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchFile: {
-			message: 'No such file.',
-			code: 'NO_SUCH_FILE',
-			id: 'c118ece3-2e4b-4296-99d1-51756e32d232',
-		},
-	},
+	errors: ['NO_SUCH_FILE'],
 } as const;
 
 export const paramDef = {
@@ -46,9 +40,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		userId: user.id,
 	});
 
-	if (file == null) {
-		throw new ApiError(meta.errors.noSuchFile);
-	}
+	if (file == null) throw new ApiError('NO_SUCH_FILE');
 
 	const notes = await Notes.createQueryBuilder('note')
 		.where(':file = ANY(note.fileIds)', { file: file.id })

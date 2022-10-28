@@ -15,31 +15,7 @@ export const meta = {
 
 	description: 'Invite a user to an existing group.',
 
-	errors: {
-		noSuchGroup: {
-			message: 'No such group.',
-			code: 'NO_SUCH_GROUP',
-			id: '583f8bc0-8eee-4b78-9299-1e14fc91e409',
-		},
-
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: 'da52de61-002c-475b-90e1-ba64f9cf13a8',
-		},
-
-		alreadyAdded: {
-			message: 'That user has already been added to that group.',
-			code: 'ALREADY_ADDED',
-			id: '7e35c6a0-39b2-4488-aea6-6ee20bd5da2c',
-		},
-
-		alreadyInvited: {
-			message: 'That user has already been invited to that group.',
-			code: 'ALREADY_INVITED',
-			id: 'ee0f58b4-b529-4d13-b761-b9a3e69f97e6',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'NO_SUCH_GROUP', 'ALREADY_ADDED', 'ALREADY_INVITED'],
 } as const;
 
 export const paramDef = {
@@ -59,13 +35,11 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: me.id,
 	});
 
-	if (userGroup == null) {
-		throw new ApiError(meta.errors.noSuchGroup);
-	}
+	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 	// Fetch the user
 	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError(meta.errors.noSuchUser);
+		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
 		throw e;
 	});
 
@@ -74,18 +48,14 @@ export default define(meta, paramDef, async (ps, me) => {
 		userId: user.id,
 	});
 
-	if (joining) {
-		throw new ApiError(meta.errors.alreadyAdded);
-	}
+	if (joining) throw new ApiError('ALREADY_ADDED');
 
 	const existInvitation = await UserGroupInvitations.findOneBy({
 		userGroupId: userGroup.id,
 		userId: user.id,
 	});
 
-	if (existInvitation) {
-		throw new ApiError(meta.errors.alreadyInvited);
-	}
+	if (existInvitation) throw new ApiError('ALREADY_INVITED');
 
 	const invitation = await UserGroupInvitations.insert({
 		id: genId(),

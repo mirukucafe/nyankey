@@ -22,19 +22,7 @@ export const meta = {
 		},
 	},
 
-	errors: {
-		noSuchUser: {
-			message: 'No such user.',
-			code: 'NO_SUCH_USER',
-			id: '27fa5435-88ab-43de-9360-387de88727cd',
-		},
-
-		forbidden: {
-			message: 'Forbidden.',
-			code: 'FORBIDDEN',
-			id: '3c6a84db-d619-26af-ca14-06232a21df8a',
-		},
-	},
+	errors: ['NO_SUCH_USER', 'ACCESS_DENIED'],
 } as const;
 
 export const paramDef = {
@@ -71,26 +59,24 @@ export default define(meta, paramDef, async (ps, me) => {
 		? { id: ps.userId }
 		: { usernameLower: ps.username!.toLowerCase(), host: toPunyNullable(ps.host) ?? IsNull() });
 
-	if (user == null) {
-		throw new ApiError(meta.errors.noSuchUser);
-	}
+	if (user == null) throw new ApiError('NO_SUCH_USER');
 
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 
 	if (profile.ffVisibility === 'private') {
 		if (me == null || (me.id !== user.id)) {
-			throw new ApiError(meta.errors.forbidden);
+			throw new ApiError('ACCESS_DENIED');
 		}
 	} else if (profile.ffVisibility === 'followers') {
 		if (me == null) {
-			throw new ApiError(meta.errors.forbidden);
+			throw new ApiError('ACCESS_DENIED');
 		} else if (me.id !== user.id) {
 			const following = await Followings.findOneBy({
 				followeeId: user.id,
 				followerId: me.id,
 			});
 			if (following == null) {
-				throw new ApiError(meta.errors.forbidden);
+				throw new ApiError('ACCESS_DENIED');
 			}
 		}
 	}
