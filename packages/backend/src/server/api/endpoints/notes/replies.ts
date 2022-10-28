@@ -2,7 +2,7 @@ import { Notes } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import define from '@/server/api/define.js';
 import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
-import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
 import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 import { getNote } from '@/server/api/common/getters.js';
@@ -63,11 +63,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		.leftJoinAndSelect('renoteUser.avatar', 'renoteUserAvatar')
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner');
 
-	generateVisibilityQuery(query, user);
 	if (user) generateMutedUserQuery(query, user);
 	if (user) generateBlockedUserQuery(query, user);
 
-	const timeline = await query.take(ps.limit).getMany();
+	const timeline = await visibilityQuery(query, user).take(ps.limit).getMany();
 
 	return await Notes.packMany(timeline, user);
 });

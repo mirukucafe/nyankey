@@ -1,7 +1,7 @@
 import { readNote } from '@/services/note/read.js';
 import { Antennas, Notes, AntennaNotes } from '@/models/index.js';
 import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
-import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
 import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 import define from '@/server/api/define.js';
@@ -65,11 +65,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner')
 		.andWhere('antennaNote.antennaId = :antennaId', { antennaId: antenna.id });
 
-	generateVisibilityQuery(query, user);
 	generateMutedUserQuery(query, user);
 	generateBlockedUserQuery(query, user);
 
-	const notes = await query
+	const notes = await visibilityQuery(query, user)
 		.take(ps.limit)
 		.getMany();
 

@@ -3,7 +3,7 @@ import { Notes, Followings } from '@/models/index.js';
 import { activeUsersChart } from '@/services/chart/index.js';
 import define from '@/server/api/define.js';
 import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
-import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
 import { generateRepliesQuery } from '@/server/api/common/generate-replies-query.js';
 import { generateMutedNoteQuery } from '@/server/api/common/generate-muted-note-query.js';
@@ -82,7 +82,6 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	generateChannelQuery(query, user);
 	generateRepliesQuery(query, user);
-	generateVisibilityQuery(query, user);
 	generateMutedUserQuery(query, user);
 	generateMutedNoteQuery(query, user);
 	generateBlockedUserQuery(query, user);
@@ -123,7 +122,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	}
 	//#endregion
 
-	const timeline = await query.take(ps.limit).getMany();
+	const timeline = await visibilityQuery(query, user).take(ps.limit).getMany();
 
 	process.nextTick(() => {
 		activeUsersChart.read(user);

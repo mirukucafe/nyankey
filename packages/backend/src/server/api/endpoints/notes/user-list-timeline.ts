@@ -4,7 +4,7 @@ import { activeUsersChart } from '@/services/chart/index.js';
 import define from '@/server/api/define.js';
 import { ApiError } from '@/server/api/error.js';
 import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
-import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 
 export const meta = {
 	tags: ['notes', 'lists'],
@@ -70,8 +70,6 @@ export default define(meta, paramDef, async (ps, user) => {
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner')
 		.andWhere('userListJoining.userListId = :userListId', { userListId: list.id });
 
-	generateVisibilityQuery(query, user);
-
 	if (ps.includeMyRenotes === false) {
 		query.andWhere(new Brackets(qb => {
 			qb.orWhere('note.userId != :meId', { meId: user.id });
@@ -107,7 +105,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	}
 	//#endregion
 
-	const timeline = await query.take(ps.limit).getMany();
+	const timeline = await visibilityQuery(query, user).take(ps.limit).getMany();
 
 	activeUsersChart.read(user);
 

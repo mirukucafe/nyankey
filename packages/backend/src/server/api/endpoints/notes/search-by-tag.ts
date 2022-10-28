@@ -4,7 +4,7 @@ import { normalizeForSearch } from '@/misc/normalize-for-search.js';
 import define from '@/server/api/define.js';
 import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
 import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
-import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 
 export const meta = {
@@ -79,7 +79,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		.leftJoinAndSelect('renoteUser.avatar', 'renoteUserAvatar')
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner');
 
-	generateVisibilityQuery(query, me);
 	if (me) generateMutedUserQuery(query, me);
 	if (me) generateBlockedUserQuery(query, me);
 
@@ -132,7 +131,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	}
 
 	// Search notes
-	const notes = await query.take(ps.limit).getMany();
+	const notes = await visibilityQuery(query, me).take(ps.limit).getMany();
 
 	return await Notes.packMany(notes, me);
 });

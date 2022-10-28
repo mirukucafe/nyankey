@@ -1,7 +1,7 @@
 import { Notes } from '@/models/index.js';
 import define from '@/server/api/define.js';
 import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
-import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
 import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 
@@ -59,13 +59,12 @@ export default define(meta, paramDef, async (ps, user) => {
 		.andWhere('note.id IN (SELECT id FROM note_replies(:noteId, :depth, :limit))', { noteId: ps.noteId, depth: ps.depth, limit: ps.limit })
 		.innerJoinAndSelect('note.user', 'user');
 
-	generateVisibilityQuery(query, user);
 	if (user) {
 		generateMutedUserQuery(query, user);
 		generateBlockedUserQuery(query, user);
 	}
 
-	const notes = await query.getMany();
+	const notes = await visibilityQuery(query, user).getMany();
 
 	return await Notes.packMany(notes, user, { detail: false });
 });
