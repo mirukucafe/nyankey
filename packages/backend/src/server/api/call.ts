@@ -36,7 +36,7 @@ export default async (endpoint: string, user: CacheableLocalUser | null | undefi
 		}
 
 		// Rate limit
-		await limiter(limit as IEndpointMeta['limit'] & { key: NonNullable<string> }, limitActor).catch(e => {
+		await limiter(limit as IEndpointMeta['limit'] & { key: NonNullable<string> }, limitActor).catch(() => {
 			throw new ApiError('RATE_LIMIT_EXCEEDED');
 		});
 	}

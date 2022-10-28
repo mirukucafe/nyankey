@@ -71,7 +71,7 @@ export function genOpenapiSpec() {
 			const { message, httpStatusCode } = errorDefinitions[code];
 			const httpCode = httpStatusCode.toString();
 
-			if(!(httpCode in acc)) {
+			if (!(httpCode in acc)) {
 				acc[httpCode] = {
 					description: httpCodes[httpCode],
 					content: {

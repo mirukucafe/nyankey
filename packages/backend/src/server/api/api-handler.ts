@@ -25,7 +25,7 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 				endpoint: endpoint.name,
 			},
 		};
-	}
+	};
 
 	// Authentication
 	// for GET requests, do not even pass on the body parameter as it is considered unsafe
@@ -52,4 +52,4 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 			error(new ApiError());
 		}
 	});
-};
+}

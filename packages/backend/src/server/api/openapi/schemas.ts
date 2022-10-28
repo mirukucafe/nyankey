@@ -48,7 +48,7 @@ export const schemas = {
 					},
 					info: {
 						description: 'Potentially more information, primarily intended for developers.',
-					}
+					},
 				},
 				required: ['code', 'endpoint', 'message'],
 			},
