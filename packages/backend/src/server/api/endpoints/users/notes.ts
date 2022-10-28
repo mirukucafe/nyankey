@@ -71,7 +71,7 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	generateVisibilityQuery(query, me);
 	if (me) {
-		generateMutedUserQuery(query, me, user);
+		generateMutedUserQuery(query, me);
 		generateBlockedUserQuery(query, me);
 	}
 
