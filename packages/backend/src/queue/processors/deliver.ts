@@ -6,39 +6,20 @@ import Logger from '@/services/logger.js';
 import { Instances } from '@/models/index.js';
 import { apRequestChart, federationChart, instanceChart } from '@/services/chart/index.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { toPuny } from '@/misc/convert-host.js';
-import { Cache } from '@/misc/cache.js';
-import { Instance } from '@/models/entities/instance.js';
 import { StatusError } from '@/misc/fetch.js';
+import { shouldSkipInstance } from '@/misc/skipped-instances.js';
 import { DeliverJobData } from '@/queue/types.js';
-import { LessThan } from 'typeorm';
-import { DAY } from '@/const.js';
 
 const logger = new Logger('deliver');
 
 let latest: string | null = null;
 
-const deadThreshold = 30 * DAY;
-
 export default async (job: Bull.Job<DeliverJobData>) => {
 	const { host } = new URL(job.data.to);
 	const puny = toPuny(host);
 
-	// ブロックしてたら中断
-	const meta = await fetchMeta();
-	if (meta.blockedHosts.includes(puny)) {
-		return 'skip (blocked)';
-	}
-
-	const deadTime = new Date(Date.now() - deadThreshold);
-	const isSuspendedOrDead = await Instances.countBy([
-		{ host: puny, isSuspended: true },
-		{ host: puny, lastCommunicatedAt: LessThan(deadTime) },
-	]);
-	if (isSuspendedOrDead) {
-		return 'skip (suspended or dead)';
-	}
+	if (await shouldSkipInstance(puny)) return 'skip';
 
 	try {
 		if (latest !== (latest = JSON.stringify(job.data.content, null, 2))) {

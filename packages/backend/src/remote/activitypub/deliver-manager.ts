@@ -2,6 +2,7 @@ import { IsNull, Not } from 'typeorm';
 import { ILocalUser, IRemoteUser, User } from '@/models/entities/user.js';
 import { Users, Followings } from '@/models/index.js';
 import { deliver } from '@/queue/index.js';
+import { skippedInstances } from '@/misc/skipped-instances.js';
 
 //#region types
 interface IRecipe {
@@ -150,8 +151,19 @@ export default class DeliverManager {
 		)
 		.forEach(recipe => inboxes.add(recipe.to.inbox!));
 
+		const instancesToSkip = await skippedInstances(
+			// get (unique) list of hosts
+			Array.from(new Set(
+				Array.from(inboxes)
+				.map(inbox => new URL(inbox).host)
+			))
+		);
+
 		// deliver
 		for (const inbox of inboxes) {
+			// skip instances as indicated
+			if (instancesToSkip.includes(new URL(inbox).host)) continue;
+
 			deliver(this.actor, this.activity, inbox);
 		}
 	}
