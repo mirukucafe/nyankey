@@ -15,14 +15,14 @@
 
 	<div v-else ref="rootEl">
 		<div v-show="pagination.reversed && more" key="_more_" class="cxiknjgy _gap">
-			<MkButton v-if="!moreFetching" class="button" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" primary @click="fetchMoreAhead">
+			<MkButton v-if="!moreFetching" class="button" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" primary @click="fetchMore(true)">
 				{{ i18n.ts.loadMore }}
 			</MkButton>
 			<MkLoading v-else class="loading"/>
 		</div>
 		<slot :items="items"></slot>
 		<div v-show="!pagination.reversed && more" key="_more_" class="cxiknjgy _gap">
-			<MkButton v-if="!moreFetching" v-appear="($store.state.enableInfiniteScroll && !disableAutoLoad) ? fetchMore : null" class="button" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" primary @click="fetchMore">
+			<MkButton v-if="!moreFetching" v-appear="($store.state.enableInfiniteScroll && !disableAutoLoad) ? fetchMore : null" class="button" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" primary @click="fetchMore()">
 				{{ i18n.ts.loadMore }}
 			</MkButton>
 			<MkLoading v-else class="loading"/>
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ComputedRef, isRef, onActivated, onDeactivated, ref, watch } from 'vue';
+import { ComputedRef, isRef, onActivated, onDeactivated, watch } from 'vue';
 import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 import { onScrollTop, isTopVisible, getScrollPosition, getScrollContainer } from '@/scripts/scroll';
@@ -45,13 +45,13 @@ export type Paging<E extends keyof foundkey.Endpoints = keyof foundkey.Endpoints
 	params?: foundkey.Endpoints[E]['req'] | ComputedRef<foundkey.Endpoints[E]['req']>;
 
 	/**
-	 * 検索APIのような、ページング不可なエンドポイントを利用する場合
-	 * (そのようなAPIをこの関数で使うのは若干矛盾してるけど)
+	 * When using non-pageable endpoints, such as the search API.
+	 * (though it is slightly inconsistent to use such an API with this function)
 	 */
 	noPaging?: boolean;
 
 	/**
-	 * items 配列の中身を逆順にする(新しい方が最後)
+	 * items Array contents in reverse order (newest first, last)
 	 */
 	reversed?: boolean;
 
@@ -76,202 +76,175 @@ const emit = defineEmits<{
 
 type Item = { id: string; [another: string]: unknown; };
 
-const rootEl = ref<HTMLElement>();
-const items = ref<Item[]>([]);
-const queue = ref<Item[]>([]);
-const offset = ref(0);
-const fetching = ref(true);
-const moreFetching = ref(false);
-const more = ref(false);
-const backed = ref(false); // 遡り中か否か
-const isBackTop = ref(false);
-const empty = computed(() => items.value.length === 0);
-const error = ref(false);
+let rootEl: HTMLElement | null = $ref(null);
+let items: Item[] = $ref([]);
+let queue: Item[] = $ref([]);
+let offset: number = $ref(0);
+let fetching: boolean = $ref(true);
+let moreFetching: boolean = $ref(false);
+let more: boolean = $ref(false);
+let backed: boolean = $ref(false); // 遡り中か否か
+let isBackTop: boolean = $ref(false);
+const empty = $computed(() => items.length === 0);
+let error: boolean = $ref(false);
 
 const init = async (): Promise<void> => {
-	queue.value = [];
-	fetching.value = true;
-	const params = props.pagination.params ? isRef(props.pagination.params) ? props.pagination.params.value : props.pagination.params : {};
+	queue = [];
+	fetching = true;
+	const params = props.pagination.params
+		? isRef(props.pagination.params)
+			? props.pagination.params.value as Record<string, any>
+			: props.pagination.params
+		: {};
 	await os.api(props.pagination.endpoint, {
 		...params,
 		limit: props.pagination.noPaging ? (props.pagination.limit || 10) : (props.pagination.limit || 10) + 1,
-	}).then(res => {
+	}).then((res: Item[]) => {
 		if (!props.pagination.noPaging && (res.length > (props.pagination.limit || 10))) {
 			res.pop();
-			items.value = props.pagination.reversed ? [...res].reverse() : res;
-			more.value = true;
+			more = true;
 		} else {
-			items.value = props.pagination.reversed ? [...res].reverse() : res;
-			more.value = false;
+			more = false;
 		}
-		offset.value = res.length;
-		error.value = false;
-		fetching.value = false;
+		items = props.pagination.reversed ? [...res].reverse() : res;
+		offset = res.length;
+		error = false;
+		fetching = false;
 		emit('loaded');
-	}, () => {
-		error.value = true;
-		fetching.value = false;
+	}).catch(() => {
+		error = true;
+		fetching = false;
 		emit('error');
 	});
 };
 
 const reload = (): void => {
-	items.value = [];
+	items = [];
 	init();
 };
 
-const fetchMore = async (): Promise<void> => {
-	if (!more.value || fetching.value || moreFetching.value || items.value.length === 0) return;
-	moreFetching.value = true;
-	backed.value = true;
-	const params = props.pagination.params ? isRef(props.pagination.params) ? props.pagination.params.value : props.pagination.params : {};
+const fetchMore = async (ahead?: boolean): Promise<void> => {
+	if (!more || fetching || moreFetching || items.length === 0) return;
+	moreFetching = true;
+	if (!ahead) {
+		backed = true;
+	}
+	const params = props.pagination.params ? isRef(props.pagination.params) ? props.pagination.params : props.pagination.params : {};
 	await os.api(props.pagination.endpoint, {
 		...params,
 		limit: SECOND_FETCH_LIMIT + 1,
 		...(props.pagination.offsetMode ? {
-			offset: offset.value,
-		} : props.pagination.reversed ? {
-			sinceId: items.value[0].id,
-		} : {
-			untilId: items.value[items.value.length - 1].id,
-		}),
+			offset,
+		} : ahead ? (
+			props.pagination.reversed ? {
+				untilId: items[0].id,
+			} : {
+				sinceId: items[items.length - 1].id,
+			}
+		) : (
+			props.pagination.reversed ? {
+				sinceId: items[0].id,
+			} : {
+				untilId: items[items.length - 1].id,
+			}
+		)),
 	}).then(res => {
 		if (res.length > SECOND_FETCH_LIMIT) {
 			res.pop();
-			items.value = props.pagination.reversed ? [...res].reverse().concat(items.value) : items.value.concat(res);
-			more.value = true;
+			more = true;
 		} else {
-			items.value = props.pagination.reversed ? [...res].reverse().concat(items.value) : items.value.concat(res);
-			more.value = false;
+			more = false;
 		}
-		offset.value += res.length;
-		moreFetching.value = false;
+		items = props.pagination.reversed ? [...res].reverse().concat(items) : items.concat(res);
+		offset += res.length;
+		moreFetching = false;
 	}, () => {
-		moreFetching.value = false;
-	});
-};
-
-const fetchMoreAhead = async (): Promise<void> => {
-	if (!more.value || fetching.value || moreFetching.value || items.value.length === 0) return;
-	moreFetching.value = true;
-	const params = props.pagination.params ? isRef(props.pagination.params) ? props.pagination.params.value : props.pagination.params : {};
-	await os.api(props.pagination.endpoint, {
-		...params,
-		limit: SECOND_FETCH_LIMIT + 1,
-		...(props.pagination.offsetMode ? {
-			offset: offset.value,
-		} : props.pagination.reversed ? {
-			untilId: items.value[0].id,
-		} : {
-			sinceId: items.value[items.value.length - 1].id,
-		}),
-	}).then(res => {
-		if (res.length > SECOND_FETCH_LIMIT) {
-			res.pop();
-			items.value = props.pagination.reversed ? [...res].reverse().concat(items.value) : items.value.concat(res);
-			more.value = true;
-		} else {
-			items.value = props.pagination.reversed ? [...res].reverse().concat(items.value) : items.value.concat(res);
-			more.value = false;
-		}
-		offset.value += res.length;
-		moreFetching.value = false;
-	}, () => {
-		moreFetching.value = false;
+		moreFetching = false;
 	});
 };
 
 const prepend = (item: Item): void => {
 	if (props.pagination.reversed) {
-		if (rootEl.value) {
-			const container = getScrollContainer(rootEl.value);
+		if (rootEl) {
+			const container = getScrollContainer(rootEl);
 			if (container == null) {
 				// TODO?
 			} else {
-				const pos = getScrollPosition(rootEl.value);
+				const pos = getScrollPosition(rootEl);
 				const viewHeight = container.clientHeight;
 				const height = container.scrollHeight;
 				const isBottom = (pos + viewHeight > height - 32);
+				// Discard old items if they overflow.
 				if (isBottom) {
-					// オーバーフローしたら古いアイテムは捨てる
-					if (items.value.length >= props.displayLimit) {
-						// このやり方だとVue 3.2以降アニメーションが動かなくなる
-						//items.value = items.value.slice(-props.displayLimit);
-						while (items.value.length >= props.displayLimit) {
-							items.value.shift();
-						}
-						more.value = true;
+					while (items.length >= props.displayLimit) {
+						items.shift();
 					}
+					more = true;
 				}
 			}
 		}
-		items.value.push(item);
+		items.push(item);
 		// TODO
 	} else {
-		// 初回表示時はunshiftだけでOK
-		if (!rootEl.value) {
-			items.value.unshift(item);
+		// Only unshift is required for initial display.
+		if (!rootEl) {
+			items.unshift(item);
 			return;
 		}
 
-		const isTop = isBackTop.value || (document.body.contains(rootEl.value) && isTopVisible(rootEl.value));
+		const isTop = isBackTop || (document.body.contains(rootEl) && isTopVisible(rootEl));
 
 		if (isTop) {
 			// Prepend the item
-			items.value.unshift(item);
+			items.unshift(item);
 
-			// オーバーフローしたら古いアイテムは捨てる
-			if (items.value.length >= props.displayLimit) {
-				// このやり方だとVue 3.2以降アニメーションが動かなくなる
-				//this.items = items.value.slice(0, props.displayLimit);
-				while (items.value.length >= props.displayLimit) {
-					items.value.pop();
-				}
-				more.value = true;
+			// Discard old items if they overflow.
+			while (items.length >= props.displayLimit) {
+				items.pop();
 			}
+			more = true;
 		} else {
-			queue.value.push(item);
-			onScrollTop(rootEl.value, () => {
-				for (const queueItem of queue.value) {
+			queue.push(item);
+			onScrollTop(rootEl, () => {
+				for (const queueItem of queue) {
 					prepend(queueItem);
 				}
-				queue.value = [];
+				queue = [];
 			});
 		}
 	}
 };
 
 const append = (item: Item): void => {
-	items.value.push(item);
+	items.push(item);
 };
 
 const removeItem = (finder: (item: Item) => boolean): void => {
-	const i = items.value.findIndex(finder);
-	items.value.splice(i, 1);
+	const i = items.findIndex(finder);
+	items.splice(i, 1);
 };
 
 const updateItem = (id: Item['id'], replacer: (old: Item) => Item): void => {
-	const i = items.value.findIndex(item => item.id === id);
-	items.value[i] = replacer(items.value[i]);
+	const i = items.findIndex(item => item.id === id);
+	items[i] = replacer(items[i]);
 };
 
 if (props.pagination.params && isRef(props.pagination.params)) {
 	watch(props.pagination.params, init, { deep: true });
 }
 
-watch(queue, (a, b) => {
-	if (a.length === 0 && b.length === 0) return;
-	emit('queue', queue.value.length);
+watch($$(queue), (a, b) => {
+	if (a.length !== 0 || b.length !== 0) emit('queue', queue.length);
 }, { deep: true });
 
 init();
 
 onActivated(() => {
-	isBackTop.value = false;
+	isBackTop = false;
 });
 
 onDeactivated(() => {
-	isBackTop.value = window.scrollY === 0;
+	isBackTop = window.scrollY === 0;
 });
 
 defineExpose({
