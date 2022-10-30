@@ -129,7 +129,11 @@ const fetchMore = async (ahead?: boolean): Promise<void> => {
 	if (!ahead) {
 		backed = true;
 	}
-	const params = props.pagination.params ? isRef(props.pagination.params) ? props.pagination.params : props.pagination.params : {};
+	const params = props.pagination.params
+		? isRef(props.pagination.params)
+			? props.pagination.params.value as Record<string, any>
+			: props.pagination.params
+		: {};
 	await os.api(props.pagination.endpoint, {
 		...params,
 		limit: SECOND_FETCH_LIMIT + 1,
