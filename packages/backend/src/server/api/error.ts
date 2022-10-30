@@ -13,7 +13,7 @@ export class ApiError extends Error {
 			code = 'INTERNAL_ERROR';
 		}
 
-		const { message, httpStatusCode } = errors[this.code];
+		const { message, httpStatusCode } = errors[code];
 		super(message);
 		this.code = code;
 		this.info = info;
