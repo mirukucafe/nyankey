@@ -9,15 +9,14 @@ export class ApiError extends Error {
 		info?: any | null,
 	) {
 		if (!(code in errors)) {
-			this.info = `Unknown error "${code}" occurred.`;
-			this.code = 'INTERNAL_ERROR';
-		} else {
-			this.info = info;
-			this.code = code;
+			info = `Unknown error "${code}" occurred.`;
+			code = 'INTERNAL_ERROR';
 		}
 
 		const { message, httpStatusCode } = errors[this.code];
 		super(message);
+		this.code = code;
+		this.info = info;
 		this.message = message;
 		this.httpStatusCode = httpStatusCode;
 	}
