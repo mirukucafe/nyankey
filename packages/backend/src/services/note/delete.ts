@@ -54,7 +54,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 		}
 
 		// also deliever delete activity to cascaded notes
-		const cascadingNotes = (await findCascadingNotes(note)).filter(note => !note.localOnly); // filter out local-only notes
+		const cascadingNotes = await findCascadingNotes(note);
 		for (const cascadingNote of cascadingNotes) {
 			if (!cascadingNote.user) continue;
 			if (!Users.isLocalUser(cascadingNote.user)) continue;
@@ -89,22 +89,31 @@ async function findCascadingNotes(note: Note): Promise<Note[]> {
 	const cascadingNotes: Note[] = [];
 
 	const recursive = async (noteId: string): Promise<void> => {
-		const query = Notes.createQueryBuilder('note')
-			.where('note.replyId = :noteId', { noteId })
-			.orWhere(new Brackets(q => {
-				q.where('note.renoteId = :noteId', { noteId })
-				.andWhere('note.text IS NOT NULL');
-			}))
-			.leftJoinAndSelect('note.user', 'user');
-		const replies = await query.getMany();
-		for (const reply of replies) {
+		// FIXME: use note_replies SQL function? Unclear what to do with 2nd and 3rd parameter, maybe rewrite the function.
+		const replies = await Notes.find({
+			where: [{
+				replyId: noteId,
+				localOnly: false,
+				userHost: IsNull(),
+			}, {
+				renoteId: noteId,
+				text: Not(IsNull()),
+				localOnly: false,
+				userHost: IsNull(),
+			}],
+			relations: {
+				user: true,
+			},
+		});
+
+		await Promise.all(replies.map(reply => {
 			cascadingNotes.push(reply);
-			await recursive(reply.id);
-		}
+			return recursive(reply.id);
+		}));
 	};
 	await recursive(note.id);
 
-	return cascadingNotes.filter(note => note.userHost === null); // filter out non-local users
+	return cascadingNotes;
 }
 
 async function getMentionedRemoteUsers(note: Note): Promise<IRemoteUser[]> {
