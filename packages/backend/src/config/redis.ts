@@ -10,7 +10,7 @@ function getRedisFamily(family?: string | number): number {
 		dual: 0,
 	};
 	if (typeof family === 'string' && family in familyMap) {
-		return familyMap[family];
+		return familyMap[family as keyof typeof familyMap];
 	} else if (typeof family === 'number' && Object.values(familyMap).includes(family)) {
 		return family;
 	}
