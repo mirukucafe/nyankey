@@ -17,14 +17,14 @@ import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js
 import { deliverToRelays } from '../relay.js';
 
 /**
- * 投稿を削除します。
- * @param user 投稿者
- * @param note 投稿
+ * Delete your note.
+ * @param user author
+ * @param note note to be deleted
  */
 export default async function(user: { id: User['id']; uri: User['uri']; host: User['host']; }, note: Note, quiet = false): Promise<void> {
 	const deletedAt = new Date();
 
-	// この投稿を除く指定したユーザーによる指定したノートのリノートが存在しないとき
+	// If this is the only renote of this note by this user
 	if (note.renoteId && (await countSameRenotes(user.id, note.renoteId, note.id)) === 0) {
 		Notes.decrement({ id: note.renoteId }, 'renoteCount', 1);
 		Notes.decrement({ id: note.renoteId }, 'score', 1);
@@ -37,7 +37,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 	if (!quiet) {
 		publishNoteStream(note.id, 'deleted', { deletedAt });
 
-		//#region ローカルの投稿なら削除アクティビティを配送
+		// deliver delete activity of note itself for local posts
 		if (Users.isLocalUser(user) && !note.localOnly) {
 			let renote: Note | null = null;
 
@@ -61,9 +61,8 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 			const content = renderActivity(renderDelete(renderTombstone(`${config.url}/notes/${cascadingNote.id}`), cascadingNote.user));
 			deliverToConcerned(cascadingNote.user, cascadingNote, content);
 		}
-		//#endregion
 
-		// 統計を更新
+		// update statistics
 		notesChart.update(note, false);
 		perUserNotesChart.update(user, note, false);
 
@@ -81,6 +80,11 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 	});
 }
 
+/**
+ * Search for notes that will be affected by ON CASCADE DELETE.
+ * However, only notes for which it is relevant to deliver delete activities are searched.
+ * This means only local notes that are not local-only are searched.
+ */
 async function findCascadingNotes(note: Note): Promise<Note[]> {
 	const cascadingNotes: Note[] = [];
 
