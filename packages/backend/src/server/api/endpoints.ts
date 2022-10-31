@@ -622,7 +622,7 @@ export interface IEndpointMeta {
 
 	readonly tags?: ReadonlyArray<string>;
 
-	readonly errors?: Array<keyof errors>;
+	readonly errors?: ReadonlyArray<keyof typeof errors>;
 
 	readonly res?: Schema;
 
