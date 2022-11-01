@@ -128,18 +128,6 @@
 							</FormInput>
 						</template>
 					</FormSection>
-
-					<FormSection>
-						<template #label>DeepL Translation</template>
-
-						<FormInput v-model="deeplAuthKey" class="_formBlock">
-							<template #prefix><i class="fas fa-key"></i></template>
-							<template #label>DeepL Auth Key</template>
-						</FormInput>
-						<FormSwitch v-model="deeplIsPro" class="_formBlock">
-							<template #label>Pro account</template>
-						</FormSwitch>
-					</FormSection>
 				</div>
 			</FormSuspense>
 		</MkSpacer>
@@ -182,8 +170,6 @@ let emailRequiredForSignup: boolean = $ref(false);
 let enableServiceWorker: boolean = $ref(false);
 let swPublicKey: any = $ref(null);
 let swPrivateKey: any = $ref(null);
-let deeplAuthKey: string = $ref('');
-let deeplIsPro: boolean = $ref(false);
 
 async function init(): Promise<void> {
 	const meta = await os.api('admin/meta');
@@ -209,11 +195,9 @@ async function init(): Promise<void> {
 	enableServiceWorker = meta.enableServiceWorker;
 	swPublicKey = meta.swPublickey;
 	swPrivateKey = meta.swPrivateKey;
-	deeplAuthKey = meta.deeplAuthKey;
-	deeplIsPro = meta.deeplIsPro;
 }
 
-function save() {
+function save(): void {
 	os.apiWithDialog('admin/update-meta', {
 		name,
 		description,
@@ -237,8 +221,6 @@ function save() {
 		enableServiceWorker,
 		swPublicKey,
 		swPrivateKey,
-		deeplAuthKey,
-		deeplIsPro,
 	}).then(() => {
 		fetchInstance();
 	});
