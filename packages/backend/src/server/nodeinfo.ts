@@ -3,7 +3,6 @@ import { IsNull, MoreThan } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Users, Notes } from '@/models/index.js';
-import { Cache } from '@/misc/cache.js';
 
 const router = new Router();
 
@@ -18,7 +17,33 @@ export const links = [{
 	href: config.url + nodeinfo2_0path,
 }];
 
-const nodeinfo2 = async () => {
+const repository = 'https://akkoma.dev/FoundKeyGang/FoundKey';
+
+type NodeInfo2Base = {
+	software: {
+		name: string;
+		version: string;
+		repository?: string; // Not used in NodeInfo 2.0; used in 2.1
+	};
+	protocols: string[];
+	services: {
+		inbound: string[];
+		outbound: string[];
+	};
+	openRegistrations: boolean;
+	usage: {
+		users: {
+			total: number;
+			activeHalfyear: number;
+			activeMonth: number;
+		};
+		localPosts: number;
+		localComments: number;
+	};
+	metadata: Record<string, any>;
+};
+
+const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 	const now = Date.now();
 	const [
 		meta,
@@ -40,7 +65,7 @@ const nodeinfo2 = async () => {
 		software: {
 			name: 'foundkey',
 			version: config.version,
-			repository: 'https://akkoma.dev/FoundKeyGang/FoundKey',
+			repository,
 		},
 		protocols: ['activitypub'],
 		services: {
@@ -62,7 +87,7 @@ const nodeinfo2 = async () => {
 			},
 			langs: meta.langs,
 			tosUrl: meta.ToSUrl,
-			repositoryUrl: meta.repositoryUrl,
+			repositoryUrl: repository,
 			feedbackUrl: 'ircs://irc.akkoma.dev/foundkey',
 			disableRegistration: meta.disableRegistration,
 			disableLocalTimeline: meta.disableLocalTimeline,
@@ -82,17 +107,15 @@ const nodeinfo2 = async () => {
 	};
 };
 
-const cache = new Cache<Awaited<ReturnType<typeof nodeinfo2>>>(1000 * 60 * 10);
-
 router.get(nodeinfo2_1path, async ctx => {
-	const base = await cache.fetch(null, () => nodeinfo2());
+	const base = await nodeinfo2();
 
 	ctx.body = { version: '2.1', ...base };
 	ctx.set('Cache-Control', 'public, max-age=600');
 });
 
 router.get(nodeinfo2_0path, async ctx => {
-	const base = await cache.fetch(null, () => nodeinfo2());
+	const base = await nodeinfo2();
 
 	delete base.software.repository;
 
