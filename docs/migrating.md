@@ -41,7 +41,7 @@ git merge tags/v13.0.0-preview2 --squash
 ```
 
 ## Making sure modern Yarn works
-Foundkey uses Yarn 3.2.3 instead of 1.x. To make sure the `yarn` command will work going forward, run `corepack enable`.
+Foundkey uses Modern Yarn instead of Classic (1.x). To make sure the `yarn` command will work going forward, run `corepack enable`.
 
 ## Rebuilding and running database migrations
 This will be pretty much the same as a regular update of Misskey. Note that `yarn install` may take a while since dependency versions have been updated or removed and we use a newer version of Yarn.
