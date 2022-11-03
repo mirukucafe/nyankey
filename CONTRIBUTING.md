@@ -297,8 +297,11 @@ PostgreSQL array indices **start at 1**.
 When `IN` is performed on a column that may contain `NULL` values, use `OR` or similar to handle `NULL` values.
 
 ### creating migrations
-In `packages/backend`, run:
+First make changes to the entity files in `packages/backend/src/models/entities/`.
+
+Then, in `packages/backend`, run:
 ```sh
+yarn build
 npx typeorm migration:generate -d ormconfig.js -o <migration name>
 ```
 
