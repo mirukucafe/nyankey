@@ -2,6 +2,7 @@ import { Apps } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { unique } from '@/prelude/array.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
+import { kinds } from '@/misc/api-permissions.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -21,10 +22,14 @@ export const paramDef = {
 	properties: {
 		name: { type: 'string' },
 		description: { type: 'string' },
-		permission: { type: 'array', uniqueItems: true, items: {
-			type: 'string',
-			// FIXME: add enum of possible permissions
-		} },
+		permission: {
+			type: 'array',
+			uniqueItems: true,
+			items: {
+				type: 'string',
+				enum: kinds,
+			},
+		},
 		callbackUrl: { type: 'string', nullable: true },
 	},
 	required: ['name', 'description', 'permission'],
