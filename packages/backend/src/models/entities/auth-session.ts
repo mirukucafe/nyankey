@@ -1,6 +1,6 @@
-import { Entity, PrimaryColumn, Index, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryColumn, Index, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { id } from '../id.js';
-import { User } from './user.js';
+import { AccessToken } from './access-token.js';
 import { App } from './app.js';
 
 @Entity()
@@ -23,19 +23,19 @@ export class AuthSession {
 		...id(),
 		nullable: true,
 	})
-	public userId: User['id'] | null;
+	public accessTokenId: AccessToken['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => AccessToken, {
 		onDelete: 'CASCADE',
 		nullable: true,
 	})
 	@JoinColumn()
-	public user: User | null;
+	public accessToken: AccessToken | null;
 
 	@Column(id())
 	public appId: App['id'];
 
-	@ManyToOne(type => App, {
+	@ManyToOne(() => App, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

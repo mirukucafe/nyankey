@@ -51,11 +51,16 @@ export async function oauth(ctx: Koa.Context): void {
 			id: client_id,
 			secret: client_secret,
 		}),
-		AuthSessions.findOneBy({
-			appId: client_id,
-			token: code,
-			// only check for approved auth sessions
-			userId: Not(IsNull()),
+		AuthSessions.findOne({
+			where: {
+				appId: client_id,
+				token: code,
+				// only check for approved auth sessions
+				accessTokenId: Not(IsNull()),
+			},
+			relations: {
+				accessToken: true,
+			},
 		}),
 	]);
 	if (app == null) {
@@ -75,20 +80,14 @@ export async function oauth(ctx: Koa.Context): void {
 		return;
 	}
 
-	const [ token ] = await Promise.all([
-		AccessTokens.findOneByOrFail({
-			appId: client_id,
-			userId: session.userId,
-		}),
-		// session is single use
-		AuthSessions.delete(session.id),
-	]);
+	// session is single use
+	await AuthSessions.delete(session.id),
 
 	ctx.response.status = 200;
 	ctx.response.body = {
-		access_token: token.token,
+		access_token: session.accessToken.token,
 		token_type: 'bearer',
-		// FIXME: per-token permissions
-		scope: app.permission.join(' '),
+		scope: session.accessToken.permission.join(' '),
 	};
+
 };

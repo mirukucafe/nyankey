@@ -46,27 +46,26 @@ export default define(meta, paramDef, async (ps) => {
 	if (app == null) throw new ApiError('NO_SUCH_APP');
 
 	// Fetch token
-	const session = await AuthSessions.findOneBy({
-		token: ps.token,
-		appId: app.id,
+	const session = await AuthSessions.findOne({
+		where: {
+			token: ps.token,
+			appId: app.id,
+		},
+		relations: {
+			accessToken: true,
+		},
 	});
 
 	if (session == null) throw new ApiError('NO_SUCH_SESSION');
 
-	if (session.userId == null) throw new ApiError('PENDING_SESSION');
-
-	// Lookup access token
-	const accessToken = await AccessTokens.findOneByOrFail({
-		appId: app.id,
-		userId: session.userId,
-	});
+	if (session.accessTokenId == null) throw new ApiError('PENDING_SESSION');
 
 	// Delete session
 	AuthSessions.delete(session.id);
 
 	return {
-		accessToken: accessToken.token,
-		user: await Users.pack(session.userId, null, {
+		accessToken: session.accessToken.token,
+		user: await Users.pack(session.accessToken.userId, null, {
 			detail: true,
 		}),
 	};

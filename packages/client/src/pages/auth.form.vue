@@ -7,8 +7,8 @@
 	</div>
 	<div class="_content">
 		<h2>{{ i18n.ts._auth.permissionAsk }}</h2>
-		<ul v-if="app.permission.length > 0">
-			<li v-for="p in app.permission" :key="p">{{ i18n.t(`_permissions.${p}`) }}</li>
+		<ul v-if="permission.length > 0">
+			<li v-for="p in permission" :key="p">{{ i18n.t(`_permissions.${p}`) }}</li>
 		</ul>
 		<template v-else>
 			{{ i18n.ts.noPermissionRequested }}
@@ -32,12 +32,12 @@ const emit = defineEmits<{
 }>();
 
 const props = defineProps<{
+	// TODO: allow user to deselect some permissions
+	permission: string[];
 	session: {
 		app: {
 			name: string;
-			id: string;
 			description: string;
-			permission: string[];
 		};
 		token: string;
 	};
@@ -56,6 +56,7 @@ function cancel(): void {
 function accept(): void {
 	os.api('auth/accept', {
 		token: props.session.token,
+		permission: props.permission,
 	}).then(() => {
 		emit('accepted');
 	});

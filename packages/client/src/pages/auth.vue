@@ -9,6 +9,7 @@
 				ref="form"
 				class="form"
 				:session="session"
+				:permission="permission"
 				@denied="denied"
 				@accepted="accepted"
 			/>
@@ -50,6 +51,7 @@ const props = defineProps<{
 
 let state: 'fetching' | 'waiting' | 'denied' | 'accepted' | 'fetch-session-error' | 'oauth-error' = $ref('fetching');
 let session = $ref(null);
+let permission: string[] = $ref([]);
 
 // if this is an OAuth request, will contain the respective parameters
 let oauth: { state: string | null, callback: string } | null = null;
@@ -95,6 +97,16 @@ onMounted(async () => {
 			state: params.get('state'),
 			callback: params.get('redirect_uri') ?? session.app.callbackUrl,
 		};
+
+		if (params.has('scope')) {
+			// If there are specific permissions requested, they have to be a subset of the apps permissions.
+			permission = params.get('scope')
+				.split(' ')
+				.filter(scope => session.app.permission.includes(scope));
+		} else {
+			// Default to all permissions of this app.
+			permission = session.app.permission;
+		}
 	} else if (!props.token) {
 		state = 'fetch-session-error';
 	} else {
@@ -103,6 +115,7 @@ onMounted(async () => {
 		}).catch(() => {
 			state = 'fetch-session-error';
 		});
+		permission = session?.app.permission ?? [];
 	}
 
 	// abort if an error occurred
@@ -113,6 +126,7 @@ onMounted(async () => {
 		// already authorized, move on through!
 		os.api('auth/accept', {
 			token: session.token,
+			permission,
 		}).then(() => {
 			accepted();
 		});
