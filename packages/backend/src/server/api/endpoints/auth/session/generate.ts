@@ -52,6 +52,10 @@ export const paramDef = {
 				type: 'string',
 				minLength: 1,
 			},
+			pkceChallenge: {
+				type: 'string',
+				minLength: 1,
+			},
 		},
 		required: ['clientId']
 	}, {
@@ -93,6 +97,7 @@ export default define(meta, paramDef, async (ps) => {
 		createdAt: new Date(),
 		appId: app.id,
 		token,
+		pkceChallenge: ps.pkceChallenge,
 	}).then(x => AuthSessions.findOneByOrFail(x.identifiers[0]));
 
 	return {

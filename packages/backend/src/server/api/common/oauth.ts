@@ -10,6 +10,7 @@ export async function oauth(ctx: Koa.Context): void {
 		grant_type,
 		code,
 		redirect_uri,
+		code_verifier,
 	} = ctx.request.body;
 
 	// check if any of the parameters are null or empty string
@@ -77,6 +78,34 @@ export async function oauth(ctx: Koa.Context): void {
 			error: 'invalid_grant',
 		};
 		return;
+	}
+
+	// check PKCE challenge, if provided before
+	if (session.pkceChallenge) {
+		// Also checking the client's homework, the RFC says:
+		//> minimum length of 43 characters and a maximum length of 128 characters
+		if (!code_verifier || code_verifier.length < 43 || code_verifier.length > 128) {
+			ctx.response.status = 400;
+			ctx.response.body = {
+				error: 'invalid_grant',
+				error_description: 'invalid or missing PKCE code_verifier',
+			};
+			return;
+		} else {
+			// verify that (from RFC 7636):
+			//> BASE64URL-ENCODE(SHA256(ASCII(code_verifier))) == code_challenge
+			const hash = crypto.createHash('sha256');
+			hash.update(code_verifier);
+
+			if (hash.digest('base64url') !== code_challenge) {
+				ctx.response.status = 400;
+				ctx.response.body = {
+					error: 'invalid_grant',
+					error_description: 'invalid PKCE code_verifier',
+				};
+				return;
+			}
+		}
 	}
 
 	// check redirect URI

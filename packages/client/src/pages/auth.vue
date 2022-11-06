@@ -64,6 +64,20 @@ onMounted(async () => {
 	if (params.get('response_type') === 'code') {
 		// OAuth request detected!
 
+		// if PKCE is used, check that it is a supported method
+		// the default value for code_challenge_method if not supplied is 'plain', which is not supported.
+		if (params.has('code_challenge') && params.get('code_challenge_method') !== 'S256') {
+			if (params.has('redirect_uri')) {
+				location.href = appendQuery(params.get('redirect_uri'), query({
+					error: 'invalid_request',
+					error_description: 'unsupported code_challenge_method, only "S256" is supported',
+				}));
+			} else {
+				state = 'oauth-error';
+			}
+			return;
+		}
+
 		// as a kind of hack, we first have to start the session for the OAuth client
 		const clientId = params.get('client_id');
 		if (!clientId) {
@@ -75,6 +89,7 @@ onMounted(async () => {
 			clientId,
 			// make the server check the redirect, if provided
 			callbackUrl: params.get('redirect_uri') ?? undefined,
+			pkceChallenge: params.get('code_challenge') ?? undefined,
 		}).catch(e => {
 			const response = {
 				error: 'server_error',

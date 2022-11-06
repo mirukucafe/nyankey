@@ -40,4 +40,10 @@ export class AuthSession {
 	})
 	@JoinColumn()
 	public app: App | null;
+
+	@Column('text', {
+		nullable: true,
+		comment: 'PKCE code_challenge value, if provided (OAuth only)',
+	})
+	pkceChallenge: string | null;
 }
