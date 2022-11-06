@@ -7,6 +7,7 @@ import { escapeAttribute, escapeValue } from '@/prelude/xml.js';
 import { Users } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
 import { links } from './nodeinfo.js';
+import { oauthMeta } from './oauth.js';
 
 // Init router
 const router = new Router();
@@ -62,10 +63,21 @@ router.get('/.well-known/nodeinfo', async ctx => {
 	ctx.body = { links };
 });
 
-/* TODO
-router.get('/.well-known/change-password', async ctx => {
-});
-*/
+function oauth(ctx) {
+	ctx.body = oauthMeta;
+	ctx.type = 'application/json';
+	ctx.set('Cache-Control', 'max-age=31536000, immutable');
+}
+
+// implements RFC 8414
+router.get('/.well-known/oauth-authorization-server', oauth);
+// From the above RFC:
+//> The identifiers "/.well-known/openid-configuration" [...] contain strings
+//> referring to the OpenID Connect family of specifications [...]. Despite the reuse
+//> of these identifiers that appear to be OpenID specific, their usage in this
+//> specification is actually referring to general OAuth 2.0 features that are not
+//> specific to OpenID Connect.
+router.get('/.well-known/openid-configuration', oauth);
 
 router.get(webFingerPath, async ctx => {
 	const fromId = (id: User['id']): FindOptionsWhere<User> => ({
