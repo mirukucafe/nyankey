@@ -1,15 +1,14 @@
+import * as crypto from 'node:crypto';
 import Koa from 'koa';
 import { IsNull, Not } from 'typeorm';
 import { Apps, AuthSessions, AccessTokens } from '@/models/index.js';
 import config from '@/config/index.js';
+import { compareUrl } from './compare-url.js';
 
 export async function oauth(ctx: Koa.Context): void {
 	const {
 		grant_type,
 		code,
-		// TODO: check redirect_uri
-		// since this is also not checked in the legacy app authentication
-		// it seems pointless to check it here, and it is also not stored.
 		redirect_uri,
 	} = ctx.request.body;
 
@@ -76,6 +75,16 @@ export async function oauth(ctx: Koa.Context): void {
 		ctx.response.status = 400;
 		ctx.response.body = {
 			error: 'invalid_grant',
+		};
+		return;
+	}
+
+	// check redirect URI
+	if (!compareUrl(app.callbackUrl, redirect_uri)) {
+		ctx.response.status = 400;
+		ctx.response.body = {
+			error: 'invalid_grant',
+			error_description: 'Mismatched redirect_uri',
 		};
 		return;
 	}

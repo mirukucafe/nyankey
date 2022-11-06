@@ -73,6 +73,8 @@ onMounted(async () => {
 
 		session = await os.api('auth/session/generate', {
 			clientId,
+			// make the server check the redirect, if provided
+			callbackUrl: params.get('redirect_uri') ?? undefined,
 		}).catch(e => {
 			const response = {
 				error: 'server_error',

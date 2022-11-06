@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import config from '@/config/index.js';
 import { Apps, AuthSessions } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
+import { compareUrl } from '@/server/api/common/compare-url.js';
 import define from '../../../define.js';
 import { ApiError } from '../../../error.js';
 
@@ -43,14 +44,17 @@ export const meta = {
 } as const;
 
 export const paramDef = {
+	type: 'object',
 	oneOf: [{
-		type: 'object',
 		properties: {
 			clientId: { type: 'string' },
+			callbackUrl: {
+				type: 'string',
+				minLength: 1,
+			},
 		},
 		required: ['clientId']
 	}, {
-		type: 'object',
 		properties: {
 			appSecret: { type: 'string' },
 		},
@@ -69,6 +73,14 @@ export default define(meta, paramDef, async (ps) => {
 
 	if (app == null) {
 		throw new ApiError('NO_SUCH_APP');
+	}
+
+	// check URL if provided
+	// technically the OAuth specification says that the redirect URI has to be
+	// bound with the token request, but since an app may only register one
+	// redirect URI, we don't actually have to store that.
+	if (ps.callbackUrl && !compareUrl(app.callbackUrl, ps.callbackUrl)) {
+		throw new ApiError('NO_SUCH_APP', 'redirect URI mismatch');
 	}
 
 	// Generate token
