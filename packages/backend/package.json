@@ -96,7 +96,7 @@
 		"rss-parser": "3.12.0",
 		"sanitize-html": "2.7.0",
 		"semver": "7.3.7",
-		"sharp": "0.30.7",
+		"sharp": "0.31.2",
 		"speakeasy": "2.0.0",
 		"strict-event-emitter-types": "2.0.0",
 		"stringz": "2.1.0",
