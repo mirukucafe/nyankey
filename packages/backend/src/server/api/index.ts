@@ -32,10 +32,7 @@ app.use(async (ctx, next) => {
 	await next();
 });
 
-app.use(bodyParser({
-	// リクエストが multipart/form-data でない限りはJSONだと見なす
-	detectJSON: ctx => !ctx.is('multipart/form-data'),
-}));
+app.use(bodyParser());
 
 // Init multer instance
 const upload = multer({
