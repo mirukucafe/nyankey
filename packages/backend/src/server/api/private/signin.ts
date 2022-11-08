@@ -11,48 +11,51 @@ import { getIpHash } from '@/misc/get-ip-hash.js';
 import signin from '../common/signin.js';
 import { verifyLogin, hash } from '../2fa.js';
 import { limiter } from '../limiter.js';
+import { ApiError } from '../error.js';
 
 export default async (ctx: Koa.Context) => {
 	ctx.set('Access-Control-Allow-Origin', config.url);
 	ctx.set('Access-Control-Allow-Credentials', 'true');
 
 	const body = ctx.request.body as any;
-	const username = body['username'];
-	const password = body['password'];
-	const token = body['token'];
+	const { username, password, token } = body;
 
-	function error(status: number, error: { id: string }) {
-		ctx.status = status;
-		ctx.body = { error };
+	// taken from @server/api/api-handler.ts
+	function error (e: ApiError): void {
+		ctx.status = e.httpStatusCode;
+		if (e.httpStatusCode === 401) {
+			ctx.response.set('WWW-Authenticate', 'Bearer');
+		}
+		ctx.body = {
+			error: {
+				message: e!.message,
+				code: e!.code,
+				...(e!.info ? { info: e!.info } : {}),
+				endpoint: endpoint.name,
+			},
+		};
 	}
 
 	try {
 		// not more than 1 attempt per second and not more than 10 attempts per hour
 		await limiter({ key: 'signin', duration: 60 * 60 * 1000, max: 10, minInterval: 1000 }, getIpHash(ctx.ip));
 	} catch (err) {
-		ctx.status = 429;
-		ctx.body = {
-			error: {
-				message: 'Too many failed attempts to sign in. Try again later.',
-				code: 'TOO_MANY_AUTHENTICATION_FAILURES',
-				id: '22d05606-fbcf-421a-a2db-b32610dcfd1b',
-			},
-		};
+		error(new ApiError('RATE_LIMIT_EXCEEDED'));
 		return;
 	}
 
 	if (typeof username !== 'string') {
-		ctx.status = 400;
+		error(new ApiError('INVALID_PARAM', { param: 'username', reason: 'not a string' }));
 		return;
 	}
 
 	if (typeof password !== 'string') {
-		ctx.status = 400;
+		error(new ApiError('INVALID_PARAM', { param: 'password', reason: 'not a string' }));
 		return;
 	}
 
 	if (token != null && typeof token !== 'string') {
-		ctx.status = 400;
+		error(new ApiError('INVALID_PARAM', { param: 'token', reason: 'provided but not a string' }));
 		return;
 	}
 
@@ -63,16 +66,12 @@ export default async (ctx: Koa.Context) => {
 	}) as ILocalUser;
 
 	if (user == null) {
-		error(404, {
-			id: '6cc579cc-885d-43d8-95c2-b8c7fc963280',
-		});
+		error(new ApiError('NO_SUCH_USER'));
 		return;
 	}
 
 	if (user.isSuspended) {
-		error(403, {
-			id: 'e03a5f46-d309-4865-9b69-56282d94e1eb',
-		});
+		error(new ApiError('SUSPENDED'));
 		return;
 	}
 
@@ -81,7 +80,7 @@ export default async (ctx: Koa.Context) => {
 	// Compare password
 	const same = await bcrypt.compare(password, profile.password!);
 
-	async function fail(status?: number, failure?: { id: string }) {
+	async function fail(): void {
 		// Append signin history
 		await Signins.insert({
 			id: genId(),
@@ -92,7 +91,7 @@ export default async (ctx: Koa.Context) => {
 			success: false,
 		});
 
-		error(status || 500, failure || { id: '4e30e80c-e338-45a0-8c8f-44455efa3b76' });
+		error(new ApiError('ACCESS_DENIED'));
 	}
 
 	if (!profile.twoFactorEnabled) {
@@ -100,18 +99,14 @@ export default async (ctx: Koa.Context) => {
 			signin(ctx, user);
 			return;
 		} else {
-			await fail(403, {
-				id: '932c904e-9460-45b7-9ce6-7ed33be7eb2c',
-			});
+			await fail();
 			return;
 		}
 	}
 
 	if (token) {
 		if (!same) {
-			await fail(403, {
-				id: '932c904e-9460-45b7-9ce6-7ed33be7eb2c',
-			});
+			await fail();
 			return;
 		}
 
@@ -126,16 +121,12 @@ export default async (ctx: Koa.Context) => {
 			signin(ctx, user);
 			return;
 		} else {
-			await fail(403, {
-				id: 'cdf1235b-ac71-46d4-a3a6-84ccce48df6f',
-			});
+			await fail();
 			return;
 		}
 	} else if (body.credentialId) {
 		if (!same && !profile.usePasswordLessLogin) {
-			await fail(403, {
-				id: '932c904e-9460-45b7-9ce6-7ed33be7eb2c',
-			});
+			await fail();
 			return;
 		}
 
@@ -149,9 +140,7 @@ export default async (ctx: Koa.Context) => {
 		});
 
 		if (!challenge) {
-			await fail(403, {
-				id: '2715a88a-2125-4013-932f-aa6fe72792da',
-			});
+			await fail();
 			return;
 		}
 
@@ -161,9 +150,7 @@ export default async (ctx: Koa.Context) => {
 		});
 
 		if (new Date().getTime() - challenge.createdAt.getTime() >= 5 * 60 * 1000) {
-			await fail(403, {
-				id: '2715a88a-2125-4013-932f-aa6fe72792da',
-			});
+			await fail();
 			return;
 		}
 
@@ -177,9 +164,7 @@ export default async (ctx: Koa.Context) => {
 		});
 
 		if (!securityKey) {
-			await fail(403, {
-				id: '66269679-aeaf-4474-862b-eb761197e046',
-			});
+			await fail();
 			return;
 		}
 
@@ -196,16 +181,12 @@ export default async (ctx: Koa.Context) => {
 			signin(ctx, user);
 			return;
 		} else {
-			await fail(403, {
-				id: '93b86c4b-72f9-40eb-9815-798928603d1e',
-			});
+			await fail();
 			return;
 		}
 	} else {
 		if (!same && !profile.usePasswordLessLogin) {
-			await fail(403, {
-				id: '932c904e-9460-45b7-9ce6-7ed33be7eb2c',
-			});
+			await fail();
 			return;
 		}
 
@@ -214,9 +195,7 @@ export default async (ctx: Koa.Context) => {
 		});
 
 		if (keys.length === 0) {
-			await fail(403, {
-				id: 'f27fd449-9af4-4841-9249-1f989b9fa4a4',
-			});
+			await fail();
 			return;
 		}
 
