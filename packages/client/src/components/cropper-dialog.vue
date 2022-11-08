@@ -71,6 +71,7 @@ const ok = async () => {
 				method: 'POST',
 				body: formData,
 				headers: {
+					'content-type': 'multipart/form-data',
 					authorization: `Bearer ${$i.token}`,
 				},
 			})
