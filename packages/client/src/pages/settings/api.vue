@@ -7,14 +7,14 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, ref } from 'vue';
+import { defineAsyncComponent } from 'vue';
 import FormLink from '@/components/form/link.vue';
 import FormButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
-const isDesktop = ref(window.innerWidth >= 1100);
+const isDesktop = window.innerWidth >= 1100;
 
 function generateToken() {
 	os.popup(defineAsyncComponent(() => import('@/components/token-generate-window.vue')), {}, {
