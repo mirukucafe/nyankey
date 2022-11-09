@@ -33,7 +33,8 @@ export async function skippedInstances(hosts: Array<Instace['host']>): Array<Ins
 			})
 			.andWhere(new Brackets(qb => { qb
 				.where('instance.isSuspended')
-				.orWhere('instance.lastCommunicatedAt < :deadTime', { deadTime });
+				.orWhere('instance.lastCommunicatedAt < :deadTime', { deadTime })
+				.orWhere('instance.latestStatus = 410');
 			}))
 			.select('host')
 			.getRawMany()
