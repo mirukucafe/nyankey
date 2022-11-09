@@ -6,7 +6,7 @@ import { DAY } from '@/const.js';
 
 // Threshold from last contact after which an instance will be considered
 // "dead" and should no longer get activities delivered to it.
-const deadThreshold = 30 * DAY;
+const deadThreshold = 7 * DAY;
 
 /**
  * Returns the subset of hosts which should be skipped.
