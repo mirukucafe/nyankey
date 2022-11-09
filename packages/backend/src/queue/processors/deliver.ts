@@ -62,8 +62,8 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 		if (res instanceof StatusError) {
 			// 4xx
 			if (res.isClientError) {
-				// HTTPステータスコード4xxはクライアントエラーであり、それはつまり
-				// 何回再送しても成功することはないということなのでエラーにはしないでおく
+				// A client error means that something is wrong with the request we are making,
+				// which means that retrying it makes no sense.
 				return `${res.statusCode} ${res.statusMessage}`;
 			}
 

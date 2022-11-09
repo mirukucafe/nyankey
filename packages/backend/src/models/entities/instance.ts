@@ -7,7 +7,7 @@ export class Instance {
 	public id: string;
 
 	/**
-	 * このインスタンスを捕捉した日時
+	 * Date and time this instance was first seen.
 	 */
 	@Index()
 	@Column('timestamp with time zone', {
@@ -16,7 +16,7 @@ export class Instance {
 	public caughtAt: Date;
 
 	/**
-	 * ホスト
+	 * Hostname
 	 */
 	@Index({ unique: true })
 	@Column('varchar', {
@@ -26,7 +26,7 @@ export class Instance {
 	public host: string;
 
 	/**
-	 * インスタンスのユーザー数
+	 * Number of users on this instance.
 	 */
 	@Column('integer', {
 		default: 0,
@@ -35,7 +35,7 @@ export class Instance {
 	public usersCount: number;
 
 	/**
-	 * インスタンスの投稿数
+	 * Number of notes on this instance.
 	 */
 	@Column('integer', {
 		default: 0,
@@ -44,7 +44,7 @@ export class Instance {
 	public notesCount: number;
 
 	/**
-	 * このインスタンスのユーザーからフォローされている、自インスタンスのユーザーの数
+	 * Number of local users who are followed by users from this instance.
 	 */
 	@Column('integer', {
 		default: 0,
@@ -52,7 +52,7 @@ export class Instance {
 	public followingCount: number;
 
 	/**
-	 * このインスタンスのユーザーをフォローしている、自インスタンスのユーザーの数
+	 * Number of users from this instance who are followed by local users.
 	 */
 	@Column('integer', {
 		default: 0,
@@ -60,7 +60,7 @@ export class Instance {
 	public followersCount: number;
 
 	/**
-	 * 直近のリクエスト送信日時
+	 * Timestamp of the latest outgoing HTTP request.
 	 */
 	@Column('timestamp with time zone', {
 		nullable: true,
@@ -68,7 +68,7 @@ export class Instance {
 	public latestRequestSentAt: Date | null;
 
 	/**
-	 * 直近のリクエスト送信時のHTTPステータスコード
+	 * HTTP status code that was received for the last outgoing HTTP request.
 	 */
 	@Column('integer', {
 		nullable: true,
@@ -76,7 +76,7 @@ export class Instance {
 	public latestStatus: number | null;
 
 	/**
-	 * 直近のリクエスト受信日時
+	 * Timestamp of the latest incoming HTTP request.
 	 */
 	@Column('timestamp with time zone', {
 		nullable: true,
@@ -84,13 +84,13 @@ export class Instance {
 	public latestRequestReceivedAt: Date | null;
 
 	/**
-	 * このインスタンスと最後にやり取りした日時
+	 * Timestamp of last communication with this instance (incoming or outgoing).
 	 */
 	@Column('timestamp with time zone')
 	public lastCommunicatedAt: Date;
 
 	/**
-	 * このインスタンスと不通かどうか
+	 * Whether this instance seems unresponsive.
 	 */
 	@Column('boolean', {
 		default: false,
@@ -98,7 +98,7 @@ export class Instance {
 	public isNotResponding: boolean;
 
 	/**
-	 * このインスタンスへの配信を停止するか
+	 * Whether sending activities to this instance has been suspended.
 	 */
 	@Index()
 	@Column('boolean', {
