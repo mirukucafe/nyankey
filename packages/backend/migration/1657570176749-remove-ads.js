@@ -1,5 +1,5 @@
 export class removeAds1657570176749 {
-    name = 'removeAds1657570176749'
+    name = 'removeAds1657570176749';
 
     async up(queryRunner) {
         await queryRunner.query(`DROP TABLE "ad"`);
