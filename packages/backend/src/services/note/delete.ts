@@ -105,6 +105,9 @@ async function findCascadingNotes(note: Note): Promise<Note[]> {
 		});
 
 		await Promise.all(replies.map(reply => {
+			// only add unique notes
+			if (cascadingNotes.find((x) => x.id == reply.id) != null) return;
+
 			cascadingNotes.push(reply);
 			return recursive(reply.id);
 		}));
