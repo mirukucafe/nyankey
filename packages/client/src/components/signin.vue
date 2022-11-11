@@ -8,7 +8,6 @@
 		<div v-if="!totpLogin" class="normal-signin">
 			<MkInput v-model="username" class="_formBlock" :placeholder="i18n.ts.username" type="text" pattern="^[a-zA-Z0-9_]+$" :spellcheck="false" autofocus required data-cy-signin-username @update:modelValue="onUsernameChange">
 				<template #prefix>@</template>
-				<template #suffix>@{{ host }}</template>
 			</MkInput>
 			<MkInput v-if="!user || user && !user.usePasswordLessLogin" v-model="password" class="_formBlock" :placeholder="i18n.ts.password" type="password" :with-password-toggle="true" required data-cy-signin-password>
 				<template #prefix><i class="fas fa-lock"></i></template>
@@ -55,7 +54,7 @@ import { showSuspendedDialog } from '@/scripts/show-suspended-dialog';
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
 import MkInfo from '@/components/ui/info.vue';
-import { apiUrl, host as configHost } from '@/config';
+import { apiUrl } from '@/config';
 import { byteify, hexify } from '@/scripts/2fa';
 import * as os from '@/os';
 import { login } from '@/account';
@@ -68,7 +67,6 @@ let user = $ref(null);
 let username = $ref('');
 let password = $ref('');
 let token = $ref('');
-let host = $ref(toUnicode(configHost));
 let totpLogin = $ref(false);
 let challengeData = $ref(null);
 let queryingKey = $ref(false);

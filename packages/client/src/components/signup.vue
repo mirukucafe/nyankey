@@ -7,7 +7,6 @@
 	<MkInput v-model="username" class="_formBlock" type="text" pattern="^[a-zA-Z0-9_]{1,20}$" :spellcheck="false" required data-cy-signup-username @update:modelValue="onChangeUsername">
 		<template #label>{{ i18n.ts.username }} <div v-tooltip:dialog="i18n.ts.usernameInfo" class="_button _help"><i class="far fa-question-circle"></i></div></template>
 		<template #prefix>@</template>
-		<template #suffix>@{{ host }}</template>
 		<template #caption>
 			<span v-if="usernameState === 'wait'" style="color:#999"><i class="fas fa-spinner fa-pulse fa-fw"></i> {{ i18n.ts.checking }}</span>
 			<span v-else-if="usernameState === 'ok'" style="color: var(--success)"><i class="fas fa-check fa-fw"></i> {{ i18n.ts.available }}</span>
@@ -70,7 +69,6 @@ import MkButton from './ui/button.vue';
 import MkCaptcha from './captcha.vue';
 import MkInput from './form/input.vue';
 import MkSwitch from './form/switch.vue';
-import * as config from '@/config';
 import * as os from '@/os';
 import { login } from '@/account';
 import { instance } from '@/instance';
@@ -86,8 +84,6 @@ const emit = defineEmits<{
 	(ev: 'signup', user: Record<string, any>): void;
 	(ev: 'signupEmailPending'): void;
 }>();
-
-const host = toUnicode(config.host);
 
 let hcaptcha = $ref();
 let recaptcha = $ref();

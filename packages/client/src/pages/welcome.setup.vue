@@ -6,7 +6,6 @@
 		<MkInput v-model="username" pattern="^[a-zA-Z0-9_]{1,20}$" :spellcheck="false" required data-cy-admin-username class="_formBlock">
 			<template #label>{{ i18n.ts.username }}</template>
 			<template #prefix>@</template>
-			<template #suffix>@{{ host }}</template>
 		</MkInput>
 		<MkInput v-model="password" type="password" data-cy-admin-password class="_formBlock">
 			<template #label>{{ i18n.ts.password }}</template>
@@ -24,7 +23,6 @@
 <script lang="ts" setup>
 import MkButton from '@/components/ui/button.vue';
 import MkInput from '@/components/form/input.vue';
-import { host } from '@/config';
 import * as os from '@/os';
 import { login } from '@/account';
 import { i18n } from '@/i18n';
