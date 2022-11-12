@@ -119,26 +119,18 @@ export default class DeliverManager {
 
 		if (this.recipes.some(r => isFollowers(r))) {
 			// followers deliver
-			// TODO: SELECT DISTINCT ON ("followerSharedInbox") "followerSharedInbox" みたいな問い合わせにすればよりパフォーマンス向上できそう
-			// ただ、sharedInboxがnullなリモートユーザーも稀におり、その対応ができなさそう？
-			const followers = await Followings.find({
-				where: {
-					followeeId: this.actor.id,
-					followerHost: Not(IsNull()),
-				},
-				select: {
-					followerSharedInbox: true,
-					followerInbox: true,
-				},
-			}) as {
-				followerSharedInbox: string | null;
-				followerInbox: string;
-			}[];
+			const followers = await Followings.createQueryBuilder('followings')
+				// return either the shared inbox (if available) or the individual inbox
+				.select('COALESCE(followings.followerSharedInbox, followings.followerInbox)', 'inbox')
+				// so we don't have to make our inboxes Set work as hard
+				.distinct(true)
+				// ...for the specific actors followers
+				.where('followings.followeeId = :actorId', { actorId: this.actor.id })
+				// don't deliver to ourselves
+				.andWhere('followings.followerHost IS NOT NULL')
+				.getRawMany();
 
-			for (const following of followers) {
-				const inbox = following.followerSharedInbox || following.followerInbox;
-				inboxes.add(inbox);
-			}
+			followers.forEach(({ inbox }) => inboxes.add(inbox));
 		}
 
 		this.recipes.filter((recipe): recipe is IDirectRecipe =>
