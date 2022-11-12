@@ -1,6 +1,6 @@
 declare var self: ServiceWorkerGlobalScope;
 
-import { createEmptyNotification, createNotification } from '@/scripts/create-notification';
+import { createNotification } from '@/scripts/create-notification';
 import { swLang } from '@/scripts/lang';
 import { swNotificationRead } from '@/scripts/notification-read';
 import { pushNotificationDataMap } from '@/types';
@@ -67,8 +67,6 @@ self.addEventListener('push', ev => {
 				}
 				break;
 		}
-
-		return createEmptyNotification();
 	}));
 });
 
