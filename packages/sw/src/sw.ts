@@ -24,19 +24,13 @@ self.addEventListener('activate', ev => {
 });
 
 self.addEventListener('push', ev => {
-	// クライアント取得
-	ev.waitUntil(self.clients.matchAll({
-		includeUncontrolled: true,
-		type: 'window'
-	}).then(async <K extends keyof pushNotificationDataMap>(clients: readonly WindowClient[]) => {
+	ev.waitUntil((async <K extends keyof pushNotificationDataMap>() => {
 		const data: pushNotificationDataMap[K] = ev.data?.json();
 
 		switch (data.type) {
 			// case 'driveFileCreated':
 			case 'notification':
 			case 'unreadMessagingMessage':
-				// クライアントがあったらストリームに接続しているということなので通知しない
-				if (clients.length != 0) return;
 				return createNotification(data);
 			case 'readAllNotifications':
 				for (const n of await self.registration.getNotifications()) {
@@ -67,7 +61,7 @@ self.addEventListener('push', ev => {
 				}
 				break;
 		}
-	}));
+	})());
 });
 
 self.addEventListener('notificationclick', <K extends keyof pushNotificationDataMap>(ev: ServiceWorkerGlobalScopeEventMap['notificationclick']) => {
