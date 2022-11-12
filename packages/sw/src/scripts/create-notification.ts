@@ -30,14 +30,6 @@ async function composeNotification<K extends keyof pushNotificationDataMap>(data
 	const i18n = await swLang.i18n as I18n<any>;
 	const { t } = i18n;
 	switch (data.type) {
-		/*
-		case 'driveFileCreated': // TODO (Server Side)
-			return [t('_notification.fileUploaded'), {
-				body: body.name,
-				icon: body.url,
-				data
-			}];
-		*/
 		case 'notification':
 			switch (data.body.type) {
 				case 'follow':
