@@ -9,7 +9,7 @@ export async function initializeSw() {
 	navigator.serviceWorker.register('/sw.js', { scope: '/', type: 'classic' });
 	navigator.serviceWorker.ready.then(registration => {
 		registration.active?.postMessage({
-			msg: 'initialize',
+			type: 'initialize',
 			lang,
 		});
 

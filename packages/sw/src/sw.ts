@@ -161,24 +161,14 @@ self.addEventListener('notificationclose', <K extends keyof pushNotificationData
 
 self.addEventListener('message', (ev: ServiceWorkerGlobalScopeEventMap['message']) => {
 	ev.waitUntil((async () => {
-		switch (ev.data) {
-			case 'clear':
-				// Cache Storage全削除
-				await caches.keys()
-					.then(cacheNames => Promise.all(
-						cacheNames.map(name => caches.delete(name))
-					));
-				return; // TODO
-		}
-	
 		if (typeof ev.data === 'object') {
-			// E.g. '[object Array]' → 'array'
-			const otype = Object.prototype.toString.call(ev.data).slice(8, -1).toLowerCase();
-	
-			if (otype === 'object') {
-				if (ev.data.msg === 'initialize') {
+			switch (ev.data.type) {
+				case 'initialize':
 					swLang.setLang(ev.data.lang);
-				}
+					break;
+				case 'notification':
+					createNotification(ev.data);
+					break;
 			}
 		}
 	})());
