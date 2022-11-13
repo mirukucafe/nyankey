@@ -5,7 +5,6 @@ import { subscriber } from '@/db/redis.js';
 
 export const userByIdCache = new Cache<CacheableUser>(Infinity);
 export const localUserByNativeTokenCache = new Cache<CacheableLocalUser | null>(Infinity);
-export const localUserByIdCache = new Cache<CacheableLocalUser>(Infinity);
 export const uriPersonCache = new Cache<CacheableUser | null>(Infinity);
 
 subscriber.on('message', async (_, data) => {
@@ -27,7 +26,6 @@ subscriber.on('message', async (_, data) => {
 				}
 				if (Users.isLocalUser(user)) {
 					localUserByNativeTokenCache.set(user.token, user);
-					localUserByIdCache.set(user.id, user);
 				}
 				break;
 			}

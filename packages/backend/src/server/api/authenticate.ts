@@ -3,7 +3,7 @@ import { Users, AccessTokens, Apps } from '@/models/index.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { Cache } from '@/misc/cache.js';
 import { App } from '@/models/entities/app.js';
-import { localUserByIdCache, localUserByNativeTokenCache } from '@/services/user-cache.js';
+import { userByIdCache, localUserByNativeTokenCache } from '@/services/user-cache.js';
 import isNativeToken from './common/is-native-token.js';
 
 const appCache = new Cache<App>(Infinity);
@@ -64,10 +64,13 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 			lastUsedAt: new Date(),
 		});
 
-		const user = await localUserByIdCache.fetch(accessToken.userId,
+		const user = await userByIdCache.fetch(accessToken.userId,
 			() => Users.findOneBy({
 				id: accessToken.userId,
 			}) as Promise<ILocalUser>);
+
+		// can't authorize remote users
+		if (!Users.isLocalUser(user)) return [null, null];
 
 		if (accessToken.appId) {
 			const app = await appCache.fetch(accessToken.appId,
