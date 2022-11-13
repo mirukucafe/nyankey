@@ -26,8 +26,27 @@
 
 			<FormSection v-if="iAmModerator">
 				<template #label>Moderation</template>
-				<FormSwitch v-model="suspended" class="_formBlock" @update:modelValue="toggleSuspend">{{ i18n.ts.stopActivityDelivery }}</FormSwitch>
-				<FormSwitch v-model="isBlocked" class="_formBlock" @update:modelValue="toggleBlock">{{ i18n.ts.blockThisInstance }}</FormSwitch>
+				<FormSwitch
+					:model-value="suspended || isBlocked"
+					@update:model-value="newValue => {suspended = newValue; toggleSuspend() }"
+					:disabled="isBlocked"
+					class="_formBlock"
+				>
+					{{ i18n.ts.stopActivityDelivery }}
+					<template #caption>
+						{{ i18n.ts.stopActivityDeliveryDescription }}
+					</template>
+				</FormSwitch>
+				<FormSwitch
+					v-model="isBlocked"
+					@update:modelValue="toggleBlock"
+					class="_formBlock"
+				>
+					{{ i18n.ts.blockThisInstance }}
+					<template #caption>
+						{{ i18n.ts.blockThisInstanceDescription }}
+					</template>
+				</FormSwitch>
 				<MkButton @click="refreshMetadata"><i class="fas fa-refresh"></i> Refresh metadata</MkButton>
 			</FormSection>
 
@@ -152,7 +171,7 @@ const usersPagination = {
 	offsetMode: true,
 };
 
-async function fetch() {
+async function fetch(): Promise<void> {
 	instance = await os.api('federation/show-instance', {
 		host: props.host,
 	});
@@ -160,21 +179,21 @@ async function fetch() {
 	isBlocked = instance.isBlocked;
 }
 
-async function toggleBlock(ev) {
+async function toggleBlock(): Promise<void> {
 	if (meta == null) return;
 	await os.api('admin/update-meta', {
 		blockedHosts: isBlocked ? meta.blockedHosts.concat([instance.host]) : meta.blockedHosts.filter(x => x !== instance.host),
 	});
 }
 
-async function toggleSuspend(v) {
+async function toggleSuspend(): Promise<void> {
 	await os.api('admin/federation/update-instance', {
 		host: instance.host,
 		isSuspended: suspended,
 	});
 }
 
-function refreshMetadata() {
+function refreshMetadata(): void {
 	os.api('admin/federation/refresh-remote-instance-metadata', {
 		host: instance.host,
 	});
