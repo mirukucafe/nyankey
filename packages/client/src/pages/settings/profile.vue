@@ -12,7 +12,7 @@
 		<template #label>{{ i18n.ts._profile.name }}</template>
 	</FormInput>
 
-	<FormTextarea v-model="profile.description" :max="500" tall manual-save class="_formBlock">
+	<FormTextarea v-model="profile.description" :max="2048" tall manual-save class="_formBlock">
 		<template #label>{{ i18n.ts._profile.description }}</template>
 		<template #caption>{{ i18n.ts._profile.youCanIncludeHashtags }}</template>
 	</FormTextarea>

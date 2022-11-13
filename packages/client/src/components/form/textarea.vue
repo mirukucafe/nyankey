@@ -14,6 +14,7 @@
 			:pattern="pattern"
 			:autocomplete="autocomplete ? 'on' : 'off'"
 			:spellcheck="spellcheck"
+			:maxlength="max"
 			@focus="focused = true"
 			@blur="focused = false"
 			@keydown="onKeydown($event)"
@@ -54,6 +55,7 @@ const props = withDefaults(defineProps<{
 	pre?: boolean;
 	debounce?: boolean;
 	manualSave?: boolean;
+	max?: number;
 }>(), {
 	pattern: undefined,
 	placeholder: '',
