@@ -43,7 +43,7 @@ export class Cache<T> {
 		if (cached !== undefined) {
 			return cached;
 		} else {
-			const value = await this.fetcher();
+			const value = await this.fetcher(key);
 
 			// don't cache undefined
 			if (value !== undefined)

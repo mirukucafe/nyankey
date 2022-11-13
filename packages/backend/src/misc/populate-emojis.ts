@@ -15,7 +15,7 @@ import { decodeReaction } from './reaction-lib.js';
 const cache = new Cache<Emoji | null>(
 	12 * HOUR,
 	async (key) => {
-		const [host, name]  = key.split(':');
+		const [host, name] = key.split(':');
 		return (await Emojis.findOneBy({
 			name,
 			host: host || IsNull(),
