@@ -36,13 +36,22 @@ import { Cache } from '@/misc/cache.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
 import { IActivity } from '@/remote/activitypub/type.js';
+import { MINUTE } from '@/const.js';
 import { updateHashtags } from '../update-hashtag.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import { createNotification } from '../create-notification.js';
 import { addNoteToAntenna } from '../add-note-to-antenna.js';
 import { deliverToRelays } from '../relay.js';
 
-const mutedWordsCache = new Cache<{ userId: UserProfile['userId']; mutedWords: UserProfile['mutedWords']; }[]>(1000 * 60 * 5);
+const mutedWordsCache = new Cache<{ userId: UserProfile['userId']; mutedWords: UserProfile['mutedWords']; }[]>(
+	5 * MINUTE,
+	() => UserProfiles.find({
+		where: {
+			enableWordMute: true,
+		},
+		select: ['userId', 'mutedWords'],
+	}),
+);
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention';
 
@@ -257,12 +266,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	incNotesCountOfUser(user);
 
 	// Word mute
-	mutedWordsCache.fetch(null, () => UserProfiles.find({
-		where: {
-			enableWordMute: true,
-		},
-		select: ['userId', 'mutedWords'],
-	})).then(us => {
+	mutedWordsCache.fetch(null).then(us => {
 		for (const u of us) {
 			checkWordMute(note, { id: u.userId }, u.mutedWords).then(shouldMute => {
 				if (shouldMute) {

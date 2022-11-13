@@ -6,13 +6,16 @@ import { Packed } from '@/misc/schema.js';
 import { awaitAll, Promiseable } from '@/prelude/await-all.js';
 import { populateEmojis } from '@/misc/populate-emojis.js';
 import { getAntennas } from '@/misc/antenna-cache.js';
-import { USER_ACTIVE_THRESHOLD, USER_ONLINE_THRESHOLD } from '@/const.js';
+import { USER_ACTIVE_THRESHOLD, USER_ONLINE_THRESHOLD, HOUR } from '@/const.js';
 import { Cache } from '@/misc/cache.js';
 import { db } from '@/db/postgre.js';
 import { Instance } from '../entities/instance.js';
 import { Notes, NoteUnreads, FollowRequests, Notifications, MessagingMessages, UserNotePinings, Followings, Blockings, Mutings, RenoteMutings, UserProfiles, UserSecurityKeys, UserGroupJoinings, Pages, Announcements, AnnouncementReads, AntennaNotes, ChannelFollowings, Instances, DriveFiles } from '../index.js';
 
-const userInstanceCache = new Cache<Instance | null>(1000 * 60 * 60 * 3);
+const userInstanceCache = new Cache<Instance | null>(
+	3 * HOUR,
+	(host) => Instances.findOneBy({ host }).then(x => x ?? undefined),
+);
 
 type IsUserDetailed<Detailed extends boolean> = Detailed extends true ? Packed<'UserDetailed'> : Packed<'UserLite'>;
 type IsMeAndIsUserDetailed<ExpectsMe extends boolean | null, Detailed extends boolean> =
@@ -309,17 +312,15 @@ export const UserRepository = db.getRepository(User).extend({
 			isModerator: user.isModerator || falsy,
 			isBot: user.isBot || falsy,
 			isCat: user.isCat || falsy,
-			instance: user.host ? userInstanceCache.fetch(user.host,
-				() => Instances.findOneBy({ host: user.host! }),
-				v => v != null,
-			).then(instance => instance ? {
-				name: instance.name,
-				softwareName: instance.softwareName,
-				softwareVersion: instance.softwareVersion,
-				iconUrl: instance.iconUrl,
-				faviconUrl: instance.faviconUrl,
-				themeColor: instance.themeColor,
-			} : undefined) : undefined,
+			instance: !user.host ? undefined : userInstanceCache.fetch(user.host)
+				.then(instance => !instance ? undefined : {
+					name: instance.name,
+					softwareName: instance.softwareName,
+					softwareVersion: instance.softwareVersion,
+					iconUrl: instance.iconUrl,
+					faviconUrl: instance.faviconUrl,
+					themeColor: instance.themeColor,
+				}),
 			emojis: populateEmojis(user.emojis, user.host),
 			onlineStatus: this.getOnlineStatus(user),
 

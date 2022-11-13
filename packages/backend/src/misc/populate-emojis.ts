@@ -4,11 +4,24 @@ import { Emojis } from '@/models/index.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { Note } from '@/models/entities/note.js';
 import { query } from '@/prelude/url.js';
+import { HOUR } from '@/const.js';
 import { Cache } from './cache.js';
 import { isSelfHost, toPunyNullable } from './convert-host.js';
 import { decodeReaction } from './reaction-lib.js';
 
-const cache = new Cache<Emoji | null>(1000 * 60 * 60 * 12);
+/**
+ * composite cache key: `${host ?? ''}:${name}`
+ */
+const cache = new Cache<Emoji | null>(
+	12 * HOUR,
+	async (key) => {
+		const [host, name]  = key.split(':');
+		return (await Emojis.findOneBy({
+			name,
+			host: host || IsNull(),
+		})) || null;
+	},
+);
 
 /**
  * Information needed to attach in ActivityPub
@@ -51,12 +64,7 @@ export async function populateEmoji(emojiName: string, noteUserHost: string | nu
 	const { name, host } = parseEmojiStr(emojiName, noteUserHost);
 	if (name == null) return null;
 
-	const queryOrNull = async () => (await Emojis.findOneBy({
-		name,
-		host: host ?? IsNull(),
-	})) || null;
-
-	const emoji = await cache.fetch(`${name} ${host}`, queryOrNull);
+	const emoji = await cache.fetch(`${host ?? ''}:${name}`);
 
 	if (emoji == null) return null;
 
@@ -105,7 +113,10 @@ export function aggregateNoteEmojis(notes: Note[]) {
  * Query list of emojis in bulk and add them to the cache.
  */
 export async function prefetchEmojis(emojis: { name: string; host: string | null; }[]): Promise<void> {
-	const notCachedEmojis = emojis.filter(emoji => cache.get(`${emoji.name} ${emoji.host}`) == null);
+	const notCachedEmojis = emojis.filter(emoji => {
+		// check if the cache has this emoji
+		return cache.get(`${emoji.host ?? ''}:${emoji.name}`) == null;
+	});
 
 	// check if there even are any uncached emoji to handle
 	if (notCachedEmojis.length === 0) return;
@@ -127,7 +138,7 @@ export async function prefetchEmojis(emojis: { name: string; host: string | null
 	}).then(emojis => {
 		// store all emojis into the cache
 		emojis.forEach(emoji => {
-			cache.set(`${emoji.name} ${emoji.host}`, emoji);
+			cache.set(`${emoji.host ?? ''}:${emoji.name}`, emoji);
 		});
 	});
 }

@@ -6,7 +6,10 @@ import { App } from '@/models/entities/app.js';
 import { userByIdCache, localUserByNativeTokenCache } from '@/services/user-cache.js';
 import isNativeToken from './common/is-native-token.js';
 
-const appCache = new Cache<App>(Infinity);
+const appCache = new Cache<App>(
+	Infinity,
+	(id) => Apps.findOneByOrFail({ id }),
+);
 
 export class AuthenticationError extends Error {
 	constructor(message: string) {
@@ -39,8 +42,7 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 	const token: string = maybeToken;
 
 	if (isNativeToken(token)) {
-		const user = await localUserByNativeTokenCache.fetch(token,
-			() => Users.findOneBy({ token }) as Promise<ILocalUser | null>);
+		const user = await localUserByNativeTokenCache.fetch(token);
 
 		if (user == null) {
 			throw new AuthenticationError('unknown token');
@@ -64,17 +66,13 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 			lastUsedAt: new Date(),
 		});
 
-		const user = await userByIdCache.fetch(accessToken.userId,
-			() => Users.findOneBy({
-				id: accessToken.userId,
-			}) as Promise<ILocalUser>);
+		const user = await userByIdCache.fetch(accessToken.userId);
 
 		// can't authorize remote users
 		if (!Users.isLocalUser(user)) return [null, null];
 
 		if (accessToken.appId) {
-			const app = await appCache.fetch(accessToken.appId,
-				() => Apps.findOneByOrFail({ id: accessToken.appId! }));
+			const app = await appCache.fetch(accessToken.appId);
 
 			return [user, {
 				id: accessToken.id,

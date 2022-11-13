@@ -8,11 +8,21 @@ import { Users, Relays } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { Cache } from '@/misc/cache.js';
 import { Relay } from '@/models/entities/relay.js';
+import { MINUTE } from '@/const.js';
 import { createSystemUser } from './create-system-user.js';
 
 const ACTOR_USERNAME = 'relay.actor' as const;
 
-const relaysCache = new Cache<Relay[]>(1000 * 60 * 10);
+/**
+ * There is only one cache key: null.
+ * A cache is only used here to have expiring storage.
+ */
+const relaysCache = new Cache<Relay[]>(
+	10 * MINUTE,
+	() => Relays.findBy({
+		status: 'accepted',
+	}),
+);
 
 export async function getRelayActor(): Promise<ILocalUser> {
 	const user = await Users.findOneBy({
@@ -83,9 +93,7 @@ export async function relayRejected(id: string) {
 export async function deliverToRelays(user: { id: User['id']; host: null; }, activity: any) {
 	if (activity == null) return;
 
-	const relays = await relaysCache.fetch(null, () => Relays.findBy({
-		status: 'accepted',
-	}));
+	const relays = await relaysCache.fetch(null);
 	if (relays.length === 0) return;
 
 	// TODO

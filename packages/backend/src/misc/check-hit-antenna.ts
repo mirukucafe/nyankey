@@ -3,22 +3,26 @@ import { Note } from '@/models/entities/note.js';
 import { User } from '@/models/entities/user.js';
 import { UserListJoinings, UserGroupJoinings, Blockings } from '@/models/index.js';
 import * as Acct from '@/misc/acct.js';
+import { MINUTE } from '@/const.js';
 import { getFullApAccount } from './convert-host.js';
 import { Packed } from './schema.js';
 import { Cache } from './cache.js';
 
-const blockingCache = new Cache<User['id'][]>(1000 * 60 * 5);
+const blockingCache = new Cache<User['id'][]>(
+	5 * MINUTE,
+	(blockerId) => Blockings.findBy({ blockerId }).then(res => res.map(x => x.blockeeId)),
+);
 
-// NOTE: フォローしているユーザーのノート、リストのユーザーのノート、グループのユーザーのノート指定はパフォーマンス上の理由で無効になっている
+// designation for users you follow, list users and groups is disabled for performance reasons
 
 /**
- * noteUserFollowers / antennaUserFollowing はどちらか一方が指定されていればよい
+ * either noteUserFollowers or antennaUserFollowing must be specified
  */
 export async function checkHitAntenna(antenna: Antenna, note: (Note | Packed<'Note'>), noteUser: { id: User['id']; username: string; host: string | null; }, noteUserFollowers?: User['id'][], antennaUserFollowing?: User['id'][]): Promise<boolean> {
 	if (note.visibility === 'specified') return false;
 
-	// アンテナ作成者がノート作成者にブロックされていたらスキップ
-	const blockings = await blockingCache.fetch(noteUser.id, () => Blockings.findBy({ blockerId: noteUser.id }).then(res => res.map(x => x.blockeeId)));
+	// skip if the antenna creator is blocked by the note author
+	const blockings = await blockingCache.fetch(noteUser.id);
 	if (blockings.some(blocking => blocking === antenna.userId)) return false;
 
 	if (note.visibility === 'followers') {

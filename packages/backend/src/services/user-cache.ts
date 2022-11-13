@@ -3,9 +3,18 @@ import { Users } from '@/models/index.js';
 import { Cache } from '@/misc/cache.js';
 import { subscriber } from '@/db/redis.js';
 
-export const userByIdCache = new Cache<CacheableUser>(Infinity);
-export const localUserByNativeTokenCache = new Cache<CacheableLocalUser | null>(Infinity);
-export const uriPersonCache = new Cache<CacheableUser | null>(Infinity);
+export const userByIdCache = new Cache<CacheableUser>(
+	Infinity,
+	(id) => Users.findOneBy({ id }).then(x => x ?? undefined),
+);
+export const localUserByNativeTokenCache = new Cache<CacheableLocalUser>(
+	Infinity,
+	(token) => Users.findOneBy({ token }).then(x => x ?? undefined),
+);
+export const uriPersonCache = new Cache<CacheableUser>(
+	Infinity,
+	(uri) => Users.findOneBy({ uri }).then(x => x ?? undefined),
+);
 
 subscriber.on('message', async (_, data) => {
 	const obj = JSON.parse(data);
