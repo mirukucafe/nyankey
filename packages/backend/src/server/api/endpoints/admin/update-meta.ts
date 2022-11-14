@@ -1,6 +1,5 @@
-import { Meta } from '@/models/entities/meta.js';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
-import { db } from '@/db/postgre.js';
+import { fetchMeta, setMeta } from '@/misc/fetch-meta.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -375,20 +374,10 @@ export default define(meta, paramDef, async (ps, me) => {
 		set.deeplIsPro = ps.deeplIsPro;
 	}
 
-	await db.transaction(async transactionalEntityManager => {
-		const metas = await transactionalEntityManager.find(Meta, {
-			order: {
-				id: 'DESC',
-			},
-		});
-
-		const meta = metas[0];
-
-		if (meta) {
-			await transactionalEntityManager.update(Meta, meta.id, set);
-		} else {
-			await transactionalEntityManager.save(Meta, set);
-		}
+	const meta = await fetchMeta();
+	await setMeta({
+		...meta,
+		...set,
 	});
 
 	insertModerationLog(me, 'updateMeta');
