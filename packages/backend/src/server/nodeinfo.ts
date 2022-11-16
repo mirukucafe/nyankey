@@ -24,6 +24,7 @@ type NodeInfo2Base = {
 	software: {
 		name: string;
 		version: string;
+		repository?: string;
 	};
 	protocols: string[];
 	services: {
@@ -65,6 +66,7 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 		software: {
 			name: 'foundkey',
 			version: config.version,
+			repository,
 		},
 		protocols: ['activitypub'],
 		services: {
@@ -109,12 +111,14 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 router.get(nodeinfo2_1path, async ctx => {
 	const base = await nodeinfo2();
 
-	ctx.body = { version: '2.1', repository, ...base };
+	ctx.body = { version: '2.1', ...base };
 	ctx.set('Cache-Control', 'public, max-age=600');
 });
 
 router.get(nodeinfo2_0path, async ctx => {
 	const base = await nodeinfo2();
+
+	delete base.software.repository;
 
 	ctx.body = { version: '2.0', ...base };
 	ctx.set('Cache-Control', 'public, max-age=600');
