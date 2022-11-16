@@ -3,6 +3,7 @@ import { IsNull, MoreThan } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Users, Notes } from '@/models/index.js';
+import { MONTH, DAY } from '@/const.js';
 
 const router = new Router();
 
@@ -23,7 +24,6 @@ type NodeInfo2Base = {
 	software: {
 		name: string;
 		version: string;
-		repository?: string; // Not used in NodeInfo 2.0; used in 2.1
 	};
 	protocols: string[];
 	services: {
@@ -54,8 +54,8 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 	] = await Promise.all([
 		fetchMeta(true),
 		Users.count({ where: { host: IsNull() } }),
-		Users.count({ where: { host: IsNull(), lastActiveDate: MoreThan(new Date(now - 15552000000)) } }),
-		Users.count({ where: { host: IsNull(), lastActiveDate: MoreThan(new Date(now - 2592000000)) } }),
+		Users.count({ where: { host: IsNull(), lastActiveDate: MoreThan(new Date(now - 180 * DAY)) } }),
+		Users.count({ where: { host: IsNull(), lastActiveDate: MoreThan(new Date(now - MONTH)) } }),
 		Notes.count({ where: { userHost: IsNull() } }),
 	]);
 
@@ -65,7 +65,6 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 		software: {
 			name: 'foundkey',
 			version: config.version,
-			repository,
 		},
 		protocols: ['activitypub'],
 		services: {
@@ -101,7 +100,7 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 			enableDiscordIntegration: meta.enableDiscordIntegration,
 			enableEmail: meta.enableEmail,
 			enableServiceWorker: meta.enableServiceWorker,
-			proxyAccountName: proxyAccount ? proxyAccount.username : null,
+			proxyAccountName: proxyAccount?.username ?? null,
 			themeColor: meta.themeColor || '#86b300',
 		},
 	};
@@ -110,14 +109,12 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 router.get(nodeinfo2_1path, async ctx => {
 	const base = await nodeinfo2();
 
-	ctx.body = { version: '2.1', ...base };
+	ctx.body = { version: '2.1', repository, ...base };
 	ctx.set('Cache-Control', 'public, max-age=600');
 });
 
 router.get(nodeinfo2_0path, async ctx => {
 	const base = await nodeinfo2();
-
-	delete base.software.repository;
 
 	ctx.body = { version: '2.0', ...base };
 	ctx.set('Cache-Control', 'public, max-age=600');
