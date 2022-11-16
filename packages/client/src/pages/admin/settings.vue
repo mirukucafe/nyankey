@@ -107,27 +107,6 @@
 							</FormInput>
 						</FormSplit>
 					</FormSection>
-
-					<FormSection>
-						<template #label>ServiceWorker</template>
-
-						<FormSwitch v-model="enableServiceWorker" class="_formBlock">
-							<template #label>{{ i18n.ts.enableServiceworker }}</template>
-							<template #caption>{{ i18n.ts.serviceworkerInfo }}</template>
-						</FormSwitch>
-
-						<template v-if="enableServiceWorker">
-							<FormInput v-model="swPublicKey" class="_formBlock">
-								<template #prefix><i class="fas fa-key"></i></template>
-								<template #label>Public key</template>
-							</FormInput>
-
-							<FormInput v-model="swPrivateKey" class="_formBlock">
-								<template #prefix><i class="fas fa-key"></i></template>
-								<template #label>Private key</template>
-							</FormInput>
-						</template>
-					</FormSection>
 				</div>
 			</FormSuspense>
 		</MkSpacer>
@@ -167,9 +146,6 @@ let localDriveCapacityMb: any = $ref(0);
 let remoteDriveCapacityMb: any = $ref(0);
 let enableRegistration: boolean = $ref(false);
 let emailRequiredForSignup: boolean = $ref(false);
-let enableServiceWorker: boolean = $ref(false);
-let swPublicKey: any = $ref(null);
-let swPrivateKey: any = $ref(null);
 
 async function init(): Promise<void> {
 	const meta = await os.api('admin/meta');
@@ -192,9 +168,6 @@ async function init(): Promise<void> {
 	remoteDriveCapacityMb = meta.driveCapacityPerRemoteUserMb;
 	enableRegistration = !meta.disableRegistration;
 	emailRequiredForSignup = meta.emailRequiredForSignup;
-	enableServiceWorker = meta.enableServiceWorker;
-	swPublicKey = meta.swPublickey;
-	swPrivateKey = meta.swPrivateKey;
 }
 
 function save(): void {
@@ -218,9 +191,6 @@ function save(): void {
 		remoteDriveCapacityMb: parseInt(remoteDriveCapacityMb, 10),
 		disableRegistration: !enableRegistration,
 		emailRequiredForSignup,
-		enableServiceWorker,
-		swPublicKey,
-		swPrivateKey,
 	}).then(() => {
 		fetchInstance();
 	});

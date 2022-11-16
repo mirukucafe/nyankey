@@ -182,10 +182,6 @@ export const meta = {
 				type: 'boolean',
 				optional: false, nullable: false,
 			},
-			enableServiceWorker: {
-				type: 'boolean',
-				optional: false, nullable: false,
-			},
 			translatorAvailable: {
 				type: 'boolean',
 				optional: false, nullable: false,
@@ -240,7 +236,8 @@ export const meta = {
 					},
 					serviceWorker: {
 						type: 'boolean',
-						optional: false, nullable: false,
+						optional: true, nullable: false,
+						default: true,
 					},
 					miauth: {
 						type: 'boolean',
@@ -321,8 +318,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		enableGithubIntegration: instance.enableGithubIntegration,
 		enableDiscordIntegration: instance.enableDiscordIntegration,
 
-		enableServiceWorker: instance.enableServiceWorker,
-
 		translatorAvailable: translatorAvailable(instance),
 
 		pinnedPages: instance.pinnedPages,
@@ -346,7 +341,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			twitter: instance.enableTwitterIntegration,
 			github: instance.enableGithubIntegration,
 			discord: instance.enableDiscordIntegration,
-			serviceWorker: instance.enableServiceWorker,
+			serviceWorker: true,
 			miauth: true,
 		},
 	};

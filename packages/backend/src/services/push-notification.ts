@@ -40,8 +40,6 @@ function truncateNotification(notification: Packed<'Notification'>): any {
 export async function pushNotification<T extends keyof pushNotificationsTypes>(userId: string, type: T, body: pushNotificationsTypes[T]) {
 	const meta = await fetchMeta();
 
-	if (!meta.enableServiceWorker || meta.swPublicKey == null || meta.swPrivateKey == null) return;
-
 	// Register key pair information
 	push.setVapidDetails(config.url,
 		meta.swPublicKey,
