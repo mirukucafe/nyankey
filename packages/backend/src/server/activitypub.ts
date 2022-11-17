@@ -23,7 +23,7 @@ import Featured from './activitypub/featured.js';
 // Init router
 const router = new Router();
 
-function inbox(ctx: Router.RouterContext) {
+function inbox(ctx: Router.RouterContext): void {
 	let signature;
 
 	try {
@@ -41,7 +41,7 @@ function inbox(ctx: Router.RouterContext) {
 const ACTIVITY_JSON = 'application/activity+json; charset=utf-8';
 const LD_JSON = 'application/ld+json; profile="https://www.w3.org/ns/activitystreams"; charset=utf-8';
 
-function isActivityPubReq(ctx: Router.RouterContext) {
+function isActivityPubReq(ctx: Router.RouterContext): boolean {
 	ctx.response.vary('Accept');
 	// if no accept header is supplied, koa returns the 1st, so html is used as a dummy
 	// i.e. activitypub requests must be explicit
@@ -49,7 +49,7 @@ function isActivityPubReq(ctx: Router.RouterContext) {
 	return typeof accepted === 'string' && !accepted.match(/html/);
 }
 
-export function setResponseType(ctx: Router.RouterContext) {
+export function setResponseType(ctx: Router.RouterContext): void {
 	const accept = ctx.accepts(ACTIVITY_JSON, LD_JSON);
 	if (accept === LD_JSON) {
 		ctx.response.type = LD_JSON;
@@ -158,7 +158,7 @@ router.get('/users/:user/publickey', async ctx => {
 });
 
 // user
-async function userInfo(ctx: Router.RouterContext, user: User | null) {
+async function userInfo(ctx: Router.RouterContext, user: User | null): Promise<void> {
 	if (user == null) {
 		ctx.status = 404;
 		return;
@@ -214,19 +214,19 @@ router.get('/emojis/:emoji', async ctx => {
 
 // like
 router.get('/likes/:like', async ctx => {
+	const reaction = await NoteReactions.findOneBy({ id: ctx.params.like });
+
+	if (reaction == null) {
+		ctx.status = 404;
+		return;
+	}
+
 	const note = await Notes.findOneBy({
 		id: reaction.noteId,
 		visibility: In(['public' as const, 'home' as const]),
 	});
 
 	if (note == null) {
-		ctx.status = 404;
-		return;
-	}
-
-	const reaction = await NoteReactions.findOneBy({ id: ctx.params.like });
-
-	if (reaction == null) {
 		ctx.status = 404;
 		return;
 	}
