@@ -1,5 +1,6 @@
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
+import { translatorAvailable } from '../../common/translator.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -317,7 +318,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		enableGithubIntegration: instance.enableGithubIntegration,
 		enableDiscordIntegration: instance.enableDiscordIntegration,
 		enableServiceWorker: instance.enableServiceWorker,
-		translatorAvailable: instance.deeplAuthKey != null,
+		translatorAvailable: translatorAvailable(instance),
 		pinnedPages: instance.pinnedPages,
 		pinnedClipId: instance.pinnedClipId,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
