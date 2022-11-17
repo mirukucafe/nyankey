@@ -799,6 +799,8 @@ onlineStatus: "Online status"
 hideOnlineStatus: "Hide online status"
 hideOnlineStatusDescription: "Hiding your online status reduces the convenience of\
   \ some features such as the search."
+federateBlocks: "Federate blocks"
+federateBlocksDescription: "If disabled, block activities won't be sent."
 online: "Online"
 active: "Active"
 offline: "Offline"

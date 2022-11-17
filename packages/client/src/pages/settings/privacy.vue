@@ -28,6 +28,10 @@
 		{{ i18n.ts.makeExplorable }}
 		<template #caption>{{ i18n.ts.makeExplorableDescription }}</template>
 	</FormSwitch>
+	<FormSwitch v-model="federateBlocks" @update:value="save()">
+		{{ $ts.federateBlocks }}
+		<template #caption>{{ $ts.federateBlocksDescription }}</template>
+	</FormSwitch>
 
 	<FormSection>
 		<FormFolder class="_formBlock">
@@ -69,12 +73,13 @@ let isExplorable = $ref($i.isExplorable);
 let hideOnlineStatus = $ref($i.hideOnlineStatus);
 let publicReactions = $ref($i.publicReactions);
 let ffVisibility = $ref($i.ffVisibility);
+let federateBlocks = $ref($i.federateBlocks);
 
 let defaultNoteVisibility = $computed(defaultStore.makeGetterSetter('defaultNoteVisibility'));
 let defaultNoteLocalOnly = $computed(defaultStore.makeGetterSetter('defaultNoteLocalOnly'));
 let keepCw = $computed(defaultStore.makeGetterSetter('keepCw'));
 
-function save() {
+function save(): void {
 	os.api('i/update', {
 		isLocked: !!isLocked,
 		autoAcceptFollowed: !!autoAcceptFollowed,
@@ -83,6 +88,7 @@ function save() {
 		hideOnlineStatus: !!hideOnlineStatus,
 		publicReactions: !!publicReactions,
 		ffVisibility,
+		federateBlocks,
 	});
 }
 

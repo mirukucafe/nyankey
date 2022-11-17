@@ -12,7 +12,7 @@ import { perUserFollowingChart } from '@/services/chart/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
 
-export default async function(blocker: User, blockee: User) {
+export default async function(blocker: User, blockee: User): Promise<void> {
 	await Promise.all([
 		cancelRequest(blocker, blockee),
 		cancelRequest(blockee, blocker),
@@ -32,13 +32,13 @@ export default async function(blocker: User, blockee: User) {
 
 	await Blockings.insert(blocking);
 
-	if (Users.isLocalUser(blocker) && Users.isRemoteUser(blockee)) {
+	if (Users.isLocalUser(blocker) && Users.isRemoteUser(blockee) && blocker.federateBlocks) {
 		const content = renderActivity(renderBlock(blocking));
 		deliver(blocker, content, blockee.inbox);
 	}
 }
 
-async function cancelRequest(follower: User, followee: User) {
+async function cancelRequest(follower: User, followee: User): Promise<void> {
 	const request = await FollowRequests.findOneBy({
 		followeeId: followee.id,
 		followerId: follower.id,
@@ -75,20 +75,20 @@ async function cancelRequest(follower: User, followee: User) {
 		});
 	}
 
-	// リモートにフォローリクエストをしていたらUndoFollow送信
+	// Send Undo Follow if followee is remote
 	if (Users.isLocalUser(follower) && Users.isRemoteUser(followee)) {
 		const content = renderActivity(renderUndo(renderFollow(follower, followee), follower));
 		deliver(follower, content, followee.inbox);
 	}
 
-	// リモートからフォローリクエストを受けていたらReject送信
+	// Send Reject if follower is remote
 	if (Users.isRemoteUser(follower) && Users.isLocalUser(followee)) {
 		const content = renderActivity(renderReject(renderFollow(follower, followee, request.requestId!), followee));
 		deliver(followee, content, follower.inbox);
 	}
 }
 
-async function unFollow(follower: User, followee: User) {
+async function unFollow(follower: User, followee: User): Promise<void> {
 	const following = await Followings.findOneBy({
 		followerId: follower.id,
 		followeeId: followee.id,
@@ -122,14 +122,14 @@ async function unFollow(follower: User, followee: User) {
 		});
 	}
 
-	// リモートにフォローをしていたらUndoFollow送信
+	// Send Undo Follow if follower is remote
 	if (Users.isLocalUser(follower) && Users.isRemoteUser(followee)) {
 		const content = renderActivity(renderUndo(renderFollow(follower, followee), follower));
 		deliver(follower, content, followee.inbox);
 	}
 }
 
-async function removeFromList(listOwner: User, user: User) {
+async function removeFromList(listOwner: User, user: User): Promise<void> {
 	const userLists = await UserLists.findBy({
 		userId: listOwner.id,
 	});
