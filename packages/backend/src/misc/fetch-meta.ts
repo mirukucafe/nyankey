@@ -15,22 +15,36 @@ export async function setMeta(meta: Meta): Promise<void> {
 	db.manager.clear(Meta);
 	db.manager.insert(Meta, meta);
 
+	cache = meta;
+
 	unlock();
 }
 
 /**
  * Performs the primitive database operation to fetch server configuration.
+ * If there is no entry yet, inserts a new one.
  * Writes to `cache` instead of returning.
  */
 async function getMeta(): Promise<void> {
 	const unlock = await getFetchInstanceMetadataLock('localhost');
 
 	// new IDs are prioritised because multiple records may have been created due to past bugs
-	cache = db.manager.findOne(Meta, {
+	let metas = await db.manager.find(Meta, {
 		order: {
 			id: 'DESC',
 		},
 	});
+	if (metas.length === 0) {
+		db.manager.insert(Meta, {
+			id: 'x',
+		});
+		metas = await db.manager.find(Meta, {
+			order: {
+				id: 'DESC',
+			},
+		});
+	}
+	cache = metas[0];
 
 	unlock();
 }

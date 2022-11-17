@@ -11,12 +11,12 @@ export function isSelfHost(host: string | null): boolean {
 	return toPuny(config.host) === toPuny(host);
 }
 
-export function extractDbHost(uri: string) {
+export function extractDbHost(uri: string): string {
 	const url = new URL(uri);
 	return toPuny(url.hostname);
 }
 
-export function toPuny(host: string) {
+export function toPuny(host: string): string {
 	return toASCII(host.toLowerCase());
 }
 

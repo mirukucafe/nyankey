@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import config from '@/config/index.js';
 import { getAgentByUrl } from './fetch.js';
 
-export async function verifyRecaptcha(secret: string, response: string) {
+export async function verifyRecaptcha(secret: string, response: string): Promise<void> {
 	const result = await getCaptchaResponse('https://www.recaptcha.net/recaptcha/api/siteverify', secret, response).catch(e => {
 		throw new Error(`recaptcha-request-failed: ${e.message}`);
 	});
@@ -14,7 +14,7 @@ export async function verifyRecaptcha(secret: string, response: string) {
 	}
 }
 
-export async function verifyHcaptcha(secret: string, response: string) {
+export async function verifyHcaptcha(secret: string, response: string): Promise<void> {
 	const result = await getCaptchaResponse('https://hcaptcha.com/siteverify', secret, response).catch(e => {
 		throw new Error(`hcaptcha-request-failed: ${e.message}`);
 	});

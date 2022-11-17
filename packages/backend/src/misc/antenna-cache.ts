@@ -5,7 +5,7 @@ import { subscriber } from '@/db/redis.js';
 let antennasFetched = false;
 let antennas: Antenna[] = [];
 
-export async function getAntennas() {
+export async function getAntennas(): Promise<Antenna[]> {
 	if (!antennasFetched) {
 		antennas = await Antennas.find();
 		antennasFetched = true;
