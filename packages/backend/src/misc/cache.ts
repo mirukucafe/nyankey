@@ -29,7 +29,7 @@ export class Cache<T> {
 		return cached.value;
 	}
 
-	public delete(key: string | null) {
+	public delete(key: string | null): void {
 		this.cache.delete(key);
 	}
 
@@ -46,8 +46,9 @@ export class Cache<T> {
 			const value = await this.fetcher(key);
 
 			// don't cache undefined
-			if (value !== undefined)
+			if (value !== undefined) {
 				this.set(key, value);
+			}
 
 			return value;
 		}
