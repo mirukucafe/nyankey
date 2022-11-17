@@ -1,5 +1,5 @@
 /**
- * チャートエンジン
+ * chart engine
  *
  * Tests located in test/chart
  */
@@ -24,7 +24,7 @@ type Schema = Record<string, {
 
 	range?: 'big' | 'small' | 'medium';
 
-	// previousな値を引き継ぐかどうか
+	// Whether or not to accumulate with previous values.
 	accumulate?: boolean;
 }>;
 
@@ -42,12 +42,12 @@ type RawRecord<S extends Schema> = {
 	id: number;
 
 	/**
-	 * 集計のグループ
+	 * aggregation group
 	 */
 	group?: string | null;
 
 	/**
-	 * 集計日時のUnixタイムスタンプ(秒)
+	 * Unix epoch timestamp (seconds) of aggregation
 	 */
 	date: number;
 } & TempColumnsForUnique<S> & Columns<S>;
@@ -108,7 +108,7 @@ export function getJsonSchema<S extends Schema>(schema: S): ToJsonSchema<Unflatt
 }
 
 /**
- * 様々なチャートの管理を司るクラス
+ * Parent class of all charts that governs how they run in general.
  */
 // eslint-disable-next-line import/no-default-export
 export default abstract class Chart<T extends Schema> {
@@ -119,19 +119,23 @@ export default abstract class Chart<T extends Schema> {
 		diff: Commit<T>;
 		group: string | null;
 	}[] = [];
-	// ↓にしたいけどfindOneとかで型エラーになる
-	//private repositoryForHour: Repository<RawRecord<T>>;
-	//private repositoryForDay: Repository<RawRecord<T>>;
+
+	/*
+	 * The following would be nice but it gives a type error when used with findOne
+	 *private repositoryForHour: Repository<RawRecord<T>>;
+	 *private repositoryForDay: Repository<RawRecord<T>>;
+	 */
+
 	private repositoryForHour: Repository<{ id: number; group?: string | null; date: number; }>;
 	private repositoryForDay: Repository<{ id: number; group?: string | null; date: number; }>;
 
 	/**
-	 * 1日に一回程度実行されれば良いような計算処理を入れる(主にCASCADE削除などアプリケーション側で感知できない変動によるズレの修正用)
+	 * Computation to run once a day. Intended to fix discrepancies e.g. due to cascaded deletes or other changes that were missed.
 	 */
 	protected abstract tickMajor(group: string | null): Promise<Partial<KVs<T>>>;
 
 	/**
-	 * 少なくとも最小スパン内に1回は実行されて欲しい計算処理を入れる
+	 * A smaller computation that should be run once per lowest time interval.
 	 */
 	protected abstract tickMinor(group: string | null): Promise<Partial<KVs<T>>>;
 
@@ -274,7 +278,7 @@ export default abstract class Chart<T extends Schema> {
 	}
 
 	/**
-	 * 現在(=今のHour or Day)のログをデータベースから探して、あればそれを返し、なければ作成して返します。
+	 * Search the database for the current (=current Hour or Day) log and return it if available, otherwise create and return it.
 	 */
 	private async claimCurrentLog(group: string | null, span: 'hour' | 'day'): Promise<RawRecord<T>> {
 		const [y, m, d, h] = Chart.getCurrentDate();
@@ -289,13 +293,13 @@ export default abstract class Chart<T extends Schema> {
 			span === 'day' ? this.repositoryForDay :
 			new Error('not happen') as never;
 
-		// 現在(=今のHour or Day)のログ
+		// current hour or day log entry
 		const currentLog = await repository.findOneBy({
 			date: Chart.dateToTimestamp(current),
 			...(group ? { group } : {}),
 		}) as RawRecord<T> | undefined;
 
-		// ログがあればそれを返して終了
+		// If logs are available, return them and exit.
 		if (currentLog != null) {
 			return currentLog;
 		}
@@ -303,12 +307,13 @@ export default abstract class Chart<T extends Schema> {
 		let log: RawRecord<T>;
 		let data: KVs<T>;
 
-		// 集計期間が変わってから、初めてのチャート更新なら
-		// 最も最近のログを持ってくる
-		// * 例えば集計期間が「日」である場合で考えると、
-		// * 昨日何もチャートを更新するような出来事がなかった場合は、
-		// * ログがそもそも作られずドキュメントが存在しないということがあり得るため、
-		// * 「昨日の」と決め打ちせずに「もっとも最近の」とします
+		// If this is the first chart update since the start of the aggregation period,
+		// use the most recent log entry.
+		//
+		// For example, if the aggregation period is "day", if nothing happened yesterday
+		// to change the chart, the log entry is not created in the first place. So "most
+		// recent" is used instead of "yesterdays" because there might be missing log
+		// entries.
 		const latest = await this.getLatestLog(group, span);
 
 		if (latest != null) {
@@ -329,13 +334,13 @@ export default abstract class Chart<T extends Schema> {
 
 		const unlock = await getChartInsertLock(lockKey);
 		try {
-			// ロック内でもう1回チェックする
+			// check once more now that we're holding the lock
 			const currentLog = await repository.findOneBy({
 				date,
 				...(group ? { group } : {}),
 			}) as RawRecord<T> | undefined;
 
-			// ログがあればそれを返して終了
+			// if log entries are available now, return them and exit
 			if (currentLog != null) return currentLog;
 
 			const columns = {} as Record<string, number | unknown[]>;
@@ -344,7 +349,7 @@ export default abstract class Chart<T extends Schema> {
 				columns[columnPrefix + name] = v;
 			}
 
-			// 新規ログ挿入
+			// insert new entries
 			log = await repository.insert({
 				date,
 				...(group ? { group } : {}),
@@ -374,11 +379,14 @@ export default abstract class Chart<T extends Schema> {
 			return;
 		}
 
-		// TODO: 前の時間のログがbufferにあった場合のハンドリング
-		// 例えば、save が20分ごとに行われるとして、前回行われたのは 01:50 だったとする。
-		// 次に save が行われるのは 02:10 ということになるが、もし 01:55 に新規ログが buffer に追加されたとすると、
-		// そのログは本来は 01:00~ のログとしてDBに保存されて欲しいのに、02:00~ のログ扱いになってしまう。
-		// これを回避するための実装は複雑になりそうなため、一旦保留。
+		// TODO: handling of previous time logs in buffer
+
+		// For example, suppose that a save is performed every 20 minutes, and the last
+		// save was performed at 01:50. If a new log is added to the buffer at 01:55, the
+		// next save will take place at 02:10, and if the new log is added to the buffer
+		// at 01:55, then If a new log is added to the buffer at 01:55, the log is
+		// treated as a 02:00~ log, even though it should be saved as a 01:00~ log. The
+		// implementation to work around this is pending, as it would be complicated.
 
 		const update = async (logHour: RawRecord<T>, logDay: RawRecord<T>): Promise<void> => {
 			const finalDiffs = {} as Record<string, number | string[]>;
@@ -406,9 +414,9 @@ export default abstract class Chart<T extends Schema> {
 					if (v < 0) queryForHour[name] = () => `"${name}" - ${Math.abs(v)}`;
 					if (v > 0) queryForDay[name] = () => `"${name}" + ${v}`;
 					if (v < 0) queryForDay[name] = () => `"${name}" - ${Math.abs(v)}`;
-				} else if (Array.isArray(v) && v.length > 0) { // ユニークインクリメント
+				} else if (Array.isArray(v) && v.length > 0) { // unique increment
 					const tempColumnName = uniqueTempColumnPrefix + k.replaceAll('.', columnDot) as keyof TempColumnsForUnique<T>;
-					// TODO: item をSQLエスケープ
+					// TODO: SQL escape for item
 					const itemsForHour = v.filter(item => !logHour[tempColumnName].includes(item)).map(item => `"${item}"`);
 					const itemsForDay = v.filter(item => !logDay[tempColumnName].includes(item)).map(item => `"${item}"`);
 					if (itemsForHour.length > 0) queryForHour[tempColumnName] = () => `array_cat("${tempColumnName}", '{${itemsForHour.join(',')}}'::varchar[])`;
@@ -427,7 +435,7 @@ export default abstract class Chart<T extends Schema> {
 			}
 
 			// compute intersection
-			// TODO: intersectionに指定されたカラムがintersectionだった場合の対応
+			// TODO: what to do if the column specified for intersection is an intersection itself
 			for (const [k, v] of Object.entries(this.schema)) {
 				const intersection = v.intersection;
 				if (intersection) {
@@ -455,7 +463,7 @@ export default abstract class Chart<T extends Schema> {
 				}
 			}
 
-			// ログ更新
+			// update log
 			await Promise.all([
 				this.repositoryForHour.createQueryBuilder()
 					.update()
@@ -471,7 +479,7 @@ export default abstract class Chart<T extends Schema> {
 
 			logger.info(`${this.name + (logHour.group ? `:${logHour.group}` : '')}: Updated`);
 
-			// TODO: この一連の処理が始まった後に新たにbufferに入ったものは消さないようにする
+			// TODO: do not delete anything new in the buffer since this round of processing began
 			this.buffer = this.buffer.filter(q => q.group != null && (q.group !== logHour.group));
 		};
 
@@ -528,7 +536,7 @@ export default abstract class Chart<T extends Schema> {
 	public async clean(): Promise<void> {
 		const current = dateUTC(Chart.getCurrentDate());
 
-		// 一日以上前かつ三日以内
+		// more than 1 day and less than 3 days
 		const gt = Chart.dateToTimestamp(current) - (60 * 60 * 24 * 3);
 		const lt = Chart.dateToTimestamp(current) - (60 * 60 * 24);
 
@@ -576,7 +584,7 @@ export default abstract class Chart<T extends Schema> {
 			span === 'day' ? this.repositoryForDay :
 			new Error('not happen') as never;
 
-		// ログ取得
+		// gathering logs
 		let logs = await repository.find({
 			where: {
 				date: Between(Chart.dateToTimestamp(gt), Chart.dateToTimestamp(lt)),
@@ -587,10 +595,10 @@ export default abstract class Chart<T extends Schema> {
 			},
 		}) as RawRecord<T>[];
 
-		// 要求された範囲にログがひとつもなかったら
+		// If there is no log entry in the requested range
 		if (logs.length === 0) {
-			// もっとも新しいログを持ってくる
-			// (すくなくともひとつログが無いと隙間埋めできないため)
+			// Use the most recent logs instead.
+			// (At least 1 log entry is needed to fill the gap.)
 			const recentLog = await repository.findOne({
 				where: group ? { group } : {},
 				order: {
@@ -602,10 +610,10 @@ export default abstract class Chart<T extends Schema> {
 				logs = [recentLog];
 			}
 
-		// 要求された範囲の最も古い箇所に位置するログが存在しなかったら
+		// If there is no log located at the earliest point in the requested range
 		} else if (!isTimeSame(new Date(logs[logs.length - 1].date * 1000), gt)) {
-			// 要求された範囲の最も古い箇所時点での最も新しいログを持ってきて末尾に追加する
-			// (隙間埋めできないため)
+			// Bring the most recent log as of the earliest point in the requested range and append it to the end.
+			// (Due to inability to fill gaps)
 			const outdatedLog = await repository.findOne({
 				where: {
 					date: LessThan(Chart.dateToTimestamp(gt)),
@@ -634,7 +642,7 @@ export default abstract class Chart<T extends Schema> {
 			if (log) {
 				chart.unshift(this.convertRawRecord(log));
 			} else {
-				// 隙間埋め
+				// fill in gaps
 				const latest = logs.find(l => isTimeBefore(new Date(l.date * 1000), current));
 				const data = latest ? this.convertRawRecord(latest) : null;
 				chart.unshift(this.getNewLog(data));
@@ -644,10 +652,10 @@ export default abstract class Chart<T extends Schema> {
 		const res = {} as ChartResult<T>;
 
 		/**
+		 * Turn
 		 * [{ foo: 1, bar: 5 }, { foo: 2, bar: 6 }, { foo: 3, bar: 7 }]
-		 * を
+		 * into
 		 * { foo: [1, 2, 3], bar: [5, 6, 7] }
-		 * にする
 		 */
 		for (const record of chart) {
 			for (const [k, v] of Object.entries(record) as ([keyof typeof record, number])[]) {
