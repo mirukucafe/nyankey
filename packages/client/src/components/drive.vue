@@ -386,9 +386,7 @@ function onChangeFileInput() {
 }
 
 function upload(file: File, folderToUpload?: foundkey.entities.DriveFolder | null) {
-	uploadFile(file, (typeof folderToUpload === 'object') ? folderToUpload.id : null, undefined, keepOriginal).then(res => {
-		addFile(res, true);
-	});
+	uploadFile(file, folderToUpload?.id ?? null, undefined, keepOriginal);
 }
 
 function chooseFile(file: foundkey.entities.DriveFile) {
