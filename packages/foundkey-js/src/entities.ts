@@ -106,6 +106,7 @@ export type MeDetailed = UserDetailed & {
 	noCrawle: boolean;
 	receiveAnnouncementEmail: boolean;
 	usePasswordLessLogin: boolean;
+	federateBlocks: boolean;
 	[other: string]: any;
 };
 

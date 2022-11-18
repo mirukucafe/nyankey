@@ -1,14 +1,14 @@
 <template>
 <div class="_formRoot">
-	<FormSwitch v-model="isLocked" class="_formBlock" @update:modelValue="save()">{{ i18n.ts.makeFollowManuallyApprove }}<template #caption>{{ i18n.ts.lockedAccountInfo }}</template></FormSwitch>
-	<FormSwitch v-if="isLocked" v-model="autoAcceptFollowed" class="_formBlock" @update:modelValue="save()">{{ i18n.ts.autoAcceptFollowed }}</FormSwitch>
+	<FormSwitch v-model="isLocked" class="_formBlock" @update:model-value="save()">{{ i18n.ts.makeFollowManuallyApprove }}<template #caption>{{ i18n.ts.lockedAccountInfo }}</template></FormSwitch>
+	<FormSwitch v-if="isLocked" v-model="autoAcceptFollowed" class="_formBlock" @update:model-value="save()">{{ i18n.ts.autoAcceptFollowed }}</FormSwitch>
 
-	<FormSwitch v-model="publicReactions" class="_formBlock" @update:modelValue="save()">
+	<FormSwitch v-model="publicReactions" class="_formBlock" @update:model-value="save()">
 		{{ i18n.ts.makeReactionsPublic }}
 		<template #caption>{{ i18n.ts.makeReactionsPublicDescription }}</template>
 	</FormSwitch>
 		
-	<FormSelect v-model="ffVisibility" class="_formBlock" @update:modelValue="save()">
+	<FormSelect v-model="ffVisibility" class="_formBlock" @update:model-value="save()">
 		<template #label>{{ i18n.ts.ffVisibility }}</template>
 		<option value="public">{{ i18n.ts._ffVisibility.public }}</option>
 		<option value="followers">{{ i18n.ts._ffVisibility.followers }}</option>
@@ -16,21 +16,21 @@
 		<template #caption>{{ i18n.ts.ffVisibilityDescription }}</template>
 	</FormSelect>
 		
-	<FormSwitch v-model="hideOnlineStatus" class="_formBlock" @update:modelValue="save()">
+	<FormSwitch v-model="hideOnlineStatus" class="_formBlock" @update:model-value="save()">
 		{{ i18n.ts.hideOnlineStatus }}
 		<template #caption>{{ i18n.ts.hideOnlineStatusDescription }}</template>
 	</FormSwitch>
-	<FormSwitch v-model="noCrawle" class="_formBlock" @update:modelValue="save()">
+	<FormSwitch v-model="noCrawle" class="_formBlock" @update:model-value="save()">
 		{{ i18n.ts.noCrawle }}
 		<template #caption>{{ i18n.ts.noCrawleDescription }}</template>
 	</FormSwitch>
-	<FormSwitch v-model="isExplorable" class="_formBlock" @update:modelValue="save()">
+	<FormSwitch v-model="isExplorable" class="_formBlock" @update:model-value="save()">
 		{{ i18n.ts.makeExplorable }}
 		<template #caption>{{ i18n.ts.makeExplorableDescription }}</template>
 	</FormSwitch>
-	<FormSwitch v-model="federateBlocks" @update:value="save()">
-		{{ $ts.federateBlocks }}
-		<template #caption>{{ $ts.federateBlocksDescription }}</template>
+	<FormSwitch v-model="federateBlocks" @update:model-value="save()">
+		{{ i18n.ts.federateBlocks }}
+		<template #caption>{{ i18n.ts.federateBlocksDescription }}</template>
 	</FormSwitch>
 
 	<FormSection>
