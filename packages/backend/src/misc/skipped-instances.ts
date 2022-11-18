@@ -1,4 +1,5 @@
 import { Brackets } from 'typeorm';
+import { db } from '@/db/postgre.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Instances } from '@/models/index.js';
 import { Instance } from '@/models/entities/instance.js';
@@ -25,19 +26,16 @@ export async function skippedInstances(hosts: Array<Instace['host']>): Array<Ins
 	const deadTime = new Date(Date.now() - deadThreshold);
 
 	return skipped.concat(
-		await Instances.createQueryBuilder('instance')
-			.where('instance.host in (:...hosts)', {
+		await db.query(
+			`SELECT host FROM instance WHERE ("isSuspended" OR "latestStatus" = 410 OR "lastCommunicatedAt" < $1::date) AND host = ANY(string_to_array($2, ','))`,
+			[
+				deadTime.toISOString(),
 				// don't check hosts again that we already know are suspended
 				// also avoids adding duplicates to the list
-				hosts: hosts.filter(host => !skipped.includes(host)),
-			})
-			.andWhere(new Brackets(qb => { qb
-				.where('instance.isSuspended')
-				.orWhere('instance.lastCommunicatedAt < :deadTime', { deadTime })
-				.orWhere('instance.latestStatus = 410');
-			}))
-			.select('host')
-			.getRawMany()
+				hosts.filter(host => !skipped.includes(host) && !host.includes(',')).join(','),
+			],
+		)
+		.then(res => res.map(row => row.host))
 	);
 }
 
