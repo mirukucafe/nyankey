@@ -12,8 +12,8 @@ export async function setMeta(meta: Meta): Promise<void> {
 	const unlock = await getFetchInstanceMetadataLock('localhost');
 
 	// try to mitigate older bugs where multiple meta entries may have been created
-	db.manager.clear(Meta);
-	db.manager.insert(Meta, meta);
+	await db.manager.clear(Meta);
+	await db.manager.insert(Meta, meta);
 
 	cache = meta;
 
@@ -35,7 +35,7 @@ async function getMeta(): Promise<void> {
 		},
 	});
 	if (metas.length === 0) {
-		db.manager.insert(Meta, {
+		await db.manager.insert(Meta, {
 			id: 'x',
 		});
 		metas = await db.manager.find(Meta, {
