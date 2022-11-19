@@ -11,7 +11,7 @@
 import FormInfo from '@/components/ui/info.vue';
 import FormButton from '@/components/ui/button.vue';
 import * as os from '@/os';
-import { signout } from '@/account';
+import { $i, signout } from '@/account';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
@@ -19,7 +19,7 @@ async function deleteAccount() {
 	{
 		const { canceled } = await os.confirm({
 			type: 'warning',
-			text: i18n.ts.deleteAccountConfirm,
+			text: i18n.t('deleteAccountConfirm', { handle: '@' + $i.username }),
 		});
 		if (canceled) return;
 	}

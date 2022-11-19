@@ -879,7 +879,7 @@ ffVisibility: "Follows/Followers Visibility"
 ffVisibilityDescription: "Allows you to configure who can see who you follow and who\
   \ follows you."
 continueThread: "View thread continuation"
-deleteAccountConfirm: "This will irreversibly delete your account. Proceed?"
+deleteAccountConfirm: "This will irreversibly delete the account {handle}. Proceed?"
 incorrectPassword: "Incorrect password."
 voteConfirm: "Confirm your vote for \"{choice}\"?"
 hide: "Hide"
