@@ -7,7 +7,7 @@ const treeAdapter = parse5.defaultTreeAdapter;
 const urlRegex = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+/;
 const urlRegexFull = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+$/;
 
-export function fromHtml(html: string, hashtagNames?: string[]): string {
+export function fromHtml(html: string, hashtagNames?: string[], quoteUri?: string | null): string {
 	const dom = parse5.parseFragment(
 		// some AP servers like Pixelfed use br tags as well as newlines
 		html.replace(/<br\s?\/?>\r?\n/gi, '\n'),
@@ -199,6 +199,16 @@ export function fromHtml(html: string, hashtagNames?: string[]): string {
 			{
 				text += '\n';
 				appendChildren(node.childNodes);
+				break;
+			}
+
+			case 'span':
+			{
+				if (node.classList.contains('quote-inline') && quoteUri && getText(node).trim() === `RE: ${quoteUri}`) {
+					// embedded quote thingy for backwards compatibility, don't show it
+				} else {
+					appendChildren(node.childNodes);
+				}
 				break;
 			}
 

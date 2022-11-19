@@ -194,14 +194,14 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 
 	const cw = note.summary === '' ? null : note.summary;
 
-	// テキストのパース
+	// text parsing
 	let text: string | null = null;
 	if (note.source?.mediaType === 'text/x.misskeymarkdown' && typeof note.source.content === 'string') {
 		text = note.source.content;
 	} else if (typeof note._misskey_content !== 'undefined') {
 		text = note._misskey_content;
 	} else if (typeof note.content === 'string') {
-		text = htmlToMfm(note.content, note.tag);
+		text = htmlToMfm(note.content, note.tag, quote.uri);
 	}
 
 	// vote
