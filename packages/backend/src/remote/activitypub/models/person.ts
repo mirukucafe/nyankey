@@ -39,7 +39,7 @@ const summaryLength = 2048;
  * @param x Fetched object
  * @param uri Fetch target URI
  */
-function validateActor(x: IObject): IActor {
+async function validateActor(x: IObject, resolver: Resolver): Promise<IActor> {
 	if (x == null) {
 		throw new Error('invalid Actor: object is null');
 	}
@@ -59,6 +59,22 @@ function validateActor(x: IObject): IActor {
 	// Without this check, an entry could be inserted into UserPublickey for a local user.
 	if (extractDbHost(uri) === extractDbHost(config.url)) {
 		throw new StatusError('cannot resolve local user', 400, 'cannot resolve local user');
+	}
+
+	if (x.movedTo !== undefined) {
+		if (!(typeof x.movedTo === 'string' && x.movedTo.length > 0)) {
+			throw new Error('invalid Actor: wrong movedTo');
+		}
+		if (x.movedTo === uri) {
+			throw new Error('invalid Actor: moved to self');
+		}
+		// This may throw an exception if we cannot resolve the move target.
+		// If we are processing an incoming activity, this is desired behaviour
+		// because that will cause the activity to be retried.
+		await resolvePerson(x.movedTo, resolver)
+			.then(moveTarget => {
+				x.movedTo = moveTarget.id
+			});
 	}
 
 	if (!(typeof x.inbox === 'string' && x.inbox.length > 0)) {
@@ -137,7 +153,7 @@ export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
 export async function createPerson(value: string | IObject, resolver: Resolver): Promise<User> {
 	const object = await resolver.resolve(value) as any;
 
-	const person = validateActor(object);
+	const person = await validateActor(object, resolver);
 
 	apLogger.info(`Creating the Person: ${person.id}`);
 
@@ -177,6 +193,7 @@ export async function createPerson(value: string | IObject, resolver: Resolver):
 				isBot,
 				isCat: (person as any).isCat === true,
 				showTimelineReplies: false,
+				movedToId: person.movedTo,
 			})) as IRemoteUser;
 
 			await transactionalEntityManager.save(new UserProfile({
@@ -287,7 +304,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 
 	const object = await resolver.resolve(value);
 
-	const person = validateActor(object);
+	const person = await validateActor(object, resolver);
 
 	apLogger.info(`Updating the Person: ${person.id}`);
 
@@ -328,6 +345,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 		isCat: (person as any).isCat === true,
 		isLocked: !!person.manuallyApprovesFollowers,
 		isExplorable: !!person.discoverable,
+		movedToId: person.movedTo,
 	} as Partial<User>;
 
 	if (avatar) {
