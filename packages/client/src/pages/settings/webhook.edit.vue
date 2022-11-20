@@ -29,6 +29,7 @@
 
 	<div class="_formBlock" style="display: flex; gap: var(--margin); flex-wrap: wrap;">
 		<FormButton primary inline @click="save"><i class="fas fa-check"></i> {{ i18n.ts.save }}</FormButton>
+		<FormButton danger inline @click="del"><i class="fas fa-trash-alt"></i> {{ i18n.ts.delete }}</FormButton>
 	</div>
 </div>
 </template>
@@ -76,6 +77,17 @@ async function save(): Promise<void> {
 		secret,
 		on: events,
 		active,
+	});
+}
+
+async function del(): Promise<void> {
+	const { canceled } = await os.confirm({
+		type: 'warning',
+		text: i18n.ts.deleteConfirm,
+	});
+	if (canceled) return;
+	await os.apiWithDialog('i/webhooks/delete', {
+		webhookId: webhook.id,
 	});
 }
 
