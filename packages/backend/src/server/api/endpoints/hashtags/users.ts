@@ -1,3 +1,4 @@
+import { DAY } from '@/const.js';
 import { Users } from '@/models/index.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
 import define from '../../define.js';
@@ -35,7 +36,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	const query = Users.createQueryBuilder('user')
 		.where(':tag = ANY(user.tags)', { tag: normalizeForSearch(ps.tag) });
 
-	const recent = new Date(Date.now() - (1000 * 60 * 60 * 24 * 5));
+	const recent = new Date(Date.now() - 5 * DAY);
 
 	if (ps.state === 'alive') {
 		query.andWhere('user.updatedAt > :date', { date: recent });

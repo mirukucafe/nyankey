@@ -1,3 +1,4 @@
+import { DAY } from '@/const.js';
 import { Users } from '@/models/index.js';
 import define from '../define.js';
 import { generateMutedUserQueryForUsers } from '../common/generate-muted-user-query.js';
@@ -46,7 +47,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		case 'admin': query.andWhere('user.isAdmin = TRUE'); break;
 		case 'moderator': query.andWhere('user.isModerator = TRUE'); break;
 		case 'adminOrModerator': query.andWhere('user.isAdmin = TRUE OR user.isModerator = TRUE'); break;
-		case 'alive': query.andWhere('user.updatedAt > :date', { date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) }); break;
+		case 'alive': query.andWhere('user.updatedAt > :date', { date: new Date(Date.now() - 5 * DAY) }); break;
 	}
 
 	switch (ps.origin) {

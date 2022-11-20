@@ -1,3 +1,4 @@
+import { MONTH } from '@/const.js';
 import { Brackets } from 'typeorm';
 import { Followings, Users } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
@@ -39,7 +40,7 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
-	const activeThreshold = new Date(Date.now() - (1000 * 60 * 60 * 24 * 30)); // 30日
+	const activeThreshold = new Date(Date.now() - MONTH);
 
 	if (ps.host) {
 		const q = Users.createQueryBuilder('user')

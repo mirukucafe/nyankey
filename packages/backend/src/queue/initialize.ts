@@ -1,4 +1,5 @@
 import Bull from 'bull';
+import { SECOND, MINUTE, HOUR } from '@/const.js';
 import config from '@/config/index.js';
 import { getRedisOptions } from '@/config/redis.js';
 
@@ -8,7 +9,7 @@ export function initialize<T>(name: string, limitPerSec = -1): Bull.Queue<T> {
 		prefix: config.redis.prefix ? `${config.redis.prefix}:queue` : 'queue',
 		limiter: limitPerSec > 0 ? {
 			max: limitPerSec,
-			duration: 1000,
+			duration: SECOND,
 		} : undefined,
 		settings: {
 			backoffStrategies: {
@@ -20,8 +21,8 @@ export function initialize<T>(name: string, limitPerSec = -1): Bull.Queue<T> {
 
 // ref. https://github.com/misskey-dev/misskey/pull/7635#issue-971097019
 function apBackoff(attemptsMade: number, err: Error) {
-	const baseDelay = 60 * 1000;	// 1min
-	const maxBackoff = 8 * 60 * 60 * 1000;	// 8hours
+	const baseDelay = MINUTE;
+	const maxBackoff = 8 * HOUR;
 	let backoff = (Math.pow(2, attemptsMade) - 1) * baseDelay;
 	backoff = Math.min(backoff, maxBackoff);
 	backoff += Math.round(backoff * Math.random() * 0.2);

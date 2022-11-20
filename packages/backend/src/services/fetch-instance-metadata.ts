@@ -2,6 +2,7 @@ import { URL } from 'node:url';
 import { DOMWindow, JSDOM } from 'jsdom';
 import fetch from 'node-fetch';
 import tinycolor from 'tinycolor2';
+import { DAY } from '@/const.js';
 import { getJson, getHtml, getAgentByUrl } from '@/misc/fetch.js';
 import { Instance } from '@/models/entities/instance.js';
 import { Instances } from '@/models/index.js';
@@ -16,7 +17,7 @@ export async function fetchInstanceMetadata(instance: Instance, force = false): 
 	if (!force) {
 		const _instance = await Instances.findOneBy({ host: instance.host });
 		const now = Date.now();
-		if (_instance && _instance.infoUpdatedAt && (now - _instance.infoUpdatedAt.getTime() < 1000 * 60 * 60 * 24)) {
+		if (_instance && _instance.infoUpdatedAt && (now - _instance.infoUpdatedAt.getTime() < DAY)) {
 			unlock();
 			return;
 		}

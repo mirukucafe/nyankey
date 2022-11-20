@@ -4,9 +4,10 @@ import { URL } from 'node:url';
 import CacheableLookup from 'cacheable-lookup';
 import fetch from 'node-fetch';
 import { HttpProxyAgent, HttpsProxyAgent } from 'hpagent';
+import { SECOND } from '@/const.js';
 import config from '@/config/index.js';
 
-export async function getJson(url: string, accept = 'application/json, */*', timeout = 10000, headers?: Record<string, string>) {
+export async function getJson(url: string, accept = 'application/json, */*', timeout = 10 * SECOND, headers?: Record<string, string>) {
 	const res = await getResponse({
 		url,
 		method: 'GET',
@@ -20,7 +21,7 @@ export async function getJson(url: string, accept = 'application/json, */*', tim
 	return await res.json();
 }
 
-export async function getHtml(url: string, accept = 'text/html, */*', timeout = 10000, headers?: Record<string, string>) {
+export async function getHtml(url: string, accept = 'text/html, */*', timeout = 10 * SECOND, headers?: Record<string, string>) {
 	const res = await getResponse({
 		url,
 		method: 'GET',
@@ -35,7 +36,7 @@ export async function getHtml(url: string, accept = 'text/html, */*', timeout = 
 }
 
 export async function getResponse(args: { url: string, method: string, body?: string, headers: Record<string, string>, timeout?: number, size?: number }) {
-	const timeout = args.timeout || 10 * 1000;
+	const timeout = args.timeout || 10 * SECOND;
 
 	const controller = new AbortController();
 	setTimeout(() => {
@@ -70,7 +71,7 @@ const cache = new CacheableLookup({
  */
 const _http = new http.Agent({
 	keepAlive: true,
-	keepAliveMsecs: 30 * 1000,
+	keepAliveMsecs: 30 * SECOND,
 	lookup: cache.lookup,
 } as http.AgentOptions);
 
@@ -79,7 +80,7 @@ const _http = new http.Agent({
  */
 const _https = new https.Agent({
 	keepAlive: true,
-	keepAliveMsecs: 30 * 1000,
+	keepAliveMsecs: 30 * SECOND,
 	lookup: cache.lookup,
 } as https.AgentOptions);
 
@@ -91,7 +92,7 @@ const maxSockets = Math.max(256, config.deliverJobConcurrency || 128);
 export const httpAgent = config.proxy
 	? new HttpProxyAgent({
 		keepAlive: true,
-		keepAliveMsecs: 30 * 1000,
+		keepAliveMsecs: 30 * SECOND,
 		maxSockets,
 		maxFreeSockets: 256,
 		scheduling: 'lifo',
@@ -105,7 +106,7 @@ export const httpAgent = config.proxy
 export const httpsAgent = config.proxy
 	? new HttpsProxyAgent({
 		keepAlive: true,
-		keepAliveMsecs: 30 * 1000,
+		keepAliveMsecs: 30 * SECOND,
 		maxSockets,
 		maxFreeSockets: 256,
 		scheduling: 'lifo',

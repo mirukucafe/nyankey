@@ -1,3 +1,4 @@
+import { DAY } from '@/const.js';
 import { GalleryPosts } from '@/models/index.js';
 import define from '../../define.js';
 
@@ -26,7 +27,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
 	const query = GalleryPosts.createQueryBuilder('post')
-		.andWhere('post.createdAt > :date', { date: new Date(Date.now() - (1000 * 60 * 60 * 24 * 3)) })
+		.andWhere('post.createdAt > :date', { date: new Date(Date.now() - 3 * DAY) })
 		.andWhere('post.likedCount > 0')
 		.orderBy('post.likedCount', 'DESC');
 

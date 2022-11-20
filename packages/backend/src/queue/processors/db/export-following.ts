@@ -3,6 +3,7 @@ import Bull from 'bull';
 import { format as dateFormat } from 'date-fns';
 import { In, MoreThan, Not } from 'typeorm';
 
+import { MONTH } from '@/const.js';
 import { getFullApAccount } from '@/misc/convert-host.js';
 import { createTemp } from '@/misc/create-temp.js';
 import { Following } from '@/models/entities/following.js';
@@ -61,7 +62,7 @@ export async function exportFollowing(job: Bull.Job<DbUserJobData>, done: () => 
 					continue;
 				}
 
-				if (job.data.excludeInactive && u.updatedAt && (Date.now() - u.updatedAt.getTime() > 1000 * 60 * 60 * 24 * 90)) {
+				if (job.data.excludeInactive && u.updatedAt && (Date.now() - u.updatedAt.getTime() > 3 * MONTH)) {
 					continue;
 				}
 

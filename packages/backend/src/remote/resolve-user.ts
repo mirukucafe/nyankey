@@ -1,6 +1,7 @@
 import { URL } from 'node:url';
 import chalk from 'chalk';
 import { IsNull } from 'typeorm';
+import { DAY } from '@/const.js';
 import config from '@/config/index.js';
 import { isSelfHost, toPuny } from '@/misc/convert-host.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
@@ -49,9 +50,9 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 		return await createPerson(self.href);
 	}
 
-	// ユーザー情報が古い場合は、WebFilgerからやりなおして返す
-	if (user.lastFetchedAt == null || Date.now() - user.lastFetchedAt.getTime() > 1000 * 60 * 60 * 24) {
-		// 繋がらないインスタンスに何回も試行するのを防ぐ, 後続の同様処理の連続試行を防ぐ ため 試行前にも更新する
+	// If user information is out of date, start over with webfinger
+	if (user.lastFetchedAt == null || Date.now() - user.lastFetchedAt.getTime() > DAY) {
+		// Prevent race conditions
 		await Users.update(user.id, {
 			lastFetchedAt: new Date(),
 		});

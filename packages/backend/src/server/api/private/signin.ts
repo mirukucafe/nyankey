@@ -3,6 +3,7 @@ import { IsNull } from 'typeorm';
 import Koa from 'koa';
 import bcrypt from 'bcryptjs';
 import * as speakeasy from 'speakeasy';
+import { SECOND, MINUTE, HOUR } from '@/const.js';
 import config from '@/config/index.js';
 import { Users, Signins, UserProfiles, UserSecurityKeys, AttestationChallenges } from '@/models/index.js';
 import { ILocalUser } from '@/models/entities/user.js';
@@ -38,7 +39,7 @@ export default async (ctx: Koa.Context) => {
 
 	try {
 		// not more than 1 attempt per second and not more than 10 attempts per hour
-		await limiter({ key: 'signin', duration: 60 * 60 * 1000, max: 10, minInterval: 1000 }, getIpHash(ctx.ip));
+		await limiter({ key: 'signin', duration: HOUR, max: 10, minInterval: SECOND }, getIpHash(ctx.ip));
 	} catch (err) {
 		error(new ApiError('RATE_LIMIT_EXCEEDED'));
 		return;
@@ -149,7 +150,7 @@ export default async (ctx: Koa.Context) => {
 			id: body.challengeId,
 		});
 
-		if (new Date().getTime() - challenge.createdAt.getTime() >= 5 * 60 * 1000) {
+		if (new Date().getTime() - challenge.createdAt.getTime() >= 5 * MINUTE) {
 			await fail();
 			return;
 		}

@@ -6,6 +6,7 @@ import { DriveFile } from '@/models/entities/drive-file.js';
 import { Webhook, webhookEventTypes } from '@/models/entities/webhook.js';
 import { IActivity } from '@/remote/activitypub/type.js';
 import { envOption } from '@/env.js';
+import { MINUTE } from '@/const.js';
 
 import processDeliver from './processors/deliver.js';
 import processInbox from './processors/inbox.js';
@@ -96,7 +97,7 @@ export function deliver(user: ThinUser, content: unknown, to: string | null) {
 
 	return deliverQueue.add(data, {
 		attempts: config.deliverJobMaxAttempts || 12,
-		timeout: 1 * 60 * 1000,	// 1min
+		timeout: MINUTE,
 		backoff: {
 			type: 'apBackoff',
 		},
@@ -113,7 +114,7 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 
 	return inboxQueue.add(data, {
 		attempts: config.inboxJobMaxAttempts || 8,
-		timeout: 5 * 60 * 1000,	// 5min
+		timeout: 5 * MINUTE,
 		backoff: {
 			type: 'apBackoff',
 		},
@@ -278,7 +279,7 @@ export function webhookDeliver(webhook: Webhook, type: typeof webhookEventTypes[
 
 	return webhookDeliverQueue.add(data, {
 		attempts: 4,
-		timeout: 1 * 60 * 1000,	// 1min
+		timeout: MINUTE,
 		backoff: {
 			type: 'apBackoff',
 		},

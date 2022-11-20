@@ -1,4 +1,5 @@
 import { Brackets } from 'typeorm';
+import { MONTH } from '@/const.js';
 import { UserProfiles, Users } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
 import define from '../../define.js';
@@ -35,7 +36,7 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
-	const activeThreshold = new Date(Date.now() - (1000 * 60 * 60 * 24 * 30)); // 30日
+	const activeThreshold = new Date(Date.now() - MONTH);
 
 	const isUsername = ps.query.startsWith('@');
 

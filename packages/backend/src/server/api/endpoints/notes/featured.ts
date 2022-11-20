@@ -1,3 +1,4 @@
+import { DAY } from '@/const.js';
 import { Notes } from '@/models/index.js';
 import define from '../../define.js';
 import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
@@ -31,7 +32,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const max = 30;
-	const day = 1000 * 60 * 60 * 24 * 3; // 3日前まで
+	const day = 3 * DAY;
 
 	const query = Notes.createQueryBuilder('note')
 		.addSelect('note.score')

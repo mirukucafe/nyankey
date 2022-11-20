@@ -1,4 +1,5 @@
 import { Brackets } from 'typeorm';
+import { MINUTE, HOUR } from '@/const.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
@@ -13,8 +14,8 @@ import define from '../../define.js';
 ..が理想だけどPostgreSQLでどうするのか分からないので単に「直近Aの内に投稿されたユニーク投稿数が多いハッシュタグ」で妥協する
 */
 
-const rangeA = 1000 * 60 * 60; // 60分
-//const rangeB = 1000 * 60 * 120; // 2時間
+const rangeA = HOUR;
+//const rangeB = 2 * HOUR;
 //const coefficient = 1.25; // 「n倍」の部分
 //const requiredUsers = 3; // 最低何人がそのタグを投稿している必要があるか
 
@@ -116,8 +117,7 @@ export default define(meta, paramDef, async () => {
 
 	const range = 20;
 
-	// 10分
-	const interval = 1000 * 60 * 10;
+	const interval = 10 * MINUTE;
 
 	for (let i = 0; i < range; i++) {
 		countPromises.push(Promise.all(hots.map(tag => Notes.createQueryBuilder('note')

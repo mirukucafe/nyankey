@@ -1,4 +1,5 @@
 import rndstr from 'rndstr';
+import { DAY } from '@/const.js';
 import { Note } from '@/models/entities/note.js';
 import { User } from '@/models/entities/user.js';
 import { Notes, UserProfiles, NoteReactions } from '@/models/index.js';
@@ -16,13 +17,13 @@ export async function injectFeatured(timeline: Note[], user?: User | null) {
 	}
 
 	const max = 30;
-	const day = 1000 * 60 * 60 * 24 * 3; // 3日前まで
+	const offset = 3 * DAY;
 
 	const query = Notes.createQueryBuilder('note')
 		.addSelect('note.score')
 		.where('note.userHost IS NULL')
 		.andWhere('note.score > 0')
-		.andWhere('note.createdAt > :date', { date: new Date(Date.now() - day) })
+		.andWhere('note.createdAt > :date', { date: new Date(Date.now() - offset) })
 		.andWhere("note.visibility = 'public'")
 		.innerJoinAndSelect('note.user', 'user');
 

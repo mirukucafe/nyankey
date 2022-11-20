@@ -1,6 +1,7 @@
 import { promisify } from 'node:util';
 import bcrypt from 'bcryptjs';
 import * as cbor from 'cbor';
+import { MINUTE } from '@/const.js';
 import {
 	UserProfiles,
 	UserSecurityKeys,
@@ -112,10 +113,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		id: ps.challengeId,
 	});
 
-	// Expired challenge (> 5min old)
+	// Expired challenge
 	if (
 		new Date().getTime() - attestationChallenge.createdAt.getTime() >=
-		5 * 60 * 1000
+		5 * MINUTE
 	) {
 		throw new Error('expired challenge');
 	}

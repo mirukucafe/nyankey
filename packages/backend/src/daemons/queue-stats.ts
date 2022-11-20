@@ -1,9 +1,10 @@
 import Xev from 'xev';
 import { deliverQueue, inboxQueue } from '@/queue/queues.js';
+import { SECOND } from '@/const.js';
 
 const ev = new Xev();
 
-const interval = 10000;
+const interval = 10 * SECOND;
 
 /**
  * Report queue stats regularly

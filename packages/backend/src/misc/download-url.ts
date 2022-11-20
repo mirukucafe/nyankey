@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import got, * as Got from 'got';
 import IPCIDR from 'ip-cidr';
 import PrivateIp from 'private-ip';
+import { SECOND, MINUTE } from '@/const.js';
 import config from '@/config/index.js';
 import Logger from '@/services/logger.js';
 import { httpAgent, httpsAgent, StatusError } from './fetch.js';
@@ -16,8 +17,8 @@ export async function downloadUrl(url: string, path: string): Promise<void> {
 
 	logger.info(`Downloading ${chalk.cyan(url)} ...`);
 
-	const timeout = 30 * 1000;
-	const operationTimeout = 60 * 1000;
+	const timeout = 30 * SECOND;
+	const operationTimeout = MINUTE;
 	const maxSize = config.maxFileSize || 262144000;
 
 	const req = got.stream(url, {

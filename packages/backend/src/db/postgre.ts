@@ -1,5 +1,7 @@
 // https://github.com/typeorm/typeorm/issues/2400
 import pg from 'pg';
+import { SECOND } from '@/const.js';
+
 pg.types.setTypeParser(20, Number);
 
 import { Logger, DataSource } from 'typeorm';
@@ -182,7 +184,7 @@ export const db = new DataSource({
 	password: config.db.pass,
 	database: config.db.db,
 	extra: {
-		statement_timeout: 1000 * 10,
+		statement_timeout: 10 * SECOND,
 		...config.db.extra,
 	},
 	synchronize: process.env.NODE_ENV === 'test',
@@ -234,7 +236,7 @@ export async function resetDb() {
 			if (i === 3) {
 				throw e;
 			} else {
-				await new Promise(resolve => setTimeout(resolve, 1000));
+				await new Promise(resolve => setTimeout(resolve, SECOND));
 				continue;
 			}
 		}
