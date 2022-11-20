@@ -39,6 +39,9 @@ import FormButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
+import { useRouter } from '@/router';
+
+const router = useRouter();
 
 let name = $ref('');
 let url = $ref('');
@@ -62,12 +65,14 @@ async function create(): Promise<void> {
 	if (event_reaction) events.push('reaction');
 	if (event_mention) events.push('mention');
 
-	os.apiWithDialog('i/webhooks/create', {
+	await os.apiWithDialog('i/webhooks/create', {
 		name,
 		url,
 		secret,
 		on: events,
 	});
+
+	router.push('/settings/webhook');
 }
 
 definePageMetadata({

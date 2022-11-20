@@ -42,6 +42,9 @@ import FormButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
+import { useRouter } from '@/router';
+
+const router = useRouter();
 
 const webhook = await os.api('i/webhooks/show', {
 	webhookId: new URLSearchParams(window.location.search).get('id'),
@@ -70,7 +73,7 @@ async function save(): Promise<void> {
 	if (event_reaction) events.push('reaction');
 	if (event_mention) events.push('mention');
 
-	os.apiWithDialog('i/webhooks/update', {
+	await os.apiWithDialog('i/webhooks/update', {
 		webhookId: webhook.id,
 		name,
 		url,
@@ -78,6 +81,8 @@ async function save(): Promise<void> {
 		on: events,
 		active,
 	});
+
+	router.push('/settings/webhook');
 }
 
 async function del(): Promise<void> {
@@ -89,6 +94,7 @@ async function del(): Promise<void> {
 	await os.apiWithDialog('i/webhooks/delete', {
 		webhookId: webhook.id,
 	});
+	router.push('/settings/webhook');
 }
 
 definePageMetadata({
