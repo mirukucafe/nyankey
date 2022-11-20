@@ -11,6 +11,7 @@ FoundKey requires the following packages to run:
 * **[Node.js](https://nodejs.org/en/)** (18.x)
 * **[PostgreSQL](https://www.postgresql.org/)** (12.x minimum; 13.x+ is preferred)
 * **[Redis](https://redis.io/)**
+* **[Yarn](https://yarnpkg.com/)**
 
 The following are needed to compile native npm modules:
 * A C/C++ compiler like **GCC** or **Clang**
@@ -18,17 +19,16 @@ The following are needed to compile native npm modules:
 * **[Python](https://python.org/)** (3.x)
 
 ### Optional
-* [Yarn](https://yarnpkg.com/) - *If you decide not to install it, use `npx yarn` instead of `yarn`.*
 * [FFmpeg](https://www.ffmpeg.org/)
 
 To install the dependiencies on Debian (or derivatives like Ubuntu) you can use the following commands:
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 apt install build-essential python3 nodejs postgresql redis
+corepack enable # for yarn
 
 # Optional dependencies
 apt install ffmpeg
-corepack enable # for yarn
 ```
 
 ## Create FoundKey user
