@@ -30,8 +30,8 @@ import * as sound from '@/scripts/sound';
 import { $i, refreshAccount, login, updateAccount, signout } from '@/account';
 import { defaultStore, ColdDeviceStorage } from '@/store';
 import { fetchInstance, instance } from '@/instance';
+import { mainRouter } from '@/router';
 import { makeHotkey } from '@/scripts/hotkey';
-import { search } from '@/scripts/search';
 import { deviceKind } from '@/scripts/device-kind';
 import { initializeSw } from '@/scripts/initialize-sw';
 import { reloadChannel } from '@/scripts/unison-reload';
@@ -332,7 +332,9 @@ import { getAccountFromId } from '@/scripts/get-account-from-id';
 		'd': (): void => {
 			defaultStore.set('darkMode', !defaultStore.state.darkMode);
 		},
-		's': search,
+		's': (): void => {
+			mainRouter.push('/search');
+		},
 	};
 
 	if ($i) {

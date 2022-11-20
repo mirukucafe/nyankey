@@ -18,7 +18,7 @@
 				</button>
 			</div>
 			<div class="right">
-				<button class="_button search" @click="search()"><i class="fas fa-search icon"></i><span>{{ i18n.ts.search }}</span></button>
+				<MkA to="/search" class="link search" active-class="active"><i class="fas fa-search icon"></i><span>{{ i18n.ts.search }}</span></MkA>
 				<button class="_buttonPrimary signup" @click="signup()">{{ i18n.ts.signup }}</button>
 				<button class="_button login" @click="signin()">{{ i18n.ts.login }}</button>
 			</div>
@@ -46,7 +46,6 @@ import { onMounted, ref, Ref } from 'vue';
 import XSigninDialog from '@/components/signin-dialog.vue';
 import XSignupDialog from '@/components/signup-dialog.vue';
 import * as os from '@/os';
-import { search } from '@/scripts/search';
 import { i18n } from '@/i18n';
 
 defineProps<{

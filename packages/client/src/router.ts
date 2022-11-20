@@ -73,10 +73,6 @@ export const routes = [{
 }, {
 	path: '/search',
 	component: page(() => import('./pages/search.vue')),
-	query: {
-		q: 'query',
-		channel: 'channel',
-	},
 }, {
 	path: '/authorize-follow',
 	component: page(() => import('./pages/follow.vue')),
