@@ -70,6 +70,7 @@ async function save(): Promise<void> {
 	if (event_mention) events.push('mention');
 
 	os.apiWithDialog('i/webhooks/update', {
+		webhookId: webhook.id,
 		name,
 		url,
 		secret,
