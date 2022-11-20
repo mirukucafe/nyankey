@@ -1,5 +1,7 @@
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
+import { TranslationService } from '@/models/entities/meta.js';
+import { translatorAvailable } from '../../common/translator.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -269,6 +271,27 @@ export const meta = {
 				type: 'boolean',
 				optional: true, nullable: false,
 			},
+			translatorService: {
+				type: 'string',
+				enum: [null, ...Object.values(TranslationService)],
+				optional: false, nullable: true,
+			},
+			deeplAuthKey: {
+				type: 'string',
+				optional: true, nullable: true,
+			},
+			deeplIsPro: {
+				type: 'boolean',
+				optional: true, nullable: false,
+			},
+			libreTranslateEndpoint: {
+				type: 'string',
+				optional: true, nullable: true,
+			},
+			libreTranslateAuthKey: {
+				type: 'string',
+				optional: true, nullable: true,
+			},
 		},
 	},
 } as const;
@@ -317,7 +340,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		enableGithubIntegration: instance.enableGithubIntegration,
 		enableDiscordIntegration: instance.enableDiscordIntegration,
 		enableServiceWorker: instance.enableServiceWorker,
-		translatorAvailable: instance.deeplAuthKey != null,
 		pinnedPages: instance.pinnedPages,
 		pinnedClipId: instance.pinnedClipId,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
@@ -356,7 +378,12 @@ export default define(meta, paramDef, async (ps, me) => {
 		objectStorageUseProxy: instance.objectStorageUseProxy,
 		objectStorageSetPublicRead: instance.objectStorageSetPublicRead,
 		objectStorageS3ForcePathStyle: instance.objectStorageS3ForcePathStyle,
+
+		translatorAvailable: translatorAvailable(instance),
+		translationService: instance.translationService,
 		deeplAuthKey: instance.deeplAuthKey,
 		deeplIsPro: instance.deeplIsPro,
+		libreTranslateEndpoint: instance.libreTranslateEndpoint,
+		libreTranslateAuthKey: instance.libreTranslateAuthKey,
 	};
 });

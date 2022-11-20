@@ -3,6 +3,11 @@ import { id } from '../id.js';
 import { User } from './user.js';
 import { Clip } from './clip.js';
 
+export enum TranslationService {
+	DeepL = 'deepl',
+	LibreTranslate = 'libretranslate',
+}
+
 @Entity()
 export class Meta {
 	@PrimaryColumn({
@@ -299,6 +304,12 @@ export class Meta {
 	})
 	public discordClientSecret: string | null;
 
+	@Column('enum', {
+		enum: TranslationService,
+		nullable: true,
+	})
+	public translationService: TranslationService | null;
+
 	@Column('varchar', {
 		length: 128,
 		nullable: true,
@@ -309,6 +320,18 @@ export class Meta {
 		default: false,
 	})
 	public deeplIsPro: boolean;
+
+	@Column('varchar', {
+		length: 128,
+		nullable: true,
+	})
+	public libreTranslateAuthKey: string | null;
+
+	@Column('varchar', {
+		length: 2048,
+		nullable: true,
+	})
+	public libreTranslateEndpoint: string | null;
 
 	@Column('varchar', {
 		length: 512,
