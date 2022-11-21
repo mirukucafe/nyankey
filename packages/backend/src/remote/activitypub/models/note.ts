@@ -201,7 +201,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 	} else if (typeof note._misskey_content !== 'undefined') {
 		text = note._misskey_content;
 	} else if (typeof note.content === 'string') {
-		text = htmlToMfm(note.content, note.tag, quote.uri);
+		text = htmlToMfm(note.content, note.tag, quote?.uri);
 	}
 
 	// vote

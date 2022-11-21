@@ -204,7 +204,8 @@ export function fromHtml(html: string, hashtagNames?: string[], quoteUri?: strin
 
 			case 'span':
 			{
-				if (node.classList.contains('quote-inline') && quoteUri && getText(node).trim() === `RE: ${quoteUri}`) {
+				const nodeClass = node.attrs.find(({ name }) => name === 'class');
+				if (/\bquote-inline\b/.test(nodeClass) && quoteUri && getText(node).trim() === `RE: ${quoteUri}`) {
 					// embedded quote thingy for backwards compatibility, don't show it
 				} else {
 					appendChildren(node.childNodes);
