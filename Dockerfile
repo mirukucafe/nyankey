@@ -1,4 +1,4 @@
-FROM node:18.9.0-alpine3.16 AS base
+FROM node:18.12.1-alpine3.16 AS base
 
 ARG NODE_ENV=production
 
