@@ -56,7 +56,7 @@ copyUsername: "Copier le nom d’utilisateur·rice"
 searchUser: "Chercher un·e utilisateur·rice"
 reply: "Répondre"
 loadMore: "Afficher plus …"
-showMore: "Afficher plus …"
+showMore: "Afficher plus"
 youGotNewFollower: "Vous suit"
 receiveFollowRequest: "Demande d’abonnement reçue"
 followRequestAccepted: "La demande d’abonnement a été acceptée"
@@ -86,7 +86,7 @@ manageLists: "Gérer les listes"
 error: "Erreur"
 somethingHappened: "Une erreur est survenue"
 retry: "Réessayer"
-pageLoadError: "Le chargement de la page a échoué"
+pageLoadError: "Le chargement de la page a échoué."
 pageLoadErrorDescription: "Cela est généralement causé par le cache du navigateur\
   \ ou par un problème réseau. Veuillez vider votre cache ou attendre un peu et réessayer."
 serverIsDead: "Le serveur ne répond pas. Patientez quelques instants puis essayez\
@@ -513,7 +513,7 @@ hideThisNote: "Masquer cette note"
 showFeaturedNotesInTimeline: "Afficher les notes des Tendances dans le fil d'actualité"
 objectStorage: "Stockage d'objets"
 useObjectStorage: "Utiliser le stockage d'objets"
-objectStorageBaseUrl: "Base URL"
+objectStorageBaseUrl: "URL de base"
 objectStorageBaseUrlDesc: "Préfixe d’URL utilisé pour construire l’URL vers le référencement\
   \ d’objet (média). Spécifiez son URL si vous utilisez un CDN ou un proxy, sinon\
   \ spécifiez l’adresse accessible au public selon le guide de service que vous allez\
@@ -587,7 +587,7 @@ divider: "Séparateur"
 addItem: "Ajouter un élément"
 relays: "Relais"
 addRelay: "Ajouter un relais"
-inboxUrl: "Inbox URL"
+inboxUrl: "URL de la boite de réception"
 addedRelays: "Relais ajoutés"
 serviceworkerInfo: "Devrait être activé pour les notifications push."
 deletedNote: "Note supprimée"
@@ -607,7 +607,7 @@ leaveConfirm: "Vous avez des modifications non-sauvegardées. Voulez-vous les ig
   \ ?"
 manage: "Gestion"
 plugins: "Extensions"
-deck: "Deck"
+deck: "Cartes"
 undeck: "Quitter le deck"
 useBlurEffectForModal: "Utiliser un effet de flou pour les modals"
 useFullReactionPicker: "Utiliser l'intégralité du panneau de réactions"
@@ -883,7 +883,8 @@ ffVisibility: "Visibilité des abonnés/abonnements"
 ffVisibilityDescription: "Permet de configurer qui peut voir les personnes que tu\
   \ suis et les personnes qui te suivent."
 continueThread: "Afficher la suite du fil"
-deleteAccountConfirm: "Votre compte sera supprimé. Êtes vous certain ?"
+deleteAccountConfirm: "Le compte {handle} sera définitivement supprimé. Êtes vous\
+  \ certain ?"
 incorrectPassword: "Le mot de passe est incorrect."
 voteConfirm: "Confirmez-vous votre vote pour « {choice} » ?"
 hide: "Masquer"
@@ -911,6 +912,7 @@ _emailUnavailable:
   format: "Le format de cette adresse de courriel est invalide"
   mx: "Ce serveur de courriels est invalide"
   smtp: "Ce serveur de courriels ne répond pas"
+  disposable: Il ne faut pas utiliser d'adresses email jetables
 _ffVisibility:
   public: "Public"
   followers: "Visible uniquement pour les abonné·e·s"
@@ -1000,7 +1002,7 @@ _mfm:
   blockCode: "Bloc de code"
   blockCodeDescription: "Coloration syntaxique des lignes de code pour les blocs multi-lignes."
   inlineMath: "Formule mathématique (inline)"
-  inlineMathDescription: "Afficher les formules mathématiques (KaTeX)."
+  inlineMathDescription: "Afficher les formules mathématiques (KaTeX) dans le texte."
   blockMath: "Formule mathématique (bloc)"
   blockMathDescription: "Afficher les formules mathématiques (KaTeX) multi-lignes\
     \ dans un bloc."
@@ -1042,6 +1044,7 @@ _mfm:
   sparkle: "Paillettes"
   sparkleDescription: "Ajoute un effet scintillant au contenu."
   rotate: "Pivoter"
+  rotateDescription: Rotation du contenu selon l'angle spécifié.
 _instanceTicker:
   none: "Cacher "
   remote: "Montrer pour les utilisateur·ice·s distant·e·s"
@@ -1082,6 +1085,9 @@ _instanceMute:
   instanceMuteDescription2: "Séparer avec de nouvelles lignes"
   title: "Masque les notes venant des instances listées."
   heading: "Instances à mettre en sourdine"
+  instanceMuteDescription: Cela va mettre en sourdine toutes les notes/renotes des
+    instances listées, y compris celles des utilisateurs répondant à un utilisateur
+    à partir d'une instance désactivée.
 _theme:
   explore: "Explorer les thèmes"
   install: "Installer un thème"
@@ -1235,6 +1241,8 @@ _2fa:
     \ davantage le processus de connexion grâce à une clé de sécurité matérielle qui\
     \ prend en charge FIDO2, ou bien en configurant l'authentification par empreinte\
     \ digitale ou par code PIN sur votre appareil."
+  step2Url: 'Vous pouvez aussi entrer cette URL si vous utilisez un programme sur
+    ordinateur:'
 _permissions:
   "read:account": "Afficher les informations du compte"
   "write:account": "Mettre à jour les informations de votre compte"
@@ -1310,6 +1318,7 @@ _widgets:
   serverMetric: "Statistiques du serveur"
   aiscript: "Console AiScript"
   aichan: "Ai"
+  rssMarquee: Flux RSS
 _cw:
   hide: "Masquer"
   show: "Afficher plus …"
@@ -1472,9 +1481,13 @@ _notification:
     followRequestAccepted: "Demande d'abonnement acceptée"
     groupInvited: "Invitation à un groupe"
     app: "Notifications provenant des apps"
+    pollEnded: Sondages terminés
   _actions:
     reply: "Répondre"
     renote: "Renoter"
+    followBack: vous suis aussi
+  pollEnded: Les résultats d'un sondage sont disponibles
+  emptyPushNotificationMessage: L'envoi des notifications à été mis à jour
 _deck:
   alwaysShowMainColumn: "Toujours afficher la colonne principale"
   columnAlign: "Aligner les colonnes"
@@ -1497,4 +1510,84 @@ _deck:
     list: "Listes"
     mentions: "Mentions"
     direct: "Direct"
-_services: {}
+_services:
+  _discord:
+    connected: '@{username}#{discriminator} sur Discord est connecté à @{mkUsername}!
+      sur FoundKey'
+    disconnected: La liaison avec Discord à été supprimée.
+  _twitter:
+    connected: '@{twitterUserName} sur Twitter est connecté à @{userName}! sur FoundKey'
+    disconnected: La liaison avec Twitter à été supprimée.
+  _github:
+    disconnected: La liaison avec Github à été supprimée.
+    connected: '@{login} sur Github est connecté à @{userName}! sur FoundKey'
+exportAll: Tout exporter
+stopActivityDeliveryDescription: L'activité locale ne sera pas envoyé à cette instance.
+  La réception  de l'activité continuera de fonctionner comme avant.
+blockThisInstanceDescription: L'activité locale ne sera pas envoyée à cette instance.
+  L'activité de cette instance sera ignorée.
+signinHistoryExpires: Les données des connexions précédentes seront effacées automatiquement
+  après 60 jours conformément à la règlementation sur la vie privée.
+reflectMayTakeTime: Il se peut que cet affichage ne soit pas immédiat.
+failedToFetchAccountInformation: Impossible de récupérer les informations du compte
+cropImageAsk: Voulez-vous rogner cette image ?
+numberOfPageCache: Nombre de pages en cache
+numberOfPageCacheDescription: Augmenter cette valeur améliorera l'expérience utilisateur
+  mais la charge du serveur et la consommation mémoire vont augmenter.
+confirmToUnclipAlreadyClippedNote: Cette note est déjà associée avec le groupe "{name}".
+  Voulez-vous plutôt l'enlever ?
+selectMode: Sélection multiple
+maxCustomEmojiPicker: Nombre maximum d'émoticônes personnalisés proposés dans la sélection
+maxUnicodeEmojiPicker: Nombre maximum d'émoticônes unicodes proposés dans la sélection
+threadMuteNotificationsDesc: Sélectionnez les notifications que vous souhaitez voir
+  depuis ce fil. Les paramètres de notifications généraux s'appliquent aussi. Les
+  désactivations sont prioritaires.
+renoteMute: Cacher les notes
+renoteUnmute: Montrer les notes
+translationSettings: Paramètres de traduction
+translationService: Service de traduction
+rateLimitExceeded: Dépassement de la limite de débit
+cropImage: Rognez l'image
+recentNHours: '{n} dernières heures'
+recentNDays: '{n} derniers jours'
+isSystemAccount: Un compte créé et géré automatiquement par le système.
+typeToConfirm: Entrez {x} pour confirmer SVP
+deleteAccount: Supprimer le compte
+documentation: Documentation
+file: Fichier
+unclip: Déclipser
+noEmailServerWarning: Le serveur de messagerie n'est pas configuré.
+thereIsUnresolvedAbuseReportWarning: Il y a des signalements non traités.
+recommended: Recommandé
+check: Vérifier
+unlimited: Illimité
+selectAll: Tout sélectionner
+setCategory: Définir la catégorie
+addTag: Ajouter une étiquette
+setTag: Définir une étiquette
+removeTag: Enlever une étiquette
+externalCssSnippets: Quelques CSS pour vous inspirer (pas gérés par FoundKey)
+_translationService:
+  _deepl:
+    authKey: Clé d'authentification pour DeepL
+    pro: Compte Pro
+  _libreTranslate:
+    endpoint: Point de connexion pour l'API LibreTranslate
+    authKey: Clé d'authentification pour LibreTranslate (optionnel)
+exportSelected: Exporter la sélection
+instanceDefaultThemeDescription: Saisissez le code de thème au format objet.
+federateBlocks: Fédérations bloquées
+federateBlocksDescription: Si désactivé, les blocages d'activités ne seront pas envoyé.
+showLess: Afficher moins
+flagShowTimelineRepliesDescription: Afficher les réponses des utilisateurs aux notes
+  des autres utilisateurs dans le fil.
+keepOriginalUploadingDescription: Enregistre l'image importée d'origine tel quel.
+  Si désactivé, une version affichable sur internet sera générée après l'import.
+disableDrawer: Ne pas utiliser de menus à tiroir
+regexpErrorDescription: "Il y a une erreur dans l'expression régulière de la ligne\
+  \ {line} de vos mots ignorées {tab}:"
+forwardReportIsAnonymous: Un compte système anonyme sera affiché, à la place de votre
+  compte, lors du signalement à l'instance distante.
+attachmentRequired: Un attachement au moins est nécessaire.
+useDrawerReactionPickerForMobile: Sur mobile afficher un tiroir pour le panneau de
+  réaction
