@@ -32,7 +32,7 @@ export default async (ctx: Koa.Context) => {
 				message: e!.message,
 				code: e!.code,
 				...(e!.info ? { info: e!.info } : {}),
-				endpoint: endpoint.name,
+				endpoint: 'signin',
 			},
 		};
 	}
