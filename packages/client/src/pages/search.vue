@@ -120,7 +120,7 @@ async function search(): void {
 			query = query.trim();
 			// process special query strings
 			if (query.startsWith('@') && !query.includes(' ')) {
-				mainRouter.push('/' + q);
+				mainRouter.push('/' + query);
 			} else if (query.startsWith('#')) {
 				mainRouter.push('/tags/' + encodeURIComponent(query.slice(1)));
 			} else if (query.startsWith('https://')) {
