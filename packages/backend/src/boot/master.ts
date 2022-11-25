@@ -66,7 +66,7 @@ export async function masterMain(): Promise<void> {
 	bootLogger.succ('FoundKey initialized');
 
 	if (!envOption.disableClustering) {
-		await spawnWorkers(config.clusterLimit);
+		await spawnWorkers(config.clusterLimits);
 	}
 
 	bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, null, true);
@@ -139,16 +139,26 @@ async function connectDb(): Promise<void> {
 	}
 }
 
-async function spawnWorkers(limit = 1): Promise<void> {
-	const workers = Math.min(limit, os.cpus().length);
-	bootLogger.info(`Starting ${workers} worker${workers === 1 ? '' : 's'}...`);
-	await Promise.all([...Array(workers)].map(spawnWorker));
-	bootLogger.succ('All workers started');
+async function spawnWorkers(clusterLimits: Required<Config['clusterLimits']>): Promise<void> {
+	const modes = ['web', 'queue'];
+	const total = modes.reduce((acc, mode) => acc + clusterLimits[mode], 0);
+	if (total > os.cpus().length) {
+		bootLogger.error(`configuration error: cluster limits total (${total}) must not exceed number of cores (${os.cpus().length})`);
+		process.exit(78);
+	}
+
+	const workers = new Array(total);
+	workers.fill('web', 0, clusterLimits.web);
+	workers.fill('queue', clusterLimits.web);
+
+	bootLogger.info(`Starting ${total} workers...`);
+	await Promise.all(workers.map(mode => spawnWorker(mode)));
+	bootLogger.succ(`All workers started`);
 }
 
-function spawnWorker(): Promise<void> {
+function spawnWorker(mode: 'web' | 'queue'): Promise<void> {
 	return new Promise(res => {
-		const worker = cluster.fork();
+		const worker = cluster.fork({ mode });
 		worker.on('message', message => {
 			if (message === 'listenFailed') {
 				bootLogger.error('The server Listen failed due to the previous error.');

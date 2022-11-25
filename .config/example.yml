@@ -78,8 +78,11 @@ redis:
 # Whether disable HSTS
 #disableHsts: true
 
-# Number of worker processes
-#clusterLimit: 1
+# Number of worker processes by type.
+# The sum must not exceed the number of available cores.
+#clusterLimits:
+#  web: 1
+#  queue: 1
 
 # Job concurrency per worker
 # deliverJobConcurrency: 128

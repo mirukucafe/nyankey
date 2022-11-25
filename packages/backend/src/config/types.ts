@@ -45,7 +45,10 @@ export type Source = {
 
 	accesslog?: string;
 
-	clusterLimit?: number;
+	clusterLimits?: {
+		web?: number;
+		queue?: number;
+	};
 
 	id: string;
 
