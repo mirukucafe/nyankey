@@ -11,10 +11,9 @@ let instanceActor = await Users.findOneBy({
 }) as ILocalUser | undefined;
 
 export async function getInstanceActor(): Promise<ILocalUser> {
-	if (instanceActor) {
-		return instanceActor;
-	} else {
+	if (!instanceActor) {
 		instanceActor = await createSystemUser(ACTOR_USERNAME) as ILocalUser;
-		return created;
 	}
+
+	return instanceActor;
 }
