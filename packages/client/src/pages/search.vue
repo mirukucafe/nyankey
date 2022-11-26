@@ -4,7 +4,7 @@
 	<MkSpacer :content-max="800">
 		<MkFolder>
 			<template #header>{{ i18n.ts.search }}</template>
-			<MkInput v-model="query" class="input" tabindex="1" @keydown="keydown">
+			<MkInput v-model="query" :autofocus="true" class="input" tabindex="1" @keydown="keydown">
 				<template #prefix><i class="fas fa-magnifying-glass"></i></template>
 				<template v-if="tab === 'users'" #label>{{ i18n.ts.username }}</template>
 				<template v-if="tab === 'all'" #caption>Try entering a URL or user handle!</template>
