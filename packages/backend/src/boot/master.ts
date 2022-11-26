@@ -141,12 +141,12 @@ async function connectDb(): Promise<void> {
 
 async function spawnWorkers(clusterLimits: Required<Config['clusterLimits']>): Promise<void> {
 	const modes = ['web', 'queue'];
-	const total = modes.reduce((acc, mode) => acc + clusterLimits[mode], 0);
-	if (total > os.cpus().length) {
-		bootLogger.error(`configuration error: cluster limits total (${total}) must not exceed number of cores (${os.cpus().length})`);
-		process.exit(78);
+	const cpus = os.cpus().length;
+	for (const mode of modes.filter(mode => clusterLimits[mode] > cpus)) {
+		bootLogger.warn(`configuration warning: cluster limit for ${mode} exceeds number of cores (${cpus})`);
 	}
 
+	const total = modes.reduce((acc, mode) => acc + clusterLimits[mode], 0);
 	const workers = new Array(total);
 	workers.fill('web', 0, clusterLimits.web);
 	workers.fill('queue', clusterLimits.web);
