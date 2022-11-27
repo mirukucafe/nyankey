@@ -1530,7 +1530,6 @@ _services:
 _translationService:
   _deepl:
     authKey: "DeepL Auth Key"
-    pro: "Pro Account"
   _libreTranslate:
     endpoint: "LibreTranslate API Endpoint"
     authKey: "LibreTranslate Auth Key (optional)"
