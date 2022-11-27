@@ -71,7 +71,7 @@
 		"v-debounce": "0.1.2",
 		"vanilla-tilt": "1.7.2",
 		"vite": "3.1.0",
-		"vue": "3.2.39",
+		"vue": "3.2.45",
 		"vue-prism-editor": "2.0.0-alpha.2",
 		"vuedraggable": "4.0.1",
 		"websocket": "1.0.34",
@@ -101,7 +101,7 @@
 		"cypress": "10.3.0",
 		"eslint": "^8.28.0",
 		"eslint-plugin-import": "^2.26.0",
-		"eslint-plugin-vue": "^9.1.1",
+		"eslint-plugin-vue": "^9.8.0",
 		"start-server-and-test": "1.14.0"
 	}
 }
