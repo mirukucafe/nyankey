@@ -204,7 +204,7 @@ export function fromHtml(html: string, hashtagNames?: string[], quoteUri?: strin
 
 			case 'span':
 			{
-				const nodeClass = node.attrs.find(({ name }) => name === 'class');
+				const nodeClass = node.attrs.find(({ name }) => name === 'class')?.value;
 				if (/\bquote-inline\b/.test(nodeClass) && quoteUri && getText(node).trim() === `RE: ${quoteUri}`) {
 					// embedded quote thingy for backwards compatibility, don't show it
 				} else {
