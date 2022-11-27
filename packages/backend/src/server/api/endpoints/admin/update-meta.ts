@@ -58,7 +58,6 @@ export const paramDef = {
 		summalyProxy: { type: 'string', nullable: true },
 		translationService: { type: 'string', nullable: true, enum: [null, ...Object.values(TranslationService)] },
 		deeplAuthKey: { type: 'string', nullable: true },
-		deeplIsPro: { type: 'boolean' },
 		libreTranslateAuthKey: { type: 'string', nullable: true },
 		libreTranslateEndpoint: { type: 'string', nullable: true },
 		enableTwitterIntegration: { type: 'boolean' },
@@ -376,10 +375,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		} else {
 			set.deeplAuthKey = ps.deeplAuthKey;
 		}
-	}
-
-	if (ps.deeplIsPro !== undefined) {
-		set.deeplIsPro = ps.deeplIsPro;
 	}
 
 	if (ps.libreTranslateEndpoint !== undefined) {

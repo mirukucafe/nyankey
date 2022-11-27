@@ -139,7 +139,11 @@ export default define(meta, paramDef, async (ps, user) => {
 		params.append('target_lang', targetLang);
 		if (sourceLang) params.append('source_lang', sourceLang);
 
-		const endpoint = instance.deeplIsPro ? 'https://api.deepl.com/v2/translate' : 'https://api-free.deepl.com/v2/translate';
+		// From the DeepL API docs:
+		//> DeepL API Free authentication keys can be identified easily by the suffix ":fx"
+		const endpoint = instance.deeplAuthKey.endsWith(':fx')
+			? 'https://api-free.deepl.com/v2/translate'
+			: 'https://api.deepl.com/v2/translate';
 
 		const res = await fetch(endpoint, {
 			method: 'POST',

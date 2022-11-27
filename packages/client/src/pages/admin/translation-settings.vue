@@ -12,9 +12,6 @@
 				</FormSelect>
 
 				<template v-if="translationService === 'deepl'">
-					<FormSwitch v-model="deeplIsPro" class="_formBlock">
-						<template #label>{{ i18n.ts._translationService._deepl.pro }}</template>
-					</FormSwitch>
 					<FormInput v-model="deeplAuthKey" class="_formBlock">
 						<template #prefix><i class="fas fa-key"></i></template>
 						<template #label>{{ i18n.ts._translationService._deepl.authKey }}</template>
@@ -46,7 +43,6 @@ import { fetchInstance } from '@/instance';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
 let translationService: string = $ref('none');
-let deeplIsPro: boolean = $ref(false);
 let deeplAuthKey: string = $ref('');
 let libreTranslateEndpoint: string = $ref('');
 let libreTranslateAuthKey: string = $ref('');
@@ -54,7 +50,6 @@ let libreTranslateAuthKey: string = $ref('');
 async function init(): Promise<void> {
 	const meta = await os.api('admin/meta');
 	translationService = meta.translationService ?? 'none';
-	deeplIsPro = meta.deeplIsPro;
 	deeplAuthKey = meta.deeplAuthKey;
 	libreTranslateEndpoint = meta.libreTranslateEndpoint;
 	libreTranslateAuthKey = meta.libreTranslateAuthKey;
@@ -64,7 +59,6 @@ function save(): void {
 	os.apiWithDialog('admin/update-meta', {
 		translationService: translationService === 'none' ? null : translationService,
 		deeplAuthKey,
-		deeplIsPro,
 		libreTranslateEndpoint,
 		libreTranslateAuthKey,
 	}).then(() => {
