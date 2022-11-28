@@ -1570,7 +1570,6 @@ externalCssSnippets: Quelques CSS pour vous inspirer (pas gérés par FoundKey)
 _translationService:
   _deepl:
     authKey: Clé d'authentification pour DeepL
-    pro: Compte Pro
   _libreTranslate:
     endpoint: Point de connexion pour l'API LibreTranslate
     authKey: Clé d'authentification pour LibreTranslate (optionnel)
