@@ -47,7 +47,11 @@
 						{{ i18n.ts.blockThisInstanceDescription }}
 					</template>
 				</FormSwitch>
+
 				<MkButton @click="refreshMetadata"><i class="fas fa-refresh"></i> Refresh metadata</MkButton>
+
+				<MkInfo style="margin-top: 1em;" warn>{{ i18n.t('removeAllFollowingDescription', { host: instance.host }) }}</MkInfo>
+				<MkButton danger @click="removeAllFollowing"><i class="fas fa-users-slash"></i> {{ i18n.ts.removeAllFollowing }}</MkButton>
 			</FormSection>
 
 			<FormSection>
@@ -148,6 +152,7 @@ import { definePageMetadata } from '@/scripts/page-metadata';
 import { i18n } from '@/i18n';
 import MkUserCardMini from '@/components/user-card-mini.vue';
 import MkPagination from '@/components/ui/pagination.vue';
+import MkInfo from '@/components/ui/info.vue';
 
 const props = defineProps<{
 	host: string;
@@ -199,6 +204,12 @@ function refreshMetadata(): void {
 	});
 	os.alert({
 		text: 'Refresh requested',
+	});
+}
+
+async function removeAllFollowing() {
+	await os.apiWithDialog('admin/federation/remove-all-following', {
+		host: instance.host,
 	});
 }
 
