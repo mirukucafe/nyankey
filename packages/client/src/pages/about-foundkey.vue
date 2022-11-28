@@ -24,6 +24,11 @@
 							{{ i18n.ts._aboutMisskey.source }}
 							<template #suffix>Gitea</template>
 						</FormLink>
+						<FormLink to="https://translate.akkoma.dev/projects/foundkey/foundkey/" external>
+							<template #icon><i class="fas fa-language"></i></template>
+							{{ i18n.ts._aboutMisskey.translation }}
+							<template #suffix>Weblate</template>
+						</FormLink>
 					</div>
 				</FormSection>
 				<FormSection>
