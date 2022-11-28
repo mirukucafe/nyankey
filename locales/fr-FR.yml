@@ -32,14 +32,14 @@ login: "Se connecter"
 loggingIn: "Connexion en cours"
 logout: "Se déconnecter"
 signup: "S’inscrire"
-uploading: "Envoi en cours"
+uploading: "Envoi en cours..."
 save: "Enregistrer"
 users: "Utilisateur·rice·s"
 addUser: "Ajouter un·e utilisateur·rice"
 favorite: "Ajouter aux favoris"
 favorites: "Favoris"
 unfavorite: "Retirer des favoris"
-favorited: "Ajouté à mes favoris"
+favorited: "Ajouté à mes favoris."
 alreadyFavorited: "Déjà ajouté aux favoris."
 cantFavorite: "Impossible d'ajouter aux favoris."
 pin: "Épingler sur le profil"
@@ -55,7 +55,7 @@ sendMessage: "Envoyer un message"
 copyUsername: "Copier le nom d’utilisateur·rice"
 searchUser: "Chercher un·e utilisateur·rice"
 reply: "Répondre"
-loadMore: "Afficher plus …"
+loadMore: "Afficher plus"
 showMore: "Afficher plus"
 youGotNewFollower: "Vous suit"
 receiveFollowRequest: "Demande d’abonnement reçue"
@@ -105,7 +105,7 @@ followRequestPending: "Demande d'abonnement en attente de confirmation"
 enterEmoji: "Insérer un émoji"
 renote: "Renoter"
 unrenote: "Annuler la Renote"
-renoted: "Renoté !"
+renoted: "Renoté."
 cantRenote: "Ce message ne peut pas être renoté."
 cantReRenote: "Impossible de renoter une Renote."
 quote: "Citer"
@@ -223,7 +223,7 @@ noteDeleteConfirm: "Êtes-vous sûr·e de vouloir supprimer cette note ?"
 pinLimitExceeded: "Vous ne pouvez plus épingler d’autres notes."
 intro: "L’installation de FoundKey est terminée ! Veuillez créer un compte administrateur."
 done: "Terminé"
-processing: "Traitement en cours"
+processing: "Traitement en cours..."
 preview: "Aperçu"
 default: "Par défaut"
 noCustomEmojis: "Il n'y a pas d’émoji"
@@ -254,8 +254,8 @@ announcements: "Annonces"
 imageUrl: "URL de l’image"
 remove: "Supprimer"
 removed: "Supprimé"
-removeAreYouSure: "Êtes-vous sûr·e de vouloir supprimer「{x}」?"
-deleteAreYouSure: "Êtes-vous sûr·e de vouloir supprimer「{x}」?"
+removeAreYouSure: "Êtes-vous sûr·e de vouloir supprimer \"{x}\" ?"
+deleteAreYouSure: "Êtes-vous sûr·e de vouloir supprimer \"{x}\" ?"
 resetAreYouSure: "Voulez-vous réinitialiser ?"
 saved: "Enregistré"
 messaging: "Discuter"
@@ -323,7 +323,7 @@ whenServerDisconnected: "Lorsque la connexion au serveur est perdue"
 disconnectedFromServer: "Déconnecté·e du serveur"
 reload: "Rafraîchir"
 doNothing: "Ignorer"
-reloadConfirm: "Voulez-vous recharger?"
+reloadConfirm: "Voulez-vous rafraichir la timeline ?"
 watch: "Surveiller"
 unwatch: "Ne plus surveiller"
 accept: "Autoriser"
@@ -465,7 +465,7 @@ checking: "Vérification en cours..."
 available: "Disponible"
 unavailable: "Non disponible"
 usernameInvalidFormat: "Le nom d'utilisateur peut contenir uniquement des lettres\
-  \ (minuscules et/ou majuscules), des chiffres et des _"
+  \ (minuscules et/ou majuscules), des chiffres et des tirets bas."
 tooShort: "Trop court"
 tooLong: "Trop long"
 weakPassword: "Mot de passe faible"
@@ -515,7 +515,7 @@ objectStorage: "Stockage d'objets"
 useObjectStorage: "Utiliser le stockage d'objets"
 objectStorageBaseUrl: "URL de base"
 objectStorageBaseUrlDesc: "Préfixe d’URL utilisé pour construire l’URL vers le référencement\
-  \ d’objet (média). Spécifiez son URL si vous utilisez un CDN ou un proxy, sinon\
+  \ d’objet (média). \nSpécifiez son URL si vous utilisez un CDN ou un proxy, sinon\
   \ spécifiez l’adresse accessible au public selon le guide de service que vous allez\
   \ utiliser. P.ex. 'https://<bucket>.s3.amazonaws.com' pour AWS S3 et 'https://storage.googleapis.com/<bucket>'\
   \ pour GCS."
@@ -526,7 +526,7 @@ objectStoragePrefix: "Prefix"
 objectStoragePrefixDesc: "Les fichiers seront stockés sous le répertoire de ce préfixe."
 objectStorageEndpoint: "Endpoint"
 objectStorageEndpointDesc: "Laissez ce champ vide si vous utilisez AWS S3, sinon spécifiez\
-  \ le point de terminaison comme '<host>' ou '<host>: <port>' selon le guide de service\
+  \ le point de terminaison comme '<host>' ou '<host>:<port>' selon le guide de service\
   \ que vous allez utiliser."
 objectStorageRegion: "Région"
 objectStorageRegionDesc: "Spécifiez une région comme 'xx-east-1'. Si votre service\
@@ -551,7 +551,7 @@ volume: "Volume"
 masterVolume: "Volume principal"
 details: "Détails"
 chooseEmoji: "Choisissez un émoji"
-unableToProcess: "L’opération n’a pas pu être complétée."
+unableToProcess: "L’opération n’a pas réussi"
 recentUsed: "Utilisé récemment"
 install: "Installation"
 uninstall: "Désinstaller"
@@ -630,8 +630,8 @@ useStarForReactionFallback: "Utiliser ★ comme alternative si l’émoji de ré
 emailServer: "Serveur mail"
 enableEmail: "Activer la distribution de courriel"
 emailConfigInfo: "Utilisé pour confirmer votre adresse de courriel et la réinitialisation\
-  \ de votre mot de passe en cas d’oubli."
-email: "E-mail "
+  \ de votre mot de passe en cas d’oubli"
+email: "E-mail"
 emailAddress: "Adresses e-mail"
 smtpConfig: "Paramètres du serveur SMTP"
 smtpHost: "Serveur distant"
@@ -641,7 +641,7 @@ smtpPass: "Mot de passe"
 emptyToDisableSmtpAuth: "Laisser le nom d’utilisateur et le mot de passe vides pour\
   \ désactiver la vérification SMTP"
 smtpSecure: "Utiliser SSL/TLS implicitement dans les connexions SMTP"
-smtpSecureInfo: "Désactiver cette option lorsque STARTTLS est utilisé"
+smtpSecureInfo: "Désactiver cette option lorsque STARTTLS est utilisé."
 testEmail: "Tester la distribution de courriel"
 wordMute: "Filtre de mots"
 regexpError: "Erreur d’expression régulière"
@@ -657,8 +657,8 @@ delayed: "en retard"
 database: "Base de données"
 channel: "Canaux"
 create: "Créer"
-notificationSetting: "Paramètres des notifications "
-notificationSettingDesc: "Sélectionnez le type de notification à afficher"
+notificationSetting: "Paramètres des notifications"
+notificationSettingDesc: "Sélectionnez le type de notification à afficher."
 useGlobalSetting: "Utiliser paramètre général"
 useGlobalSettingDesc: "S'il est activé, les paramètres de notification de votre compte\
   \ seront utilisés. S'il est désactivé, des configurations individuelles peuvent\
@@ -667,7 +667,7 @@ other: "Autre"
 regenerateLoginToken: "Régénérer le jeton de connexion"
 regenerateLoginTokenDescription: "Générer un nouveau jeton d'authentification. Cette\
   \ opération ne devrait pas être nécessaire ; lors de la génération d'un nouveau\
-  \ jeton, tous les appareils seront déconnectés. "
+  \ jeton, tous les appareils seront déconnectés."
 setMultipleBySeparatingWithSpace: "Vous pouvez en définir plusieurs, en les séparant\
   \ par des espaces."
 fileIdOrUrl: "ID du fichier ou URL"
@@ -703,7 +703,7 @@ public: "Public"
 i18nInfo: "FoundKey est traduit dans différentes langues par des bénévoles. Vous pouvez\
   \ contribuer à {link}."
 manageAccessTokens: "Gérer les jetons d'accès"
-accountInfo: " Informations du compte "
+accountInfo: "Informations du compte"
 notesCount: "Nombre de notes"
 repliesCount: "Nombre de réponses envoyées"
 renotesCount: "Nombre de notes que vous avez renotées"
@@ -731,7 +731,7 @@ disableShowingAnimatedImages: "Désactiver l'animation des images"
 verificationEmailSent: "Un e-mail de vérification a été envoyé. Veuillez accéder au\
   \ lien pour compléter la vérification."
 notSet: "Non défini"
-emailVerified: "Votre adresse e-mail a été vérifiée."
+emailVerified: "Votre adresse e-mail a été vérifiée"
 noteFavoritesCount: "Nombre de notes dans les favoris"
 pageLikesCount: "Nombre de pages aimées"
 pageLikedCount: "Nombre de vos pages aimées"
@@ -740,7 +740,7 @@ useSystemFont: "Utiliser la police par défaut du système"
 clips: "Clips"
 experimentalFeatures: "Fonctionnalités expérimentales"
 developer: "Développeur"
-makeExplorable: "Rendre le compte visible sur la page \"Découvrir\"."
+makeExplorable: "Rendre le compte visible sur la page \"Découvrir\""
 makeExplorableDescription: "Si vous désactivez cette option, votre compte n'apparaîtra\
   \ pas sur la page \"Découvrir\"."
 showGapBetweenNotesInTimeline: "Afficher un écart entre les notes sur la Timeline"
@@ -766,8 +766,8 @@ advanced: "Avancé"
 value: "Valeur"
 createdAt: "Date de création"
 updatedAt: "Mis à jour le"
-saveConfirm: "Voulez-vous sauvegarder les modifications?"
-deleteConfirm: "Confirmez-vous la suppression?"
+saveConfirm: "Voulez-vous sauvegarder les modifications ?"
+deleteConfirm: "Confirmez-vous la suppression ?"
 invalidValue: "Cette valeur est invalide."
 registry: "Registre"
 closeAccount: "Fermer le compte"
@@ -785,7 +785,7 @@ emailNotification: "Notifications par mail"
 publish: "Public"
 inChannelSearch: "Chercher dans le canal"
 useReactionPickerForContextMenu: "Clic-droit pour ouvrir le panneau de réactions"
-typingUsers: "{users} est en train d'écrire"
+typingUsers: "{users} est en train d'écrire..."
 jumpToSpecifiedDate: "Se rendre à la date"
 showingPastTimeline: "Un fil ancien est affiché"
 clear: "Effacer"
@@ -855,7 +855,7 @@ misskeyUpdated: "FoundKey a été mis à jour !"
 whatIsNew: "Voir les derniers changements"
 translate: "Traduire"
 translatedFrom: "Traduit depuis {x}"
-accountDeletionInProgress: "La suppression de votre compte est en cours"
+accountDeletionInProgress: "La suppression de votre compte est en cours."
 usernameInfo: "C'est un nom qui identifie votre compte sur l'instance de manière unique.\
   \ Vous pouvez utiliser des lettres de l'alphabet (minuscules et majuscules), des\
   \ chiffres (de 0 à 9), ou bien le tiret « _ ». Vous ne pourrez pas modifier votre\
@@ -947,7 +947,7 @@ _forgotPassword:
     \ de votre mot de passe."
 _gallery:
   my: "Mes publications"
-  liked: " Publications que j'ai aimées"
+  liked: "Publications que j'ai aimées"
   like: "J'aime"
   unlike: "Je n’aime pas"
 _email:
@@ -961,8 +961,8 @@ _plugin:
   manage: "Gestion des plugins"
 _registry:
   scope: "Portée"
-  key: "Clé "
-  keys: "Clé "
+  key: "Clé"
+  keys: "Clés"
   domain: "Domaine"
   createKey: "Créer une clé"
 _aboutMisskey:
@@ -982,10 +982,10 @@ _mfm:
   dummy: "La Fédiverse s'agrandit avec FoundKey"
   mention: "Mentionner"
   mentionDescription: "Vous pouvez afficher un utilisateur spécifique en indiquant\
-    \ une arobase suivie d'un nom d'utilisateur"
+    \ une arobase suivie d'un nom d'utilisateur."
   hashtag: "Hashtags"
   hashtagDescription: "Vous pouvez afficher un mot-dièse en utilisant un croisillon\
-    \ et du texte"
+    \ et du texte."
   url: "URL"
   urlDescription: "L'adresse web peut être affichée."
   link: "Lien"
@@ -996,7 +996,7 @@ _mfm:
   small: "Diminuer l'emphase"
   smallDescription: "Le contenu peut être affiché en petit et fin."
   center: "Centrer"
-  centerDescription: "Le contenu peut être centré"
+  centerDescription: "Centrer l'affichage du contenu."
   inlineCode: "Code (inline)"
   inlineCodeDescription: "Coloration syntaxique des lignes de code."
   blockCode: "Bloc de code"
@@ -1013,11 +1013,11 @@ _mfm:
   search: "Rechercher"
   searchDescription: "Affiche une boîte de recherche avec du texte pré-saisi."
   flip: "Inverser"
-  flipDescription: "Rotation verticale ou horizontale du contenu"
+  flipDescription: "Rotation verticale ou horizontale du contenu."
   jelly: "Animation (Gelée)"
   jellyDescription: "Donne une animation d'étirement."
   tada: "Animation (Tada)"
-  tadaDescription: "Donne une animation qui donne une impression de \"Tada !\""
+  tadaDescription: "Donne une animation qui donne une impression de \"Tada !\"."
   jump: "Animation (Saut)"
   jumpDescription: "Donne une animation qui saute."
   bounce: "Animation (Rebond)"
@@ -1046,7 +1046,7 @@ _mfm:
   rotate: "Pivoter"
   rotateDescription: Rotation du contenu selon l'angle spécifié.
 _instanceTicker:
-  none: "Cacher "
+  none: "Cacher"
   remote: "Montrer pour les utilisateur·ice·s distant·e·s"
   always: "Toujours afficher"
 _serverDisconnectedBehavior:
@@ -1107,7 +1107,7 @@ _theme:
   color: "Couleur"
   refProp: "Appeler une propriété"
   refConst: "Appeler une constante"
-  key: "Clé "
+  key: "Clé"
   func: "Fonction"
   funcKind: "Type de fonction"
   argument: "Argument"
@@ -1117,7 +1117,7 @@ _theme:
   lighten: "Clair"
   inputConstantName: "Insérez un nom de constante"
   importInfo: "Vous pouvez importer un thème vers l’éditeur de thèmes en saisissant\
-    \ son code ici."
+    \ son code ici"
   deleteConstantConfirm: "Êtes-vous sûr·e de vouloir supprimer la constante {const}\
     \ ?"
   keys:
@@ -1189,7 +1189,7 @@ _time:
   day: "j"
 _tutorial:
   title: "Comment utiliser FoundKey"
-  step1_1: "Bienvenue,"
+  step1_1: "Bienvenue !"
   step1_2: "Cette page est appelée « un fil ». Elle affiche les « notes » des personnes\
     \ auxquelles vous êtes abonné dans un ordre chronologique."
   step1_3: "Votre fil est actuellement vide vu que vous ne suivez aucun compte et\
@@ -1203,7 +1203,7 @@ _tutorial:
     \ sur l’icône crayon sur l’écran."
   step3_3: "Remplissez le cadran et cliquez sur le bouton en haut à droite pour envoyer."
   step3_4: "Vous n’avez rien à dire ? Essayez d’écrire « J’ai commencé à utiliser\
-    \ FoundKey »."
+    \ FoundKey » !"
   step4_1: "Avez-vous publié votre première note ?"
   step4_2: "Youpi ! Celle-ci est maintenant affichée sur votre fil d’actualité."
   step5_1: "Maintenant, essayons de nous abonner à d’autres personnes afin de rendre\
@@ -1241,8 +1241,8 @@ _2fa:
     \ davantage le processus de connexion grâce à une clé de sécurité matérielle qui\
     \ prend en charge FIDO2, ou bien en configurant l'authentification par empreinte\
     \ digitale ou par code PIN sur votre appareil."
-  step2Url: 'Vous pouvez aussi entrer cette URL si vous utilisez un programme sur
-    ordinateur:'
+  step2Url: 'Vous pouvez aussi entrer cette URL si vous utilisez un client lourd sur
+    ordinateur :'
 _permissions:
   "read:account": "Afficher les informations du compte"
   "write:account": "Mettre à jour les informations de votre compte"
@@ -1279,8 +1279,8 @@ _permissions:
 _auth:
   shareAccess: "Autoriser \"{name}\" à accéder à votre compte ?"
   shareAccessAsk: "Voulez-vous vraiment autoriser cette application à accéder à votre\
-    \ compte?"
-  permissionAsk: "Cette application nécessite les autorisations suivantes :"
+    \ compte ?"
+  permissionAsk: "Cette application nécessite les autorisations suivantes"
   pleaseGoBack: "Veuillez retourner à l’application"
   callback: "Retour vers l’application"
   denied: "Accès refusé"
@@ -1321,7 +1321,7 @@ _widgets:
   rssMarquee: Flux RSS
 _cw:
   hide: "Masquer"
-  show: "Afficher plus …"
+  show: "Afficher plus"
   chars: "{count} caractères"
   files: "{count} fichiers"
 _poll:
@@ -1331,8 +1331,8 @@ _poll:
   canMultipleVote: "Autoriser le multi-choix"
   expiration: "Fin du sondage"
   infinite: "Illimité"
-  at: "Choisir une date"
-  after: "Choisir la durée"
+  at: "Fin a..."
+  after: "Fin après..."
   deadlineDate: "Date de fin"
   deadlineTime: "Heure de fin"
   duration: "Durée"
@@ -1360,13 +1360,13 @@ _visibility:
 _postForm:
   replyPlaceholder: "Répondre à cette note ..."
   quotePlaceholder: "Citez cette note ..."
-  channelPlaceholder: "Publier vers le canal"
+  channelPlaceholder: "Publier vers le canal..."
   _placeholders:
     a: "Quoi de neuf ?"
     b: "Il s'est passé quelque chose ?"
     c: "Qu’avez-vous en tête ?"
     d: "Désirez-vous publier quelques mots ?"
-    e: "Écrivez ici"
+    e: "Écrivez ici..."
     f: "En attente de vos écrits ..."
 _profile:
   name: "Nom"
@@ -1424,8 +1424,8 @@ _pages:
   newPage: "Créer une page"
   editPage: "Modifier une page"
   readPage: "Affichage de la source en cours"
-  created: "La page a été créée !"
-  updated: "La page a été mise à jour !"
+  created: "La page a été créée"
+  updated: "La page a été mise à jour"
   deleted: "La page a été supprimée"
   pageSetting: "Paramètres de la Page"
   nameAlreadyExists: "L'URL de page spécifiée existe déjà"
@@ -1456,7 +1456,7 @@ _relayStatus:
   accepted: "Accepté"
   rejected: "Refusée"
 _notification:
-  fileUploaded: "Le fichier a été téléversé !"
+  fileUploaded: "Le fichier a été téléversé"
   youGotMention: "{name} vous a mentionné"
   youGotReply: "Réponse de {name}"
   youGotQuote: "Cité·e par {name}"
@@ -1467,7 +1467,7 @@ _notification:
   youWereFollowed: "Vous suit"
   youReceivedFollowRequest: "Vous avez reçu une demande d’abonnement"
   yourFollowRequestAccepted: "Votre demande d’abonnement a été accepté"
-  youWereInvitedToGroup: "Invité·e au groupe"
+  youWereInvitedToGroup: "{userName} Invité·e au groupe"
   _types:
     all: "Toutes"
     follow: "Nouvel·le abonné·e"
@@ -1512,18 +1512,19 @@ _deck:
     direct: "Direct"
 _services:
   _discord:
-    connected: '@{username}#{discriminator} sur Discord est connecté à @{mkUsername}!
-      sur FoundKey'
+    connected: '@{username}#{discriminator} sur Discord est connecté à @{mkUsername}
+      sur FoundKey !'
     disconnected: La liaison avec Discord à été supprimée.
   _twitter:
-    connected: '@{twitterUserName} sur Twitter est connecté à @{userName}! sur FoundKey'
+    connected: '@{twitterUserName} sur Twitter est connecté à @{userName} sur FoundKey
+      !'
     disconnected: La liaison avec Twitter à été supprimée.
   _github:
     disconnected: La liaison avec Github à été supprimée.
-    connected: '@{login} sur Github est connecté à @{userName}! sur FoundKey'
+    connected: '@{login} sur Github est connecté à @{userName} sur FoundKey !'
 exportAll: Tout exporter
 stopActivityDeliveryDescription: L'activité locale ne sera pas envoyé à cette instance.
-  La réception  de l'activité continuera de fonctionner comme avant.
+  La réception de l'activité continuera de fonctionner comme avant.
 blockThisInstanceDescription: L'activité locale ne sera pas envoyée à cette instance.
   L'activité de cette instance sera ignorée.
 signinHistoryExpires: Les données des connexions précédentes seront effacées automatiquement
@@ -1584,7 +1585,7 @@ keepOriginalUploadingDescription: Enregistre l'image importée d'origine tel que
   Si désactivé, une version affichable sur internet sera générée après l'import.
 disableDrawer: Ne pas utiliser de menus à tiroir
 regexpErrorDescription: "Il y a une erreur dans l'expression régulière de la ligne\
-  \ {line} de vos mots ignorées {tab}:"
+  \ {line} de vos mots ignorées {tab} :"
 forwardReportIsAnonymous: Un compte système anonyme sera affiché, à la place de votre
   compte, lors du signalement à l'instance distante.
 attachmentRequired: Un attachement au moins est nécessaire.
