@@ -22,7 +22,6 @@ export: "Sifeḍ"
 files: "Ifuyla"
 download: "Sider"
 lists: "Tibdarin"
-noLists: "Ulac ɣur-k·m ula d yiwet n tabdart"
 following: "Ig ṭṭafaṛ"
 followers: "Imeḍfaṛen"
 followsYou: "Yeṭṭafaṛ-ik·em-id"
@@ -43,7 +42,6 @@ signinRequired: "Ttxil jerred"
 signinWith: "Tuqqna s {x}"
 tapSecurityKey: "Sekcem tasarutt-ik·im n tɣellist"
 uiLanguage: "Tutlayt n wegrudem"
-accountSettings: "Iɣewwaṛen n umiḍan"
 plugins: "Izegrar"
 email: "Imayl"
 emailAddress: "Tansa imayl"
@@ -61,9 +59,7 @@ _mfm:
   mention: "Bder"
   search: "Nadi"
   font: "Tasefsit"
-_theme:
-  keys:
-    mention: "Bder"
+_theme: {}
 _sfx:
   notification: "Ilɣuyen"
 _permissions:
