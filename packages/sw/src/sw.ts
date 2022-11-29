@@ -24,19 +24,13 @@ self.addEventListener('activate', ev => {
 });
 
 self.addEventListener('push', ev => {
-	// クライアント取得
-	ev.waitUntil(self.clients.matchAll({
-		includeUncontrolled: true,
-		type: 'window'
-	}).then(async <K extends keyof pushNotificationDataMap>(clients: readonly WindowClient[]) => {
+	ev.waitUntil((async <K extends keyof pushNotificationDataMap>() => {
 		const data: pushNotificationDataMap[K] = ev.data?.json();
 
 		switch (data.type) {
 			// case 'driveFileCreated':
 			case 'notification':
 			case 'unreadMessagingMessage':
-				// クライアントがあったらストリームに接続しているということなので通知しない
-				if (clients.length != 0) return;
 				return createNotification(data);
 			case 'readAllNotifications':
 				for (const n of await self.registration.getNotifications()) {
@@ -67,7 +61,7 @@ self.addEventListener('push', ev => {
 				}
 				break;
 		}
-	}));
+	})());
 });
 
 self.addEventListener('notificationclick', <K extends keyof pushNotificationDataMap>(ev: ServiceWorkerGlobalScopeEventMap['notificationclick']) => {
@@ -167,24 +161,14 @@ self.addEventListener('notificationclose', <K extends keyof pushNotificationData
 
 self.addEventListener('message', (ev: ServiceWorkerGlobalScopeEventMap['message']) => {
 	ev.waitUntil((async () => {
-		switch (ev.data) {
-			case 'clear':
-				// Cache Storage全削除
-				await caches.keys()
-					.then(cacheNames => Promise.all(
-						cacheNames.map(name => caches.delete(name))
-					));
-				return; // TODO
-		}
-	
 		if (typeof ev.data === 'object') {
-			// E.g. '[object Array]' → 'array'
-			const otype = Object.prototype.toString.call(ev.data).slice(8, -1).toLowerCase();
-	
-			if (otype === 'object') {
-				if (ev.data.msg === 'initialize') {
+			switch (ev.data.type) {
+				case 'initialize':
 					swLang.setLang(ev.data.lang);
-				}
+					break;
+				case 'notification':
+					createNotification(ev.data);
+					break;
 			}
 		}
 	})());

@@ -19,6 +19,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, Ref, ref } from 'vue';
 import { swInject } from './sw-inject';
+import { instance } from '@/instance';
 import { popup as showPopup, popups, pendingApiRequestsCount } from '@/os';
 import { uploads } from '@/scripts/upload';
 import * as sound from '@/scripts/sound';
@@ -32,14 +33,12 @@ const dev: Ref<boolean> = ref(_DEV_);
 const onNotification = (notification: { type: string; id: any; }): void => {
 	if ($i?.mutingNotificationTypes.includes(notification.type)) return;
 
-	if (document.visibilityState === 'visible') {
-		stream.send('readNotification', {
-			id: notification.id,
+	// if push notifications are enabled there is no need to pass the notification along
+	if (!instance.enableServiceWorker) {
+		// service worker is not enabled or set up on the server, pass the notification along
+		navigator.serviceWorker.ready.then(registration => {
+			registration.active.postMessage({ type: 'notification', body: notification });
 		});
-
-		showPopup(defineAsyncComponent(() => import('@/components/notification-toast.vue')), {
-			notification,
-		}, {}, 'closed');
 	}
 
 	sound.play('notification');

@@ -9,7 +9,7 @@ export async function initializeSw() {
 	navigator.serviceWorker.register('/sw.js', { scope: '/', type: 'classic' });
 	navigator.serviceWorker.ready.then(registration => {
 		registration.active?.postMessage({
-			msg: 'initialize',
+			type: 'initialize',
 			lang,
 		});
 
@@ -33,14 +33,14 @@ export async function initializeSw() {
 			})
 			// When subscribe failed
 			.catch(async (err: Error) => {
-				// 通知が許可されていなかったとき
+				// when notifications were not authorized
 				if (err.name === 'NotAllowedError') {
 					return;
 				}
-		
-				// 違うapplicationServerKey (または gcm_sender_id)のサブスクリプションが
-				// 既に存在していることが原因でエラーになった可能性があるので、
-				// そのサブスクリプションを解除しておく
+
+				// The error may have been caused by the fact that a subscription to a
+				// different applicationServerKey (or gcm_sender_id) already exists, so
+				// unsubscribe to it.
 				const subscription = await registration.pushManager.getSubscription();
 				if (subscription) subscription.unsubscribe();
 			});
