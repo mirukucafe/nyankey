@@ -1128,7 +1128,7 @@
 	{ "category": "objects", "char": "🔑", "name": "key", "keywords": ["lock", "door", "password"] },
 	{ "category": "objects", "char": "🗝", "name": "old_key", "keywords": ["lock", "door", "password"] },
 	{ "category": "objects", "char": "🛋", "name": "couch_and_lamp", "keywords": ["read", "chill"] },
-	{ "category": "objects", "char": "🪔", "name": "diya_Lamp", "keywords": ["light", "oil"] },
+	{ "category": "objects", "char": "🪔", "name": "diya_lamp", "keywords": ["light", "oil"] },
 	{ "category": "objects", "char": "🛌", "name": "sleeping_bed", "keywords": ["bed", "rest"] },
 	{ "category": "objects", "char": "🛏", "name": "bed", "keywords": ["sleep", "rest"] },
 	{ "category": "objects", "char": "🚪", "name": "door", "keywords": ["house", "entry", "exit"] },
