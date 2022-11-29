@@ -236,22 +236,15 @@ export class Meta {
 	})
 	public smtpPass: string | null;
 
-	@Column('boolean', {
-		default: false,
+	@Column('varchar', {
+		length: 128,
 	})
-	public enableServiceWorker: boolean;
+	public swPublicKey: string;
 
 	@Column('varchar', {
 		length: 128,
-		nullable: true,
 	})
-	public swPublicKey: string | null;
-
-	@Column('varchar', {
-		length: 128,
-		nullable: true,
-	})
-	public swPrivateKey: string | null;
+	public swPrivateKey: string;
 
 	@Column('boolean', {
 		default: false,

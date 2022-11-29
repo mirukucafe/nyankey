@@ -101,7 +101,6 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 			enableGithubIntegration: meta.enableGithubIntegration,
 			enableDiscordIntegration: meta.enableDiscordIntegration,
 			enableEmail: meta.enableEmail,
-			enableServiceWorker: meta.enableServiceWorker,
 			proxyAccountName: proxyAccount?.username ?? null,
 			themeColor: meta.themeColor || '#86b300',
 		},

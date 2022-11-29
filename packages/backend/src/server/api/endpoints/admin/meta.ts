@@ -48,7 +48,7 @@ export const meta = {
 			},
 			swPublickey: {
 				type: 'string',
-				optional: false, nullable: true,
+				optional: false, nullable: false,
 			},
 			bannerUrl: {
 				type: 'string',
@@ -111,10 +111,6 @@ export const meta = {
 				optional: false, nullable: false,
 			},
 			enableDiscordIntegration: {
-				type: 'boolean',
-				optional: false, nullable: false,
-			},
-			enableServiceWorker: {
 				type: 'boolean',
 				optional: false, nullable: false,
 			},
@@ -216,10 +212,6 @@ export const meta = {
 				optional: true, nullable: true,
 			},
 			smtpPass: {
-				type: 'string',
-				optional: true, nullable: true,
-			},
-			swPrivateKey: {
 				type: 'string',
 				optional: true, nullable: true,
 			},
@@ -335,7 +327,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		enableTwitterIntegration: instance.enableTwitterIntegration,
 		enableGithubIntegration: instance.enableGithubIntegration,
 		enableDiscordIntegration: instance.enableDiscordIntegration,
-		enableServiceWorker: instance.enableServiceWorker,
 		pinnedPages: instance.pinnedPages,
 		pinnedClipId: instance.pinnedClipId,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
@@ -360,7 +351,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		smtpPort: instance.smtpPort,
 		smtpUser: instance.smtpUser,
 		smtpPass: instance.smtpPass,
-		swPrivateKey: instance.swPrivateKey,
 		useObjectStorage: instance.useObjectStorage,
 		objectStorageBaseUrl: instance.objectStorageBaseUrl,
 		objectStorageBucket: instance.objectStorageBucket,

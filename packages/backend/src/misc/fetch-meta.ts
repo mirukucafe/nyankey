@@ -35,8 +35,11 @@ async function getMeta(): Promise<void> {
 		},
 	});
 	if (metas.length === 0) {
+		const { publicKey, privateKey } = push.generateVAPIDKeys();
 		await db.manager.insert(Meta, {
 			id: 'x',
+			swPublicKey: publicKey,
+			swPrivateKey: privateKey,
 		});
 		metas = await db.manager.find(Meta, {
 			order: {
