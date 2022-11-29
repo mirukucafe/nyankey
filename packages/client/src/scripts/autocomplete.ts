@@ -24,7 +24,7 @@ export class Autocomplete {
 	}
 
 	/**
-	 * 対象のテキストエリアを与えてインスタンスを初期化します。
+	 * Initialize the object by giving it the targeted text area.
 	 */
 	constructor(textarea: HTMLInputElement | HTMLTextAreaElement, textRef: Ref<string>) {
 		//#region BIND
@@ -42,23 +42,20 @@ export class Autocomplete {
 	}
 
 	/**
-	 * このインスタンスにあるテキストエリアの入力のキャプチャを開始します。
+	 * Starts capturing text area input.
 	 */
 	public attach() {
 		this.textarea.addEventListener('input', this.onInput);
 	}
 
 	/**
-	 * このインスタンスにあるテキストエリアの入力のキャプチャを解除します。
+	 * Stop capturing text area input.
 	 */
 	public detach() {
 		this.textarea.removeEventListener('input', this.onInput);
 		this.close();
 	}
 
-	/**
-	 * テキスト入力時
-	 */
 	private onInput() {
 		const caretPos = this.textarea.selectionStart;
 		const text = this.text.substr(0, caretPos).split('\n').pop()!;
@@ -127,7 +124,7 @@ export class Autocomplete {
 	}
 
 	/**
-	 * サジェストを提示します。
+	 * Show suggestions.
 	 */
 	private async open(type: string, q: string | null) {
 		if (type !== this.currentType) {
@@ -137,14 +134,13 @@ export class Autocomplete {
 		this.opening = true;
 		this.currentType = type;
 
-		//#region サジェストを表示すべき位置を計算
+		// calculate where the suggestion should appear
 		const caretPosition = getCaretCoordinates(this.textarea, this.textarea.selectionStart);
 
 		const rect = this.textarea.getBoundingClientRect();
 
 		const x = rect.left + caretPosition.left - this.textarea.scrollLeft;
 		const y = rect.top + caretPosition.top - this.textarea.scrollTop;
-		//#endregion
 
 		if (this.suggestion) {
 			this.suggestion.x.value = x;
@@ -182,7 +178,7 @@ export class Autocomplete {
 	}
 
 	/**
-	 * サジェストを閉じます。
+	 * Close suggestion.
 	 */
 	private close() {
 		if (this.suggestion == null) return;
@@ -194,7 +190,17 @@ export class Autocomplete {
 	}
 
 	/**
-	 * オートコンプリートする
+	 * Positions the cursor within the given text area.
+	 */
+	private positionCursor(pos) {
+		nextTick(() => {
+			this.textarea.focus();
+			this.textarea.setSelectionRange(pos, pos);
+		});
+	}
+
+	/**
+	 * Write the suggestion to the textarea.
 	 */
 	private complete({ type, value }) {
 		this.close();
@@ -210,15 +216,9 @@ export class Autocomplete {
 
 			const acct = value.host === null ? value.username : `${value.username}@${toASCII(value.host)}`;
 
-			// 挿入
 			this.text = `${trimmedBefore}@${acct} ${after}`;
-
-			// キャレットを戻す
-			nextTick(() => {
-				this.textarea.focus();
-				const pos = trimmedBefore.length + (acct.length + 2);
-				this.textarea.setSelectionRange(pos, pos);
-			});
+			// add 2 for "@" and space
+			this.positionCursor(trimmedBefore.length + acct.length + 2);
 		} else if (type === 'hashtag') {
 			const source = this.text;
 
@@ -226,15 +226,9 @@ export class Autocomplete {
 			const trimmedBefore = before.substring(0, before.lastIndexOf('#'));
 			const after = source.substr(caret);
 
-			// 挿入
 			this.text = `${trimmedBefore}#${value} ${after}`;
-
-			// キャレットを戻す
-			nextTick(() => {
-				this.textarea.focus();
-				const pos = trimmedBefore.length + (value.length + 2);
-				this.textarea.setSelectionRange(pos, pos);
-			});
+			// add 2 for "#" and space
+			this.positionCursor(trimmedBefore.length + value.length + 2);
 		} else if (type === 'emoji') {
 			const source = this.text;
 
@@ -242,15 +236,8 @@ export class Autocomplete {
 			const trimmedBefore = before.substring(0, before.lastIndexOf(':'));
 			const after = source.substr(caret);
 
-			// 挿入
 			this.text = trimmedBefore + value + after;
-
-			// キャレットを戻す
-			nextTick(() => {
-				this.textarea.focus();
-				const pos = trimmedBefore.length + value.length;
-				this.textarea.setSelectionRange(pos, pos);
-			});
+			this.positionCursor(trimmedBefore.length + value.length);
 		} else if (type === 'mfmTag') {
 			const source = this.text;
 
@@ -258,15 +245,8 @@ export class Autocomplete {
 			const trimmedBefore = before.substring(0, before.lastIndexOf('$'));
 			const after = source.substr(caret);
 
-			// 挿入
 			this.text = `${trimmedBefore}$[${value} ]${after}`;
-
-			// キャレットを戻す
-			nextTick(() => {
-				this.textarea.focus();
-				const pos = trimmedBefore.length + (value.length + 3);
-				this.textarea.setSelectionRange(pos, pos);
-			});
+			this.positionCursor(trimmedBefore.length + value.length + 3);
 		}
 	}
 }
