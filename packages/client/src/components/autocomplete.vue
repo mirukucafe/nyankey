@@ -54,15 +54,13 @@ type EmojiDef = {
 	isCustomEmoji?: boolean;
 };
 
-const lib = emojilist.filter(x => x.category !== 'flags');
-
-const emjdb: EmojiDef[] = lib.map(x => ({
+const emjdb: EmojiDef[] = emojilist.map(x => ({
 	emoji: x.char,
 	name: x.name,
 	url: char2filePath(x.char),
 }));
 
-for (const x of lib) {
+for (const x of emojilist) {
 	if (x.keywords) {
 		for (const k of x.keywords) {
 			emjdb.push({
