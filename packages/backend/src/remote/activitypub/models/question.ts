@@ -36,9 +36,10 @@ export async function extractPollFromQuestion(source: string | IObject, resolver
 /**
  * Update votes of Question
  * @param value AP Question object or its id
+ * @param resolver Resolver to use
  * @returns true if updated
  */
-export async function updateQuestion(value: string | IObject) {
+export async function updateQuestion(value: string | IObject, resolver?: Resolver = new Resolver()) {
 	const uri = typeof value === 'string' ? value : value.id;
 
 	// URIがこのサーバーを指しているならスキップ
@@ -53,7 +54,6 @@ export async function updateQuestion(value: string | IObject) {
 	//#endregion
 
 	// resolve new Question object
-	const resolver = new Resolver();
 	const question = await resolver.resolve(value) as IQuestion;
 	apLogger.debug(`fetched question: ${JSON.stringify(question, null, 2)}`);
 
