@@ -5,6 +5,11 @@ Migrating from Misskey to FoundKey is relatively straightforward. However, addit
 ## Backup
 The process will take some time and it's possible something will go wrong. It's highly suggested to make a database dump using `pgdump` and backing up `.config/default.yml` and the `files/` directory before proceeding any further.
 
+## Requirements
+FoundKey has different version requirements compared to Misskey. Before continuing please check if you have the following minimum versions installed:
+* Node (version 18)
+* Postgresql (version 12)
+
 ## Reverting migrations
 If you're migrating from Misskey 12.112.0 or higher, you'll need to revert some database migrations as they have diverged from that point. Specifically, you'll need to revert `nsfwDetection1655368940105` and newer migrations.
 
@@ -41,7 +46,14 @@ git merge tags/v13.0.0-preview2 --squash
 ```
 
 ## Making sure modern Yarn works
-Foundkey uses Modern Yarn instead of Classic (1.x). To make sure the `yarn` command will work going forward, run `corepack enable`.
+FoundKey uses modern Yarn instead of Classic (1.x) using [Corepack](https://github.com/nodejs/corepack). To make sure the `yarn` command will work going forward, run `corepack enable`.
+
+If you previously had Yarn installed manually you have to remove it and install Corepack:
+```sh
+npm uninstall -g yarn
+npm install -g corepack
+corepack enable
+```
 
 ## Rebuilding and running database migrations
 This will be pretty much the same as a regular update of Misskey. Note that `yarn install` may take a while since dependency versions have been updated or removed and we use a newer version of Yarn.
@@ -50,6 +62,7 @@ yarn install
 NODE_ENV=production yarn build
 yarn migrate
 ```
+If you encounter issues during the build process run `yarn clean-all` and run the install and build command again.
 
 ## Restarting your instance
 To let the changes take effect restart your instance as usual:
