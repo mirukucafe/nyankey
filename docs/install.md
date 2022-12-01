@@ -199,6 +199,5 @@ If you encounter any problems with updating, please try the following:
 1. `yarn clean` or `yarn cleanall`
 2. Retry update (Don't forget `yarn install`)
 
-----------------------------------------------------------------
-
+## Need Help?
 If you have any questions or troubles, feel free to contact us on IRC: `#foundkey` on `irc.akkoma.dev`, port `6697` with SSL

@@ -74,6 +74,5 @@ systemctl restart misskey
 rc-service misskey restart
 ```
 
-----------------------------------------------------------------
-
+## Need help?
 If you have any questions or troubles, feel free to contact us on IRC: `#foundkey` on `irc.akkoma.dev`, port `6697` with SSL
