@@ -6,7 +6,6 @@ import Logger from '@/services/logger.js';
 import { registerOrFetchInstanceDoc } from '@/services/register-or-fetch-instance-doc.js';
 import { Instances } from '@/models/index.js';
 import { apRequestChart, federationChart, instanceChart } from '@/services/chart/index.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { toPuny, extractDbHost } from '@/misc/convert-host.js';
 import { getApId } from '@/remote/activitypub/type.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
@@ -17,6 +16,7 @@ import { StatusError } from '@/misc/fetch.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { UserPublickey } from '@/models/entities/user-publickey.js';
 import { InboxJobData } from '@/queue/types.js';
+import { shouldBlockInstance } from '@/misc/skipped-instances.js';
 
 const logger = new Logger('inbox');
 
@@ -33,9 +33,8 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 
 	const host = toPuny(new URL(signature.keyId).hostname);
 
-	// ブロックしてたら中断
-	const meta = await fetchMeta();
-	if (meta.blockedHosts.includes(host)) {
+	// Stop if the host is blocked.
+	if (await shouldBlockInstance(host)) {
 		return `Blocked request: ${host}`;
 	}
 
@@ -117,9 +116,9 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 				return `skip: LD-Signature user(${authUser.user.uri}) !== activity.actor(${activity.actor})`;
 			}
 
-			// ブロックしてたら中断
+			// Stop if the host is blocked.
 			const ldHost = extractDbHost(authUser.user.uri);
-			if (meta.blockedHosts.includes(ldHost)) {
+			if (await shouldBlockInstance(ldHost)) {
 				return `Blocked request: ${ldHost}`;
 			}
 		} else {
