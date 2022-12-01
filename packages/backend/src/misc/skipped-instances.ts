@@ -1,3 +1,4 @@
+import { toASCII } from 'punycode/';
 import { db } from '@/db/postgre.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Instance } from '@/models/entities/instance.js';
@@ -9,17 +10,19 @@ const deadThreshold = 7 * DAY;
 
 /**
  * Returns whether a given host matches a wildcard pattern.
- * @param host punycoded instance host
- * @param pattern wildcard pattern containing a punycoded instance host
+ * @param host instance host
+ * @param pattern wildcard pattern containing an instance host
  * @returns whether the post matches the pattern
  */
 function matchHost(host: Instance['host'], pattern: string): boolean {
 	// Escape all of the regex special characters. Pattern from:
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
 	const escape = (str: string): string => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-	const re = new RegExp('^' + pattern.split('*').map(escape).join('.*') + '$');
-	return re.test(host);
+	const re = new RegExp('^' + pattern.split('*').map(toASCII).map(escape).join('.*') + '$');
+	
+	// Encode the domain in punycode in case it uses non-ascii
+	const punycoded = toASCII(host);
+	return re.test(punycoded);
 }
 
 /**
@@ -53,7 +56,7 @@ export async function skippedInstances(hosts: Array<Instance['host']>): Promise<
 				deadTime.toISOString(),
 				// don't check hosts again that we already know are suspended
 				// also avoids adding duplicates to the list
-				hosts.filter(host => !skipped.some(blockedHost => matchHost(host, blockedHost)) && !host.includes(',')).join(','),
+				hosts.filter(host => !skipped.includes(host) && !host.includes(',')).join(','),
 			],
 		)
 		.then(res => res.map(row => row.host)),
