@@ -2,7 +2,6 @@ import config from '@/config/index.js';
 import { getJson } from '@/misc/fetch.js';
 import { ILocalUser } from '@/models/entities/user.js';
 import { getInstanceActor } from '@/services/instance-actor.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { extractDbHost, isSelfHost } from '@/misc/convert-host.js';
 import { Notes, NoteReactions, Polls, Users } from '@/models/index.js';
 import renderNote from '@/remote/activitypub/renderer/note.js';
