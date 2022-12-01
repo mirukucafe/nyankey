@@ -73,3 +73,7 @@ systemctl restart misskey
 # OpenRC
 rc-service misskey restart
 ```
+
+----------------------------------------------------------------
+
+If you have any questions or troubles, feel free to contact us on IRC: `#foundkey` on `irc.akkoma.dev`, port `6697` with SSL
