@@ -1,4 +1,3 @@
-import config from '@/config/index.js';
 import { createPerson } from '@/remote/activitypub/models/person.js';
 import { createNote } from '@/remote/activitypub/models/note.js';
 import DbResolver from '@/remote/activitypub/db-resolver.js';
@@ -7,10 +6,10 @@ import { extractDbHost } from '@/misc/convert-host.js';
 import { Users, Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { CacheableLocalUser, User } from '@/models/entities/user.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { isActor, isPost, getApId } from '@/remote/activitypub/type.js';
 import { SchemaType } from '@/misc/schema.js';
 import { HOUR } from '@/const.js';
+import { shouldBlockInstance } from '@/misc/skipped-instances.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
 
@@ -85,9 +84,11 @@ export default define(meta, paramDef, async (ps, me) => {
  * URIからUserかNoteを解決する
  */
 async function fetchAny(uri: string, me: CacheableLocalUser | null | undefined): Promise<SchemaType<typeof meta['res']> | null> {
-	// ブロックしてたら中断
-	const fetchedMeta = await fetchMeta();
-	if (fetchedMeta.blockedHosts.includes(extractDbHost(uri))) return null;
+	// Stop if the host is blocked.
+	const host = extractDbHost(uri);
+	if (await shouldBlockInstance(host)) {
+		return null;
+	}
 
 	const dbResolver = new DbResolver();
 

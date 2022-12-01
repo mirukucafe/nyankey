@@ -2,7 +2,6 @@ import config from '@/config/index.js';
 import { getJson } from '@/misc/fetch.js';
 import { ILocalUser } from '@/models/entities/user.js';
 import { getInstanceActor } from '@/services/instance-actor.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { extractDbHost, isSelfHost } from '@/misc/convert-host.js';
 import { Notes, NoteReactions, Polls, Users } from '@/models/index.js';
 import renderNote from '@/remote/activitypub/renderer/note.js';
@@ -12,6 +11,7 @@ import renderQuestion from '@/remote/activitypub/renderer/question.js';
 import renderCreate from '@/remote/activitypub/renderer/create.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
+import { shouldBlockInstance } from '@/misc/skipped-instances.js';
 import { signedGet } from './request.js';
 import { IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
 import { parseUri } from './db-resolver.js';
@@ -71,8 +71,7 @@ export default class Resolver {
 			return await this.resolveLocal(value);
 		}
 
-		const meta = await fetchMeta();
-		if (meta.blockedHosts.includes(host)) {
+		if (await shouldBlockInstance(host)) {
 			throw new Error('Instance is blocked');
 		}
 
