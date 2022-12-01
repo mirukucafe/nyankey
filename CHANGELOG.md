@@ -11,6 +11,100 @@ Unreleased changes should not be listed in this file.
 Instead, run `git shortlog --format='%h %s' --group=trailer:changelog <last tag>..` to see unreleased changes; replace `<last tag>` with the tag you wish to compare from.
 If you are a contributor, please read [CONTRIBUTING.md, section "Changelog Trailer"](./CONTRIBUTING.md#changelog-trailer) on what to do instead.
 
+## 13.0.0-preview3 - 2022-12-02
+This release contains 1 urgent security fix necessitated by `misskey-forkbomb`.
+This release contains 1 breaking change.
+If you are a 3rd party client developer please see the "Intended future changes" section at the end.
+
+### Security
+- activitypub: add recursion limit to resolver
+
+### Added
+- server: make max note length configurable
+- server: LibreTranslate support
+- activitypub: not forwarding block activities
+  This can be configured per user.
+- client: add "follows you" hint to user profile popup
+- client: improved search page for notes and users
+- client: ability to delete webhooks
+- client: put back button to let admin remove all followings from an instance
+
+### Changed
+- **BREAKING** server: remove support for node 16.x.
+  Since 2022-10-18, Node.js 16.x is out of Long Term Support and has entered the Maintenance phase.
+  The new Long Term Support version since 2022-10-25 is Node.js 18.x.
+  Foundkey now requires at least Node.js 18.7.0.
+- updated documentation
+- client: updated translations
+- client: update emoji list
+- client: autocomplete flag emoji
+- client: autocompletion for emoji is case insensitive
+- client: use browser native notifications
+- client: close webhook settings page automatically after saving
+- client: remove hostname from signup and signin forms
+- server: increase user profile description length limit to 2048
+- server: always enable push notifications
+- server: allow to like own pages
+- server: allow to like own gallery pages
+- server: produce error when trying to unclip note that was not clipped
+- server: stricter API permissions, more endpoints require authentication
+  This affects the following endpoints:
+  - `/api/federation/instances`
+  - `/api/federation/show-instance`
+  - `/api/federation/stats`
+  - `/api/federation/users`
+  - `/api/federation/followers`
+  - `/api/federation/following`
+  - `/api/fetch-rss`
+- server: stricter rate limiting for password reset
+- server: refactor API errors and improve documentation
+  This affects all API endpoints.
+  API errors no longer have a UUID (previous `id` property). Use the properties `code` and `endpoint` instead.
+- server: avoid adding suspended instances to the delivery queue in the first place
+- server: rewrite skipped instances query in raw SQL to improve performance
+- activitypub: don't nyaize blockquotes
+- server: add wildcard matching to blocked hosts
+- server: updated dependencies
+
+### Fixed
+- client: fix detection of maximum lenght for profile description
+- client: editing webhooks
+- client: files in some states couldnot be dropped and uploaded
+- service worker: don't trigger "push notification have been updated"
+- server: properly delete expired password reset requests
+- server: skip delivering to instances that proclaim themself dead via HTTP 410
+- server: use host parameter in note search even if elasticsearch is not enabled
+- activitypub: fix rendering of Follow activity `id` when force-removing a follow
+- activitypub: remove akkoma quote URLs
+
+### Removed
+- client: remove user search from explore page
+  You can use the new revamped search page instead.
+- server: remove `deeplIsPro` setting
+  This setting can be automatically detected based on the DeepL Auth Key provided.
+  This affects the following endpoints:
+  - `/api/admin/meta`
+  - `/api/admin/update-meta`
+- server: remove unused endpoints
+  This affects the following endpoints. Expected usage of these endpoints is low.
+  - `/api/test`
+  - `/api/users/get-frequently-replied-users`
+
+### Intended future changes
+This section is intended for 3rd party client developers.
+
+MiAuth will be removed in a future release, most likely in the next release.
+This affects the follwing endpoints:
+- `/miauth`
+- `/api/miauth/:session/check`
+The `features.miauth` feature flag in `/api/meta` will no longer be `true` (set to `false` or removed entirely).
+
+We would like to clarify that the follwing ndpoints are not part of the public API as they were never part of the documentation generated at `/api-doc`.
+They may be removed at any point, without notice.
+- `/api/signup`
+- `/api/signin`
+- `/api/signup-pending`
+
 ## 13.0.0-preview2 - 2022-10-16
 ### Security
 - server: Update `multer` dependency to resolve [CVE-2022-24434](https://nvd.nist.gov/vuln/detail/CVE-2022-24434)
