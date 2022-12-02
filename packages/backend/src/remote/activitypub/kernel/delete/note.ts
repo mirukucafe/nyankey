@@ -5,10 +5,8 @@ import { deleteMessage } from '@/services/messages/delete.js';
 import DbResolver from '@/remote/activitypub/db-resolver.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 
-const logger = apLogger;
-
 export default async function(actor: CacheableRemoteUser, uri: string): Promise<string> {
-	logger.info(`Deleting the Note: ${uri}`);
+	apLogger.info(`Deleting the Note: ${uri}`);
 
 	const unlock = await getApLock(uri);
 
@@ -25,7 +23,6 @@ export default async function(actor: CacheableRemoteUser, uri: string): Promise<
 			}
 
 			await deleteMessage(message);
-
 			return 'ok: message deleted';
 		}
 

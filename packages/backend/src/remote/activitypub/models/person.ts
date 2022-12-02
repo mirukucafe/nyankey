@@ -32,8 +32,6 @@ import { extractApHashtags } from './tag.js';
 import { resolveNote, extractEmojis } from './note.js';
 import { resolveImage } from './image.js';
 
-const logger = apLogger;
-
 const nameLength = 128;
 const summaryLength = 2048;
 
@@ -145,7 +143,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 
 	const person = validateActor(object, uri);
 
-	logger.info(`Creating the Person: ${person.id}`);
+	apLogger.info(`Creating the Person: ${person.id}`);
 
 	const host = toPuny(new URL(object.id).hostname);
 
@@ -217,7 +215,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 				throw new Error('already registered');
 			}
 		} else {
-			logger.error(e instanceof Error ? e : new Error(e as string));
+			apLogger.error(e instanceof Error ? e : new Error(e as string));
 			throw e;
 		}
 	}
@@ -258,7 +256,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 
 	//#region カスタム絵文字取得
 	const emojis = await extractEmojis(person.tag || [], host).catch(e => {
-		logger.info(`extractEmojis: ${e}`);
+		apLogger.info(`extractEmojis: ${e}`);
 		return [] as Emoji[];
 	});
 
@@ -269,7 +267,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 	});
 	//#endregion
 
-	await updateFeatured(user!.id, resolver).catch(err => logger.error(err));
+	await updateFeatured(user!.id, resolver).catch(err => apLogger.error(err));
 
 	return user!;
 }
@@ -301,7 +299,7 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
 
 	const person = validateActor(object, uri);
 
-	logger.info(`Updating the Person: ${person.id}`);
+	apLogger.info(`Updating the Person: ${person.id}`);
 
 	// アバターとヘッダー画像をフェッチ
 	const [avatar, banner] = await Promise.all([
@@ -315,7 +313,7 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
 
 	// カスタム絵文字取得
 	const emojis = await extractEmojis(person.tag || [], exist.host).catch(e => {
-		logger.info(`extractEmojis: ${e}`);
+		apLogger.info(`extractEmojis: ${e}`);
 		return [] as Emoji[];
 	});
 
@@ -380,7 +378,7 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
 		followerSharedInbox: person.sharedInbox || (person.endpoints ? person.endpoints.sharedInbox : undefined),
 	});
 
-	await updateFeatured(exist.id, resolver).catch(err => logger.error(err));
+	await updateFeatured(exist.id, resolver).catch(err => apLogger.error(err));
 }
 
 /**
@@ -463,7 +461,7 @@ export async function updateFeatured(userId: User['id'], resolver?: Resolver) {
 	if (!Users.isRemoteUser(user)) return;
 	if (!user.featured) return;
 
-	logger.info(`Updating the featured: ${user.uri}`);
+	apLogger.info(`Updating the featured: ${user.uri}`);
 
 	if (resolver == null) resolver = new Resolver();
 

@@ -4,17 +4,15 @@ import Resolver from '@/remote/activitypub/resolver.js';
 import { IAccept, isFollow, getApType } from '@/remote/activitypub/type.js';
 import acceptFollow from './follow.js';
 
-const logger = apLogger;
-
 export default async (actor: CacheableRemoteUser, activity: IAccept): Promise<string> => {
 	const uri = activity.id || activity;
 
-	logger.info(`Accept: ${uri}`);
+	apLogger.info(`Accept: ${uri}`);
 
 	const resolver = new Resolver();
 
 	const object = await resolver.resolve(activity.object).catch(e => {
-		logger.error(`Resolution failed: ${e}`);
+		apLogger.error(`Resolution failed: ${e}`);
 		throw e;
 	});
 

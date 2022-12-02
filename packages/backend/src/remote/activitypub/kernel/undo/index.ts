@@ -8,8 +8,6 @@ import undoLike from './like.js';
 import undoAccept from './accept.js';
 import { undoAnnounce } from './announce.js';
 
-const logger = apLogger;
-
 export default async (actor: CacheableRemoteUser, activity: IUndo): Promise<string> => {
 	if ('actor' in activity && actor.uri !== activity.actor) {
 		throw new Error('invalid actor');
@@ -17,12 +15,11 @@ export default async (actor: CacheableRemoteUser, activity: IUndo): Promise<stri
 
 	const uri = activity.id || activity;
 
-	logger.info(`Undo: ${uri}`);
+	apLogger.info(`Undo: ${uri}`);
 
 	const resolver = new Resolver();
-
 	const object = await resolver.resolve(activity.object).catch(e => {
-		logger.error(`Resolution failed: ${e}`);
+		apLogger.error(`Resolution failed: ${e}`);
 		throw e;
 	});
 

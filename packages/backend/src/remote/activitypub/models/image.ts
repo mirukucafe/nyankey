@@ -8,8 +8,6 @@ import { DB_MAX_IMAGE_COMMENT_LENGTH } from '@/misc/hard-limits.js';
 import Resolver from '../resolver.js';
 import { apLogger } from '../logger.js';
 
-const logger = apLogger;
-
 /**
  * Imageを作成します。
  */
@@ -25,7 +23,7 @@ export async function createImage(actor: CacheableRemoteUser, value: any): Promi
 		throw new Error('invalid image: url not privided');
 	}
 
-	logger.info(`Creating the Image: ${image.url}`);
+	apLogger.info(`Creating the Image: ${image.url}`);
 
 	const instance = await fetchMeta();
 

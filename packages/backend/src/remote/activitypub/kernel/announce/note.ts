@@ -11,11 +11,6 @@ import { fetchNote, resolveNote } from '@/remote/activitypub/models/note.js';
 import Resolver from '@/remote/activitypub/resolver.js';
 import { IAnnounce, getApId } from '@/remote/activitypub/type.js';
 
-const logger = apLogger;
-
-/**
- * アナウンスアクティビティを捌きます
- */
 export default async function(resolver: Resolver, actor: CacheableRemoteUser, activity: IAnnounce, targetUri: string): Promise<void> {
 	const uri = getApId(activity);
 
@@ -44,18 +39,18 @@ export default async function(resolver: Resolver, actor: CacheableRemoteUser, ac
 			// 対象が4xxならスキップ
 			if (e instanceof StatusError) {
 				if (e.isClientError) {
-					logger.warn(`Ignored announce target ${targetUri} - ${e.statusCode}`);
+					apLogger.warn(`Ignored announce target ${targetUri} - ${e.statusCode}`);
 					return;
 				}
 
-				logger.warn(`Error in announce target ${targetUri} - ${e.statusCode || e}`);
+				apLogger.warn(`Error in announce target ${targetUri} - ${e.statusCode || e}`);
 			}
 			throw e;
 		}
 
 		if (!await Notes.isVisibleForMe(renote, actor.id)) return 'skip: invalid actor for this activity';
 
-		logger.info(`Creating the (Re)Note: ${uri}`);
+		apLogger.info(`Creating the (Re)Note: ${uri}`);
 
 		const activityAudience = await parseAudience(actor, activity.to, activity.cc);
 

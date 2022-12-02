@@ -28,8 +28,6 @@ import { extractApHashtags } from './tag.js';
 import { extractPollFromQuestion } from './question.js';
 import { extractApMentions } from './mention.js';
 
-const logger = apLogger;
-
 export function validateNote(object: any, uri: string) {
 	const expectHost = extractDbHost(uri);
 
@@ -71,7 +69,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 	const entryUri = getApId(value);
 	const err = validateNote(object, entryUri);
 	if (err) {
-		logger.error(`${err.message}`, {
+		apLogger.error(`${err.message}`, {
 			resolver: {
 				history: resolver.getHistory(),
 			},
@@ -83,9 +81,9 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 
 	const note: IPost = object;
 
-	logger.debug(`Note fetched: ${JSON.stringify(note, null, 2)}`);
+	apLogger.debug(`Note fetched: ${JSON.stringify(note, null, 2)}`);
 
-	logger.info(`Creating the Note: ${note.id}`);
+	apLogger.info(`Creating the Note: ${note.id}`);
 
 	// 投稿者をフェッチ
 	const actor = await resolvePerson(getOneApId(note.attributedTo), resolver) as CacheableRemoteUser;
@@ -129,7 +127,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 	const reply: Note | null = note.inReplyTo
 		? await resolveNote(note.inReplyTo, resolver).then(x => {
 			if (x == null) {
-				logger.warn('Specified inReplyTo, but nout found');
+				apLogger.warn('Specified inReplyTo, but nout found');
 				throw new Error('inReplyTo not found');
 			} else {
 				return x;
@@ -146,7 +144,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 				}
 			}
 
-			logger.warn(`Error in inReplyTo ${note.inReplyTo} - ${e.statusCode || e}`);
+			apLogger.warn(`Error in inReplyTo ${note.inReplyTo} - ${e.statusCode || e}`);
 			throw e;
 		})
 		: null;
@@ -210,9 +208,9 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 
 		const tryCreateVote = async (name: string, index: number): Promise<null> => {
 			if (poll.expiresAt && Date.now() > new Date(poll.expiresAt).getTime()) {
-				logger.warn(`vote to expired poll from AP: actor=${actor.username}@${actor.host}, note=${note.id}, choice=${name}`);
+				apLogger.warn(`vote to expired poll from AP: actor=${actor.username}@${actor.host}, note=${note.id}, choice=${name}`);
 			} else if (index >= 0) {
-				logger.info(`vote from AP: actor=${actor.username}@${actor.host}, note=${note.id}, choice=${name}`);
+				apLogger.info(`vote from AP: actor=${actor.username}@${actor.host}, note=${note.id}, choice=${name}`);
 				await vote(actor, reply, index);
 
 				// リモートフォロワーにUpdate配信
@@ -227,7 +225,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 	}
 
 	const emojis = await extractEmojis(note.tag || [], actor.host).catch(e => {
-		logger.info(`extractEmojis: ${e}`);
+		apLogger.info(`extractEmojis: ${e}`);
 		return [] as Emoji[];
 	});
 
@@ -341,7 +339,7 @@ export async function extractEmojis(tags: IObject | IObject[], idnHost: string):
 			return exists;
 		}
 
-		logger.info(`register emoji host=${host}, name=${name}`);
+		apLogger.info(`register emoji host=${host}, name=${name}`);
 
 		return await Emojis.insert({
 			id: genId(),
