@@ -16,22 +16,22 @@ export default async function(actor: CacheableRemoteUser, uri: string): Promise<
 
 		if (note == null) {
 			const message = await dbResolver.getMessageFromApId(uri);
-			if (message == null) return 'message not found';
+			if (message == null) return 'skip: message not found';
 
 			if (message.userId !== actor.id) {
-				return '投稿を削除しようとしているユーザーは投稿の作成者ではありません';
+				return 'skip: cant delete other actors message';
 			}
 
 			await deleteMessage(message);
 			return 'ok: message deleted';
-		}
+		} else {
+			if (note.userId !== actor.id) {
+				return 'skip: cant delete other actors note';
+			}
 
-		if (note.userId !== actor.id) {
-			return '投稿を削除しようとしているユーザーは投稿の作成者ではありません';
+			await deleteNode(actor, note);
+			return 'ok: note deleted';
 		}
-
-		await deleteNode(actor, note);
-		return 'ok: note deleted';
 	} finally {
 		unlock();
 	}

@@ -16,6 +16,11 @@ import { signedGet } from './request.js';
 import { IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
 import { parseUri } from './db-resolver.js';
 
+/**
+ * Tries to resolve an ActivityPub URI into an AP object.
+ *
+ * As opposed to the DbResolver which will try to resolve an ActivityPub URI into a database object.
+ */
 export default class Resolver {
 	private history: Set<string>;
 	private user?: ILocalUser;

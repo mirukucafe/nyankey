@@ -14,28 +14,27 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 	}
 
 	if (followee.host != null) {
-		return 'skip: フォロー解除しようとしているユーザーはローカルユーザーではありません';
+		return 'skip: the unfollowed user is not local';
 	}
 
-	const req = await FollowRequests.findOneBy({
-		followerId: actor.id,
-		followeeId: followee.id,
-	});
-
-	const following = await Followings.findOneBy({
-		followerId: actor.id,
-		followeeId: followee.id,
-	});
+	const [req, following] = await Promise.all([
+		FollowRequests.findOneBy({
+			followerId: actor.id,
+			followeeId: followee.id,
+		}),
+		Followings.findOneBy({
+			followerId: actor.id,
+			followeeId: followee.id,
+		}),
+	]);
 
 	if (req) {
 		await cancelRequest(followee, actor);
 		return 'ok: follow request canceled';
-	}
-
-	if (following) {
+	} else if (following) {
 		await unfollow(actor, followee);
 		return 'ok: unfollowed';
+	} else {
+		return 'skip: no such following or follow request';
 	}
-
-	return 'skip: リクエストもフォローもされていない';
 };

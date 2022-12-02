@@ -18,25 +18,25 @@ export default async function(resolver: Resolver, actor: CacheableRemoteUser, ac
 		return;
 	}
 
-	// アナウンス先をブロックしてたら中断
+	// Cancel if the announced from host is blocked.
 	const meta = await fetchMeta();
 	if (meta.blockedHosts.includes(extractDbHost(uri))) return;
 
 	const unlock = await getApLock(uri);
 
 	try {
-		// 既に同じURIを持つものが登録されていないかチェック
+		// Check if this has already been announced.
 		const exist = await fetchNote(uri);
 		if (exist) {
 			return;
 		}
 
-		// Announce対象をresolve
+		// resolve the announce target
 		let renote;
 		try {
 			renote = await resolveNote(targetUri);
 		} catch (e) {
-			// 対象が4xxならスキップ
+			// skip if the target returns a HTTP client error
 			if (e instanceof StatusError) {
 				if (e.isClientError) {
 					apLogger.warn(`Ignored announce target ${targetUri} - ${e.statusCode}`);
