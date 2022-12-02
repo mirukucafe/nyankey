@@ -7,7 +7,7 @@ const treeAdapter = parse5.defaultTreeAdapter;
 const urlRegex = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+/;
 const urlRegexFull = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+$/;
 
-export function fromHtml(html: string, hashtagNames?: string[], quoteUri?: string | null): string {
+export function fromHtml(html: string, quoteUri?: string | null): string {
 	const dom = parse5.parseFragment(
 		// some AP servers like Pixelfed use br tags as well as newlines
 		html.replace(/<br\s?\/?>\r?\n/gi, '\n'),
@@ -63,7 +63,7 @@ export function fromHtml(html: string, hashtagNames?: string[], quoteUri?: strin
 				const href = node.attrs.find(x => x.name === 'href');
 
 				// hashtags
-				if (hashtagNames && href && hashtagNames.map(x => x.toLowerCase()).includes(txt.toLowerCase())) {
+				if (txt.startsWith('#') && href && /\btag\b/.test(rel?.value)) {
 					text += txt;
 				// mentions
 				} else if (txt.startsWith('@') && !(rel && rel.value.match(/^me /))) {

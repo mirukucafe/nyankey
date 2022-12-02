@@ -16,11 +16,11 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { createMessage } from '@/services/messages/create.js';
 import { StatusError } from '@/misc/fetch.js';
+import { fromHtml } from '@/mfm/from-html.js';
 import { parseAudience } from '../audience.js';
 import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
 import DbResolver from '../db-resolver.js';
 import Resolver from '../resolver.js';
-import { htmlToMfm } from '../misc/html-to-mfm.js';
 import { apLogger } from '../logger.js';
 import { resolvePerson } from './person.js';
 import { resolveImage } from './image.js';
@@ -199,7 +199,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 	} else if (typeof note._misskey_content !== 'undefined') {
 		text = note._misskey_content;
 	} else if (typeof note.content === 'string') {
-		text = htmlToMfm(note.content, note.tag, quote?.uri);
+		text = fromHtml(note.content, quote?.uri);
 	}
 
 	// vote

@@ -24,7 +24,6 @@ import { uriPersonCache } from '@/services/user-cache.js';
 import { publishInternalEvent } from '@/services/stream.js';
 import { db } from '@/db/postgre.js';
 import { apLogger } from '../logger.js';
-import { htmlToMfm } from '../misc/html-to-mfm.js';
 import { fromHtml } from '@/mfm/from-html.js';
 import { isCollectionOrOrderedCollection, isCollection, IActor, getApId, getOneApHrefNullable, IObject, isPropertyValue, IApPropertyValue, getApType, isActor } from '../type.js';
 import Resolver from '../resolver.js';
@@ -185,7 +184,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 
 			await transactionalEntityManager.save(new UserProfile({
 				userId: user.id,
-				description: person.summary ? htmlToMfm(truncate(person.summary, summaryLength), person.tag) : null,
+				description: person.summary ? fromHtml(truncate(person.summary, summaryLength)) : null,
 				url: getOneApHrefNullable(person.url),
 				fields,
 				birthday: bday ? bday[0] : null,
@@ -361,7 +360,7 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
 	await UserProfiles.update({ userId: exist.id }, {
 		url: getOneApHrefNullable(person.url),
 		fields,
-		description: person.summary ? htmlToMfm(truncate(person.summary, summaryLength), person.tag) : null,
+		description: person.summary ? fromHtml(truncate(person.summary, summaryLength)) : null,
 		birthday: bday ? bday[0] : null,
 		location: person['vcard:Address'] || null,
 	});
