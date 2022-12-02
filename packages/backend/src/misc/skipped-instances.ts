@@ -40,7 +40,10 @@ export async function shouldBlockInstance(host: string): Promise<boolean> {
  * @returns array of punycoded instance hosts that should be skipped (subset of hosts parameter)
  */
 export async function skippedInstances(hosts: Array<Instance['host']>): Promise<Array<Instance['host']>> {
-	const skipped = hosts.filter(host => shouldBlockInstance(host));
+	// Resolve the boolean promises before filtering
+	const shouldSkip = await Promise.all(hosts.map(shouldBlockInstance));
+	const skipped = hosts.filter((_, i) => shouldSkip[i]);
+
 	// if possible return early and skip accessing the database
 	if (skipped.length === hosts.length) return hosts;
 
