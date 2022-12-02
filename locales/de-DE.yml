@@ -193,7 +193,9 @@ clearCachedFilesConfirm: "Sollen alle im Cache gespeicherten Dateien von anderen
 blockedInstances: "Blockierte Instanzen"
 blockedInstancesDescription: "Gib die Hostnamen der Instanzen, welche blockiert werden\
   \ sollen, durch Zeilenumbrüche getrennt an. Blockierte Instanzen können mit dieser\
-  \ instanz nicht mehr kommunizieren."
+  \ Instanz nicht mehr kommunizieren. Hostnamen, die nicht-ASCII-Zeichen enthalten,\
+  \ müssen zuvor in Punycode umgewandelt werden. Ein Asterisk (*) kann als Platzhalter\
+  \ für beliebig viele Zeichen verwendet werden."
 muteAndBlock: "Stummschaltungen und Blockierungen"
 mutedUsers: "Stummgeschaltete Benutzer"
 blockedUsers: "Blockierte Benutzer"
