@@ -18,13 +18,12 @@ import remove from './remove/index.js';
 import block from './block/index.js';
 import flag from './flag/index.js';
 
-export async function performActivity(actor: CacheableRemoteUser, activity: IObject) {
+export async function performActivity(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver) {
 	if (isCollectionOrOrderedCollection(activity)) {
-		const resolver = new Resolver();
 		for (const item of toArray(isCollection(activity) ? activity.items : activity.orderedItems)) {
 			const act = await resolver.resolve(item);
 			try {
-				await performOneActivity(actor, act);
+				await performOneActivity(actor, act, resolver);
 			} catch (err) {
 				if (err instanceof Error || typeof err === 'string') {
 					apLogger.error(err);
@@ -32,37 +31,37 @@ export async function performActivity(actor: CacheableRemoteUser, activity: IObj
 			}
 		}
 	} else {
-		await performOneActivity(actor, activity);
+		await performOneActivity(actor, activity, resolver);
 	}
 }
 
-async function performOneActivity(actor: CacheableRemoteUser, activity: IObject): Promise<void> {
+async function performOneActivity(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver): Promise<void> {
 	if (actor.isSuspended) return;
 
 	if (isCreate(activity)) {
-		await create(actor, activity);
+		await create(actor, activity, resolver);
 	} else if (isDelete(activity)) {
 		await performDeleteActivity(actor, activity);
 	} else if (isUpdate(activity)) {
-		await performUpdateActivity(actor, activity);
+		await performUpdateActivity(actor, activity, resolver);
 	} else if (isRead(activity)) {
 		await performReadActivity(actor, activity);
 	} else if (isFollow(activity)) {
 		await follow(actor, activity);
 	} else if (isAccept(activity)) {
-		await accept(actor, activity);
+		await accept(actor, activity, resolver);
 	} else if (isReject(activity)) {
-		await reject(actor, activity);
+		await reject(actor, activity, resolver);
 	} else if (isAdd(activity)) {
 		await add(actor, activity).catch(err => apLogger.error(err));
 	} else if (isRemove(activity)) {
 		await remove(actor, activity).catch(err => apLogger.error(err));
 	} else if (isAnnounce(activity)) {
-		await announce(actor, activity);
+		await announce(actor, activity, resolver);
 	} else if (isLike(activity)) {
 		await like(actor, activity);
 	} else if (isUndo(activity)) {
-		await undo(actor, activity);
+		await undo(actor, activity, resolver);
 	} else if (isBlock(activity)) {
 		await block(actor, activity);
 	} else if (isFlag(activity)) {

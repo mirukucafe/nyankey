@@ -4,12 +4,10 @@ import { IReject, isFollow, getApType } from '../../type.js';
 import Resolver from '../../resolver.js';
 import rejectFollow from './follow.js';
 
-export default async (actor: CacheableRemoteUser, activity: IReject): Promise<string> => {
+export default async (actor: CacheableRemoteUser, activity: IReject, resolver: Resolver): Promise<string> => {
 	const uri = activity.id || activity;
 
 	apLogger.info(`Reject: ${uri}`);
-
-	const resolver = new Resolver();
 
 	const object = await resolver.resolve(activity.object).catch(e => {
 		apLogger.error(`Resolution failed: ${e}`);

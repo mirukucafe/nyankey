@@ -1,3 +1,4 @@
+import Resolver from '@/remote/activitypub/resolver.js';
 import { updatePerson } from '@/remote/activitypub/models/person.js';
 import define from '../../define.js';
 import { getRemoteUser } from '../../common/getters.js';
@@ -19,5 +20,5 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps) => {
 	const user = await getRemoteUser(ps.userId);
-	await updatePerson(user.uri!);
+	await updatePerson(user.uri!, new Resolver());
 });

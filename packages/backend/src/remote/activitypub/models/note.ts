@@ -63,7 +63,7 @@ export async function fetchNote(object: string | IObject): Promise<Note | null> 
 /**
  * Noteを作成します。
  */
-export async function createNote(value: string | IObject, resolver?: Resolver = new Resolver(), silent = false): Promise<Note | null> {
+export async function createNote(value: string | IObject, resolver: Resolver, silent = false): Promise<Note | null> {
 	const object: any = await resolver.resolve(value);
 
 	const entryUri = getApId(value);
@@ -107,7 +107,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 
 	let isTalk = note._misskey_talk && visibility === 'specified';
 
-	const apMentions = await extractApMentions(note.tag);
+	const apMentions = await extractApMentions(note.tag, resolver);
 	const apHashtags = await extractApHashtags(note.tag);
 
 	// 添付ファイル
@@ -119,7 +119,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver = 
 	note.attachment = Array.isArray(note.attachment) ? note.attachment : note.attachment ? [note.attachment] : [];
 	const files = note.attachment
 		.map(attach => attach.sensitive = note.sensitive)
-		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x)) as Promise<DriveFile>)))
+		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
 			.filter(image => image != null)
 		: [];
 

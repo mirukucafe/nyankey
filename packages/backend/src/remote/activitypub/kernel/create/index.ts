@@ -5,7 +5,7 @@ import { ICreate, getApId, isPost, getApType } from '../../type.js';
 import { apLogger } from '../../logger.js';
 import createNote from './note.js';
 
-export default async (actor: CacheableRemoteUser, activity: ICreate): Promise<void> => {
+export default async (actor: CacheableRemoteUser, activity: ICreate, resolver: Resolver): Promise<void> => {
 	const uri = getApId(activity);
 
 	apLogger.info(`Create: ${uri}`);
@@ -25,8 +25,6 @@ export default async (actor: CacheableRemoteUser, activity: ICreate): Promise<vo
 	if (typeof activity.object === 'object' && !activity.object.attributedTo) {
 		activity.object.attributedTo = activity.actor;
 	}
-
-	const resolver = new Resolver();
 
 	const object = await resolver.resolve(activity.object).catch(e => {
 		apLogger.error(`Resolution failed: ${e}`);

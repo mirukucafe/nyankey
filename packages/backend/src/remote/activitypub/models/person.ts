@@ -131,7 +131,7 @@ export async function fetchPerson(uri: string, resolver?: Resolver): Promise<Cac
 /**
  * Personを作成します。
  */
-export async function createPerson(uri: string, resolver?: Resolver = new Resolver()): Promise<User> {
+export async function createPerson(uri: string, resolver: Resolver): Promise<User> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	if (uri.startsWith(config.url)) {
@@ -238,7 +238,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
 	].map(img =>
 		img == null
 			? Promise.resolve(null)
-			: resolveImage(user!, img).catch(() => null),
+			: resolveImage(user!, img, resolver).catch(() => null),
 	));
 
 	const avatarId = avatar ? avatar.id : null;
@@ -278,7 +278,7 @@ export async function createPerson(uri: string, resolver?: Resolver = new Resolv
  * @param resolver Resolver
  * @param hint Hint of Person object (If this value is a valid Person, it is used for updating without Remote resolve.)
  */
-export async function updatePerson(uri: string, resolver?: Resolver = new Resolver(), hint?: IObject): Promise<void> {
+export async function updatePerson(uri: string, resolver: Resolver, hint?: IObject): Promise<void> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	// URIがこのサーバーを指しているならスキップ
@@ -307,7 +307,7 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
 	].map(img =>
 		img == null
 			? Promise.resolve(null)
-			: resolveImage(exist, img).catch(() => null),
+			: resolveImage(exist, img, resolver).catch(() => null),
 	));
 
 	// カスタム絵文字取得
@@ -386,7 +386,7 @@ export async function updatePerson(uri: string, resolver?: Resolver = new Resolv
  * If the target Person is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
  * Fetch the person from the remote server, register it in FoundKey, and return it.
  */
-export async function resolvePerson(uri: string, resolver?: Resolver): Promise<CacheableUser> {
+export async function resolvePerson(uri: string, resolver: Resolver): Promise<CacheableUser> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	//#region このサーバーに既に登録されていたらそれを返す
@@ -398,7 +398,7 @@ export async function resolvePerson(uri: string, resolver?: Resolver): Promise<C
 	//#endregion
 
 	// リモートサーバーからフェッチしてきて登録
-	return await createPerson(uri, resolver ?? new Resolver());
+	return await createPerson(uri, resolver);
 }
 
 const services: {
@@ -455,14 +455,12 @@ export function analyzeAttachments(attachments: IObject | IObject[] | undefined)
 	return { fields, services };
 }
 
-export async function updateFeatured(userId: User['id'], resolver?: Resolver) {
+async function updateFeatured(userId: User['id'], resolver: Resolver) {
 	const user = await Users.findOneByOrFail({ id: userId });
 	if (!Users.isRemoteUser(user)) return;
 	if (!user.featured) return;
 
 	apLogger.info(`Updating the featured: ${user.uri}`);
-
-	if (resolver == null) resolver = new Resolver();
 
 	// Resolve to (Ordered)Collection Object
 	const collection = await resolver.resolveCollection(user.featured);

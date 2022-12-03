@@ -31,7 +31,7 @@ function authUserFromApId(uri: string): Promise<AuthUser | null> {
 
 export async function getAuthUser(keyId: string, actorUri: string, resolver: Resolver): Promise<AuthUser | null> {
 	let authUser = await publicKeyCache.fetch(keyId)
-		.then(key => {
+		.then(async key => {
 			if (!key) return null;
 			else return {
 				user: await userByIdCache.fetch(key.userId),

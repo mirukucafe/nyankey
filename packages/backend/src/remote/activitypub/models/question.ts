@@ -5,7 +5,7 @@ import Resolver from '../resolver.js';
 import { IObject, IQuestion, isQuestion } from '../type.js';
 import { apLogger } from '../logger.js';
 
-export async function extractPollFromQuestion(source: string | IObject, resolver?: Resolver = new Resolver()): Promise<IPoll> {
+export async function extractPollFromQuestion(source: string | IObject, resolver: Resolver): Promise<IPoll> {
 	const question = await resolver.resolve(source);
 
 	if (!isQuestion(question)) {
@@ -39,7 +39,7 @@ export async function extractPollFromQuestion(source: string | IObject, resolver
  * @param resolver Resolver to use
  * @returns true if updated
  */
-export async function updateQuestion(value: string | IObject, resolver?: Resolver = new Resolver()) {
+export async function updateQuestion(value: string | IObject, resolver: Resolver) {
 	const uri = typeof value === 'string' ? value : value.id;
 
 	// URIがこのサーバーを指しているならスキップ

@@ -8,14 +8,12 @@ import { updatePerson } from '@/remote/activitypub/models/person.js';
 /**
  * Updateアクティビティを捌きます
  */
-export default async (actor: CacheableRemoteUser, activity: IUpdate): Promise<string> => {
+export default async (actor: CacheableRemoteUser, activity: IUpdate, resolver: Resolver): Promise<string> => {
 	if ('actor' in activity && actor.uri !== activity.actor) {
 		return 'skip: invalid actor';
 	}
 
 	apLogger.debug('Update');
-
-	const resolver = new Resolver();
 
 	const object = await resolver.resolve(activity.object).catch(e => {
 		apLogger.error(`Resolution failed: ${e}`);

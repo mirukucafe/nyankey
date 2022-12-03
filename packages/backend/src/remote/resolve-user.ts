@@ -9,10 +9,11 @@ import { Users } from '@/models/index.js';
 import webFinger from './webfinger.js';
 import { createPerson, updatePerson } from './activitypub/models/person.js';
 import { remoteLogger } from './logger.js';
+import Resolver from './activitypub/resolver.js';
 
 const logger = remoteLogger.createSubLogger('resolve-user');
 
-export async function resolveUser(username: string, idnHost: string | null): Promise<User> {
+export async function resolveUser(username: string, idnHost: string | null, resolver: Resolver = new Resolver()): Promise<User> {
 	const usernameLower = username.toLowerCase();
 
 	if (idnHost == null) {
@@ -47,7 +48,7 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 		const self = await resolveSelf(acctLower);
 
 		logger.succ(`return new remote user: ${chalk.magenta(acctLower)}`);
-		return await createPerson(self);
+		return await createPerson(self, resolver);
 	}
 
 	// If user information is out of date, start over with webfinger
@@ -81,7 +82,7 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 			logger.info(`uri is fine: ${acctLower}`);
 		}
 
-		await updatePerson(self);
+		await updatePerson(self, resolver);
 
 		logger.info(`return resynced remote user: ${acctLower}`);
 		return await Users.findOneBy({ uri: self }).then(u => {
