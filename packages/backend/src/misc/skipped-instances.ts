@@ -2,6 +2,7 @@ import { db } from '@/db/postgre.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Instance } from '@/models/entities/instance.js';
 import { DAY } from '@/const.js';
+import { Meta } from '@/models/entities/meta.js';
 
 // Threshold from last contact after which an instance will be considered
 // "dead" and should no longer get activities delivered to it.
@@ -26,10 +27,11 @@ function matchHost(host: Instance['host'], pattern: string): boolean {
  * Returns whether a specific host (punycoded) should be blocked.
  *
  * @param host punycoded instance host
+ * @param meta a Promise contatining the information from the meta table (oprional)
  * @returns whether the given host should be blocked
  */
-export async function shouldBlockInstance(host: string): Promise<boolean> {
-	const { blockedHosts } = await fetchMeta();
+export async function shouldBlockInstance(host: string, meta: Promise<Meta> = fetchMeta()): Promise<boolean> {
+	const { blockedHosts } = await meta;
 	return blockedHosts.some(blockedHost => matchHost(host, blockedHost));
 }
 
@@ -41,7 +43,8 @@ export async function shouldBlockInstance(host: string): Promise<boolean> {
  */
 export async function skippedInstances(hosts: Array<Instance['host']>): Promise<Array<Instance['host']>> {
 	// Resolve the boolean promises before filtering
-	const shouldSkip = await Promise.all(hosts.map(shouldBlockInstance));
+	const meta = fetchMeta();
+	const shouldSkip = await Promise.all(hosts.map(host => shouldBlockInstance(host, meta)));
 	const skipped = hosts.filter((_, i) => shouldSkip[i]);
 
 	// if possible return early and skip accessing the database
