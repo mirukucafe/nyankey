@@ -7,14 +7,18 @@ import { HOUR } from '@/const.js';
 
 const cache = new Cache<Instance>(
 	HOUR,
-	(host) => Instances.findOneBy({ host }).then(x => x ?? undefined),
+	async (host) => {
+		if (host == null) return undefined;
+		const res = await Instances.findOneBy({ host });
+		return res ?? undefined;
+	} ,
 );
 
 export async function registerOrFetchInstanceDoc(idnHost: string): Promise<Instance> {
 	const host = toPuny(idnHost);
 
-	const cached = cache.fetch(host);
-	if (cached) return cached;
+	const cached = await cache.fetch(host);
+	if (cached != null) return cached;
 
 	// apparently a new instance
 	const i = await Instances.insert({
