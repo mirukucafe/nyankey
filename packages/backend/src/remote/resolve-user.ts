@@ -47,7 +47,7 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 		const self = await resolveSelf(acctLower);
 
 		logger.succ(`return new remote user: ${chalk.magenta(acctLower)}`);
-		return await createPerson(self.href);
+		return await createPerson(self);
 	}
 
 	// If user information is out of date, start over with webfinger
@@ -60,13 +60,13 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 		logger.info(`try resync: ${acctLower}`);
 		const self = await resolveSelf(acctLower);
 
-		if (user.uri !== self.href) {
+		if (user.uri !== self) {
 			// if uri mismatch, Fix (user@host <=> AP's Person id(IRemoteUser.uri)) mapping.
 			logger.info(`uri missmatch: ${acctLower}`);
-			logger.info(`recovery missmatch uri for (username=${username}, host=${host}) from ${user.uri} to ${self.href}`);
+			logger.info(`recovery missmatch uri for (username=${username}, host=${host}) from ${user.uri} to ${self}`);
 
 			// validate uri
-			const uri = new URL(self.href);
+			const uri = new URL(self);
 			if (uri.hostname !== host) {
 				throw new Error('Invalid uri');
 			}
@@ -75,16 +75,16 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 				usernameLower,
 				host,
 			}, {
-				uri: self.href,
+				uri: self,
 			});
 		} else {
 			logger.info(`uri is fine: ${acctLower}`);
 		}
 
-		await updatePerson(self.href);
+		await updatePerson(self);
 
 		logger.info(`return resynced remote user: ${acctLower}`);
-		return await Users.findOneBy({ uri: self.href }).then(u => {
+		return await Users.findOneBy({ uri: self }).then(u => {
 			if (u == null) {
 				throw new Error('user not found');
 			} else {
@@ -97,16 +97,21 @@ export async function resolveUser(username: string, idnHost: string | null): Pro
 	return user;
 }
 
-async function resolveSelf(acctLower: string) {
+/**
+ * Gets the Webfinger href matching rel="self".
+ */
+async function resolveSelf(acctLower: string): string {
 	logger.info(`WebFinger for ${chalk.yellow(acctLower)}`);
+	// get webfinger response for user
 	const finger = await webFinger(acctLower).catch(e => {
 		logger.error(`Failed to WebFinger for ${chalk.yellow(acctLower)}: ${ e.statusCode || e.message }`);
 		throw new Error(`Failed to WebFinger for ${acctLower}: ${ e.statusCode || e.message }`);
 	});
-	const self = finger.links.find(link => link.rel != null && link.rel.toLowerCase() === 'self');
-	if (!self) {
+	// try to find the rel="self" link
+	const self = finger.links.find(link => link.rel?.toLowerCase() === 'self');
+	if (!self?.href) {
 		logger.error(`Failed to WebFinger for ${chalk.yellow(acctLower)}: self link not found`);
 		throw new Error('self link not found');
 	}
-	return self;
+	return self.href;
 }
