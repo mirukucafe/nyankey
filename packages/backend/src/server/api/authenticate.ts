@@ -1,15 +1,8 @@
-import { CacheableLocalUser, ILocalUser } from '@/models/entities/user.js';
-import { Users, AccessTokens, Apps } from '@/models/index.js';
+import { CacheableLocalUser } from '@/models/entities/user.js';
+import { Users, AccessTokens } from '@/models/index.js';
 import { AccessToken } from '@/models/entities/access-token.js';
-import { Cache } from '@/misc/cache.js';
-import { App } from '@/models/entities/app.js';
 import { userByIdCache, localUserByNativeTokenCache } from '@/services/user-cache.js';
 import isNativeToken from './common/is-native-token.js';
-
-const appCache = new Cache<App>(
-	Infinity,
-	(id) => Apps.findOneByOrFail({ id }),
-);
 
 export class AuthenticationError extends Error {
 	constructor(message: string) {
@@ -71,15 +64,6 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 		// can't authorize remote users
 		if (!Users.isLocalUser(user)) return [null, null];
 
-		if (accessToken.appId) {
-			const app = await appCache.fetch(accessToken.appId);
-
-			return [user, {
-				id: accessToken.id,
-				permission: app.permission,
-			} as AccessToken];
-		} else {
-			return [user, accessToken];
-		}
+		return [user, accessToken];
 	}
 };

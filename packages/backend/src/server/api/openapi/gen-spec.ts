@@ -3,6 +3,10 @@ import { errors as errorDefinitions } from '../error.js';
 import endpoints from '../endpoints.js';
 import { schemas, convertSchemaToOpenApiSchema } from './schemas.js';
 import { httpCodes } from './http-codes.js';
+import { kinds } from '@/misc/api-permissions.js';
+import { I18n } from '@/misc/i18n.js';
+
+const i18n = new I18n('en-US');
 
 export function genOpenapiSpec() {
 	const spec = {
@@ -34,10 +38,18 @@ export function genOpenapiSpec() {
 					in: 'body',
 					name: 'i',
 				},
-				// TODO: change this to oauth2 when the remaining oauth stuff is set up
-				Bearer: {
-					type: 'http',
-					scheme: 'bearer',
+				OAuth: {
+					type: 'oauth2',
+					flows: {
+						authorizationCode: {
+							authorizationUrl: `${config.url}/auth`,
+							tokenUrl: `${config.apiUrl}/auth/session/oauth`,
+							scopes: kinds.reduce((acc, kind) => {
+								acc[kind] = i18n.ts['_permissions'][kind];
+								return acc;
+							}, {}),
+						},
+					},
 				},
 			},
 		},
@@ -137,10 +149,16 @@ export function genOpenapiSpec() {
 			{
 				ApiKeyAuth: [],
 			},
-			{
-				Bearer: [],
-			},
 		];
+		if (endpoint.meta.kind) {
+			security.push({
+				OAuth: [endpoint.meta.kind],
+			});
+		} else {
+			security.push({
+				OAuth: [],
+			});
+		}
 		if (!endpoint.meta.requireCredential) {
 			// add this to make authentication optional
 			security.push({});

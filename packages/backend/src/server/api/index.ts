@@ -15,6 +15,7 @@ import { handler } from './api-handler.js';
 import signup from './private/signup.js';
 import signin from './private/signin.js';
 import signupPending from './private/signup-pending.js';
+import { oauth } from './common/oauth.js';
 import discord from './service/discord.js';
 import github from './service/github.js';
 import twitter from './service/twitter.js';
@@ -73,6 +74,9 @@ for (const endpoint of endpoints) {
 		}
 	}
 }
+
+// the OAuth endpoint does some shenanigans and can not use the normal API handler
+router.post('/auth/session/oauth', oauth);
 
 router.post('/signup', signup);
 router.post('/signin', signin);
