@@ -107,11 +107,17 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 	};
 };
 
+/*
+Nodeinfo is cacheable for 1 day, the parts that change are the usage statistics
+and those should not be time critical.
+*/
+const cacheControl = 'public, max-age=86400';
+
 router.get(nodeinfo2_1path, async ctx => {
 	const base = await nodeinfo2();
 
 	ctx.body = { version: '2.1', ...base };
-	ctx.set('Cache-Control', 'public, max-age=600');
+	ctx.set('Cache-Control', cacheControl);
 });
 
 router.get(nodeinfo2_0path, async ctx => {
@@ -120,7 +126,7 @@ router.get(nodeinfo2_0path, async ctx => {
 	delete base.software.repository;
 
 	ctx.body = { version: '2.0', ...base };
-	ctx.set('Cache-Control', 'public, max-age=600');
+	ctx.set('Cache-Control', cacheControl);
 });
 
 export default router;
