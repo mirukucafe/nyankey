@@ -136,7 +136,7 @@ export function promiseDialog<T extends Promise<any>>(
 		} else {
 			alert({
 				type: 'error',
-				text: err,
+				text: (err.message + '\n' + (err?.endpoint ?? '') + (err?.code ?? '')).trim(),
 			});
 		}
 	});
