@@ -7,6 +7,16 @@ const treeAdapter = parse5.defaultTreeAdapter;
 const urlRegex = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+/;
 const urlRegexFull = /^https?:\/\/[\w\/:%#@$&?!()\[\]~.,=+\-]+$/;
 
+function getAttr(node: TreeAdapter.Node, attr: string): string {
+	return node.attrs.find(({ name }) => name === attr)?.value;
+}
+function attrHas(node: TreeAdapter.Node, attr: string, value: string): boolean {
+	const attrValue = getAttr(node, attr);
+	if (!attrValue) return false;
+
+	return new RegExp('\\b' + value + '\\b').test(attrValue);
+}
+
 export function fromHtml(html: string, quoteUri?: string | null): string {
 	const dom = parse5.parseFragment(
 		// some AP servers like Pixelfed use br tags as well as newlines
@@ -59,19 +69,18 @@ export function fromHtml(html: string, quoteUri?: string | null): string {
 			case 'a':
 			{
 				const txt = getText(node);
-				const rel = node.attrs.find(x => x.name === 'rel');
-				const href = node.attrs.find(x => x.name === 'href');
+				const href = getAttr(node, 'href');
 
 				// hashtags
-				if (txt.startsWith('#') && href && /\btag\b/.test(rel?.value)) {
+				if (txt.startsWith('#') && href && (attrHas(node, 'rel', 'tag') || attrHas(node, 'class', 'hashtag')) {
 					text += txt;
 				// mentions
-				} else if (txt.startsWith('@') && !(rel && rel.value.match(/^me /))) {
+				} else if (txt.startsWith('@') && !attrHas(node, 'rel', 'me')) {
 					const part = txt.split('@');
 
 					if (part.length === 2 && href) {
 						// restore the host name part
-						const acct = `${txt}@${(new URL(href.value)).hostname}`;
+						const acct = `${txt}@${(new URL(href)).hostname}`;
 						text += acct;
 					} else if (part.length === 3) {
 						text += txt;
@@ -85,17 +94,17 @@ export function fromHtml(html: string, quoteUri?: string | null): string {
 						if (!href) {
 							return txt;
 						}
-						if (!txt || txt === href.value) {	// #6383: Missing text node
-							if (href.value.match(urlRegexFull)) {
-								return href.value;
+						if (!txt || txt === href) { // #6383: Missing text node
+							if (href.match(urlRegexFull)) {
+								return href;
 							} else {
-								return `<${href.value}>`;
+								return `<${href}>`;
 							}
 						}
-						if (href.value.match(urlRegex) && !href.value.match(urlRegexFull)) {
-							return `[${txt}](<${href.value}>)`;	// #6846
+						if (href.match(urlRegex) && !href.match(urlRegexFull)) {
+							return `[${txt}](<${href}>)`; // #6846
 						} else {
-							return `[${txt}](${href.value})`;
+							return `[${txt}](${href})`;
 						}
 					};
 
@@ -204,8 +213,7 @@ export function fromHtml(html: string, quoteUri?: string | null): string {
 
 			case 'span':
 			{
-				const nodeClass = node.attrs.find(({ name }) => name === 'class')?.value;
-				if (/\bquote-inline\b/.test(nodeClass) && quoteUri && getText(node).trim() === `RE: ${quoteUri}`) {
+				if (attrHas(node, 'class', 'quote-inline') && quoteUri && getText(node).trim() === `RE: ${quoteUri}`) {
 					// embedded quote thingy for backwards compatibility, don't show it
 				} else {
 					appendChildren(node.childNodes);
