@@ -14,7 +14,7 @@ import { LdSignature } from '@/remote/activitypub/misc/ld-signature.js';
 import { getAuthUser } from '@/remote/activitypub/misc/auth-user.js';
 import { StatusError } from '@/misc/fetch.js';
 import { InboxJobData } from '@/queue/types.js';
-import { shouldBlockInstance } from '@/misc/skipped-instances.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 
 const logger = new Logger('inbox');
 

@@ -12,11 +12,11 @@ import { Emojis, Polls, MessagingMessages } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { genId } from '@/misc/gen-id.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { createMessage } from '@/services/messages/create.js';
 import { StatusError } from '@/misc/fetch.js';
 import { fromHtml } from '@/mfm/from-html.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { parseAudience } from '../audience.js';
 import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
 import DbResolver from '../db-resolver.js';
@@ -28,7 +28,7 @@ import { extractApHashtags } from './tag.js';
 import { extractPollFromQuestion } from './question.js';
 import { extractApMentions } from './mention.js';
 
-export function validateNote(object: any, uri: string) {
+export function validateNote(object: any, uri: string): Error | null {
 	const expectHost = extractDbHost(uri);
 
 	if (object == null) {
@@ -270,14 +270,13 @@ export async function resolveNote(value: string | IObject, resolver?: Resolver):
 	const uri = typeof value === 'string' ? value : value.id;
 	if (uri == null) throw new Error('missing uri');
 
-	// ブロックしてたら中断
-	const meta = await fetchMeta();
-	if (meta.blockedHosts.includes(extractDbHost(uri))) throw new StatusError('host blocked', 451, `host ${extractDbHost(uri)} is blocked`);
+	// Interrupt if blocked.
+	if (await shouldBlockInstance(extractDbHost(uri))) throw new StatusError('host blocked', 451, `host ${extractDbHost(uri)} is blocked`);
 
 	const unlock = await getApLock(uri);
 
 	try {
-		//#region このサーバーに既に登録されていたらそれを返す
+		//#region If already registered on this server, return it.
 		const exist = await fetchNote(uri);
 
 		if (exist) {

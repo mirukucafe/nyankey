@@ -9,7 +9,7 @@ import { CacheableLocalUser, User } from '@/models/entities/user.js';
 import { isActor, isPost, getApId } from '@/remote/activitypub/type.js';
 import { SchemaType } from '@/misc/schema.js';
 import { HOUR } from '@/const.js';
-import { shouldBlockInstance } from '@/misc/skipped-instances.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import define from '../../define.js';
 import { ApiError } from '../../error.js';
 

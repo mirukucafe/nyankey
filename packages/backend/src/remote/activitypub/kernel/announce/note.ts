@@ -1,7 +1,6 @@
 import post from '@/services/note/create.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { extractDbHost } from '@/misc/convert-host.js';
-import { fetchMeta } from '@/misc/fetch-meta.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { StatusError } from '@/misc/fetch.js';
 import { Notes } from '@/models/index.js';
@@ -10,6 +9,7 @@ import { apLogger } from '@/remote/activitypub/logger.js';
 import { fetchNote, resolveNote } from '@/remote/activitypub/models/note.js';
 import Resolver from '@/remote/activitypub/resolver.js';
 import { IAnnounce, getApId } from '@/remote/activitypub/type.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 
 export default async function(resolver: Resolver, actor: CacheableRemoteUser, activity: IAnnounce, targetUri: string): Promise<void> {
 	const uri = getApId(activity);
@@ -19,8 +19,7 @@ export default async function(resolver: Resolver, actor: CacheableRemoteUser, ac
 	}
 
 	// Cancel if the announced from host is blocked.
-	const meta = await fetchMeta();
-	if (meta.blockedHosts.includes(extractDbHost(uri))) return;
+	if (await shouldBlockInstance(extractDbHost(uri))) return;
 
 	const unlock = await getApLock(uri);
 

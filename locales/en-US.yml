@@ -187,7 +187,7 @@ clearCachedFiles: "Clear cache"
 clearCachedFilesConfirm: "Are you sure that you want to delete all cached remote files?"
 blockedInstances: "Blocked Instances"
 blockedInstancesDescription: "List the hostnames of the instances that you want to\
-  \ block. Listed instances will no longer be able to communicate with this instance. Non-ASCII domain names must be encoded in punycode. You can use an asterisk (*) as a placeholder for zero or more character(s)."
+  \ block. Listed instances will no longer be able to communicate with this instance. Non-ASCII domain names must be encoded in punycode. Subdomains of the listed instances will also be blocked."
 muteAndBlock: "Mutes and Blocks"
 mutedUsers: "Muted users"
 blockedUsers: "Blocked users"

@@ -2,38 +2,11 @@ import { db } from '@/db/postgre.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Instance } from '@/models/entities/instance.js';
 import { DAY } from '@/const.js';
-import { Meta } from '@/models/entities/meta.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 
 // Threshold from last contact after which an instance will be considered
 // "dead" and should no longer get activities delivered to it.
 const deadThreshold = 7 * DAY;
-
-/**
- * Returns whether a given host matches a wildcard pattern.
- * @param host punycoded instance host
- * @param pattern wildcard pattern containing a punycoded instance host
- * @returns whether the post matches the pattern
- */
-function matchHost(host: Instance['host'], pattern: string): boolean {
-	// Escape all of the regex special characters. Pattern from:
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#escaping
-	const escape = (str: string): string => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-	const re = new RegExp('^' + pattern.split('*').map(escape).join('.*') + '$');
-	
-	return re.test(host);
-}
-
-/**
- * Returns whether a specific host (punycoded) should be blocked.
- *
- * @param host punycoded instance host
- * @param meta a Promise contatining the information from the meta table (oprional)
- * @returns whether the given host should be blocked
- */
-export async function shouldBlockInstance(host: string, meta: Promise<Meta> = fetchMeta()): Promise<boolean> {
-	const { blockedHosts } = await meta;
-	return blockedHosts.some(blockedHost => matchHost(host, blockedHost));
-}
 
 /**
  * Returns the subset of hosts which should be skipped.

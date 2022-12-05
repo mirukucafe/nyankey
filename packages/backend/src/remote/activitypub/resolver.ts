@@ -11,7 +11,7 @@ import renderQuestion from '@/remote/activitypub/renderer/question.js';
 import renderCreate from '@/remote/activitypub/renderer/create.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
-import { shouldBlockInstance } from '@/misc/skipped-instances.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { signedGet } from './request.js';
 import { IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
 import { parseUri } from './db-resolver.js';
