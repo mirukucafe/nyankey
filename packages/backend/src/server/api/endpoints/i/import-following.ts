@@ -8,7 +8,7 @@ export const meta = {
 	secure: true,
 	requireCredential: true,
 	limit: {
-		duratition: HOUR,
+		duration: HOUR,
 		max: 1,
 	},
 
