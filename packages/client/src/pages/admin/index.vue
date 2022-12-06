@@ -158,11 +158,6 @@ const menuDef = $computed(() => [{
 		to: '/admin/relays',
 		active: props.initialPage === 'relays',
 	}, {
-		icon: 'fas fa-share-alt',
-		text: i18n.ts.integration,
-		to: '/admin/integrations',
-		active: props.initialPage === 'integrations',
-	}, {
 		icon: 'fas fa-ban',
 		text: i18n.ts.instanceBlocking,
 		to: '/admin/instance-block',
@@ -204,7 +199,6 @@ const component = $computed(() => {
 		case 'object-storage': return defineAsyncComponent(() => import('./object-storage.vue'));
 		case 'security': return defineAsyncComponent(() => import('./security.vue'));
 		case 'relays': return defineAsyncComponent(() => import('./relays.vue'));
-		case 'integrations': return defineAsyncComponent(() => import('./integrations.vue'));
 		case 'instance-block': return defineAsyncComponent(() => import('./instance-block.vue'));
 		case 'proxy-account': return defineAsyncComponent(() => import('./proxy-account.vue'));
 		case 'translation-settings': return defineAsyncComponent(() => import('./translation-settings.vue'));
