@@ -2216,15 +2216,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/oauth@npm:0.9.1, @types/oauth@npm:^0.9.1":
-  version: 0.9.1
-  resolution: "@types/oauth@npm:0.9.1"
-  dependencies:
-    "@types/node": "*"
-  checksum: 5c079611b455eff58fba6358e028b191a1e65475600f8ed8d98c1696fedcfb0290aa6c6a19cf50f21a9e2d816ecb43a19f910900d91f8ba3727e33c48f97d7f3
-  languageName: node
-  linkType: hard
-
 "@types/parse5@npm:*":
   version: 7.0.0
   resolution: "@types/parse5@npm:7.0.0"
@@ -3474,15 +3465,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autwh@npm:0.1.0":
-  version: 0.1.0
-  resolution: "autwh@npm:0.1.0"
-  dependencies:
-    oauth: 0.9.15
-  checksum: 5ca904d43421e7475de29adfda65ca769105cbf597c9c43fef934f20b0daa331621157cdf34513eae5f492e1b4fc6443f37438da08bf2ba1c4e3e7d6d3f3f738
-  languageName: node
-  linkType: hard
-
 "aws-sdk@npm:2.1165.0":
   version: 2.1165.0
   resolution: "aws-sdk@npm:2.1165.0"
@@ -3675,7 +3657,6 @@ __metadata:
     "@types/node": 18.7.16
     "@types/node-fetch": 3.0.3
     "@types/nodemailer": 6.4.5
-    "@types/oauth": ^0.9.1
     "@types/pg": ^8.6.5
     "@types/pug": 2.0.6
     "@types/punycode": 2.1.0
@@ -3702,7 +3683,6 @@ __metadata:
     ajv: 8.11.0
     archiver: 5.3.1
     autobind-decorator: 2.4.0
-    autwh: 0.1.0
     aws-sdk: 2.1165.0
     bcryptjs: 2.4.3
     blurhash: 1.1.5
@@ -4704,7 +4684,6 @@ __metadata:
     "@types/katex": 0.14.0
     "@types/matter-js": 0.17.7
     "@types/mocha": 9.1.1
-    "@types/oauth": 0.9.1
     "@types/punycode": 2.1.0
     "@types/qrcode": 1.5.0
     "@types/seedrandom": 3.0.2
@@ -4719,7 +4698,6 @@ __metadata:
     abort-controller: 3.0.0
     autobind-decorator: 2.4.0
     autosize: 5.0.1
-    autwh: 0.1.0
     blurhash: 1.1.5
     broadcast-channel: 4.13.0
     browser-image-resizer: 2.4.1
@@ -12620,13 +12598,6 @@ __metadata:
   version: 2.2.1
   resolution: "nwsapi@npm:2.2.1"
   checksum: 6c21fcb6950538012516b39137ed9b53ed56843e521362e977282c781169f229e7bca8ec6e207165b19912550f360806b222f77b6c9202bb8d66818456875c3d
-  languageName: node
-  linkType: hard
-
-"oauth@npm:0.9.15":
-  version: 0.9.15
-  resolution: "oauth@npm:0.9.15"
-  checksum: 957c0d8d85300398dcb0e293953650c0fc3facc795bee8228238414f19f59cef5fd4ee8d17a972c142924c10c5f6ec50ef80f77f4a6cc6e3c98f9d22c027801c
   languageName: node
   linkType: hard
 
