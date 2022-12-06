@@ -98,7 +98,6 @@ export type MeDetailed = UserDetailed & {
 	hasUnreadSpecifiedNotes: boolean;
 	hideOnlineStatus: boolean;
 	injectFeaturedNote: boolean;
-	integrations: Record<string, any>;
 	isDeleted: boolean;
 	isExplorable: boolean;
 	mutedWords: string[][];

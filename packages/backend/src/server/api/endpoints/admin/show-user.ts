@@ -45,11 +45,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		};
 	}
 
-	const maskedKeys = ['accessToken', 'accessTokenSecret', 'refreshToken'];
-	Object.keys(profile.integrations).forEach(integration => {
-		maskedKeys.forEach(key => profile.integrations[integration][key] = '<MASKED>');
-	});
-
 	const signins = await Signins.findBy({ userId: user.id });
 
 	return {
@@ -61,7 +56,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		carefulBot: profile.carefulBot,
 		injectFeaturedNote: profile.injectFeaturedNote,
 		receiveAnnouncementEmail: profile.receiveAnnouncementEmail,
-		integrations: profile.integrations,
 		mutedWords: profile.mutedWords,
 		mutedInstances: profile.mutedInstances,
 		mutingNotificationTypes: profile.mutingNotificationTypes,

@@ -11,9 +11,11 @@ export class removeIntegrations1670359028055 {
 		await queryRunner.query(`ALTER TABLE "meta" DROP COLUMN "enableDiscordIntegration"`);
 		await queryRunner.query(`ALTER TABLE "meta" DROP COLUMN "discordClientId"`);
 		await queryRunner.query(`ALTER TABLE "meta" DROP COLUMN "discordClientSecret"`);
+		await queryRunner.query(`ALTER TABLE "user_profile" DROP COLUMN "integrations"`);
 	}
 
 	async down(queryRunner) {
+		await queryRunner.query(`ALTER TABLE "user_profile" ADD "integrations" jsonb NOT NULL DEFAULT '{}'`);
 		await queryRunner.query(`ALTER TABLE "meta" ADD "discordClientSecret" character varying(128)`);
 		await queryRunner.query(`ALTER TABLE "meta" ADD "discordClientId" character varying(128)`);
 		await queryRunner.query(`ALTER TABLE "meta" ADD "enableDiscordIntegration" boolean NOT NULL DEFAULT false`);
