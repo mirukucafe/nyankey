@@ -311,9 +311,6 @@ dayX: "{day}"
 monthX: "{month}"
 yearX: "{year}"
 pages: "Pages"
-integration: "Intégrations"
-connectService: "Connexion"
-disconnectService: "Déconnexion"
 enableLocalTimeline: "Activer le fil local"
 enableGlobalTimeline: "Activer le fil global"
 disablingTimelinesInfo: "Même si vous désactivez ces fils, les administrateur·rice·s\
@@ -423,7 +420,6 @@ normalPassword: "Mot de passe acceptable"
 strongPassword: "Mot de passe fort"
 passwordMatched: "Les mots de passe correspondent"
 passwordNotMatched: "Les mots de passe ne correspondent pas"
-signinWith: "Se connecter avec {x}"
 signinFailed: "Échec d’authentification. Veuillez vérifier que votre nom d’utilisateur\
   \ et mot de passe sont corrects."
 tapSecurityKey: "Appuyez sur votre clé de sécurité"
@@ -1331,18 +1327,6 @@ _deck:
     list: "Listes"
     mentions: "Mentions"
     direct: "Direct"
-_services:
-  _discord:
-    connected: '@{username}#{discriminator} sur Discord est connecté à @{mkUsername}
-      sur FoundKey !'
-    disconnected: La liaison avec Discord à été supprimée.
-  _twitter:
-    connected: '@{twitterUserName} sur Twitter est connecté à @{userName} sur FoundKey
-      !'
-    disconnected: La liaison avec Twitter à été supprimée.
-  _github:
-    disconnected: La liaison avec Github à été supprimée.
-    connected: '@{login} sur Github est connecté à @{userName} sur FoundKey !'
 exportAll: Tout exporter
 stopActivityDeliveryDescription: L'activité locale ne sera pas envoyé à cette instance.
   La réception de l'activité continuera de fonctionner comme avant.
