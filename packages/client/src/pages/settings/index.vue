@@ -90,11 +90,6 @@ const menuDef = computed(() => [{
 		to: '/settings/email',
 		active: props.initialPage === 'email',
 	}, {
-		icon: 'fas fa-share-alt',
-		text: i18n.ts.integration,
-		to: '/settings/integration',
-		active: props.initialPage === 'integration',
-	}, {
 		icon: 'fas fa-lock',
 		text: i18n.ts.security,
 		to: '/settings/security',
