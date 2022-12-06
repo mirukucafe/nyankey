@@ -200,7 +200,6 @@ const component = computed(() => {
 		case 'mute-block': return defineAsyncComponent(() => import('./mute-block.vue'));
 		case 'word-mute': return defineAsyncComponent(() => import('./word-mute.vue'));
 		case 'instance-mute': return defineAsyncComponent(() => import('./instance-mute.vue'));
-		case 'integration': return defineAsyncComponent(() => import('./integration.vue'));
 		case 'security': return defineAsyncComponent(() => import('./security.vue'));
 		case '2fa': return defineAsyncComponent(() => import('./2fa.vue'));
 		case 'api': return defineAsyncComponent(() => import('./api.vue'));
