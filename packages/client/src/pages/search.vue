@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, watch } from 'vue';
+import { computed, nextTick, watch } from 'vue';
 import XNotes from '@/components/notes.vue';
 import XUserList from '@/components/user-list.vue';
 import MkButton from '@/components/ui/button.vue';
@@ -115,6 +115,9 @@ function selectUser() {
 }
 
 async function search(): void {
+	userPagination = null;
+	notePagination = null;
+
 	switch (tab) {
 		case 'all': {
 			query = query.trim();
@@ -138,20 +141,22 @@ async function search(): void {
 					mainRouter.push(`/notes/${res.object.id}`);
 				}
 			} else {
-				notePagination = {
-					endpoint: 'notes/search' as const,
-					limit: 10,
-					params: { query },
-				};
-				origin = 'combined';
-				userPagination = {
-					endpoint: 'users/search' as const,
-					limit: 4,
-					params: {
-						query,
-						origin,
-					},
-				};
+				nextTick(() => {
+					notePagination = {
+						endpoint: 'notes/search' as const,
+						limit: 10,
+						params: { query },
+					};
+					origin = 'combined';
+					userPagination = {
+						endpoint: 'users/search' as const,
+						limit: 4,
+						params: {
+							query,
+							origin,
+						},
+					};
+				});
 			}
 			break;
 		}
@@ -171,24 +176,26 @@ async function search(): void {
 					params.host = host;
 					break;
 			}
-			notePagination = {
-				endpoint: 'notes/search' as const,
-				limit: 10,
-				params,
-			};
-			userPagination = null;
+			nextTick(() => {
+				notePagination = {
+					endpoint: 'notes/search' as const,
+					limit: 10,
+					params,
+				};
+			});
 			break;
 		}
 		case 'users': {
-			notePagination = null;
-			userPagination = {
-				endpoint: 'users/search' as const,
-				limit: 10,
-				params: {
-					query,
-					origin,
-				},
-			};
+			nextTick(() => {
+				userPagination = {
+					endpoint: 'users/search' as const,
+					limit: 10,
+					params: {
+						query,
+						origin,
+					},
+				};
+			});
 			break;
 		}
 	}
