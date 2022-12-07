@@ -98,7 +98,6 @@ export type MeDetailed = UserDetailed & {
 	hasUnreadSpecifiedNotes: boolean;
 	hideOnlineStatus: boolean;
 	injectFeaturedNote: boolean;
-	integrations: Record<string, any>;
 	isDeleted: boolean;
 	isExplorable: boolean;
 	mutedWords: string[][];
@@ -277,9 +276,6 @@ export type LiteInstanceMetadata = {
 	swPublickey: string | null;
 	maxNoteTextLength: number;
 	enableEmail: boolean;
-	enableTwitterIntegration: boolean;
-	enableGithubIntegration: boolean;
-	enableDiscordIntegration: boolean;
 	enableServiceWorker: boolean;
 	emojis: CustomEmoji[];
 	iconUrl: string;

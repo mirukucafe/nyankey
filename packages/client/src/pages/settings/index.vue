@@ -90,11 +90,6 @@ const menuDef = computed(() => [{
 		to: '/settings/email',
 		active: props.initialPage === 'email',
 	}, {
-		icon: 'fas fa-share-alt',
-		text: i18n.ts.integration,
-		to: '/settings/integration',
-		active: props.initialPage === 'integration',
-	}, {
 		icon: 'fas fa-lock',
 		text: i18n.ts.security,
 		to: '/settings/security',
@@ -200,7 +195,6 @@ const component = computed(() => {
 		case 'mute-block': return defineAsyncComponent(() => import('./mute-block.vue'));
 		case 'word-mute': return defineAsyncComponent(() => import('./word-mute.vue'));
 		case 'instance-mute': return defineAsyncComponent(() => import('./instance-mute.vue'));
-		case 'integration': return defineAsyncComponent(() => import('./integration.vue'));
 		case 'security': return defineAsyncComponent(() => import('./security.vue'));
 		case '2fa': return defineAsyncComponent(() => import('./2fa.vue'));
 		case 'api': return defineAsyncComponent(() => import('./api.vue'));

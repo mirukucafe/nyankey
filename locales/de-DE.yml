@@ -321,9 +321,6 @@ dayX: "{day}"
 monthX: "{month}"
 yearX: "{year}"
 pages: "Seiten"
-integration: "Integration"
-connectService: "Verbinden"
-disconnectService: "Trennen"
 enableLocalTimeline: "Lokale Chronik aktivieren"
 enableGlobalTimeline: "Globale Chronik aktivieren"
 disablingTimelinesInfo: "Administratoren und Moderatoren haben immer Zugriff auf alle\
@@ -433,7 +430,6 @@ normalPassword: "Durchschnittliches Passwort"
 strongPassword: "Starkes Passwort"
 passwordMatched: "Stimmt überein"
 passwordNotMatched: "Stimmt nicht überein"
-signinWith: "Mit {x} anmelden"
 signinFailed: "Anmeldung fehlgeschlagen. Überprüfe Benutzername und Passswort."
 tapSecurityKey: "Tippe deinen Sicherheitsschlüssel an"
 or: "Oder"
@@ -1373,18 +1369,6 @@ recommended: "Empfehlung"
 check: "Check"
 maxCustomEmojiPicker: Maximale Anzahl vorgeschlagener benutzerdefinierter Emoji
 maxUnicodeEmojiPicker: Maximale Anzahl vorgeschlagener Unicode-Emoji
-_services:
-  _discord:
-    connected: 'Discord: @{username}#{discriminator} wurde mit Foundkey-Account @{mkUsername}
-      verknüpft!'
-    disconnected: Discord-Verknüpfung wurde entfernt.
-  _twitter:
-    connected: Twitter-Account @{twitterUserName} wurde mit Foundkey-Account @{userName}
-      verknüpft!
-    disconnected: Twitter-Verknüpfung wurde entfernt.
-  _github:
-    connected: GitHub-Account @{login} wurde mit Foundkey-Account @{userName} verknüpft!
-    disconnected: GitHub-Verknüpfung wurde entfernt.
 documentation: Dokumentation
 signinHistoryExpires: Frühere Login-Versuche werden aus Datenschutzgründen nach 60
   Tagen automatisch gelöscht.

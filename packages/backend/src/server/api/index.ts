@@ -16,9 +16,6 @@ import signup from './private/signup.js';
 import signin from './private/signin.js';
 import signupPending from './private/signup-pending.js';
 import { oauth } from './common/oauth.js';
-import discord from './service/discord.js';
-import github from './service/github.js';
-import twitter from './service/twitter.js';
 
 // Init app
 const app = new Koa();
@@ -81,10 +78,6 @@ router.post('/auth/session/oauth', oauth);
 router.post('/signup', signup);
 router.post('/signin', signin);
 router.post('/signup-pending', signupPending);
-
-router.use(discord.routes());
-router.use(github.routes());
-router.use(twitter.routes());
 
 router.get('/v1/instance/peers', async ctx => {
 	const instances = await Instances.find({

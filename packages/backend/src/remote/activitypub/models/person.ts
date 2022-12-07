@@ -25,7 +25,7 @@ import { publishInternalEvent } from '@/services/stream.js';
 import { db } from '@/db/postgre.js';
 import { apLogger } from '../logger.js';
 import { fromHtml } from '@/mfm/from-html.js';
-import { isCollectionOrOrderedCollection, isCollection, IActor, getApId, getOneApHrefNullable, IObject, isPropertyValue, IApPropertyValue, getApType, isActor } from '../type.js';
+import { isCollectionOrOrderedCollection, isCollection, IActor, getApId, getOneApHrefNullable, IObject, isPropertyValue, getApType, isActor } from '../type.js';
 import Resolver from '../resolver.js';
 import { extractApHashtags } from './tag.js';
 import { resolveNote, extractEmojis } from './note.js';
@@ -401,37 +401,6 @@ export async function resolvePerson(uri: string, resolver: Resolver): Promise<Ca
 	return await createPerson(uri, resolver);
 }
 
-const services: {
-		[x: string]: (id: string, username: string) => any
-	} = {
-		'misskey:authentication:twitter': (userId, screenName) => ({ userId, screenName }),
-		'misskey:authentication:github': (id, login) => ({ id, login }),
-		'misskey:authentication:discord': (id, name) => $discord(id, name),
-	};
-
-const $discord = (id: string, name: string) => {
-	if (typeof name !== 'string') {
-		return { id, username: 'unknown', discriminator: '0000' };
-	} else {
-		const [username, discriminator] = name.split('#');
-		return { id, username, discriminator };
-	}
-};
-
-function addService(target: { [x: string]: any }, source: IApPropertyValue) {
-	const service = services[source.name];
-
-	if (typeof source.value !== 'string') {
-		source.value = 'unknown';
-	}
-
-	const [id, username] = source.value.split('@');
-
-	if (service) {
-		target[source.name.split(':')[2]] = service(id, username);
-	}
-}
-
 export function analyzeAttachments(attachments: IObject | IObject[] | undefined) {
 	const fields: {
 		name: string,
@@ -441,14 +410,10 @@ export function analyzeAttachments(attachments: IObject | IObject[] | undefined)
 
 	if (Array.isArray(attachments)) {
 		for (const attachment of attachments.filter(isPropertyValue)) {
-			if (isPropertyValue(attachment.identifier)) {
-				addService(services, attachment.identifier);
-			} else {
-				fields.push({
-					name: attachment.name,
-					value: fromHtml(attachment.value),
-				});
-			}
+			fields.push({
+				name: attachment.name,
+				value: fromHtml(attachment.value),
+			});
 		}
 	}
 
