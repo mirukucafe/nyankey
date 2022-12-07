@@ -22,7 +22,7 @@
 		"@types/node": "18.7.16",
 		"@typescript-eslint/eslint-plugin": "^5.44.0",
 		"@typescript-eslint/parser": "^5.44.0",
-		"eslint": "^8.28.0",
+		"eslint": "^8.29.0",
 		"jest": "^27.4.5",
 		"jest-fetch-mock": "^3.0.3",
 		"jest-websocket-mock": "^2.2.1",
