@@ -35,7 +35,7 @@ export async function skippedInstances(hosts: Array<Instance['host']>): Promise<
 				hosts.filter(host => !skipped.includes(host) && !host.includes(',')).join(','),
 			],
 		)
-		.then(res => res.map(row => row.host)),
+		.then((res: Instance[]) => res.map(row => row.host)),
 	);
 }
 
