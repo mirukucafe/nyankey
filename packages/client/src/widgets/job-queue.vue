@@ -1,7 +1,10 @@
 <template>
 <div class="mkw-jobQueue _monospace" :class="{ _panel: !widgetProps.transparent }">
 	<div class="inbox">
-		<div class="label">Inbox queue<i v-if="current.inbox.waiting > 0" class="fas fa-exclamation-triangle icon"></i></div>
+		<div class="label">
+			<MkA to="/admin/queue">Inbox queue</MkA>
+			<i v-if="current.inbox.waiting > 0" class="fas fa-exclamation-triangle icon"></i>
+		</div>
 		<div class="values">
 			<div>
 				<div>Process</div>
@@ -22,7 +25,10 @@
 		</div>
 	</div>
 	<div class="deliver">
-		<div class="label">Deliver queue<i v-if="current.deliver.waiting > 0" class="fas fa-exclamation-triangle icon"></i></div>
+		<div class="label">
+			<MkA to="/admin/queue">Deliver queue</MkA>
+			<i v-if="current.deliver.waiting > 0" class="fas fa-exclamation-triangle icon"></i>
+		</div>
 		<div class="values">
 			<div>
 				<div>Process</div>
@@ -46,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { onMounted, onUnmounted, reactive } from 'vue';
 import { useWidgetPropsManager, Widget, WidgetComponentEmits, WidgetComponentExpose, WidgetComponentProps } from './widget';
 import { GetFormResultType } from '@/scripts/form';
 import { stream } from '@/stream';
