@@ -72,7 +72,7 @@ export function fromHtml(html: string, quoteUri?: string | null): string {
 				const href = getAttr(node, 'href');
 
 				// hashtags
-				if (txt.startsWith('#') && href && (attrHas(node, 'rel', 'tag') || attrHas(node, 'class', 'hashtag')) {
+				if (txt.startsWith('#') && href && (attrHas(node, 'rel', 'tag') || attrHas(node, 'class', 'hashtag'))) {
 					text += txt;
 				// mentions
 				} else if (txt.startsWith('@') && !attrHas(node, 'rel', 'me')) {
