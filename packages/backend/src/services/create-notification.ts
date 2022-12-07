@@ -4,7 +4,6 @@ import { Notifications, Mutings, UserProfiles, Users } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { User } from '@/models/entities/user.js';
 import { Notification } from '@/models/entities/notification.js';
-import { sendEmailNotification } from './send-email-notification.js';
 
 export async function createNotification(
 	notifieeId: User['id'],
@@ -53,9 +52,6 @@ export async function createNotification(
 
 		publishMainStream(notifieeId, 'unreadNotification', packed);
 		pushNotification(notifieeId, 'notification', packed);
-
-		if (type === 'follow') sendEmailNotification.follow(notifieeId, await Users.findOneByOrFail({ id: data.notifierId! }));
-		if (type === 'receiveFollowRequest') sendEmailNotification.receiveFollowRequest(notifieeId, await Users.findOneByOrFail({ id: data.notifierId! }));
 	}, 2000);
 
 	return notification;
