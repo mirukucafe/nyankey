@@ -1,7 +1,7 @@
 export class Cache<T> {
-	public cache: Map<string | null, { date: number; value: T; }>;
+	public cache: Map<string, { date: number; value: T; }>;
 	private lifetime: number;
-	public fetcher: (key: string | null) => Promise<T | undefined>;
+	public fetcher: (key: string) => Promise<T | undefined>;
 
 	constructor(lifetime: number, fetcher: Cache<T>['fetcher']) {
 		this.cache = new Map();
@@ -9,14 +9,14 @@ export class Cache<T> {
 		this.fetcher = fetcher;
 	}
 
-	public set(key: string | null, value: T): void {
+	public set(key: string, value: T): void {
 		this.cache.set(key, {
 			date: Date.now(),
 			value,
 		});
 	}
 
-	public get(key: string | null): T | undefined {
+	public get(key: string): T | undefined {
 		const cached = this.cache.get(key);
 		if (cached == null) return undefined;
 
@@ -29,7 +29,7 @@ export class Cache<T> {
 		return cached.value;
 	}
 
-	public delete(key: string | null): void {
+	public delete(key: string): void {
 		this.cache.delete(key);
 	}
 
@@ -38,7 +38,7 @@ export class Cache<T> {
 	 * run to get the value. If the fetcher returns undefined, it is
 	 * returned but not cached.
 	 */
-	public async fetch(key: string | null): Promise<T | undefined> {
+	public async fetch(key: string): Promise<T | undefined> {
 		const cached = this.get(key);
 		if (cached !== undefined) {
 			return cached;

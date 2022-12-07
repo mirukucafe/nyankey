@@ -93,7 +93,7 @@ export async function relayRejected(id: string): Promise<string> {
 export async function deliverToRelays(user: { id: User['id']; host: null; }, activity: any): Promise<void> {
 	if (activity == null) return;
 
-	const relays = await relaysCache.fetch(null);
+	const relays = await relaysCache.fetch('');
 	if (relays == null || relays.length === 0) return;
 
 	// TODO
