@@ -22,7 +22,7 @@ module.exports = {
 		'eol-last': ['error', 'always'],
 		'semi': ['error', 'always'],
 		'semi-spacing': ['error', { 'before': false, 'after': true }],
-		'quotes': ['error', 'single', { 'avoidEscape': true }],
+		'quotes': ['error', 'single', { 'avoidEscape': true, 'allowTemplateLiterals': true }],
 		'comma-dangle': ['warn', 'always-multiline'],
 		'keyword-spacing': ['error', {
 			'before': true,
