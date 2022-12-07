@@ -1,10 +1,9 @@
-import { Not, IsNull } from 'typeorm';
 import renderDelete from '@/remote/activitypub/renderer/delete.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import DeliverManager from '@/remote/activitypub/deliver-manager.js';
 import config from '@/config/index.js';
 import { User } from '@/models/entities/user.js';
-import { Users, Followings } from '@/models/index.js';
+import { Users } from '@/models/index.js';
 import { publishInternalEvent } from '@/services/stream.js';
 
 export async function doPostSuspend(user: { id: User['id']; host: User['host'] }): Promise<void> {
