@@ -24,7 +24,7 @@ export async function createNotification(
 		createdAt: new Date(),
 		notifieeId,
 		type,
-		// 相手がこの通知をミュートしているようなら、既読を予めつけておく
+		// If the other party seems to have muted this notification, pre-read it.
 		isRead: isMuted,
 		...data,
 	} as Partial<Notification>)
@@ -35,13 +35,13 @@ export async function createNotification(
 	// Publish notification event
 	publishMainStream(notifieeId, 'notification', packed);
 
-	// 2秒経っても(今回作成した)通知が既読にならなかったら「未読の通知がありますよ」イベントを発行する
+	// If the notification (created this time) has not been read after 2 seconds, issue a "You have unread notifications" event.
 	setTimeout(async () => {
 		const fresh = await Notifications.findOneBy({ id: notification.id });
-		if (fresh == null) return; // 既に削除されているかもしれない
+		if (fresh == null) return; // It may have already been deleted.
 		if (fresh.isRead) return;
 
-		//#region ただしミュートしているユーザーからの通知なら無視
+		//#region However, if the notification comes from a muted user, ignore it.
 		const mutings = await Mutings.findBy({
 			muterId: notifieeId,
 		});
