@@ -1,25 +1,36 @@
 import cluster from 'node:cluster';
 import chalk from 'chalk';
-import { default as convertColor } from 'color-convert';
+import convertColor from 'color-convert';
 import { format as dateFormat } from 'date-fns';
 import * as SyslogPro from 'syslog-pro';
 import config from '@/config/index.js';
 import { envOption } from '@/env.js';
 
+type Color = Parameters<typeof convertColor.keyword.rgb>[0];
+
 type Domain = {
 	name: string;
-	color?: string;
+	color?: Color;
 };
 
 type Level = 'error' | 'success' | 'warning' | 'debug' | 'info';
 
+/**
+ * Class that facilitates recording log messages to the console and optionally a syslog server.
+ */
 export default class Logger {
 	private domain: Domain;
 	private parentLogger: Logger | null = null;
 	private store: boolean;
-	private syslogClient: any | null = null;
+	private syslogClient: SyslogPro.RFC5424 | null = null;
 
-	constructor(domain: string, color?: string, store = true) {
+	/**
+	 * Create a logger instance.
+	 * @param domain Logging domain
+	 * @param color Log message color
+	 * @param store Whether to store messages
+	 */
+	constructor(domain: string, color?: Color, store = true) {
 		this.domain = {
 			name: domain,
 			color,
@@ -41,7 +52,14 @@ export default class Logger {
 		}
 	}
 
-	public createSubLogger(domain: string, color?: string, store = true): Logger {
+	/**
+	 * Create a child logger instance.
+	 * @param domain Logging domain
+	 * @param color Log message color
+	 * @param store Whether to store messages
+	 * @returns A Logger instance whose parent logger is this instance.
+	 */
+	public createSubLogger(domain: string, color?: Color, store = true): Logger {
 		const logger = new Logger(domain, color, store);
 		logger.parentLogger = this;
 		return logger;
@@ -57,22 +75,20 @@ export default class Logger {
 		}
 
 		const time = dateFormat(new Date(), 'HH:mm:ss');
-		const worker = cluster.isPrimary ? '*' : cluster.worker.id;
+		const worker = cluster.isPrimary ? '*' : cluster.worker?.id;
 		const l =
 			level === 'error' ? important ? chalk.bgRed.white('ERR ') : chalk.red('ERR ') :
 			level === 'warning' ? chalk.yellow('WARN') :
 			level === 'success' ? important ? chalk.bgGreen.white('DONE') : chalk.green('DONE') :
 			level === 'debug' ? chalk.gray('VERB') :
-			level === 'info' ? chalk.blue('INFO') :
-			null;
+			chalk.blue('INFO');
 		const domains = [this.domain].concat(subDomains).map(d => d.color ? chalk.rgb(...convertColor.keyword.rgb(d.color))(d.name) : chalk.white(d.name));
 		const m =
 			level === 'error' ? chalk.red(message) :
 			level === 'warning' ? chalk.yellow(message) :
 			level === 'success' ? chalk.green(message) :
 			level === 'debug' ? chalk.gray(message) :
-			level === 'info' ? message :
-			null;
+			message;
 
 		let log = `${l} ${worker}\t[${domains.join(' ')}]\t${m}`;
 		if (envOption.withLogTime) log = chalk.gray(time) + ' ' + log;
@@ -84,42 +100,74 @@ export default class Logger {
 				const send =
 					level === 'error' ? this.syslogClient.error :
 					level === 'warning' ? this.syslogClient.warning :
-					level === 'success' ? this.syslogClient.info :
-					level === 'debug' ? this.syslogClient.info :
-					level === 'info' ? this.syslogClient.info :
-					null as never;
+					this.syslogClient.info;
 
 				send.bind(this.syslogClient)(message).catch(() => {});
 			}
 		}
 	}
 
-	public error(x: string | Error, data?: Record<string, any> = {}, important = false): void { // 実行を継続できない状況で使う
-		if (x instanceof Error) {
-			data.e = x;
-			this.log('error', x.toString(), data, important);
-		} else if (typeof x === 'object') {
-			this.log('error', `${(x as any).message || (x as any).name || x}`, data, important);
+	/**
+	 * Log an error message.
+	 * Use in situations where execution cannot be continued.
+	 * @param err Error or string containing an error message
+	 * @param data Data relating to the error
+	 * @param important Whether this error is important
+	 */
+	public error(err: string | Error, data: Record<string, any> = {}, important = false): void {
+		if (err instanceof Error) {
+			data.e = err;
+			this.log('error', err.toString(), data, important);
+		} else if (typeof err === 'object') {
+			this.log('error', `${(err as any).message || (err as any).name || err}`, data, important);
 		} else {
-			this.log('error', `${x}`, data, important);
+			this.log('error', `${err}`, data, important);
 		}
 	}
 
-	public warn(message: string, data?: Record<string, any> | null, important = false): void { // 実行を継続できるが改善すべき状況で使う
+	/**
+	 * Log a warning message.
+	 * Use in situations where execution can continue but needs to be improved.
+	 * @param message Warning message
+	 * @param data Data relating to the warning
+	 * @param important Whether this warning is important
+	 */
+	public warn(message: string, data?: Record<string, any> | null, important = false): void {
 		this.log('warning', message, data, important);
 	}
 
-	public succ(message: string, data?: Record<string, any> | null, important = false): void { // 何かに成功した状況で使う
+	/**
+	 * Log a success message.
+	 * Use in situations where something has been successfully done.
+	 * @param message Success message
+	 * @param data Data relating to the success
+	 * @param important Whether this success message is important
+	 */
+	public succ(message: string, data?: Record<string, any> | null, important = false): void {
 		this.log('success', message, data, important);
 	}
 
-	public debug(message: string, data?: Record<string, any> | null, important = false): void { // デバッグ用に使う(開発者に必要だが利用者に不要な情報)
+	/**
+	 * Log a debug message.
+	 * Use for debugging (information needed by developers but not required by users).
+	 * @param message Debug message
+	 * @param data Data relating to the debug message
+	 * @param important Whether this debug message is important
+	 */
+	public debug(message: string, data?: Record<string, any> | null, important = false): void {
 		if (process.env.NODE_ENV !== 'production' || envOption.verbose) {
 			this.log('debug', message, data, important);
 		}
 	}
 
-	public info(message: string, data?: Record<string, any> | null, important = false): void { // それ以外
+	/**
+	 * Log an informational message.
+	 * Use when something needs to be logged but doesn't fit into other levels.
+	 * @param message Info message
+	 * @param data Data relating to the info message
+	 * @param important Whether this info message is important
+	 */
+	public info(message: string, data?: Record<string, any> | null, important = false): void {
 		this.log('info', message, data, important);
 	}
 }
