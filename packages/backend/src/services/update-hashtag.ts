@@ -16,7 +16,7 @@ export async function updateUsertags(user: User, tags: string[]): Promise<void> 
 		await updateHashtag(user, tag, true, true);
 	}
 
-	for (const tag of (user.tags || []).filter(x => !tags.includes(x))) {
+	for (const tag of user.tags.filter(x => !tags.includes(x))) {
 		await updateHashtag(user, tag, true, false);
 	}
 }

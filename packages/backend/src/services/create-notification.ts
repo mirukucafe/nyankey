@@ -9,7 +9,7 @@ export async function createNotification(
 	notifieeId: User['id'],
 	type: Notification['type'],
 	data: Partial<Notification>,
-) {
+): Promise<Notification | null> {
 	if (data.notifierId && (notifieeId === data.notifierId)) {
 		return null;
 	}

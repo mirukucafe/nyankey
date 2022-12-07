@@ -36,7 +36,7 @@ export async function getRelayActor(): Promise<ILocalUser> {
 	return created as ILocalUser;
 }
 
-export async function addRelay(inbox: string) {
+export async function addRelay(inbox: string): Promise<Relay> {
 	const relay = await Relays.insert({
 		id: genId(),
 		inbox,
@@ -51,7 +51,7 @@ export async function addRelay(inbox: string) {
 	return relay;
 }
 
-export async function removeRelay(inbox: string) {
+export async function removeRelay(inbox: string): Promise<void> {
 	const relay = await Relays.findOneBy({
 		inbox,
 	});
@@ -69,12 +69,12 @@ export async function removeRelay(inbox: string) {
 	await Relays.delete(relay.id);
 }
 
-export async function listRelay() {
+export async function listRelay(): Promise<Relay[]> {
 	const relays = await Relays.find();
 	return relays;
 }
 
-export async function relayAccepted(id: string) {
+export async function relayAccepted(id: string): Promise<string> {
 	const result = await Relays.update(id, {
 		status: 'accepted',
 	});
@@ -82,7 +82,7 @@ export async function relayAccepted(id: string) {
 	return JSON.stringify(result);
 }
 
-export async function relayRejected(id: string) {
+export async function relayRejected(id: string): Promise<string> {
 	const result = await Relays.update(id, {
 		status: 'rejected',
 	});
@@ -90,11 +90,11 @@ export async function relayRejected(id: string) {
 	return JSON.stringify(result);
 }
 
-export async function deliverToRelays(user: { id: User['id']; host: null; }, activity: any) {
+export async function deliverToRelays(user: { id: User['id']; host: null; }, activity: any): Promise<void> {
 	if (activity == null) return;
 
 	const relays = await relaysCache.fetch(null);
-	if (relays.length === 0) return;
+	if (relays == null || relays.length === 0) return;
 
 	// TODO
 	//const copy = structuredClone(activity);
