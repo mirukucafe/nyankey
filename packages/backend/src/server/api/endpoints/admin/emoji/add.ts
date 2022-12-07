@@ -1,4 +1,3 @@
-import rndstr from 'rndstr';
 import { publishBroadcastStream } from '@/services/stream.js';
 import { db } from '@/db/postgre.js';
 import { Emojis, DriveFiles } from '@/models/index.js';
@@ -30,7 +29,7 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	if (file == null) throw new ApiError('NO_SUCH_FILE');
 
-	const name = file.name.split('.')[0].match(/^[a-z0-9_]+$/) ? file.name.split('.')[0] : `_${rndstr('a-z0-9', 8)}_`;
+	const name = file.name.split('.')[0].match(/^[a-z0-9_]+$/) ? file.name.split('.')[0] : `_${genId()}_`;
 
 	const emoji = await Emojis.insert({
 		id: genId(),

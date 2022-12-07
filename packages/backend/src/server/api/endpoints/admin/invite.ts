@@ -1,6 +1,6 @@
-import rndstr from 'rndstr';
 import { RegistrationTickets } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
+import { secureRndstrCustom } from '@/misc/secure-rndstr.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -32,10 +32,8 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async () => {
-	const code = rndstr({
-		length: 8,
-		chars: '2-9A-HJ-NP-Z', // [0-9A-Z] w/o [01IO] (32 patterns)
-	});
+	// omit visually ambiguous zero and letter O as well as one and letter I
+	const code = secureRndstrCustom(8, '23456789ABCDEFGHJKLMNPQRSTUVWXYZ');
 
 	await RegistrationTickets.insert({
 		id: genId(),

@@ -1,7 +1,7 @@
-import rndstr from 'rndstr';
 import bcrypt from 'bcryptjs';
 import { publishMainStream } from '@/services/stream.js';
 import config from '@/config/index.js';
+import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
 import { validateEmailForAccount } from '@/services/validate-email-for-account.js';
@@ -62,7 +62,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	publishMainStream(user.id, 'meUpdated', iObj);
 
 	if (ps.email != null) {
-		const code = rndstr('a-z0-9', 16);
+		const code = secureRndstr(16);
 
 		await UserProfiles.update(user.id, {
 			emailVerifyCode: code,

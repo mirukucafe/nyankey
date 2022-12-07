@@ -3750,7 +3750,6 @@ __metadata:
     reflect-metadata: 0.1.13
     rename: 1.0.4
     require-all: 3.0.0
-    rndstr: 1.0.0
     rss-parser: 3.12.0
     sanitize-html: 2.7.0
     semver: 7.3.7
@@ -4735,7 +4734,6 @@ __metadata:
     punycode: 2.1.1
     qrcode: 1.5.1
     reflect-metadata: 0.1.13
-    rndstr: 1.0.0
     rollup: 2.75.7
     sass: 1.53.0
     seedrandom: 3.0.5
@@ -14292,13 +14290,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rangestr@npm:0.0.1":
-  version: 0.0.1
-  resolution: "rangestr@npm:0.0.1"
-  checksum: d7e3233f43a196a513f0f6c6a8a0a46b3c0e5fff97ad4d0c45031ea7494a3785d5db36d36231609b416acddaf5fe464e2c74fcc7a8f4032af83e05af23c33700
-  languageName: node
-  linkType: hard
-
 "ratelimiter@npm:3.4.1":
   version: 3.4.1
   resolution: "ratelimiter@npm:3.4.1"
@@ -14954,16 +14945,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rndstr@npm:1.0.0":
-  version: 1.0.0
-  resolution: "rndstr@npm:1.0.0"
-  dependencies:
-    rangestr: 0.0.1
-    seedrandom: 2.4.2
-  checksum: 4eb485a72bbcdfdd8017888122eaa2fe391d92f5a426558ae523f485d7d0fee8a0122ed513955225aab9a034d6eb694d8fb034c612de0bfadf5f4734d592789d
-  languageName: node
-  linkType: hard
-
 "rollup@npm:2.75.7":
   version: 2.75.7
   resolution: "rollup@npm:2.75.7"
@@ -15147,13 +15128,6 @@ __metadata:
   version: 2.5.0
   resolution: "secure-json-parse@npm:2.5.0"
   checksum: 84147a32615ce0d93d2fbba60cde85ae362f45cc948ea134e4d6d1e678bb4b7f3a5ce9b9692ed052baefeb2e1c8ba183b34920390e6a089925b97b0d8f7ab064
-  languageName: node
-  linkType: hard
-
-"seedrandom@npm:2.4.2":
-  version: 2.4.2
-  resolution: "seedrandom@npm:2.4.2"
-  checksum: 09b4a2883e667601338964f86c000839f64ca8f811c41b4b425a03eabc5c4d243e09b5d15c29c3441cd61a384a316b02d341dbfaf3b0097b5973aa12544f9435
   languageName: node
   linkType: hard
 

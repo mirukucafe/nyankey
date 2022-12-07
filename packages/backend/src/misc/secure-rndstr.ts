@@ -3,8 +3,7 @@ import * as crypto from 'node:crypto';
 const L_CHARS = '0123456789abcdefghijklmnopqrstuvwxyz';
 const LU_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-export function secureRndstr(length = 32, useLU = true): string {
-	const chars = useLU ? LU_CHARS : L_CHARS;
+export function secureRndstrCustom(length = 32, chars: string): string {
 	const chars_len = chars.length;
 
 	let str = '';
@@ -18,4 +17,9 @@ export function secureRndstr(length = 32, useLU = true): string {
 	}
 
 	return str;
+}
+
+export function secureRndstr(length = 32, useLU = true): string {
+	const chars = useLU ? LU_CHARS : L_CHARS;
+	return secureRndstrCustom(length, chars);
 }

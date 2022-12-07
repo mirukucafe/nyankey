@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import rndstr from 'rndstr';
+import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import define from '../../define.js';
 
@@ -43,7 +43,7 @@ export default define(meta, paramDef, async (ps) => {
 		throw new Error('cannot reset password of admin');
 	}
 
-	const passwd = rndstr('a-zA-Z0-9', 8);
+	const passwd = secureRndstr(8, true);
 
 	// Generate hash of password
 	const hash = bcrypt.hashSync(passwd);

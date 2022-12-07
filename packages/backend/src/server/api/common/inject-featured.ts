@@ -1,7 +1,7 @@
-import rndstr from 'rndstr';
 import { DAY } from '@/const.js';
 import { Note } from '@/models/entities/note.js';
 import { User } from '@/models/entities/user.js';
+import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Notes, UserProfiles, NoteReactions } from '@/models/index.js';
 import { generateMutedUserQuery } from './generate-muted-user-query.js';
 import { generateBlockedUserQuery } from './generate-block-query.js';
@@ -50,7 +50,7 @@ export async function injectFeatured(timeline: Note[], user?: User | null) {
 	// Pick random one
 	const featured = notes[Math.floor(Math.random() * notes.length)];
 
-	(featured as any)._featuredId_ = rndstr('a-z0-9', 8);
+	(featured as any)._featuredId_ = secureRndstr(8);
 
 	// Inject featured
 	timeline.splice(3, 0, featured);
