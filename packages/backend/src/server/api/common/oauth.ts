@@ -127,5 +127,4 @@ export async function oauth(ctx: Koa.Context): void {
 		token_type: 'bearer',
 		scope: session.accessToken.permission.join(' '),
 	};
-
-};
+}

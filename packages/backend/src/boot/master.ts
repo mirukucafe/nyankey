@@ -153,7 +153,7 @@ async function spawnWorkers(clusterLimits: Required<Config['clusterLimits']>): P
 
 	bootLogger.info(`Starting ${total} workers...`);
 	await Promise.all(workers.map(mode => spawnWorker(mode)));
-	bootLogger.succ(`All workers started`);
+	bootLogger.succ('All workers started');
 }
 
 function spawnWorker(mode: 'web' | 'queue'): Promise<void> {

@@ -1,10 +1,10 @@
 import config from '@/config/index.js';
+import { kinds } from '@/misc/api-permissions.js';
+import { I18n } from '@/misc/i18n.js';
 import { errors as errorDefinitions } from '../error.js';
 import endpoints from '../endpoints.js';
 import { schemas, convertSchemaToOpenApiSchema } from './schemas.js';
 import { httpCodes } from './http-codes.js';
-import { kinds } from '@/misc/api-permissions.js';
-import { I18n } from '@/misc/i18n.js';
 
 const i18n = new I18n('en-US');
 

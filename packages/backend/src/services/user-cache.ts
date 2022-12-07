@@ -29,7 +29,7 @@ subscriber.on('message', async (_, data) => {
 				const user = await Users.findOneByOrFail({ id: body.id });
 				userByIdCache.set(user.id, user);
 				for (const [k, v] of uriPersonCache.cache.entries()) {
-					if (v.value?.id === user.id) {
+					if (v.value.id === user.id) {
 						uriPersonCache.set(k, user);
 					}
 				}

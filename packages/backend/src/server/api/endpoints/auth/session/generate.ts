@@ -57,7 +57,7 @@ export const paramDef = {
 				minLength: 1,
 			},
 		},
-		required: ['clientId']
+		required: ['clientId'],
 	}, {
 		properties: {
 			appSecret: { type: 'string' },

@@ -68,7 +68,7 @@ export async function vote(user: CacheableUser, note: Note, choice: number): Pro
 		createNotification(note.userId, 'pollVote', {
 			notifierId: user.id,
 			noteId: note.id,
-			choice: choice,
+			choice,
 		});
 	}
 

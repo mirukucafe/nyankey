@@ -45,5 +45,5 @@ export class AuthSession {
 		nullable: true,
 		comment: 'PKCE code_challenge value, if provided (OAuth only)',
 	})
-	pkceChallenge: string | null;
+		pkceChallenge: string | null;
 }

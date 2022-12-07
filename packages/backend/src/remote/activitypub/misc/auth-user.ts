@@ -23,7 +23,7 @@ function authUserFromApId(uri: string): Promise<AuthUser | null> {
 	return uriPersonCache.fetch(uri)
 		.then(async user => {
 			if (!user) return null;
-			let key = await publicKeyByUserIdCache.fetch(user.id);
+			const key = await publicKeyByUserIdCache.fetch(user.id);
 			if (!key) return null;
 			return { user, key };
 		});

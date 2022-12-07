@@ -147,8 +147,8 @@ export default class DeliverManager {
 			// get (unique) list of hosts
 			Array.from(new Set(
 				Array.from(inboxes)
-				.map(inbox => new URL(inbox).host)
-			))
+				.map(inbox => new URL(inbox).host),
+			)),
 		);
 
 		// deliver

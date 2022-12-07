@@ -27,7 +27,7 @@ export async function skippedInstances(hosts: Array<Instance['host']>): Promise<
 
 	return skipped.concat(
 		await db.query(
-			`SELECT host FROM instance WHERE ("isSuspended" OR "latestStatus" = 410 OR "lastCommunicatedAt" < $1::date) AND host = ANY(string_to_array($2, ','))`,
+			'SELECT host FROM instance WHERE ("isSuspended" OR "latestStatus" = 410 OR "lastCommunicatedAt" < $1::date) AND host = ANY(string_to_array($2, \',\'))',
 			[
 				deadTime.toISOString(),
 				// don't check hosts again that we already know are suspended
