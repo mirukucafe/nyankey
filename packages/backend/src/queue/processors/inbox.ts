@@ -79,7 +79,7 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 			// lets assume that the creator has this common form:
 			// <https://example.com/users/user#main-key>
 			// Then we can use it as the key id and (without fragment part) user id.
-			authUser = await getAuthUser(activity.signature.creator, activity.signature.creator.replace(/#.*$/, ''));
+			authUser = await getAuthUser(activity.signature.creator, activity.signature.creator.replace(/#.*$/, ''), resolver);
 
 			if (authUser == null) {
 				return 'skip: failed to resolve LD-Signature user';
