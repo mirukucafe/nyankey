@@ -102,7 +102,7 @@ function validateActor(x: IObject, uri: string): IActor {
  *
  * If the target Person is registered in FoundKey, it is returned.
  */
-export async function fetchPerson(uri: string, resolver?: Resolver): Promise<CacheableUser | null> {
+export async function fetchPerson(uri: string, resolver: Resolver): Promise<CacheableUser | null> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	const cached = uriPersonCache.get(uri);
@@ -390,7 +390,7 @@ export async function resolvePerson(uri: string, resolver: Resolver): Promise<Ca
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	//#region このサーバーに既に登録されていたらそれを返す
-	const exist = await fetchPerson(uri);
+	const exist = await fetchPerson(uri, resolver);
 
 	if (exist) {
 		return exist;
