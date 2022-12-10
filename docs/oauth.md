@@ -1,9 +1,9 @@
 # 3rd party access
 Foundkey supports:
-- OAuth 2.0 Authorization Code grant per RFC 6749.
-- OAuth Bearer Token Usage per RFC 6750.
-- Proof Key for Code Exchange (PKCE) per RFC 7636.
-- OAuth 2.0 Authorization Server Metadata per RFC 8414.
+- OAuth 2.0 Authorization Code grant per [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749).
+- OAuth Bearer Token Usage per [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750).
+- Proof Key for Code Exchange (PKCE) per [RFC 7636](https://www.rfc-editor.org/rfc/rfc7636).
+- OAuth 2.0 Authorization Server Metadata per [RFC 8414](https://www.rfc-editor.org/rfc/rfc8414.html).
 
 # Discovery
 Because the implementation may change in the future, it is recommended that you use OAuth 2.0 Authorization Server Metadata a.k.a. OpenID Connect Discovery.
