@@ -53,7 +53,7 @@ async function performOneActivity(actor: CacheableRemoteUser, activity: IObject,
 	} else if (isReject(activity)) {
 		await reject(actor, activity, resolver);
 	} else if (isAdd(activity)) {
-		await add(actor, activity).catch(err => apLogger.error(err));
+		await add(actor, activity, resolver).catch(err => apLogger.error(err));
 	} else if (isRemove(activity)) {
 		await remove(actor, activity).catch(err => apLogger.error(err));
 	} else if (isAnnounce(activity)) {

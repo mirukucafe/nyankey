@@ -161,7 +161,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		}> => {
 			if (typeof uri !== 'string' || !uri.match(/^https?:/)) return { status: 'permerror' };
 			try {
-				const res = await resolveNote(uri);
+				const res = await resolveNote(uri, resolver);
 				if (res) {
 					return {
 						status: 'ok',
@@ -266,7 +266,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
  * If the target Note is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
  * Fetch the Note from the remote server, register it in FoundKey, and return it.
  */
-export async function resolveNote(value: string | IObject, resolver?: Resolver): Promise<Note | null> {
+export async function resolveNote(value: string | IObject, resolver: Resolver): Promise<Note | null> {
 	const uri = typeof value === 'string' ? value : value.id;
 	if (uri == null) throw new Error('missing uri');
 

@@ -33,7 +33,7 @@ export default async function(resolver: Resolver, actor: CacheableRemoteUser, ac
 		// resolve the announce target
 		let renote;
 		try {
-			renote = await resolveNote(targetUri);
+			renote = await resolveNote(targetUri, resolver);
 		} catch (e) {
 			// skip if the target returns a HTTP client error
 			if (e instanceof StatusError) {
