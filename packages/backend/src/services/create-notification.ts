@@ -4,13 +4,12 @@ import { Notifications, Mutings, UserProfiles, Users } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { User } from '@/models/entities/user.js';
 import { Notification } from '@/models/entities/notification.js';
-import { sendEmailNotification } from './send-email-notification.js';
 
 export async function createNotification(
 	notifieeId: User['id'],
 	type: Notification['type'],
 	data: Partial<Notification>,
-) {
+): Promise<Notification | null> {
 	if (data.notifierId && (notifieeId === data.notifierId)) {
 		return null;
 	}
@@ -25,7 +24,7 @@ export async function createNotification(
 		createdAt: new Date(),
 		notifieeId,
 		type,
-		// 相手がこの通知をミュートしているようなら、既読を予めつけておく
+		// If the other party seems to have muted this notification, pre-read it.
 		isRead: isMuted,
 		...data,
 	} as Partial<Notification>)
@@ -36,13 +35,13 @@ export async function createNotification(
 	// Publish notification event
 	publishMainStream(notifieeId, 'notification', packed);
 
-	// 2秒経っても(今回作成した)通知が既読にならなかったら「未読の通知がありますよ」イベントを発行する
+	// If the notification (created this time) has not been read after 2 seconds, issue a "You have unread notifications" event.
 	setTimeout(async () => {
 		const fresh = await Notifications.findOneBy({ id: notification.id });
-		if (fresh == null) return; // 既に削除されているかもしれない
+		if (fresh == null) return; // It may have already been deleted.
 		if (fresh.isRead) return;
 
-		//#region ただしミュートしているユーザーからの通知なら無視
+		//#region However, if the notification comes from a muted user, ignore it.
 		const mutings = await Mutings.findBy({
 			muterId: notifieeId,
 		});
@@ -53,9 +52,6 @@ export async function createNotification(
 
 		publishMainStream(notifieeId, 'unreadNotification', packed);
 		pushNotification(notifieeId, 'notification', packed);
-
-		if (type === 'follow') sendEmailNotification.follow(notifieeId, await Users.findOneByOrFail({ id: data.notifierId! }));
-		if (type === 'receiveFollowRequest') sendEmailNotification.receiveFollowRequest(notifieeId, await Users.findOneByOrFail({ id: data.notifierId! }));
 	}, 2000);
 
 	return notification;

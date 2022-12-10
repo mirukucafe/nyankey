@@ -8,7 +8,7 @@ import { User } from '@/models/entities/user.js';
 import { Users, Followings } from '@/models/index.js';
 import { publishInternalEvent } from '@/services/stream.js';
 
-export async function doPostUnsuspend(user: User) {
+export async function doPostUnsuspend(user: User): Promise<void> {
 	publishInternalEvent('userChangeSuspendedState', { id: user.id, isSuspended: false });
 
 	if (Users.isLocalUser(user)) {

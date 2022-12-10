@@ -16,7 +16,7 @@ type pushNotificationsTypes = {
 };
 
 // Reduce the content of the push message because of the character limit
-function truncateNotification(notification: Packed<'Notification'>): any {
+function truncateNotification(notification: Packed<'Notification'>): Record<string, any> {
 	if (notification.note) {
 		return {
 			...notification,
@@ -37,7 +37,7 @@ function truncateNotification(notification: Packed<'Notification'>): any {
 	return notification;
 }
 
-export async function pushNotification<T extends keyof pushNotificationsTypes>(userId: string, type: T, body: pushNotificationsTypes[T]) {
+export async function pushNotification<T extends keyof pushNotificationsTypes>(userId: string, type: T, body: pushNotificationsTypes[T]): Promise<void> {
 	const meta = await fetchMeta();
 
 	// Register key pair information

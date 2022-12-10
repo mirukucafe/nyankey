@@ -7,7 +7,7 @@ export async function deleteAccount(user: {
 	id: string;
 	host: string | null;
 }): Promise<void> {
-	// 物理削除する前にDelete activityを送信する
+	// Send Delete activity before physical deletion
 	await doPostSuspend(user).catch(() => {});
 
 	createDeleteAccountJob(user, {

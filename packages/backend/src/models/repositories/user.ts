@@ -35,7 +35,7 @@ const locationSchema = { type: 'string', minLength: 1, maxLength: 50 } as const;
 const birthdaySchema = { type: 'string', pattern: /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/.toString().slice(1, -1) } as const;
 
 function isLocalUser(user: User): user is ILocalUser;
-function isLocalUser<T extends { host: User['host'] }>(user: T): user is T & { host: null; };
+function isLocalUser<T extends { host: User['host'] }>(user: T): user is T & { host: null; token: string; };
 function isLocalUser(user: User | { host: User['host'] }): boolean {
 	return user.host == null;
 }

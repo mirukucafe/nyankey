@@ -214,7 +214,7 @@ export class User {
 	@Index({ unique: true })
 	@Column('char', {
 		length: 16, nullable: true, unique: true,
-		comment: 'The native access token of the User. It will be null if the origin of the user is local.',
+		comment: 'The native access token of local users, or null.',
 	})
 	public token: string | null;
 
@@ -234,10 +234,12 @@ export class User {
 
 export interface ILocalUser extends User {
 	host: null;
+	token: string;
 }
 
 export interface IRemoteUser extends User {
 	host: string;
+	token: null;
 }
 
 export type CacheableLocalUser = ILocalUser;

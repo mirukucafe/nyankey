@@ -81,6 +81,7 @@ type NodeInfo = {
 		nodeName?: any;
 		nodeDescription?: any;
 		description?: any;
+		themeColor?: any;
 		maintainer?: {
 			name?: any;
 			email?: any;
@@ -125,7 +126,8 @@ async function fetchNodeinfo(instance: Instance): Promise<NodeInfo> {
 
 		return info as NodeInfo;
 	} catch (e) {
-		logger.error(`Failed to fetch nodeinfo of ${instance.host}: ${e.message}`);
+		const message = e instanceof Error ? e.message : e;
+		logger.error(`Failed to fetch nodeinfo of ${instance.host}: ${message}`);
 
 		throw e;
 	}

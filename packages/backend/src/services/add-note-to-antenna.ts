@@ -6,8 +6,8 @@ import { isUserRelated } from '@/misc/is-user-related.js';
 import { publishAntennaStream, publishMainStream } from '@/services/stream.js';
 import { User } from '@/models/entities/user.js';
 
-export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: { id: User['id']; }) {
-	// 通知しない設定になっているか、自分自身の投稿なら既読にする
+export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: { id: User['id']; }): Promise<void> {
+	// If it's set to not notify the user, or if it's the user's own post, read it.
 	const read = !antenna.notify || (antenna.userId === noteUser.id);
 
 	AntennaNotes.insert({
@@ -43,7 +43,7 @@ export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: {
 			return;
 		}
 
-		// 2秒経っても既読にならなかったら通知
+		// Notify if not read after 2 seconds
 		setTimeout(async () => {
 			const unread = await AntennaNotes.findOneBy({ antennaId: antenna.id, read: false });
 			if (unread) {

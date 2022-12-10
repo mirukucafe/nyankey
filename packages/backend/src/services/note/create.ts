@@ -266,7 +266,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 	incNotesCountOfUser(user);
 
 	// Word mute
-	mutedWordsCache.fetch(null).then(us => {
+	mutedWordsCache.fetch('').then(us => {
 		for (const u of us) {
 			checkWordMute(note, { id: u.userId }, u.mutedWords).then(shouldMute => {
 				if (shouldMute) {
