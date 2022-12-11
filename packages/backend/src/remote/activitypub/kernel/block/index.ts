@@ -1,7 +1,7 @@
 import block from '@/services/blocking/create.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
-import DbResolver from '@/remote/activitypub/db-resolver.js';
+import { DbResolver } from '@/remote/activitypub/db-resolver.js';
 import { IBlock } from '@/remote/activitypub/type.js';
 
 export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<string> => {

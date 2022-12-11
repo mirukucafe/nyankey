@@ -1,7 +1,7 @@
 import unfollow from '@/services/following/delete.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { Followings } from '@/models/index.js';
-import DbResolver from '@/remote/activitypub/db-resolver.js';
+import { DbResolver } from '@/remote/activitypub/db-resolver.js';
 import { IAccept } from '@/remote/activitypub/type.js';
 
 export default async (actor: CacheableRemoteUser, activity: IAccept): Promise<string> => {

@@ -45,7 +45,7 @@ export function parseUri(value: string | IObject): UriParseResult {
 	}
 }
 
-export default class DbResolver {
+export class DbResolver {
 	constructor() {
 	}
 

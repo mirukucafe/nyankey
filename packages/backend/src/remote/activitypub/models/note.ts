@@ -19,7 +19,7 @@ import { fromHtml } from '@/mfm/from-html.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { parseAudience } from '../audience.js';
 import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
-import DbResolver from '../db-resolver.js';
+import { DbResolver } from '../db-resolver.js';
 import Resolver from '../resolver.js';
 import { apLogger } from '../logger.js';
 import { resolvePerson } from './person.js';

@@ -1,6 +1,6 @@
 import { createPerson } from '@/remote/activitypub/models/person.js';
 import { createNote } from '@/remote/activitypub/models/note.js';
-import DbResolver from '@/remote/activitypub/db-resolver.js';
+import { DbResolver } from '@/remote/activitypub/db-resolver.js';
 import Resolver from '@/remote/activitypub/resolver.js';
 import { extractDbHost } from '@/misc/convert-host.js';
 import { Users, Notes } from '@/models/index.js';
