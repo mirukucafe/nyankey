@@ -1,6 +1,7 @@
 .autogen
 .vscode
 .config
+.woodpecker
 Dockerfile
 build/
 built/
