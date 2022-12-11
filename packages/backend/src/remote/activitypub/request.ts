@@ -4,7 +4,7 @@ import { User } from '@/models/entities/user.js';
 import { getResponse } from '@/misc/fetch.js';
 import { createSignedPost, createSignedGet } from './ap-request.js';
 
-export default async (user: { id: User['id'] }, url: string, object: any) => {
+export async function request(user: { id: User['id'] }, url: string, object: any): Promise<void> {
 	const body = JSON.stringify(object);
 
 	const keypair = await getUserKeypair(user.id);

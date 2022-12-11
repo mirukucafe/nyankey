@@ -1,6 +1,6 @@
 import { URL } from 'node:url';
 import Bull from 'bull';
-import request from '@/remote/activitypub/request.js';
+import { request } from '@/remote/activitypub/request.js';
 import { registerOrFetchInstanceDoc } from '@/services/register-or-fetch-instance-doc.js';
 import Logger from '@/services/logger.js';
 import { Instances } from '@/models/index.js';
