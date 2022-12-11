@@ -1,8 +1,8 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { removePinned } from '@/services/i/pin.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IRemove } from '../../type.js';
 import { resolveNote } from '../../models/note.js';
-import Resolver from '@/remote/activitypub/resolver.js';
 
 export default async (actor: CacheableRemoteUser, activity: IRemove, resolver: Resolver): Promise<void> => {
 	if ('actor' in activity && actor.uri !== activity.actor) {

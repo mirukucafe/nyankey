@@ -1,4 +1,4 @@
-import Resolver from '@/remote/activitypub/resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { updatePerson } from '@/remote/activitypub/models/person.js';
 import define from '../../define.js';
 import { getRemoteUser } from '../../common/getters.js';

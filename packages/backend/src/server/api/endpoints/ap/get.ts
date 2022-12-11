@@ -1,4 +1,4 @@
-import Resolver from '@/remote/activitypub/resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { HOUR } from '@/const.js';
 import define from '../../define.js';
 

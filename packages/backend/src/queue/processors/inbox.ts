@@ -9,7 +9,7 @@ import { apRequestChart, federationChart, instanceChart } from '@/services/chart
 import { toPuny, extractDbHost } from '@/misc/convert-host.js';
 import { getApId } from '@/remote/activitypub/type.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
-import Resolver from '@/remote/activitypub/resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { LdSignature } from '@/remote/activitypub/misc/ld-signature.js';
 import { getAuthUser } from '@/remote/activitypub/misc/auth-user.js';
 import { StatusError } from '@/misc/fetch.js';

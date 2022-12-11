@@ -1,7 +1,7 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { apLogger } from '../../logger.js';
 import { IReject, isFollow, getApType } from '../../type.js';
-import Resolver from '../../resolver.js';
 import rejectFollow from './follow.js';
 
 export default async (actor: CacheableRemoteUser, activity: IReject, resolver: Resolver): Promise<string> => {

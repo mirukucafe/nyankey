@@ -9,7 +9,7 @@ import { Users } from '@/models/index.js';
 import webFinger from './webfinger.js';
 import { createPerson, updatePerson } from './activitypub/models/person.js';
 import { remoteLogger } from './logger.js';
-import Resolver from './activitypub/resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 
 const logger = remoteLogger.createSubLogger('resolve-user');
 

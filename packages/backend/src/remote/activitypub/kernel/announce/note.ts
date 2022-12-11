@@ -7,7 +7,7 @@ import { Notes } from '@/models/index.js';
 import { parseAudience } from '@/remote/activitypub/audience.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 import { fetchNote, resolveNote } from '@/remote/activitypub/models/note.js';
-import Resolver from '@/remote/activitypub/resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IAnnounce, getApId } from '@/remote/activitypub/type.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 

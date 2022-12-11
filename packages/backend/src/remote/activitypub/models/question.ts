@@ -1,7 +1,7 @@
 import config from '@/config/index.js';
 import { Notes, Polls } from '@/models/index.js';
 import { IPoll } from '@/models/entities/poll.js';
-import Resolver from '../resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IObject, IQuestion, isQuestion } from '../type.js';
 import { apLogger } from '../logger.js';
 

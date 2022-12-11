@@ -21,7 +21,7 @@ import { parseUri } from './db-resolver.js';
  *
  * As opposed to the DbResolver which will try to resolve an ActivityPub URI into a database object.
  */
-export default class Resolver {
+export class Resolver {
 	private history: Set<string>;
 	private user?: ILocalUser;
 	private recursionLimit?: number;

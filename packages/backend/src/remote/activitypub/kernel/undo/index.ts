@@ -1,6 +1,6 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
-import Resolver from '@/remote/activitypub/resolver.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IUndo, isFollow, isBlock, isLike, isAnnounce, getApType, isAccept } from '@/remote/activitypub/type.js';
 import unfollow from './follow.js';
 import unblock from './block.js';
