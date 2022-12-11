@@ -10,7 +10,7 @@ import { User, ILocalUser, IRemoteUser } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { Notes, Users, Instances } from '@/models/index.js';
 import { notesChart, perUserNotesChart, instanceChart } from '@/services/chart/index.js';
-import DeliverManager from '@/remote/activitypub/deliver-manager.js';
+import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import { countSameRenotes } from '@/misc/count-same-renotes.js';
 import { isPureRenote } from '@/misc/renote.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';

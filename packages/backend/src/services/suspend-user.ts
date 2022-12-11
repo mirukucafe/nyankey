@@ -1,6 +1,6 @@
 import renderDelete from '@/remote/activitypub/renderer/delete.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
-import DeliverManager from '@/remote/activitypub/deliver-manager.js';
+import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import config from '@/config/index.js';
 import { User } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';

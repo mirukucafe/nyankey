@@ -32,7 +32,7 @@ const isDirect = (recipe: any): recipe is IDirectRecipe =>
 	recipe.type === 'Direct';
 //#endregion
 
-export default class DeliverManager {
+export class DeliverManager {
 	private actor: { id: User['id']; host: null; };
 	private activity: any;
 	private recipes: IRecipe[] = [];

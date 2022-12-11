@@ -2,7 +2,7 @@ import { publishNoteStream } from '@/services/stream.js';
 import { renderLike } from '@/remote/activitypub/renderer/like.js';
 import renderUndo from '@/remote/activitypub/renderer/undo.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
-import DeliverManager from '@/remote/activitypub/deliver-manager.js';
+import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';

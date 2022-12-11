@@ -3,7 +3,7 @@ import * as mfm from 'mfm-js';
 import { db } from '@/db/postgre.js';
 import es from '@/db/elasticsearch.js';
 import { publishMainStream, publishNotesStream } from '@/services/stream.js';
-import DeliverManager from '@/remote/activitypub/deliver-manager.js';
+import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import renderNote from '@/remote/activitypub/renderer/note.js';
 import renderCreate from '@/remote/activitypub/renderer/create.js';
 import renderAnnounce from '@/remote/activitypub/renderer/announce.js';

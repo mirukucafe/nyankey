@@ -1,7 +1,7 @@
 import { ArrayOverlap, IsNull, Not } from 'typeorm';
 import { publishNoteStream } from '@/services/stream.js';
 import { renderLike } from '@/remote/activitypub/renderer/like.js';
-import DeliverManager from '@/remote/activitypub/deliver-manager.js';
+import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import { toDbReaction, decodeReaction } from '@/misc/reaction-lib.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
