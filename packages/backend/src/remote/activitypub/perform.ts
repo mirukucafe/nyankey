@@ -5,7 +5,7 @@ import { IObject } from './type.js';
 import { performActivity } from './kernel/index.js';
 import { updatePerson } from './models/person.js';
 
-export default async (actor: CacheableRemoteUser, activity: IObject, resolver: Resolver): Promise<void> => {
+export async function perform(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver): Promise<void> {
 	await performActivity(actor, activity, resolver);
 
 	// And while I'm at it, I'll update the remote user information if it's out of date.
