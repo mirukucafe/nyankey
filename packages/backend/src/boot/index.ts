@@ -17,7 +17,7 @@ const ev = new Xev();
 /**
  * Init process
  */
-export default async function(): Promise<void> {
+export async function boot(): Promise<void> {
 	process.title = `FoundKey (${cluster.isPrimary ? 'master' : 'worker'})`;
 
 	if (cluster.isPrimary || envOption.disableClustering) {
