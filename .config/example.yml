@@ -133,3 +133,10 @@ redis:
 #allowedPrivateNetworks: [
 #  '127.0.0.1/32'
 #]
+
+# images used on error screens. You can use absolute or relative URLs.
+# If you use relative URLs, be aware that the URL may be used on different pages/paths, so the path component should be absolute.
+#images:
+#  info: /twemoji/1f440.svg
+#  notFound: /twemoji/2049.svg
+#  error: /twemoji/1f480.svg

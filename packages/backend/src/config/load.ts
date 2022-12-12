@@ -38,6 +38,12 @@ export default function load(): Config {
 
 	config.port = config.port || parseInt(process.env.PORT || '', 10);
 
+	config.images = Object.assign({
+		info: '/twemoji/1f440.svg',
+		notFound: '/twemoji/2040.svg',
+		error: '/twemoji/1f480.svg',
+	}, config.images ?? {});
+
 	if (!config.maxNoteTextLength) config.maxNoteTextLength = 3000;
 
 	mixin.version = meta.version;
