@@ -178,6 +178,15 @@ export const meta = {
 				type: 'string',
 				optional: false, nullable: true,
 			},
+			images: {
+				type: 'object',
+				optional: false, nullable: false,
+				properties: {
+					info: { type: 'string' },
+					notFound: { type: 'string' },
+					error: { type: 'string' },
+				},
+			},
 			features: {
 				type: 'object',
 				optional: true, nullable: false,
@@ -300,6 +309,8 @@ export default define(meta, paramDef, async (ps, me) => {
 		})) === 0,
 
 		proxyAccountName: instance.proxyAccountId ? (await Users.pack(instance.proxyAccountId).catch(() => null))?.username : null,
+
+		images: config.images,
 
 		features: {
 			registration: !instance.disableRegistration,
