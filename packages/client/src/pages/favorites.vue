@@ -5,7 +5,7 @@
 		<MkPagination ref="pagingComponent" :pagination="pagination">
 			<template #empty>
 				<div class="_fullinfo">
-					<img src="https://xn--931a.moe/assets/info.jpg" class="_ghost"/>
+					<img :src="instance.images.info" class="_ghost"/>
 					<div>{{ i18n.ts.noNotes }}</div>
 				</div>
 			</template>
@@ -27,6 +27,7 @@ import XNote from '@/components/note.vue';
 import XList from '@/components/date-separated-list.vue';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
+import { instance } from '@/instance';
 
 const pagination = {
 	endpoint: 'i/favorites' as const,

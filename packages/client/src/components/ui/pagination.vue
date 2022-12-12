@@ -7,7 +7,7 @@
 	<div v-else-if="empty" key="_empty_" class="empty">
 		<slot name="empty">
 			<div class="_fullinfo">
-				<img src="https://xn--931a.moe/assets/info.jpg" class="_ghost"/>
+				<img :src="instance.images.info" class="_ghost"/>
 				<div>{{ i18n.ts.nothing }}</div>
 			</div>
 		</slot>
@@ -38,6 +38,7 @@ import * as os from '@/os';
 import { onScrollTop, isTopVisible, getScrollPosition, getScrollContainer } from '@/scripts/scroll';
 import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
+import { instance } from '@/instance';
 
 export type Paging<E extends keyof foundkey.Endpoints = keyof foundkey.Endpoints> = {
 	endpoint: E;

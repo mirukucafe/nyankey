@@ -1,7 +1,7 @@
 <template>
 <transition :name="defaultStore.state.animation ? 'zoom' : ''" appear>
 	<div class="mjndxjcg">
-		<img src="https://xn--931a.moe/assets/error.jpg" class="_ghost"/>
+		<img :src="instance.images.error" class="_ghost"/>
 		<p><i class="fas fa-exclamation-triangle"></i> {{ i18n.ts.somethingHappened }}</p>
 		<MkButton v-if="!final" class="button" @click="retry">{{ i18n.ts.retry }}</MkButton>
 	</div>
@@ -12,6 +12,7 @@
 import MkButton from '@/components/ui/button.vue';
 import { i18n } from '@/i18n';
 import { defaultStore } from '@/store';
+import { instance } from '@/instance';
 
 const emit = defineEmits<{
 	(ev: 'retry'): void;

@@ -33,7 +33,7 @@
 				</MkA>
 			</div>
 			<div v-if="!fetching && messages.length == 0" class="_fullinfo">
-				<img src="https://xn--931a.moe/assets/info.jpg" class="_ghost"/>
+				<img :src="instance.images.info" class="_ghost"/>
 				<div>{{ i18n.ts.noHistory }}</div>
 			</div>
 			<MkLoading v-if="fetching"/>
@@ -53,6 +53,7 @@ import { useRouter } from '@/router';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';
 import { $i } from '@/account';
+import { instance } from '@/instance';
 
 const router = useRouter();
 
