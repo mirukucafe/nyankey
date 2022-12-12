@@ -281,6 +281,11 @@ export type LiteInstanceMetadata = {
 	iconUrl: string;
 	faviconUrl: string;
 	bannerUrl: string;
+	images: {
+		error: string;
+		notFound: string;
+		info: string;
+	};
 };
 
 export type DetailedInstanceMetadata = LiteInstanceMetadata & {
