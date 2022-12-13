@@ -1,6 +1,6 @@
 import cluster from 'node:cluster';
 import chalk from 'chalk';
-import convertKEYWORD from 'color-convert';
+import convertColor from 'color-convert';
 import { format as dateFormat } from 'date-fns';
 import * as SyslogPro from 'syslog-pro';
 import config from '@/config/index.js';
@@ -81,7 +81,7 @@ export default class Logger {
 			level === 'success' ? important ? chalk.bgGreen.white('DONE') : chalk.green('DONE') :
 			level === 'debug' ? chalk.gray('VERB') :
 			chalk.blue('INFO');
-		const domains = [this.domain].concat(subDomains).map(d => d.color ? chalk.rgb(...convertKEYWORD.keyword.rgb(d.color))(d.name) : chalk.white(d.name));
+		const domains = [this.domain].concat(subDomains).map(d => d.color ? chalk.rgb(...convertColor.keyword.rgb(d.color))(d.name) : chalk.white(d.name));
 		const m =
 			level === 'error' ? chalk.red(message) :
 			level === 'warning' ? chalk.yellow(message) :
