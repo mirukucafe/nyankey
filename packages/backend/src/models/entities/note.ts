@@ -27,7 +27,7 @@ export class Note {
 	})
 	public replyId: Note['id'] | null;
 
-	@ManyToOne(type => Note, {
+	@ManyToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -41,7 +41,7 @@ export class Note {
 	})
 	public renoteId: Note['id'] | null;
 
-	@ManyToOne(type => Note, {
+	@ManyToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -75,7 +75,7 @@ export class Note {
 	})
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -179,7 +179,7 @@ export class Note {
 	})
 	public channelId: Channel['id'] | null;
 
-	@ManyToOne(type => Channel, {
+	@ManyToOne(() => Channel, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

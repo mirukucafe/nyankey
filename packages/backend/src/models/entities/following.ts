@@ -21,7 +21,7 @@ export class Following {
 	})
 	public followeeId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -34,7 +34,7 @@ export class Following {
 	})
 	public followerId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

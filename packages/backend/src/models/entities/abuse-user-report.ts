@@ -17,7 +17,7 @@ export class AbuseUserReport {
 	@Column(id())
 	public targetUserId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -27,7 +27,7 @@ export class AbuseUserReport {
 	@Column(id())
 	public reporterId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -39,7 +39,7 @@ export class AbuseUserReport {
 	})
 	public assigneeId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()

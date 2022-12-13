@@ -19,7 +19,7 @@ export class UserList {
 	})
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

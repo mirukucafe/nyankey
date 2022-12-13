@@ -16,7 +16,7 @@ export class PageLike {
 	@Column(id())
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -25,7 +25,7 @@ export class PageLike {
 	@Column(id())
 	public pageId: Page['id'];
 
-	@ManyToOne(type => Page, {
+	@ManyToOne(() => Page, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

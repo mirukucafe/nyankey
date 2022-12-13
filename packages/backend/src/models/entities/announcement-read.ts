@@ -18,7 +18,7 @@ export class AnnouncementRead {
 	@Column(id())
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -28,7 +28,7 @@ export class AnnouncementRead {
 	@Column(id())
 	public announcementId: Announcement['id'];
 
-	@ManyToOne(type => Announcement, {
+	@ManyToOne(() => Announcement, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

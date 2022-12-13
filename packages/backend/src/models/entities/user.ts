@@ -81,7 +81,7 @@ export class User {
 	})
 	public avatarId: DriveFile['id'] | null;
 
-	@OneToOne(type => DriveFile, {
+	@OneToOne(() => DriveFile, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()
@@ -94,7 +94,7 @@ export class User {
 	})
 	public bannerId: DriveFile['id'] | null;
 
-	@OneToOne(type => DriveFile, {
+	@OneToOne(() => DriveFile, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()

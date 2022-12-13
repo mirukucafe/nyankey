@@ -16,7 +16,7 @@ export class ClipNote {
 	})
 	public noteId: Note['id'];
 
-	@ManyToOne(type => Note, {
+	@ManyToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -29,7 +29,7 @@ export class ClipNote {
 	})
 	public clipId: Clip['id'];
 
-	@ManyToOne(type => Clip, {
+	@ManyToOne(() => Clip, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

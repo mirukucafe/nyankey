@@ -11,7 +11,7 @@ export class UserProfile {
 	@PrimaryColumn(id())
 	public userId: User['id'];
 
-	@OneToOne(type => User, {
+	@OneToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -161,7 +161,7 @@ export class UserProfile {
 	})
 	public pinnedPageId: Page['id'] | null;
 
-	@OneToOne(type => Page, {
+	@OneToOne(() => Page, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()

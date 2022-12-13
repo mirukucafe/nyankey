@@ -9,7 +9,7 @@ export class Poll {
 	@PrimaryColumn(id())
 	public noteId: Note['id'];
 
-	@OneToOne(type => Note, {
+	@OneToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

@@ -22,7 +22,7 @@ export class ChannelFollowing {
 	})
 	public followeeId: Channel['id'];
 
-	@ManyToOne(type => Channel, {
+	@ManyToOne(() => Channel, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -35,7 +35,7 @@ export class ChannelFollowing {
 	})
 	public followerId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

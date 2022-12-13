@@ -16,7 +16,7 @@ export class AntennaNote {
 	})
 	public noteId: Note['id'];
 
-	@ManyToOne(type => Note, {
+	@ManyToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -29,7 +29,7 @@ export class AntennaNote {
 	})
 	public antennaId: Antenna['id'];
 
-	@ManyToOne(type => Antenna, {
+	@ManyToOne(() => Antenna, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

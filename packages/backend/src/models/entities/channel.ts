@@ -28,7 +28,7 @@ export class Channel {
 	})
 	public userId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()
@@ -53,7 +53,7 @@ export class Channel {
 	})
 	public bannerId: DriveFile['id'] | null;
 
-	@ManyToOne(type => DriveFile, {
+	@ManyToOne(() => DriveFile, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()

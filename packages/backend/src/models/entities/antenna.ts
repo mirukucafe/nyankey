@@ -21,7 +21,7 @@ export class Antenna {
 	})
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -42,7 +42,7 @@ export class Antenna {
 	})
 	public userListId: UserList['id'] | null;
 
-	@ManyToOne(type => UserList, {
+	@ManyToOne(() => UserList, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -54,7 +54,7 @@ export class Antenna {
 	})
 	public userGroupJoiningId: UserGroupJoining['id'] | null;
 
-	@ManyToOne(type => UserGroupJoining, {
+	@ManyToOne(() => UserGroupJoining, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

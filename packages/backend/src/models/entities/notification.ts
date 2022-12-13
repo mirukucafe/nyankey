@@ -28,7 +28,7 @@ export class Notification {
 	})
 	public notifieeId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -45,7 +45,7 @@ export class Notification {
 	})
 	public notifierId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -89,7 +89,7 @@ export class Notification {
 	})
 	public noteId: Note['id'] | null;
 
-	@ManyToOne(type => Note, {
+	@ManyToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -101,7 +101,7 @@ export class Notification {
 	})
 	public followRequestId: FollowRequest['id'] | null;
 
-	@ManyToOne(type => FollowRequest, {
+	@ManyToOne(() => FollowRequest, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -113,7 +113,7 @@ export class Notification {
 	})
 	public userGroupInvitationId: UserGroupInvitation['id'] | null;
 
-	@ManyToOne(type => UserGroupInvitation, {
+	@ManyToOne(() => UserGroupInvitation, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -165,7 +165,7 @@ export class Notification {
 	})
 	public appAccessTokenId: AccessToken['id'] | null;
 
-	@ManyToOne(type => AccessToken, {
+	@ManyToOne(() => AccessToken, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

@@ -21,7 +21,7 @@ export class App {
 	})
 	public userId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'SET NULL',
 		nullable: true,
 	})

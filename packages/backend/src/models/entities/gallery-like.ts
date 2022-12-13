@@ -16,7 +16,7 @@ export class GalleryLike {
 	@Column(id())
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -25,7 +25,7 @@ export class GalleryLike {
 	@Column(id())
 	public postId: GalleryPost['id'];
 
-	@ManyToOne(type => GalleryPost, {
+	@ManyToOne(() => GalleryPost, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

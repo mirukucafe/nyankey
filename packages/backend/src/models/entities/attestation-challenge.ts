@@ -11,7 +11,7 @@ export class AttestationChallenge {
 	@PrimaryColumn(id())
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

@@ -22,7 +22,7 @@ export class MessagingMessage {
 	})
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -35,7 +35,7 @@ export class MessagingMessage {
 	})
 	public recipientId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -48,7 +48,7 @@ export class MessagingMessage {
 	})
 	public groupId: UserGroup['id'] | null;
 
-	@ManyToOne(type => UserGroup, {
+	@ManyToOne(() => UserGroup, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -81,7 +81,7 @@ export class MessagingMessage {
 	})
 	public fileId: DriveFile['id'] | null;
 
-	@ManyToOne(type => DriveFile, {
+	@ManyToOne(() => DriveFile, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

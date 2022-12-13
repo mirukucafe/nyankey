@@ -21,7 +21,7 @@ export class UserListJoining {
 	})
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -34,7 +34,7 @@ export class UserListJoining {
 	})
 	public userListId: UserList['id'];
 
-	@ManyToOne(type => UserList, {
+	@ManyToOne(() => UserList, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

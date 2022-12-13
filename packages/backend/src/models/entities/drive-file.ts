@@ -23,7 +23,7 @@ export class DriveFile {
 	})
 	public userId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'RESTRICT',
 	})
 	@JoinColumn()
@@ -144,7 +144,7 @@ export class DriveFile {
 	})
 	public folderId: DriveFolder['id'] | null;
 
-	@ManyToOne(type => DriveFolder, {
+	@ManyToOne(() => DriveFolder, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()

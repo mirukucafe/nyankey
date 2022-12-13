@@ -18,7 +18,7 @@ export class ChannelNotePining {
 	@Column(id())
 	public channelId: Channel['id'];
 
-	@ManyToOne(type => Channel, {
+	@ManyToOne(() => Channel, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -27,7 +27,7 @@ export class ChannelNotePining {
 	@Column(id())
 	public noteId: Note['id'];
 
-	@ManyToOne(type => Note, {
+	@ManyToOne(() => Note, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

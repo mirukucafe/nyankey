@@ -134,7 +134,7 @@ export class Meta {
 	})
 	public proxyAccountId: User['id'] | null;
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()

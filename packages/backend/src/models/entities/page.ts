@@ -57,7 +57,7 @@ export class Page {
 	})
 	public userId: User['id'];
 
-	@ManyToOne(type => User, {
+	@ManyToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
@@ -69,7 +69,7 @@ export class Page {
 	})
 	public eyeCatchingImageId: DriveFile['id'] | null;
 
-	@ManyToOne(type => DriveFile, {
+	@ManyToOne(() => DriveFile, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()

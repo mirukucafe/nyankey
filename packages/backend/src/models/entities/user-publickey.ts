@@ -7,7 +7,7 @@ export class UserPublickey {
 	@PrimaryColumn(id())
 	public userId: User['id'];
 
-	@OneToOne(type => User, {
+	@OneToOne(() => User, {
 		onDelete: 'CASCADE',
 	})
 	@JoinColumn()
