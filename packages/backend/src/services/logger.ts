@@ -1,16 +1,15 @@
 import cluster from 'node:cluster';
 import chalk from 'chalk';
-import convertColor from 'color-convert';
+import convertKEYWORD from 'color-convert';
 import { format as dateFormat } from 'date-fns';
 import * as SyslogPro from 'syslog-pro';
 import config from '@/config/index.js';
 import { envOption } from '@/env.js';
-
-type Color = Parameters<typeof convertColor.keyword.rgb>[0];
+import type { KEYWORD } from 'color-convert/conversions.js';
 
 type Domain = {
 	name: string;
-	color?: Color;
+	color?: KEYWORD;
 };
 
 type Level = 'error' | 'success' | 'warning' | 'debug' | 'info';
@@ -30,7 +29,7 @@ export default class Logger {
 	 * @param color Log message color
 	 * @param store Whether to store messages
 	 */
-	constructor(domain: string, color?: Color, store = true) {
+	constructor(domain: string, color?: KEYWORD, store = true) {
 		this.domain = {
 			name: domain,
 			color,
@@ -59,7 +58,7 @@ export default class Logger {
 	 * @param store Whether to store messages
 	 * @returns A Logger instance whose parent logger is this instance.
 	 */
-	public createSubLogger(domain: string, color?: Color, store = true): Logger {
+	public createSubLogger(domain: string, color?: KEYWORD, store = true): Logger {
 		const logger = new Logger(domain, color, store);
 		logger.parentLogger = this;
 		return logger;
@@ -82,7 +81,7 @@ export default class Logger {
 			level === 'success' ? important ? chalk.bgGreen.white('DONE') : chalk.green('DONE') :
 			level === 'debug' ? chalk.gray('VERB') :
 			chalk.blue('INFO');
-		const domains = [this.domain].concat(subDomains).map(d => d.color ? chalk.rgb(...convertColor.keyword.rgb(d.color))(d.name) : chalk.white(d.name));
+		const domains = [this.domain].concat(subDomains).map(d => d.color ? chalk.rgb(...convertKEYWORD.keyword.rgb(d.color))(d.name) : chalk.white(d.name));
 		const m =
 			level === 'error' ? chalk.red(message) :
 			level === 'warning' ? chalk.yellow(message) :
