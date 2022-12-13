@@ -2,8 +2,6 @@
  * Operations
  * 各種操作
  */
-declare var self: ServiceWorkerGlobalScope;
-
 import * as foundkey from 'foundkey-js';
 import { SwMessage, swMessageOrderType } from '@/types';
 import { acct as getAcct } from '@/filters/user';

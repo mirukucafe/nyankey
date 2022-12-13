@@ -1,5 +1,3 @@
-declare var self: ServiceWorkerGlobalScope;
-
 import { createNotification } from '@/scripts/create-notification';
 import { swLang } from '@/scripts/lang';
 import { swNotificationRead } from '@/scripts/notification-read';
@@ -55,9 +53,9 @@ self.addEventListener('push', ev => {
 						&& ('userId' in data.body
 							? data.body.userId === n.data.body.userId
 							: data.body.groupId === n.data.body.groupId)
-						) {
-							n.close();
-						}
+					) {
+						n.close();
+					}
 				}
 				break;
 		}
