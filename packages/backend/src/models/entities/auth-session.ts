@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Index, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryColumn, Index, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { id } from '../id.js';
 import { AccessToken } from './access-token.js';
 import { App } from './app.js';

@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import Ajv from 'ajv';
-import { CacheableLocalUser, ILocalUser } from '@/models/entities/user.js';
+import { CacheableLocalUser } from '@/models/entities/user.js';
 import { Schema, SchemaType } from '@/misc/schema.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { IEndpointMeta } from './endpoints.js';

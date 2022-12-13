@@ -2,14 +2,13 @@ import { URL } from 'node:url';
 import chalk from 'chalk';
 import { IsNull } from 'typeorm';
 import { DAY } from '@/const.js';
-import config from '@/config/index.js';
 import { isSelfHost, toPuny } from '@/misc/convert-host.js';
 import { User, IRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
+import { Resolver } from '@/remote/activitypub/resolver.js';
 import webFinger from './webfinger.js';
 import { createPerson, updatePerson } from './activitypub/models/person.js';
 import { remoteLogger } from './logger.js';
-import { Resolver } from '@/remote/activitypub/resolver.js';
 
 const logger = remoteLogger.createSubLogger('resolve-user');
 

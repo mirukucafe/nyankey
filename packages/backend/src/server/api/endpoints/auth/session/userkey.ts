@@ -1,4 +1,4 @@
-import { Apps, AuthSessions, AccessTokens, Users } from '@/models/index.js';
+import { Apps, AuthSessions, Users } from '@/models/index.js';
 import define from '../../../define.js';
 import { ApiError } from '../../../error.js';
 

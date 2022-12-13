@@ -1,5 +1,3 @@
-import config from '@/config/index.js';
-import { getJson } from '@/misc/fetch.js';
 import { ILocalUser } from '@/models/entities/user.js';
 import { getInstanceActor } from '@/services/instance-actor.js';
 import { extractDbHost, isSelfHost } from '@/misc/convert-host.js';

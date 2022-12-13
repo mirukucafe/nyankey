@@ -1,6 +1,5 @@
 import { Apps } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
-import { unique } from '@/prelude/array.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { kinds } from '@/misc/api-permissions.js';
 import define from '../../define.js';

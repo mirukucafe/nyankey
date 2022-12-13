@@ -1,6 +1,5 @@
 // https://github.com/typeorm/typeorm/issues/2400
 import pg from 'pg';
-import { SECOND } from '@/const.js';
 
 pg.types.setTypeParser(20, Number);
 
@@ -8,6 +7,7 @@ import { Logger, DataSource } from 'typeorm';
 import * as highlight from 'cli-highlight';
 import config from '@/config/index.js';
 
+import { SECOND } from '@/const.js';
 import { User } from '@/models/entities/user.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { DriveFolder } from '@/models/entities/drive-folder.js';

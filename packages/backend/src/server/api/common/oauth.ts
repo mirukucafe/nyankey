@@ -1,8 +1,7 @@
 import * as crypto from 'node:crypto';
 import Koa from 'koa';
 import { IsNull, Not } from 'typeorm';
-import { Apps, AuthSessions, AccessTokens } from '@/models/index.js';
-import config from '@/config/index.js';
+import { Apps, AuthSessions } from '@/models/index.js';
 import { compareUrl } from './compare-url.js';
 
 export async function oauth(ctx: Koa.Context): void {
