@@ -44,7 +44,7 @@ export async function addRelay(inbox: string): Promise<Relay> {
 	}).then(x => Relays.findOneByOrFail(x.identifiers[0]));
 
 	const relayActor = await getRelayActor();
-	const follow = await renderFollowRelay(relay, relayActor);
+	const follow = renderFollowRelay(relay, relayActor);
 	const activity = renderActivity(follow);
 	deliver(relayActor, activity, relay.inbox);
 
