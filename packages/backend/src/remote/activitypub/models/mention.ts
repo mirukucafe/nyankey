@@ -5,7 +5,7 @@ import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IObject, isMention, IApMention } from '../type.js';
 import { resolvePerson } from './person.js';
 
-export async function extractApMentions(tags: IObject | IObject[] | null | undefined, resolver: Resolver) {
+export async function extractApMentions(tags: IObject | IObject[] | null | undefined, resolver: Resolver): Promise<CacheableUser[]> {
 	const hrefs = unique(extractApMentionObjects(tags).map(x => x.href as string));
 
 	const limit = promiseLimit<CacheableUser | null>(2);
