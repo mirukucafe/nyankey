@@ -4,6 +4,7 @@ import { makePaginationQuery } from '../../common/make-pagination-query.js';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
 import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
 import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -19,6 +20,8 @@ export const meta = {
 			ref: 'Note',
 		},
 	},
+
+	errors: ['NO_SUCH_NOTE'],
 } as const;
 
 export const paramDef = {
@@ -34,6 +37,11 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
+	const note = await getNote(ps.noteId, user).catch(err => {
+		if (err.id === '9725d0ce-ba28-4dde-95a7-2cbb2c15de24') throw new ApiError('NO_SUCH_NOTE');
+		throw err;
+	});
+
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId)
 		.andWhere('note.replyId = :replyId', { replyId: ps.noteId })
 		.innerJoinAndSelect('note.user', 'user')
