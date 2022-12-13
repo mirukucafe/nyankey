@@ -9,7 +9,7 @@ import { getApId, IObject, ICreate } from '@/remote/activitypub/type.js';
 /**
  * 投稿作成アクティビティを捌きます
  */
-export default async function(resolver: Resolver, actor: CacheableRemoteUser, note: IObject, silent = false, activity?: ICreate): Promise<string> {
+export default async function(resolver: Resolver, actor: CacheableRemoteUser, note: IObject, silent = false): Promise<string> {
 	const uri = getApId(note);
 
 	if (typeof note === 'object') {

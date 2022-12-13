@@ -78,33 +78,33 @@ import { redisClient } from './redis.js';
 const sqlLogger = dbLogger.createSubLogger('sql', 'gray', false);
 
 class MyCustomLogger implements Logger {
-	private highlight(sql: string) {
+	private highlight(sql: string): string {
 		return highlight.highlight(sql, {
 			language: 'sql', ignoreIllegals: true,
 		});
 	}
 
-	public logQuery(query: string, parameters?: any[]) {
+	public logQuery(query: string): void {
 		sqlLogger.info(this.highlight(query).substring(0, 100));
 	}
 
-	public logQueryError(error: string, query: string, parameters?: any[]) {
+	public logQueryError(error: string, query: string): void {
 		sqlLogger.error(this.highlight(query));
 	}
 
-	public logQuerySlow(time: number, query: string, parameters?: any[]) {
+	public logQuerySlow(time: number, query: string): void {
 		sqlLogger.warn(this.highlight(query));
 	}
 
-	public logSchemaBuild(message: string) {
+	public logSchemaBuild(message: string): void {
 		sqlLogger.info(message);
 	}
 
-	public log(message: string) {
+	public log(message: string): void {
 		sqlLogger.info(message);
 	}
 
-	public logMigration(message: string) {
+	public logMigration(message: string): void {
 		sqlLogger.info(message);
 	}
 }

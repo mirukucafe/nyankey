@@ -20,7 +20,7 @@ export function initialize<T>(name: string, limitPerSec = -1): Bull.Queue<T> {
 }
 
 // ref. https://github.com/misskey-dev/misskey/pull/7635#issue-971097019
-function apBackoff(attemptsMade: number, err: Error) {
+function apBackoff(attemptsMade: number /*, err: Error */): number {
 	const baseDelay = MINUTE;
 	const maxBackoff = 8 * HOUR;
 	let backoff = (Math.pow(2, attemptsMade) - 1) * baseDelay;

@@ -32,7 +32,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		token: ps.token,
 	});
 
-	if (result.affected == 0) {
+	if (result.affected === 0) {
 		throw new ApiError(meta.errors.noSuchSession);
 	}
 });
