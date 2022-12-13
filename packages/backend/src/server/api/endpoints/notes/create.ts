@@ -37,6 +37,11 @@ export const meta = {
 		},
 	},
 
+	v2: {
+		method: 'post',
+		alias: 'notes',
+	},
+
 	errors: ['NO_SUCH_NOTE', 'PURE_RENOTE', 'EXPIRED_POLL', 'NO_SUCH_CHANNEL', 'BLOCKED', 'LESS_RESTRICTIVE_VISIBILITY'],
 } as const;
 

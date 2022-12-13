@@ -27,6 +27,11 @@ export const meta = {
 		},
 	},
 
+	v2: {
+		method: 'get',
+		alias: 'notes/:noteId/status',
+	},
+
 	errors: ['NO_SUCH_NOTE'],
 } as const;
 

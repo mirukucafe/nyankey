@@ -14,6 +14,11 @@ export const meta = {
 		ref: 'Note',
 	},
 
+	v2: {
+		method: 'get',
+		alias: 'notes/:noteId',
+	},
+
 	errors: ['NO_SUCH_NOTE'],
 } as const;
 

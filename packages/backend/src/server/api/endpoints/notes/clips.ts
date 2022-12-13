@@ -19,6 +19,11 @@ export const meta = {
 		},
 	},
 
+	v2: {
+		method: 'get',
+		alias: 'notes/:noteId/clips',
+	},
+
 	errors: ['NO_SUCH_NOTE'],
 } as const;
 

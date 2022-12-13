@@ -18,6 +18,10 @@ export const meta = {
 			ref: 'Note',
 		},
 	},
+
+	v2: {
+		method: 'get',
+	}
 } as const;
 
 export const paramDef = {

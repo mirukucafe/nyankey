@@ -18,6 +18,11 @@ export const meta = {
 		minInterval: SECOND,
 	},
 
+	v2: {
+		method: 'delete',
+		alias: 'notes/:noteId/renotes',
+	},
+
 	errors: ['NO_SUCH_NOTE'],
 } as const;
 

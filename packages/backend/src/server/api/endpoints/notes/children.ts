@@ -21,6 +21,11 @@ export const meta = {
 			ref: 'Note',
 		},
 	},
+
+	v2: {
+		method: 'get',
+		alias: 'notes/:noteId/children',
+	},
 } as const;
 
 export const paramDef = {

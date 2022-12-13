@@ -56,6 +56,11 @@ export const meta = {
 		},
 	},
 
+	v2: {
+		method: 'get',
+		alias: 'notes/:noteId/translate/:targetLang/:sourceLang?',
+	},
+
 	errors: ['NO_SUCH_NOTE'],
 } as const;
 

@@ -23,6 +23,11 @@ export const meta = {
 		},
 	},
 
+	v2: {
+		method: 'get',
+		alias: 'notes/:noteId/reactions/:type?',
+	},
+
 	errors: ['NO_SUCH_NOTE'],
 } as const;
 
