@@ -485,18 +485,6 @@ router.get('/_info_card_', async ctx => {
 	});
 });
 
-router.get('/bios', async ctx => {
-	await ctx.render('bios', {
-		version: config.version,
-	});
-});
-
-router.get('/cli', async ctx => {
-	await ctx.render('cli', {
-		version: config.version,
-	});
-});
-
 const override = (source: string, target: string, depth = 0) =>
 	[, ...target.split('/').filter(x => x), ...source.split('/').filter(x => x).splice(depth)].join('/');
 
