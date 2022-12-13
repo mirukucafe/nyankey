@@ -3,8 +3,6 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import manifest from './manifest.json' assert { type: 'json' };
 
 export const manifestHandler = async (ctx: Koa.Context): Promise<void> => {
-	// TODO
-	//const res = structuredClone(manifest);
 	const res = structuredClone(manifest);
 
 	const instance = await fetchMeta(true);
