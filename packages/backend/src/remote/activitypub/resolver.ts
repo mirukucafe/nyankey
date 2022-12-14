@@ -11,7 +11,7 @@ import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { signedGet } from './request.js';
-import { IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
+import { getApId, IObject, isCollectionOrOrderedCollection, ICollection, IOrderedCollection } from './type.js';
 import { parseUri } from './db-resolver.js';
 
 /**
@@ -84,11 +84,18 @@ export class Resolver {
 
 		const object = await signedGet(value, this.user);
 
-		if (object == null || (
-			Array.isArray(object['@context']) ?
-				!(object['@context'] as unknown[]).includes('https://www.w3.org/ns/activitystreams') :
-				object['@context'] !== 'https://www.w3.org/ns/activitystreams'
-		)) {
+		if (
+			object == null
+			|| // check that this is an activitypub object by looking at the @context
+			(
+				Array.isArray(object['@context']) ?
+					!(object['@context'] as unknown[]).includes('https://www.w3.org/ns/activitystreams') :
+					object['@context'] !== 'https://www.w3.org/ns/activitystreams'
+			)
+			// Did we actually get the object that corresponds to the canonical URL?
+			// Does the host we requested stuff from actually correspond to the host that owns the activity?
+			|| !(getApId(object) == null || getApId(object) === value)
+		) {
 			throw new Error('invalid response');
 		}
 
