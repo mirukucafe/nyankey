@@ -13,7 +13,7 @@ import { genId } from '@/misc/gen-id.js';
 import { instanceChart, usersChart } from '@/services/chart/index.js';
 import { UserPublickey } from '@/models/entities/user-publickey.js';
 import { isDuplicateKeyValueError } from '@/misc/is-duplicate-key-value-error.js';
-import { toPuny } from '@/misc/convert-host.js';
+import { extractDbHost } from '@/misc/convert-host.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { toArray } from '@/prelude/array.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
@@ -86,7 +86,7 @@ function validateActor(x: IObject): IActor {
 		}
 
 		const expectHost = extractDbHost(uri);
-		const publicKeyIdHost = toPuny(new URL(x.publicKey.id).hostname);
+		const publicKeyIdHost = extractDbHost(x.publicKey.id);
 		if (publicKeyIdHost !== expectHost) {
 			throw new Error('invalid Actor: publicKey.id has different host');
 		}
@@ -142,7 +142,7 @@ export async function createPerson(uri: string, resolver: Resolver): Promise<Use
 
 	apLogger.info(`Creating the Person: ${person.id}`);
 
-	const host = toPuny(new URL(object.id).hostname);
+	const host = extractDbHost(object.id);
 
 	const { fields } = analyzeAttachments(person.attachment || []);
 
@@ -279,18 +279,17 @@ export async function createPerson(uri: string, resolver: Resolver): Promise<Use
 export async function updatePerson(value: IObject | string, resolver: Resolver): Promise<void> {
 	const uri = getApId(value);
 
-	// URIがこのサーバーを指しているならスキップ
-	if (uri.startsWith(config.url + '/')) {
+	// skip local URIs
+	if (uri.startsWith(config.url)) {
 		return;
 	}
 
-	//#region このサーバーに既に登録されているか
+	// do we already know this user?
 	const exist = await Users.findOneBy({ uri }) as IRemoteUser;
 
 	if (exist == null) {
 		return;
 	}
-	//#endregion
 
 	const object = await resolver.resolve(value);
 
@@ -298,7 +297,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 
 	apLogger.info(`Updating the Person: ${person.id}`);
 
-	// アバターとヘッダー画像をフェッチ
+	// Fetch avatar and banner image
 	const [avatar, banner] = await Promise.all([
 		person.icon,
 		person.image,
@@ -308,7 +307,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 			: resolveImage(exist, img, resolver).catch(() => null),
 	));
 
-	// カスタム絵文字取得
+	// Get custom emoji
 	const emojis = await extractEmojis(person.tag || [], exist.host).catch(e => {
 		apLogger.info(`extractEmojis: ${e}`);
 		return [] as Emoji[];
@@ -316,7 +315,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 
 	const emojiNames = emojis.map(emoji => emoji.name);
 
-	const { fields } = analyzeAttachments(person.attachment || []);
+	const { fields } = analyzeAttachments(person.attachment ?? []);
 
 	const tags = extractApHashtags(person.tag).map(tag => normalizeForSearch(tag)).splice(0, 32);
 
@@ -325,7 +324,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 	const updates = {
 		lastFetchedAt: new Date(),
 		inbox: person.inbox,
-		sharedInbox: person.sharedInbox || (person.endpoints ? person.endpoints.sharedInbox : undefined),
+		sharedInbox: person.sharedInbox ?? (person.endpoints ? person.endpoints.sharedInbox : undefined),
 		followersUri: person.followers ? getApId(person.followers) : undefined,
 		featured: person.featured,
 		emojis: emojiNames,
@@ -365,14 +364,13 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 
 	publishInternalEvent('remoteUserUpdated', { id: exist.id });
 
-	// ハッシュタグ更新
 	updateUsertags(exist, tags);
 
-	// 該当ユーザーが既にフォロワーになっていた場合はFollowingもアップデートする
+	// If the user in question is already a follower, followers will also be updated.
 	await Followings.update({
 		followerId: exist.id,
 	}, {
-		followerSharedInbox: person.sharedInbox || (person.endpoints ? person.endpoints.sharedInbox : undefined),
+		followerSharedInbox: person.sharedInbox ?? (person.endpoints ? person.endpoints.sharedInbox : undefined),
 	});
 
 	await updateFeatured(exist.id, resolver).catch(err => apLogger.error(err));
