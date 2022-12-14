@@ -50,13 +50,8 @@ import number from '@/filters/number';
 import { i18n } from '@/i18n';
 import { instance } from '@/instance';
 
-let stats = $ref();
 let tags = $ref();
 let onlineUsersCount = $ref();
-
-os.api('stats').then(_stats => {
-	stats = _stats;
-});
 
 os.api('get-online-users-count').then(res => {
 	onlineUsersCount = res.count;
