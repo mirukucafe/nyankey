@@ -1,5 +1,5 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import { getApType, IUpdate, isActor } from '@/remote/activitypub/type.js';
+import { getApId, getApType, IUpdate, isActor } from '@/remote/activitypub/type.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 import { updateQuestion } from '@/remote/activitypub/models/question.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
@@ -21,7 +21,11 @@ export default async (actor: CacheableRemoteUser, activity: IUpdate, resolver: R
 	});
 
 	if (isActor(object)) {
-		await updatePerson(actor.uri!, resolver, object);
+		if (actor.uri !== getApId(object)) {
+			return 'skip: actor id !== updated actor id';
+		}
+
+		await updatePerson(object, resolver);
 		return 'ok: Person updated';
 	} else if (getApType(object) === 'Question') {
 		await updateQuestion(object, resolver).catch(e => console.log(e));

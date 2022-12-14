@@ -39,8 +39,7 @@ const summaryLength = 2048;
  * @param x Fetched object
  * @param uri Fetch target URI
  */
-function validateActor(x: IObject, uri: string): IActor {
-	const expectHost = toPuny(new URL(uri).hostname);
+function validateActor(x: IObject): IActor {
 
 	if (x == null) {
 		throw new Error('invalid Actor: object is null');
@@ -50,7 +49,10 @@ function validateActor(x: IObject, uri: string): IActor {
 		throw new Error(`invalid Actor type '${x.type}'`);
 	}
 
-	if (!(typeof x.id === 'string' && x.id.length > 0)) {
+	const uri = getApId(x);
+	if (uri == null) {
+		// Only transient objects or anonymous objects may not have an id or an id that is explicitly null.
+		// We consider all actors as not transient and not anonymous so require ids for them.
 		throw new Error('invalid Actor: wrong id');
 	}
 
@@ -78,16 +80,12 @@ function validateActor(x: IObject, uri: string): IActor {
 		x.summary = truncate(x.summary, summaryLength);
 	}
 
-	const idHost = toPuny(new URL(x.id!).hostname);
-	if (idHost !== expectHost) {
-		throw new Error('invalid Actor: id has different host');
-	}
-
 	if (x.publicKey) {
 		if (typeof x.publicKey.id !== 'string') {
 			throw new Error('invalid Actor: publicKey.id is not a string');
 		}
 
+		const expectHost = extractDbHost(uri);
 		const publicKeyIdHost = toPuny(new URL(x.publicKey.id).hostname);
 		if (publicKeyIdHost !== expectHost) {
 			throw new Error('invalid Actor: publicKey.id has different host');
@@ -140,7 +138,7 @@ export async function createPerson(uri: string, resolver: Resolver): Promise<Use
 
 	const object = await resolver.resolve(uri) as any;
 
-	const person = validateActor(object, uri);
+	const person = validateActor(object);
 
 	apLogger.info(`Creating the Person: ${person.id}`);
 
@@ -278,8 +276,8 @@ export async function createPerson(uri: string, resolver: Resolver): Promise<Use
  * @param resolver Resolver
  * @param hint Hint of Person object (If this value is a valid Person, it is used for updating without Remote resolve.)
  */
-export async function updatePerson(uri: string, resolver: Resolver, hint?: IObject): Promise<void> {
-	if (typeof uri !== 'string') throw new Error('uri is not string');
+export async function updatePerson(value: IObject | string, resolver: Resolver): Promise<void> {
+	const uri = getApId(value);
 
 	// URIがこのサーバーを指しているならスキップ
 	if (uri.startsWith(config.url + '/')) {
@@ -294,9 +292,9 @@ export async function updatePerson(uri: string, resolver: Resolver, hint?: IObje
 	}
 	//#endregion
 
-	const object = hint || await resolver.resolve(uri);
+	const object = await resolver.resolve(value);
 
-	const person = validateActor(object, uri);
+	const person = validateActor(object);
 
 	apLogger.info(`Updating the Person: ${person.id}`);
 

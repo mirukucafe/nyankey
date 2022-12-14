@@ -28,9 +28,7 @@ import { extractApHashtags } from './tag.js';
 import { extractPollFromQuestion } from './question.js';
 import { extractApMentions } from './mention.js';
 
-export function validateNote(object: any, uri: string): Error | null {
-	const expectHost = extractDbHost(uri);
-
+export function validateNote(object: IObject): Error | null {
 	if (object == null) {
 		return new Error('invalid Note: object is null');
 	}
@@ -39,12 +37,20 @@ export function validateNote(object: any, uri: string): Error | null {
 		return new Error(`invalid Note: invalid object type ${getApType(object)}`);
 	}
 
-	if (object.id && extractDbHost(object.id) !== expectHost) {
-		return new Error(`invalid Note: id has different host. expected: ${expectHost}, actual: ${extractDbHost(object.id)}`);
+	const id = getApId(object);
+	if (id == null) {
+		// Only transient objects or anonymous objects may not have an id or an id that is explicitly null.
+		// We consider all Notes as not transient and not anonymous so require ids for them.
+		return new Error(`invalid Note: id required but not present`);
 	}
 
-	if (object.attributedTo && extractDbHost(getOneApId(object.attributedTo)) !== expectHost) {
-		return new Error(`invalid Note: attributedTo has different host. expected: ${expectHost}, actual: ${extractDbHost(object.attributedTo)}`);
+	// Check that the server is authorized to act on behalf of this author.
+	const expectHost = extractDbHost(id);
+	const attributedToHost = object.attributedTo
+		? extractDbHost(getOneApId(object.attributedTo))
+		: null;
+	if (attributedToHost !== expectHost) {
+		return new Error(`invalid Note: attributedTo has different host. expected: ${expectHost}, actual: ${attributedToHost}`);
 	}
 
 	return null;
@@ -64,10 +70,9 @@ export async function fetchNote(object: string | IObject): Promise<Note | null> 
  * Noteを作成します。
  */
 export async function createNote(value: string | IObject, resolver: Resolver, silent = false): Promise<Note | null> {
-	const object: any = await resolver.resolve(value);
+	const object: IObject = await resolver.resolve(value);
 
-	const entryUri = getApId(value);
-	const err = validateNote(object, entryUri);
+	const err = validateNote(object);
 	if (err) {
 		apLogger.error(`${err.message}`, {
 			resolver: {
