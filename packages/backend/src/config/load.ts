@@ -40,7 +40,7 @@ export default function load(): Config {
 
 	config.images = Object.assign({
 		info: '/twemoji/1f440.svg',
-		notFound: '/twemoji/2040.svg',
+		notFound: '/twemoji/2049.svg',
 		error: '/twemoji/1f480.svg',
 	}, config.images ?? {});
 
