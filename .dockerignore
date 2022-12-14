@@ -1,5 +1,4 @@
 .autogen
-.vscode
 .config
 .woodpecker
 Dockerfile
