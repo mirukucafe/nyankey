@@ -62,6 +62,22 @@ function renote(viaKeyboard = false): void {
 			});
 		},
 	}, {
+		text: i18n.ts.unrenoteAll,
+		icon: 'fas fa-trash-alt',
+		danger: true,
+		action: () => {
+			os.confirm({
+				type: 'warning',
+				text: i18n.ts.unrenoteAllConfirm,
+			}).then(({ canceled }) => {
+				if (canceled) return;
+
+				os.api('notes/unrenote', {
+					noteId: props.note.id,
+				});
+			});
+		},
+	}, {
 		text: i18n.ts.quote,
 		icon: 'fas fa-quote-right',
 		action: () => {
