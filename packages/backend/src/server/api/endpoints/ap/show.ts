@@ -114,8 +114,8 @@ async function fetchAny(uri: string, me: CacheableLocalUser | null | undefined):
 
 	return await mergePack(
 		me,
-		isActor(object) ? await createPerson(getApId(object), resolver) : null,
-		isPost(object) ? await createNote(getApId(object), resolver, true) : null,
+		isActor(object) ? await createPerson(object, resolver) : null,
+		isPost(object) ? await createNote(object, resolver, true) : null,
 	);
 }
 

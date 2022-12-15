@@ -129,14 +129,12 @@ export async function fetchPerson(uri: string, resolver: Resolver): Promise<Cach
 /**
  * Personを作成します。
  */
-export async function createPerson(uri: string, resolver: Resolver): Promise<User> {
-	if (typeof uri !== 'string') throw new Error('uri is not string');
-
-	if (uri.startsWith(config.url)) {
+export async function createPerson(value: string | IObject, resolver: Resolver): Promise<User> {
+	if (getApId(value).startsWith(config.url)) {
 		throw new StatusError('cannot resolve local user', 400, 'cannot resolve local user');
 	}
 
-	const object = await resolver.resolve(uri) as any;
+	const object = await resolver.resolve(value) as any;
 
 	const person = validateActor(object);
 
@@ -272,7 +270,7 @@ export async function createPerson(uri: string, resolver: Resolver): Promise<Use
 /**
  * Update Person information.
  * If the target Person is not registered in FoundKey, it is ignored.
- * @param uri URI of Person
+ * @param value URI of Person or Person itself
  * @param resolver Resolver
  * @param hint Hint of Person object (If this value is a valid Person, it is used for updating without Remote resolve.)
  */
