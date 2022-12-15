@@ -1,7 +1,7 @@
 import * as crypto from 'node:crypto';
 
 const L_CHARS = '0123456789abcdefghijklmnopqrstuvwxyz';
-const LU_CHARS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const LU_CHARS = L_CHARS + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export function secureRndstrCustom(length = 32, chars: string): string {
 	const chars_len = chars.length;
