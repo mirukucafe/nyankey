@@ -1,9 +1,26 @@
 process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
-import rndstr from 'rndstr';
 import { initDb } from '../src/db/postgre.js';
 import { initTestDb } from './utils.js';
+
+
+function rndstr(length): string {
+	const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	const chars_len = 62;
+
+	let str = '';
+
+	for (let i = 0; i < length; i++) {
+		let rand = Math.floor(Math.random() * chars_len);
+		if (rand === chars_len) {
+			rand = chars_len - 1;
+		}
+		str += chars.charAt(rand);
+	}
+
+	return str;
+}
 
 describe('ActivityPub', () => {
 	before(async () => {
@@ -13,7 +30,7 @@ describe('ActivityPub', () => {
 
 	describe('Parse minimum object', () => {
 		const host = 'https://host1.test';
-		const preferredUsername = `${rndstr('A-Z', 4)}${rndstr('a-z', 4)}`;
+		const preferredUsername = `${rndstr(8)}`;
 		const actorId = `${host}/users/${preferredUsername.toLowerCase()}`;
 
 		const actor = {
@@ -27,7 +44,7 @@ describe('ActivityPub', () => {
 
 		const post = {
 			'@context': 'https://www.w3.org/ns/activitystreams',
-			id: `${host}/users/${rndstr('0-9a-z', 8)}`,
+			id: `${host}/users/${rndstr(8)}`,
 			type: 'Note',
 			attributedTo: actor.id,
 			to: 'https://www.w3.org/ns/activitystreams#Public',
@@ -66,10 +83,10 @@ describe('ActivityPub', () => {
 
 	describe('Truncate long name', () => {
 		const host = 'https://host1.test';
-		const preferredUsername = `${rndstr('A-Z', 4)}${rndstr('a-z', 4)}`;
+		const preferredUsername = `${rndstr(8)}`;
 		const actorId = `${host}/users/${preferredUsername.toLowerCase()}`;
 
-		const name = rndstr('0-9a-z', 129);
+		const name = rndstr(129);
 
 		const actor = {
 			'@context': 'https://www.w3.org/ns/activitystreams',
