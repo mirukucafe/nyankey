@@ -18,7 +18,7 @@
 		"migrateandstart": "yarn migrate && yarn start",
 		"gulp": "gulp build",
 		"watch": "yarn dev",
-		"dev": "node ./scripts/dev.js",
+		"dev": "node ./scripts/dev.mjs",
 		"lint": "yarn workspaces foreach run lint",
 		"cy:open": "cypress open --browser --e2e --config-file=cypress.config.ts",
 		"cy:run": "cypress run",
@@ -26,8 +26,8 @@
 		"mocha": "yarn workspace backend run mocha",
 		"test": "yarn mocha",
 		"format": "gulp format",
-		"clean": "node ./scripts/clean.js",
-		"clean-all": "node ./scripts/clean-all.js",
+		"clean": "node ./scripts/clean.mjs",
+		"clean-all": "node ./scripts/clean-all.mjs",
 		"cleanall": "yarn clean-all"
 	},
 	"resolutions": {
