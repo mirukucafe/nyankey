@@ -9,7 +9,7 @@
 						<template #prefix><i class="fas fa-search"></i></template>
 						<template #label>{{ i18n.ts.search }}</template>
 					</FormInput>
-					<FormSwitch v-model="selectMode" style="margin: 8px 0;">
+					<FormSwitch v-model="selectMode">
 						<template #label>{{ i18n.ts.selectMode }}</template>
 					</FormSwitch>
 					<div v-if="selectMode" style="display: flex; gap: var(--margin); flex-wrap: wrap;">

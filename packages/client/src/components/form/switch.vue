@@ -13,7 +13,7 @@
 		<div class="knob"></div>
 	</span>
 	<span class="label">
-		<!-- TODO: 無名slotの方は廃止 -->
+		<!-- TODO: do not use unnamed slot -->
 		<span @click="toggle"><slot name="label"></slot><slot></slot></span>
 		<p class="caption"><slot name="caption"></slot></p>
 	</span>
@@ -50,6 +50,7 @@ const toggle = () => {
 	position: relative;
 	display: flex;
 	transition: all 0.2s ease;
+	margin: var(--margin) 0;
 
 	> * {
 		user-select: none;

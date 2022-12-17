@@ -134,6 +134,7 @@ function onMousedown(evt: MouseEvent): void {
 	overflow: clip;
 	box-sizing: border-box;
 	transition: background 0.1s ease;
+	margin: var(--margin) 0;
 
 	&:not(:disabled):hover {
 		background: var(--buttonHoverBg);

@@ -316,8 +316,8 @@ This does not apply when using the Composition API since reactivation is manual.
 If you import json in TypeScript, the json file will be spit out together with the TypeScript file into the dist directory when compiling with tsc. This behavior may cause unintentional rewriting of files, so when importing json files, be sure to check whether the files are allowed to be rewritten or not. If you do not want the file to be rewritten, you should make sure that the file can be rewritten by importing the json file. If you do not want the file to be rewritten, use functions such as `fs.readFileSync` to read the file instead of importing it.
 
 ### Component style definitions do not have a `margin`
-Setting the `margin` of a component may be confusing.
-Instead, it should always be the user of a component that sets a `margin`.
+~~Setting the `margin` of a component may be confusing. Instead, it should always be the user of a component that sets a `margin`.~~
+This was a philosophy used previously. Hoever it now seems a better idea to add a default margin to the top level element of a component which can be easily overwritten on the usage of that component with a `style` attribute.
 
 ### Do not use the word "follow" in HTML class names
 This has caused things to be blocked by an ad blocker in the past.
