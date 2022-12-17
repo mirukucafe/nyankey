@@ -46,8 +46,8 @@
 
 	<FormSection>
 		<div style="display: flex; gap: var(--margin); flex-wrap: wrap;">
-			<FormButton inline @click="preview"><i class="fas fa-eye"></i> {{ i18n.ts.preview }}</FormButton>
-			<FormButton inline danger @click="setDefault"><i class="fas fa-undo"></i> {{ i18n.ts.default }}</FormButton>
+			<MkButton inline @click="preview"><i class="fas fa-eye"></i> {{ i18n.ts.preview }}</MkButton>
+			<MkButton inline danger @click="setDefault"><i class="fas fa-undo"></i> {{ i18n.ts.default }}</MkButton>
 		</div>
 	</FormSection>
 </div>
@@ -59,7 +59,7 @@ import XDraggable from 'vuedraggable';
 import FormInput from '@/components/form/input.vue';
 import FormRadios from '@/components/form/radios.vue';
 import FromSlot from '@/components/form/slot.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import FormSection from '@/components/form/section.vue';
 import FormSwitch from '@/components/form/switch.vue';
 import * as os from '@/os';

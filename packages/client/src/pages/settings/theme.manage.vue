@@ -20,7 +20,7 @@
 			<template #label>{{ i18n.ts._theme.code }}</template>
 			<template #caption><button class="_textButton" @click="copyThemeCode()">{{ i18n.ts.copy }}</button></template>
 		</FormTextarea>
-		<FormButton v-if="!builtinThemes.some(t => t.id == selectedTheme.id)" class="_formBlock" danger @click="uninstall()"><i class="fas fa-trash-alt"></i> {{ i18n.ts.uninstall }}</FormButton>
+		<MkButton v-if="!builtinThemes.some(t => t.id == selectedTheme.id)" class="_formBlock" danger @click="uninstall()"><i class="fas fa-trash-alt"></i> {{ i18n.ts.uninstall }}</MkButton>
 	</template>
 </div>
 </template>
@@ -31,7 +31,7 @@ import JSON5 from 'json5';
 import FormTextarea from '@/components/form/textarea.vue';
 import FormSelect from '@/components/form/select.vue';
 import FormInput from '@/components/form/input.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import { Theme, getBuiltinThemesRef } from '@/scripts/theme';
 import copyToClipboard from '@/scripts/copy-to-clipboard';
 import * as os from '@/os';

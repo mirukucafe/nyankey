@@ -2,7 +2,7 @@
 <div class="_formRoot">
 	<FormSection>
 		<template #label>{{ i18n.ts.password }}</template>
-		<FormButton primary @click="change()">{{ i18n.ts.changePassword }}</FormButton>
+		<MkButton primary @click="change()">{{ i18n.ts.changePassword }}</MkButton>
 	</FormSection>
 
 	<FormSection>
@@ -34,7 +34,7 @@
 
 	<FormSection>
 		<FormSlot>
-			<FormButton danger @click="regenerateToken"><i class="fas fa-sync-alt"></i> {{ i18n.ts.regenerateLoginToken }}</FormButton>
+			<MkButton danger @click="regenerateToken"><i class="fas fa-sync-alt"></i> {{ i18n.ts.regenerateLoginToken }}</MkButton>
 			<template #caption>{{ i18n.ts.regenerateLoginTokenDescription }}</template>
 		</FormSlot>
 	</FormSection>
@@ -45,7 +45,7 @@
 import X2fa from './2fa.vue';
 import FormSection from '@/components/form/section.vue';
 import FormSlot from '@/components/form/slot.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';

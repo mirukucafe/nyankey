@@ -26,7 +26,7 @@
 	</FormSection>
 
 	<div class="_formBlock" style="display: flex; gap: var(--margin); flex-wrap: wrap;">
-		<FormButton primary inline @click="create"><i class="fas fa-check"></i> {{ i18n.ts.create }}</FormButton>
+		<MkButton primary inline @click="create"><i class="fas fa-check"></i> {{ i18n.ts.create }}</MkButton>
 	</div>
 </div>
 </template>
@@ -35,7 +35,7 @@
 import FormInput from '@/components/form/input.vue';
 import FormSection from '@/components/form/section.vue';
 import FormSwitch from '@/components/form/switch.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { definePageMetadata } from '@/scripts/page-metadata';

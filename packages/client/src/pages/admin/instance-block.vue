@@ -8,14 +8,14 @@
 				<template #caption>{{ i18n.ts.blockedInstancesDescription }}</template>
 			</FormTextarea>
 
-			<FormButton primary class="_formBlock" @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</FormButton>
+			<MkButton primary class="_formBlock" @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</MkButton>
 		</FormSuspense>
 	</MkSpacer>
 </MkStickyContainer>
 </template>
 
 <script lang="ts" setup>
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import FormTextarea from '@/components/form/textarea.vue';
 import FormSuspense from '@/components/form/suspense.vue';
 import * as os from '@/os';

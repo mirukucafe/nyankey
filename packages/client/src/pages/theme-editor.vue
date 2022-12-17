@@ -49,7 +49,7 @@
 					<FormTextarea v-model="themeCode" tall class="_formBlock">
 						<template #label>{{ i18n.ts._theme.code }}</template>
 					</FormTextarea>
-					<FormButton primary class="_formBlock" @click="applyThemeCode">{{ i18n.ts.apply }}</FormButton>
+					<MkButton primary class="_formBlock" @click="applyThemeCode">{{ i18n.ts.apply }}</MkButton>
 				</div>
 			</FormFolder>
 
@@ -74,7 +74,7 @@ import tinycolor from 'tinycolor2';
 import { v4 as uuid } from 'uuid';
 import JSON5 from 'json5';
 
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import FormTextarea from '@/components/form/textarea.vue';
 import FormFolder from '@/components/form/folder.vue';
 

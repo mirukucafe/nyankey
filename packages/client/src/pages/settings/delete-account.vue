@@ -2,14 +2,14 @@
 <div class="_formRoot">
 	<FormInfo warn class="_formBlock">{{ i18n.ts._accountDelete.mayTakeTime }}</FormInfo>
 	<FormInfo class="_formBlock">{{ i18n.ts._accountDelete.sendEmail }}</FormInfo>
-	<FormButton v-if="!$i.isDeleted" danger class="_formBlock" @click="deleteAccount">{{ i18n.ts._accountDelete.requestAccountDelete }}</FormButton>
-	<FormButton v-else disabled>{{ i18n.ts._accountDelete.inProgress }}</FormButton>
+	<MkButton v-if="!$i.isDeleted" danger class="_formBlock" @click="deleteAccount">{{ i18n.ts._accountDelete.requestAccountDelete }}</MkButton>
+	<MkButton v-else disabled>{{ i18n.ts._accountDelete.inProgress }}</MkButton>
 </div>
 </template>
 
 <script lang="ts" setup>
 import FormInfo from '@/components/ui/info.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { $i, signout } from '@/account';
 import { i18n } from '@/i18n';

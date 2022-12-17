@@ -16,15 +16,15 @@
 					<div class="name">{{ file.name }}</div>
 					<button v-tooltip="i18n.ts.remove" class="remove _button" @click="remove(file)"><i class="fas fa-times"></i></button>
 				</div>
-				<FormButton primary @click="selectFile"><i class="fas fa-plus"></i> {{ i18n.ts.attachFile }}</FormButton>
+				<MkButton primary @click="selectFile"><i class="fas fa-plus"></i> {{ i18n.ts.attachFile }}</MkButton>
 			</div>
 
 			<FormSwitch v-model="isSensitive">{{ i18n.ts.markAsSensitive }}</FormSwitch>
 
-			<FormButton v-if="postId" primary @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</FormButton>
-			<FormButton v-else primary @click="save"><i class="fas fa-save"></i> {{ i18n.ts.publish }}</FormButton>
+			<MkButton v-if="postId" primary @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</MkButton>
+			<MkButton v-else primary @click="save"><i class="fas fa-save"></i> {{ i18n.ts.publish }}</MkButton>
 
-			<FormButton v-if="postId" danger @click="del"><i class="fas fa-trash-alt"></i> {{ i18n.ts.delete }}</FormButton>
+			<MkButton v-if="postId" danger @click="del"><i class="fas fa-trash-alt"></i> {{ i18n.ts.delete }}</MkButton>
 		</FormSuspense>
 	</MkSpacer>
 </MkStickyContainer>
@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import { computed, inject, watch } from 'vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import FormInput from '@/components/form/input.vue';
 import FormTextarea from '@/components/form/textarea.vue';
 import FormSwitch from '@/components/form/switch.vue';

@@ -7,7 +7,7 @@
 	</FormTextarea>
 
 	<div class="_formBlock">
-		<FormButton :disabled="code == null" primary inline @click="install"><i class="fas fa-check"></i> {{ i18n.ts.install }}</FormButton>
+		<MkButton :disabled="code == null" primary inline @click="install"><i class="fas fa-check"></i> {{ i18n.ts.install }}</MkButton>
 	</div>
 </div>
 </template>
@@ -18,7 +18,7 @@ import { AiScript, parse } from '@syuilo/aiscript';
 import { serialize } from '@syuilo/aiscript/built/serializer';
 import { v4 as uuid } from 'uuid';
 import FormTextarea from '@/components/form/textarea.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import FormInfo from '@/components/ui/info.vue';
 import * as os from '@/os';
 import { ColdDeviceStorage } from '@/store';

@@ -13,14 +13,14 @@
 		</FormLink>
 	</FormSection>
 
-	<FormButton danger class="_formBlock" @click="reset()"><i class="fas fa-redo"></i> {{ i18n.ts.default }}</FormButton>
+	<MkButton danger class="_formBlock" @click="reset()"><i class="fas fa-redo"></i> {{ i18n.ts.default }}</MkButton>
 </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import FormRange from '@/components/form/range.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import FormLink from '@/components/form/link.vue';
 import FormSection from '@/components/form/section.vue';
 import * as os from '@/os';

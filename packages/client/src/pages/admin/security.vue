@@ -23,7 +23,7 @@
 							<template #label>Summaly Proxy URL</template>
 						</FormInput>
 
-						<FormButton primary class="_formBlock" @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</FormButton>
+						<MkButton primary class="_formBlock" @click="save"><i class="fas fa-save"></i> {{ i18n.ts.save }}</MkButton>
 					</div>
 				</FormFolder>
 			</div>
@@ -37,7 +37,7 @@ import XBotProtection from './bot-protection.vue';
 import FormFolder from '@/components/form/folder.vue';
 import FormSuspense from '@/components/form/suspense.vue';
 import FormInput from '@/components/form/input.vue';
-import FormButton from '@/components/ui/button.vue';
+import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { fetchInstance } from '@/instance';
 import { i18n } from '@/i18n';
