@@ -196,7 +196,6 @@ const component = computed(() => {
 		case 'word-mute': return defineAsyncComponent(() => import('./word-mute.vue'));
 		case 'instance-mute': return defineAsyncComponent(() => import('./instance-mute.vue'));
 		case 'security': return defineAsyncComponent(() => import('./security.vue'));
-		case '2fa': return defineAsyncComponent(() => import('./2fa.vue'));
 		case 'api': return defineAsyncComponent(() => import('./api.vue'));
 		case 'webhook': return defineAsyncComponent(() => import('./webhook.vue'));
 		case 'webhook/new': return defineAsyncComponent(() => import('./webhook.new.vue'));
