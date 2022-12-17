@@ -13,7 +13,7 @@
 			<div class="key-list">
 				<div v-for="key in $i.securityKeysList" class="key">
 					<h3>{{ key.name }}</h3>
-					<div class="last-used">{{ i18n.ts.lastUsed }}<MkTime :time="key.lastUsed"/></div>
+					<div class="last-used">{{ i18n.ts.lastUsed }} <MkTime :time="key.lastUsed"/></div>
 					<MkButton @click="unregisterKey(key)">{{ i18n.ts.unregister }}</MkButton>
 				</div>
 			</div>
