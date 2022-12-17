@@ -155,6 +155,13 @@ withDefaults(defineProps<{
 	0% { filter: hue-rotate(0deg) contrast(150%) saturate(150%); }
 	100% { filter: hue-rotate(360deg) contrast(150%) saturate(150%); }
 }
+
+@keyframes mfm-tada {
+	0%, 100% { transform: scale3d(1, 1, 1); }
+	10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
+	30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
+	40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
+}
 </style>
 
 <style lang="scss" scoped>
