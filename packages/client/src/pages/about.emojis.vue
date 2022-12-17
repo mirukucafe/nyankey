@@ -1,9 +1,9 @@
 <template>
 <div class="driuhtrh">
 	<div class="query">
-		<MkInput v-model="q" class="" :placeholder="i18n.ts.search">
+		<FormInput v-model="q" class="" :placeholder="i18n.ts.search">
 			<template #prefix><i class="fas fa-search"></i></template>
-		</MkInput>
+		</FormInput>
 	</div>
 
 	<MkFolder v-if="searchEmojis" class="emojis">
@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { watch } from 'vue';
 import XEmoji from './emojis.emoji.vue';
-import MkInput from '@/components/form/input.vue';
+import FormInput from '@/components/form/input.vue';
 import MkFolder from '@/components/ui/folder.vue';
 import { i18n } from '@/i18n';
 import { emojiCategories, instance } from '@/instance';

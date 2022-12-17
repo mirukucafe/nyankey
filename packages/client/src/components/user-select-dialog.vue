@@ -12,14 +12,14 @@
 	<div class="tbhwbxda">
 		<div class="form">
 			<FormSplit :min-width="170">
-				<MkInput v-model="username" :autofocus="true" @update:modelValue="search">
+				<FormInput v-model="username" :autofocus="true" @update:modelValue="search">
 					<template #label>{{ i18n.ts.username }}</template>
 					<template #prefix>@</template>
-				</MkInput>
-				<MkInput v-model="host" @update:modelValue="search">
+				</FormInput>
+				<FormInput v-model="host" @update:modelValue="search">
 					<template #label>{{ i18n.ts.host }}</template>
 					<template #prefix>@</template>
-				</MkInput>
+				</FormInput>
 			</FormSplit>
 		</div>
 		<div v-if="username != '' || host != ''" class="result" :class="{ hit: users.length > 0 }">
@@ -54,7 +54,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
 import * as foundkey from 'foundkey-js';
-import MkInput from '@/components/form/input.vue';
+import FormInput from '@/components/form/input.vue';
 import FormSplit from '@/components/form/split.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';
 import * as os from '@/os';

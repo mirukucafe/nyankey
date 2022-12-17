@@ -45,7 +45,6 @@
 import { computed, defineComponent, watch } from 'vue';
 import XUserList from '@/components/user-list.vue';
 import MkFolder from '@/components/ui/folder.vue';
-import MkInput from '@/components/form/input.vue';
 import MkButton from '@/components/ui/button.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkGalleryPostPreview from '@/components/gallery-post-preview.vue';

@@ -3,7 +3,7 @@
 	<div class="main">
 		<div class="body">
 			<div class="selects" style="display: flex;">
-				<MkSelect v-model="chartSrc" style="margin: 0; flex: 1;">
+				<FormSelect v-model="chartSrc" style="margin: 0; flex: 1;">
 					<optgroup :label="i18n.ts.federation">
 						<option value="federation">{{ i18n.ts._charts.federation }}</option>
 						<option value="ap-request">{{ i18n.ts._charts.apRequest }}</option>
@@ -23,11 +23,11 @@
 						<option value="drive-files">{{ i18n.ts._charts.filesIncDec }}</option>
 						<option value="drive">{{ i18n.ts._charts.storageUsageIncDec }}</option>
 					</optgroup>
-				</MkSelect>
-				<MkSelect v-model="chartSpan" style="margin: 0 0 0 10px;">
+				</FormSelect>
+				<FormSelect v-model="chartSpan" style="margin: 0 0 0 10px;">
 					<option value="hour">{{ i18n.ts.perHour }}</option>
 					<option value="day">{{ i18n.ts.perDay }}</option>
-				</MkSelect>
+				</FormSelect>
 			</div>
 			<div class="chart">
 				<MkChart :src="chartSrc" :span="chartSpan" :limit="chartLimit" :detailed="detailed"></MkChart>
@@ -67,7 +67,7 @@ import {
 	Filler,
 	DoughnutController,
 } from 'chart.js';
-import MkSelect from '@/components/form/select.vue';
+import FormSelect from '@/components/form/select.vue';
 import MkChart from '@/components/chart.vue';
 import { useChartTooltip } from '@/scripts/use-chart-tooltip';
 import * as os from '@/os';

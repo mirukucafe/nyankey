@@ -10,10 +10,10 @@
 	</template>
 	<div class="dpvffvvy _monolithic_">
 		<div class="_section">
-			<MkTextarea v-model="comment">
+			<FormTextarea v-model="comment">
 				<template #label>{{ i18n.ts.details }}</template>
 				<template #caption>{{ i18n.ts.fillAbuseReportDescription }}</template>
-			</MkTextarea>
+			</FormTextarea>
 		</div>
 		<div class="_section">
 			<MkButton primary full :disabled="comment.length === 0" @click="send">{{ i18n.ts.send }}</MkButton>
@@ -26,7 +26,7 @@
 import { ref } from 'vue';
 import * as foundkey from 'foundkey-js';
 import XWindow from '@/components/ui/window.vue';
-import MkTextarea from '@/components/form/textarea.vue';
+import FormTextarea from '@/components/form/textarea.vue';
 import MkButton from '@/components/ui/button.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';

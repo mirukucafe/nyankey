@@ -12,16 +12,16 @@
 	<template #header>{{ i18n.ts.notificationSetting }}</template>
 	<div class="_monolithic_">
 		<div v-if="showGlobalToggle" class="_section">
-			<MkSwitch v-model="useGlobalSetting">
+			<FormSwitch v-model="useGlobalSetting">
 				{{ i18n.ts.useGlobalSetting }}
 				<template #caption>{{ i18n.ts.useGlobalSettingDesc }}</template>
-			</MkSwitch>
+			</FormSwitch>
 		</div>
 		<div v-if="!useGlobalSetting" class="_section">
 			<MkInfo>{{ message }}</MkInfo>
 			<MkButton inline @click="disableAll">{{ i18n.ts.disableAll }}</MkButton>
 			<MkButton inline @click="enableAll">{{ i18n.ts.enableAll }}</MkButton>
-			<MkSwitch v-for="ntype in notificationTypes" :key="ntype" v-model="typesMap[ntype]">{{ i18n.t(`_notification._types.${ntype}`) }}</MkSwitch>
+			<FormSwitch v-for="ntype in notificationTypes" :key="ntype" v-model="typesMap[ntype]">{{ i18n.t(`_notification._types.${ntype}`) }}</FormSwitch>
 		</div>
 	</div>
 </XModalWindow>
@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import * as foundkey from 'foundkey-js';
-import MkSwitch from './form/switch.vue';
+import FormSwitch from './form/switch.vue';
 import MkInfo from './ui/info.vue';
 import MkButton from './ui/button.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';

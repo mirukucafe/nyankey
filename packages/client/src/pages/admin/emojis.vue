@@ -5,13 +5,13 @@
 		<MkSpacer :content-max="900">
 			<div class="ogwlenmc">
 				<div v-if="tab === 'local'" class="local">
-					<MkInput v-model="query" :debounce="true" type="search">
+					<FormInput v-model="query" :debounce="true" type="search">
 						<template #prefix><i class="fas fa-search"></i></template>
 						<template #label>{{ i18n.ts.search }}</template>
-					</MkInput>
-					<MkSwitch v-model="selectMode" style="margin: 8px 0;">
+					</FormInput>
+					<FormSwitch v-model="selectMode" style="margin: 8px 0;">
 						<template #label>{{ i18n.ts.selectMode }}</template>
-					</MkSwitch>
+					</FormSwitch>
 					<div v-if="selectMode" style="display: flex; gap: var(--margin); flex-wrap: wrap;">
 						<MkButton inline @click="selectAll">{{ i18n.ts.selectAll }}</MkButton>
 						<MkButton inline @click="setCategoryBulk">{{ i18n.ts.setCategory }}</MkButton>
@@ -39,13 +39,13 @@
 
 				<div v-else-if="tab === 'remote'" class="remote">
 					<FormSplit>
-						<MkInput v-model="queryRemote" :debounce="true" type="search">
+						<FormInput v-model="queryRemote" :debounce="true" type="search">
 							<template #prefix><i class="fas fa-search"></i></template>
 							<template #label>{{ i18n.ts.search }}</template>
-						</MkInput>
-						<MkInput v-model="host" :debounce="true">
+						</FormInput>
+						<FormInput v-model="host" :debounce="true">
 							<template #label>{{ i18n.ts.host }}</template>
-						</MkInput>
+						</FormInput>
 					</FormSplit>
 					<MkPagination :pagination="remotePagination">
 						<template #empty><span>{{ i18n.ts.noCustomEmojis }}</span></template>
@@ -71,9 +71,9 @@
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from 'vue';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
+import FormInput from '@/components/form/input.vue';
 import MkPagination from '@/components/ui/pagination.vue';
-import MkSwitch from '@/components/form/switch.vue';
+import FormSwitch from '@/components/form/switch.vue';
 import FormSplit from '@/components/form/split.vue';
 import { selectFile, selectFiles } from '@/scripts/select-file';
 import * as os from '@/os';

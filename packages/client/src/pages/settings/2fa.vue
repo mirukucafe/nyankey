@@ -18,7 +18,7 @@
 				</div>
 			</div>
 
-			<MkSwitch v-if="$i.securityKeysList.length > 0" v-model="usePasswordLessLogin" @update:modelValue="updatePasswordLessLogin">{{ i18n.ts.passwordLessLogin }}</MkSwitch>
+			<FormSwitch v-if="$i.securityKeysList.length > 0" v-model="usePasswordLessLogin" @update:modelValue="updatePasswordLessLogin">{{ i18n.ts.passwordLessLogin }}</FormSwitch>
 
 			<MkInfo v-if="registration && registration.error" warn>{{ i18n.ts.error }} {{ registration.error }}</MkInfo>
 			<MkButton v-if="!registration || registration.error" @click="addSecurityKey">{{ i18n.ts._2fa.registerKey }}</MkButton>
@@ -30,9 +30,9 @@
 				</li>
 				<li v-if="registration.stage >= 1">
 					<MkForm :disabled="registration.stage != 1 || registration.saving">
-						<MkInput v-model="keyName" :max="30">
+						<FormInput v-model="keyName" :max="30">
 							<template #label>{{ i18n.ts.securityKeyName }}</template>
-						</MkInput>
+						</FormInput>
 						<MkButton :disabled="keyName.length == 0" @click="registerKey">{{ i18n.ts.registerSecurityKey }}</MkButton>
 						<i v-if="registration.saving && registration.stage == 1" class="fas fa-spinner fa-pulse fa-fw"></i>
 					</MkForm>
@@ -55,7 +55,7 @@
 			<li>{{ i18n.ts._2fa.step2 }}<br><img :src="twoFactorData.qr"><p>{{ i18n.ts._2fa.step2Url }}<br>{{ twoFactorData.url }}</p></li>
 			<li>
 				{{ i18n.ts._2fa.step3 }}<br>
-				<MkInput v-model="token" type="text" pattern="^[0-9]{6}$" autocomplete="off" :spellcheck="false"><template #label>{{ i18n.ts.token }}</template></MkInput>
+				<FormInput v-model="token" type="text" pattern="^[0-9]{6}$" autocomplete="off" :spellcheck="false"><template #label>{{ i18n.ts.token }}</template></FormInput>
 				<MkButton primary @click="submit">{{ i18n.ts.done }}</MkButton>
 			</li>
 		</ol>
@@ -70,8 +70,8 @@ import { hostname } from '@/config';
 import { byteify, hexify, stringify } from '@/scripts/2fa';
 import MkButton from '@/components/ui/button.vue';
 import MkInfo from '@/components/ui/info.vue';
-import MkInput from '@/components/form/input.vue';
-import MkSwitch from '@/components/form/switch.vue';
+import FormInput from '@/components/form/input.vue';
+import FormSwitch from '@/components/form/switch.vue';
 import * as os from '@/os';
 import { $i } from '@/account';
 import { i18n } from '@/i18n';

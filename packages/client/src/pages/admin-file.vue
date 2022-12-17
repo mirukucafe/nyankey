@@ -32,7 +32,7 @@
 				<MkUserCardMini :user="file.user"/>
 			</MkA>
 			<div class="_formBlock">
-				<MkSwitch v-model="isSensitive" @update:modelValue="toggleIsSensitive">NSFW</MkSwitch>
+				<FormSwitch v-model="isSensitive" @update:modelValue="toggleIsSensitive">NSFW</FormSwitch>
 			</div>
 
 			<div class="_formBlock">
@@ -50,7 +50,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import MkButton from '@/components/ui/button.vue';
-import MkSwitch from '@/components/form/switch.vue';
+import FormSwitch from '@/components/form/switch.vue';
 import MkObjectView from '@/components/object-view.vue';
 import MkDriveFileThumbnail from '@/components/drive-file-thumbnail.vue';
 import MkKeyValue from '@/components/key-value.vue';

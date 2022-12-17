@@ -1,16 +1,16 @@
 <template>
 <div class="_card">
 	<div class="_content">
-		<MkInput v-model="text">
+		<FormInput v-model="text">
 			<template #label>Text</template>
-		</MkInput>
-		<MkSwitch v-model="flag">
+		</FormInput>
+		<FormSwitch v-model="flag">
 			<span>Switch is now {{ flag ? 'on' : 'off' }}</span>
-		</MkSwitch>
+		</FormSwitch>
 		<div style="margin: 32px 0;">
-			<MkRadio v-model="radio" value="misskey">Misskey</MkRadio>
-			<MkRadio v-model="radio" value="mastodon">Mastodon</MkRadio>
-			<MkRadio v-model="radio" value="pleroma">Pleroma</MkRadio>
+			<FormRadio v-model="radio" value="misskey">Misskey</FormRadio>
+			<FormRadio v-model="radio" value="mastodon">Mastodon</FormRadio>
+			<FormRadio v-model="radio" value="pleroma">Pleroma</FormRadio>
 		</div>
 		<MkButton inline>This is</MkButton>
 		<MkButton inline primary>the button</MkButton>
@@ -30,9 +30,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
-import MkSwitch from '@/components/form/switch.vue';
-import MkRadio from '@/components/form/radio.vue';
+import FormInput from '@/components/form/input.vue';
+import FormSwitch from '@/components/form/switch.vue';
+import FormRadio from '@/components/form/radio.vue';
 import * as os from '@/os';
 import * as config from '@/config';
 import { $i } from '@/account';

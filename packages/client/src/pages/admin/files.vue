@@ -6,23 +6,23 @@
 			<div class="xrmjdkdw">
 				<div>
 					<div class="inputs" style="display: flex; gap: var(--margin); flex-wrap: wrap;">
-						<MkSelect v-model="origin" style="margin: 0; flex: 1;">
+						<FormSelect v-model="origin" style="margin: 0; flex: 1;">
 							<template #label>{{ i18n.ts.instance }}</template>
 							<option value="combined">{{ i18n.ts.all }}</option>
 							<option value="local">{{ i18n.ts.local }}</option>
 							<option value="remote">{{ i18n.ts.remote }}</option>
-						</MkSelect>
-						<MkInput v-model="searchHost" :debounce="true" type="search" style="margin: 0; flex: 1;" :disabled="pagination.params.origin === 'local'">
+						</FormSelect>
+						<FormInput v-model="searchHost" :debounce="true" type="search" style="margin: 0; flex: 1;" :disabled="pagination.params.origin === 'local'">
 							<template #label>{{ i18n.ts.host }}</template>
-						</MkInput>
+						</FormInput>
 					</div>
 					<div class="inputs" style="display: flex; gap: var(--margin); flex-wrap: wrap; padding-top: 1.2em;">
-						<MkInput v-model="userId" :debounce="true" type="search" style="margin: 0; flex: 1;">
+						<FormInput v-model="userId" :debounce="true" type="search" style="margin: 0; flex: 1;">
 							<template #label>User ID</template>
-						</MkInput>
-						<MkInput v-model="type" :debounce="true" type="search" style="margin: 0; flex: 1;">
+						</FormInput>
+						<FormInput v-model="type" :debounce="true" type="search" style="margin: 0; flex: 1;">
 							<template #label>MIME type</template>
-						</MkInput>
+						</FormInput>
 					</div>
 					<MkFileListForAdmin :pagination="pagination" :view-mode="viewMode"/>
 				</div>
@@ -34,8 +34,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import MkInput from '@/components/form/input.vue';
-import MkSelect from '@/components/form/select.vue';
+import FormInput from '@/components/form/input.vue';
+import FormSelect from '@/components/form/select.vue';
 import MkFileListForAdmin from '@/components/file-list-for-admin.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';

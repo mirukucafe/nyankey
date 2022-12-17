@@ -26,11 +26,11 @@
 
 				<MkSwitch v-model="alignCenter" :disabled="readonly" class="_formBlock">{{ i18n.ts._pages.alignCenter }}</MkSwitch>
 
-				<MkSelect v-model="font" :readonly="readonly" class="_formBlock">
+				<FormSelect v-model="font" :readonly="readonly" class="_formBlock">
 					<template #label>{{ i18n.ts._pages.font }}</template>
 					<option value="serif">{{ i18n.ts._pages.fontSerif }}</option>
 					<option value="sans-serif">{{ i18n.ts._pages.fontSansSerif }}</option>
-				</MkSelect>
+				</FormSelect>
 
 				<MkSwitch v-model="hideTitleWhenPinned" :disabled="readonly" class="_formBlock">{{ i18n.ts._pages.hideTitleWhenPinned }}</MkSwitch>
 
@@ -54,7 +54,7 @@
 <script lang="ts" setup>
 import { computed, watch } from 'vue';
 import MkButton from '@/components/ui/button.vue';
-import MkSelect from '@/components/form/select.vue';
+import FormSelect from '@/components/form/select.vue';
 import MkSwitch from '@/components/form/switch.vue';
 import MkInput from '@/components/form/input.vue';
 import MkTextarea from '@/components/form/textarea.vue';

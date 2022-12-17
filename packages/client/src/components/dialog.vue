@@ -14,10 +14,10 @@
 		</div>
 		<header v-if="title"><Mfm :text="title"/></header>
 		<div v-if="text" class="body"><Mfm :text="text"/></div>
-		<MkInput v-if="input" v-model="inputValue" autofocus :type="input.type || 'text'" :placeholder="input.placeholder || undefined" @keydown="onInputKeydown">
+		<FormInput v-if="input" v-model="inputValue" autofocus :type="input.type || 'text'" :placeholder="input.placeholder || undefined" @keydown="onInputKeydown">
 			<template v-if="input.type === 'password'" #prefix><i class="fas fa-lock"></i></template>
-		</MkInput>
-		<MkSelect v-if="select" v-model="selectedValue" autofocus>
+		</FormInput>
+		<FormSelect v-if="select" v-model="selectedValue" autofocus>
 			<template v-if="select.items">
 				<option v-for="item in select.items" :value="item.value">{{ item.text }}</option>
 			</template>
@@ -26,7 +26,7 @@
 					<option v-for="item in groupedItem.items" :value="item.value">{{ item.text }}</option>
 				</optgroup>
 			</template>
-		</MkSelect>
+		</FormSelect>
 		<div v-if="(showOkButton || showCancelButton) && !actions" class="buttons">
 			<MkButton v-if="showOkButton" inline primary :autofocus="!input && !select" @click="ok">{{ (showCancelButton || input || select) ? i18n.ts.ok : i18n.ts.gotIt }}</MkButton>
 			<MkButton v-if="showCancelButton || input || select" inline @click="cancel">{{ i18n.ts.cancel }}</MkButton>
@@ -42,8 +42,8 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import MkModal from '@/components/ui/modal.vue';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
-import MkSelect from '@/components/form/select.vue';
+import FormInput from '@/components/form/input.vue';
+import FormSelect from '@/components/form/select.vue';
 import { i18n } from '@/i18n';
 
 type Input = {

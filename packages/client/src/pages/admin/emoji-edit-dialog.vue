@@ -12,16 +12,16 @@
 	<div class="_monolithic_">
 		<div class="yigymqpb _section">
 			<img :src="emoji.url" class="img"/>
-			<MkInput v-model="name" class="_formBlock">
+			<FormInput v-model="name" class="_formBlock">
 				<template #label>{{ i18n.ts.name }}</template>
-			</MkInput>
-			<MkInput v-model="category" class="_formBlock" :datalist="categories">
+			</FormInput>
+			<FormInput v-model="category" class="_formBlock" :datalist="categories">
 				<template #label>{{ i18n.ts.category }}</template>
-			</MkInput>
-			<MkInput v-model="aliases" class="_formBlock">
+			</FormInput>
+			<FormInput v-model="aliases" class="_formBlock">
 				<template #label>{{ i18n.ts.tags }}</template>
 				<template #caption>{{ i18n.ts.setMultipleBySeparatingWithSpace }}</template>
-			</MkInput>
+			</FormInput>
 			<MkButton danger @click="del()"><i class="fas fa-trash-alt"></i> {{ i18n.ts.delete }}</MkButton>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import XModalWindow from '@/components/ui/modal-window.vue';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
+import FormInput from '@/components/form/input.vue';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { emojiCategories } from '@/instance';

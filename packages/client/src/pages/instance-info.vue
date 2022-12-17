@@ -96,7 +96,7 @@
 		<div v-else-if="tab === 'chart'" class="_formRoot">
 			<div class="cmhjzshl">
 				<div class="selects">
-					<MkSelect v-model="chartSrc" style="margin: 0 10px 0 0; flex: 1;">
+					<FormSelect v-model="chartSrc" style="margin: 0 10px 0 0; flex: 1;">
 						<option value="instance-requests">{{ i18n.ts._instanceCharts.requests }}</option>
 						<option value="instance-users">{{ i18n.ts._instanceCharts.users }}</option>
 						<option value="instance-users-total">{{ i18n.ts._instanceCharts.usersTotal }}</option>
@@ -108,7 +108,7 @@
 						<option value="instance-drive-usage-total">{{ i18n.ts._instanceCharts.cacheSizeTotal }}</option>
 						<option value="instance-drive-files">{{ i18n.ts._instanceCharts.files }}</option>
 						<option value="instance-drive-files-total">{{ i18n.ts._instanceCharts.filesTotal }}</option>
-					</MkSelect>
+					</FormSelect>
 				</div>
 				<div class="charts">
 					<div class="label">{{ i18n.t('recentNHours', { n: 90 }) }}</div>
@@ -142,7 +142,7 @@ import MkLink from '@/components/link.vue';
 import MkButton from '@/components/ui/button.vue';
 import FormSection from '@/components/form/section.vue';
 import MkKeyValue from '@/components/key-value.vue';
-import MkSelect from '@/components/form/select.vue';
+import FormSelect from '@/components/form/select.vue';
 import FormSwitch from '@/components/form/switch.vue';
 import * as os from '@/os';
 import number from '@/filters/number';

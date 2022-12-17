@@ -15,23 +15,23 @@
 		<MkInfo warn>{{ information }}</MkInfo>
 	</div>
 	<div class="_section">
-		<MkInput v-model="name">
+		<FormInput v-model="name">
 			<template #label>{{ i18n.ts.name }}</template>
-		</MkInput>
+		</FormInput>
 	</div>
 	<div class="_section">
 		<div style="margin-bottom: 16px;"><b>{{ i18n.ts.permission }}</b></div>
 		<MkButton inline @click="disableAll">{{ i18n.ts.disableAll }}</MkButton>
 		<MkButton inline @click="enableAll">{{ i18n.ts.enableAll }}</MkButton>
-		<MkSwitch v-for="kind in (initialPermissions || kinds)" :key="kind" v-model="permissions[kind]">{{ i18n.t(`_permissions.${kind}`) }}</MkSwitch>
+		<FormSwitch v-for="kind in (initialPermissions || kinds)" :key="kind" v-model="permissions[kind]">{{ i18n.t(`_permissions.${kind}`) }}</FormSwitch>
 	</div>
 </XModalWindow>
 </template>
 
 <script lang="ts" setup>
 import { permissions } from 'foundkey-js';
-import MkInput from './form/input.vue';
-import MkSwitch from './form/switch.vue';
+import FormInput from './form/input.vue';
+import FormSwitch from './form/switch.vue';
 import MkButton from './ui/button.vue';
 import MkInfo from './ui/info.vue';
 import XModalWindow from '@/components/ui/modal-window.vue';

@@ -1,12 +1,12 @@
 <template>
 <div class="taeiyria">
 	<div class="query">
-		<MkInput v-model="host" :debounce="true" class="">
+		<FormInput v-model="host" :debounce="true" class="">
 			<template #prefix><i class="fas fa-search"></i></template>
 			<template #label>{{ i18n.ts.host }}</template>
-		</MkInput>
+		</FormInput>
 		<FormSplit style="margin-top: var(--margin);">
-			<MkSelect v-model="state">
+			<FormSelect v-model="state">
 				<template #label>{{ i18n.ts.state }}</template>
 				<option value="all">{{ i18n.ts.all }}</option>
 				<option value="federating">{{ i18n.ts.federating }}</option>
@@ -15,8 +15,8 @@
 				<option value="suspended">{{ i18n.ts.suspended }}</option>
 				<option value="blocked">{{ i18n.ts.blocked }}</option>
 				<option value="notResponding">{{ i18n.ts.notResponding }}</option>
-			</MkSelect>
-			<MkSelect v-model="sort">
+			</FormSelect>
+			<FormSelect v-model="sort">
 				<template #label>{{ i18n.ts.sort }}</template>
 				<option value="+pubSub">{{ i18n.ts.pubSub }} ({{ i18n.ts.descendingOrder }})</option>
 				<option value="-pubSub">{{ i18n.ts.pubSub }} ({{ i18n.ts.ascendingOrder }})</option>
@@ -32,7 +32,7 @@
 				<option value="-caughtAt">{{ i18n.ts.registeredAt }} ({{ i18n.ts.ascendingOrder }})</option>
 				<option value="+lastCommunicatedAt">{{ i18n.ts.lastCommunication }} ({{ i18n.ts.descendingOrder }})</option>
 				<option value="-lastCommunicatedAt">{{ i18n.ts.lastCommunication }} ({{ i18n.ts.ascendingOrder }})</option>
-			</MkSelect>
+			</FormSelect>
 		</FormSplit>
 	</div>
 
@@ -48,8 +48,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import MkInput from '@/components/form/input.vue';
-import MkSelect from '@/components/form/select.vue';
+import FormInput from '@/components/form/input.vue';
+import FormSelect from '@/components/form/select.vue';
 import MkPagination from '@/components/ui/pagination.vue';
 import MkInstanceCardMini from '@/components/instance-card-mini.vue';
 import FormSplit from '@/components/form/split.vue';

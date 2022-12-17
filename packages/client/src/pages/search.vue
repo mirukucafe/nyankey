@@ -4,20 +4,20 @@
 	<MkSpacer :content-max="800">
 		<MkFolder>
 			<template #header>{{ i18n.ts.search }}</template>
-			<MkInput v-model="query" :autofocus="true" class="input" tabindex="1" @keydown="keydown">
+			<FormInput v-model="query" :autofocus="true" class="input" tabindex="1" @keydown="keydown">
 				<template #prefix><i class="fas fa-magnifying-glass"></i></template>
 				<template v-if="tab === 'users'" #label>{{ i18n.ts.username }}</template>
 				<template v-if="tab === 'all'" #caption>Try entering a URL or user handle!</template>
-			</MkInput>
+			</FormInput>
 			<template v-if="tab === 'notes'">
-				<MkSelect v-model="author" class="input">
+				<FormSelect v-model="author" class="input">
 					<template #label>{{ i18n.ts.author }}</template>
 					<option value="all">{{ i18n.ts.all }}</option>
 					<option value="self">{{ i18n.ts.you }}</option>
 					<option value="user">{{ i18n.ts.user }}</option>
 					<option value="local">{{ i18n.ts.local }}</option>
 					<option value="host">{{ i18n.ts.instance }}</option>
-				</MkSelect>
+				</FormSelect>
 				<MkButton v-if="author === 'user'" @click="selectUser" full class="input">
 					<template v-if="user == null">{{ i18n.ts.selectUser }}</template>
 					<template v-else>
@@ -25,18 +25,18 @@
 						<MkAcct :user="user"/>
 					</template>
 				</MkButton>
-				<MkInput v-if="author === 'host'" v-model="host" class="input">
+				<FormInput v-if="author === 'host'" v-model="host" class="input">
 					<template #prefix>@</template>
 					<template #label>{{ i18n.ts.host }}</template>
-				</MkInput>
+				</FormInput>
 			</template>
 			<template v-if="tab === 'users'">
-				<MkSelect v-model="origin" class="input">
+				<FormSelect v-model="origin" class="input">
 					<template #label>{{ i18n.ts.instance }}</template>
 					<option value="combined">{{ i18n.ts.all }}</option>
 					<option value="local">{{ i18n.ts.local }}</option>
 					<option value="remote">{{ i18n.ts.remote }}</option>
-				</MkSelect>
+				</FormSelect>
 			</template>
 			<MkButton @click="search()" primary :disabled="!canSearch" class="input">
 				<i class="fas fa-magnifying-glass"></i> {{ i18n.ts.search }}
@@ -59,8 +59,8 @@ import { computed, nextTick, watch } from 'vue';
 import XNotes from '@/components/notes.vue';
 import XUserList from '@/components/user-list.vue';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
-import MkSelect from '@/components/form/select.vue';
+import FormInput from '@/components/form/input.vue';
+import FormSelect from '@/components/form/select.vue';
 import MkFolder from '@/components/ui/folder.vue';
 import { $i } from '@/account';
 import { i18n } from '@/i18n';

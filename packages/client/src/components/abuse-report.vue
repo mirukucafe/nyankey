@@ -32,10 +32,10 @@
 		</div>
 		<div><MkTime :time="report.createdAt"/></div>
 		<div class="action">
-			<MkSwitch v-model="forward" :disabled="report.targetUser.host == null || report.resolved">
+			<FormSwitch v-model="forward" :disabled="report.targetUser.host == null || report.resolved">
 				{{ i18n.ts.forwardReport }}
 				<template #caption>{{ i18n.ts.forwardReportIsAnonymous }}</template>
-			</MkSwitch>
+			</FormSwitch>
 			<MkButton v-if="!report.resolved" class="_formBlock" style="margin-bottom: 0;" primary @click="resolve">{{ i18n.ts.abuseMarkAsResolved }}</MkButton>
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 
 <script lang="ts" setup>
 import MkButton from '@/components/ui/button.vue';
-import MkSwitch from '@/components/form/switch.vue';
+import FormSwitch from '@/components/form/switch.vue';
 import MkKeyValue from '@/components/key-value.vue';
 import MkUrl from '@/components/global/url.vue';
 import * as os from '@/os';

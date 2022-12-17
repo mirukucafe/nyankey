@@ -6,13 +6,13 @@
 			{{ message }}
 		</MkInfo>
 		<div v-if="!totpLogin" class="normal-signin">
-			<MkInput v-model="username" class="_formBlock" :placeholder="i18n.ts.username" type="text" pattern="^[a-zA-Z0-9_]+$" :spellcheck="false" autofocus required data-cy-signin-username @update:modelValue="onUsernameChange">
+			<FormInput v-model="username" class="_formBlock" :placeholder="i18n.ts.username" type="text" pattern="^[a-zA-Z0-9_]+$" :spellcheck="false" autofocus required data-cy-signin-username @update:modelValue="onUsernameChange">
 				<template #prefix>@</template>
-			</MkInput>
-			<MkInput v-if="!user || user && !user.usePasswordLessLogin" v-model="password" class="_formBlock" :placeholder="i18n.ts.password" type="password" :with-password-toggle="true" required data-cy-signin-password>
+			</FormInput>
+			<FormInput v-if="!user || user && !user.usePasswordLessLogin" v-model="password" class="_formBlock" :placeholder="i18n.ts.password" type="password" :with-password-toggle="true" required data-cy-signin-password>
 				<template #prefix><i class="fas fa-lock"></i></template>
 				<template #caption><button class="_textButton" type="button" @click="resetPassword">{{ i18n.ts.forgotPassword }}</button></template>
-			</MkInput>
+			</FormInput>
 			<MkButton class="_formBlock" type="submit" primary :disabled="signing" style="margin: 0 auto;">{{ signing ? i18n.ts.loggingIn : i18n.ts.login }}</MkButton>
 		</div>
 		<div v-if="totpLogin" class="2fa-signin" :class="{ securityKeys: user && user.securityKeys }">
@@ -27,14 +27,14 @@
 			</div>
 			<div class="twofa-group totp-group">
 				<p style="margin-bottom:0;">{{ i18n.ts.twoStepAuthentication }}</p>
-				<MkInput v-if="user && user.usePasswordLessLogin" v-model="password" type="password" :with-password-toggle="true" required>
+				<FormInput v-if="user && user.usePasswordLessLogin" v-model="password" type="password" :with-password-toggle="true" required>
 					<template #label>{{ i18n.ts.password }}</template>
 					<template #prefix><i class="fas fa-lock"></i></template>
-				</MkInput>
-				<MkInput v-model="token" type="text" pattern="^[0-9]{6}$" autocomplete="off" :spellcheck="false" required>
+				</FormInput>
+				<FormInput v-model="token" type="text" pattern="^[0-9]{6}$" autocomplete="off" :spellcheck="false" required>
 					<template #label>{{ i18n.ts.token }}</template>
 					<template #prefix><i class="fas fa-gavel"></i></template>
-				</MkInput>
+				</FormInput>
 				<MkButton type="submit" :disabled="signing" primary style="margin: 0 auto;">{{ signing ? i18n.ts.loggingIn : i18n.ts.login }}</MkButton>
 			</div>
 		</div>
@@ -47,7 +47,7 @@ import { defineAsyncComponent } from 'vue';
 import { toUnicode } from 'punycode/';
 import { showSuspendedDialog } from '@/scripts/show-suspended-dialog';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
+import FormInput from '@/components/form/input.vue';
 import MkInfo from '@/components/ui/info.vue';
 import { apiUrl } from '@/config';
 import { byteify, hexify } from '@/scripts/2fa';

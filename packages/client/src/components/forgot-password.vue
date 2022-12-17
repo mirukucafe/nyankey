@@ -10,15 +10,15 @@
 
 	<form v-if="instance.enableEmail" class="bafeceda" @submit.prevent="onSubmit">
 		<div class="main _formRoot">
-			<MkInput v-model="username" class="_formBlock" type="text" pattern="^[a-zA-Z0-9_]+$" :spellcheck="false" autofocus required>
+			<FormInput v-model="username" class="_formBlock" type="text" pattern="^[a-zA-Z0-9_]+$" :spellcheck="false" autofocus required>
 				<template #label>{{ i18n.ts.username }}</template>
 				<template #prefix>@</template>
-			</MkInput>
+			</FormInput>
 
-			<MkInput v-model="email" class="_formBlock" type="email" :spellcheck="false" required>
+			<FormInput v-model="email" class="_formBlock" type="email" :spellcheck="false" required>
 				<template #label>{{ i18n.ts.emailAddress }}</template>
 				<template #caption>{{ i18n.ts._forgotPassword.enterEmail }}</template>
-			</MkInput>
+			</FormInput>
 
 			<MkButton class="_formBlock" type="submit" :disabled="processing" primary style="margin: 0 auto;">{{ i18n.ts.send }}</MkButton>
 		</div>
@@ -35,7 +35,7 @@
 <script lang="ts" setup>
 import XModalWindow from '@/components/ui/modal-window.vue';
 import MkButton from '@/components/ui/button.vue';
-import MkInput from '@/components/form/input.vue';
+import FormInput from '@/components/form/input.vue';
 import * as os from '@/os';
 import { instance } from '@/instance';
 import { i18n } from '@/i18n';

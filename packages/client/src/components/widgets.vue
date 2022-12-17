@@ -2,10 +2,10 @@
 <div class="vjoppmmu">
 	<template v-if="edit">
 		<header>
-			<MkSelect v-model="widgetAdderSelected" style="margin-bottom: var(--margin)" class="mk-widget-select">
+			<FormSelect v-model="widgetAdderSelected" style="margin-bottom: var(--margin)" class="mk-widget-select">
 				<template #label>{{ i18n.ts.selectWidget }}</template>
 				<option v-for="widget in widgetDefs" :key="widget" :value="widget">{{ i18n.t(`_widgets.${widget}`) }}</option>
-			</MkSelect>
+			</FormSelect>
 			<MkButton inline primary class="mk-widget-add" @click="addWidget"><i class="fas fa-plus"></i> {{ i18n.ts.add }}</MkButton>
 			<MkButton inline @click="emit('exit')">{{ i18n.ts.close }}</MkButton>
 		</header>
@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, reactive, ref, computed } from 'vue';
 import { v4 as uuid } from 'uuid';
-import MkSelect from '@/components/form/select.vue';
+import FormSelect from '@/components/form/select.vue';
 import MkButton from '@/components/ui/button.vue';
 import { widgets as widgetDefs } from '@/widgets';
 import { i18n } from '@/i18n';
