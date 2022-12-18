@@ -11,19 +11,25 @@
 			<div v-for="token in items" :key="token.id" class="_panel bfomjevm">
 				<img v-if="token.iconUrl" class="icon" :src="token.iconUrl" alt=""/>
 				<div class="body">
-					<div class="name">{{ token.name }}</div>
-					<div class="description">{{ token.description }}</div>
-					<div class="_keyValue">
-						<div>{{ i18n.ts.installedDate }}:</div>
-						<div><MkTime :time="token.createdAt"/></div>
-					</div>
-					<div class="_keyValue">
-						<div>{{ i18n.ts.lastUsedDate }}:</div>
-						<div><MkTime :time="token.lastUsedAt"/></div>
-					</div>
-					<div class="actions">
-						<button class="_button" @click="revoke(token)"><i class="fas fa-trash-alt"></i></button>
-					</div>
+					<button class="_button" @click="revoke(token)"><i class="fas fa-trash-alt"></i></button>
+					<table>
+						<tr>
+							<th>{{ i18n.ts.name }}:</th>
+							<td>{{ token.name }}</td>
+						</tr>
+						<tr>
+							<th>{{ i18n.ts.description }}:</th>
+							<td>{{ token.description }}</td>
+						</tr>
+						<tr>
+							<th>{{ i18n.ts.installedDate }}:</th>
+							<td><MkTime :time="token.createdAt"/></td>
+						</tr>
+						<tr>
+							<th>{{ i18n.ts.lastUsedDate }}:</th>
+							<td><MkTime :time="token.lastUsedAt"/></td>
+						</tr>
+					</table>
 					<details>
 						<summary>{{ i18n.ts.details }}</summary>
 						<ul>
@@ -82,11 +88,19 @@ definePageMetadata({
 	}
 
 	> .body {
-		width: calc(100% - 62px);
+		width: 100%;
 		position: relative;
 
-		> .name {
-			font-weight: bold;
+		button {
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+		th {
+			text-align: right;
+		}
+		td {
+			text-align: left;
 		}
 	}
 }
