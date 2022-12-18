@@ -23,7 +23,7 @@
 		<div style="margin-bottom: 16px;"><b>{{ i18n.ts.permission }}</b></div>
 		<MkButton inline @click="disableAll">{{ i18n.ts.disableAll }}</MkButton>
 		<MkButton inline @click="enableAll">{{ i18n.ts.enableAll }}</MkButton>
-		<FormSwitch v-for="kind in (initialPermissions || kinds)" :key="kind" v-model="permissions[kind]">{{ i18n.t(`_permissions.${kind}`) }}</FormSwitch>
+		<FormSwitch v-for="kind in kinds" :key="kind" v-model="permissions[kind]">{{ i18n.t(`_permissions.${kind}`) }}</FormSwitch>
 	</div>
 </XModalWindow>
 </template>
@@ -57,16 +57,15 @@ const emit = defineEmits<{
 let dialog: InstanceType<typeof XModalWindow> | null = $ref(null);
 let name = $ref(props.initialName);
 let perms: Record<string, boolean> = $ref({});
-const kinds = $ref(permissions);
+let kinds = props.initialPermissions.length > 0
+	? props.initialPermissions
+	: permissions;
 
-if (props.initialPermissions.length > 0) {
-	for (const kind of props.initialPermissions) {
-		perms[kind] = true;
-	}
-} else {
-	for (const kind of kinds) {
-		perms[kind] = false;
-	}
+// If there is a particular set of permissions given, enable all of them.
+// Otherwise, by default disable all permissions.
+const enable = props.initialPermissions.length > 0;
+for (const kind of kinds) {
+	perms[kind] = enable;
 }
 
 function ok(): void {
