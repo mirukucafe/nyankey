@@ -1,3 +1,5 @@
+import Koa from 'koa';
+
 export class ApiError extends Error {
 	public message: string;
 	public code: string;
@@ -19,6 +21,24 @@ export class ApiError extends Error {
 		this.info = info;
 		this.message = message;
 		this.httpStatusCode = httpStatusCode;
+	}
+
+	/**
+	 * Makes the response of ctx the current error, given the respective endpoint name.
+	 */
+	public apply(ctx: Koa.Context, endpoint: string): void {
+		ctx.status = this.httpStatusCode;
+		if (ctx.status === 401) {
+			ctx.response.set('WWW-Authenticate', 'Bearer');
+		}
+		ctx.body = {
+			error: {
+				message: this.message,
+				code: this.code,
+				info: this.info ?? undefined,
+				endpoint,
+			},
+		};
 	}
 }
 

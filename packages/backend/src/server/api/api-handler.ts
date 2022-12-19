@@ -12,21 +12,6 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 			? ctx.query
 			: ctx.request.body;
 
-	const error = (e: ApiError): void => {
-		ctx.status = e.httpStatusCode;
-		if (e.httpStatusCode === 401) {
-			ctx.response.set('WWW-Authenticate', 'Bearer');
-		}
-		ctx.body = {
-			error: {
-				message: e!.message,
-				code: e!.code,
-				...(e!.info ? { info: e!.info } : {}),
-				endpoint: endpoint.name,
-			},
-		};
-	};
-
 	// Authentication
 	// for GET requests, do not even pass on the body parameter as it is considered unsafe
 	await authenticate(ctx.headers.authorization, ctx.method === 'GET' ? null : body['i']).then(async ([user, app]) => {
@@ -43,13 +28,13 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 				ctx.body = typeof res === 'string' ? JSON.stringify(res) : res;
 			}
 		}).catch((e: ApiError) => {
-			error(e);
+			e.apply(ctx, endpoint.name);
 		});
 	}).catch(e => {
 		if (e instanceof AuthenticationError) {
-			error(new ApiError('AUTHENTICATION_FAILED', e.message));
+			new ApiError('AUTHENTICATION_FAILED', e.message).apply(ctx, endpoint.name);
 		} else {
-			error(new ApiError());
+			new ApiError().apply(ctx, endpoint.name);
 		}
 	});
 }
