@@ -16,6 +16,7 @@ import signup from './private/signup.js';
 import signin from './private/signin.js';
 import signupPending from './private/signup-pending.js';
 import { oauth } from './common/oauth.js';
+import { ApiError } from './error.js';
 
 // Init app
 const app = new Koa();
@@ -40,6 +41,27 @@ const upload = multer({
 		files: 1,
 	},
 });
+/**
+ * Wrap multer to return an appropriate API error when something goes wrong, e.g. the file is too big.
+ */
+type KoaMiddleware = (ctx: Koa.Context, next: () => Promise<void>) => Promise<void>;
+const wrapped = upload.single('file');
+function uploadWrapper(endpoint: string): KoaMiddleware {
+	return (ctx: Koa.Context, next: () => Promise<void>): Promise<void> => {
+		// pass a fake "next" so we can separate multer errors from other API errors
+		return wrapped(ctx, () => {})
+			.then(
+				() => next(),
+				(err) => {
+					let apiErr = new ApiError('INTERNAL_ERROR', err);
+					if (err?.code === 'LIMIT_FILE_SIZE') {
+						apiErr = new ApiError('FILE_TOO_BIG', { maxFileSize: config.maxFileSize || 262144000 });
+					}
+					apiErr.apply(ctx, endpoint);
+				}
+			);
+	};
+}
 
 // Init router
 const router = new Router();
@@ -49,7 +71,7 @@ const router = new Router();
  */
 for (const endpoint of endpoints) {
 	if (endpoint.meta.requireFile) {
-		router.post(`/${endpoint.name}`, upload.single('file'), handler.bind(null, endpoint));
+		router.post(`/${endpoint.name}`, uploadWrapper(endpoint.name), handler.bind(null, endpoint));
 	} else {
 		// 後方互換性のため
 		if (endpoint.name.includes('-')) {
