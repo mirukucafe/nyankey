@@ -1097,6 +1097,7 @@ _permissions:
   "write:notes": "Create and delete notes"
   "read:notifications": "Read notifications"
   "write:notifications": "Mark notifications as read and create custom notifications"
+  "read:reactions": "View your reactions"
   "write:reactions": "Create and delete reactions"
   "write:votes": "Vote in polls"
   "read:pages": "List and read pages"
