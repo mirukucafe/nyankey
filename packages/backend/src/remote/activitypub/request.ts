@@ -1,3 +1,4 @@
+import { URL } from 'node:url';
 import config from '@/config/index.js';
 import { getUserKeypair } from '@/misc/keypair-store.js';
 import { User } from '@/models/entities/user.js';
@@ -37,22 +38,32 @@ export async function request(user: { id: User['id'] }, url: string, object: any
 export async function signedGet(url: string, user: { id: User['id'] }): Promise<any> {
 	const keypair = await getUserKeypair(user.id);
 
-	const req = createSignedGet({
-		key: {
-			privateKeyPem: keypair.privateKey,
-			keyId: `${config.url}/users/${user.id}#main-key`,
-		},
-		url,
-		additionalHeaders: {
-			'User-Agent': config.userAgent,
-		},
-	});
+	for (let redirects = 0; redirects < 3; redirects++) {
+		const req = createSignedGet({
+			key: {
+				privateKeyPem: keypair.privateKey,
+				keyId: `${config.url}/users/${user.id}#main-key`,
+			},
+			url,
+			additionalHeaders: {
+				'User-Agent': config.userAgent,
+			},
+		});
 
-	const res = await getResponse({
-		url,
-		method: req.request.method,
-		headers: req.request.headers,
-	});
+		const res = await getResponse({
+			url,
+			method: req.request.method,
+			headers: req.request.headers,
+		});
 
-	return await res.json();
+		if (res.status >= 300 && res.status < 400) {
+			// Have been redirected, need to make a new signature.
+			// Use Location header and fetched URL as the base URL.
+			url = new URL(res.headers.get('Location'), url).href;
+		} else {
+			return await res.json();
+		}
+	}
+
+	throw new Error('too many redirects');
 }
