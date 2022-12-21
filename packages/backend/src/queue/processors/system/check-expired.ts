@@ -2,7 +2,7 @@ import Bull from 'bull';
 import { In, LessThan } from 'typeorm';
 import { AttestationChallenges, AuthSessions, Mutings, PasswordResetRequests, Signins } from '@/models/index.js';
 import { publishUserEvent } from '@/services/stream.js';
-import { MINUTE, DAY } from '@/const.js';
+import { MINUTE, DAY, MONTH } from '@/const.js';
 import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('check-expired');
@@ -26,22 +26,25 @@ export async function checkExpired(job: Bull.Job<Record<string, unknown>>, done:
 		}
 	}
 
+	const OlderThan = (millis: number) => {
+		return LessThan(new Date(new Date().getTime() - millis));
+	};
+
 	await Signins.delete({
-		// 60 days, or roughly equal to two months
-		createdAt: LessThan(new Date(new Date().getTime() - 60 * DAY)),
+		createdAt: OlderThan(2 * MONTH),
 	});
 
 	await AttestationChallenges.delete({
-		createdAt: LessThan(new Date(new Date().getTime() - 5 * MINUTE)),
+		createdAt: OlderThan(5 * MINUTE),
 	});
 
 	await PasswordResetRequests.delete({
 		// this timing should be the same as in @/server/api/endpoints/reset-password.ts
-		createdAt: LessThan(new Date(new Date().getTime() - 30 * MINUTE)),
+		createdAt: OlderThan(30 * MINUTE),
 	});
 
 	await AuthSessions.delete({
-		createdAt: LessThan(new Date(new Date().getTime() - 15 * MINUTE)),
+		createdAt: OlderThan(15 * MINUTE),
 	});
 
 	logger.succ('Deleted expired data.');
