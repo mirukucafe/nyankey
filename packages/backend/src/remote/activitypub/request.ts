@@ -27,6 +27,8 @@ export async function request(user: { id: User['id'] }, url: string, object: any
 		method: req.request.method,
 		headers: req.request.headers,
 		body,
+		// don't allow redirects on the inbox
+		redirect: 'error',
 	});
 };
 
@@ -54,6 +56,7 @@ export async function signedGet(url: string, user: { id: User['id'] }): Promise<
 			url,
 			method: req.request.method,
 			headers: req.request.headers,
+			redirect: 'manual',
 		});
 
 		if (res.status >= 300 && res.status < 400) {
