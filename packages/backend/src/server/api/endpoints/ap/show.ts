@@ -98,9 +98,10 @@ async function fetchAny(uri: string, me: CacheableLocalUser | null | undefined):
 	]));
 	if (local != null) return local;
 
-	// リモートから一旦オブジェクトフェッチ
+	// fetch object from remote
 	const resolver = new Resolver();
-	const object = await resolver.resolve(uri) as any;
+	// allow redirect
+	const object = await resolver.resolve(uri, true) as any;
 
 	// /@user のような正規id以外で取得できるURIが指定されていた場合、ここで初めて正規URIが確定する
 	// これはDBに存在する可能性があるため再度DB検索

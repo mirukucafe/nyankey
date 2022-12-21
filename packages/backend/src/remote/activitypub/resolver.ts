@@ -45,7 +45,7 @@ export class Resolver {
 		}
 	}
 
-	public async resolve(value: string | IObject): Promise<IObject> {
+	public async resolve(value: string | IObject, allowRedirect = false): Promise<IObject> {
 		if (value == null) {
 			throw new Error('resolvee is null (or undefined)');
 		}
@@ -94,7 +94,7 @@ export class Resolver {
 			)
 			// Did we actually get the object that corresponds to the canonical URL?
 			// Does the host we requested stuff from actually correspond to the host that owns the activity?
-			|| !(getApId(object) == null || getApId(object) === value)
+			|| !(getApId(object) == null || getApId(object) === value || allowRedirect)
 		) {
 			throw new Error('invalid response');
 		}

@@ -29,6 +29,6 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps) => {
 	const resolver = new Resolver();
-	const object = await resolver.resolve(ps.uri);
+	const object = await resolver.resolve(ps.uri, true);
 	return object;
 });
