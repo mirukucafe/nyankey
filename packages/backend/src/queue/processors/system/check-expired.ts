@@ -1,6 +1,6 @@
 import Bull from 'bull';
 import { In, LessThan } from 'typeorm';
-import { AttestationChallenges, AuthSessions, Mutings, PasswordResetRequests, Signins } from '@/models/index.js';
+import { AttestationChallenges, AuthSessions, Mutings, Notifications, PasswordResetRequests, Signins } from '@/models/index.js';
 import { publishUserEvent } from '@/services/stream.js';
 import { MINUTE, DAY, MONTH } from '@/const.js';
 import { queueLogger } from '@/queue/logger.js';
@@ -45,6 +45,11 @@ export async function checkExpired(job: Bull.Job<Record<string, unknown>>, done:
 
 	await AuthSessions.delete({
 		createdAt: OlderThan(15 * MINUTE),
+	});
+
+	await Notifications.delete({
+		isRead: true,
+		createdAt: OlderThan(3 * MONTH),
 	});
 
 	logger.succ('Deleted expired data.');
