@@ -2,7 +2,7 @@ import RE2 from 're2';
 import * as mfm from 'mfm-js';
 import { notificationTypes } from 'foundkey-js';
 import { publishMainStream, publishUserEvent } from '@/services/stream.js';
-import acceptAllFollowRequests from '@/services/following/requests/accept-all.js';
+import { acceptAllFollowRequests } from '@/services/following/requests/accept-all.js';
 import { publishToFollowers } from '@/services/i/update.js';
 import { extractCustomEmojisFromMfm } from '@/misc/extract-custom-emojis-from-mfm.js';
 import { extractHashtags } from '@/misc/extract-hashtags.js';
