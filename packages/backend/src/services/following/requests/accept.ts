@@ -3,12 +3,17 @@ import renderFollow from '@/remote/activitypub/renderer/follow.js';
 import renderAccept from '@/remote/activitypub/renderer/accept.js';
 import { deliver } from '@/queue/index.js';
 import { publishMainStream } from '@/services/stream.js';
-import { User, CacheableUser } from '@/models/entities/user.js';
+import { User } from '@/models/entities/user.js';
 import { FollowRequests, Users } from '@/models/index.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { insertFollowingDoc } from '../create.js';
 
-export default async function(followee: { id: User['id']; host: User['host']; uri: User['host']; inbox: User['inbox']; sharedInbox: User['sharedInbox']; }, follower: CacheableUser) {
+/**
+ * Accept a follow request from user `followee` to follow `follower`.
+ * @param followee User who is being followed
+ * @param follower User making the follow request
+ */
+export async function acceptFollowRequest(followee: User, follower: User): Promise<void> {
 	const request = await FollowRequests.findOneBy({
 		followeeId: followee.id,
 		followerId: follower.id,

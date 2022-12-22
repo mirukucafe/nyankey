@@ -1,4 +1,4 @@
-import acceptFollowRequest from '@/services/following/requests/accept.js';
+import { acceptFollowRequest } from '@/services/following/requests/accept.js';
 import define from '../../../define.js';
 import { ApiError } from '../../../error.js';
 import { getUser } from '../../../common/getters.js';
