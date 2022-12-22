@@ -1,5 +1,5 @@
 import unfollow from '@/services/following/delete.js';
-import cancelRequest from '@/services/following/requests/cancel.js';
+import { cancelFollowRequest } from '@/services/following/requests/cancel.js';
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { FollowRequests, Followings } from '@/models/index.js';
 import { IFollow } from '@/remote/activitypub/type.js';
@@ -29,7 +29,7 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 	]);
 
 	if (req) {
-		await cancelRequest(followee, actor);
+		await cancelFollowRequest(followee, actor);
 		return 'ok: follow request canceled';
 	} else if (following) {
 		await unfollow(actor, followee);

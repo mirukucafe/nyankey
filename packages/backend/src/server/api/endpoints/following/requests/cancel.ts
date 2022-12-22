@@ -1,4 +1,4 @@
-import cancelFollowRequest from '@/services/following/requests/cancel.js';
+import { cancelFollowRequest } from '@/services/following/requests/cancel.js';
 import { Users } from '@/models/index.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import define from '../../../define.js';

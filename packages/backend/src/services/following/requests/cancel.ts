@@ -7,7 +7,7 @@ import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { User } from '@/models/entities/user.js';
 import { Users, FollowRequests } from '@/models/index.js';
 
-export default async function(followee: { id: User['id']; host: User['host']; uri: User['host']; inbox: User['inbox'] }, follower: { id: User['id']; host: User['host']; uri: User['host'] }) {
+export async function cancelFollowRequest(followee: User, follower: User): Promise<void> {
 	if (Users.isRemoteUser(followee)) {
 		const content = renderActivity(renderUndo(renderFollow(follower, followee), follower));
 
