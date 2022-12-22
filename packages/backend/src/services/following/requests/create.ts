@@ -7,7 +7,7 @@ import { Blockings, FollowRequests, Users } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { createNotification } from '@/services/create-notification.js';
 
-export default async function(follower: { id: User['id']; host: User['host']; uri: User['host']; inbox: User['inbox']; sharedInbox: User['sharedInbox']; }, followee: { id: User['id']; host: User['host']; uri: User['host']; inbox: User['inbox']; sharedInbox: User['sharedInbox']; }, requestId?: string) {
+export async function createFollowRequest(follower: User, followee: User, requestId?: string): Promise<void> {
 	if (follower.id === followee.id) return;
 
 	// check blocking

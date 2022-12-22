@@ -15,7 +15,7 @@ import { getActiveWebhooks } from '@/misc/webhook-cache.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import Logger from '../logger.js';
 import { createNotification } from '../create-notification.js';
-import createFollowRequest from './requests/create.js';
+import { createFollowRequest } from './requests/create.js';
 
 const logger = new Logger('following/create');
 
