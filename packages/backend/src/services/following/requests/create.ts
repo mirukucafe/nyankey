@@ -7,6 +7,12 @@ import { Blockings, FollowRequests, Users } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { createNotification } from '@/services/create-notification.js';
 
+/**
+ * Make a follow request from `follower` to `followee`.
+ * @param follower User making the follow request
+ * @param followee User to make the follow request to
+ * @param requestId Follow request ID
+ */
 export async function createFollowRequest(follower: User, followee: User, requestId?: string): Promise<void> {
 	if (follower.id === followee.id) return;
 
