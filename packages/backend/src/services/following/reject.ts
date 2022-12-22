@@ -24,7 +24,7 @@ type Both = Local | Remote;
 /**
  * API following/request/reject
  */
-export async function rejectFollowRequest(user: Local, follower: Both) {
+export async function rejectFollowRequest(user: Local, follower: Both): Promise<void> {
 	if (Users.isRemoteUser(follower)) {
 		deliverReject(user, follower);
 	}
@@ -39,7 +39,7 @@ export async function rejectFollowRequest(user: Local, follower: Both) {
 /**
  * API following/reject
  */
-export async function rejectFollow(user: Local, follower: Both) {
+export async function rejectFollow(user: Local, follower: Both): Promise<void> {
 	if (Users.isRemoteUser(follower)) {
 		deliverReject(user, follower);
 	}
@@ -54,7 +54,7 @@ export async function rejectFollow(user: Local, follower: Both) {
 /**
  * AP Reject/Follow
  */
-export async function remoteReject(actor: Remote, follower: Local) {
+export async function remoteReject(actor: Remote, follower: Local): Promise<void> {
 	await removeFollowRequest(actor, follower);
 	await removeFollow(actor, follower);
 	publishUnfollow(actor, follower);
@@ -63,7 +63,7 @@ export async function remoteReject(actor: Remote, follower: Local) {
 /**
  * Remove follow request record
  */
-async function removeFollowRequest(followee: Both, follower: Both) {
+async function removeFollowRequest(followee: Both, follower: Both): Promise<void> {
 	const request = await FollowRequests.findOneBy({
 		followeeId: followee.id,
 		followerId: follower.id,
@@ -77,7 +77,7 @@ async function removeFollowRequest(followee: Both, follower: Both) {
 /**
  * Remove follow record
  */
-async function removeFollow(followee: Both, follower: Both) {
+async function removeFollow(followee: Both, follower: Both): Promise<void> {
 	const following = await Followings.findOneBy({
 		followeeId: followee.id,
 		followerId: follower.id,
@@ -92,7 +92,7 @@ async function removeFollow(followee: Both, follower: Both) {
 /**
  * Deliver Reject to remote
  */
-async function deliverReject(followee: Local, follower: Remote) {
+async function deliverReject(followee: Local, follower: Remote): Promise<void> {
 	const request = await FollowRequests.findOneBy({
 		followeeId: followee.id,
 		followerId: follower.id,
@@ -105,7 +105,7 @@ async function deliverReject(followee: Local, follower: Remote) {
 /**
  * Publish unfollow to local
  */
-async function publishUnfollow(followee: Both, follower: Local) {
+async function publishUnfollow(followee: Both, follower: Local): Promise<void> {
 	const packedFollowee = await Users.pack(followee.id, follower, {
 		detail: true,
 	});
