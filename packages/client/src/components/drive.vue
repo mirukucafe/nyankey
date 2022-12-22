@@ -210,9 +210,8 @@ function onStreamDriveFolderDeleted(folderId: string) {
 function onDragover(ev: DragEvent): any {
 	if (!ev.dataTransfer) return;
 
-	// ドラッグ元が自分自身の所有するアイテムだったら
 	if (isDragSource) {
-		// 自分自身にはドロップさせない
+		// We are the drag source, do not allow to drop.
 		ev.dataTransfer.dropEffect = 'none';
 		return;
 	}
@@ -257,17 +256,16 @@ function onDrop(ev: DragEvent): any {
 
 	if (!ev.dataTransfer) return;
 
-	// ドロップされてきたものがファイルだったら
+	const driveFile = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FILE_);
+	const driveFolder = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FOLDER_);
+
 	if (ev.dataTransfer.files.length > 0) {
+		// dropping operating system files
 		for (const file of Array.from(ev.dataTransfer.files)) {
 			upload(file, folder);
 		}
-		return;
-	}
-
-	//#region ドライブのファイル
-	const driveFile = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FILE_);
-	if (driveFile != null && driveFile !== '') {
+	} else if (driveFile != null && driveFile !== '') {
+		// dropping drive files
 		const file = JSON.parse(driveFile);
 
 		// cannot move file within parent folder
@@ -278,18 +276,14 @@ function onDrop(ev: DragEvent): any {
 			fileId: file.id,
 			folderId: folder?.id ?? null,
 		});
-	}
-	//#endregion
-
-	//#region ドライブのフォルダ
-	const driveFolder = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FOLDER_);
-	if (driveFolder != null && driveFolder !== '') {
+	} else if (driveFolder != null && driveFolder !== '') {
+		// dropping drive folders
 		const droppedFolder = JSON.parse(driveFolder);
 
 		// cannot move folder into itself
 		if (droppedFolder.id === folder?.id) return false;
 		// cannot move folder within parent folder
-		if (foldersPaginationElem.items.some(f => f.id === droppedFolder.id)) return false;
+		if (folder.id === droppedFolder.parentId) return false;
 
 		removeFolder(droppedFolder.id);
 		os.api('drive/folders/update', {
@@ -311,7 +305,6 @@ function onDrop(ev: DragEvent): any {
 			}
 		});
 	}
-	//#endregion
 }
 
 function selectLocalFile() {
