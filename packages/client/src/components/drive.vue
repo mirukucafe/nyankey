@@ -51,7 +51,6 @@
 						v-if="'size' in f"
 						:key="f.id"
 						v-anim="i"
-						class="item"
 						:file="f"
 						:select-mode="select === 'file'"
 						:is-selected="selectedFiles.some(x => x.id === f.id)"
@@ -63,7 +62,6 @@
 						v-else
 						:key="f.id"
 						v-anim="i"
-						class="item"
 						:folder="f"
 						:select-mode="select === 'folder'"
 						:is-selected="selectedFolders.some(x => x.id === f.id)"
@@ -621,15 +619,9 @@ onBeforeUnmount(() => {
 		}
 
 		> .contents {
-			display: flex;
-			flex-wrap: wrap;
-
-			> .item {
-				flex-grow: 1;
-				width: 128px;
-				margin: 4px;
-				box-sizing: border-box;
-			}
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: .5em;
 		}
 
 		> .empty {
