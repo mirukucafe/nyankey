@@ -152,26 +152,7 @@ export const DriveFileRepository = db.getRepository(DriveFile).extend({
 		const file = typeof src === 'object' ? src : await this.findOneBy({ id: src });
 		if (file == null) return null;
 
-		return await awaitAll<Packed<'DriveFile'>>({
-			id: file.id,
-			createdAt: file.createdAt.toISOString(),
-			name: file.name,
-			type: file.type,
-			md5: file.md5,
-			size: file.size,
-			isSensitive: file.isSensitive,
-			blurhash: file.blurhash,
-			properties: opts.self ? file.properties : this.getPublicProperties(file),
-			url: opts.self ? file.url : this.getPublicUrl(file, false),
-			thumbnailUrl: this.getPublicUrl(file, true),
-			comment: file.comment,
-			folderId: file.folderId,
-			folder: opts.detail && file.folderId ? DriveFolders.pack(file.folderId, {
-				detail: true,
-			}) : null,
-			userId: opts.withUser ? file.userId : null,
-			user: (opts.withUser && file.userId) ? Users.pack(file.userId) : null,
-		});
+		return await this.pack(file);
 	},
 
 	async packMany(
