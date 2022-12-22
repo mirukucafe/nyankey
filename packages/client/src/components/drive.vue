@@ -35,27 +35,35 @@
 		@drop.prevent.stop="onDrop"
 		@contextmenu.stop="onContextmenu"
 	>
-		<div ref="contents" class="contents">
-			<MkPagination
-				ref="foldersPaginationElem"
-				:pagination="foldersPagination"
-				class="folders"
-				@loaded="foldersLoading = false"
-			>
-				<template #empty>
-					<!--
-						Don't display anything here if there are no folders,
-						there is a separate check if both paginations are empty.
-					-->
-					{{ null }}
-				</template>
+		<MkPagination
+			ref="paginationElem"
+			:pagination="pagination"
+			class="contents"
+		>
+			<template #empty>
+				<p v-if="folder == null" class="empty"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
+				<p v-else class="empty">{{ i18n.ts.emptyFolder }}</p>
+			</template>
 
-				<template #default="{ items: folders }">
-					<XFolder
-						v-for="(f, i) in folders"
+			<template #default="{ items }">
+				<template v-for="(f, i) in items">
+					<XFile
+						v-if="'size' in f"
 						:key="f.id"
 						v-anim="i"
-						class="folder"
+						class="item"
+						:file="f"
+						:select-mode="select === 'file'"
+						:is-selected="selectedFiles.some(x => x.id === f.id)"
+						@chosen="chooseFile"
+						@dragstart="isDragSource = true"
+						@dragend="isDragSource = false"
+					/>
+					<XFolder
+						v-else
+						:key="f.id"
+						v-anim="i"
+						class="item"
 						:folder="f"
 						:select-mode="select === 'folder'"
 						:is-selected="selectedFolders.some(x => x.id === f.id)"
@@ -67,46 +75,9 @@
 						@dragstart="isDragSource = true"
 						@dragend="isDragSource = false"
 					/>
-					<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-					<div v-for="(n, i) in 16" :key="i" class="padding"></div>
 				</template>
-			</MkPagination>
-			<MkPagination
-				ref="filesPaginationElem"
-				:pagination="filesPagination"
-				class="files"
-				@loaded="filesLoading = false"
-			>
-				<template #empty>
-					<!--
-						Don't display anything here if there are no files,
-						there is a separate check if both paginations are empty.
-					-->
-					{{ null }}
-				</template>
-
-				<template #default="{ items: files }">
-					<XFile
-						v-for="(file, i) in files"
-						:key="file.id"
-						v-anim="i"
-						class="file"
-						:file="file"
-						:select-mode="select === 'file'"
-						:is-selected="selectedFiles.some(x => x.id === file.id)"
-						@chosen="chooseFile"
-						@dragstart="isDragSource = true"
-						@dragend="isDragSource = false"
-					/>
-					<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-					<div v-for="(n, i) in 16" :key="i" class="padding"></div>
-				</template>
-			</MkPagination>
-			<div v-if="empty" class="empty">
-				<p v-if="folder == null"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
-				<p v-else>{{ i18n.ts.emptyFolder }}</p>
-			</div>
-		</div>
+			</template>
+		</MkPagination>
 	</div>
 	<div v-if="draghover" class="dropzone"></div>
 	<input ref="fileInput" type="file" accept="*/*" multiple tabindex="-1" @change="onChangeFileInput"/>
@@ -145,13 +116,7 @@ const emit = defineEmits<{
 	(ev: 'open-folder', v: foundkey.entities.DriveFolder): void;
 }>();
 
-let foldersPaginationElem = $ref<InstanceType<typeof MkPagination>>();
-let filesPaginationElem = $ref<InstanceType<typeof MkPagination>>();
-
-let foldersLoading = $ref<boolean>(true);
-let filesLoading = $ref<boolean>(true);
-const empty = $computed(() => !foldersLoading && !filesLoading
-	&& foldersPaginationElem?.items.length === 0 && filesPaginationElem?.items.length === 0);
+let paginationElem = $ref<InstanceType<typeof MkPagination>>();
 
 let fileInput = $ref<HTMLInputElement>();
 
@@ -434,10 +399,6 @@ function chooseFolder(folderToChoose: foundkey.entities.DriveFolder) {
 }
 
 function move(target?: string | foundkey.entities.DriveFolder) {
-	// reset loading state
-	foldersLoading = true;
-	filesLoading = true;
-
 	if (!target) {
 		goRoot();
 		return;
@@ -466,13 +427,13 @@ function addFolder(folderToAdd: foundkey.entities.DriveFolder, unshift = false) 
 	const current = folder?.id ?? null;
 	if (current !== folderToAdd.parentId) return;
 
-	const exist = foldersPaginationElem.items.some(f => f.id === folderToAdd.id);
+	const exist = paginationElem.items.some(f => f.id === folderToAdd.id);
 	if (exist) {
-		foldersPaginationElem.updateItem(folderToAdd.id, () => folderToAdd);
+		paginationElem.updateItem(folderToAdd.id, () => folderToAdd);
 	} else if (unshift) {
-		foldersPaginationElem.prepend(folderToAdd);
+		paginationElem.prepend(folderToAdd);
 	} else {
-		foldersPaginationElem.append(folderToAdd);
+		paginationElem.append(folderToAdd);
 	}
 }
 
@@ -480,24 +441,24 @@ function addFile(fileToAdd: foundkey.entities.DriveFile, unshift = false) {
 	const current = folder?.id ?? null;
 	if (current !== fileToAdd.folderId) return;
 
-	const exist = filesPaginationElem.items.some(f => f.id === fileToAdd.id);
+	const exist = paginationElem.items.some(f => f.id === fileToAdd.id);
 	if (exist) {
-		filesPaginationElem.updateItem(fileToAdd.id, () => fileToAdd);
+		paginationElem.updateItem(fileToAdd.id, () => fileToAdd);
 	} else if (unshift) {
-		filesPaginationElem.prepend(fileToAdd);
+		paginationElem.prepend(fileToAdd);
 	} else {
-		filesPaginationElem.append(fileToAdd);
+		paginationElem.append(fileToAdd);
 	}
 }
 
 function removeFolder(folderToRemove: foundkey.entities.DriveFolder | string): void {
 	const folderIdToRemove = typeof folderToRemove === 'object' ? folderToRemove.id : folderToRemove;
-	foldersPaginationElem.removeItem(item => item.id === folderIdToRemove);
+	paginationElem.removeItem(item => item.id === folderIdToRemove);
 }
 
 function removeFile(fileToRemove: foundkey.entities.DriveFile | string): void {
 	const fileIdToRemove = typeof fileToRemove === 'object' ? fileToRemove.id : fileToRemove;
-	filesPaginationElem.removeItem(item => item.id === fileIdToRemove);
+	paginationElem.removeItem(item => item.id === fileIdToRemove);
 }
 
 function goRoot() {
@@ -509,20 +470,11 @@ function goRoot() {
 	emit('move-root');
 }
 
-const foldersPagination = {
-	endpoint: 'drive/folders' as const,
+const pagination = {
+	endpoint: 'drive/show' as const,
 	limit: 30,
 	params: computed(() => ({
 		folderId: folder?.id ?? null,
-	})),
-};
-
-const filesPagination = {
-	endpoint: 'drive/files' as const,
-	limit: 30,
-	params: computed(() => ({
-		folderId: folder?.id ?? null,
-		type: props.type,
 	})),
 };
 
@@ -669,37 +621,23 @@ onBeforeUnmount(() => {
 		}
 
 		> .contents {
+			display: flex;
+			flex-wrap: wrap;
 
-			> .folders,
-			> .files {
-				display: flex;
-				flex-wrap: wrap;
-
-				> .folder,
-				> .file {
-					flex-grow: 1;
-					width: 128px;
-					margin: 4px;
-					box-sizing: border-box;
-				}
-
-				> .padding {
-					flex-grow: 1;
-					pointer-events: none;
-					width: 128px + 8px;
-				}
+			> .item {
+				flex-grow: 1;
+				width: 128px;
+				margin: 4px;
+				box-sizing: border-box;
 			}
+		}
 
-			> .empty {
-				padding: 16px;
-				text-align: center;
-				pointer-events: none;
-				opacity: 0.5;
-
-				> p {
-					margin: 0;
-				}
-			}
+		> .empty {
+			padding: 16px;
+			text-align: center;
+			pointer-events: none;
+			opacity: 0.5;
+			margin: 0;
 		}
 	}
 
