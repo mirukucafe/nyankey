@@ -339,8 +339,6 @@ function createFolder() {
 		os.api('drive/folders/create', {
 			name,
 			parentId: folder?.id ?? undefined,
-		}).then(createdFolder => {
-			addFolder(createdFolder, true);
 		});
 	});
 }
