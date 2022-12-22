@@ -45,7 +45,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	if (ps.type) {
 		if (ps.type.endsWith('/*')) {
-			query.andWhere('file.type like :type', { type: ps.type.replace('/*', '/') + '%' });
+			query.andWhere('file.type like :type', { type: ps.type.slice(0, -1) + '%' });
 		} else {
 			query.andWhere('file.type = :type', { type: ps.type });
 		}
