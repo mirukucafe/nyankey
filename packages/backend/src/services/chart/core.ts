@@ -7,6 +7,7 @@
 import * as nestedProperty from 'nested-property';
 import { EntitySchema, Repository, LessThan, Between } from 'typeorm';
 import { dateUTC, isTimeSame, isTimeBefore, subtractTime, addTime } from '@/prelude/time.js';
+import { unique } from '@/prelude/array.js';
 import { getChartInsertLock } from '@/misc/app-lock.js';
 import { db } from '@/db/postgre.js';
 import Logger from '../logger.js';
@@ -55,8 +56,6 @@ type RawRecord<S extends Schema> = {
 const camelToSnake = (str: string): string => {
 	return str.replace(/([A-Z])/g, s => '_' + s.charAt(0).toLowerCase());
 };
-
-const removeDuplicates = (array: any[]) => Array.from(new Set(array));
 
 type Commit<S extends Schema> = {
 	[K in keyof S]?: S[K]['uniqueIncrement'] extends true ? string[] : number;
@@ -483,7 +482,7 @@ export default abstract class Chart<T extends Schema> {
 			this.buffer = this.buffer.filter(q => q.group != null && (q.group !== logHour.group));
 		};
 
-		const groups = removeDuplicates(this.buffer.map(log => log.group));
+		const groups = unique(this.buffer.map(log => log.group));
 
 		await Promise.all(
 			groups.map(group =>
@@ -651,12 +650,7 @@ export default abstract class Chart<T extends Schema> {
 
 		const res = {} as ChartResult<T>;
 
-		/**
-		 * Turn
-		 * [{ foo: 1, bar: 5 }, { foo: 2, bar: 6 }, { foo: 3, bar: 7 }]
-		 * into
-		 * { foo: [1, 2, 3], bar: [5, 6, 7] }
-		 */
+		// Turn array of objects into object of arrays.
 		for (const record of chart) {
 			for (const [k, v] of Object.entries(record) as ([keyof typeof record, number])[]) {
 				if (res[k]) {
