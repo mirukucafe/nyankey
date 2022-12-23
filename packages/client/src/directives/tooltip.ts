@@ -1,31 +1,83 @@
-// TODO: useTooltip関数使うようにしたい
-// ただディレクティブ内でonUnmountedなどのcomposition api使えるのか不明
+// TODO: use the useTooltip function
 
 import { defineAsyncComponent, Directive, ref } from 'vue';
 import { isTouchUsing } from '@/scripts/touch';
 import { popup, alert } from '@/os';
 
-const start = isTouchUsing ? 'touchstart' : 'mouseover';
-const end = isTouchUsing ? 'touchend' : 'mouseleave';
 const delay = 100;
 
-export default {
-	mounted(el: HTMLElement, binding) {
-		const self = (el as any)._tooltipDirective_ = {} as any;
+class TooltipDirective {
+	public text: string | null;
+	private asMfm: boolean;
 
-		self.text = binding.value as string;
-		self._close = null;
+	private _close: null | () => void;
+	private showTimer: null | ReturnType<typeof window.setTimeout>;
+	private hideTimer: null | ReturnType<typeof window.setTimeout>;
+
+
+	constructor(binding) {
+		this.text = binding.value;
+		this.asMfm = binding.modifiers.mfm ?? false;
+		this._close = null;
+		this.showTimer = null;
+		this.hideTimer = null;
+	}
+
+	private close(): void {
+		if (this.hideTimer != null) return; // already closed or closing
+
+		// cancel any pending attempts to show
+		window.clearTimeout(self.showTimer);
 		self.showTimer = null;
-		self.hideTimer = null;
-		self.checkTimer = null;
 
-		self.close = () => {
-			if (self._close) {
-				window.clearInterval(self.checkTimer);
-				self._close();
-				self._close = null;
-			}
-		};
+		self.hideTimer = window.setTimeout(() => {
+			this._close?.();
+			this._close = null;
+		}, delay);
+	}
+
+	public show(el): void {
+		if (!document.body.contains(el)) return;
+		if (this.text == null) return; // no content
+		if (this.showTimer != null) return; // already showing or going to show
+
+		// cancel any pending attempts to hide
+		window.clearTimeout(self.hideTimer);
+		self.hideTimer = null;
+
+		self.showTimer = window.setTimeout(() => {
+			const showing = ref(true);
+			popup(defineAsyncComponent(() => import('@/components/ui/tooltip.vue')), {
+				showing,
+				text: self.text,
+				asMfm: self.asMfm,
+				targetElement: el,
+			}, {}, 'closed');
+
+			self._close = () => {
+				showing.value = false;
+			};
+		}, delay);
+	}
+}
+
+/**
+ * Show a tooltip on mouseover. The content of the tooltip is the text
+ * provided as the value of this directive.
+ *
+ * Supported arguments:
+ * v-tooltip:dialog -> show text as a dialog on mousedown
+ *
+ * Supported modifiers:
+ * v-tooltip.mfm -> show tooltip content as MFM
+ */
+export default {
+	created(el: HTMLElement, binding) {
+		(el as any)._tooltipDirective_ = new TooltipDirective(binding);
+	},
+
+	mounted(el: HTMLElement, binding) {
+		const self = el._tooltipDirective_ as TooltipDirective;
 
 		if (binding.arg === 'dialog') {
 			el.addEventListener('click', (ev) => {
@@ -39,53 +91,20 @@ export default {
 			});
 		}
 
-		self.show = () => {
-			if (!document.body.contains(el)) return;
-			if (self._close) return;
-			if (self.text == null) return;
-
-			const showing = ref(true);
-			popup(defineAsyncComponent(() => import('@/components/ui/tooltip.vue')), {
-				showing,
-				text: self.text,
-				asMfm: binding.modifiers.mfm,
-				targetElement: el,
-			}, {}, 'closed');
-
-			self._close = () => {
-				showing.value = false;
-			};
-		};
-
-		el.addEventListener('selectstart', ev => {
-			ev.preventDefault();
-		});
-
-		el.addEventListener(start, () => {
-			window.clearTimeout(self.showTimer);
-			window.clearTimeout(self.hideTimer);
-			self.showTimer = window.setTimeout(self.show, delay);
-		}, { passive: true });
-
-		el.addEventListener(end, () => {
-			window.clearTimeout(self.showTimer);
-			window.clearTimeout(self.hideTimer);
-			self.hideTimer = window.setTimeout(self.close, delay);
-		}, { passive: true });
-
-		el.addEventListener('click', () => {
-			window.clearTimeout(self.showTimer);
-			self.close();
-		});
+		// add event listeners
+		const start = isTouchUsing ? 'touchstart' : 'mouseover';
+		const end = isTouchUsing ? 'touchend' : 'mouseleave';
+		el.addEventListener(start, () => self.show(el), { passive: true });
+		el.addEventListener(end, () => self.close(), { passive: true });
+		el.addEventListener('click', self.close());
+		el.addEventListener('selectstart', ev => ev.preventDefault());
 	},
 
-	updated(el, binding) {
-		const self = el._tooltipDirective_;
-		self.text = binding.value as string;
+	beforeUpdate(el, binding) {
+		(el._tooltipDirective_ as TooltipDirective).text = binding.value as string;
 	},
 
-	unmounted(el) {
-		const self = el._tooltipDirective_;
-		window.clearInterval(self.checkTimer);
+	beforeUnmount(el) {
+		(el._tooltipDirective_ as TooltipDirective).close();
 	},
 } as Directive;
