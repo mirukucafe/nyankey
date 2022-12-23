@@ -35,7 +35,6 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const instance = await fetchMeta(true);
 
-	// Calculate drive usage
 	const usage = await DriveFiles.calcDriveUsageOf(user.id);
 
 	return {

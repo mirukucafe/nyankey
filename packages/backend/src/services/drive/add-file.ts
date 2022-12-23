@@ -372,7 +372,7 @@ export async function addFile({
 
 	//#region Check drive usage
 	if (user && !isLink) {
-		const usage = await DriveFiles.calcDriveUsageOf(user);
+		const usage = await DriveFiles.calcDriveUsageOf(user.id);
 
 		const instance = await fetchMeta();
 		const driveCapacity = 1024 * 1024 * (Users.isLocalUser(user) ? instance.localDriveCapacityMb : instance.remoteDriveCapacityMb);

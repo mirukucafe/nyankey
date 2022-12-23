@@ -177,7 +177,7 @@ export default define(meta, paramDef, async (ps, me) => {
 		driveFilesCount: DriveFiles.createQueryBuilder('file')
 			.where('file.userId = :userId', { userId: user.id })
 			.getCount(),
-		driveUsage: DriveFiles.calcDriveUsageOf(user),
+		driveUsage: DriveFiles.calcDriveUsageOf(user.id),
 	});
 
 	result.followingCount = result.localFollowingCount + result.remoteFollowingCount;
