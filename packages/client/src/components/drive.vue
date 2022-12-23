@@ -52,8 +52,9 @@
 						:key="f.id"
 						v-anim="i"
 						:file="f"
-						:is-selected="selectedFiles.some(x => x.id === f.id)"
-						@chosen="chooseFile"
+						:select-mode="select !== 'folder'"
+						:is-selected="selected.some(x => x.id === f.id)"
+						@chosen="choose"
 						@dragstart="isDragSource = true"
 						@dragend="isDragSource = false"
 					/>
@@ -62,8 +63,9 @@
 						:key="f.id"
 						v-anim="i"
 						:folder="f"
-						:is-selected="selectedFolders.some(x => x.id === f.id)"
-						@chosen="chooseFolder"
+						:select-mode="select !== 'file'"
+						:is-selected="selected.some(x => x.id === f.id)"
+						@chosen="choose"
 						@move="move"
 						@upload="upload"
 						@removeFile="removeFile"
@@ -106,7 +108,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
 	(ev: 'selected', v: foundkey.entities.DriveFile | foundkey.entities.DriveFolder): void;
-	(ev: 'change-selection', v: foundkey.entities.DriveFile[] | foundkey.entities.DriveFolder[]): void;
+	(ev: 'change-selection', v: Array<foundkey.entities.DriveFile | foundkey.entities.DriveFolder>): void;
 	(ev: 'move-root'): void;
 	(ev: 'cd', v: foundkey.entities.DriveFolder | null): void;
 	(ev: 'open-folder', v: foundkey.entities.DriveFolder): void;
@@ -121,8 +123,7 @@ const connection = stream.useChannel('drive');
 
 let folder = $ref<foundkey.entities.DriveFolder | null>(null);
 let hierarchyFolders = $ref<foundkey.entities.DriveFolder[]>([]);
-let selectedFiles = $ref<foundkey.entities.DriveFile[]>([]);
-let selectedFolders = $ref<foundkey.entities.DriveFolder[]>([]);
+let selected = $ref<Array<foundkey.entities.DriveFile | foundkey.entities.DriveFolder>>([]);
 let keepOriginal = $ref<boolean>(defaultStore.state.keepOriginalUploading);
 
 // ドロップされようとしているか
@@ -356,42 +357,49 @@ function upload(file: File, folderToUpload?: foundkey.entities.DriveFolder | nul
 	uploadFile(file, folderToUpload?.id ?? null, undefined, keepOriginal);
 }
 
-function chooseFile(file: foundkey.entities.DriveFile) {
-	const isAlreadySelected = selectedFiles.some(f => f.id === file.id);
-	if (props.multiple) {
-		if (isAlreadySelected) {
-			selectedFiles = selectedFiles.filter(f => f.id !== file.id);
-		} else {
-			selectedFiles.push(file);
-		}
-		emit('change-selection', selectedFiles);
-	} else {
-		if (isAlreadySelected) {
-			emit('selected', file);
-		} else {
-			selectedFiles = [file];
-			emit('change-selection', [file]);
-		}
-	}
-}
+function choose(choice: foundkey.entities.DriveFile | foundkey.entities.DriveFolder, extendSelection: boolean) {
+	const alreadySelected = selectedFiles.some(f => f.id === file.id);
 
-function chooseFolder(folderToChoose: foundkey.entities.DriveFolder) {
-	const isAlreadySelected = selectedFolders.some(f => f.id === folderToChoose.id);
-	if (props.multiple) {
-		if (isAlreadySelected) {
-			selectedFolders = selectedFolders.filter(f => f.id !== folderToChoose.id);
+	const action = (() => {
+		if (props.select != null) {
+			// file picker mode, extendSelection is disregarded
+			if (props.multiple && alreadySelected) {
+				return 'remove';
+			} else if (props.multiple) {
+				return 'add';
+			} else if (!props.multiple && alreadySelected) {
+				return 'emit';
+			} else {
+				return 'set';
+			}
 		} else {
-			selectedFolders.push(folderToChoose);
+			// explorer mode, props.multiple is disregarded
+			if (extendSelection && alreadySelected) {
+				return 'remove';
+			} else if (extendSelection) {
+				return 'add';
+			} else if (!alreadySelected) {
+				return 'set';
+			}
+			// already selected && ! extend selection is a noop
 		}
-		emit('change-selection', selectedFolders);
-	} else {
-		if (isAlreadySelected) {
-			emit('selected', folderToChoose);
-		} else {
-			selectedFolders = [folderToChoose];
-			emit('change-selection', [folderToChoose]);
-		}
+	})();
+
+	switch (action) {
+		case 'emit':
+			emit('selected', choice);
+			return; // don't emit the change-selection event
+		case 'add':
+			selected.push(choice);
+			break;
+		case 'set':
+			selected = [choice];
+			break;
+		case 'remove':
+			selected = selected.filter(f => f.id !== choice.id);
+			break;
 	}
+	emit('change-selection', selected);
 }
 
 function move(target?: string | foundkey.entities.DriveFolder) {
