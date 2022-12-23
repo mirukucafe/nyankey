@@ -61,50 +61,24 @@ export const DriveFileRepository = db.getRepository(DriveFile).extend({
 		return thumbnail ? (file.thumbnailUrl || (isImage ? (file.webpublicUrl || file.url) : null)) : (file.webpublicUrl || file.url);
 	},
 
-	async calcDriveUsageOf(user: User['id'] | { id: User['id'] }): Promise<number> {
-		const id = typeof user === 'object' ? user.id : user;
-
-		const { sum } = await this
-			.createQueryBuilder('file')
-			.where('file.userId = :id', { id })
-			.andWhere('file.isLink = FALSE')
-			.select('SUM(file.size)', 'sum')
-			.getRawOne();
-
-		return parseInt(sum, 10) || 0;
+	calcDriveUsageOf(id: User['id']): Promise<number> {
+		return db.query('SELECT SUM(size) AS sum FROM drive_file WHERE "userId" = $1 AND NOT "isLink"', [id])
+			.then(res => res[0].sum as number ?? 0);
 	},
 
-	async calcDriveUsageOfHost(host: string): Promise<number> {
-		const { sum } = await this
-			.createQueryBuilder('file')
-			.where('file.userHost = :host', { host: toPuny(host) })
-			.andWhere('file.isLink = FALSE')
-			.select('SUM(file.size)', 'sum')
-			.getRawOne();
-
-		return parseInt(sum, 10) || 0;
+	calcDriveUsageOfHost(host: string): Promise<number> {
+		return db.query('SELECT SUM(size) AS sum FROM drive_file WHERE "userHost" = $1 AND NOT "isLink"', [toPuny(host)])
+			.then(res => res[0].sum as number ?? 0);
 	},
 
-	async calcDriveUsageOfLocal(): Promise<number> {
-		const { sum } = await this
-			.createQueryBuilder('file')
-			.where('file.userHost IS NULL')
-			.andWhere('file.isLink = FALSE')
-			.select('SUM(file.size)', 'sum')
-			.getRawOne();
-
-		return parseInt(sum, 10) || 0;
+	calcDriveUsageOfLocal(): Promise<number> {
+		return db.query('SELECT SUM(size) AS sum FROM drive_file WHERE "userHost" IS NULL AND NOT "isLink"')
+			.then(res => res[0].sum as number ?? 0);
 	},
 
-	async calcDriveUsageOfRemote(): Promise<number> {
-		const { sum } = await this
-			.createQueryBuilder('file')
-			.where('file.userHost IS NOT NULL')
-			.andWhere('file.isLink = FALSE')
-			.select('SUM(file.size)', 'sum')
-			.getRawOne();
-
-		return parseInt(sum, 10) || 0;
+	calcDriveUsageOfRemote(): Promise<number> {
+		return db.query('SELECT SUM(size) AS sum FROM drive_file WHERE "userHost" IS NOT NULL AND NOT "isLink"')
+			.then(res => res[0].sum as number ?? 0);
 	},
 
 	async pack(
