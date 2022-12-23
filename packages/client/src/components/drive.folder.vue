@@ -261,7 +261,6 @@ function onContextmenu(ev: MouseEvent) {
 	position: relative;
 	padding: 8px;
 	height: 64px;
-	background: var(--driveFolderBg);
 	border-radius: 4px;
 
 	&, * {
