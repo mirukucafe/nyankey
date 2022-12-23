@@ -98,7 +98,6 @@ import { uploadFile, uploads } from '@/scripts/upload';
 
 const props = withDefaults(defineProps<{
 	initialFolder?: foundkey.entities.DriveFolder;
-	type?: string;
 	multiple?: boolean;
 	select?: 'file' | 'folder' | null;
 }>(), {
@@ -133,7 +132,14 @@ let draghover = $ref(false);
 // (自分自身の階層にドロップできないようにするためのフラグ)
 let isDragSource = $ref(false);
 
-watch($$(folder), () => emit('cd', folder));
+watch($$(folder), () => {
+	emit('cd', folder)
+	if (props.select === 'folder') {
+		// convenience: entering a folder selects it
+		selected = [folder];
+		emit('change-selection', selected);
+	}
+});
 
 function onStreamDriveFileCreated(file: foundkey.entities.DriveFile) {
 	addFile(file, true);
