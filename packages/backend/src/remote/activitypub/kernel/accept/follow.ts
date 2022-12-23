@@ -1,5 +1,5 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import accept from '@/services/following/requests/accept.js';
+import { acceptFollowRequest } from '@/services/following/requests/accept.js';
 import { relayAccepted } from '@/services/relay.js';
 import { IFollow } from '@/remote/activitypub/type.js';
 import { DbResolver } from '@/remote/activitypub/db-resolver.js';
@@ -24,6 +24,6 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 		return await relayAccepted(match[1]);
 	}
 
-	await accept(actor, follower);
+	await acceptFollowRequest(actor, follower);
 	return 'ok';
 };

@@ -1,18 +1,18 @@
 import { User } from '@/models/entities/user.js';
 import { FollowRequests, Users } from '@/models/index.js';
-import accept from './accept.js';
+import { acceptFollowRequest } from './accept.js';
 
 /**
- * 指定したユーザー宛てのフォローリクエストをすべて承認
- * @param user ユーザー
+ * Approve all follow requests addressed to the specified user.
+ * @param user The user whom to accept all follow requests to
  */
-export default async function(user: { id: User['id']; host: User['host']; uri: User['host']; inbox: User['inbox']; sharedInbox: User['sharedInbox']; }) {
+export async function acceptAllFollowRequests(user: User): Promise<void> {
 	const requests = await FollowRequests.findBy({
 		followeeId: user.id,
 	});
 
 	for (const request of requests) {
 		const follower = await Users.findOneByOrFail({ id: request.followerId });
-		accept(user, follower);
+		acceptFollowRequest(user, follower);
 	}
 }
