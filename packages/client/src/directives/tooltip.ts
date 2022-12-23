@@ -34,7 +34,7 @@ class TooltipDirective {
 			this._close?.();
 			this._close = null;
 		}, delay);
-	},
+	}
 
 	public show(el): void {
 		if (!document.body.contains(el)) return;
@@ -58,7 +58,7 @@ class TooltipDirective {
 				showing.value = false;
 			};
 		}, delay);
-	},
+	}
 }
 
 /**
@@ -102,7 +102,7 @@ export default {
 
 	beforeUpdate(el, binding) {
 		(el._tooltipDirective_ as TooltipDirective).text = binding.value as string;
-	}
+	},
 
 	beforeUnmount(el) {
 		(el._tooltipDirective_ as TooltipDirective).close();
