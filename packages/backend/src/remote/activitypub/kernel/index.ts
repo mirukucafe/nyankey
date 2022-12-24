@@ -1,8 +1,10 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
 import { toArray } from '@/prelude/array.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
+import { extractDbHost } from '@/misc/convert-host.js';
+import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { apLogger } from '../logger.js';
-import { IObject, isCreate, isDelete, isUpdate, isRead, isFollow, isAccept, isReject, isAdd, isRemove, isAnnounce, isLike, isUndo, isBlock, isCollectionOrOrderedCollection, isCollection, isFlag } from '../type.js';
+import { IObject, isCreate, isDelete, isUpdate, isRead, isFollow, isAccept, isReject, isAdd, isRemove, isAnnounce, isLike, isUndo, isBlock, isCollectionOrOrderedCollection, isCollection, isFlag, getApId } from '../type.js';
 import create from './create/index.js';
 import performDeleteActivity from './delete/index.js';
 import performUpdateActivity from './update/index.js';
@@ -18,7 +20,7 @@ import remove from './remove/index.js';
 import block from './block/index.js';
 import flag from './flag/index.js';
 
-export async function performActivity(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver) {
+export async function performActivity(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver): Promise<void> {
 	if (isCollectionOrOrderedCollection(activity)) {
 		for (const item of toArray(isCollection(activity) ? activity.items : activity.orderedItems)) {
 			const act = await resolver.resolve(item);
@@ -38,6 +40,11 @@ export async function performActivity(actor: CacheableRemoteUser, activity: IObj
 async function performOneActivity(actor: CacheableRemoteUser, activity: IObject, resolver: Resolver): Promise<void> {
 	if (actor.isSuspended) return;
 
+	if (typeof activity.id !== 'undefined') {
+		const host = extractDbHost(getApId(activity));
+		if (await shouldBlockInstance(host)) return;
+	}
+
 	if (isCreate(activity)) {
 		await create(actor, activity, resolver);
 	} else if (isDelete(activity)) {
@@ -55,7 +62,7 @@ async function performOneActivity(actor: CacheableRemoteUser, activity: IObject,
 	} else if (isAdd(activity)) {
 		await add(actor, activity, resolver).catch(err => apLogger.error(err));
 	} else if (isRemove(activity)) {
-		await remove(actor, activity).catch(err => apLogger.error(err));
+		await remove(actor, activity, resolver).catch(err => apLogger.error(err));
 	} else if (isAnnounce(activity)) {
 		await announce(actor, activity, resolver);
 	} else if (isLike(activity)) {
