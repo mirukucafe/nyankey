@@ -34,9 +34,7 @@ export class Resolver {
 	}
 
 	public async resolveCollection(value: string | IObject): Promise<ICollection | IOrderedCollection> {
-		const collection = typeof value === 'string'
-			? await this.resolve(value)
-			: value;
+		const collection = await this.resolve(value);
 
 		if (isCollectionOrOrderedCollection(collection)) {
 			return collection;
