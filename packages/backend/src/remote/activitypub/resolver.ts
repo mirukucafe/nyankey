@@ -34,9 +34,7 @@ export class Resolver {
 	}
 
 	public async resolveCollection(value: string | IObject): Promise<ICollection | IOrderedCollection> {
-		const collection = typeof value === 'string'
-			? await this.resolve(value)
-			: value;
+		const collection = await this.resolve(value);
 
 		if (isCollectionOrOrderedCollection(collection)) {
 			return collection;
@@ -45,12 +43,18 @@ export class Resolver {
 		}
 	}
 
-	public async resolve(value: string | IObject, allowRedirect = false): Promise<IObject> {
+	public async resolve(value?: string | IObject | null, allowRedirect = false): Promise<IObject> {
 		if (value == null) {
 			throw new Error('resolvee is null (or undefined)');
 		}
 
 		if (typeof value !== 'string') {
+			if (typeof value.id !== 'undefined') {
+				const host = extractDbHost(getApId(value));
+				if (await shouldBlockInstance(host)) {
+					throw new Error('instance is blocked');
+				}
+			}
 			return value;
 		}
 
@@ -75,7 +79,7 @@ export class Resolver {
 		}
 
 		if (await shouldBlockInstance(host)) {
-			throw new Error('Instance is blocked');
+			throw new Error('instance is blocked');
 		}
 
 		if (!this.user) {
