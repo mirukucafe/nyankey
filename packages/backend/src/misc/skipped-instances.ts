@@ -16,7 +16,7 @@ const deadThreshold = 7 * DAY;
  */
 export async function skippedInstances(hosts: Array<Instance['host']>): Promise<Array<Instance['host']>> {
 	// Resolve the boolean promises before filtering
-	const meta = fetchMeta();
+	const meta = await fetchMeta();
 	const shouldSkip = await Promise.all(hosts.map(host => shouldBlockInstance(host, meta)));
 	const skipped = hosts.filter((_, i) => shouldSkip[i]);
 

@@ -6,11 +6,10 @@ import { Meta } from '@/models/entities/meta.js';
  * Returns whether a specific host (punycoded) should be blocked.
  *
  * @param host punycoded instance host
- * @param meta a Promise contatining the information from the meta table (optional)
+ * @param meta a resolved Meta table
  * @returns whether the given host should be blocked
  */
-
-export async function shouldBlockInstance(host: Instance['host'], meta: Promise<Meta> = fetchMeta()): Promise<boolean> {
-	const { blockedHosts } = await meta;
+export async function shouldBlockInstance(host: Instance['host'], meta?: Meta): Promise<boolean> {
+	const { blockedHosts } = meta ?? await fetchMeta();
 	return blockedHosts.some(blockedHost => host === blockedHost || host.endsWith('.' + blockedHost));
 }
