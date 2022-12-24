@@ -27,10 +27,10 @@ class TooltipDirective {
 		if (this.hideTimer != null) return; // already closed or closing
 
 		// cancel any pending attempts to show
-		window.clearTimeout(self.showTimer);
-		self.showTimer = null;
+		window.clearTimeout(this.showTimer);
+		this.showTimer = null;
 
-		self.hideTimer = window.setTimeout(() => {
+		this.hideTimer = window.setTimeout(() => {
 			this._close?.();
 			this._close = null;
 		}, delay);
@@ -42,19 +42,19 @@ class TooltipDirective {
 		if (this.showTimer != null) return; // already showing or going to show
 
 		// cancel any pending attempts to hide
-		window.clearTimeout(self.hideTimer);
-		self.hideTimer = null;
+		window.clearTimeout(this.hideTimer);
+		this.hideTimer = null;
 
-		self.showTimer = window.setTimeout(() => {
+		this.showTimer = window.setTimeout(() => {
 			const showing = ref(true);
 			popup(defineAsyncComponent(() => import('@/components/ui/tooltip.vue')), {
 				showing,
-				text: self.text,
-				asMfm: self.asMfm,
+				text: this.text,
+				asMfm: this.asMfm,
 				targetElement: el,
 			}, {}, 'closed');
 
-			self._close = () => {
+			this._close = () => {
 				showing.value = false;
 			};
 		}, delay);
