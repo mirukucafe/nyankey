@@ -187,6 +187,14 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		message: 'Invalid username.',
 		httpStatusCode: 400,
 	},
+	IS_ADMIN: {
+		message: 'This action cannot be done to an administrator account.',
+		httpStatusCode: 400,
+	},
+	IS_MODERATOR: {
+		message: 'This action cannot be done to a moderator account.',
+		httpStatusCode: 400,
+	},
 	LESS_RESTRICTIVE_VISIBILITY: {
 		message: 'The visibility cannot be less restrictive than the parent note.',
 		httpStatusCode: 400,

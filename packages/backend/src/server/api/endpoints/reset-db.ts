@@ -1,4 +1,5 @@
 import { resetDb } from '@/db/postgre.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../define.js';
 
 export const meta = {
@@ -17,7 +18,7 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
-	if (process.env.NODE_ENV !== 'test') throw new Error('NODE_ENV is not a test');
+	if (process.env.NODE_ENV !== 'test') throw new ApiError('ACCESS_DENIED');
 
 	await resetDb();
 

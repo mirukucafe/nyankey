@@ -1,4 +1,5 @@
 import { Signins, UserProfiles, Users } from '@/models/index.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -11,6 +12,8 @@ export const meta = {
 		type: 'object',
 		nullable: false, optional: false,
 	},
+
+	errors: ['NO_SUCH_USER', 'IS_ADMIN'],
 } as const;
 
 export const paramDef = {
@@ -29,12 +32,12 @@ export default define(meta, paramDef, async (ps, me) => {
 	]);
 
 	if (user == null || profile == null) {
-		throw new Error('user not found');
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	const _me = await Users.findOneByOrFail({ id: me.id });
 	if ((_me.isModerator && !_me.isAdmin) && user.isAdmin) {
-		throw new Error('cannot show info of admin');
+		throw new ApiError('IS_ADMIN');
 	}
 
 	if (!_me.isAdmin) {

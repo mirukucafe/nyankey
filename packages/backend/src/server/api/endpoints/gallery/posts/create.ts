@@ -3,6 +3,7 @@ import { genId } from '@/misc/gen-id.js';
 import { GalleryPost } from '@/models/entities/gallery-post.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { HOUR } from '@/const.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 
 export const meta = {
@@ -46,8 +47,14 @@ export default define(meta, paramDef, async (ps, user) => {
 		}),
 	))).filter((file): file is DriveFile => file != null);
 
-	if (files.length === 0) {
-		throw new Error();
+	if (files.length !== ps.fileIds.length) {
+		throw new ApiError(
+			'INVALID_PARAM',
+			{
+				param: '#/properties/fileIds/items',
+				reason: 'contains invalid file IDs',
+			}
+		);
 	}
 
 	const post = await GalleryPosts.insert(new GalleryPost({

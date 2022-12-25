@@ -1,11 +1,14 @@
 import * as speakeasy from 'speakeasy';
 import { UserProfiles } from '@/models/index.js';
 import define from '../../../define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	requireCredential: true,
 
 	secure: true,
+
+	errors: ['INTERNAL_ERROR', 'ACCESS_DENIED'],
 } as const;
 
 export const paramDef = {
@@ -23,7 +26,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 
 	if (profile.twoFactorTempSecret == null) {
-		throw new Error('二段階認証の設定が開始されていません');
+		throw new ApiError('INTERNAL_ERROR', 'Two-step verification has not been initiated.');
 	}
 
 	const verified = (speakeasy as any).totp.verify({
@@ -33,7 +36,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	if (!verified) {
-		throw new Error('not verified');
+		throw new ApiError('ACCESS_DENIED', 'TOTP missmatch');
 	}
 
 	await UserProfiles.update(user.id, {

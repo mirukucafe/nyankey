@@ -1,5 +1,6 @@
 import { Instances } from '@/models/index.js';
 import { toPuny } from '@/misc/convert-host.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 
 export const meta = {
@@ -7,6 +8,8 @@ export const meta = {
 
 	requireCredential: true,
 	requireModerator: true,
+
+	errors: ['NO_SUCH_OBJECT'],
 } as const;
 
 export const paramDef = {
@@ -23,7 +26,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	const instance = await Instances.findOneBy({ host: toPuny(ps.host) });
 
 	if (instance == null) {
-		throw new Error('instance not found');
+		throw new ApiError('NO_SUCH_OBJECT');
 	}
 
 	Instances.update({ host: toPuny(ps.host) }, {

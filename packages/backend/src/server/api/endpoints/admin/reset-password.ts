@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Users, UserProfiles } from '@/models/index.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../define.js';
 
 export const meta = {
@@ -21,6 +22,8 @@ export const meta = {
 			},
 		},
 	},
+
+	errors: ['NO_SUCH_USER', 'IS_ADMIN'],
 } as const;
 
 export const paramDef = {
@@ -36,11 +39,11 @@ export default define(meta, paramDef, async (ps) => {
 	const user = await Users.findOneBy({ id: ps.userId });
 
 	if (user == null) {
-		throw new Error('user not found');
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	if (user.isAdmin) {
-		throw new Error('cannot reset password of admin');
+		throw new ApiError('IS_ADMIN');
 	}
 
 	const passwd = secureRndstr(8, true);

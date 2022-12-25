@@ -3,12 +3,15 @@ import * as speakeasy from 'speakeasy';
 import * as QRCode from 'qrcode';
 import config from '@/config/index.js';
 import { UserProfiles } from '@/models/index.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 
 export const meta = {
 	requireCredential: true,
 
 	secure: true,
+
+	errors: ['ACCESS_DENIED'],
 } as const;
 
 export const paramDef = {
@@ -27,7 +30,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const same = await bcrypt.compare(ps.password, profile.password!);
 
 	if (!same) {
-		throw new Error('incorrect password');
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	// Generate user's secret key

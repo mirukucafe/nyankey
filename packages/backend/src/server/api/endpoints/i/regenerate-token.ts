@@ -2,12 +2,15 @@ import bcrypt from 'bcryptjs';
 import { publishInternalEvent, publishMainStream, publishUserEvent } from '@/services/stream.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import generateUserToken from '../../common/generate-native-user-token.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../define.js';
 
 export const meta = {
 	requireCredential: true,
 
 	secure: true,
+
+	errors: ['ACCESS_DENIED'],
 } as const;
 
 export const paramDef = {
@@ -29,7 +32,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const same = await bcrypt.compare(ps.password, profile.password!);
 
 	if (!same) {
-		throw new Error('incorrect password');
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	const newToken = generateUserToken();

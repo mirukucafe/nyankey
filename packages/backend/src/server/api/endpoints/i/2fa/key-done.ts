@@ -9,6 +9,7 @@ import {
 	Users,
 } from '@/models/index.js';
 import config from '@/config/index.js';
+import { ApiError } from '@/server/api/error.js';
 import { publishMainStream } from '@/services/stream.js';
 import define from '../../../define.js';
 import { procedures, hash } from '../../../2fa.js';
@@ -20,6 +21,8 @@ export const meta = {
 	requireCredential: true,
 
 	secure: true,
+
+	errors: ['ACCESS_DENIED', 'INTERNAL_ERROR', 'NO_SUCH_OBJECT'],
 } as const;
 
 export const paramDef = {
@@ -42,20 +45,20 @@ export default define(meta, paramDef, async (ps, user) => {
 	const same = await bcrypt.compare(ps.password, profile.password!);
 
 	if (!same) {
-		throw new Error('incorrect password');
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	if (!profile.twoFactorEnabled) {
-		throw new Error('2fa not enabled');
+		throw new ApiError('INTERNAL_ERROR', '2fa not enabled');
 	}
 
 	const clientData = JSON.parse(ps.clientDataJSON);
 
 	if (clientData.type !== 'webauthn.create') {
-		throw new Error('not a creation attestation');
+		throw new ApiError('INTERNAL_ERROR', 'not a creation attestation');
 	}
 	if (clientData.origin !== config.scheme + '://' + config.host) {
-		throw new Error('origin mismatch');
+		throw new ApiError('INTERNAL_ERROR', 'origin mismatch');
 	}
 
 	const clientDataJSONHash = hash(Buffer.from(ps.clientDataJSON, 'utf-8'));
@@ -64,14 +67,14 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	const rpIdHash = attestation.authData.slice(0, 32);
 	if (!rpIdHashReal.equals(rpIdHash)) {
-		throw new Error('rpIdHash mismatch');
+		throw new ApiError('INTERNAL_ERROR', 'rpIdHash mismatch');
 	}
 
 	const flags = attestation.authData[32];
 
 	// eslint:disable-next-line:no-bitwise
 	if (!(flags & 1)) {
-		throw new Error('user not present');
+		throw new ApiError('INTERNAL_ERROR', 'user not present');
 	}
 
 	const authData = Buffer.from(attestation.authData);
@@ -80,11 +83,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	const publicKeyData = authData.slice(55 + credentialIdLength);
 	const publicKey: Map<number, any> = await cborDecodeFirst(publicKeyData);
 	if (publicKey.get(3) !== -7) {
-		throw new Error('alg mismatch');
+		throw new ApiError('INTERNAL_ERROR', 'algorithm mismatch');
 	}
 
 	if (!(procedures as any)[attestation.fmt]) {
-		throw new Error('unsupported fmt');
+		throw new ApiError('INTERNAL_ERROR', 'unsupported fmt');
 	}
 
 	const verificationData = (procedures as any)[attestation.fmt].verify({
@@ -95,7 +98,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		publicKey,
 		rpIdHash,
 	});
-	if (!verificationData.valid) throw new Error('signature invalid');
+	if (!verificationData.valid) throw new ApiError('INTERNAL_ERROR', 'signature invalid');
 
 	const attestationChallenge = await AttestationChallenges.findOneBy({
 		userId: user.id,
@@ -105,7 +108,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	if (!attestationChallenge) {
-		throw new Error('non-existent challenge');
+		throw new ApiError('NO_SUCH_OBJECT', 'Attestation challenge not found.');
 	}
 
 	await AttestationChallenges.delete({
@@ -118,7 +121,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		new Date().getTime() - attestationChallenge.createdAt.getTime() >=
 		5 * MINUTE
 	) {
-		throw new Error('expired challenge');
+		throw new ApiError('NO_SUCH_OBJECT', 'Attestation challenge expired.');
 	}
 
 	const credentialIdString = credentialId.toString('hex');

@@ -1,6 +1,7 @@
 import { DriveFiles, GalleryPosts } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { HOUR } from '@/const.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 
 export const meta = {
@@ -20,6 +21,8 @@ export const meta = {
 		optional: false, nullable: false,
 		ref: 'GalleryPost',
 	},
+
+	errors: ['INVALID_PARAM'],
 } as const;
 
 export const paramDef = {
@@ -45,8 +48,14 @@ export default define(meta, paramDef, async (ps, user) => {
 		}),
 	))).filter((file): file is DriveFile => file != null);
 
-	if (files.length === 0) {
-		throw new Error();
+	if (files.length !== ps.fileIds.length) {
+		throw new ApiError(
+			'INVALID_PARAM',
+			{
+				param: '#/properties/fileIds/items',
+				reason: 'contains invalid file IDs',
+			}
+		);
 	}
 
 	await GalleryPosts.update({

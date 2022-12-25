@@ -1,12 +1,17 @@
 import { Users } from '@/models/index.js';
+import { ApiError } from '@/server/api/error.js';
 import { publishInternalEvent } from '@/services/stream.js';
 import define from '../../../define.js';
 
 export const meta = {
 	tags: ['admin'],
 
+	description: 'Grants a user moderator privileges. Administrators cannot be granted moderator privileges.',
+
 	requireCredential: true,
 	requireAdmin: true,
+
+	errors: ['NO_SUCH_USER', 'IS_ADMIN'],
 } as const;
 
 export const paramDef = {
@@ -22,11 +27,11 @@ export default define(meta, paramDef, async (ps) => {
 	const user = await Users.findOneBy({ id: ps.userId });
 
 	if (user == null) {
-		throw new Error('user not found');
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	if (user.isAdmin) {
-		throw new Error('cannot mark as moderator if admin user');
+		throw new ApiError('IS_ADMIN');
 	}
 
 	await Users.update(user.id, {

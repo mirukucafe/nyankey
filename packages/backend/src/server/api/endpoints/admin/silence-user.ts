@@ -1,4 +1,5 @@
 import { Users } from '@/models/index.js';
+import { ApiError } from '@/server/api/error.js';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
 import { publishInternalEvent } from '@/services/stream.js';
 import define from '../../define.js';
@@ -8,6 +9,8 @@ export const meta = {
 
 	requireCredential: true,
 	requireModerator: true,
+
+	errors: ['NO_SUCH_USER', 'IS_ADMIN'],
 } as const;
 
 export const paramDef = {
@@ -23,11 +26,11 @@ export default define(meta, paramDef, async (ps, me) => {
 	const user = await Users.findOneBy({ id: ps.userId });
 
 	if (user == null) {
-		throw new Error('user not found');
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	if (user.isAdmin) {
-		throw new Error('cannot silence admin');
+		throw new ApiError('IS_ADMIN');
 	}
 
 	await Users.update(user.id, {

@@ -3,6 +3,7 @@ import * as crypto from 'node:crypto';
 import bcrypt from 'bcryptjs';
 import { UserProfiles, AttestationChallenges } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 import { hash } from '../../../2fa.js';
 
@@ -12,6 +13,8 @@ export const meta = {
 	requireCredential: true,
 
 	secure: true,
+
+	errors: ['ACCESS_DENIED', 'INTERNAL_ERROR'],
 } as const;
 
 export const paramDef = {
@@ -30,11 +33,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	const same = await bcrypt.compare(ps.password, profile.password!);
 
 	if (!same) {
-		throw new Error('incorrect password');
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	if (!profile.twoFactorEnabled) {
-		throw new Error('2fa not enabled');
+		throw new ApiError('INTERNAL_ERROR', '2fa not enabled');
 	}
 
 	// 32 byte challenge

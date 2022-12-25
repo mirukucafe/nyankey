@@ -1,12 +1,15 @@
 import bcrypt from 'bcryptjs';
 import { UserProfiles, UserSecurityKeys, Users } from '@/models/index.js';
 import { publishMainStream } from '@/services/stream.js';
+import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 
 export const meta = {
 	requireCredential: true,
 
 	secure: true,
+
+	errors: ['ACCESS_DENIED'],
 } as const;
 
 export const paramDef = {
@@ -26,7 +29,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const same = await bcrypt.compare(ps.password, profile.password!);
 
 	if (!same) {
-		throw new Error('incorrect password');
+		throw new ApiError('ACCESS_DENIED');
 	}
 
 	// Make sure we only delete the user's own creds

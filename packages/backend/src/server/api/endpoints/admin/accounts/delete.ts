@@ -1,4 +1,5 @@
 import { Users } from '@/models/index.js';
+import { ApiError } from '@/server/api/error.js';
 import { doPostSuspend } from '@/services/suspend-user.js';
 import { publishUserEvent } from '@/services/stream.js';
 import { createDeleteAccountJob } from '@/queue/index.js';
@@ -9,6 +10,8 @@ export const meta = {
 
 	requireCredential: true,
 	requireModerator: true,
+
+	errors: ['NO_SUCH_USER', 'IS_ADMIN', 'IS_MODERATOR'],
 } as const;
 
 export const paramDef = {
@@ -24,15 +27,11 @@ export default define(meta, paramDef, async (ps, me) => {
 	const user = await Users.findOneBy({ id: ps.userId });
 
 	if (user == null) {
-		throw new Error('user not found');
-	}
-
-	if (user.isAdmin) {
-		throw new Error('cannot suspend admin');
-	}
-
-	if (user.isModerator) {
-		throw new Error('cannot suspend moderator');
+		throw new ApiError('NO_SUCH_USER');
+	} else if (user.isAdmin) {
+		throw new ApiError('IS_ADMIN');
+	} else if(user.isModerator) {
+		throw new ApiError('IS_MODERATOR');
 	}
 
 	if (Users.isLocalUser(user)) {
