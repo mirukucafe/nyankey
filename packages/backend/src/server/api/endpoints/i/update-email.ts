@@ -1,6 +1,6 @@
-import bcrypt from 'bcryptjs';
 import { publishMainStream } from '@/services/stream.js';
 import config from '@/config/index.js';
+import { comparePassword } from '@/misc/password.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
@@ -37,10 +37,9 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 
-	// Compare password
-	const same = await bcrypt.compare(ps.password, profile.password!);
-
-	if (!same) throw new ApiError('ACCESS_DENIED');
+	if (!(await comparePassword(ps.password, profile.password!))) {
+		throw new ApiError('ACCESS_DENIED');
+	}
 
 	if (ps.email != null) {
 		const available = await validateEmailForAccount(ps.email);

@@ -1,7 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import { IsNull } from 'typeorm';
 import Koa from 'koa';
-import bcrypt from 'bcryptjs';
 import * as speakeasy from 'speakeasy';
 import { SECOND, MINUTE, HOUR } from '@/const.js';
 import config from '@/config/index.js';
@@ -9,6 +8,7 @@ import { Users, Signins, UserProfiles, UserSecurityKeys, AttestationChallenges }
 import { ILocalUser } from '@/models/entities/user.js';
 import { genId } from '@/misc/gen-id.js';
 import { getIpHash } from '@/misc/get-ip-hash.js';
+import { comparePassword } from '@/misc/password.js';
 import signin from '../common/signin.js';
 import { verifyLogin, hash } from '../2fa.js';
 import { limiter } from '../limiter.js';
@@ -67,7 +67,7 @@ export default async (ctx: Koa.Context) => {
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 
 	// Compare password
-	const same = await bcrypt.compare(password, profile.password!);
+	const same = await comparePassword(password, profile.password!);
 
 	async function fail(): void {
 		// Append signin history

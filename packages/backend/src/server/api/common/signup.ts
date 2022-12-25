@@ -1,11 +1,11 @@
 import { generateKeyPair } from 'node:crypto';
-import bcrypt from 'bcryptjs';
 import { IsNull } from 'typeorm';
 import { User } from '@/models/entities/user.js';
 import { Users, UsedUsernames } from '@/models/index.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { genId } from '@/misc/gen-id.js';
 import { toPunyNullable } from '@/misc/convert-host.js';
+import { hashPassword } from '@/misc/password.js';
 import { UserKeypair } from '@/models/entities/user-keypair.js';
 import { usersChart } from '@/services/chart/index.js';
 import { UsedUsername } from '@/models/entities/used-username.js';
@@ -33,9 +33,7 @@ export async function signup(opts: {
 			throw new ApiError('INVALID_PASSWORD');
 		}
 
-		// Generate hash of password
-		const salt = await bcrypt.genSalt(8);
-		hash = await bcrypt.hash(password, salt);
+		hash = await hashPassword(password);
 	}
 
 	// Generate secret

@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+import { hashPassword } from '@/misc/password.js';
 import { UserProfiles, PasswordResetRequests } from '@/models/index.js';
 import { DAY, MINUTE } from '@/const.js';
 import define from '../define.js';
@@ -43,12 +43,8 @@ export default define(meta, paramDef, async (ps, user) => {
 		throw new ApiError('NO_SUCH_RESET_REQUEST');
 	}
 
-	// Generate hash of password
-	const salt = await bcrypt.genSalt(8);
-	const hash = await bcrypt.hash(ps.password, salt);
-
 	await UserProfiles.update(req.userId, {
-		password: hash,
+		password: await hashPassword(ps.password),
 	});
 
 	await PasswordResetRequests.delete(req.id);

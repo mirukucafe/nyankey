@@ -1,8 +1,8 @@
 import { promisify } from 'node:util';
 import * as crypto from 'node:crypto';
-import bcrypt from 'bcryptjs';
 import { UserProfiles, AttestationChallenges } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
+import { comparePassword } from '@/misc/password.js';
 import { ApiError } from '@/server/api/error.js';
 import define from '../../../define.js';
 import { hash } from '../../../2fa.js';
@@ -29,10 +29,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 
-	// Compare password
-	const same = await bcrypt.compare(ps.password, profile.password!);
-
-	if (!same) {
+	if (!(await comparePassword(ps.password, profile.password!))) {
 		throw new ApiError('ACCESS_DENIED');
 	}
 

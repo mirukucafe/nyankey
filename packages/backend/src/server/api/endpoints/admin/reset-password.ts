@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+import { hashPassword } from '@/misc/password.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
@@ -17,8 +17,6 @@ export const meta = {
 			password: {
 				type: 'string',
 				optional: false, nullable: false,
-				minLength: 8,
-				maxLength: 8,
 			},
 		},
 	},
@@ -46,18 +44,15 @@ export default define(meta, paramDef, async (ps) => {
 		throw new ApiError('IS_ADMIN');
 	}
 
-	const passwd = secureRndstr(8, true);
-
-	// Generate hash of password
-	const hash = bcrypt.hashSync(passwd);
+	const password = secureRndstr(8, true);
 
 	await UserProfiles.update({
 		userId: user.id,
 	}, {
-		password: hash,
+		password: await hashPassword(password),
 	});
 
 	return {
-		password: passwd,
+		password,
 	};
 });

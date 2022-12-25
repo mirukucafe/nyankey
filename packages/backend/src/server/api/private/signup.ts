@@ -1,7 +1,7 @@
 import Koa from 'koa';
-import bcrypt from 'bcryptjs';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { verifyHcaptcha, verifyRecaptcha } from '@/misc/captcha.js';
+import { hashPassword } from '@/misc/password.js';
 import { Users, RegistrationTickets, UserPendings } from '@/models/index.js';
 import config from '@/config/index.js';
 import { sendEmail } from '@/services/send-email.js';
@@ -71,17 +71,13 @@ export default async (ctx: Koa.Context) => {
 	if (instance.emailRequiredForSignup) {
 		const code = secureRndstr(16);
 
-		// Generate hash of password
-		const salt = await bcrypt.genSalt(8);
-		const hash = await bcrypt.hash(password, salt);
-
 		await UserPendings.insert({
 			id: genId(),
 			createdAt: new Date(),
 			code,
 			email: emailAddress,
 			username,
-			password: hash,
+			password: await hashPassword(password),
 		});
 
 		const link = `${config.url}/signup-complete/${code}`;

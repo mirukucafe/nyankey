@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+import { comparePassword } from '@/misc/password.js';
 import { UserProfiles, UserSecurityKeys, Users } from '@/models/index.js';
 import { publishMainStream } from '@/services/stream.js';
 import { ApiError } from '@/server/api/error.js';
@@ -25,10 +25,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
 
-	// Compare password
-	const same = await bcrypt.compare(ps.password, profile.password!);
-
-	if (!same) {
+	if (!(await comparePassword(ps.password, profile.password!))) {
 		throw new ApiError('ACCESS_DENIED');
 	}
 
