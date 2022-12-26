@@ -307,7 +307,6 @@ export const UserRepository = db.getRepository(User).extend({
 			host: user.host,
 			avatarUrl: this.getAvatarUrlSync(user),
 			avatarBlurhash: user.avatar?.blurhash || null,
-			avatarColor: null, // 後方互換性のため
 			isAdmin: user.isAdmin || falsy,
 			isModerator: user.isModerator || falsy,
 			isBot: user.isBot || falsy,
@@ -332,7 +331,6 @@ export const UserRepository = db.getRepository(User).extend({
 				lastFetchedAt: user.lastFetchedAt ? user.lastFetchedAt.toISOString() : null,
 				bannerUrl: user.banner ? DriveFiles.getPublicUrl(user.banner, false) : null,
 				bannerBlurhash: user.banner?.blurhash || null,
-				bannerColor: null, // 後方互換性のため
 				isLocked: user.isLocked,
 				isSilenced: user.isSilenced || falsy,
 				isSuspended: user.isSuspended || falsy,
