@@ -88,7 +88,11 @@
 			</div>
 		</span>
 		<span v-if="notification.type === 'move'" class="text" style="opacity: 0.6;">
-			{{ i18n.ts.moved }}
+			<I18n :src="i18n.ts.movedTo">
+				<template #handle>
+					<MkAcct :user="notification.moveTarget"/>
+				</template>
+			</I18n>
 			<div v-if="full"><MkFollowButton :user="notification.moveTarget" :full="true"/></div>
 		</span>
 		<span v-if="notification.type === 'app'" class="text">
