@@ -11,6 +11,9 @@
 # nano
 .swp
 
+# vimlocal
+.vimlocal
+
 # Node.js
 node_modules
 report.*.json

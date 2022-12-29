@@ -46,6 +46,44 @@ export const FILE_TYPE_BROWSERSAFE = [
 	'audio/x-flac',
 	'audio/vnd.wave',
 ];
+
+export const FILE_EXT_TRACKER_MODULES = [
+	'mod',
+	's3m',
+	'xm',
+	'it',
+	'mptm',
+	'stm',
+	'nst',
+	'm15',
+	'stk',
+	'wow',
+	'ult',
+	'669',
+	'mtm',
+	'med',
+	'far',
+	'mdl',
+	'ams',
+	'dsm',
+	'amf',
+	'okt',
+	'dmf',
+	'ptm',
+	'psm',
+	'mt2',
+	'dbm',
+	'digi',
+	'imf',
+	'j2b',
+	'gdm',
+	'umx',
+	'plm',
+	'mo3',
+	'xpk',
+	'ppm',
+	'mmcmp'
+];
 /*
 https://github.com/sindresorhus/file-type/blob/main/supported.js
 https://github.com/sindresorhus/file-type/blob/main/core.js

@@ -6,6 +6,7 @@
 			<template v-for="media in mediaList.filter(media => previewable(media))">
 				<XVideo v-if="media.type.startsWith('video')" :key="media.id" :video="media"/>
 				<XImage v-else-if="media.type.startsWith('image')" :key="media.id" class="image" :data-id="media.id" :image="media" :raw="raw"/>
+				<XModPlayer v-else-if="isModule(media)" :key="media.id" :module="media"/>
 			</template>
 		</div>
 	</div>
@@ -21,7 +22,8 @@ import 'photoswipe/style.css';
 import XBanner from './media-banner.vue';
 import XImage from './media-image.vue';
 import XVideo from './media-video.vue';
-import { FILE_TYPE_BROWSERSAFE } from '@/const';
+import XModPlayer from './mod-player.vue';
+import { FILE_TYPE_BROWSERSAFE, FILE_EXT_TRACKER_MODULES } from '@/const';
 
 const props = defineProps<{
 	mediaList: foundkey.entities.DriveFile[];
@@ -123,8 +125,16 @@ onMounted(() => {
 const previewable = (file: foundkey.entities.DriveFile): boolean => {
 	if (file.type === 'image/svg+xml') return true; // svgのwebpublic/thumbnailはpngなのでtrue
 	// FILE_TYPE_BROWSERSAFEに適合しないものはブラウザで表示するのに不適切
+	if (isModule(file)) return true;
 	return (file.type.startsWith('video') || file.type.startsWith('image')) && FILE_TYPE_BROWSERSAFE.includes(file.type);
 };
+
+const isModule = (file: foundkey.entities.DriveFile): boolean => {
+	return FILE_EXT_TRACKER_MODULES.some((ext) => {
+		return file.name.toLowerCase().endsWith("." + ext);
+	});
+};
+
 </script>
 
 <style lang="scss" scoped>

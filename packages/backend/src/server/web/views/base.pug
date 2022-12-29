@@ -36,6 +36,7 @@ html
 		link(rel='prefetch' href=config.images.error)
 		link(rel='stylesheet' href='/assets/fontawesome/css/all.css')
 		link(rel='modulepreload' href=`/assets/${clientEntry.file}`)
+		script(src='/client-assets/libopenmpt.js')
 
 		each href in clientEntry.css
 			link(rel='preload' href=`/assets/${href}` as='style')
@@ -63,6 +64,7 @@ html
 		script.
 			var VERSION = "#{version}";
 			var CLIENT_ENTRY = "#{clientEntry.file}";
+			window.libopenmpt = window.Module;
 
 	body
 		noscript: p
