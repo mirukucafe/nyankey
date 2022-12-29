@@ -85,6 +85,7 @@ player.value.load(props.module.url).then((result) => {
 	buffer = result;
 	try {
 		player.value.play(buffer);
+		progress.value.max = player.value.duration();
 		display();
 	} catch (e) {
 		console.warn(e);
@@ -138,8 +139,15 @@ function initSeek() {
 }
 
 function performSeek() {
+	const noNode = !player.value.currentPlayingNode;
+	if (noNode) {
+		player.value.play(buffer);
+	}
 	player.value.seek(position.value);
 	display();
+	if (noNode) {
+		player.value.stop();
+	}
 	isSeeking = false;
 }
 
