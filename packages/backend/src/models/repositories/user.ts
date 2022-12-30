@@ -5,7 +5,6 @@ import config from '@/config/index.js';
 import { Packed } from '@/misc/schema.js';
 import { awaitAll, Promiseable } from '@/prelude/await-all.js';
 import { populateEmojis } from '@/misc/populate-emojis.js';
-import { getAntennas } from '@/misc/antenna-cache.js';
 import { USER_ACTIVE_THRESHOLD, USER_ONLINE_THRESHOLD, HOUR } from '@/const.js';
 import { Cache } from '@/misc/cache.js';
 import { db } from '@/db/postgre.js';
@@ -126,92 +125,71 @@ export const UserRepository = db.getRepository(User).extend({
 	},
 
 	async getHasUnreadMessagingMessage(userId: User['id']): Promise<boolean> {
-		const mute = await Mutings.findBy({
-			muterId: userId,
-		});
+		return await db.query(
+			`SELECT EXISTS (
+				SELECT 1
+				FROM "messaging_message"
+				WHERE
+						"recipientId" = $1
+					AND
+						NOT "isRead"
+					AND
+						"userId" NOT IN (
+							SELECT "muteeId"
+							FROM "muting"
+							WHERE "muterId" = $1
+						)
 
-		const joinings = await UserGroupJoinings.findBy({ userId });
+				UNION
 
-		const groupQs = Promise.all(joinings.map(j => MessagingMessages.createQueryBuilder('message')
-			.where('message.groupId = :groupId', { groupId: j.userGroupId })
-			.andWhere('message.userId != :userId', { userId })
-			.andWhere('NOT (:userId = ANY(message.reads))', { userId })
-			.andWhere('message.createdAt > :joinedAt', { joinedAt: j.createdAt }) // 自分が加入する前の会話については、未読扱いしない
-			.getOne().then(x => x != null)));
-
-		const [withUser, withGroups] = await Promise.all([
-			MessagingMessages.count({
-				where: {
-					recipientId: userId,
-					isRead: false,
-					...(mute.length > 0 ? { userId: Not(In(mute.map(x => x.muteeId))) } : {}),
-				},
-				take: 1,
-			}).then(count => count > 0),
-			groupQs,
-		]);
-
-		return withUser || withGroups.some(x => x);
+				SELECT 1
+				FROM "messaging_message"
+				JOIN "user_group_joining"
+					ON "messaging_message"."groupId" = "user_group_joining"."userGroupId"
+				WHERE
+						"messaging_message"."userId" != $1
+					AND
+						NOT $1 = ANY("messaging_message"."reads")
+					AND
+						"messaging_message"."createdAt" > "user_group_joining"."createdAt"
+			) AS exists`,
+			[userId]
+		).then(res => res[0].exists);
 	},
 
 	async getHasUnreadAnnouncement(userId: User['id']): Promise<boolean> {
-		const reads = await AnnouncementReads.findBy({
-			userId,
-		});
-
-		const count = await Announcements.countBy(reads.length > 0 ? {
-			id: Not(In(reads.map(read => read.announcementId))),
-		} : {});
-
-		return count > 0;
+		return await db.query(
+			`SELECT EXISTS (SELECT 1 FROM "announcement" WHERE "id" NOT IN (SELECT "announcementId" FROM "announcement_read" WHERE "userId" = $1)) AS exists`,
+			[userId]
+		).then(res => res[0].exists);
 	},
 
 	async getHasUnreadAntenna(userId: User['id']): Promise<boolean> {
-		const myAntennas = (await getAntennas()).filter(a => a.userId === userId);
-
-		const unread = myAntennas.length > 0 ? await AntennaNotes.findOneBy({
-			antennaId: In(myAntennas.map(x => x.id)),
-			read: false,
-		}) : null;
-
-		return unread != null;
+		return await db.query(
+			`SELECT EXISTS (SELECT 1 FROM "antenna_note" WHERE NOT "read" AND "antennaId" IN (SELECT "id" FROM "antenna" WHERE "userId" = $1)) AS exists`,
+			[userId]
+		).then(res => res[0].exists);
 	},
 
 	async getHasUnreadChannel(userId: User['id']): Promise<boolean> {
-		const channels = await ChannelFollowings.findBy({ followerId: userId });
-
-		const unread = channels.length > 0 ? await NoteUnreads.findOneBy({
-			userId,
-			noteChannelId: In(channels.map(x => x.followeeId)),
-		}) : null;
-
-		return unread != null;
+		return await db.query(
+			`SELECT EXISTS (SELECT 1 FROM "note_unread" WHERE "noteChannelId" IN (SELECT "followeeId" FROM "channel_following" WHERE "followerId" = $1)) AS exists`,
+			[userId]
+		).then(res => res[0].exists);
 	},
 
 	async getHasUnreadNotification(userId: User['id']): Promise<boolean> {
-		const mute = await Mutings.findBy({
-			muterId: userId,
-		});
-		const mutedUserIds = mute.map(m => m.muteeId);
-
-		const count = await Notifications.count({
-			where: {
-				notifieeId: userId,
-				...(mutedUserIds.length > 0 ? { notifierId: Not(In(mutedUserIds)) } : {}),
-				isRead: false,
-			},
-			take: 1,
-		});
-
-		return count > 0;
+		return await db.query(
+			`SELECT EXISTS (SELECT 1 FROM "notification" WHERE NOT "isRead" AND "notifieeId" = $1 AND "notifierId" NOT IN (SELECT "muteeId" FROM "muting" WHERE "muterId" = $1)) AS exists`,
+			[userId]
+		).then(res => res[0].exists);
 	},
 
 	async getHasPendingReceivedFollowRequest(userId: User['id']): Promise<boolean> {
-		const count = await FollowRequests.countBy({
-			followeeId: userId,
-		});
-
-		return count > 0;
+		return await db.query(
+			`SELECT EXISTS (SELECT 1 FROM "follow_request" WHERE "followeeId" = $1) AS exists`,
+			[userId]
+		).then(res => res[0].exists);
 	},
 
 	getOnlineStatus(user: User): 'unknown' | 'online' | 'active' | 'offline' {
