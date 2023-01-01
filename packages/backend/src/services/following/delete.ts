@@ -20,7 +20,7 @@ export default async function(follower: { id: User['id']; host: User['host']; ur
 	});
 
 	if (following == null) {
-		logger.warn('フォロー解除がリクエストされましたがフォローしていませんでした');
+		logger.warn('unfollow requested, but did not follow');
 		return;
 	}
 
