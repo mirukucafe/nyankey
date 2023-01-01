@@ -393,8 +393,8 @@ function setVisibility() {
 	}
 
 	os.popup(defineAsyncComponent(() => import('./visibility-picker.vue')), {
-		currentVisibility: visibility,
-		currentLocalOnly: localOnly,
+		parentVisibility: visibility,
+		parentLocalOnly: localOnly,
 		src: visibilityButton,
 	}, {
 		changeVisibility: v => {
