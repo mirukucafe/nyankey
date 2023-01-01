@@ -64,7 +64,7 @@ export default define(meta, paramDef, async (ps, me) => {
 			.getMany();
 	} else {
 		const nameQuery = Users.createQueryBuilder('user')
-			.where(new Brackets(qb => { 
+			.where(new Brackets(qb => {
 				qb.where('user.name ILIKE :query', { query: '%' + ps.query + '%' });
 
 				// Also search username if it qualifies as username
@@ -103,6 +103,8 @@ export default define(meta, paramDef, async (ps, me) => {
 
 			const query = Users.createQueryBuilder('user')
 				.where(`user.id IN (${ profQuery.getQuery() })`)
+				// don't show users twice
+				.andWhere('user.id NOT IN (:...ids)', { ids: users.map(user => user.id) })
 				.andWhere(new Brackets(qb => { qb
 					.where('user.updatedAt IS NULL')
 					.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
