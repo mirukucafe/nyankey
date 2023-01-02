@@ -5,6 +5,7 @@ import { genId } from '@/misc/gen-id.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { publishAntennaStream, publishMainStream } from '@/services/stream.js';
 import { User } from '@/models/entities/user.js';
+import { SECOND } from '@/const.js';
 
 export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: { id: User['id']; }): Promise<void> {
 	// If it's set to not notify the user, or if it's the user's own post, read it.
@@ -49,6 +50,6 @@ export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: {
 			if (unread) {
 				publishMainStream(antenna.userId, 'unreadAntenna', antenna);
 			}
-		}, 2000);
+		}, 2 * SECOND);
 	}
 }

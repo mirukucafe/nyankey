@@ -22,5 +22,5 @@ export default async (actor: CacheableRemoteUser, activity: IAccept): Promise<st
 		return 'ok: unfollowed';
 	}
 
-	return 'skip: フォローされていない';
+	return 'skip: not followed';
 };

@@ -166,7 +166,7 @@ export default async function(_follower: { id: User['id'] }, _followee: { id: Us
 	if (followee.isLocked || (followeeProfile.carefulBot && follower.isBot) || (Users.isLocalUser(follower) && Users.isRemoteUser(followee))) {
 		let autoAccept = false;
 
-		// 鍵アカウントであっても、既にフォローされていた場合はスルー
+		// Even for locked accounts, if they are already following, go through immediately.
 		const following = await Followings.countBy({
 			followerId: follower.id,
 			followeeId: followee.id,
@@ -175,7 +175,7 @@ export default async function(_follower: { id: User['id'] }, _followee: { id: Us
 			autoAccept = true;
 		}
 
-		// フォローしているユーザーは自動承認オプション
+		// handle automatic approval for users that follow you, if enabled
 		if (!autoAccept && (Users.isLocalUser(followee) && followeeProfile.autoAcceptFollowed)) {
 			const followed = await Followings.countBy({
 				followerId: followee.id,

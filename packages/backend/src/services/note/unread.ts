@@ -3,27 +3,27 @@ import { publishMainStream } from '@/services/stream.js';
 import { User } from '@/models/entities/user.js';
 import { Mutings, NoteThreadMutings, NoteUnreads } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
+import { SECOND } from '@/const.js';
 
 export async function insertNoteUnread(userId: User['id'], note: Note, params: {
-	// NOTE: isSpecifiedがtrueならisMentionedは必ずfalse
+	// NOTE: if isSpecified is true, isMentioned is always false
 	isSpecified: boolean;
 	isMentioned: boolean;
 }): Promise<void> {
-	//#region ミュートしているなら無視
-	// TODO: 現在の仕様ではChannelにミュートは適用されないのでよしなにケアする
+	//#region ignore if muted
+	// TODO: The current design does not apply mutes to channels.
 	const muted = await Mutings.countBy({
 		muterId: userId,
 		muteeId: note.userId,
 	});
 	if (muted) return;
-	//#endregion
 
 	const threadMuted = await NoteThreadMutings.countBy({
-	// スレッドミュート
 		userId,
 		threadId: note.threadId || note.id,
 	});
 	if (threadMuted) return;
+	//#endregion
 
 	const unread = {
 		id: genId(),
@@ -37,7 +37,7 @@ export async function insertNoteUnread(userId: User['id'], note: Note, params: {
 
 	await NoteUnreads.insert(unread);
 
-	// 2秒経っても既読にならなかったら「未読の投稿がありますよ」イベントを発行する
+	// Issue the events for unread messages if it hasn't been read after 2 seconds.
 	setTimeout(async () => {
 		const exist = await NoteUnreads.countBy({ id: unread.id });
 
@@ -52,5 +52,5 @@ export async function insertNoteUnread(userId: User['id'], note: Note, params: {
 		if (note.channelId) {
 			publishMainStream(userId, 'unreadChannel', note.id);
 		}
-	}, 2000);
+	}, 2 * SECOND);
 }
