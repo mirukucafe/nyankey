@@ -183,6 +183,7 @@ export function genOpenapiSpec() {
 				},
 			},
 			responses,
+			deprecated: endpoint.meta.stability === 'deprecated',
 		};
 
 		const path = {
