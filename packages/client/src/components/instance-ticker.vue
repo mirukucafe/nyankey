@@ -1,5 +1,5 @@
 <template>
-<div v-tooltip="instance.softwareName + ' ' + instance.softwareVersion" class="hpaizdrt" :style="bg">
+<div v-tooltip="tooltip" class="hpaizdrt" :style="bg">
 	<img v-if="instance.faviconUrl" class="icon" :src="instance.faviconUrl"/>
 	<span class="name">{{ instance.name ?? host }}</span>
 	<span v-if="instance.softwareName" class="software">{{ instance.softwareName }}</span>
@@ -35,6 +35,10 @@ const themeColor = instance.themeColor ?? '#777777';
 const bg = {
 	background: `linear-gradient(90deg, ${themeColor}, ${themeColor}00)`,
 };
+
+const tooltip = instance.softwareName == null || instance.softwareVersion == null
+	? null
+	: instance.softwareName + ' ' + instance.softwareVersion;
 </script>
 
 <style lang="scss" scoped>
