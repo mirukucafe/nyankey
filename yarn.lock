@@ -3764,6 +3764,7 @@ __metadata:
     deep-email-validator: 0.1.21
     escape-regexp: 0.0.1
     eslint: ^8.29.0
+    eslint-plugin-foundkey-custom-rules: "file:../shared/custom-rules"
     eslint-plugin-import: ^2.26.0
     execa: 6.1.0
     feed: 4.2.2
@@ -7002,6 +7003,13 @@ __metadata:
     eslint:
       optional: true
   checksum: 5da13645daff145a5c922896b258f8bba560722c3767254e458d894ff5fbb505d6dfd945bffa932a5b0ae06714da2379bd41011c4c20d2d59cc83e23895360f7
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-foundkey-custom-rules@file:../shared/custom-rules::locator=backend%40workspace%3Apackages%2Fbackend":
+  version: 0.0.0
+  resolution: "eslint-plugin-foundkey-custom-rules@file:../shared/custom-rules#../shared/custom-rules::hash=81166b&locator=backend%40workspace%3Apackages%2Fbackend"
+  checksum: ac30bdbd2f8f135362128b93fe202e3eeabe785225439056ac1de78be10d919ee2f371b801e31a6de05e169d9002b29269726c2b26ca07f8003e98bbbb8600a7
   languageName: node
   linkType: hard
 
