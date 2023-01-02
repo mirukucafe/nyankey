@@ -48,12 +48,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// Check not following
-	const exist = await Followings.findOneBy({
+	const exist = await Followings.countBy({
 		followerId: follower.id,
 		followeeId: followee.id,
 	});
 
-	if (exist == null) throw new ApiError('NOT_FOLLOWING');
+	if (!exist) throw new ApiError('NOT_FOLLOWING');
 
 	await deleteFollowing(follower, followee);
 

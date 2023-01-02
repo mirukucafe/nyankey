@@ -91,12 +91,12 @@ class NotificationManager {
 	public async deliver(): Promise<void> {
 		for (const x of this.queue) {
 			// check if the sender or thread are muted
-			const userMuted = await Mutings.findOneBy({
+			const userMuted = await Mutings.countBy({
 				muterId: x.target,
 				muteeId: this.notifier.id,
 			});
 
-			const threadMuted = await NoteThreadMutings.findOneBy({
+			const threadMuted = await NoteThreadMutings.countBy({
 				userId: x.target,
 				threadId: In([
 					// replies
@@ -376,7 +376,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 
 			// 通知
 			if (data.reply.userHost === null) {
-				const threadMuted = await NoteThreadMutings.findOneBy({
+				const threadMuted = await NoteThreadMutings.countBy({
 					userId: data.reply.userId,
 					threadId: data.reply.threadId || data.reply.id,
 				});
@@ -623,7 +623,7 @@ async function notifyToWatchersOfReplyee(reply: Note, user: { id: User['id']; },
 
 async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, nm: NotificationManager): Promise<void> {
 	for (const u of mentionedUsers.filter(u => Users.isLocalUser(u))) {
-		const threadMuted = await NoteThreadMutings.findOneBy({
+		const threadMuted = await NoteThreadMutings.countBy({
 			userId: u.id,
 			threadId: note.threadId || note.id,
 		});

@@ -43,14 +43,14 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	// Check blocking
 	if (user.id !== me.id) {
-		const block = await Blockings.findOneBy({
+		const blocked = await Blockings.countBy({
 			blockerId: user.id,
 			blockeeId: me.id,
 		});
-		if (block) throw new ApiError('BLOCKED');
+		if (blocked) throw new ApiError('BLOCKED');
 	}
 
-	const exist = await UserListJoinings.findOneBy({
+	const exist = await UserListJoinings.countBy({
 		userListId: userList.id,
 		userId: user.id,
 	});

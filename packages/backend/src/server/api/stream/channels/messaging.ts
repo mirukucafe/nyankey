@@ -31,12 +31,12 @@ export default class extends Channel {
 
 		// Check joining
 		if (this.groupId) {
-			const joining = await UserGroupJoinings.findOneBy({
+			const joined = await UserGroupJoinings.countBy({
 				userId: this.user!.id,
 				userGroupId: this.groupId,
 			});
 
-			if (joining == null) {
+			if (!joined) {
 				return;
 			}
 		}

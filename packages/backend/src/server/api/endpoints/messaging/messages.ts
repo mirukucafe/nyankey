@@ -95,12 +95,12 @@ export default define(meta, paramDef, async (ps, user) => {
 		if (recipientGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 		// check joined
-		const joining = await UserGroupJoinings.findOneBy({
+		const joined = await UserGroupJoinings.countBy({
 			userId: user.id,
 			userGroupId: recipientGroup.id,
 		});
 
-		if (joining == null) throw new ApiError('ACCESS_DENIED', 'You have to join a group to read messages in it.');
+		if (!joined) throw new ApiError('ACCESS_DENIED', 'You have to join a group to read messages in it.');
 
 		const query = makePaginationQuery(MessagingMessages.createQueryBuilder('message'), ps.sinceId, ps.untilId)
 			.andWhere('message.groupId = :groupId', { groupId: recipientGroup.id });

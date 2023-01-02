@@ -17,18 +17,18 @@ export default async (actor: CacheableRemoteUser, activity: IFollow): Promise<st
 		return 'skip: the unfollowed user is not local';
 	}
 
-	const [req, following] = await Promise.all([
-		FollowRequests.findOneBy({
+	const [requested, following] = await Promise.all([
+		FollowRequests.countBy({
 			followerId: actor.id,
 			followeeId: followee.id,
 		}),
-		Followings.findOneBy({
+		Followings.countBy({
 			followerId: actor.id,
 			followeeId: followee.id,
 		}),
 	]);
 
-	if (req) {
+	if (requested) {
 		await cancelFollowRequest(followee, actor);
 		return 'ok: follow request canceled';
 	} else if (following) {

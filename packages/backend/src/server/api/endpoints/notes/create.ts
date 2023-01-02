@@ -169,11 +169,11 @@ export default define(meta, paramDef, async (ps, user) => {
 
 		// Check blocking
 		if (renote.userId !== user.id) {
-			const block = await Blockings.findOneBy({
+			const blocked = await Blockings.countBy({
 				blockerId: renote.userId,
 				blockeeId: user.id,
 			});
-			if (block) throw new ApiError('BLOCKED', 'Blocked by author of note to be renoted.');
+			if (blocked) throw new ApiError('BLOCKED', 'Blocked by author of note to be renoted.');
 		}
 	}
 
@@ -194,11 +194,11 @@ export default define(meta, paramDef, async (ps, user) => {
 
 		// Check blocking
 		if (reply.userId !== user.id) {
-			const block = await Blockings.findOneBy({
+			const blocked = await Blockings.countBy({
 				blockerId: reply.userId,
 				blockeeId: user.id,
 			});
-			if (block) throw new ApiError('BLOCKED', 'Blocked by author of replied to note.');
+			if (blocked) throw new ApiError('BLOCKED', 'Blocked by author of replied to note.');
 		}
 	}
 

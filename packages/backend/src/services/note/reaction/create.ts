@@ -18,7 +18,7 @@ import { deleteReaction } from './delete.js';
 export async function createReaction(user: { id: User['id']; host: User['host']; }, note: Note, reaction?: string): Promise<void> {
 	// Check blocking
 	if (note.userId !== user.id) {
-		const block = await Blockings.findOneBy({
+		const block = await Blockings.countBy({
 			blockerId: note.userId,
 			blockeeId: user.id,
 		});
@@ -99,7 +99,7 @@ export async function createReaction(user: { id: User['id']; host: User['host'];
 	});
 
 	// check if this thread is muted
-	const threadMuted = await NoteThreadMutings.findOneBy({
+	const threadMuted = await NoteThreadMutings.countBy({
 		userId: note.userId,
 		threadId: note.threadId || note.id,
 		mutingNotificationTypes: ArrayOverlap(['reaction']),

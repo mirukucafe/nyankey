@@ -70,7 +70,7 @@ export async function signup(opts: {
 
 	// Start transaction
 	await db.transaction(async transactionalEntityManager => {
-		const exist = await transactionalEntityManager.findOneBy(User, {
+		const exist = await transactionalEntityManager.countBy(User, {
 			usernameLower: username.toLowerCase(),
 			host: IsNull(),
 		});

@@ -22,7 +22,7 @@ export async function createSystemUser(username: string): Promise<User> {
 
 	// Start transaction
 	await db.transaction(async transactionalEntityManager => {
-		const exist = await transactionalEntityManager.findOneBy(User, {
+		const exist = await transactionalEntityManager.countBy(User, {
 			usernameLower: username.toLowerCase(),
 			host: IsNull(),
 		});

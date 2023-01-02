@@ -46,12 +46,12 @@ export default define(meta, paramDef, async (ps, me) => {
 		throw e;
 	});
 
-	const joining = await UserGroupJoinings.findOneBy({
+	const joined = await UserGroupJoinings.countBy({
 		userGroupId: userGroup.id,
 		userId: user.id,
 	});
 
-	if (joining == null) throw new ApiError('NO_SUCH_USER', 'The user exists but is not a member of the group.');
+	if (!joined) throw new ApiError('NO_SUCH_USER', 'The user exists but is not a member of the group.');
 
 	await UserGroups.update(userGroup.id, {
 		userId: ps.userId,

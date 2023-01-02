@@ -71,11 +71,11 @@ export default define(meta, paramDef, async (ps, me) => {
 		if (me == null) {
 			throw new ApiError('ACCESS_DENIED');
 		} else if (me.id !== user.id) {
-			const following = await Followings.findOneBy({
+			const following = await Followings.countBy({
 				followeeId: user.id,
 				followerId: me.id,
 			});
-			if (following == null) {
+			if (!following) {
 				throw new ApiError('ACCESS_DENIED');
 			}
 		}

@@ -11,18 +11,19 @@ export async function insertNoteUnread(userId: User['id'], note: Note, params: {
 }): Promise<void> {
 	//#region ミュートしているなら無視
 	// TODO: 現在の仕様ではChannelにミュートは適用されないのでよしなにケアする
-	const mute = await Mutings.findBy({
+	const muted = await Mutings.countBy({
 		muterId: userId,
+		muteeId: note.userId,
 	});
-	if (mute.map(m => m.muteeId).includes(note.userId)) return;
+	if (muted) return;
 	//#endregion
 
+	const threadMuted = await NoteThreadMutings.countBy({
 	// スレッドミュート
-	const threadMute = await NoteThreadMutings.findOneBy({
 		userId,
 		threadId: note.threadId || note.id,
 	});
-	if (threadMute) return;
+	if (threadMuted) return;
 
 	const unread = {
 		id: genId(),
@@ -38,9 +39,9 @@ export async function insertNoteUnread(userId: User['id'], note: Note, params: {
 
 	// 2秒経っても既読にならなかったら「未読の投稿がありますよ」イベントを発行する
 	setTimeout(async () => {
-		const exist = await NoteUnreads.findOneBy({ id: unread.id });
+		const exist = await NoteUnreads.countBy({ id: unread.id });
 
-		if (exist == null) return;
+		if (!exist) return;
 
 		if (params.isMentioned) {
 			publishMainStream(userId, 'unreadMention', note.id);

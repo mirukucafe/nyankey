@@ -23,9 +23,9 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
-	const instance = await Instances.findOneBy({ host: toPuny(ps.host) });
+	const instanceExists = await Instances.countBy({ host: toPuny(ps.host) });
 
-	if (instance == null) {
+	if (!instanceExists) {
 		throw new ApiError('NO_SUCH_OBJECT');
 	}
 

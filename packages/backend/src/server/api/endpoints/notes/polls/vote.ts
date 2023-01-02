@@ -47,11 +47,11 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	// Check blocking
 	if (note.userId !== user.id) {
-		const block = await Blockings.findOneBy({
+		const blocked = await Blockings.countBy({
 			blockerId: note.userId,
 			blockeeId: user.id,
 		});
-		if (block) throw new ApiError('BLOCKED');
+		if (blocked) throw new ApiError('BLOCKED');
 	}
 
 	const poll = await Polls.findOneByOrFail({ noteId: note.id });
@@ -99,7 +99,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// check if this thread and notification type is muted
-	const threadMuted = await NoteThreadMutings.findOneBy({
+	const threadMuted = await NoteThreadMutings.countBy({
 		userId: note.userId,
 		threadId: note.threadId || note.id,
 		mutingNotificationTypes: ArrayOverlap(['pollVote']),

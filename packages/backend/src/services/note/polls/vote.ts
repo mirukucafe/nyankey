@@ -16,7 +16,7 @@ export async function vote(user: CacheableUser, note: Note, choice: number): Pro
 
 	// Check blocking
 	if (note.userId !== user.id) {
-		const block = await Blockings.findOneBy({
+		const block = await Blockings.countBy({
 			blockerId: note.userId,
 			blockeeId: user.id,
 		});
@@ -58,7 +58,7 @@ export async function vote(user: CacheableUser, note: Note, choice: number): Pro
 	});
 
 	// check if this thread and notification type is muted
-	const muted = await NoteThreadMutings.findOneBy({
+	const muted = await NoteThreadMutings.countBy({
 		userId: note.userId,
 		threadId: note.threadId || note.id,
 		mutingNotificationTypes: ArrayOverlap(['pollVote']),

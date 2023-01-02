@@ -142,7 +142,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 			const uri = getApId(note.inReplyTo);
 			if (uri.startsWith(config.url + '/')) {
 				const id = uri.split('/').pop();
-				const talk = await MessagingMessages.findOneBy({ id });
+				const talk = await MessagingMessages.countBy({ id });
 				if (talk) {
 					isTalk = true;
 					return null;

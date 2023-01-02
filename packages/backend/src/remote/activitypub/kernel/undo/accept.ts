@@ -12,7 +12,7 @@ export default async (actor: CacheableRemoteUser, activity: IAccept): Promise<st
 		return 'skip: follower not found';
 	}
 
-	const following = await Followings.findOneBy({
+	const following = await Followings.countBy({
 		followerId: follower.id,
 		followeeId: actor.id,
 	});

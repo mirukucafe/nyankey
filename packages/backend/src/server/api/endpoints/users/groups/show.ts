@@ -37,12 +37,12 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
-	const joining = await UserGroupJoinings.findOneBy({
+	const joined = await UserGroupJoinings.countBy({
 		userId: me.id,
 		userGroupId: userGroup.id,
 	});
 
-	if (joining == null && userGroup.userId !== me.id) {
+	if (!joined && userGroup.userId !== me.id) {
 		throw new ApiError('NO_SUCH_GROUP');
 	}
 

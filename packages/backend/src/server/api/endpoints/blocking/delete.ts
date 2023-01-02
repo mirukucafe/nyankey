@@ -48,12 +48,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// Check not blocking
-	const exist = await Blockings.findOneBy({
+	const exist = await Blockings.countBy({
 		blockerId: blocker.id,
 		blockeeId: blockee.id,
 	});
 
-	if (exist == null) throw new ApiError('NOT_BLOCKING');
+	if (!exist) throw new ApiError('NOT_BLOCKING');
 
 	// Delete blocking
 	await deleteBlocking(blocker, blockee);

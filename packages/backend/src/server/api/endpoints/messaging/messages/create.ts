@@ -106,7 +106,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		});
 
 		// Check blocking
-		const block = await Blockings.findOneBy({
+		const block = await Blockings.countBy({
 			blockerId: recipientUser.id,
 			blockeeId: user.id,
 		});
@@ -118,12 +118,12 @@ export default define(meta, paramDef, async (ps, user) => {
 		if (recipientGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 		// check joined
-		const joining = await UserGroupJoinings.findOneBy({
+		const joined = await UserGroupJoinings.countBy({
 			userId: user.id,
 			userGroupId: recipientGroup.id,
 		});
 
-		if (joining == null) throw new ApiError('ACCESS_DENIED', 'You have to join a group to send a message in it.');
+		if (!joined) throw new ApiError('ACCESS_DENIED', 'You have to join a group to send a message in it.');
 	}
 
 	let file = null;

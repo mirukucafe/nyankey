@@ -25,9 +25,9 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	// Check if announcement exists
-	const announcement = await Announcements.findOneBy({ id: ps.announcementId });
+	const exists = await Announcements.countBy({ id: ps.announcementId });
 
-	if (announcement == null) throw new ApiError('NO_SUCH_ANNOUNCEMENT');
+	if (!exists) throw new ApiError('NO_SUCH_ANNOUNCEMENT');
 
 	// Check if already read
 	const read = await AnnouncementReads.findOneBy({

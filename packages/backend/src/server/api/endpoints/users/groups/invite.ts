@@ -43,14 +43,14 @@ export default define(meta, paramDef, async (ps, me) => {
 		throw e;
 	});
 
-	const joining = await UserGroupJoinings.findOneBy({
+	const joined = await UserGroupJoinings.countBy({
 		userGroupId: userGroup.id,
 		userId: user.id,
 	});
 
-	if (joining) throw new ApiError('ALREADY_ADDED');
+	if (joined) throw new ApiError('ALREADY_ADDED');
 
-	const existInvitation = await UserGroupInvitations.findOneBy({
+	const existInvitation = await UserGroupInvitations.countBy({
 		userGroupId: userGroup.id,
 		userId: user.id,
 	});

@@ -75,7 +75,7 @@ export async function toDbReaction(reaction?: string | null, idnReacterHost?: st
 	const custom = reaction.match(/^:([\w+-]+)(?:@\.)?:$/);
 	if (custom) {
 		const name = custom[1];
-		const emoji = await Emojis.findOneBy({
+		const emoji = await Emojis.countBy({
 			host: reacterHost ?? IsNull(),
 			name,
 		});

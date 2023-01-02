@@ -16,17 +16,17 @@ export async function cancelFollowRequest(followee: User, follower: User): Promi
 	if (Users.isRemoteUser(followee)) {
 		const content = renderActivity(renderUndo(renderFollow(follower, followee), follower));
 
-		if (Users.isLocalUser(follower)) { // 本来このチェックは不要だけどTSに怒られるので
+		if (Users.isLocalUser(follower)) {
 			deliver(follower, content, followee.inbox);
 		}
 	}
 
-	const request = await FollowRequests.findOneBy({
+	const requested = await FollowRequests.countBy({
 		followeeId: followee.id,
 		followerId: follower.id,
 	});
 
-	if (request == null) {
+	if (!requested) {
 		throw new IdentifiableError('17447091-ce07-46dd-b331-c1fd4f15b1e7', 'request not found');
 	}
 

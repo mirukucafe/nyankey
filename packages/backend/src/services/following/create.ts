@@ -46,12 +46,12 @@ export async function insertFollowingDoc(followee: { id: User['id']; host: User[
 		}
 	});
 
-	const req = await FollowRequests.findOneBy({
+	const requested = await FollowRequests.countBy({
 		followeeId: followee.id,
 		followerId: follower.id,
 	});
 
-	if (req) {
+	if (requested) {
 		await FollowRequests.delete({
 			followeeId: followee.id,
 			followerId: follower.id,
@@ -167,7 +167,7 @@ export default async function(_follower: { id: User['id'] }, _followee: { id: Us
 		let autoAccept = false;
 
 		// 鍵アカウントであっても、既にフォローされていた場合はスルー
-		const following = await Followings.findOneBy({
+		const following = await Followings.countBy({
 			followerId: follower.id,
 			followeeId: followee.id,
 		});
@@ -177,7 +177,7 @@ export default async function(_follower: { id: User['id'] }, _followee: { id: Us
 
 		// フォローしているユーザーは自動承認オプション
 		if (!autoAccept && (Users.isLocalUser(followee) && followeeProfile.autoAcceptFollowed)) {
-			const followed = await Followings.findOneBy({
+			const followed = await Followings.countBy({
 				followerId: followee.id,
 				followeeId: follower.id,
 			});
