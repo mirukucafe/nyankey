@@ -18,7 +18,9 @@ export class InternalStorage {
 
 	public static saveFromPath(key: string, srcPath: string): string {
 		fs.mkdirSync(InternalStorage.path, { recursive: true });
-		fs.copyFileSync(srcPath, InternalStorage.resolvePath(key));
+		const target = InternalStorage.resolvePath(key);
+		fs.copyFileSync(srcPath, target);
+		fs.chmodSync(target, 0o644);
 		return `${config.url}/files/${key}`;
 	}
 
