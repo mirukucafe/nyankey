@@ -6,7 +6,11 @@ module.exports = {
 	extends: [
 		'../shared/.eslintrc.js',
 	],
+	plugins: [
+		'foundkey-custom-rules',
+	]
 	rules: {
+		'foundkey-custom-rules/typeorm-prefer-count': 'error',
 		'import/order': ['warn', {
 			'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
 			'pathGroups': [
