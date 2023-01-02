@@ -6,7 +6,7 @@
 
 import * as nestedProperty from 'nested-property';
 import { EntitySchema, Repository, LessThan, Between } from 'typeorm';
-import { dateUTC, isTimeSame, isTimeBefore, subtractTime, addTime } from '@/prelude/time.js';
+import { isTimeSame, isTimeBefore, subtractTime, addTime } from '@/prelude/time.js';
 import { unique } from '@/prelude/array.js';
 import { getChartInsertLock } from '@/misc/app-lock.js';
 import { db } from '@/db/postgre.js';
@@ -282,10 +282,10 @@ export default abstract class Chart<T extends Schema> {
 	private async claimCurrentLog(group: string | null, span: 'hour' | 'day'): Promise<RawRecord<T>> {
 		const [y, m, d, h] = Chart.getCurrentDate();
 
-		const current = dateUTC(
+		const current = new Date(Date.UTC(...(
 			span === 'hour' ? [y, m, d, h] :
 			span === 'day' ? [y, m, d] :
-			new Error('not happen') as never);
+			new Error('not happen') as never)));
 
 		const repository =
 			span === 'hour' ? this.repositoryForHour :
@@ -533,7 +533,7 @@ export default abstract class Chart<T extends Schema> {
 	}
 
 	public async clean(): Promise<void> {
-		const current = dateUTC(Chart.getCurrentDate());
+		const current = new Date(Date.UTC(...Chart.getCurrentDate()));
 
 		// more than 1 day and less than 3 days
 		const gt = Chart.dateToTimestamp(current) - (60 * 60 * 24 * 3);
@@ -571,11 +571,11 @@ export default abstract class Chart<T extends Schema> {
 		const [y, m, d, h, _m, _s, _ms] = cursor ? Chart.parseDate(subtractTime(addTime(cursor, 1, span), 1)) : Chart.getCurrentDate();
 		const [y2, m2, d2, h2] = cursor ? Chart.parseDate(addTime(cursor, 1, span)) : [] as never;
 
-		const lt = dateUTC([y, m, d, h, _m, _s, _ms]);
+		const lt = new Date(Date.UTC(y, m, d, h, _m, _s, _ms));
 
 		const gt =
-			span === 'day' ? subtractTime(cursor ? dateUTC([y2, m2, d2, 0]) : dateUTC([y, m, d, 0]), amount - 1, 'day') :
-			span === 'hour' ? subtractTime(cursor ? dateUTC([y2, m2, d2, h2]) : dateUTC([y, m, d, h]), amount - 1, 'hour') :
+			span === 'day' ? subtractTime(cursor ? new Date(Date.UTC(y2, m2, d2, 0)) : new Date(Date.UTC(y, m, d, 0)), amount - 1, 'day') :
+			span === 'hour' ? subtractTime(cursor ? new Date(Date.UTC(y2, m2, d2, h2)) : new Date(Date.UTC(y, m, d, h)), amount - 1, 'hour') :
 			new Error('not happen') as never;
 
 		const repository =
@@ -632,8 +632,8 @@ export default abstract class Chart<T extends Schema> {
 
 		for (let i = (amount - 1); i >= 0; i--) {
 			const current =
-				span === 'hour' ? subtractTime(dateUTC([y, m, d, h]), i, 'hour') :
-				span === 'day' ? subtractTime(dateUTC([y, m, d]), i, 'day') :
+				span === 'hour' ? subtractTime(new Date(Date.UTC(y, m, d, h)), i, 'hour') :
+				span === 'day' ? subtractTime(new Date(Date.UTC(y, m, d)), i, 'day') :
 				new Error('not happen') as never;
 
 			const log = logs.find(l => isTimeSame(new Date(l.date * 1000), current));
