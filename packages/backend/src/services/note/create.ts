@@ -102,7 +102,7 @@ class NotificationManager {
 					// replies
 					this.note.threadId ?? this.note.id,
 					// renotes
-					this.note.renoteId ?? undefined
+					this.note.renoteId ?? undefined,
 				]),
 				mutingNotificationTypes: ArrayOverlap([x.reason]),
 			});

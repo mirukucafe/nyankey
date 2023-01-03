@@ -235,7 +235,7 @@ export const meta = {
 	},
 
 	v2: {
-		method: 'get'
+		method: 'get',
 	},
 } as const;
 
@@ -253,7 +253,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, me) => {
+export default define(meta, paramDef, async () => {
 	const instance = await fetchMeta(true);
 
 	const emojis = await Emojis.find({

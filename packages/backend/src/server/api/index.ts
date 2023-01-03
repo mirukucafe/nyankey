@@ -58,7 +58,7 @@ function uploadWrapper(endpoint: string): KoaMiddleware {
 						apiErr = new ApiError('FILE_TOO_BIG', { maxFileSize: config.maxFileSize || 262144000 });
 					}
 					apiErr.apply(ctx, endpoint);
-				}
+				},
 			);
 	};
 }

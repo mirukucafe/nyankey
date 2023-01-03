@@ -21,7 +21,7 @@ export const meta = {
 
 	v2: {
 		method: 'get',
-	}
+	},
 } as const;
 
 export const paramDef = {

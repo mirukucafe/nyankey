@@ -53,7 +53,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			{
 				param: '#/properties/fileIds/items',
 				reason: 'contains invalid file IDs',
-			}
+			},
 		);
 	}
 
