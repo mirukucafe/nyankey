@@ -49,7 +49,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, user) => {
+export default define(meta, paramDef, async (ps) => {
 	try {
 		if (new URL(ps.inbox).protocol !== 'https:') throw new ApiError('INVALID_URL', 'https only');
 	} catch (e) {

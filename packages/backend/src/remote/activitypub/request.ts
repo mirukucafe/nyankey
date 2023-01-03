@@ -30,14 +30,15 @@ export async function request(user: { id: User['id'] }, url: string, object: any
 		// don't allow redirects on the inbox
 		redirect: 'error',
 	});
-};
+}
 
 /**
  * Get AP object with http-signature
  * @param user http-signature user
  * @param url URL to fetch
  */
-export async function signedGet(url: string, user: { id: User['id'] }): Promise<any> {
+export async function signedGet(_url: string, user: { id: User['id'] }): Promise<any> {
+	let url = _url;
 	const keypair = await getUserKeypair(user.id);
 
 	for (let redirects = 0; redirects < 3; redirects++) {

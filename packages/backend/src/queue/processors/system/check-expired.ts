@@ -2,7 +2,7 @@ import Bull from 'bull';
 import { In, LessThan } from 'typeorm';
 import { AttestationChallenges, AuthSessions, Mutings, Notifications, PasswordResetRequests, Signins } from '@/models/index.js';
 import { publishUserEvent } from '@/services/stream.js';
-import { MINUTE, DAY, MONTH } from '@/const.js';
+import { MINUTE, MONTH } from '@/const.js';
 import { queueLogger } from '@/queue/logger.js';
 
 const logger = queueLogger.createSubLogger('check-expired');

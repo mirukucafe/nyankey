@@ -38,7 +38,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps) => {
+export default define(meta, paramDef, async () => {
 	const deliverJobCounts = await deliverQueue.getJobCounts();
 	const inboxJobCounts = await inboxQueue.getJobCounts();
 	const dbJobCounts = await dbQueue.getJobCounts();

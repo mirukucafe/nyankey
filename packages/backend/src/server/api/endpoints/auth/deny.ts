@@ -27,7 +27,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, user) => {
+export default define(meta, paramDef, async (ps) => {
 	const result = await AuthSessions.delete({
 		token: ps.token,
 	});

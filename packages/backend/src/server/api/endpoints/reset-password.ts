@@ -28,7 +28,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, user) => {
+export default define(meta, paramDef, async (ps) => {
 	const req = await PasswordResetRequests.findOneBy({
 		token: ps.token,
 	});

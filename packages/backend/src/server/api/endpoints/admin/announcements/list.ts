@@ -84,6 +84,6 @@ export default define(meta, paramDef, async (ps) => {
 		title: announcement.title,
 		text: announcement.text,
 		imageUrl: announcement.imageUrl,
-		reads: reads.get(announcement)!,
+		reads: reads.get(announcement),
 	}));
 });

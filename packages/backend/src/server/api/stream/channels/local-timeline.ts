@@ -16,7 +16,7 @@ export default class extends Channel {
 		this.onNote = this.withPackedNote(this.onPackedNote.bind(this));
 	}
 
-	public async init(params: any) {
+	public async init() {
 		const meta = await fetchMeta();
 		if (meta.disableLocalTimeline) {
 			if (this.user == null || (!this.user.isAdmin && !this.user.isModerator)) return;

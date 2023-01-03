@@ -56,7 +56,7 @@ export async function importCustomEmojis(job: Bull.Job<DbUserImportJobData>, don
 				name: emojiInfo.name,
 			});
 			const driveFile = await addFile({ user: null, path: emojiPath, name: record.fileName, force: true });
-			const emoji = await Emojis.insert({
+			await Emojis.insert({
 				id: genId(),
 				updatedAt: new Date(),
 				name: emojiInfo.name,
@@ -66,13 +66,13 @@ export async function importCustomEmojis(job: Bull.Job<DbUserImportJobData>, don
 				originalUrl: driveFile.url,
 				publicUrl: driveFile.webpublicUrl ?? driveFile.url,
 				type: driveFile.webpublicType ?? driveFile.type,
-			}).then(x => Emojis.findOneByOrFail(x.identifiers[0]));
+			});
 		}
 
 		await db.queryResultCache!.remove(['meta_emojis']);
 
 		cleanup();
-	
+
 		logger.succ('Imported');
 		done();
 	});

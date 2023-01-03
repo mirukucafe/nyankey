@@ -4,7 +4,7 @@ import { extractDbHost } from '@/misc/convert-host.js';
 import { StatusError } from '@/misc/fetch.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { createNote, fetchNote } from '@/remote/activitypub/models/note.js';
-import { getApId, IObject, ICreate } from '@/remote/activitypub/type.js';
+import { getApId, IObject } from '@/remote/activitypub/type.js';
 
 /**
  * 投稿作成アクティビティを捌きます

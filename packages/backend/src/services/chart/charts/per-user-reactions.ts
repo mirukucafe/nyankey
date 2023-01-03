@@ -13,7 +13,7 @@ export default class PerUserReactionsChart extends Chart<typeof schema> {
 		super(name, schema, true);
 	}
 
-	protected async tickMajor(group: string): Promise<Partial<KVs<typeof schema>>> {
+	protected async tickMajor(): Promise<Partial<KVs<typeof schema>>> {
 		return {};
 	}
 

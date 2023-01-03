@@ -11,7 +11,7 @@ export default async (ctx: Koa.Context) => {
 	try {
 		const pendingUser = await UserPendings.findOneByOrFail({ code });
 
-		const { account, secret } = await signup({
+		const { account } = await signup({
 			username: pendingUser.username,
 			passwordHash: pendingUser.password,
 		});

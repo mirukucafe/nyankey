@@ -6,7 +6,7 @@ import { extractDbHost } from '@/misc/convert-host.js';
 import { Users, Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { CacheableLocalUser, User } from '@/models/entities/user.js';
-import { isActor, isPost, getApId } from '@/remote/activitypub/type.js';
+import { isActor, isPost } from '@/remote/activitypub/type.js';
 import { SchemaType } from '@/misc/schema.js';
 import { HOUR } from '@/const.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';

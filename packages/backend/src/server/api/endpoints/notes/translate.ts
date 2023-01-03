@@ -3,7 +3,6 @@ import fetch from 'node-fetch';
 import config from '@/config/index.js';
 import { getAgentByUrl } from '@/misc/fetch.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
-import { Notes } from '@/models/index.js';
 import { TranslationService } from '@/models/entities/meta.js';
 import { ApiError } from '../../error.js';
 import { getNote } from '../../common/getters.js';

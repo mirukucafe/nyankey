@@ -37,7 +37,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, me) => {
+export default define(meta, paramDef, async (ps) => {
 	const emoji = await Emojis.findOneBy({ id: ps.emojiId });
 
 	if (emoji == null) throw new ApiError('NO_SUCH_EMOJI');

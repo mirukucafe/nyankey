@@ -14,7 +14,7 @@ export default class extends Channel {
 		this.onMessage = this.onMessage.bind(this);
 	}
 
-	public async init(params: any) {
+	public async init() {
 		ev.addListener('queueStats', this.onStats);
 	}
 

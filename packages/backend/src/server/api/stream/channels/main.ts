@@ -6,7 +6,7 @@ export default class extends Channel {
 	public static shouldShare = true;
 	public static requireCredential = true;
 
-	public async init(params: any) {
+	public async init() {
 		// Subscribe main stream channel
 		this.subscriber.on(`mainStream:${this.user!.id}`, async data => {
 			switch (data.type) {

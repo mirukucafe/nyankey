@@ -1,4 +1,3 @@
-import { URL } from 'node:url';
 import promiseLimit from 'promise-limit';
 
 import config from '@/config/index.js';
@@ -40,7 +39,6 @@ const summaryLength = 2048;
  * @param uri Fetch target URI
  */
 function validateActor(x: IObject): IActor {
-
 	if (x == null) {
 		throw new Error('invalid Actor: object is null');
 	}
@@ -100,7 +98,7 @@ function validateActor(x: IObject): IActor {
  *
  * If the target Person is registered in FoundKey, it is returned.
  */
-export async function fetchPerson(uri: string, resolver: Resolver): Promise<CacheableUser | null> {
+export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	const cached = uriPersonCache.get(uri);
@@ -384,7 +382,7 @@ export async function resolvePerson(uri: string, resolver: Resolver): Promise<Ca
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	//#region このサーバーに既に登録されていたらそれを返す
-	const exist = await fetchPerson(uri, resolver);
+	const exist = await fetchPerson(uri);
 
 	if (exist) {
 		return exist;

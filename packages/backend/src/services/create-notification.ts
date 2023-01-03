@@ -1,6 +1,6 @@
 import { publishMainStream } from '@/services/stream.js';
 import { pushNotification } from '@/services/push-notification.js';
-import { Notifications, Mutings, UserProfiles, Users } from '@/models/index.js';
+import { Notifications, Mutings, UserProfiles } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { User } from '@/models/entities/user.js';
 import { Notification } from '@/models/entities/notification.js';

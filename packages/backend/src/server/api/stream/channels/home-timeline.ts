@@ -16,7 +16,7 @@ export default class extends Channel {
 		this.onNote = this.withPackedNote(this.onPackedNote.bind(this));
 	}
 
-	public async init(params: any) {
+	public async init() {
 		// Subscribe events
 		this.subscriber.on('notesStream', this.onNote);
 	}

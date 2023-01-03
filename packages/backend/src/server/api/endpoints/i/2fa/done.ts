@@ -1,7 +1,7 @@
 import * as speakeasy from 'speakeasy';
 import { UserProfiles } from '@/models/index.js';
-import define from '../../../define.js';
 import { ApiError } from '@/server/api/error.js';
+import define from '../../../define.js';
 
 export const meta = {
 	requireCredential: true,

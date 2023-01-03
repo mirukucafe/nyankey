@@ -656,7 +656,7 @@ async function createMentionedEvents(mentionedUsers: MinimumUser[], note: Note, 
 	}
 }
 
-function saveReply(reply: Note, note: Note): void {
+function saveReply(reply: Note): void {
 	Notes.increment({ id: reply.id }, 'repliesCount', 1);
 }
 

@@ -50,9 +50,9 @@ export default define(meta, paramDef, async (ps, me) => {
 	}
 
 	(async () => {
-		await doPostSuspend(user).catch(e => {});
-		await unFollowAll(user).catch(e => {});
-		await readAllNotify(user).catch(e => {});
+		await doPostSuspend(user).catch(() => {});
+		await unFollowAll(user).catch(() => {});
+		await readAllNotify(user).catch(() => {});
 	})();
 });
 

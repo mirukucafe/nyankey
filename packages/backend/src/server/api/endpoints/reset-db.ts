@@ -17,7 +17,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, user) => {
+export default define(meta, paramDef, async () => {
 	if (process.env.NODE_ENV !== 'test') throw new ApiError('ACCESS_DENIED');
 
 	await resetDb();

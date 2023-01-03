@@ -2,7 +2,6 @@ import { PrimaryColumn, Entity, Index, JoinColumn, Column, ManyToOne } from 'typ
 import { noteNotificationTypes } from 'foundkey-js';
 import { id } from '../id.js';
 import { User } from './user.js';
-import { Note } from './note.js';
 
 @Entity()
 @Index(['userId', 'threadId'], { unique: true })

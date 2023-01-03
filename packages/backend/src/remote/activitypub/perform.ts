@@ -16,4 +16,4 @@ export async function perform(actor: CacheableRemoteUser, activity: IObject, res
 			});
 		}
 	}
-};
+}

@@ -485,9 +485,6 @@ router.get('/_info_card_', async ctx => {
 	});
 });
 
-const override = (source: string, target: string, depth = 0) =>
-	[, ...target.split('/').filter(x => x), ...source.split('/').filter(x => x).splice(depth)].join('/');
-
 router.get('/flush', async ctx => {
 	await ctx.render('flush');
 });

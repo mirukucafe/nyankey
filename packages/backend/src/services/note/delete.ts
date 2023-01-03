@@ -1,4 +1,4 @@
-import { Brackets, FindOptionsWhere, In, IsNull, Not } from 'typeorm';
+import { FindOptionsWhere, In, IsNull, Not } from 'typeorm';
 import { publishNoteStream } from '@/services/stream.js';
 import renderDelete from '@/remote/activitypub/renderer/delete.js';
 import renderAnnounce from '@/remote/activitypub/renderer/announce.js';
@@ -106,7 +106,7 @@ async function findCascadingNotes(note: Note): Promise<Note[]> {
 
 		await Promise.all(replies.map(reply => {
 			// only add unique notes
-			if (cascadingNotes.find((x) => x.id == reply.id) != null) return;
+			if (cascadingNotes.find((x) => x.id === reply.id) != null) return;
 
 			cascadingNotes.push(reply);
 			return recursive(reply.id);

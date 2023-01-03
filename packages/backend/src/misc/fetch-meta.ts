@@ -3,7 +3,7 @@ import { db } from '@/db/postgre.js';
 import { Meta } from '@/models/entities/meta.js';
 import { getFetchInstanceMetadataLock } from '@/misc/app-lock.js';
 
-let cache: Meta;
+let cache: Meta | undefined;
 
 /**
  * Performs the primitive database operation to set the server configuration

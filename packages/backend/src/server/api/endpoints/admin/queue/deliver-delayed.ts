@@ -39,7 +39,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps) => {
+export default define(meta, paramDef, async () => {
 	const jobs = await deliverQueue.getJobs(['delayed']);
 
 	const res = [] as [string, number][];

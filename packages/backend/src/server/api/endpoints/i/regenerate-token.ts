@@ -1,8 +1,8 @@
 import { comparePassword } from '@/misc/password.js';
 import { publishInternalEvent, publishMainStream, publishUserEvent } from '@/services/stream.js';
 import { Users, UserProfiles } from '@/models/index.js';
-import generateUserToken from '../../common/generate-native-user-token.js';
 import { ApiError } from '@/server/api/error.js';
+import generateUserToken from '../../common/generate-native-user-token.js';
 import define from '../../define.js';
 
 export const meta = {

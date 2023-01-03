@@ -23,20 +23,20 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, me) => {
+export default define(meta, paramDef, async (ps) => {
 	const user = await Users.findOneBy({ id: ps.userId });
 
 	if (user == null) {
 		throw new ApiError('NO_SUCH_USER');
 	} else if (user.isAdmin) {
 		throw new ApiError('IS_ADMIN');
-	} else if(user.isModerator) {
+	} else if (user.isModerator) {
 		throw new ApiError('IS_MODERATOR');
 	}
 
 	if (Users.isLocalUser(user)) {
 		// 物理削除する前にDelete activityを送信する
-		await doPostSuspend(user).catch(e => {});
+		await doPostSuspend(user).catch(() => {});
 
 		createDeleteAccountJob(user, {
 			soft: false,

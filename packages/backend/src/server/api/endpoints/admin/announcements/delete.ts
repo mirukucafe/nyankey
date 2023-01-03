@@ -20,7 +20,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, me) => {
+export default define(meta, paramDef, async (ps) => {
 	const announcement = await Announcements.findOneBy({ id: ps.id });
 
 	if (announcement == null) throw new ApiError('NO_SUCH_ANNOUNCEMENT');

@@ -30,7 +30,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps, me) => {
+export default define(meta, paramDef, async (ps) => {
 	const query = Hashtags.createQueryBuilder('tag');
 
 	if (ps.attachedToUserOnly) query.andWhere('tag.attachedUsersCount != 0');
