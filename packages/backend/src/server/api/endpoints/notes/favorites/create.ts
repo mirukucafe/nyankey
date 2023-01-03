@@ -31,12 +31,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// if already favorited
-	const exist = await NoteFavorites.findOneBy({
+	const exist = await NoteFavorites.countBy({
 		noteId: note.id,
 		userId: user.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_FAVORITED');
+	if (exist) throw new ApiError('ALREADY_FAVORITED');
 
 	// Create favorite
 	await NoteFavorites.insert({

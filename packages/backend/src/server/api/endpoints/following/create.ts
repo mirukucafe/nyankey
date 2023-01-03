@@ -49,12 +49,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// Check if already following
-	const exist = await Followings.findOneBy({
+	const exist = await Followings.countBy({
 		followerId: follower.id,
 		followeeId: followee.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_FOLLOWING');
+	if (exist) throw new ApiError('ALREADY_FOLLOWING');
 
 	try {
 		await create(follower, followee);

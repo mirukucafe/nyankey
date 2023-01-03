@@ -27,12 +27,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	if (post == null) throw new ApiError('NO_SUCH_POST');
 
 	// if already liked
-	const exist = await GalleryLikes.findOneBy({
+	const exist = await GalleryLikes.countBy({
 		postId: post.id,
 		userId: user.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_LIKED');
+	if (exist) throw new ApiError('ALREADY_LIKED');
 
 	// Create like
 	await GalleryLikes.insert({

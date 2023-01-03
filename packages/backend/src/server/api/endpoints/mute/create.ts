@@ -43,12 +43,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// Check if already muting
-	const exist = await Mutings.findOneBy({
+	const exist = await Mutings.countBy({
 		muterId: muter.id,
 		muteeId: mutee.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_MUTING');
+	if (exist) throw new ApiError('ALREADY_MUTING');
 
 	if (ps.expiresAt && ps.expiresAt <= Date.now()) {
 		return;

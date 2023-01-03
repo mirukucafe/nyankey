@@ -38,12 +38,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// Check if already muting
-	const exist = await RenoteMutings.findOneBy({
+	const exist = await RenoteMutings.countBy({
 		muterId: muter.id,
 		muteeId: mutee.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_MUTING');
+	if (exist) throw new ApiError('ALREADY_MUTING');
 
 	// Create mute
 	await RenoteMutings.insert({

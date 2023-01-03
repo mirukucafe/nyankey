@@ -27,12 +27,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	if (page == null) throw new ApiError('NO_SUCH_PAGE');
 
 	// if already liked
-	const exist = await PageLikes.findOneBy({
+	const exist = await PageLikes.countBy({
 		pageId: page.id,
 		userId: user.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_LIKED');
+	if (exist) throw new ApiError('ALREADY_LIKED');
 
 	// Create like
 	await PageLikes.insert({

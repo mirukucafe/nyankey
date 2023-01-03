@@ -26,10 +26,8 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
-	const file = await DriveFiles.findOneBy({
+	return 0 < await DriveFiles.countBy({
 		md5: ps.md5,
 		userId: user.id,
 	});
-
-	return file != null;
 });

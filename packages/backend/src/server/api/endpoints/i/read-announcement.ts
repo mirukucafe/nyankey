@@ -30,12 +30,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	if (!exists) throw new ApiError('NO_SUCH_ANNOUNCEMENT');
 
 	// Check if already read
-	const read = await AnnouncementReads.findOneBy({
+	const read = await AnnouncementReads.countBy({
 		announcementId: ps.announcementId,
 		userId: user.id,
 	});
 
-	if (read != null) return;
+	if (read) return;
 
 	// Create read
 	await AnnouncementReads.insert({

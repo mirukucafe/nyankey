@@ -48,12 +48,12 @@ export default define(meta, paramDef, async (ps, user) => {
 	});
 
 	// Check if already blocking
-	const exist = await Blockings.findOneBy({
+	const blocked = await Blockings.countBy({
 		blockerId: blocker.id,
 		blockeeId: blockee.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_BLOCKING');
+	if (blocked) throw new ApiError('ALREADY_BLOCKING');
 
 	await create(blocker, blockee);
 

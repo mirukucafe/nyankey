@@ -37,12 +37,12 @@ export default define(meta, paramDef, async (ps, user) => {
 		throw err;
 	});
 
-	const exist = await ClipNotes.findOneBy({
+	const exist = await ClipNotes.countBy({
 		noteId: note.id,
 		clipId: clip.id,
 	});
 
-	if (exist != null) throw new ApiError('ALREADY_CLIPPED');
+	if (exist) throw new ApiError('ALREADY_CLIPPED');
 
 	await ClipNotes.insert({
 		id: genId(),

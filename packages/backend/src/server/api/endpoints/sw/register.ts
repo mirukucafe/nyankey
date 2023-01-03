@@ -40,7 +40,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	// if already subscribed
-	const exist = await SwSubscriptions.findOneBy({
+	const exist = await SwSubscriptions.countBy({
 		userId: user.id,
 		endpoint: ps.endpoint,
 		auth: ps.auth,
@@ -49,7 +49,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	const instance = await fetchMeta(true);
 
-	if (exist != null) {
+	if (exist) {
 		return {
 			state: 'already-subscribed' as const,
 			key: instance.swPublicKey,

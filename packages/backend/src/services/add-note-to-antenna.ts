@@ -46,7 +46,7 @@ export async function addNoteToAntenna(antenna: Antenna, note: Note, noteUser: {
 
 		// Notify if not read after 2 seconds
 		setTimeout(async () => {
-			const unread = await AntennaNotes.findOneBy({ antennaId: antenna.id, read: false });
+			const unread = await AntennaNotes.countBy({ antennaId: antenna.id, read: false });
 			if (unread) {
 				publishMainStream(antenna.userId, 'unreadAntenna', antenna);
 			}

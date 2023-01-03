@@ -18,18 +18,18 @@ export async function createFollowRequest(follower: User, followee: User, reques
 
 	// check blocking
 	const [blocking, blocked] = await Promise.all([
-		Blockings.findOneBy({
+		Blockings.countBy({
 			blockerId: follower.id,
 			blockeeId: followee.id,
 		}),
-		Blockings.findOneBy({
+		Blockings.countBy({
 			blockerId: followee.id,
 			blockeeId: follower.id,
 		}),
 	]);
 
-	if (blocking != null) throw new Error('blocking');
-	if (blocked != null) throw new Error('blocked');
+	if (blocking) throw new Error('blocking');
+	if (blocked) throw new Error('blocked');
 
 	const followRequest = await FollowRequests.insert({
 		id: genId(),
