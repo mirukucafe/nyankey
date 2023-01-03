@@ -8,7 +8,7 @@ module.exports = {
 	],
 	plugins: [
 		'foundkey-custom-rules',
-	]
+	],
 	rules: {
 		'foundkey-custom-rules/typeorm-prefer-count': 'error',
 		'import/order': ['warn', {

@@ -1,4 +1,4 @@
-const dbFunctions = ["find", "findBy", "findOne", "findOneBy", "findOneOrFail", "findOneByOrFail"];
+const dbFunctions = ["find", "findBy", "findOne", "findOneBy", "findOneOrFail", "findOneByOrFail", "getOne", "getMany", "getRawOne", "getRawMany"];
 
 module.exports = {
 	meta: {
@@ -80,7 +80,7 @@ module.exports = {
 									(
 										// explicit null check
 										node.parent.type === "BinaryExpression" &&
-										["==", "==="].includes(node.parent.operator) &&
+										["==", "===", "!=", "!=="].includes(node.parent.operator) &&
 										(
 											(isNull(node.parent.left) && node.parent.right === node)
 											||
