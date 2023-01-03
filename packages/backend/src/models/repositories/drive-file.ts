@@ -126,7 +126,7 @@ export const DriveFileRepository = db.getRepository(DriveFile).extend({
 		const file = typeof src === 'object' ? src : await this.findOneBy({ id: src });
 		if (file == null) return null;
 
-		return await this.pack(file);
+		return await this.pack(file, opts);
 	},
 
 	async packMany(

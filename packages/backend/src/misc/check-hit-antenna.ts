@@ -22,7 +22,7 @@ export async function checkHitAntenna(antenna: Antenna, note: (Note | Packed<'No
 	if (note.visibility === 'specified') return false;
 
 	// skip if the antenna creator is blocked by the note author
-	const blockings = await blockingCache.fetch(noteUser.id);
+	const blockings = (await blockingCache.fetch(noteUser.id)) ?? [];
 	if (blockings.some(blocking => blocking === antenna.userId)) return false;
 
 	if (note.visibility === 'followers') {

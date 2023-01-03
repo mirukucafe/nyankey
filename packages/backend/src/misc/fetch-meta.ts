@@ -57,5 +57,5 @@ export async function fetchMeta(noCache = false): Promise<Meta> {
 
 	await getMeta();
 
-	return cache;
+	return cache!;
 }
