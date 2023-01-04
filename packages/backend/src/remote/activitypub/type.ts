@@ -111,7 +111,7 @@ export interface IPost extends IObject {
 		mediaType: string;
 	};
 	_misskey_quote?: string;
-	quoteUrl?: string;
+	quoteUri?: string;
 	_misskey_talk: boolean;
 }
 
@@ -122,7 +122,7 @@ export interface IQuestion extends IObject {
 		mediaType: string;
 	};
 	_misskey_quote?: string;
-	quoteUrl?: string;
+	quoteUri?: string;
 	oneOf?: IQuestionChoice[];
 	anyOf?: IQuestionChoice[];
 	endTime?: Date;
