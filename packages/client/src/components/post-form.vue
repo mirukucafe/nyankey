@@ -133,6 +133,11 @@ let poll = $ref<{
 let useCw = $ref(false);
 let showPreview = $ref(false);
 let cw = $ref<string | null>(null);
+
+// these define the "maximum" these parameters can be set to and will be tightened further down
+let parentLocalOnly = false;
+let parentVisibility = 'public';
+
 let localOnly = $ref<boolean>(props.initialLocalOnly ?? defaultStore.state.defaultNoteLocalOnly);
 let visibility = $ref(props.initialVisibility ?? defaultStore.state.defaultNoteVisibility as foundkey.NoteVisibility);
 let visibleUsers = $ref([]);
@@ -251,12 +256,11 @@ if (props.reply && props.reply.text != null) {
 }
 
 if (props.channel) {
-	visibility = 'public';
-	localOnly = true; // TODO: チャンネルが連合するようになった折には消す
+	parentLocalOnly = true; // TODO: remove when channels are federated
 }
 
 if (props.reply) {
-	visibility = foundkey.minVisibility(props.reply.visibility, visibility);
+	parentVisibility = foundkey.minVisibility(props.reply.visibility, parentVisibility);
 	if (props.reply.visibility === 'specified') {
 		os.api('users/show', {
 			userIds: props.reply.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.reply.userId),
@@ -270,10 +274,11 @@ if (props.reply) {
 			});
 		}
 	}
+	parentLocalOnly ||= props.reply.localOnly;
 }
 
 if (props.renote) {
-	visibility = foundkey.minVisibility(props.renote.visibility, visibility);
+	parentVisibility = foundkey.minVisibility(props.renote.visibility, parentVisibility);
 	if (props.renote.visibility === 'specified') {
 		os.api('users/show', {
 			userIds: props.renote.visibleUserIds.filter(uid => uid !== $i.id && uid !== props.renote.userId),
@@ -287,12 +292,17 @@ if (props.renote) {
 			});
 		}
 	}
+	parentLocalOnly ||= props.renote.localOnly;
 }
 
 if (props.specified) {
-	visibility = 'specified';
+	parentVisibility = 'specified';
 	pushVisibleUser(props.specified);
 }
+
+// set visibility and local only defaults to minimum of preselected or allowed.
+visibility = foundkey.minVisibility(visibility, parentVisibility);
+localOnly ||= parentLocalOnly;
 
 // keep cw when reply
 if (defaultStore.state.keepCw && props.reply && props.reply.cw) {
@@ -393,8 +403,10 @@ function setVisibility() {
 	}
 
 	os.popup(defineAsyncComponent(() => import('./visibility-picker.vue')), {
-		parentVisibility: visibility,
-		parentLocalOnly: localOnly,
+		parentVisibility,
+		parentLocalOnly,
+		currentVisibility: visibility,
+		currentLocalOnly: localOnly,
 		src: visibilityButton,
 	}, {
 		changeVisibility: v => {

@@ -53,6 +53,7 @@ const modal = $ref<InstanceType<typeof MkModal>>();
 const props = withDefaults(defineProps<{
 	parentVisibility: foundkey.NoteVisibility;
 	parentLocalOnly: boolean;
+	currentVisibility: foundkey.NoteVisibility;
 	currentLocalOnly: boolean;
 	src?: HTMLElement;
 }>(), {
@@ -64,8 +65,8 @@ const emit = defineEmits<{
 	(ev: 'closed'): void;
 }>();
 
-let v = $ref(props.parentVisibility);
-let localOnly = $ref(props.parentLocalOnly);
+let v = $ref(props.currentVisibility);
+let localOnly = $ref(props.currentLocalOnly);
 
 const disabled = foundkey.noteVisibilities.reduce((acc, visibility) => {
 	acc[visibility] = (visibility !== foundkey.minVisibility(visibility, props.parentVisibility));
