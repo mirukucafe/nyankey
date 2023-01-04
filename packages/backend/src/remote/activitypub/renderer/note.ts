@@ -27,7 +27,7 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 		if (inReplyToNote != null) {
 			const inReplyToUserExists = await Users.countBy({ id: inReplyToNote.userId });
 
-			if (!inReplyToUserExists) {
+			if (inReplyToUserExists) {
 				if (inReplyToNote.uri) {
 					inReplyTo = inReplyToNote.uri;
 				} else {
