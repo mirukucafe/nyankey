@@ -54,7 +54,11 @@ export async function getResponse(args: { url: string, method: string, body?: st
 		signal: controller.signal,
 	});
 
-	if (!res.ok) {
+	if (
+		!res.ok
+		&&
+		// intended redirect is not an error
+		!(args.redirect != 'follow' && res.status >= 300 && res.status < 400)) {
 		throw new StatusError(`${res.status} ${res.statusText}`, res.status, res.statusText);
 	}
 
