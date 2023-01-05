@@ -103,7 +103,7 @@ export const apiWithDialog = ((
 	promiseDialog(promise, null, (err) => {
 		alert({
 			type: 'error',
-			text: (err.message + '\n' + (err?.endpoint ?? '') + (err?.code ?? '')).trim(),
+			text: (err.message + '\n' + (err?.endpoint ?? '') + ' ' + (err?.code ?? '')).trim(),
 		});
 	});
 
