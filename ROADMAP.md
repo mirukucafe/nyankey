@@ -3,9 +3,9 @@ Note: this document is historical.
 Everything starting with the next section is the original "idea" document that led to the foundation of FoundKey.
 
 For the current status you should see the following:
-* The Behavioral Fixes [project](https://akkoma.dev/FoundKeyGang/FoundKey/projects/3)
-* The Technological Upkeep [project](https://akkoma.dev/FoundKeyGang/FoundKey/projects/4)
-* The Features [project](https://akkoma.dev/FoundKeyGang/FoundKey/projects/5)
+* Issues labeled with [behaviour-fix](https://akkoma.dev/FoundKeyGang/FoundKey/issues?labels=44)
+* Issues labeled with [upkeep](https://akkoma.dev/FoundKeyGang/FoundKey/issues?labels=43)
+* Issues labeled with [feature](https://akkoma.dev/FoundKeyGang/FoundKey/issues?labels=42)
 
 ## Misskey Goals
 I’ve been thinking about a community misskey fork for a while now. To some of you, this is not a surprise. Let’s talk about that.
