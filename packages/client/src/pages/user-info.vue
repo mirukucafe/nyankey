@@ -249,7 +249,7 @@ async function deleteAccount() {
 	if (typed.canceled) return;
 
 	if (typed.result === user?.username) {
-		await os.apiWithDialog('admin/delete-account', {
+		await os.apiWithDialog('admin/accounts/delete', {
 			userId: user.id,
 		});
 	} else {
