@@ -1,4 +1,5 @@
 import promiseLimit from 'promise-limit';
+import { Not, IsNull } from 'typeorm';
 
 import config from '@/config/index.js';
 import { registerOrFetchInstanceDoc } from '@/services/register-or-fetch-instance-doc.js';
@@ -54,6 +55,12 @@ function validateActor(x: IObject): IActor {
 		throw new Error('invalid Actor: wrong id');
 	}
 
+	// This check is security critical.
+	// Without this check, an entry could be inserted into UserPublickey for a local user.
+	if (extractDbHost(uri) === extractDbHost(config.url)) {
+		throw new StatusError('cannot resolve local user', 400, 'cannot resolve local user');
+	}
+
 	if (!(typeof x.inbox === 'string' && x.inbox.length > 0)) {
 		throw new Error('invalid Actor: wrong inbox');
 	}
@@ -83,9 +90,10 @@ function validateActor(x: IObject): IActor {
 			throw new Error('invalid Actor: publicKey.id is not a string');
 		}
 
-		const expectHost = extractDbHost(uri);
 		const publicKeyIdHost = extractDbHost(x.publicKey.id);
-		if (publicKeyIdHost !== expectHost) {
+		// This is a security critical check to not insert or change an entry of
+		// UserPublickey to point to a local key id.
+		if (extractDbHost(uri) !== extractDbHost(x.publicKey.id) {
 			throw new Error('invalid Actor: publicKey.id has different host');
 		}
 	}
@@ -104,7 +112,7 @@ export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
 	const cached = uriPersonCache.get(uri);
 	if (cached) return cached;
 
-	// URIがこのサーバーを指しているならデータベースからフェッチ
+	// If the URI points to this server, fetch from database.
 	if (uri.startsWith(config.url + '/')) {
 		const id = uri.split('/').pop();
 		const u = await Users.findOneBy({ id });
@@ -128,10 +136,6 @@ export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
  * Personを作成します。
  */
 export async function createPerson(value: string | IObject, resolver: Resolver): Promise<User> {
-	if (getApId(value).startsWith(config.url)) {
-		throw new StatusError('cannot resolve local user', 400, 'cannot resolve local user');
-	}
-
 	const object = await resolver.resolve(value) as any;
 
 	const person = validateActor(object);
@@ -275,13 +279,8 @@ export async function createPerson(value: string | IObject, resolver: Resolver):
 export async function updatePerson(value: IObject | string, resolver: Resolver): Promise<void> {
 	const uri = getApId(value);
 
-	// skip local URIs
-	if (uri.startsWith(config.url)) {
-		return;
-	}
-
 	// do we already know this user?
-	const exist = await Users.findOneBy({ uri }) as IRemoteUser;
+	const exist = await Users.findOneBy({ uri, host: Not(IsNull()) }) as IRemoteUser;
 
 	if (exist == null) {
 		return;
