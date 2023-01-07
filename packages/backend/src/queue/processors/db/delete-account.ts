@@ -83,10 +83,8 @@ export async function deleteAccount(job: Bull.Job<DbUserDeleteJobData>): Promise
 		}
 	}
 
-	// soft指定されている場合は物理削除しない
-	if (job.data.soft) {
-		// nop
-	} else {
+	// No physical deletion if soft is specified.
+	if (!job.data.soft) {
 		await Users.delete(job.data.user.id);
 	}
 

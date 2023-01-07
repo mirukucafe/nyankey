@@ -155,7 +155,14 @@ export class User {
 	})
 	public isExplorable: boolean;
 
-	// アカウントが削除されたかどうかのフラグだが、完全に削除される際は物理削除なので実質削除されるまでの「削除が進行しているかどうか」のフラグ
+	// for local users:
+	// Indicates a deletion in progress.
+	// A hard delete of the record will follow after the deletion finishes.
+	//
+	// for remote users:
+	// Indicates the user was deleted by an admin.
+	// The users' data is not deleted from the database to keep them from reappearing.
+	// A hard delete of the record may follow if we receive a matching Delete activity.
 	@Column('boolean', {
 		default: false,
 		comment: 'Whether the User is deleted.',
