@@ -1,7 +1,9 @@
 import httpSignature from '@peertube/http-signature';
 import { v4 as uuid } from 'uuid';
+import Bull from 'bull';
 
 import config from '@/config/index.js';
+import { Users } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { Webhook, webhookEventTypes } from '@/models/entities/webhook.js';
 import { IActivity } from '@/remote/activitypub/type.js';
@@ -18,7 +20,7 @@ import { endedPollNotification } from './processors/ended-poll-notification.js';
 import { queueLogger } from './logger.js';
 import { getJobInfo } from './get-job-info.js';
 import { systemQueue, dbQueue, deliverQueue, inboxQueue, objectStorageQueue, endedPollNotificationQueue, webhookDeliverQueue } from './queues.js';
-import { ThinUser } from './types.js';
+import { DeliverJobData, ThinUser } from './types.js';
 
 function renderError(e: Error): any {
 	return {
@@ -35,6 +37,12 @@ const inboxLogger = queueLogger.createSubLogger('inbox');
 const dbLogger = queueLogger.createSubLogger('db');
 const objectStorageLogger = queueLogger.createSubLogger('objectStorage');
 
+async function deletionRefCount(job: Bull.Job<DeliverJobData>): Promise<void> {
+	if (job.data.deletingUserId) {
+		await Users.decrement({ id: job.data.deletingUserId }, 'isDeleted', 1);
+	}
+}
+
 systemQueue
 	.on('waiting', (jobId) => systemLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => systemLogger.debug(`active id=${job.id}`))
@@ -46,8 +54,14 @@ systemQueue
 deliverQueue
 	.on('waiting', (jobId) => deliverLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => deliverLogger.debug(`active ${getJobInfo(job, true)} to=${job.data.to}`))
-	.on('completed', (job, result) => deliverLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`))
-	.on('failed', (job, err) => deliverLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`))
+	.on('completed', async (job, result) => {
+		deliverLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`);
+		await deletionRefCount(job);
+	})
+	.on('failed', async (job, err) => {
+		deliverLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`);
+		await deletionRefCount(job);
+	})
 	.on('error', (job: any, err: Error) => deliverLogger.error(`error ${err}`, { job, e: renderError(err) }))
 	.on('stalled', (job) => deliverLogger.warn(`stalled ${getJobInfo(job)} to=${job.data.to}`));
 
@@ -83,7 +97,7 @@ webhookDeliverQueue
 	.on('error', (job: any, err: Error) => webhookLogger.error(`error ${err}`, { job, e: renderError(err) }))
 	.on('stalled', (job) => webhookLogger.warn(`stalled ${getJobInfo(job)} to=${job.data.to}`));
 
-export function deliver(user: ThinUser, content: unknown, to: string | null) {
+export function deliver(user: ThinUser, content: unknown, to: string | null, deletingUserId?: string) {
 	if (content == null) return null;
 	if (to == null) return null;
 
@@ -93,6 +107,7 @@ export function deliver(user: ThinUser, content: unknown, to: string | null) {
 		},
 		content,
 		to,
+		deletingUserId,
 	};
 
 	return deliverQueue.add(data, {
@@ -326,8 +341,9 @@ export default function() {
 }
 
 export function destroy() {
-	deliverQueue.once('cleaned', (jobs, status) => {
+	deliverQueue.once('cleaned', async (jobs, status) => {
 		deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
+		await Promise.all(jobs.map(job => deletionRefCount(job));
 	});
 	deliverQueue.clean(0, 'delayed');
 
