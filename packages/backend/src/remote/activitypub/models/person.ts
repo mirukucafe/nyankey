@@ -90,10 +90,9 @@ function validateActor(x: IObject): IActor {
 			throw new Error('invalid Actor: publicKey.id is not a string');
 		}
 
-		const publicKeyIdHost = extractDbHost(x.publicKey.id);
 		// This is a security critical check to not insert or change an entry of
 		// UserPublickey to point to a local key id.
-		if (extractDbHost(uri) !== extractDbHost(x.publicKey.id) {
+		if (extractDbHost(uri) !== extractDbHost(x.publicKey.id)) {
 			throw new Error('invalid Actor: publicKey.id has different host');
 		}
 	}
