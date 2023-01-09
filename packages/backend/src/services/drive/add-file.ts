@@ -2,9 +2,10 @@ import * as fs from 'node:fs';
 
 import { v4 as uuid } from 'uuid';
 import S3 from 'aws-sdk/clients/s3.js';
-import { IsNull } from 'typeorm';
+import { In, IsNull } from 'typeorm';
 import sharp from 'sharp';
 
+import { db } from '@/db/postgre.js';
 import { FILE_TYPE_BROWSERSAFE } from '@/const.js';
 import { publishMainStream, publishDriveStream } from '@/services/stream.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
@@ -290,25 +291,36 @@ async function upload(key: string, stream: fs.ReadStream | Buffer, _type: string
 	if (result) logger.debug(`Uploaded: ${result.Bucket}/${result.Key} => ${result.Location}`);
 }
 
-async function deleteOldFile(user: IRemoteUser): Promise<void> {
-	const q = DriveFiles.createQueryBuilder('file')
-		.where('file.userId = :userId', { userId: user.id })
-		.andWhere('NOT file.isLink');
+async function expireOldFiles(user: IRemoteUser, driveCapacity: number): Promise<void> {
+	// Delete as many files as necessary so the total usage is below driveCapacity,
+	// oldest files first, and exclude avatar and banner.
+	//
+	// Using a window function, i.e. `OVER (ORDER BY "createdAt" DESC)` means that
+	// the `SUM` will be a running total.
+	const exceededFileIds = await db.query('SELECT "id" FROM ('
+		+ 'SELECT "id", SUM("size") OVER (ORDER BY "createdAt" DESC) AS "total" FROM "drive_file" WHERE "userId" = $1 AND NOT "isLink"'
+		+ (user.avatarId ? ' AND "id" != $2' : '')
+		+ (user.bannerId ? ' AND "id" != $3' : '')
+		+ ') AS "totals" WHERE "total" > $4',
+		[
+			user.id,
+			user.avatarId ?? '',
+			user.bannerId ?? '',
+			driveCapacity,
+		]
+	);
 
-	if (user.avatarId) {
-		q.andWhere('file.id != :avatarId', { avatarId: user.avatarId });
+	if (exceededFileIds.length === 0) {
+		// no files to expire, avatar and banner if present are already the only files
+		throw new Error('remote user drive quota met by avatar and banner');
 	}
 
-	if (user.bannerId) {
-		q.andWhere('file.id != :bannerId', { bannerId: user.bannerId });
-	}
+	const files = await DriveFiles.findBy({
+		id: In(exceededFileIds.map(x => x.id)),
+	});
 
-	q.orderBy('file.id', 'ASC');
-
-	const oldFile = await q.getOne();
-
-	if (oldFile) {
-		deleteFile(oldFile, true);
+	for (const file of files) {
+		deleteFile(file, true);
 	}
 }
 
@@ -373,19 +385,20 @@ export async function addFile({
 	//#region Check drive usage
 	if (user && !isLink) {
 		const usage = await DriveFiles.calcDriveUsageOf(user.id);
+		const isLocalUser = Users.isLocalUser(user);
 
 		const instance = await fetchMeta();
-		const driveCapacity = 1024 * 1024 * (Users.isLocalUser(user) ? instance.localDriveCapacityMb : instance.remoteDriveCapacityMb);
+		const driveCapacity = 1024 * 1024 * (isLocalUser ? instance.localDriveCapacityMb : instance.remoteDriveCapacityMb);
 
 		logger.debug(`drive usage is ${usage} (max: ${driveCapacity})`);
 
 		// If usage limit exceeded
 		if (usage + info.size > driveCapacity) {
-			if (Users.isLocalUser(user)) {
+			if (isLocalUser) {
 				throw new Error('no-free-space');
 			} else {
-				// delete oldest file (excluding banner and avatar)
-				deleteOldFile(await Users.findOneByOrFail({ id: user.id }) as IRemoteUser);
+				// delete older files to make space for new file
+				expireOldFiles(await Users.findOneByOrFail({ id: user.id }) as IRemoteUser, driveCapacity - info.size);
 			}
 		}
 	}
