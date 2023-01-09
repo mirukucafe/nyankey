@@ -384,7 +384,7 @@ export async function addFile({
 			if (Users.isLocalUser(user)) {
 				throw new Error('no-free-space');
 			} else {
-				// (アバターまたはバナーを含まず)最も古いファイルを削除する
+				// delete oldest file (excluding banner and avatar)
 				deleteOldFile(await Users.findOneByOrFail({ id: user.id }) as IRemoteUser);
 			}
 		}

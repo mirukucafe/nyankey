@@ -64,27 +64,27 @@ export async function deleteFileSync(file: DriveFile, isExpired = false): Promis
 }
 
 async function postProcess(file: DriveFile, isExpired = false): Promise<void> {
-	// リモートファイル期限切れ削除後は直リンクにする
-	if (isExpired && file.userHost !== null && file.uri != null) {
+	// Turn into a direct link after expiring a remote file.
+	if (isExpired && file.userHost != null && file.uri != null) {
+		const id = uuid();
 		DriveFiles.update(file.id, {
 			isLink: true,
 			url: file.uri,
 			thumbnailUrl: null,
 			webpublicUrl: null,
 			storedInternal: false,
-			// ローカルプロキシ用
-			accessKey: uuid(),
-			thumbnailAccessKey: 'thumbnail-' + uuid(),
-			webpublicAccessKey: 'webpublic-' + uuid(),
+			accessKey: id,
+			thumbnailAccessKey: 'thumbnail-' + id,
+			webpublicAccessKey: 'webpublic-' + id,
 		});
 	} else {
 		DriveFiles.delete(file.id);
 	}
 
-	// 統計を更新
+	// update statistics
 	driveChart.update(file, false);
 	perUserDriveChart.update(file, false);
-	if (file.userHost !== null) {
+	if (file.userHost != null) {
 		instanceChart.updateDrive(file, false);
 	}
 }
