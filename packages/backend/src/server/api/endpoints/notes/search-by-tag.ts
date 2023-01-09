@@ -127,9 +127,9 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	if (ps.poll != null) {
 		if (ps.poll) {
-			query.andWhere('note.hasPoll = TRUE');
+			query.andWhere('note.hasPoll');
 		} else {
-			query.andWhere('note.hasPoll = FALSE');
+			query.andWhere('NOT note.hasPoll');
 		}
 	}
 

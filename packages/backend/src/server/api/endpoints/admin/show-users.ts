@@ -41,13 +41,13 @@ export default define(meta, paramDef, async (ps, me) => {
 	const query = Users.createQueryBuilder('user');
 
 	switch (ps.state) {
-		case 'available': query.where('user.isSuspended = FALSE'); break;
-		case 'admin': query.where('user.isAdmin = TRUE'); break;
-		case 'moderator': query.where('user.isModerator = TRUE'); break;
-		case 'adminOrModerator': query.where('user.isAdmin = TRUE OR user.isModerator = TRUE'); break;
+		case 'available': query.where('NOT user.isSuspended'); break;
+		case 'admin': query.where('user.isAdmin'); break;
+		case 'moderator': query.where('user.isModerator'); break;
+		case 'adminOrModerator': query.where('user.isAdmin OR user.isModerator'); break;
 		case 'alive': query.where('user.updatedAt > :date', { date: new Date(Date.now() - 5 * DAY) }); break;
-		case 'silenced': query.where('user.isSilenced = TRUE'); break;
-		case 'suspended': query.where('user.isSuspended = TRUE'); break;
+		case 'silenced': query.where('user.isSilenced'); break;
+		case 'suspended': query.where('user.isSuspended'); break;
 	}
 
 	switch (ps.origin) {

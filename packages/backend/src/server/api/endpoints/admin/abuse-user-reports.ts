@@ -93,8 +93,8 @@ export default define(meta, paramDef, async (ps) => {
 	const query = makePaginationQuery(AbuseUserReports.createQueryBuilder('report'), ps.sinceId, ps.untilId);
 
 	switch (ps.state) {
-		case 'resolved': query.andWhere('report.resolved = TRUE'); break;
-		case 'unresolved': query.andWhere('report.resolved = FALSE'); break;
+		case 'resolved': query.andWhere('report.resolved'); break;
+		case 'unresolved': query.andWhere('NOT report.resolved'); break;
 	}
 
 	switch (ps.reporterOrigin) {

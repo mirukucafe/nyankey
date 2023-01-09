@@ -57,7 +57,7 @@ export default async (ctx: Router.RouterContext) => {
 				.where('note.visibility = \'public\'')
 				.orWhere('note.visibility = \'home\'');
 			}))
-			.andWhere('note.localOnly = FALSE');
+			.andWhere('NOT note.localOnly');
 
 		const notes = await query.take(limit).getMany();
 

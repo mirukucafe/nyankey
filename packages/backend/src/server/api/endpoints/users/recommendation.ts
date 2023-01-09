@@ -36,8 +36,8 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
 	const query = Users.createQueryBuilder('user')
-		.where('user.isLocked = FALSE')
-		.andWhere('user.isExplorable = TRUE')
+		.where('NOT user.isLocked')
+		.andWhere('user.isExplorable')
 		.andWhere('user.host IS NULL')
 		.andWhere('user.updatedAt >= :date', { date: new Date(Date.now() - (7 * DAY)) })
 		.andWhere('user.id != :meId', { meId: me.id })

@@ -49,7 +49,7 @@ export default define(meta, paramDef, async (ps, me) => {
 				.where('user.updatedAt IS NULL')
 				.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 			}))
-			.andWhere('user.isSuspended = FALSE');
+			.andWhere('NOT user.isSuspended');
 
 		if (ps.origin === 'local') {
 			usernameQuery.andWhere('user.host IS NULL');
@@ -76,7 +76,7 @@ export default define(meta, paramDef, async (ps, me) => {
 				.where('user.updatedAt IS NULL')
 				.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 			}))
-			.andWhere('user.isSuspended = FALSE');
+			.andWhere('NOT user.isSuspended');
 
 		if (ps.origin === 'local') {
 			nameQuery.andWhere('user.host IS NULL');
@@ -109,7 +109,7 @@ export default define(meta, paramDef, async (ps, me) => {
 					.where('user.updatedAt IS NULL')
 					.orWhere('user.updatedAt > :activeThreshold', { activeThreshold });
 				}))
-				.andWhere('user.isSuspended = FALSE')
+				.andWhere('NOT user.isSuspended')
 				.setParameters(profQuery.getParameters());
 
 			users = users.concat(await query

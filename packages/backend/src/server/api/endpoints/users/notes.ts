@@ -90,7 +90,7 @@ export default define(meta, paramDef, async (ps, me) => {
 
 		if (ps.excludeNsfw) {
 			query.andWhere('note.cw IS NULL');
-			query.andWhere('0 = (SELECT COUNT(*) FROM drive_file df WHERE df.id = ANY(note."fileIds") AND df."isSensitive" = TRUE)');
+			query.andWhere('0 = (SELECT COUNT(*) FROM drive_file df WHERE df.id = ANY(note."fileIds") AND df."isSensitive")');
 		}
 	}
 

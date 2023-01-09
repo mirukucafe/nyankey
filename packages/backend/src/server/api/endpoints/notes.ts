@@ -35,7 +35,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps) => {
 	const query = makePaginationQuery(Notes.createQueryBuilder('note'), ps.sinceId, ps.untilId)
 		.andWhere('note.visibility = \'public\'')
-		.andWhere('note.localOnly = FALSE')
+		.andWhere('NOT note.localOnly')
 		.innerJoinAndSelect('note.user', 'user')
 		.leftJoinAndSelect('user.avatar', 'avatar')
 		.leftJoinAndSelect('user.banner', 'banner')
@@ -65,7 +65,7 @@ export default define(meta, paramDef, async (ps) => {
 	}
 
 	if (ps.poll !== undefined) {
-		query.andWhere(ps.poll ? 'note.hasPoll = TRUE' : 'note.hasPoll = FALSE');
+		query.andWhere((ps.poll ? '' : 'NOT') + 'note.hasPoll');
 	}
 
 	// TODO

@@ -72,7 +72,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	const suspendedQuery = Users.createQueryBuilder('users')
 		.select('users.id')
-		.where('users.isSuspended = TRUE');
+		.where('users.isSuspended');
 
 	const query = makePaginationQuery(Notifications.createQueryBuilder('notification'), ps.sinceId, ps.untilId)
 		.andWhere('notification.notifieeId = :meId', { meId: user.id })

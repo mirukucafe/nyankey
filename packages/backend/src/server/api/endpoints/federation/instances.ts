@@ -69,17 +69,17 @@ export default define(meta, paramDef, async (ps) => {
 
 	if (typeof ps.notResponding === 'boolean') {
 		if (ps.notResponding) {
-			query.andWhere('instance.isNotResponding = TRUE');
+			query.andWhere('instance.isNotResponding');
 		} else {
-			query.andWhere('instance.isNotResponding = FALSE');
+			query.andWhere('NOT instance.isNotResponding');
 		}
 	}
 
 	if (typeof ps.suspended === 'boolean') {
 		if (ps.suspended) {
-			query.andWhere('instance.isSuspended = TRUE');
+			query.andWhere('instance.isSuspended');
 		} else {
-			query.andWhere('instance.isSuspended = FALSE');
+			query.andWhere('NOT instance.isSuspended');
 		}
 	}
 
