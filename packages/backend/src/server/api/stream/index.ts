@@ -17,7 +17,7 @@ import { StreamEventEmitter, StreamMessages } from './types.js';
 /**
  * Main stream connection
  */
-export default class Connection {
+export class Connection {
 	public user?: User;
 	public userProfile?: UserProfile | null;
 	public following: Set<User['id']> = new Set();

@@ -5,7 +5,7 @@ import * as websocket from 'websocket';
 
 import { subscriber as redisClient } from '@/db/redis.js';
 import { Users } from '@/models/index.js';
-import MainStreamConnection from './stream/index.js';
+import { Connection } from './stream/index.js';
 import authenticate from './authenticate.js';
 
 export const initializeStreamingServer = (server: http.Server): void => {
@@ -42,7 +42,7 @@ export const initializeStreamingServer = (server: http.Server): void => {
 
 		redisClient.on('message', onRedisMessage);
 
-		const main = new MainStreamConnection(connection, ev, user, app);
+		const main = new Connection(connection, ev, user, app);
 
 		const intervalId = user ? setInterval(() => {
 			Users.update(user.id, {
