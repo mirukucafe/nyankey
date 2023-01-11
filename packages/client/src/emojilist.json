@@ -619,7 +619,7 @@
 	{ "category": "animals_and_nature", "char": "🌼", "name": "blossom", "keywords": ["nature", "yellow", "flowers"] },
 	{ "category": "animals_and_nature", "char": "🌸", "name": "cherry_blossom", "keywords": ["plant", "flower", "nature", "spring"] },
 	{ "category": "animals_and_nature", "char": "💐", "name": "bouquet", "keywords": ["nature", "spring", "flowers"] },
-	{ "category": "animals_and_nature", "char": "🍄", "name": "mushroom", "keywords": ["plant", "vegetable"] },
+	{ "category": "animals_and_nature", "char": "🍄", "name": "mushroom", "keywords": ["plant", "vegetable", "fungus"] },
 	{ "category": "animals_and_nature", "char": "🪴", "name": "potted_plant", "keywords": ["plant"] },
 	{ "category": "animals_and_nature", "char": "🌰", "name": "chestnut", "keywords": ["food", "squirrel"] },
 	{ "category": "animals_and_nature", "char": "🎃", "name": "jack_o_lantern", "keywords": ["fall", "light", "creepy", "pumpkin", "halloween"] },
