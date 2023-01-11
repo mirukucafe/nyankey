@@ -113,7 +113,6 @@
 		"unzipper": "0.10.11",
 		"uuid": "8.3.2",
 		"web-push": "3.5.0",
-		"websocket": "1.0.34",
 		"ws": "8.8.0",
 		"xev": "3.0.2"
 	},
@@ -164,7 +163,6 @@
 		"@types/tmp": "0.2.3",
 		"@types/uuid": "8.3.4",
 		"@types/web-push": "3.3.2",
-		"@types/websocket": "1.0.5",
 		"@types/ws": "8.5.3",
 		"@typescript-eslint/eslint-plugin": "^5.46.1",
 		"@typescript-eslint/parser": "^5.46.1",
