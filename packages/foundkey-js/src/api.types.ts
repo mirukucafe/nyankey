@@ -65,7 +65,6 @@ export type Endpoints = {
 	'admin/unsuspend-user': { req: TODO; res: TODO; };
 	'admin/update-meta': { req: TODO; res: TODO; };
 	'admin/vacuum': { req: TODO; res: TODO; };
-	'admin/delete-account': { req: TODO; res: TODO; };
 	'announcements': { req: { limit?: number; withUnreads?: boolean; sinceId?: Announcement['id']; untilId?: Announcement['id']; }; res: Announcement[]; };
 	'antennas/create': { req: TODO; res: Antenna; };
 	'antennas/delete': { req: { antennaId: Antenna['id']; }; res: null; };
