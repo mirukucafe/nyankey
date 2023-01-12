@@ -36,7 +36,7 @@
 					<FormSwitch v-model="suspended" class="_formBlock" @update:modelValue="toggleSuspend">{{ i18n.ts.suspend }}</FormSwitch>
 					{{ i18n.ts.reflectMayTakeTime }}
 					<div class="_formBlock">
-						<MkButton v-if="user.host == null && iAmModerator" inline style="margin-right: 8px;" @click="resetPassword"><i class="fas fa-key"></i> {{ i18n.ts.resetPassword }}</MkButton>
+						<MkButton v-if="user.host == null" inline style="margin-right: 8px;" @click="resetPassword"><i class="fas fa-key"></i> {{ i18n.ts.resetPassword }}</MkButton>
 						<MkButton inline danger @click="deleteAllFiles">{{ i18n.ts.deleteAllFiles }}</MkButton>
 						<MkButton v-if="$i.isAdmin" inline danger @click="deleteAccount">{{ i18n.ts.deleteAccount }}</MkButton>
 					</div>
