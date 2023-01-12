@@ -1853,16 +1853,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/glob@npm:7.2.0":
-  version: 7.2.0
-  resolution: "@types/glob@npm:7.2.0"
-  dependencies:
-    "@types/minimatch": "*"
-    "@types/node": "*"
-  checksum: 6ae717fedfdfdad25f3d5a568323926c64f52ef35897bcac8aca8e19bc50c0bd84630bbd063e5d52078b2137d8e7d3c26eabebd1a2f03ff350fff8a91e79fc19
-  languageName: node
-  linkType: hard
-
 "@types/graceful-fs@npm:^4.1.2":
   version: 4.1.5
   resolution: "@types/graceful-fs@npm:4.1.5"
@@ -2374,13 +2364,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/seedrandom@npm:3.0.2":
-  version: 3.0.2
-  resolution: "@types/seedrandom@npm:3.0.2"
-  checksum: 02e585601cb9764cb0eb3f92b384512f8e171422acea3d5a801a41a8a06d475b60ae520eba469bcedf0ed8ad650415919cf30a9cd6bc57090613e61bedc071ed
-  languageName: node
-  linkType: hard
-
 "@types/semver@npm:7.3.12":
   version: 7.3.12
   resolution: "@types/semver@npm:7.3.12"
@@ -2545,15 +2528,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 0b635e63779b1b03af536373ea7a43cfadc993d941be45a7bccd6b891b5e361ecb0f10e5375a58c0f9d355697281bc366c6a5908110afd57361fef6f2a5017d7
-  languageName: node
-  linkType: hard
-
-"@types/websocket@npm:1.0.5":
-  version: 1.0.5
-  resolution: "@types/websocket@npm:1.0.5"
-  dependencies:
-    "@types/node": "*"
-  checksum: 41c7a620f877a0165ff36e713455d888b7f5df9c51e71b5d0f47994f98cf22ccd339b8c6cfdc6bb417e950d40f405693974d393bd916971490553cc5e9e67a9d
   languageName: node
   linkType: hard
 
@@ -3740,7 +3714,6 @@ __metadata:
     "@types/tmp": 0.2.3
     "@types/uuid": 8.3.4
     "@types/web-push": 3.3.2
-    "@types/websocket": 1.0.5
     "@types/ws": 8.5.3
     "@typescript-eslint/eslint-plugin": ^5.46.1
     "@typescript-eslint/parser": ^5.46.1
@@ -3840,7 +3813,6 @@ __metadata:
     unzipper: 0.10.11
     uuid: 8.3.2
     web-push: 3.5.0
-    websocket: 1.0.34
     ws: 8.8.0
     xev: 3.0.2
   languageName: unknown
@@ -4199,16 +4171,6 @@ __metadata:
   version: 0.1.1
   resolution: "buffers@npm:0.1.1"
   checksum: ad6f8e483efab39cefd92bdc04edbff6805e4211b002f4d1cfb70c6c472a61cc89fb18c37bcdfdd4ee416ca096e9ff606286698a7d41a18b539bac12fd76d4d5
-  languageName: node
-  linkType: hard
-
-"bufferutil@npm:^4.0.1":
-  version: 4.0.6
-  resolution: "bufferutil@npm:4.0.6"
-  dependencies:
-    node-gyp: latest
-    node-gyp-build: ^4.3.0
-  checksum: dd107560947445280af7820c3d0534127b911577d85d537e1d7e0aa30fd634853cef8a994d6e8aed3d81388ab1a20257de776164afe6a6af8e78f5f17968ebd6
   languageName: node
   linkType: hard
 
@@ -4741,26 +4703,15 @@ __metadata:
     "@rollup/plugin-json": 4.1.0
     "@rollup/pluginutils": ^4.2.1
     "@syuilo/aiscript": 0.11.1
-    "@types/escape-regexp": 0.0.1
-    "@types/glob": 7.2.0
-    "@types/gulp": 4.0.9
-    "@types/gulp-rename": 2.0.1
-    "@types/is-url": 1.2.30
     "@types/katex": 0.14.0
     "@types/matter-js": 0.17.7
-    "@types/mocha": 9.1.1
     "@types/punycode": 2.1.0
-    "@types/qrcode": 1.5.0
-    "@types/seedrandom": 3.0.2
     "@types/throttle-debounce": 5.0.0
     "@types/tinycolor2": 1.4.3
     "@types/uuid": 8.3.4
-    "@types/websocket": 1.0.5
-    "@types/ws": 8.5.3
     "@typescript-eslint/eslint-plugin": ^5.46.1
     "@typescript-eslint/parser": ^5.46.1
     "@vitejs/plugin-vue": ^3.1.0
-    abort-controller: 3.0.0
     autobind-decorator: 2.4.0
     autosize: 5.0.1
     blurhash: 1.1.5
@@ -4771,17 +4722,14 @@ __metadata:
     chartjs-plugin-gradient: 0.5.0
     chartjs-plugin-zoom: 1.2.1
     compare-versions: 4.1.3
-    content-disposition: 0.5.4
     cropperjs: 2.0.0-beta.1
     cross-env: 7.0.3
     cypress: 10.3.0
     date-fns: 2.28.0
-    escape-regexp: 0.0.1
     eslint: ^8.29.0
     eslint-plugin-import: ^2.26.0
     eslint-plugin-vue: ^9.8.0
     eventemitter3: 4.0.7
-    feed: 4.2.2
     foundkey-js: "workspace:*"
     idb-keyval: 6.2.0
     insert-text-at-cursor: 0.3.0
@@ -4789,42 +4737,24 @@ __metadata:
     katex: 0.16.0
     matter-js: 0.18.0
     mfm-js: 0.22.1
-    mocha: 10.0.0
-    ms: 2.1.3
-    nested-property: 4.0.0
     photoswipe: 5.2.8
     prismjs: 1.28.0
-    private-ip: 2.3.3
-    promise-limit: 2.7.0
-    pug: 3.0.2
     punycode: 2.1.1
-    qrcode: 1.5.1
-    reflect-metadata: 0.1.13
-    rollup: 2.75.7
     sass: 1.53.0
-    seedrandom: 3.0.5
-    start-server-and-test: 1.14.0
-    strict-event-emitter-types: 2.0.0
     stringz: 2.1.0
     syuilo-password-strength: 0.0.1
     talisman: ^1.1.4
     textarea-caret: 3.1.0
-    three: 0.142.0
     throttle-debounce: 5.0.0
     tinycolor2: 1.4.2
     tsc-alias: 1.7.0
     tsconfig-paths: 4.1.0
-    twemoji-parser: 14.0.0
     typescript: ^4.9.4
     uuid: 8.3.2
-    v-debounce: 0.1.2
-    vanilla-tilt: 1.7.2
     vite: 3.1.0
     vue: 3.2.45
     vue-prism-editor: 2.0.0-alpha.2
     vuedraggable: 4.0.1
-    websocket: 1.0.34
-    ws: 8.8.0
   languageName: unknown
   linkType: soft
 
@@ -12445,17 +12375,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-gyp-build@npm:^4.3.0":
-  version: 4.5.0
-  resolution: "node-gyp-build@npm:4.5.0"
-  bin:
-    node-gyp-build: bin.js
-    node-gyp-build-optional: optional.js
-    node-gyp-build-test: build-test.js
-  checksum: d888bae0fb88335f69af1b57a2294a931c5042f36e413d8d364c992c9ebfa0b96ffe773179a5a2c8f04b73856e8634e09cce108dbb9804396d3cc8c5455ff2db
-  languageName: node
-  linkType: hard
-
 "node-gyp@npm:^9.3.0":
   version: 9.3.0
   resolution: "node-gyp@npm:9.3.0"
@@ -15048,20 +14967,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:2.75.7":
-  version: 2.75.7
-  resolution: "rollup@npm:2.75.7"
-  dependencies:
-    fsevents: ~2.3.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    rollup: dist/bin/rollup
-  checksum: a6331d46b01062b184efdcb42ce12caf2e1575f989963944534b02f5855f6f3bc239ed0c1a18893572d7695af6d83166f3aef59dbd0365084e1531cb67824674
-  languageName: node
-  linkType: hard
-
 "rollup@npm:~2.78.0":
   version: 2.78.1
   resolution: "rollup@npm:2.78.1"
@@ -16402,13 +16307,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"three@npm:0.142.0":
-  version: 0.142.0
-  resolution: "three@npm:0.142.0"
-  checksum: b920987cab222bea5fd657a498f8203546c6b613cee01d2e1a355c7e044204bbff6ef051641b026743a6d3d5261a988c84285039a94e4c94a959f1b3789ac682
-  languageName: node
-  linkType: hard
-
 "throat@npm:^6.0.1":
   version: 6.0.1
   resolution: "throat@npm:6.0.1"
@@ -17327,16 +17225,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"utf-8-validate@npm:^5.0.2":
-  version: 5.0.9
-  resolution: "utf-8-validate@npm:5.0.9"
-  dependencies:
-    node-gyp: latest
-    node-gyp-build: ^4.3.0
-  checksum: 90117f1b65e0a1256c83dfad529983617263b622f2379745311d0438c7ea31db0d134ebd0dca84c3f5847a3560a3d249644e478a9109c616f63c7ea19cac53dc
-  languageName: node
-  linkType: hard
-
 "util-deprecate@npm:^1.0.1, util-deprecate@npm:^1.0.2, util-deprecate@npm:~1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -17368,13 +17256,6 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
-  languageName: node
-  linkType: hard
-
-"v-debounce@npm:0.1.2":
-  version: 0.1.2
-  resolution: "v-debounce@npm:0.1.2"
-  checksum: 58428fb783581854a46acbeb1cf14beaddf51467a1cac2b4fd2053f32e6243e6ca8ff6948eca1b8ce82b849dadf12695a21b8bb3062fecbed0db812c14c0a983
   languageName: node
   linkType: hard
 
@@ -17426,13 +17307,6 @@ __metadata:
   version: 3.0.0
   resolution: "value-or-function@npm:3.0.0"
   checksum: 2b901d05b82deb8565d4edeba02e0737be73e7fb2c640b79fa64152aae8b450f790a46c86bf7039f91938c1b69d2cc0908cd18c4695b120293bb442179061fac
-  languageName: node
-  linkType: hard
-
-"vanilla-tilt@npm:1.7.2":
-  version: 1.7.2
-  resolution: "vanilla-tilt@npm:1.7.2"
-  checksum: 6909bae39a32f7fa707f848468d0bd914020dd38931821f2ce7e1f0b546a123ebd76c64fec7398b351021cf72508bb7d8af5627c92435bec5892827f62127c67
   languageName: node
   linkType: hard
 
@@ -17712,20 +17586,6 @@ __metadata:
   version: 7.0.0
   resolution: "webidl-conversions@npm:7.0.0"
   checksum: f05588567a2a76428515333eff87200fae6c83c3948a7482ebb109562971e77ef6dc49749afa58abb993391227c5697b3ecca52018793e0cb4620a48f10bd21b
-  languageName: node
-  linkType: hard
-
-"websocket@npm:1.0.34":
-  version: 1.0.34
-  resolution: "websocket@npm:1.0.34"
-  dependencies:
-    bufferutil: ^4.0.1
-    debug: ^2.2.0
-    es5-ext: ^0.10.50
-    typedarray-to-buffer: ^3.1.5
-    utf-8-validate: ^5.0.2
-    yaeti: ^0.0.6
-  checksum: 8a0ce6d79cc1334bb6ea0d607f0092f3d32700b4dd19e4d5540f2a85f3b50e1f8110da0e4716737056584dde70bbebcb40bbd94bbb437d7468c71abfbfa077d8
   languageName: node
   linkType: hard
 
@@ -18077,13 +17937,6 @@ __metadata:
   version: 5.0.8
   resolution: "y18n@npm:5.0.8"
   checksum: 54f0fb95621ee60898a38c572c515659e51cc9d9f787fb109cef6fde4befbe1c4602dc999d30110feee37456ad0f1660fa2edcfde6a9a740f86a290999550d30
-  languageName: node
-  linkType: hard
-
-"yaeti@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "yaeti@npm:0.0.6"
-  checksum: 6db12c152f7c363b80071086a3ebf5032e03332604eeda988872be50d6c8469e1f13316175544fa320f72edad696c2d83843ad0ff370659045c1a68bcecfcfea
   languageName: node
   linkType: hard
 
