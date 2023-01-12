@@ -70,6 +70,8 @@ Build foundkey with the following:
 
 `NODE_ENV=production yarn build`
 
+If your system has at least 4GB of RAM, run `NODE_ENV=production yarn build-parallel` to speed up build times.
+
 If you're still encountering errors about some modules, use node-gyp:
 
 1. `npx node-gyp configure`
@@ -182,6 +184,7 @@ Use git to pull in the latest changes and rerun the build and migration commands
 git pull
 git submodule update --init
 yarn install
+# Use build-parallel if your system has 4GB or more RAM and want faster builds
 NODE_ENV=production yarn build
 yarn migrate
 ```
