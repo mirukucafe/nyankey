@@ -501,6 +501,7 @@ scratchpadDescription: "The Scratchpad provides an environment for AiScript expe
   \ in it."
 output: "Output"
 updateRemoteUser: "Update remote user information"
+deleteAllFiles: "Delete all files"
 deleteAllFilesConfirm: "Are you sure that you want to delete all files?"
 removeAllFollowing: "Unfollow all followed users"
 removeAllFollowingDescription: "Executing this unfollows all accounts from {host}.\
