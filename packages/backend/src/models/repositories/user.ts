@@ -147,6 +147,8 @@ export const UserRepository = db.getRepository(User).extend({
 				JOIN "user_group_joining"
 					ON "messaging_message"."groupId" = "user_group_joining"."userGroupId"
 				WHERE
+						"user_group_joining"."userId" = $1
+					AND
 						"messaging_message"."userId" != $1
 					AND
 						NOT $1 = ANY("messaging_message"."reads")
