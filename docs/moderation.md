@@ -38,6 +38,7 @@ To demote a user, you can do a similar operation, but instead with `... SET "isA
 
 - Cannot be reported by local users.
 - Cannot have their password reset.
+  To see how you can reset an administrator password, see below.
 - Cannot have their account deleted.
 - Cannot be suspended.
 - Cannot be silenced.
@@ -53,6 +54,23 @@ To demote a user, you can do a similar operation, but instead with `... SET "isA
 
 Administrators also have the same ability as moderators.
 Note of course that people with access to the server and/or database access can do basically anything without restrictions (including breaking the instance).
+
+## Resetting an administrators password
+
+Administrators are blocked from the paths of resetting the password by moderators or administrators.
+However, if your server has email configured you should be able to use the "Forgot password" link on the normal signin dialog.
+
+If you did not set up email, you will need to kick of this process instead through modifying the database yourself.
+You will need the user ID whose password should be reset, indicated in the following as `<USERID>`;
+as well as a random string (a UUID would be recommended) indicated as `<TOKEN>`.
+
+Replacing the two terms above, run the following SQL query:
+```sql
+INSERT INTO "password_reset_request" VALUES ('0000000000', now(), '<TOKEN>', '<USERID>');
+```
+
+After that, navigate to `/reset-password/<TOKEN>` on your instance to finish the password reset process.
+After that you should be able to sign in with the new password you just set.
 
 # Moderator
 
