@@ -13,6 +13,9 @@ import { readNotification } from '../common/read-notification.js';
 import channels from './channels/index.js';
 import Channel from './channel.js';
 import { StreamEventEmitter, StreamMessages } from './types.js';
+import Logger from '@/services/logger.js';
+
+const logger = new Logger('streaming');
 
 /**
  * Main stream connection
@@ -123,13 +126,17 @@ export class Connection {
 	}
 
 	private async onMessage(data: WebSocket.RawData, isRaw: boolean) {
-		if (data.isRaw) return;
+		if (isRaw) {
+			logger.warn('received unexpected raw data from websocket');
+			return;
+		}
 
 		let obj: Record<string, any>;
 
 		try {
-			obj = JSON.parse(data.utf8Data);
-		} catch (e) {
+			obj = JSON.parse(data);
+		} catch (err) {
+			logger.error(err);
 			return;
 		}
 
