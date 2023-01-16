@@ -1099,10 +1099,6 @@ _permissions:
   "write:user-groups": "Create, modify, delete, transfer, join and leave groups. Invite and ban others from groups. Accept and reject group invitations."
   "read:channels": "List and read followed and joined channels"
   "write:channels": "Create, modify, follow and unfollow channels"
-  "read:gallery": "List and read gallery posts"
-  "write:gallery": "Create, modify and delete gallery posts"
-  "read:gallery-likes": "List and read gallery post likes"
-  "write:gallery-likes": "Like and unlike gallery posts"
 _auth:
   shareAccess: "Would you like to authorize \"{name}\" to access this account?"
   shareAccessAsk: "Are you sure you want to authorize this application to access your\

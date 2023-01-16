@@ -126,8 +126,6 @@ export type DriveFile = {
 
 export type DriveFolder = TODO;
 
-export type GalleryPost = TODO;
-
 export type Note = {
 	id: ID;
 	createdAt: DateString;
