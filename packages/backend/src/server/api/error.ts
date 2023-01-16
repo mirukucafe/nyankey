@@ -73,7 +73,7 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		httpStatusCode: 409,
 	},
 	ALREADY_LIKED: {
-		message: 'You already liked that page or gallery post.',
+		message: 'You already liked that page.',
 		httpStatusCode: 409,
 	},
 	ALREADY_MUTING: {
@@ -292,10 +292,6 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		message: 'No such parent folder.',
 		httpStatusCode: 404,
 	},
-	NO_SUCH_POST: {
-		message: 'No such gallery post.',
-		httpStatusCode: 404,
-	},
 	NO_SUCH_RESET_REQUEST: {
 		message: 'No such password reset request.',
 		httpStatusCode: 404,
@@ -337,7 +333,7 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		httpStatusCode: 409,
 	},
 	NOT_LIKED: {
-		message: 'You have not liked that page or gallery post.',
+		message: 'You have not liked that page.',
 		httpStatusCode: 409,
 	},
 	NOT_MUTING: {
