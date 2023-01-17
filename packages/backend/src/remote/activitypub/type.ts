@@ -45,7 +45,7 @@ export function getOneApId(value: ApObject): string {
 /**
  * Get ActivityStreams Object id
  */
-export function getApId(value: string | IObject): string {
+export function getApId(value: string | Object): string {
 	if (typeof value === 'string') return value;
 	if (typeof value.id === 'string') return value.id;
 	throw new Error('cannot detemine id');
@@ -54,7 +54,7 @@ export function getApId(value: string | IObject): string {
 /**
  * Get ActivityStreams Object type
  */
-export function getApType(value: IObject): string {
+export function getApType(value: Object): string {
 	if (typeof value.type === 'string') return value.type;
 	if (Array.isArray(value.type) && typeof value.type[0] === 'string') return value.type[0];
 	throw new Error('cannot detect type');
@@ -196,24 +196,6 @@ export const isPropertyValue = (object: IObject): object is IApPropertyValue =>
 	typeof object.name === 'string' &&
 	typeof (object as any).value === 'string';
 
-export interface IApMention extends IObject {
-	type: 'Mention';
-	href: string;
-}
-
-export const isMention = (object: IObject): object is IApMention =>
-	getApType(object) === 'Mention' &&
-	typeof object.href === 'string';
-
-export interface IApHashtag extends IObject {
-	type: 'Hashtag';
-	name: string;
-}
-
-export const isHashtag = (object: IObject): object is IApHashtag =>
-	getApType(object) === 'Hashtag' &&
-	typeof object.name === 'string';
-
 export interface IApEmoji extends IObject {
 	type: 'Emoji';
 	updated: Date;
@@ -293,3 +275,34 @@ export const isLike = (object: IObject): object is ILike => getApType(object) ==
 export const isAnnounce = (object: IObject): object is IAnnounce => getApType(object) === 'Announce';
 export const isBlock = (object: IObject): object is IBlock => getApType(object) === 'Block';
 export const isFlag = (object: IObject): object is IFlag => getApType(object) === 'Flag';
+
+export interface ILink {
+	href: string;
+	rel?: string | string[];
+	mediaType?: string;
+	name?: string;
+}
+
+export interface IApMention extends ILink {
+	type: 'Mention';
+}
+
+export interface IApHashtag extends ILink {
+	type: 'Hashtag';
+	name: string;
+}
+
+export const isLink = (object: Record<string, any>): object is ILink =>
+	typeof object.href === 'string'
+	&& (
+		object.rel == undefined
+		|| typeof object.rel === 'string'
+		|| (Array.isArray(object.rel) && object.rel.every(x => typeof x === 'string'))
+	)
+	&& (object.mediaType == undefined || typeof object.mediaType === 'string');
+export const isMention = (object: Record<string, any>): object is IApMention =>
+	getApType(object) === 'Mention' && isLink(object);
+export const isHashtag = (object: Record<string, any>): object is IApHashtag =>
+	getApType(object) === 'Hashtag'
+	&& isLink(object)
+	&& typeof object.name === 'string';
