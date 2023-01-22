@@ -1,5 +1,5 @@
 import {
-	Ad, Announcement, Antenna, App, AuthSession, Blocking, Channel, Clip, DateString, DetailedInstanceMetadata, DriveFile, DriveFolder, Following, FollowingFolloweePopulated, FollowingFollowerPopulated, FollowRequest, GalleryPost, Instance, InstanceMetadata,
+	Ad, Announcement, Antenna, App, AuthSession, Blocking, Channel, Clip, DateString, DetailedInstanceMetadata, DriveFile, DriveFolder, Following, FollowingFolloweePopulated, FollowingFollowerPopulated, FollowRequest, Instance, InstanceMetadata,
 	LiteInstanceMetadata,
 	MeDetailed,
 	Note, NoteFavorite, OriginType, Page, ServerInfo, Stats, User, UserDetailed, UserGroup, UserList, UserSorting, Notification, NoteReaction, Signin, MessagingMessage,
@@ -282,15 +282,6 @@ export type Endpoints = {
 	'following/requests/cancel': { req: { userId: User['id'] }; res: User; };
 	'following/requests/list': { req: NoParams; res: FollowRequest[]; };
 	'following/requests/reject': { req: { userId: User['id'] }; res: null; };
-	'gallery/featured': { req: TODO; res: TODO; };
-	'gallery/popular': { req: TODO; res: TODO; };
-	'gallery/posts': { req: TODO; res: TODO; };
-	'gallery/posts/create': { req: TODO; res: TODO; };
-	'gallery/posts/delete': { req: { postId: GalleryPost['id'] }; res: null; };
-	'gallery/posts/like': { req: TODO; res: TODO; };
-	'gallery/posts/show': { req: TODO; res: TODO; };
-	'gallery/posts/unlike': { req: TODO; res: TODO; };
-	'gallery/posts/update': { req: TODO; res: TODO; };
 	'get-online-users-count': { req: TODO; res: TODO; };
 	'hashtags/list': { req: TODO; res: TODO; };
 	'hashtags/search': { req: TODO; res: TODO; };
@@ -315,8 +306,6 @@ export type Endpoints = {
 	'i/export-notes': { req: TODO; res: TODO; };
 	'i/export-user-lists': { req: TODO; res: TODO; };
 	'i/favorites': { req: { limit?: number; sinceId?: NoteFavorite['id']; untilId?: NoteFavorite['id']; }; res: NoteFavorite[]; };
-	'i/gallery/likes': { req: TODO; res: TODO; };
-	'i/gallery/posts': { req: TODO; res: TODO; };
 	'i/get-word-muted-notes-count': { req: TODO; res: TODO; };
 	'i/import-blocking': { req: TODO; res: TODO; };
 	'i/import-following': { req: TODO; res: TODO; };
@@ -488,7 +477,6 @@ export type Endpoints = {
 	'users/clips': { req: TODO; res: TODO; };
 	'users/followers': { req: { userId?: User['id']; username?: User['username']; host?: User['host'] | null; limit?: number; sinceId?: Following['id']; untilId?: Following['id']; }; res: FollowingFollowerPopulated[]; };
 	'users/following': { req: { userId?: User['id']; username?: User['username']; host?: User['host'] | null; limit?: number; sinceId?: Following['id']; untilId?: Following['id']; }; res: FollowingFolloweePopulated[]; };
-	'users/gallery/posts': { req: TODO; res: TODO; };
 	'users/groups/create': { req: TODO; res: TODO; };
 	'users/groups/delete': { req: { groupId: UserGroup['id'] }; res: null; };
 	'users/groups/invitations/accept': { req: TODO; res: TODO; };

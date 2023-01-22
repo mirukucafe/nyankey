@@ -50,8 +50,6 @@ import { UserSecurityKey } from '@/models/entities/user-security-key.js';
 import { AttestationChallenge } from '@/models/entities/attestation-challenge.js';
 import { Page } from '@/models/entities/page.js';
 import { PageLike } from '@/models/entities/page-like.js';
-import { GalleryPost } from '@/models/entities/gallery-post.js';
-import { GalleryLike } from '@/models/entities/gallery-like.js';
 import { ModerationLog } from '@/models/entities/moderation-log.js';
 import { UsedUsername } from '@/models/entities/used-username.js';
 import { Announcement } from '@/models/entities/announcement.js';
@@ -143,8 +141,6 @@ export const entities = [
 	NoteUnread,
 	Page,
 	PageLike,
-	GalleryPost,
-	GalleryLike,
 	DriveFile,
 	DriveFolder,
 	Poll,

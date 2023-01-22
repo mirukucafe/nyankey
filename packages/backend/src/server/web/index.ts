@@ -18,7 +18,7 @@ import { KoaAdapter } from '@bull-board/koa';
 import { In, IsNull } from 'typeorm';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import config from '@/config/index.js';
-import { Users, Notes, UserProfiles, Pages, Channels, Clips, GalleryPosts } from '@/models/index.js';
+import { Users, Notes, UserProfiles, Pages, Channels, Clips } from '@/models/index.js';
 import * as Acct from '@/misc/acct.js';
 import { getNoteSummary } from '@/misc/get-note-summary.js';
 import { queues } from '@/queue/queues.js';
@@ -408,31 +408,6 @@ router.get('/clips/:clip', async (ctx, next) => {
 			clip: _clip,
 			profile,
 			avatarUrl: await Users.getAvatarUrl(await Users.findOneByOrFail({ id: clip.userId })),
-			instanceName: meta.name || 'FoundKey',
-			icon: meta.iconUrl,
-			themeColor: meta.themeColor,
-		});
-
-		ctx.set('Cache-Control', 'public, max-age=15');
-
-		return;
-	}
-
-	await next();
-});
-
-// Gallery post
-router.get('/gallery/:post', async (ctx, next) => {
-	const post = await GalleryPosts.findOneBy({ id: ctx.params.post });
-
-	if (post) {
-		const _post = await GalleryPosts.pack(post);
-		const profile = await UserProfiles.findOneByOrFail({ userId: post.userId });
-		const meta = await fetchMeta();
-		await ctx.render('gallery-post', {
-			post: _post,
-			profile,
-			avatarUrl: await Users.getAvatarUrl(await Users.findOneByOrFail({ id: post.userId })),
 			instanceName: meta.name || 'FoundKey',
 			icon: meta.iconUrl,
 			themeColor: meta.themeColor,

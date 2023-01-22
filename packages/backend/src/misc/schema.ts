@@ -28,7 +28,6 @@ import { packedAntennaSchema } from '@/models/schema/antenna.js';
 import { packedClipSchema } from '@/models/schema/clip.js';
 import { packedFederationInstanceSchema } from '@/models/schema/federation-instance.js';
 import { packedQueueCountSchema } from '@/models/schema/queue.js';
-import { packedGalleryPostSchema } from '@/models/schema/gallery-post.js';
 import { packedEmojiSchema } from '@/models/schema/emoji.js';
 
 export const refs = {
@@ -61,7 +60,6 @@ export const refs = {
 	Antenna: packedAntennaSchema,
 	Clip: packedClipSchema,
 	FederationInstance: packedFederationInstanceSchema,
-	GalleryPost: packedGalleryPostSchema,
 	Emoji: packedEmojiSchema,
 };
 
