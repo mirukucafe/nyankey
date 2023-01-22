@@ -39,11 +39,11 @@ export function extractQuoteUrl(tags: IObject | IObject[] | null | undefined): s
 						'https://www.w3.org/ns/activitystreams#quoteUrl',
 					].includes(rel)
 				)
-		);
+		)
+		// Deduplicate by href.
+		.filter((x, i, arr) => arr.findIndex(y => x.href === y.href) === i);
 
 	if (quotes.length === 0) return null;
-
-	// Deduplicate by href.
 	// If there is more than one quote, we just pick the first/a random one.
-	return quotes.filter((x, i, arr) => arr.findIndex(y => x.href === y.href) === i)[0].href;
+	else return quotes[0].href;
 }
