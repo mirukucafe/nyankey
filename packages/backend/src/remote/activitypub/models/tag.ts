@@ -45,5 +45,5 @@ export function extractQuoteUrl(tags: IObject | IObject[] | null | undefined): s
 
 	// Deduplicate by href.
 	// If there is more than one quote, we just pick the first/a random one.
-	quotes.filter((x, i, arr) => arr.findIndex(y => x.href === y.href) === i)[0].href;
+	return quotes.filter((x, i, arr) => arr.findIndex(y => x.href === y.href) === i)[0].href;
 }
