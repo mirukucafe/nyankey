@@ -117,6 +117,7 @@ export class Note {
 	})
 	public uri: string | null;
 
+	@Index({ unique: true })
 	@Column('varchar', {
 		length: 512, nullable: true,
 		comment: 'The human readable url of a note. it will be null when the note is local.',
