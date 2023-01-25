@@ -108,9 +108,9 @@ export const DriveFileRepository = db.getRepository(DriveFile).extend({
 			folderId: file.folderId,
 			folder: opts.detail && file.folderId ? DriveFolders.pack(file.folderId, {
 				detail: true,
-			}) : null,
-			userId: opts.withUser ? file.userId : null,
-			user: (opts.withUser && file.userId) ? Users.pack(file.userId) : null,
+			}) : undefined,
+			userId: file.userId,
+			user: (opts.withUser && file.userId) ? Users.pack(file.userId) : undefined,
 		});
 	},
 
