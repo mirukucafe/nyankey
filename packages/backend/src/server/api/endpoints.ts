@@ -693,6 +693,14 @@ export interface IEndpointMeta {
 		 * @example (v0) /api/notes/create -> /api/v2/notes
 		 */
 		readonly alias?: string;
+
+		/**
+		 * If any path parameters were used, they have to be listed here.
+		 * Otherwise they will show up as query parameters in the documentation.
+		 *
+		 * Note: Path parameters cannot be optional.
+		 */
+		readonly pathParamers?: string[];
 	};
 }
 

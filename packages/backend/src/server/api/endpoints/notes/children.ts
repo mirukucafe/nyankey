@@ -25,6 +25,7 @@ export const meta = {
 	v2: {
 		method: 'get',
 		alias: 'notes/:noteId/children',
+		pathParameters: ['noteId'],
 	},
 } as const;
 

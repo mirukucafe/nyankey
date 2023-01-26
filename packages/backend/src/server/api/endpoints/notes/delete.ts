@@ -22,6 +22,7 @@ export const meta = {
 	v2: {
 		method: 'delete',
 		alias: 'notes/:noteId',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['ACCESS_DENIED', 'NO_SUCH_NOTE'],

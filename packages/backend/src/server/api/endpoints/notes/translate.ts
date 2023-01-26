@@ -57,7 +57,8 @@ export const meta = {
 
 	v2: {
 		method: 'get',
-		alias: 'notes/:noteId/translate/:targetLang/:sourceLang?',
+		alias: 'notes/:noteId/translate/:targetLang',
+		pathParameters: ['noteId', 'targetLang'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],

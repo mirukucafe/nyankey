@@ -25,7 +25,8 @@ export const meta = {
 
 	v2: {
 		method: 'get',
-		alias: 'notes/:noteId/reactions/:type?',
+		alias: 'notes/:noteId/reactions',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],

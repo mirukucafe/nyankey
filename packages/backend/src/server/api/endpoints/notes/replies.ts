@@ -25,6 +25,7 @@ export const meta = {
 	v2: {
 		method: 'get',
 		alias: 'notes/:noteId/replies',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],

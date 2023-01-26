@@ -126,10 +126,10 @@ export function genOpenapiSpec() {
 			};
 		}
 
-		let desc = endpoint.meta.description ?? 'No description provided.');
+		let desc = endpoint.meta.description ?? 'No description provided.';
 		desc += `**Credential required**: *${endpoint.meta.requireCredential ? 'Yes' : 'No'}*`;
 		if (endpoint.meta.kind) {
-			desc += `\n\n**Permission**: `' + endpoint.meta.kind + '`';
+			desc += '\n\n**Permission**: `' + endpoint.meta.kind + '`';
 		}
 		if (endpoint.meta.limit) {
 			const limit = endpoint.meta.limit;
@@ -220,11 +220,37 @@ export function genOpenapiSpec() {
 		spec.paths['/' + endpoint.name] = path;
 
 		if (endpoint.meta.v2) {
+			const route = `/v2/${endpoint.meta.v2.alias ?? endpoint.name.replace(/-/g, '_')}`;
 			// we need a clone of the API endpoint info because otherwise we change it by reference
 			const infoClone = structuredClone(info);
-			const route = `/v2/${endpoint.meta.v2.alias ?? endpoint.name.replace(/-/g, '_')}`;
+			// fix the way parameters are passed
+			const hasBody = !(endpoint.meta.v2.method === 'get' || endpoint.meta.v2.method === 'delete');
+			if (!hasBody) {
+				// these methods do not (usually) have a body
+				delete infoClone.requestBody;
+				infoClone.parameters = [];
+				for (const name in schema.properties) {
+					infoClone.parameters.push({
+						name,
+						in: endpoint.meta.v2?.pathParameters?.includes(name) ? 'path' : 'query',
+						schema: schema.properties[name],
+						required: endpoint.meta.v2?.pathParameters?.includes(name) || schema.required?.includes(name) || false,
+					});
+				}
+			} else if (endpoint.meta.v2.pathParameters) {
+				for (const name in endpoint.meta.v2.pathParameters) {
+					delete infoClone.requestBody.content[requestType].schema.properties[name];
+					infoClone.parameters.push({
+						name,
+						in: 'path',
+						schema: schema.properties[name],
+						required: true,
+					});
+				}
+			}
 
-			infoClone['operationId'] = infoClone['summary'] = route;
+			infoClone['operationId'] = endpoint.meta.v2.method.toUpperCase() + '/' + route;
+			infoClone['summary'] = endpoint.meta.v2.method.toUpperCase() + ' ' + route;
 
 			spec.paths[route] = {
 				...spec.paths[route],
