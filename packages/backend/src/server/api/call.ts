@@ -35,10 +35,8 @@ export default async (endpoint: string, user: CacheableLocalUser | null | undefi
 			limit.key = ep.name;
 		}
 
-		// Rate limit
-		await limiter(limit as IEndpointMeta['limit'] & { key: NonNullable<string> }, limitActor).catch(() => {
-			throw new ApiError('RATE_LIMIT_EXCEEDED');
-		});
+		// Rate limit, may throw an ApiError
+		await limiter(limit as IEndpointMeta['limit'] & { key: NonNullable<string> }, limitActor);
 	}
 
 	if (ep.meta.requireCredential && user == null) {

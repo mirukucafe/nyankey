@@ -25,13 +25,8 @@ export default async (ctx: Koa.Context) => {
 		new ApiError(e, info).apply(ctx, 'signin');
 	}
 
-	try {
-		// not more than 1 attempt per second and not more than 10 attempts per hour
-		await limiter({ key: 'signin', duration: HOUR, max: 10, minInterval: SECOND }, getIpHash(ctx.ip));
-	} catch (err) {
-		error('RATE_LIMIT_EXCEEDED');
-		return;
-	}
+	// not more than 1 attempt per second and not more than 10 attempts per hour
+	await limiter({ key: 'signin', duration: HOUR, max: 10, minInterval: SECOND }, getIpHash(ctx.ip));
 
 	if (typeof username !== 'string') {
 		error('INVALID_PARAM', { param: 'username', reason: 'not a string' });

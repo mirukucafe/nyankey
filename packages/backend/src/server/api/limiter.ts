@@ -2,11 +2,12 @@ import Limiter from 'ratelimiter';
 import Logger from '@/services/logger.js';
 import { redisClient } from '@/db/redis.js';
 import { IEndpointMeta } from './endpoints.js';
+import { ApiError } from './error.js';
 
 const logger = new Logger('limiter');
 
-export const limiter = (limitation: IEndpointMeta['limit'] & { key: NonNullable<string> }, actor: string) => new Promise<void>((ok, reject) => {
-	if (process.env.NODE_ENV === 'test') ok();
+export const limiter = (limitation: IEndpointMeta['limit'] & { key: NonNullable<string> }, actor: string) => new Promise<void>((resolve) => {
+	if (process.env.NODE_ENV === 'test') resolve();
 
 	const hasShortTermLimit = typeof limitation.minInterval === 'number';
 
@@ -19,10 +20,10 @@ export const limiter = (limitation: IEndpointMeta['limit'] & { key: NonNullable<
 	} else if (hasLongTermLimit) {
 		max();
 	} else {
-		ok();
+		resolve();
 	}
 
-	// Short-term limit
+	// Short-term limit, calls long term limit if appropriate.
 	function min(): void {
 		const minIntervalLimiter = new Limiter({
 			id: `${actor}:${limitation.key}:min`,
@@ -33,18 +34,19 @@ export const limiter = (limitation: IEndpointMeta['limit'] & { key: NonNullable<
 
 		minIntervalLimiter.get((err, info) => {
 			if (err) {
-				return reject('ERR');
+				logger.error(err);
+				throw new ApiError('INTERNAL_ERROR');
 			}
 
 			logger.debug(`${actor} ${limitation.key} min remaining: ${info.remaining}`);
 
 			if (info.remaining === 0) {
-				reject('BRIEF_REQUEST_INTERVAL');
+				throw new ApiError('RATE_LIMIT_EXCEEDED', info);
 			} else {
 				if (hasLongTermLimit) {
 					max();
 				} else {
-					ok();
+					resolve();
 				}
 			}
 		});
@@ -61,15 +63,16 @@ export const limiter = (limitation: IEndpointMeta['limit'] & { key: NonNullable<
 
 		limiter.get((err, info) => {
 			if (err) {
-				return reject('ERR');
+				logger.error(err);
+				throw new ApiError('INTERNAL_ERROR');
 			}
 
 			logger.debug(`${actor} ${limitation.key} max remaining: ${info.remaining}`);
 
 			if (info.remaining === 0) {
-				reject('RATE_LIMIT_EXCEEDED');
+				throw new ApiError('RATE_LIMIT_EXCEEDED', info);
 			} else {
-				ok();
+				resolve();
 			}
 		});
 	}

@@ -29,8 +29,16 @@ export class ApiError extends Error {
 	 */
 	public apply(ctx: Koa.Context, endpoint: string): void {
 		ctx.status = this.httpStatusCode;
-		if (ctx.status === 401) {
-			ctx.response.set('WWW-Authenticate', 'Bearer');
+		// set additional headers
+		switch (ctx.status) {
+			case 401:
+				ctx.response.set('WWW-Authenticate', 'Bearer');
+				break;
+			case 429:
+				if (typeof this.info === 'object' && typeof this.info.reset === 'number') {
+					ctx.respose.set('Retry-After', Math.floor(this.info.reset - (Date.now() / 1000)));
+				}
+				break;
 		}
 		ctx.body = {
 			error: {
