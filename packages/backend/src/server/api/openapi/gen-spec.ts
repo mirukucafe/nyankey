@@ -126,11 +126,21 @@ export function genOpenapiSpec() {
 			};
 		}
 
-		let desc = (endpoint.meta.description ? endpoint.meta.description : 'No description provided.') + '\n\n';
+		let desc = endpoint.meta.description ?? 'No description provided.');
 		desc += `**Credential required**: *${endpoint.meta.requireCredential ? 'Yes' : 'No'}*`;
 		if (endpoint.meta.kind) {
-			const kind = endpoint.meta.kind;
-			desc += ` / **Permission**: *${kind}*`;
+			desc += `\n\n**Permission**: `' + endpoint.meta.kind + '`';
+		}
+		if (endpoint.meta.limit) {
+			const limit = endpoint.meta.limit;
+
+			desc += '\n### Rate limit\nRate limiting group: `' + (limit.key ?? endpoint.name) + '`';
+			if (limit.duration && limit.max) {
+				desc += `    \nNo more than ${limit.max} requests every ${limit.duration} ms.`;
+			}
+			if (limit.minInterval) {
+				desc += `    \nMinimum delay between each request: ${endpoint.meta.limit.minInterval} ms.`;
+			}
 		}
 
 		const requestType = endpoint.meta.requireFile ? 'multipart/form-data' : 'application/json';
