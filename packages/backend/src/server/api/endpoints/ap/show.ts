@@ -18,6 +18,8 @@ export const meta = {
 
 	requireCredential: true,
 
+	description: 'Shows the requested object. If necessary, fetches the object from the remote server.',
+
 	limit: {
 		duration: HOUR,
 		max: 30,

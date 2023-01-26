@@ -7,6 +7,8 @@ export const meta = {
 
 	requireCredential: true,
 
+	description: 'Tries to fetch the given `uri` from the remote server.',
+
 	limit: {
 		duration: HOUR,
 		max: 30,
