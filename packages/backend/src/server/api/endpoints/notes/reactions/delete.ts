@@ -13,8 +13,9 @@ export const meta = {
 
 	limit: {
 		duration: HOUR,
-		max: 60,
-		minInterval: 3 * SECOND,
+		max: 30,
+		minInterval: 10 * SECOND,
+		key: 'delete',
 	},
 
 	errors: ['NO_SUCH_NOTE', 'NOT_REACTED'],

@@ -14,8 +14,9 @@ export const meta = {
 
 	limit: {
 		duration: HOUR,
-		max: 300,
-		minInterval: SECOND,
+		max: 30,
+		minInterval: 10 * SECOND,
+		key: 'delete',
 	},
 
 	v2: {
