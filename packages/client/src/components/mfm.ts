@@ -31,10 +31,6 @@ export default defineComponent({
 			type: Object,
 			default: null,
 		},
-		i: {
-			type: Object,
-			default: null,
-		},
 		customEmojis: {
 			required: false,
 		},
