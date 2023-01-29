@@ -163,11 +163,11 @@ export class User {
 	// Indicates the user was deleted by an admin.
 	// The users' data is not deleted from the database to keep them from reappearing.
 	// A hard delete of the record may follow if we receive a matching Delete activity.
-	@Column('boolean', {
-		default: false,
-		comment: 'Whether the User is deleted.',
+	@Column('integer', {
+		nullable: true,
+		comment: 'How many delivery jobs are outstanding before the deletion is completed.',
 	})
-	public isDeleted: boolean;
+	public isDeleted: number | null;
 
 	@Column('varchar', {
 		length: 128, array: true, default: '{}',
