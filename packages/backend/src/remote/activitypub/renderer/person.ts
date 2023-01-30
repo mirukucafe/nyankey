@@ -30,12 +30,21 @@ export async function renderPerson(user: ILocalUser) {
 
 	if (profile.fields) {
 		for (const field of profile.fields) {
+			let value = field.value;
+			// try to parse it as a url
+			try {
+				if (field.value?.match(/^https?:/)) {
+					const url = new URL(field.value);
+					value = `<a href="${url.href}" rel="me nofollow noopener" target="_blank">${url.href}</a>`;
+				}
+			} catch {
+				// guess it wasn't a url after all...
+			}
+
 			attachment.push({
 				type: 'PropertyValue',
 				name: field.name,
-				value: (field.value != null && field.value.match(/^https?:/))
-					? `<a href="${new URL(field.value).href}" rel="me nofollow noopener" target="_blank">${new URL(field.value).href}</a>`
-					: field.value,
+				value,
 			});
 		}
 	}
