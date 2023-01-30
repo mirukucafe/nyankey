@@ -8,7 +8,7 @@ export async function deleteAccount(user: {
 	host: string | null;
 }): Promise<void> {
 	await Users.update(user.id, {
-		isDeleted: -1,
+		isDeleted: true,
 	});
 
 	if (Users.isLocalUser(user)) {

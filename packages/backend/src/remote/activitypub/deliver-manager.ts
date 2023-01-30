@@ -88,10 +88,10 @@ export class DeliverManager {
 	/**
 	 * Execute delivers
 	 */
-	public async execute(deletingUserId?: string) {
+	public async execute() {
 		if (!Users.isLocalUser(this.actor)) return;
 
-		let inboxes = new Set<string>();
+		const inboxes = new Set<string>();
 
 		/*
 		build inbox list
@@ -150,17 +150,13 @@ export class DeliverManager {
 			)),
 		);
 
-		inboxes = inboxes.entries()
-			.filter(inbox => !instancesToSkip.includes(new URL(inbox).host));
+		// deliver
+		for (const inbox of inboxes) {
+			// skip instances as indicated
+			if (instancesToSkip.includes(new URL(inbox).host)) continue;
 
-		if (deletingUserId) {
-			await Users.update(deletingUserId, {
-				// set deletion job count for reference counting before queueing jobs
-				isDeleted: inboxes.length,
-			});
+			deliver(this.actor, this.activity, inbox);
 		}
-
-		inboxes.forEach(inbox => deliver(this.actor, this.activity, inbox, deletingUserId));
 	}
 }
 

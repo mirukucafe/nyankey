@@ -349,7 +349,7 @@ export const UserRepository = db.getRepository(User).extend({
 				autoAcceptFollowed: profile!.autoAcceptFollowed,
 				noCrawle: profile!.noCrawle,
 				isExplorable: user.isExplorable,
-				isDeleted: user.isDeleted != null,
+				isDeleted: user.isDeleted,
 				hideOnlineStatus: user.hideOnlineStatus,
 				hasUnreadSpecifiedNotes: NoteUnreads.count({
 					where: { userId: user.id, isSpecified: true },

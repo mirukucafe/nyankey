@@ -1,4 +1,3 @@
-import { IsNull } from 'typeorm';
 import { Users } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import { deleteAccount } from '@/services/delete-account.js';
@@ -25,7 +24,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps) => {
 	const user = await Users.findOneBy({
 		id: ps.userId,
-		isDeleted: IsNull(),
+		isDeleted: false,
 	});
 
 	if (user == null) {

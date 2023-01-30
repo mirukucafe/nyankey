@@ -16,7 +16,7 @@ export async function deleteActor(actor: CacheableRemoteUser, uri: string): Prom
 		// anyway, the user is gone now so dont care
 		return 'ok: gone';
 	}
-	if (user.isDeleted != null) {
+	if (user.isDeleted) {
 		// the actual deletion already happened by an admin, just delete the record
 		await Users.delete(actor.id);
 	} else {
