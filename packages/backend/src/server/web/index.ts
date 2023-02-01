@@ -324,15 +324,15 @@ router.get('/notes/:note', async (ctx, next) => {
 	if (note) {
 		try {
 			// FIXME: packing with detail may throw an error if the reply or renote is not visible (#8774)
-			const _note = await Notes.pack(note);
+			const packedNote = await Notes.pack(note);
 			const profile = await UserProfiles.findOneByOrFail({ userId: note.userId });
 			const meta = await fetchMeta();
 			await ctx.render('note', {
-				note: _note,
+				note: packedNote,
 				profile,
 				avatarUrl: await Users.getAvatarUrl(await Users.findOneByOrFail({ id: note.userId })),
 				// TODO: Let locale changeable by instance setting
-				summary: getNoteSummary(_note),
+				summary: getNoteSummary(packedNote),
 				instanceName: meta.name || 'FoundKey',
 				icon: meta.iconUrl,
 				themeColor: meta.themeColor,
