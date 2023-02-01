@@ -17,7 +17,8 @@ block og
 	meta(property='og:title'       content= title)
 	meta(property='og:description' content= summary)
 	meta(property='og:url'         content= url)
-	meta(property='og:image'       content= avatarUrl)
+	for opengraphTag in filesOpengraph
+		meta(property=opengraphTag[0] content=opengraphTag[1])
 
 block meta
 	if user.host || isRenote || profile.noCrawle

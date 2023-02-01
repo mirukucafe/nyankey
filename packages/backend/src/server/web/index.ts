@@ -18,7 +18,7 @@ import { KoaAdapter } from '@bull-board/koa';
 import { In, IsNull } from 'typeorm';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import config from '@/config/index.js';
-import { Users, Notes, UserProfiles, Pages, Channels, Clips } from '@/models/index.js';
+import { Users, Notes, UserProfiles, Pages, Channels, Clips, DriveFiles } from '@/models/index.js';
 import * as Acct from '@/misc/acct.js';
 import { getNoteSummary } from '@/misc/get-note-summary.js';
 import { queues } from '@/queue/queues.js';
@@ -327,10 +327,70 @@ router.get('/notes/:note', async (ctx, next) => {
 			const packedNote = await Notes.pack(note);
 			const profile = await UserProfiles.findOneByOrFail({ userId: note.userId });
 			const meta = await fetchMeta();
+
+			// If the note has a CW (is sensitive as a whole) or any of the files is sensitive or there are no
+			// files, they are not used for a preview.
+			let filesOpengraph = [];
+			if (!packedNote.cw || packedNote.files.length > 0 || packedNote.files.all(file => !file.isSensitive)) {
+				let limit = 4;
+				for (const file of packedNote.files) {
+					if (file.type.startsWith('image/')) {
+						filesOpengraph.push([
+							"og:image",
+							DriveFiles.getPublicUrl(file, true),
+						]);
+						filesOpengraph.push([
+							"og:image:type",
+							file.type,
+						]);
+						if (file.properties != null) {
+							filesOpengraph.push([
+								"og:image:width",
+								file.properties?.width,
+							]);
+							filesOpengraph.push([
+								"og:image:height",
+								file.properties?.height,
+							]);
+						}
+						if (file.comment) {
+							filesOpengraph.push([
+								"og:image:alt",
+								file.comment,
+							]);
+						}
+					} else if (file.type.startsWith('audio/')) {
+						filesOpengraph.push([
+							"og:audio",
+							DriveFiles.getPublicUrl(file),
+						]);
+						filesOpengraph.push([
+							"og:audio:type",
+							file.type,
+						]);
+					} else if (file.type.startsWith('video/')) {
+						filesOpengraph.push([
+							"og:video",
+							DriveFiles.getPublicUrl(file),
+						]);
+						filesOpengraph.push([
+							"og:video:type",
+							file.type,
+						]);
+					} else {
+						// doesn't count towards the limit
+						continue;
+					}
+
+					// limit the number of presented attachments
+					if (--limit < 0) break;
+				}
+			}
+
 			await ctx.render('note', {
 				note: packedNote,
 				profile,
-				avatarUrl: await Users.getAvatarUrl(await Users.findOneByOrFail({ id: note.userId })),
+				filesOpengraph,
 				// TODO: Let locale changeable by instance setting
 				summary: getNoteSummary(packedNote),
 				instanceName: meta.name || 'FoundKey',
