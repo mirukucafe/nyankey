@@ -27,10 +27,6 @@ block meta
 	meta(name='misskey:user-id' content=user.id)
 	meta(name='misskey:note-id' content=note.id)
 	
-	// todo
-	if user.twitter
-		meta(name='twitter:creator' content=`@${user.twitter.screenName}`)
-
 	if note.prev
 		link(rel='prev' href=`${config.url}/notes/${note.prev}`)
 	if note.next
