@@ -150,17 +150,17 @@ export class DeliverManager {
 			)),
 		);
 
-		inboxes = inboxes.entries()
+		const filteredInboxes = Array.from(inboxes)
 			.filter(inbox => !instancesToSkip.includes(new URL(inbox).host));
 
 		if (deletingUserId) {
 			await Users.update(deletingUserId, {
 				// set deletion job count for reference counting before queueing jobs
-				isDeleted: inboxes.length,
+				isDeleted: filteredInboxes.length,
 			});
 		}
 
-		inboxes.forEach(inbox => deliver(this.actor, this.activity, inbox, deletingUserId));
+		filteredInboxes.forEach(inbox => deliver(this.actor, this.activity, inbox, deletingUserId));
 	}
 }
 

@@ -340,7 +340,7 @@ export default function() {
 export function destroy() {
 	deliverQueue.once('cleaned', async (jobs, status) => {
 		deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
-		await Promise.all(jobs.map(job => deletionRefCount(job));
+		await Promise.all(jobs.map(job => deletionRefCount(job)));
 	});
 	deliverQueue.clean(0, 'delayed');
 
