@@ -16,7 +16,7 @@ export async function deleteActor(actor: IRemoteUser, uri: string): Promise<stri
 		// anyway, the user is gone now so dont care
 		return 'ok: gone';
 	}
-	if (user.isDeleted) {
+	if (user.isDeleted != null) {
 		// the actual deletion already happened by an admin, just delete the record
 		await Users.delete(actor.id);
 	} else {

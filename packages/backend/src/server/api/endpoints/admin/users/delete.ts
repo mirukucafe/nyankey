@@ -1,3 +1,4 @@
+import { IsNull } from 'typeorm';
 import { Users } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import { deleteAccount } from '@/services/delete-account.js';

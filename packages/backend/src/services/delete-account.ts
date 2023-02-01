@@ -9,7 +9,7 @@ export async function deleteAccount(user: {
 }): Promise<void> {
 	await Promise.all([
 		Users.update(user.id, {
-			isDeleted: true,
+			isDeleted: -1,
 		}),
 		// revoke all of the users access tokens to block API access
 		AccessTokens.delete({
