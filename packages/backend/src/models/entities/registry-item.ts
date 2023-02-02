@@ -1,9 +1,9 @@
-import { PrimaryColumn, Entity, Index, JoinColumn, Column, ManyToOne } from 'typeorm';
+import { PrimaryColumn, Entity, Index, JoinColumn, Column, ManyToOne, Unique } from 'typeorm';
 import { id } from '../id.js';
 import { User } from './user.js';
 
-// TODO: 同じdomain、同じscope、同じkeyのレコードは二つ以上存在しないように制約付けたい
 @Entity()
+@Unique(['userId', 'key', 'scope'])
 export class RegistryItem {
 	@PrimaryColumn(id())
 	public id: string;
@@ -31,8 +31,7 @@ export class RegistryItem {
 	@JoinColumn()
 	public user: User | null;
 
-	@Column('varchar', {
-		length: 1024,
+	@Column('text', {
 		comment: 'The key of the RegistryItem.',
 	})
 	public key: string;
