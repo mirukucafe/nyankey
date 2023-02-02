@@ -48,11 +48,4 @@ export class RegistryItem {
 		length: 1024, array: true, default: '{}',
 	})
 	public scope: string[];
-
-	// サードパーティアプリに開放するときのためのカラム
-	@Index()
-	@Column('varchar', {
-		length: 512, nullable: true,
-	})
-	public domain: string | null;
 }

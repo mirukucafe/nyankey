@@ -17,7 +17,6 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const query = RegistryItems.createQueryBuilder('item')
 		.select('item.scope')
-		.where('item.domain IS NULL')
 		.andWhere('item.userId = :userId', { userId: user.id });
 
 	const items = await query.getMany();
