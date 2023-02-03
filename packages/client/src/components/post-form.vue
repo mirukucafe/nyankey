@@ -207,7 +207,7 @@ const maxTextLength = $computed((): number => {
 
 const canPost = $computed((): boolean => {
 	return !posting &&
-		(1 <= textLength || 1 <= files.length || !!poll || !!props.renote) &&
+		(1 <= textLength || 1 <= files.length || !!poll || !!props.renote || !!quoteId) &&
 		(textLength <= maxTextLength) &&
 		(!poll || poll.choices.length >= 2);
 });
@@ -573,7 +573,7 @@ async function post() {
 		text: text === '' ? undefined : text,
 		fileIds: files.length > 0 ? files.map(f => f.id) : undefined,
 		replyId: props.reply ? props.reply.id : undefined,
-		renoteId: props.renote ? props.renote.id : quoteId ? quoteId : undefined,
+		renoteId: props.renote?.id ?? quoteId ?? undefined,
 		channelId: props.channel ? props.channel.id : undefined,
 		poll,
 		cw: useCw ? cw || '' : undefined,
