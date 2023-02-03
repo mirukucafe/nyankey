@@ -102,7 +102,7 @@ export default async (ctx: Router.RouterContext) => {
 export async function packActivity(note: Note): Promise<any> {
 	if (isPureRenote(note)) {
 		const renote = await Notes.findOneByOrFail({ id: note.renoteId });
-		return renderAnnounce(renote.uri ? renote.uri : `${config.url}/notes/${renote.id}`, note);
+		return renderAnnounce(renote.uri ?? `${config.url}/notes/${renote.id}`, note);
 	} else {
 		return renderCreate(await renderNote(note, false), note);
 	}
