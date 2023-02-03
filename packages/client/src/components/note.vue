@@ -151,6 +151,7 @@ if (noteViewInterruptors.length > 0) {
 const isRenote = (
 	note.renote != null &&
 	note.text == null &&
+	note.cw == null &&
 	note.fileIds.length === 0 &&
 	note.poll == null
 );
