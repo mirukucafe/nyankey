@@ -4,7 +4,6 @@ import MkUrl from '@/components/global/url.vue';
 import MkLink from '@/components/link.vue';
 import MkMention from '@/components/mention.vue';
 import MkEmoji from '@/components/global/emoji.vue';
-import { concat } from '@/scripts/array';
 import MkFormula from '@/components/formula.vue';
 import MkCode from '@/components/code.vue';
 import MkSearch from '@/components/mfm-search.vue';
@@ -50,7 +49,7 @@ export default defineComponent({
 			return t.match(/^[0-9.]+s$/) ? t : null;
 		};
 
-		const genEl = (ast: mfm.MfmNode[]) => concat(ast.map((token): VNode[] => {
+		const genEl = (ast: mfm.MfmNode[]) => ast.map((token): VNode[] => {
 			switch (token.type) {
 				case 'text': {
 					const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
@@ -314,7 +313,7 @@ export default defineComponent({
 					return [];
 				}
 			}
-		}));
+		}).flat();
 
 		// Parse ast to DOM
 		return h('span', genEl(ast));
