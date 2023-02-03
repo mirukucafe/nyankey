@@ -76,14 +76,6 @@ export const initializeStreamingServer = (server: http.Server): void => {
 				if (intervalId) clearInterval(intervalId);
 				if (pingTimeout) clearTimeout(pingTimeout);
 			});
-
-			// ping/pong mechanism
-			// TODO: the websocket protocol already specifies a ping/pong mechanism, why is this necessary?
-			socket.on('message', async (data) => {
-				if (data.type === 'utf8' && data.utf8Data === 'ping') {
-					socket.send('pong');
-				}
-			});
 		});
 	});
 };
