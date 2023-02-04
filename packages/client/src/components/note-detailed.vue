@@ -159,12 +159,7 @@ if (noteViewInterruptors.length > 0) {
 	});
 }
 
-const isRenote = (
-	note.renote != null &&
-	note.text == null &&
-	note.fileIds.length === 0 &&
-	note.poll == null
-);
+const isRenote = foundkey.entities.isPureRenote(note);
 
 const el = ref<HTMLElement>();
 const menuButton = ref<HTMLElement>();

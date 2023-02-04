@@ -1,4 +1,5 @@
 import { FindOptionsWhere, In, IsNull, Not } from 'typeorm';
+import * as foundkey from 'foundkey-js';
 import { publishNoteStream } from '@/services/stream.js';
 import renderDelete from '@/remote/activitypub/renderer/delete.js';
 import renderAnnounce from '@/remote/activitypub/renderer/announce.js';
@@ -12,7 +13,6 @@ import { Notes, Users, Instances } from '@/models/index.js';
 import { notesChart, perUserNotesChart, instanceChart } from '@/services/chart/index.js';
 import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import { countSameRenotes } from '@/misc/count-same-renotes.js';
-import { isPureRenote } from '@/misc/renote.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import { deliverToRelays } from '../relay.js';
 
@@ -42,7 +42,7 @@ export default async function(user: { id: User['id']; uri: User['uri']; host: Us
 			let renote: Note | null = null;
 
 			// if deleted note is renote
-			if (isPureRenote(note)) {
+			if (foundkey.entities.isPureRenote(note)) {
 				renote = await Notes.findOneBy({ id: note.renoteId });
 			}
 

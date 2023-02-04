@@ -471,3 +471,14 @@ export type UserSorting =
 	| '+updatedAt'
 	| '-updatedAt';
 export type OriginType = 'combined' | 'local' | 'remote';
+
+export function isPureRenote(note: Note): boolean {
+	return note.renoteId != null
+		&& note.text == null
+		&& note.cw == null
+		&& (
+			note.fileIds == null
+			|| note.fileIds.length === 0
+		)
+		&& note.poll == null;
+}

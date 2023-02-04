@@ -16,14 +16,9 @@ export function getNoteMenu(props: {
 	isDeleted: Ref<boolean>;
 	currentClipPage?: Ref<foundkey.entities.Clip>;
 }) {
-	const isRenote = (
-		props.note.renote != null &&
-		props.note.text == null &&
-		props.note.fileIds.length === 0 &&
-		props.note.poll == null
-	);
-
-	const appearNote = isRenote ? props.note.renote as foundkey.entities.Note : props.note;
+	const appearNote = foundkey.entities.isPureRenote(props.note)
+		? props.note.renote as foundkey.entities.Note
+		: props.note;
 
 	function del(): void {
 		os.confirm({

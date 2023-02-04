@@ -1,5 +1,5 @@
 import { In } from 'typeorm';
-import { noteVisibilities } from 'foundkey-js';
+import { noteVisibilities, entities } from 'foundkey-js';
 import create from '@/services/note/create.js';
 import { User } from '@/models/entities/user.js';
 import { Users, DriveFiles, Notes, Channels, Blockings } from '@/models/index.js';
@@ -7,7 +7,6 @@ import { DriveFile } from '@/models/entities/drive-file.js';
 import { Note } from '@/models/entities/note.js';
 import { Channel } from '@/models/entities/channel.js';
 import { HOUR } from '@/const.js';
-import { isPureRenote } from '@/misc/renote.js';
 import config from '@/config/index.js';
 import { ApiError } from '../../error.js';
 import define from '../../define.js';
@@ -160,7 +159,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			throw e;
 		});
 
-		if (isPureRenote(renote)) throw new ApiError('PURE_RENOTE', 'Cannot renote a pure renote.');
+		if (entities.isPureRenote(renote)) throw new ApiError('PURE_RENOTE', 'Cannot renote a pure renote.');
 
 		// check that the visibility is not less restrictive
 		if (noteVisibilities.indexOf(renote.visibility) > noteVisibilities.indexOf(ps.visibility)) {
@@ -185,7 +184,7 @@ export default define(meta, paramDef, async (ps, user) => {
 			throw e;
 		});
 
-		if (isPureRenote(reply)) throw new ApiError('PURE_RENOTE', 'Cannot reply to a pure renote.');
+		if (entities.isPureRenote(reply)) throw new ApiError('PURE_RENOTE', 'Cannot reply to a pure renote.');
 
 		// check that the visibility is not less restrictive
 		if (noteVisibilities.indexOf(reply.visibility) > noteVisibilities.indexOf(ps.visibility)) {
