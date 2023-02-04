@@ -15,7 +15,8 @@ import { ILocalUser, User } from '@/models/entities/user.js';
 import { renderLike } from '@/remote/activitypub/renderer/like.js';
 import { getUserKeypair } from '@/misc/keypair-store.js';
 import renderFollow from '@/remote/activitypub/renderer/follow.js';
-import Outbox, { packActivity } from './activitypub/outbox.js';
+import { renderNoteOrRenoteActivity } from '@/remote/activitypub/renderer/note-or-renote.js';
+import Outbox from './activitypub/outbox.js';
 import Followers from './activitypub/followers.js';
 import Following from './activitypub/following.js';
 import Featured from './activitypub/featured.js';
@@ -115,7 +116,7 @@ router.get('/notes/:note/activity', async ctx => {
 		return;
 	}
 
-	ctx.body = renderActivity(await packActivity(note));
+	ctx.body = renderActivity(await renderNoteOrRenoteActivity(note));
 	ctx.set('Cache-Control', 'public, max-age=180');
 	setResponseType(ctx);
 });

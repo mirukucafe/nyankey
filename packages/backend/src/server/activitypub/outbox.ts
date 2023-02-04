@@ -7,6 +7,7 @@ import renderOrderedCollectionPage from '@/remote/activitypub/renderer/ordered-c
 import renderNote from '@/remote/activitypub/renderer/note.js';
 import renderCreate from '@/remote/activitypub/renderer/create.js';
 import renderAnnounce from '@/remote/activitypub/renderer/announce.js';
+import { renderNoteOrRenoteActivity } from '@/remote/activitypub/renderer/note-or-renote.js';
 import { countIf } from '@/prelude/array.js';
 import * as url from '@/prelude/url.js';
 import { Users, Notes } from '@/models/index.js';
@@ -63,7 +64,7 @@ export default async (ctx: Router.RouterContext) => {
 
 		if (sinceId) notes.reverse();
 
-		const activities = await Promise.all(notes.map(note => packActivity(note)));
+		const activities = await Promise.all(notes.map(note => renderNoteOrRenoteActivity(note)));
 		const rendered = renderOrderedCollectionPage(
 			`${partOf}?${url.query({
 				page: 'true',
@@ -94,16 +95,3 @@ export default async (ctx: Router.RouterContext) => {
 		setResponseType(ctx);
 	}
 };
-
-/**
- * Pack Create<Note> or Announce Activity
- * @param note Note
- */
-export async function packActivity(note: Note): Promise<any> {
-	if (isPureRenote(note)) {
-		const renote = await Notes.findOneByOrFail({ id: note.renoteId });
-		return renderAnnounce(renote.uri ?? `${config.url}/notes/${renote.id}`, note);
-	} else {
-		return renderCreate(await renderNote(note, false), note);
-	}
-}

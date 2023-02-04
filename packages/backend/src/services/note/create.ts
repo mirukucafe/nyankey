@@ -36,7 +36,7 @@ import { Cache } from '@/misc/cache.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
 import { IActivity } from '@/remote/activitypub/type.js';
-import { packActivity } from '@/server/activitypub/outbox.js';
+import { renderNoteOrRenoteActivity } from '@/remote/activitypub/renderer/note-or-renote.js';
 import { MINUTE } from '@/const.js';
 import { updateHashtags } from '../update-hashtag.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
@@ -431,7 +431,7 @@ export default async (user: { id: User['id']; username: User['username']; host: 
 		//#region AP deliver
 		if (Users.isLocalUser(user) && !data.localOnly) {
 			(async () => {
-				const noteActivity = renderActivity(await packActivity(note));
+				const noteActivity = renderActivity(await renderNoteOrRenoteActivity(note));
 				const dm = new DeliverManager(user, noteActivity);
 
 				// Delivered to remote users who have been mentioned
