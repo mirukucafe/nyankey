@@ -11,6 +11,108 @@ Unreleased changes should not be listed in this file.
 Instead, run `git shortlog --format='%h %s' --group=trailer:changelog <last tag>..` to see unreleased changes; replace `<last tag>` with the tag you wish to compare from.
 If you are a contributor, please read [CONTRIBUTING.md, section "Changelog Trailer"](./CONTRIBUTING.md#changelog-trailer) on what to do instead.
 
+## 13.0.0-preview4 - 2023-02-05
+This release contains 6 breaking changes, including changes to the configuration file format.
+
+### Added
+- new Foundkey logo
+- client: add button to unrenote/remove all own renotes
+- client: add mod tracker
+- client: add button to delete all files of a user for moderators
+- server: implement OAuth 2.0 Authorization Code grant
+- server: add config for error images
+- server: expire notifications after 3 months
+- server: start adding /api/v2 routes
+- server: indicate Retry-After when rate limiting
+- docs: show rate limit information
+
+### Changed
+- **BREAKING** server: implement separate web workers
+  The configuration file format has been changed: The `clusterLimit` item has been removed
+  and `clusterLimits` has been added instead. Check the example configuration file.
+- **BREAKING** server: remove wildcard blocking and instead block subdomains (#269)
+  As an administrator you may need to check the list of blocked instances.
+- **BREAKING** server: disable deliver rate limit by default
+  We found that the deliver rate limit causes a lot of load for no real benefit. Because of this,
+  it will be disabled by default. The default value of `deliverJobPerSec` is set to
+  disable this rate limit.
+- server: adjust permissions for `/api/admin/accounts/delete`
+  The admin/accounts/delete endpoint now requries administrator privileges
+  instead of just moderator privileges.
+- server: increase nodeinfo caching
+- client: headlines in queue widget are links
+- client: add tooltips to visibility icons
+- server: improve error messages
+- server: change default value for `/api/admin/show-users` origin param
+- server: lower rate limit for deletion activities
+  Deleting things that result in federating a delete activity have a more strict rate limit.
+  This affects the following endpoints:
+  - `/api/notes/delete`
+  - `/api/notes/reactions/delete`
+  - `/api/notes/unrenote`
+- server: improve OpenGraph data
+  - properly render note attachments as RDFa
+  - add more metadata about e.g. author
+  - proper OpenGraph data replaces custom `misskey:` RDFa tags
+- activitypub: implement [FEP-e232](https://codeberg.org/fediverse/fep/src/branch/main/feps/fep-e232.md) qoutes
+- activitypub: use `quoteUri` instead of `quoteUrl`
+
+### Fixed
+- client: fix layout of app authorization page
+- client: unify different error dialogs
+- client: set display name limit same as server
+- client: dont display instance banner tooltip if software name is unknown
+- client: fix 500 error in notifications
+- client: fix some tooltips not closing
+- client: fix issue of search only working once
+- client: check `quoteId` for canPost computation
+- client: fix quotes with only a CW
+- server: fix thread mutes not applying to renotes
+- server: fix ReferenceError: meta is undefined
+- server: fix TypeError in registerOrFetchInstanceDoc
+- server: fix ratelimit in `/api/i/import-following`
+- server: handle redirects in signed get
+- server: remove reversi database tables
+- server: set file permissions after copy
+- server: also use human readable URL in search
+- server: fix user deletion race condition
+- server: add websocket ping mechanism
+  This should help keep websocket connections alive even if there are no events for
+  prolonged time periods. This should also fix issues where the "connection has been lost"
+  dialog appeared despite the connection being fine.
+- activitypub: properly parse incoming hashtags
+- activitypub: Do block checks more globally
+- activitypub: properly render CW only quotes
+
+### Removed:
+- **BREAKING** server: remove Twitter, Github and Discord integrations
+ff31b8b06 server: remove bios and cli
+a673647fb server: remove avatarColor and bannerColor properties
+- **BREAKING** server: remove `api/admin/delete-account`, 
+  You should use the API endpoint `admin/accounts/delete` instead.
+  It has the same parameter and the same behaviour.
+- **BREAKING** remove galleries
+  Galleries have been removed because low usage and duplication of other behaviour.
+  Existing gallery posts will be turned into ordinary notes.
+  If a user had any gallery posts, a new clip called "Gallery" will be created containing
+  all of the former gallery posts that are now notes.
+  This affects the following endpoints:
+  - `/api/gallery/featured`
+  - `/api/gallery/popular`
+  - `/api/gallery/posts`
+  - `/api/gallery/posts/create`
+  - `/api/gallery/posts/delete`
+  - `/api/gallery/posts/like`
+  - `/api/gallery/posts/show`
+  - `/api/gallery/posts/unlike`
+  - `/api/i/gallery/likes`
+  - `/api/i/gallery/posts`
+  - `/api/users/gallery/posts`
+- server: remove application level websocket ping
+  This pinging mechanism was unused in `foundkey-js`, and we expect other usage to be low.
+  You can use the pinging mechanism built into the websocket protocol if you wish.
+  Note that the Server will now also send pings on its own (see *Fixed* section).
+
 ## 13.0.0-preview3 - 2022-12-02
 This release contains 1 urgent security fix necessitated by `misskey-forkbomb`.
 This release contains 1 breaking change.
