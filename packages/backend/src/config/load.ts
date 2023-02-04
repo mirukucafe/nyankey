@@ -54,7 +54,7 @@ export default function load(): Config {
 		disableHsts: false,
 		deliverJobConcurrency: 128,
 		inboxJobConcurrency: 16,
-		deliverJobPerSec: 128,
+		deliverJobPerSec: -1,
 		inboxJobPerSec: 16,
 		deliverJobMaxAttempts: 12,
 		inboxJobMaxAttempts: 8,

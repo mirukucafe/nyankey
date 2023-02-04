@@ -100,7 +100,7 @@ redis:
 # Use -1 to disable.
 # A rate limit for deliver jobs is not recommended as it comes with
 # a big performance penalty due to overhead of rate limiting.
-#deliverJobPerSec: 128
+#deliverJobPerSec: -1
 #inboxJobPerSec: 16
 
 # Number of times each job will be tried.
