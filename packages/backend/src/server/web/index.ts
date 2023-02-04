@@ -331,7 +331,7 @@ router.get('/notes/:note', async (ctx, next) => {
 			// If the note has a CW (is sensitive as a whole) or any of the files is sensitive or there are no
 			// files, they are not used for a preview.
 			let filesOpengraph = [];
-			if (!packedNote.cw || packedNote.files.length > 0 || packedNote.files.all(file => !file.isSensitive)) {
+			if (!packedNote.cw || packedNote.files.length > 0 || packedNote.files.every(file => !file.isSensitive)) {
 				let limit = 4;
 				for (const file of packedNote.files) {
 					if (file.type.startsWith('image/')) {
