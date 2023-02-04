@@ -6,10 +6,11 @@
 #───┘ URL └─────────────────────────────────────────────────────
 
 # Final accessible URL seen by a user.
-url: https://example.tld/
-
+# Only the host part will be used.
 # ONCE YOU HAVE STARTED THE INSTANCE, DO NOT CHANGE THE
 # URL SETTINGS AFTER THAT!
+url: https://example.tld/
+
 
 #   ┌───────────────────────┐
 #───┘ Port and TLS settings └───────────────────────────────────
@@ -45,6 +46,7 @@ db:
   pass: example-foundkey-pass
 
   # Whether to disable query caching
+  # Default is to cache, i.e. false.
   #disableCache: true
 
   # Extra connection options
@@ -57,7 +59,11 @@ db:
 redis:
   host: localhost
   port: 6379
-  #family: dual  # can be either a number or string (0/dual, 4/ipv4, 6/ipv6)
+  # Address family to connect over.
+  # Can be either a number or string (0/dual, 4/ipv4, 6/ipv6)
+  # Default is "dual".
+  #family: dual
+  # The following properties are optional.
   #pass: example-pass
   #prefix: example-prefix
   #db: 1
@@ -65,6 +71,7 @@ redis:
 #   ┌─────────────────────────────┐
 #───┘ Elasticsearch configuration └─────────────────────────────
 
+# Elasticsearch is optional.
 #elasticsearch:
 #  host: localhost
 #  port: 9200
@@ -75,35 +82,41 @@ redis:
 #   ┌─────────────────────┐
 #───┘ Other configuration └─────────────────────────────────────
 
-# Whether disable HSTS
+# Whether to disable HSTS (not recommended)
+# Default is to enable HSTS, i.e. false.
 #disableHsts: true
 
 # Number of worker processes by type.
-# The sum must not exceed the number of available cores.
+# The sum should not exceed the number of available cores.
 #clusterLimits:
 #  web: 1
 #  queue: 1
 
-# Job concurrency per worker
-# deliverJobConcurrency: 128
-# inboxJobConcurrency: 16
+# Jobs each worker will try to work on at a time.
+#deliverJobConcurrency: 128
+#inboxJobConcurrency: 16
 
-# Job rate limiter
-# deliverJobPerSec: 128
-# inboxJobPerSec: 16
+# Rate limit for each Worker.
+# Use -1 to disable.
+# A rate limit for deliver jobs is not recommended as it comes with
+# a big performance penalty due to overhead of rate limiting.
+#deliverJobPerSec: 128
+#inboxJobPerSec: 16
 
-# Job attempts
-# deliverJobMaxAttempts: 12
-# inboxJobMaxAttempts: 8
+# Number of times each job will be tried.
+# 1 means only try once and don't retry.
+#deliverJobMaxAttempts: 12
+#inboxJobMaxAttempts: 8
 
 # Syslog option
 #syslog:
 #  host: localhost
 #  port: 514
 
-# Proxy for HTTP/HTTPS
+# Proxy for HTTP/HTTPS outgoing connections
 #proxy: http://127.0.0.1:3128
 
+# Hosts that should not be connected to through the proxy specified above
 #proxyBypassHosts: [
 #  'example.com',
 #  '192.0.2.8'
@@ -117,7 +130,8 @@ redis:
 # Media Proxy
 #mediaProxy: https://example.com/proxy
 
-# Proxy remote files (default: false)
+# Proxy remote files
+# Default is to not proxy remote files, i.e. false.
 #proxyRemoteFiles: true
 
 # Storage path for files if stored locally (absolute path)
@@ -125,11 +139,15 @@ redis:
 #internalStoragePath: '/etc/foundkey/files'
 
 # Upload or download file size limits (bytes)
+# default is 262144000 = 250MiB
 #maxFileSize: 262144000
 
 # Max note text length (in characters)
 #maxNoteTextLength: 3000
 
+# By default, Foundkey will fail when something tries to make it fetch something from private IPs.
+# With the following setting you can explicitly allow some private CIDR subnets.
+# Default is an empty list, i.e. none allowed.
 #allowedPrivateNetworks: [
 #  '127.0.0.1/32'
 #]

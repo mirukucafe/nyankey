@@ -89,7 +89,7 @@ const _https = new https.Agent({
 	lookup: cache.lookup,
 } as https.AgentOptions);
 
-const maxSockets = Math.max(256, config.deliverJobConcurrency || 128);
+const maxSockets = Math.max(256, config.deliverJobConcurrency);
 
 /**
  * Get http proxy or non-proxy agent

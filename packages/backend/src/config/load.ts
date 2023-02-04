@@ -38,13 +38,30 @@ export default function load(): Config {
 
 	config.port = config.port || parseInt(process.env.PORT || '', 10);
 
+	// set default values
 	config.images = Object.assign({
 		info: '/twemoji/1f440.svg',
 		notFound: '/twemoji/2049.svg',
 		error: '/twemoji/1f480.svg',
 	}, config.images ?? {});
 
-	if (!config.maxNoteTextLength) config.maxNoteTextLength = 3000;
+	config.clusterLimits = Object.assign({
+		web: 1,
+		queue: 1,
+	}, config.clusterLimits ?? {});
+
+	config = Object.assign({
+		disableHsts: false,
+		deliverJobConcurrency: 128,
+		inboxJobConcurrency: 16,
+		deliverJobPerSec: 128,
+		inboxJobPerSec: 16,
+		deliverJobMaxAttempts: 12,
+		inboxJobMaxAttempts: 8,
+		proxyRemoteFiles: false,
+		maxFileSize: 262144000, // 250 MiB
+		maxNoteTextLength: 3000,
+	}, config);
 
 	mixin.version = meta.version;
 	mixin.host = url.host;
@@ -60,21 +77,8 @@ export default function load(): Config {
 
 	if (!config.redis.prefix) config.redis.prefix = mixin.host;
 
-	if (!config.clusterLimits) {
-		config.clusterLimits = {
-			web: 1,
-			queue: 1,
-		};
-	} else {
-		config.clusterLimits = {
-			web: 1,
-			queue: 1,
-			...config.clusterLimits,
-		};
-
-		if (config.clusterLimits.web < 1 || config.clusterLimits.queue < 1) {
-			throw new Error('invalid cluster limits');
-		}
+	if (config.clusterLimits.web < 1 || config.clusterLimits.queue < 1) {
+		throw new Error('invalid cluster limits');
 	}
 
 	return Object.assign(config, mixin);

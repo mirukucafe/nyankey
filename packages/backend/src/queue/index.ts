@@ -96,7 +96,7 @@ export function deliver(user: ThinUser, content: unknown, to: string | null) {
 	};
 
 	return deliverQueue.add(data, {
-		attempts: config.deliverJobMaxAttempts || 12,
+		attempts: config.deliverJobMaxAttempts,
 		timeout: MINUTE,
 		backoff: {
 			type: 'apBackoff',
@@ -113,7 +113,7 @@ export function inbox(activity: IActivity, signature: httpSignature.IParsedSigna
 	};
 
 	return inboxQueue.add(data, {
-		attempts: config.inboxJobMaxAttempts || 8,
+		attempts: config.inboxJobMaxAttempts,
 		timeout: 5 * MINUTE,
 		backoff: {
 			type: 'apBackoff',
@@ -291,8 +291,8 @@ export function webhookDeliver(webhook: Webhook, type: typeof webhookEventTypes[
 export default function() {
 	if (envOption.onlyServer) return;
 
-	deliverQueue.process(config.deliverJobConcurrency || 128, processDeliver);
-	inboxQueue.process(config.inboxJobConcurrency || 16, processInbox);
+	deliverQueue.process(config.deliverJobConcurrency, processDeliver);
+	inboxQueue.process(config.inboxJobConcurrency, processInbox);
 	endedPollNotificationQueue.process(endedPollNotification);
 	webhookDeliverQueue.process(64, processWebhookDeliver);
 	processDb(dbQueue);

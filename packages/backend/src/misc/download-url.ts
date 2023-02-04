@@ -19,7 +19,6 @@ export async function downloadUrl(url: string, path: string): Promise<void> {
 
 	const timeout = 30 * SECOND;
 	const operationTimeout = MINUTE;
-	const maxSize = config.maxFileSize || 262144000;
 
 	const req = got.stream(url, {
 		headers: {
@@ -53,14 +52,14 @@ export async function downloadUrl(url: string, path: string): Promise<void> {
 		const contentLength = res.headers['content-length'];
 		if (contentLength != null) {
 			const size = Number(contentLength);
-			if (size > maxSize) {
-				logger.warn(`maxSize exceeded (${size} > ${maxSize}) on response`);
+			if (size > config.maxFileSize) {
+				logger.warn(`maxSize exceeded (${size} > ${config.maxFileSize}) on response`);
 				req.destroy();
 			}
 		}
 	}).on('downloadProgress', (progress: Got.Progress) => {
-		if (progress.transferred > maxSize) {
-			logger.warn(`maxSize exceeded (${progress.transferred} > ${maxSize}) on downloadProgress`);
+		if (progress.transferred > config.maxFileSize) {
+			logger.warn(`maxSize exceeded (${progress.transferred} > ${config.maxFileSize}) on downloadProgress`);
 			req.destroy();
 		}
 	});
