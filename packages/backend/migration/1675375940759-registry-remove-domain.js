@@ -6,7 +6,7 @@ export class registryRemoveDomain1675375940759 {
         await queryRunner.query(`ALTER TABLE "registry_item" DROP COLUMN "domain"`);
         await queryRunner.query(`ALTER TABLE "registry_item" ALTER COLUMN "key" TYPE text USING "key"::text`);
         // delete existing duplicated entries, keeping the latest updated one
-        await queryRunner.query(`DELETE FROM "registry_item" AS "a" WHERE "updatedAt" != (SELECT MAX("updatedAt") OVER (PARTITION BY "userId", "key", "scope") FROM "registry_item" AS "b" WHERE "a"."userId" = "b"."userId" AND "a"."key" = "b"."key" AND "a"."scope" = "b"."scope")`);
+        await queryRunner.query(`DELETE FROM "registry_item" AS "a" WHERE "updatedAt" != (SELECT MAX("updatedAt") FROM "registry_item" AS "b" WHERE "a"."userId" = "b"."userId" AND "a"."key" = "b"."key" AND "a"."scope" = "b"."scope" GROUP BY "userId", "key", "scope")`);
         await queryRunner.query(`ALTER TABLE "registry_item" ADD CONSTRAINT "UQ_b8d6509f847331273ab99daccc7" UNIQUE ("userId", "key", "scope")`);
     }
 
