@@ -1,6 +1,5 @@
 import { Brackets } from 'typeorm';
 import { Notes } from '@/models/index.js';
-import { safeForSql } from '@/misc/safe-for-sql.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
 import define from '../../define.js';
 import { makePaginationQuery } from '../../common/make-pagination-query.js';
@@ -86,15 +85,14 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	try {
 		if (ps.tag) {
-			if (!safeForSql(ps.tag)) throw new Error('Injection');
-			query.andWhere(`'{"${normalizeForSearch(ps.tag)}"}' <@ note.tags`);
+			query.andWhere(':tag = ANY(note.tags)', { tag: normalizeForSearch(ps.tag) });
 		} else {
+			let i = 0;
 			query.andWhere(new Brackets(qb => {
 				for (const tags of ps.query!) {
 					qb.orWhere(new Brackets(qb => {
 						for (const tag of tags) {
-							if (!safeForSql(tag)) throw new Error('Injection');
-							qb.andWhere(`'{"${normalizeForSearch(tag)}"}' <@ note.tags`);
+							qb.andWhere(`:tag${++i} = ANY(note.tags)`, { ['tag' + i]: normalizeForSearch(tag) });
 						}
 					}));
 				}
