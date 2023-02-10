@@ -18,7 +18,8 @@ export function install(plugin) {
 			return new Promise(ok => {
 				inputText({
 					title: q,
-				}).then(({ result: a }) => {
+				}).then(({ canceled, result: a }) => {
+					if (canceled) return;
 					ok(a);
 				});
 			});

@@ -60,7 +60,8 @@ const run = async (): Promise<void> => {
 			return new Promise(ok => {
 				os.inputText({
 					title: q,
-				}).then(({ result: a }) => {
+				}).then(({ canceled, result: a }) => {
+					if (canceled) return;
 					ok(a);
 				});
 			});
