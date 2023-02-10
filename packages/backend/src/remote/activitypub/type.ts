@@ -35,20 +35,37 @@ export function getApIds(value: ApObject | undefined): string[] {
 }
 
 /**
- * Get first ActivityStreams Object id
- */
-export function getOneApId(value: ApObject): string {
-	const firstOne = Array.isArray(value) ? value[0] : value;
-	return getApId(firstOne);
-}
-
-/**
  * Get ActivityStreams Object id
  */
 export function getApId(value: string | Object): string {
-	if (typeof value === 'string') return value;
-	if (typeof value.id === 'string') return value.id;
-	throw new Error('cannot detemine id');
+	let url = null;
+	if (typeof value === 'string') url = value;
+	else if (typeof value.id === 'string') url = value.id;
+
+	if (!url || !['https:', 'http:'].includes(new URL(url).protocol)) {
+		throw new Error('cannot determine id');
+	} else {
+		return url;
+	}
+}
+
+/**
+ * Get first (valid) ActivityStreams Object id
+ */
+export function getOneApId(value: ApObject): string {
+	if (Array.isArray(value)) {
+		// find the first valid ID
+		for (const id of value) {
+			try {
+				return getApId(x);
+			} catch {
+				continue;
+			}
+		}
+		throw new Error('cannot determine id');
+	} else {
+		return getApId(value);
+	}
 }
 
 /**
@@ -60,15 +77,34 @@ export function getApType(value: Object): string {
 	throw new Error('cannot detect type');
 }
 
-export function getOneApHrefNullable(value: ApObject | undefined): string | undefined {
-	const firstOne = Array.isArray(value) ? value[0] : value;
-	return getApHrefNullable(firstOne);
+export function getApHrefNullable(value: string | IObject | undefined): string | undefined {
+	let url = null;
+	if (typeof value === 'string') url = value;
+	else if (typeof value?.href === 'string') url = value.href;
+
+	if (!url || !['https:', 'http:'].includes(new URL(url).protocol)) {
+		return undefined;
+	} else {
+		return url;
+	}
 }
 
-export function getApHrefNullable(value: string | IObject | undefined): string | undefined {
-	if (typeof value === 'string') return value;
-	if (typeof value?.href === 'string') return value.href;
-	return undefined;
+export function getOneApHrefNullable(value: ApObject | undefined): string | undefined {
+	if (!value) {
+		return;
+	} else if (Array.isArray(value)) {
+		// find the first valid href
+		for (const href of value) {
+			try {
+				return getApHrefNullable(href);
+			} catch {
+				continue;
+			}
+		}
+		return undefined;
+	} else {
+		return getApHrefNullable(value);
+	}
 }
 
 export interface IActivity extends IObject {
