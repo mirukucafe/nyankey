@@ -35,6 +35,7 @@ const props = withDefaults(defineProps<{
 
 const self = props.url.startsWith(local);
 const uri = new URL(props.url);
+if (!['http:', 'https:'].includes(url.protocol)) throw new Error('invalid url');
 let el: HTMLElement | null = $ref(null);
 
 let schema = $ref(uri.protocol);
