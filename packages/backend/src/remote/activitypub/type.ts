@@ -282,7 +282,7 @@ export interface IRemove extends IActivity {
 
 export interface ILike extends IActivity {
 	type: 'Like' | 'EmojiReaction' | 'EmojiReact';
-	_misskey_reaction?: string;
+	content?: string;
 }
 
 export interface IAnnounce extends IActivity {
