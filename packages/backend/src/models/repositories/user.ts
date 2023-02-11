@@ -270,15 +270,13 @@ export const UserRepository = db.getRepository(User).extend({
 
 		const followingCount = profile == null ? null :
 			(profile.ffVisibility === 'public') || isMe ? user.followingCount :
-			(profile.ffVisibility === 'followers') && (relation && relation.isFollowing) ? user.followingCount :
+			(profile.ffVisibility === 'followers') && relation?.isFollowing ? user.followingCount :
 			null;
 
 		const followersCount = profile == null ? null :
 			(profile.ffVisibility === 'public') || isMe ? user.followersCount :
-			(profile.ffVisibility === 'followers') && (relation && relation.isFollowing) ? user.followersCount :
+			(profile.ffVisibility === 'followers') && relation?.isFollowing ? user.followersCount :
 			null;
-
-		const falsy = opts.detail ? false : undefined;
 
 		const packed = {
 			id: user.id,
@@ -287,10 +285,10 @@ export const UserRepository = db.getRepository(User).extend({
 			host: user.host,
 			avatarUrl: this.getAvatarUrlSync(user),
 			avatarBlurhash: user.avatar?.blurhash || null,
-			isAdmin: user.isAdmin || falsy,
-			isModerator: user.isModerator || falsy,
-			isBot: user.isBot || falsy,
-			isCat: user.isCat || falsy,
+			isAdmin: user.isAdmin,
+			isModerator: user.isModerator,
+			isBot: user.isBot,
+			isCat: user.isCat,
 			instance: !user.host ? undefined : userInstanceCache.fetch(user.host)
 				.then(instance => !instance ? undefined : {
 					name: instance.name,
@@ -312,8 +310,8 @@ export const UserRepository = db.getRepository(User).extend({
 				bannerUrl: user.banner ? DriveFiles.getPublicUrl(user.banner, false) : null,
 				bannerBlurhash: user.banner?.blurhash || null,
 				isLocked: user.isLocked,
-				isSilenced: user.isSilenced || falsy,
-				isSuspended: user.isSuspended || falsy,
+				isSilenced: user.isSilenced,
+				isSuspended: user.isSuspended,
 				description: profile!.description,
 				location: profile!.location,
 				birthday: profile!.birthday,
@@ -369,7 +367,7 @@ export const UserRepository = db.getRepository(User).extend({
 				mutedInstances: profile!.mutedInstances,
 				mutingNotificationTypes: profile!.mutingNotificationTypes,
 				emailNotificationTypes: profile!.emailNotificationTypes,
-				showTimelineReplies: user.showTimelineReplies || falsy,
+				showTimelineReplies: user.showTimelineReplies,
 				federateBlocks: user!.federateBlocks,
 			} : {}),
 
