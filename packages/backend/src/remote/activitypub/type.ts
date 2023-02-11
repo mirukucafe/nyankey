@@ -171,7 +171,6 @@ export const isQuestion = (object: IObject): object is IQuestion =>
 interface IQuestionChoice {
 	name?: string;
 	replies?: ICollection;
-	_misskey_votes?: number;
 }
 export interface ITombstone extends IObject {
 	type: 'Tombstone';

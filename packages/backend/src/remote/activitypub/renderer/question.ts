@@ -11,7 +11,6 @@ export default async function renderQuestion(user: { id: User['id'] }, note: Not
 		content: note.text || '',
 		[poll.multiple ? 'anyOf' : 'oneOf']: poll.choices.map((text, i) => ({
 			name: text,
-			_misskey_votes: poll.votes[i],
 			replies: {
 				type: 'Collection',
 				totalItems: poll.votes[i],

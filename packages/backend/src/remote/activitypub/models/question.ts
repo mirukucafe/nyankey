@@ -23,7 +23,7 @@ export async function extractPollFromQuestion(source: string | IObject, resolver
 		.map(x => x.name!);
 
 	const votes = question[multiple ? 'anyOf' : 'oneOf']!
-		.map(x => x.replies && x.replies.totalItems || x._misskey_votes || 0);
+		.map(x => x.replies && x.replies.totalItems || 0);
 
 	return {
 		choices,
