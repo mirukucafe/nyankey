@@ -54,7 +54,7 @@ let player = $ref({
 let playerEnabled = $ref(false);
 
 const requestUrl = new URL(props.url);
-if(!['http:', 'https:].includes(requestUrl.protocol)) throw new Error('invalid url');
+if(!['http:', 'https:'].includes(requestUrl.protocol)) throw new Error('invalid url');
 
 if (requestUrl.hostname === 'music.youtube.com' && requestUrl.pathname.match('^/(?:watch|channel)')) {
 	requestUrl.hostname = 'www.youtube.com';
