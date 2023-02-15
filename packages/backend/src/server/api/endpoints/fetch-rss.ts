@@ -10,7 +10,79 @@ export const meta = {
 
 	requireCredential: true,
 	allowGet: true,
-	cacheSec: 60 * 3,
+	cacheSec: 60 * 3, // 3min
+
+	res: {
+		type: 'object',
+		properties: {
+			feedUrl: {
+				type: 'string',
+				optional: true,
+			},
+			title: {
+				type: 'string',
+				optional: true,
+			},
+			description: {
+				type: 'string',
+				optional: true,
+			},
+			generator: {
+				type: 'string',
+				description: 'The application used to generate the feed (self-proclaimed).',
+				optional: true,
+			},
+			link: {
+				type: 'string',
+				optional: true,
+			},
+			lastBuildDate: {
+				type: 'string',
+				description: 'The last update timestamp, in ISO 8601 format.',
+				optional: true,
+			},
+			items: {
+				type: 'array',
+				items: {
+					type: 'object',
+					properties: {
+						title: {
+							type: 'string',
+							optional: true,
+						},
+						link: {
+							type: 'string',
+							optional: true,
+						},
+						creator: {
+							type: 'string',
+							description: 'The author of this feed item.',
+							optional: true,
+						},
+						content: {
+							type: 'string',
+							description: 'Content of the feed item, which possibly contains HTML.',
+							optional: true,
+						},
+						contentSnippet: {
+							type: 'string',
+							description: 'The same as `content` but with HTML markup and unescaped HTML entities removed. (best effort, not guaranteed to work)',
+							optional: true,
+						},
+						guid: {
+							type: 'string',
+							optional: true,
+						},
+						isoDate: {
+							type: 'string',
+							description: 'The publication date, in ISO 8601 format.',
+							optional: true,
+						},
+					},
+				},
+			},
+		},
+	},
 } as const;
 
 export const paramDef = {
