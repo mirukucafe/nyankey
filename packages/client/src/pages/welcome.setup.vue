@@ -1,6 +1,6 @@
 <template>
 <form class="mk-setup" @submit.prevent="submit()">
-	<h1>Welcome to Misskey!</h1>
+	<h1>Welcome to Foundkey!</h1>
 	<div class="_formRoot">
 		<p>{{ i18n.ts.intro }}</p>
 		<FormInput v-model="username" pattern="^[a-zA-Z0-9_]{1,20}$" :spellcheck="false" required data-cy-admin-username>

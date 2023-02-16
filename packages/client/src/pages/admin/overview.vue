@@ -39,7 +39,7 @@
 		<template #header><i class="fas fa-info-circle"></i> {{ i18n.ts.info }}</template>
 		<div class="cfcdecdf">
 			<div class="number _panel">
-				<div class="label">Misskey</div>
+				<div class="label">Foundkey</div>
 				<div class="value _monospace">{{ version }}</div>
 			</div>
 			<div v-if="serverInfo" class="number _panel">
