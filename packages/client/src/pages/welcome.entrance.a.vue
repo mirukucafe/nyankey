@@ -193,7 +193,7 @@ function showMenu(ev) {
 			> .icon {
 				width: 85px;
 				margin-top: -47px;
-				border-radius: 100%;
+				border-radius: 5%;
 				vertical-align: bottom;
 			}
 
