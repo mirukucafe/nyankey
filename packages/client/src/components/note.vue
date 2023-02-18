@@ -418,6 +418,11 @@ function focusAfter() {
 			min-width: 0;
 
 			> .body {
+				.text {
+					position: relative;
+					z-index: -1;
+				}
+
 				> .cw {
 					cursor: default;
 					display: block;
