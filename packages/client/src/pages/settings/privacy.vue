@@ -1,7 +1,10 @@
 <template>
 <div class="_formRoot">
-	<FormSwitch v-model="isLocked" class="_formBlock" @update:model-value="save()">{{ i18n.ts.makeFollowManuallyApprove }}<template #caption>{{ i18n.ts.lockedAccountInfo }}</template></FormSwitch>
-	<FormSwitch v-if="isLocked" v-model="autoAcceptFollowed" class="_formBlock" @update:model-value="save()">{{ i18n.ts.autoAcceptFollowed }}</FormSwitch>
+	<FormSection>
+		<FormSwitch v-model="isLocked" class="_formBlock" @update:model-value="save()">{{ i18n.ts.makeFollowManuallyApprove }}<template #caption>{{ i18n.ts.lockedAccountInfo }}</template></FormSwitch>
+		<FormSwitch v-if="isLocked" v-model="autoAcceptFollowed" class="_formBlock" @update:model-value="save()">{{ i18n.ts.autoAcceptFollowed }}</FormSwitch>
+		<FormSwitch v-if="!isLocked" v-model="carefulBot" class="_formBlock" @update:model-value="save()">{{ i18n.ts.botFollowRequiresApproval }}</FormSwitch>
+	</FormSection>
 
 	<FormSwitch v-model="publicReactions" class="_formBlock" @update:model-value="save()">
 		{{ i18n.ts.makeReactionsPublic }}
@@ -68,6 +71,7 @@ import { definePageMetadata } from '@/scripts/page-metadata';
 
 let isLocked = $ref($i.isLocked);
 let autoAcceptFollowed = $ref($i.autoAcceptFollowed);
+let carefulBot = $ref($i.carefulBot);
 let noCrawle = $ref($i.noCrawle);
 let isExplorable = $ref($i.isExplorable);
 let hideOnlineStatus = $ref($i.hideOnlineStatus);
@@ -83,6 +87,7 @@ function save(): void {
 	os.api('i/update', {
 		isLocked: !!isLocked,
 		autoAcceptFollowed: !!autoAcceptFollowed,
+		carefulBot: !!carefulBot,
 		noCrawle: !!noCrawle,
 		isExplorable: !!isExplorable,
 		hideOnlineStatus: !!hideOnlineStatus,

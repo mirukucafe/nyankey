@@ -88,6 +88,7 @@ youShouldUpgradeClient: "To view this page, please refresh to update your client
 enterListName: "Enter a name for the list"
 privacy: "Privacy"
 makeFollowManuallyApprove: "Follow requests require approval"
+botFollowRequiresApproval: "Follow requests from accounts marked as bots require approval"
 defaultNoteVisibility: "Default visibility"
 follow: "Follow"
 followRequest: "Send follow request"
