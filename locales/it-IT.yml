@@ -661,7 +661,6 @@ editCode: "Modifica codice"
 apply: "Applica"
 receiveAnnouncementFromInstance: "Ricevi i messaggi informativi dall'istanza"
 emailNotification: "Eventi per notifiche via mail"
-publish: "Pubblico"
 useReactionPickerForContextMenu: "Cliccare sul tasto destro per aprire il pannello\
   \ di reazioni"
 typingUsers: "{users} sta(nno) scrivendo"
@@ -700,10 +699,7 @@ switch: "Sostituisci"
 noMaintainerInformationWarning: "Le informazioni amministratore non sono impostate."
 noBotProtectionWarning: "Nessuna protezione impostata contro i bot."
 configure: "Imposta"
-postToGallery: "Pubblicare nella galleria"
-gallery: "Galleria"
 recentPosts: "Le più recenti"
-popularPosts: "Le più visualizzate"
 shareWithNote: "Condividere in nota"
 emailNotConfiguredWarning: "Non hai impostato nessun indirizzo e-mail."
 ratio: "Rapporto"
@@ -780,11 +776,6 @@ _forgotPassword:
   contactAdmin: "Poiché questa istanza non permette l'utilizzo di una mail, si prega\
     \ di contattare l'amministratore·trice dell'istanza per poter ripristinare la\
     \ password."
-_gallery:
-  my: "Le mie pubblicazioni"
-  liked: "Pubblicazioni che mi piacciono"
-  like: "Mi piace!"
-  unlike: "Non mi piace più"
 _email:
   _follow:
     title: "Ha iniziato a seguirti"
@@ -975,7 +966,6 @@ _permissions:
   "write:notes": "Creare / Eliminare note"
   "read:notifications": "Visualizza notifiche"
   "write:notifications": "Gerisci notifiche"
-  "read:reactions": "Vedi reazioni"
   "write:reactions": "Gerisci reazioni"
   "write:votes": "Votare"
   "read:pages": "Visualizzare pagine"

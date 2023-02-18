@@ -683,7 +683,6 @@ editCode: "Modifier le code"
 apply: "Appliquer"
 receiveAnnouncementFromInstance: "Recevoir les messages d'information de l'instance"
 emailNotification: "Notifications par mail"
-publish: "Public"
 useReactionPickerForContextMenu: "Clic-droit pour ouvrir le panneau de réactions"
 typingUsers: "{users} est en train d'écrire..."
 jumpToSpecifiedDate: "Se rendre à la date"
@@ -722,10 +721,7 @@ switch: "Remplacer"
 noMaintainerInformationWarning: "Informations administrateur non configurées."
 noBotProtectionWarning: "La protection contre les bots n'est pas configurée."
 configure: "Configurer"
-postToGallery: "Publier dans la galerie"
-gallery: "Galerie"
 recentPosts: "Les plus récentes"
-popularPosts: "Les plus consultées"
 shareWithNote: "Partager dans une note"
 emailNotConfiguredWarning: "Vous n'avez pas configuré d'adresse e-mail."
 ratio: "Ratio"
@@ -831,11 +827,6 @@ _forgotPassword:
   contactAdmin: "Cette instance ne permettant pas l'utilisation d'adresses e-mail,\
     \ prenez contact avec l'administrateur·rice pour procéder à la réinitialisation\
     \ de votre mot de passe."
-_gallery:
-  my: "Mes publications"
-  liked: "Publications que j'ai aimées"
-  like: "J'aime"
-  unlike: "Je n’aime pas"
 _email:
   _follow:
     title: "Vous suit"
@@ -1080,7 +1071,6 @@ _permissions:
   "write:notes": "Créer / supprimer des notes"
   "read:notifications": "Afficher les notifications"
   "write:notifications": "Gérer vos notifications"
-  "read:reactions": "Lire les réactions"
   "write:reactions": "Gérer vos réactions"
   "write:votes": "Voter"
   "read:pages": "Voir vos pages"
@@ -1091,10 +1081,6 @@ _permissions:
   "write:user-groups": "Éditer les groupes des utilisateur·rice·s"
   "read:channels": "Lire les canaux"
   "write:channels": "Gérer les canaux"
-  "read:gallery": "Voir la galerie"
-  "write:gallery": "Éditer la galerie"
-  "read:gallery-likes": "Voir les mentions « J'aime » dans la galerie"
-  "write:gallery-likes": "Gérer les mentions « J'aime » dans la galerie"
 _auth:
   shareAccess: "Autoriser \"{name}\" à accéder à votre compte ?"
   shareAccessAsk: "Voulez-vous vraiment autoriser cette application à accéder à votre\
@@ -1393,6 +1379,5 @@ regexpErrorDescription: "Il y a une erreur dans l'expression régulière de la l
   \ {line} de vos mots ignorées {tab} :"
 forwardReportIsAnonymous: Un compte système anonyme sera affiché, à la place de votre
   compte, lors du signalement à l'instance distante.
-attachmentRequired: Un attachement au moins est nécessaire.
 useDrawerReactionPickerForMobile: Sur mobile afficher un tiroir pour le panneau de
   réaction

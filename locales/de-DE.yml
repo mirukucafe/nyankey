@@ -693,7 +693,6 @@ editCode: "Code bearbeiten"
 apply: "Anwenden"
 receiveAnnouncementFromInstance: "Benachrichtigungen von dieser Instanz empfangen"
 emailNotification: "Email-Benachrichtigungen"
-publish: "Veröffentlichen"
 useReactionPickerForContextMenu: "Reaktionsauswahl durch Rechtsklick öffnen"
 typingUsers: "{users} ist/sind am schreiben …"
 jumpToSpecifiedDate: "Zu bestimmtem Datum springen"
@@ -732,11 +731,7 @@ switch: "Wechseln"
 noMaintainerInformationWarning: "Betreiberinformationen sind nicht konfiguriert."
 noBotProtectionWarning: "Schutz vor Bots ist nicht konfiguriert."
 configure: "Konfigurieren"
-postToGallery: "Neuen Galeriebeitrag erstellen"
-attachmentRequired: "Mindestens 1 Anhang ist erforderlich."
-gallery: "Galerie"
 recentPosts: "Neue Beiträge"
-popularPosts: "Beliebte Beiträge"
 shareWithNote: "Mit Notiz teilen"
 emailNotConfiguredWarning: "Keine Email-Adresse hinterlegt."
 ratio: "Verhältnis"
@@ -851,11 +846,6 @@ _forgotPassword:
     \ wende dich bitte an den Administrator."
   contactAdmin: "Diese Instanz unterstützt die Verwendung von Email-Adressen nicht.\
     \ Wende dich an den Administrator, um dein Passwort zurückzusetzen."
-_gallery:
-  my: "Meine Galerie"
-  liked: "Mit \"Gefällt mir\" markierte Beiträge"
-  like: "Gefällt mir"
-  unlike: "\"Gefällt mir\" entfernen"
 _email:
   _follow:
     title: "Du hast einen neuen Follower"
@@ -1100,7 +1090,6 @@ _permissions:
   "write:notes": "Notizen schreiben oder löschen"
   "read:notifications": "Benachrichtigungen lesen"
   "write:notifications": "Benachrichtigungen bedienen"
-  "read:reactions": "Reaktionen lesen"
   "write:reactions": "Reaktionen bedienen"
   "write:votes": "Umfragen bedienen"
   "read:pages": "Deine Seiten lesen"
@@ -1111,12 +1100,6 @@ _permissions:
   "write:user-groups": "Benutzergruppen bearbeiten oder löschen"
   "read:channels": "Kanäle lesen"
   "write:channels": "Kanäle bedienen"
-  "read:gallery": "Beiträge deiner Galerie lesen"
-  "write:gallery": "Deine Galerie bearbeiten"
-  "read:gallery-likes": "Liste deiner mit \"Gefällt mir\" markierten Galerie-Beiträge\
-    \ lesen"
-  "write:gallery-likes": "Liste deiner mit \"Gefällt mir\" markierten Galerie-Beiträge\
-    \ bearbeiten"
 _auth:
   shareAccess: "Möchtest du „{name}“ authorisieren, auf dieses Benutzerkonto zugreifen\
     \ zu können?"

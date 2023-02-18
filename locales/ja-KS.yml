@@ -561,8 +561,6 @@ administration: "管理"
 hashtags: "ハッシュタグ"
 hide: "隠す"
 indefinitely: "無期限"
-_gallery:
-  unlike: "良くないわ"
 _email:
   _follow:
     title: "フォローされたで"
@@ -656,7 +654,6 @@ _tutorial:
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
 _permissions:
-  "read:reactions": "リアクションを見る"
   "write:votes": "投票する"
   "read:pages": "ページを見る"
   "read:page-likes": "ページのええやんを見る"

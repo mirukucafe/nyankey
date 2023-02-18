@@ -666,7 +666,6 @@ editCode: "Редагувати вихідний текст"
 apply: "Застосувати"
 receiveAnnouncementFromInstance: "Отримувати оповіщення з інстансу"
 emailNotification: "Сповіщення електронною поштою"
-publish: "Опублікувати"
 useReactionPickerForContextMenu: "Відкривати палітру реакцій правою кнопкою"
 typingUsers: "Стук клавіш. Це {users}…"
 goBack: "Назад"
@@ -678,8 +677,6 @@ hide: "Сховати"
 indefinitely: "Ніколи"
 _ffVisibility:
   public: "Опублікувати"
-_gallery:
-  unlike: "Не вподобати"
 _email:
   _follow:
     title: "Новий підписник"
@@ -875,7 +872,6 @@ _permissions:
   "write:mutes": "Змінювати список ігнорованих"
   "write:notes": "Писати і видаляти нотатки"
   "read:notifications": "Переглядати сповіщення"
-  "read:reactions": "Переглядати реакції"
   "write:reactions": "Змінювати реакції"
   "write:votes": "Голосувати в опитуваннях"
   "read:pages": "Переглядати сторінки"

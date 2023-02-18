@@ -623,7 +623,6 @@ editCode: "コードを編集"
 apply: "適用"
 receiveAnnouncementFromInstance: "インスタンスからのお知らせを受け取る"
 emailNotification: "メール通知"
-publish: "公開"
 useReactionPickerForContextMenu: "右クリックでリアクションピッカーを開く"
 typingUsers: "{users}が入力中"
 jumpToSpecifiedDate: "特定の日付にジャンプ"
@@ -661,10 +660,7 @@ switch: "切り替え"
 noMaintainerInformationWarning: "管理者情報が設定されていません。"
 noBotProtectionWarning: "Botプロテクションが設定されていません。"
 configure: "設定する"
-postToGallery: "ギャラリーへ投稿"
-gallery: "ギャラリー"
 recentPosts: "最近の投稿"
-popularPosts: "人気の投稿"
 shareWithNote: "ノートで共有"
 emailNotConfiguredWarning: "メールアドレスの設定がされていません。"
 ratio: "比率"
@@ -775,12 +771,6 @@ _forgotPassword:
   enterEmail: "アカウントに登録したメールアドレスを入力してください。そのアドレス宛てに、パスワードリセット用のリンクが送信されます。"
   ifNoEmail: "メールアドレスを登録していない場合は、管理者までお問い合わせください。"
   contactAdmin: "このインスタンスではメールがサポートされていないため、パスワードリセットを行う場合は管理者までお問い合わせください。"
-
-_gallery:
-  my: "自分の投稿"
-  liked: "いいねした投稿"
-  like: "いいね！"
-  unlike: "いいね解除"
 
 _email:
   _follow:
@@ -1006,7 +996,6 @@ _permissions:
   "write:notes": "ノートを作成・削除する"
   "read:notifications": "通知を見る"
   "write:notifications": "通知を操作する"
-  "read:reactions": "リアクションを見る"
   "write:reactions": "リアクションを操作する"
   "write:votes": "投票する"
   "read:pages": "ページを見る"
@@ -1017,11 +1006,6 @@ _permissions:
   "write:user-groups": "ユーザーグループを操作する"
   "read:channels": "チャンネルを見る"
   "write:channels": "チャンネルを操作する"
-  "read:gallery": "ギャラリーを見る"
-  "write:gallery": "ギャラリーを操作する"
-  "read:gallery-likes": "ギャラリーのいいねを見る"
-  "write:gallery-likes": "ギャラリーのいいねを操作する"
-
 _auth:
   shareAccess: "「{name}」がアカウントにアクセスすることを許可しますか？"
   shareAccessAsk: "アカウントへのアクセスを許可しますか？"
