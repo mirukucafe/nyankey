@@ -416,12 +416,12 @@ function focusAfter() {
 		> .main {
 			flex: 1;
 			min-width: 0;
+			position: relative;
+			z-index: 0;
 
 			> .body {
-				.text {
-					position: relative;
-					z-index: -1;
-				}
+				position: relative;
+				z-index: -1;
 
 				> .cw {
 					cursor: default;
