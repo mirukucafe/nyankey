@@ -188,7 +188,9 @@ clearCachedFilesConfirm: "Êtes-vous sûr·e de vouloir vider tout le cache de f
   \ distants ?"
 blockedInstances: "Instances bloquées"
 blockedInstancesDescription: "Listez les instances que vous désirez bloquer, une par\
-  \ ligne. Ces instances ne seront plus en capacité d'interagir avec votre instance."
+  \ ligne. Ces instances ne seront plus en capacité d'interagir avec votre instance.\
+  \ Les noms de domaine non-ASCII doivent être encodés en punycode. Les sous-domaines\
+  \ de ces instances seront aussi bloqués."
 muteAndBlock: "Masqué·e·s / Bloqué·e·s"
 mutedUsers: "Utilisateur·rice·s en sourdine"
 blockedUsers: "Utilisateur·rice·s bloqué·e·s"
@@ -1055,15 +1057,15 @@ _2fa:
     ordinateur :'
 _permissions:
   "read:account": "Afficher les informations du compte"
-  "write:account": "Mettre à jour les informations de votre compte"
+  "write:account": "Mettre à jour les informations du compte"
   "read:blocks": "Voir les comptes bloqués"
-  "write:blocks": "Gérer les comptes bloqués"
+  "write:blocks": "Bloquer et Débloquer des comptes"
   "read:drive": "Parcourir le Drive"
   "write:drive": "Écrire sur le Drive"
   "read:favorites": "Afficher les favoris"
   "write:favorites": "Gérer les favoris"
   "read:following": "Voir les informations de vos abonnements"
-  "write:following": "Abonnements/Se désabonner"
+  "write:following": "Abonner et désabonner autres comptes"
   "read:messaging": "Voir vos discussions"
   "write:messaging": "Gérer les discussions"
   "read:mutes": "Voir les comptes masqués"
@@ -1381,3 +1383,5 @@ forwardReportIsAnonymous: Un compte système anonyme sera affiché, à la place 
   compte, lors du signalement à l'instance distante.
 useDrawerReactionPickerForMobile: Sur mobile afficher un tiroir pour le panneau de
   réaction
+appAuthorization: Authorisation de l'application
+noPermissionsRequested: (Aucune permission demandée.)

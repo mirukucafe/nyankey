@@ -194,8 +194,8 @@ blockedInstances: "Blockierte Instanzen"
 blockedInstancesDescription: "Gib die Hostnamen der Instanzen, welche blockiert werden\
   \ sollen, durch Zeilenumbrüche getrennt an. Blockierte Instanzen können mit dieser\
   \ Instanz nicht mehr kommunizieren. Hostnamen, die nicht-ASCII-Zeichen enthalten,\
-  \ müssen zuvor in Punycode umgewandelt werden. Ein Asterisk (*) kann als Platzhalter\
-  \ für beliebig viele Zeichen verwendet werden."
+  \ müssen zuvor in Punycode umgewandelt werden. Subdomains der aufgelisteten Hostnamen\
+  \ werden ebenfalls blockiert."
 muteAndBlock: "Stummschaltungen und Blockierungen"
 mutedUsers: "Stummgeschaltete Benutzer"
 blockedUsers: "Blockierte Benutzer"
@@ -1073,33 +1073,39 @@ _2fa:
     \ deinem Gerät auch Anmeldung mit Hilfe eines FIDO2-kompatiblen Hardware-Sicherheitsschlüssels\
     \ einrichten."
 _permissions:
-  "read:account": "Deine Benutzerkontoinformationen lesen"
-  "write:account": "Deine Benutzerkontoinformationen bearbeiten"
-  "read:blocks": "Die Liste deiner blockierten Benutzer lesen"
-  "write:blocks": "Die Liste deiner blockierten Benutzer bearbeiten"
-  "read:drive": "Deine Drive-Dateien und Ordner lesen"
-  "write:drive": "Deine Drive-Dateien und Ordner bearbeiten oder löschen"
-  "read:favorites": "Deine Favoriten-Liste lesen"
-  "write:favorites": "Deine Favoriten-Liste bearbeiten"
-  "read:following": "Die Liste der Benutzer, denen du folgst, lesen"
+  "read:account": "Benutzerkonto-Informationen lesen"
+  "write:account": "Benutzerkonto-Informationen bearbeiten"
+  "read:blocks": "Liste der blockierten Benutzer lesen"
+  "write:blocks": "Liste der blockierten Benutzer bearbeiten"
+  "read:drive": "Drive-Dateien und -Ordner auflisten"
+  "write:drive": "Drive-Dateien und -Ordner erstellen, bearbeiten oder löschen"
+  "read:favorites": "Favorisierte Notizen auflisten"
+  "write:favorites": "Favorisierung von Notizen hinzufügen oder entfernen"
+  "read:following": "Gefolgte und folgende Benutzer auflisten"
   "write:following": "Anderen Benutzern folgen oder entfolgen"
-  "read:messaging": "Chats lesen"
-  "write:messaging": "Chats bedienen"
-  "read:mutes": "Stummschaltungen lesen"
-  "write:mutes": "Stummschaltungen bearbeiten"
+  "read:messaging": "Chats und Chatverläufe lesen"
+  "write:messaging": "Chatnachrichten erstellen oder löschen"
+  "read:mutes": "Stummschaltungen und Renote-Stummschaltungen auflisten"
+  "write:mutes": "Stummschaltungen und Renote-Stummschaltungen bearbeiten"
   "write:notes": "Notizen schreiben oder löschen"
   "read:notifications": "Benachrichtigungen lesen"
-  "write:notifications": "Benachrichtigungen bedienen"
-  "write:reactions": "Reaktionen bedienen"
-  "write:votes": "Umfragen bedienen"
-  "read:pages": "Deine Seiten lesen"
-  "write:pages": "Deine Seiten bearbeiten oder löschen"
-  "read:page-likes": "Liste der Seiten, die mir gefallen, lesen"
-  "write:page-likes": "Liste der Seiten, die mir gefallen, bearbeiten"
-  "read:user-groups": "Benutzergruppen lesen"
-  "write:user-groups": "Benutzergruppen bearbeiten oder löschen"
-  "read:channels": "Kanäle lesen"
-  "write:channels": "Kanäle bedienen"
+  "write:notifications": "Benachrichtigungen als gelesen markieren oder App-Benachrichtigungen\
+    \ erstellen"
+  "write:reactions": "Reaktionen erstellen oder löschen"
+  "write:votes": "In Umfragen abstimmen"
+  "read:pages": "Deine Seiten auflisten und lesen"
+  "write:pages": "Seiten erstellen, bearbeiten oder löschen"
+  "read:page-likes": "Seiten, die mir gefallen, auflisten und auslesen"
+  "write:page-likes": "\"Gefällt mir\"-Markierung von Seiten bearbeiten"
+  "read:user-groups": "beigetretene, erstellte und eingeladene Benutzergruppen auflisten\
+    \ und lesen"
+  "write:user-groups": "Benutzergruppen erstellen, bearbeiten, löschen, übertragen,\
+    \ zu diesen beitreten oder diese verlassen. Andere Benutzer zu diesen Einladen\
+    \ oder Benutzer aus diesen Bannen. Einladungen zu Benutzergruppen annehmen oder\
+    \ ablehnen."
+  "read:channels": "gefolgte und beigetretene Kanäle auflisten und lesen"
+  "write:channels": "Kanäle erstellen, bearbeiten, diesen folgen und entfolgen"
+  "read:reactions": Reaktionen ansehen
 _auth:
   shareAccess: "Möchtest du „{name}“ authorisieren, auf dieses Benutzerkonto zugreifen\
     \ zu können?"
@@ -1382,3 +1388,16 @@ selectAll: Alle auswählen
 renoteUnmute: Renotes zeigen
 renoteMute: Renotes verstecken
 externalCssSnippets: Einige CSS-Schnipsel zur Inspiration (nicht durch FoundKey verwaltet)
+botFollowRequiresApproval: Follow-Anfragen von als Bot markierten Accounts benötigen
+  Bestätigung
+unrenoteAll: alle Renotes zurücknehmen
+unrenoteAllConfirm: Bist du sicher, dass du alle Renotes zurücknehmen möchtest?
+deleteAllFiles: Alle Dateien löschen
+cannotAttachFileWhenAccountSwitched: Kann keine Dateien anhängen, während ein anderer
+  Account eingestellt ist.
+cannotSwitchAccountWhenFileAttached: Kann keinen anderen Account einstellen, solange
+  Dateien angehängt sind.
+oauthErrorGoBack: Bei der Authentifizierung einer Drittanbieter-Anwendung ist ein
+  Fehler aufgetreten. Bitte geh zurück und versuche es erneut.
+appAuthorization: Anwendungs-Authorisierung
+noPermissionsRequested: (Keine Berechtigungen angefordert.)
