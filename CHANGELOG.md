@@ -86,8 +86,6 @@ This release contains 6 breaking changes, including changes to the configuration
 
 ### Removed:
 - **BREAKING** server: remove Twitter, Github and Discord integrations
-ff31b8b06 server: remove bios and cli
-a673647fb server: remove avatarColor and bannerColor properties
 - **BREAKING** server: remove `api/admin/delete-account`, 
   You should use the API endpoint `admin/accounts/delete` instead.
   It has the same parameter and the same behaviour.
@@ -108,6 +106,8 @@ a673647fb server: remove avatarColor and bannerColor properties
   - `/api/i/gallery/likes`
   - `/api/i/gallery/posts`
   - `/api/users/gallery/posts`
+- server: remove bios and cli
+- server: remove avatarColor and bannerColor properties
 - server: remove application level websocket ping
   This pinging mechanism was unused in `foundkey-js`, and we expect other usage to be low.
   You can use the pinging mechanism built into the websocket protocol if you wish.
