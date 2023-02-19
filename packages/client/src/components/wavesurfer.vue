@@ -80,13 +80,20 @@ onMounted(() => {
 });
 
 function formatTime(value) {
-	let min = Math.floor(value / 60);
+	let hour = 0;
+	if ((value / 60) > 0) {
+		hour = Math.floor(value / 3600);
+	}
+	let min = Math.floor((value / 60) - hour * 60);
 	let sec = Math.floor(value - (min * 60));
 	if (sec < 10) {
 		sec = '0' + sec;
 	}
 	if (min < 10) {
-		sec = '0' + min;
+		min = '0' + min;
+	}
+	if (hour > 0) {
+		return hour + ':' + min + ':' + sec;
 	}
 	return min + ':' + sec;
 }
