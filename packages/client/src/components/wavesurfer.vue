@@ -9,11 +9,11 @@
 		<button class="stop" @click="stop()">
 			<i class="fas fa-stop"></i>
 		</button>
-		<input class="progress" type="range" min="0" :max="duration" step="0.1" v-model="position" @change="player.seekTo(position / duration)" @mousedown="isSeeking = true" @mouseup="isSeeking = false" />
+		<input class="progress" type="range" min="0" :max="duration" step="0.1" v-model="position" @input="player.seekTo(position / duration)" @mousedown="initSeek()" @mouseup="endSeek()" />
 		<span>
 			{{ formatTime(duration) }}
 		</span>
-		<input class="volume" type="range" min="0" max="1" step="0.1" v-model="volume" @change="player.setVolume(volume)" />
+		<input class="volume" type="range" min="0" max="1" step="0.1" v-model="volume" @input="player.setVolume(volume)" />
 		<a class="download" :href="src" target="_blank">
 			<i class="fas fa-download"></i>
 		</a>
@@ -99,6 +99,20 @@ function playPause() {
 function stop() {
 	player.value.stop();
 	playing.value = player.value.isPlaying();
+}
+
+function initSeek() {
+	isSeeking.value = true;
+	if (playing.value) {
+		player.value.playPause();
+	}
+}
+
+function endSeek() {
+	isSeeking.value = false;
+	if (playing.value) {
+		player.value.playPause();
+	}
 }
 
 </script>
