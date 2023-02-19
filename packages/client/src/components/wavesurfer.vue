@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import * as foundkey from 'foundkey-js';
 import WaveSurfer from 'wavesurfer.js';
 import Cursor from 'wavesurfer.js/dist/plugin/wavesurfer.cursor';
@@ -31,19 +31,19 @@ const props = defineProps<{
 	src: foundkey.entities.DriveFile
 }>();
 
-let playing = ref(false);
-let position = ref(0);
-let volume = ref(1);
-let isSeeking = ref(false);
-let duration = ref(1);
-let display = ref<HTMLDivElement>(null);
-let player = ref(null);
+let playing = $ref(false);
+let position = $ref(0);
+let volume = $ref(1);
+let isSeeking = $ref(false);
+let duration = $ref(1);
+let display = $ref<HTMLDivElement>(null);
+let player = $ref(null);
 
 const theme = JSON.parse(localStorage.theme);
 
 onMounted(() => {
-	player.value = WaveSurfer.create({
-		container: display.value,
+	player = WaveSurfer.create({
+		container: display,
 		barGab: 1,
 		barWidth: 2,
 		barRadius: 2,
@@ -61,20 +61,20 @@ onMounted(() => {
 		]
 	});
 
-	player.value.load(props.src.url);
+	player.load(props.src.url);
 
-	player.value.on('ready', () => {
-		volume.value = player.value.getVolume();
-		duration.value = player.value.getDuration();
+	player.on('ready', () => {
+		volume = player.getVolume();
+		duration = player.getDuration();
 	});
 
-	player.value.on('finish', () => {
-		playing.value = player.value.isPlaying();
+	player.on('finish', () => {
+		playing = player.isPlaying();
 	});
 
-	player.value.on('audioprocess', () => {
-		if (!isSeeking.value) {
-			position.value = player.value.getCurrentTime();
+	player.on('audioprocess', () => {
+		if (!isSeeking) {
+			position = player.getCurrentTime();
 		}
 	});
 });
@@ -92,26 +92,26 @@ function formatTime(value) {
 }
 
 function playPause() {
-	player.value.playPause();
-	playing.value = player.value.isPlaying();
+	player.playPause();
+	playing = player.isPlaying();
 }
 
 function stop() {
-	player.value.stop();
-	playing.value = player.value.isPlaying();
+	player.stop();
+	playing = player.isPlaying();
 }
 
 function initSeek() {
-	isSeeking.value = true;
-	if (playing.value) {
-		player.value.playPause();
+	isSeeking = true;
+	if (playing) {
+		player.playPause();
 	}
 }
 
 function endSeek() {
-	isSeeking.value = false;
-	if (playing.value) {
-		player.value.playPause();
+	isSeeking = false;
+	if (playing) {
+		player.playPause();
 	}
 }
 
