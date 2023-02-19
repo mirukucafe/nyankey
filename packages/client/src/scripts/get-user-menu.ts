@@ -119,7 +119,7 @@ export function getUserMenu(user) {
 	async function toggleSilence(): Promise<void> {
 		if (!await getConfirmed(i18n.t(user.isSilenced ? 'unsilenceConfirm' : 'silenceConfirm'))) return;
 
-		os.apiWithDialog(user.isSilenced ? 'admin/unsilence-user' : 'admin/silence-user', {
+		os.apiWithDialog(user.isSilenced ? 'admin/users/unsilence' : 'admin/users/silence', {
 			userId: user.id,
 		}).then(() => {
 			user.isSilenced = !user.isSilenced;
@@ -129,7 +129,7 @@ export function getUserMenu(user) {
 	async function toggleSuspend(): Promise<void> {
 		if (!await getConfirmed(i18n.t(user.isSuspended ? 'unsuspendConfirm' : 'suspendConfirm'))) return;
 
-		os.apiWithDialog(user.isSuspended ? 'admin/unsuspend-user' : 'admin/suspend-user', {
+		os.apiWithDialog(user.isSuspended ? 'admin/users/unsuspend' : 'admin/users/suspend', {
 			userId: user.id,
 		}).then(() => {
 			user.isSuspended = !user.isSuspended;

@@ -166,7 +166,7 @@ let suspended = $ref(false);
 let isBlocked = $ref(false);
 
 const usersPagination = {
-	endpoint: iAmModerator ? 'admin/show-users' : 'users' as const,
+	endpoint: iAmModerator ? 'admin/users' : 'users' as const,
 	limit: 10,
 	params: {
 		sort: '+updatedAt',

@@ -149,7 +149,7 @@ function createFetcher() {
 	if (iAmModerator) {
 		return () => Promise.all([os.api('users/show', {
 			userId: props.userId,
-		}), os.api('admin/show-user', {
+		}), os.api('admin/users/show', {
 			userId: props.userId,
 		})]).then(([_user, _info]) => {
 			user = _user;
@@ -177,7 +177,7 @@ async function updateRemoteUser() {
 }
 
 async function resetPassword() {
-	const { password } = await os.api('admin/reset-password', {
+	const { password } = await os.api('admin/users/reset-password', {
 		userId: user.id,
 	});
 
@@ -195,7 +195,7 @@ async function toggleSilence(v) {
 	if (confirm.canceled) {
 		silenced = !v;
 	} else {
-		await os.api(v ? 'admin/silence-user' : 'admin/unsilence-user', { userId: user.id });
+		await os.api(v ? 'admin/users/silence' : 'admin/users/unsilence', { userId: user.id });
 		await refreshUser();
 	}
 }
@@ -208,7 +208,7 @@ async function toggleSuspend(v) {
 	if (confirm.canceled) {
 		suspended = !v;
 	} else {
-		await os.api(v ? 'admin/suspend-user' : 'admin/unsuspend-user', { userId: user.id });
+		await os.api(v ? 'admin/users/suspend' : 'admin/users/unsuspend', { userId: user.id });
 		await refreshUser();
 	}
 }
@@ -225,7 +225,7 @@ async function deleteAllFiles() {
 	});
 	if (confirm.canceled) return;
 	const process = async () => {
-		await os.api('admin/delete-all-files-of-a-user', { userId: user.id });
+		await os.api('admin/users/delete-all-files', { userId: user.id });
 		os.success();
 	};
 	await process().catch(err => {
@@ -250,7 +250,7 @@ async function deleteAccount() {
 	if (typed.canceled) return;
 
 	if (typed.result === user?.username) {
-		await os.apiWithDialog('admin/accounts/delete', {
+		await os.apiWithDialog('admin/users/delete', {
 			userId: user.id,
 		});
 	} else {

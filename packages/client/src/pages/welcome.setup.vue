@@ -35,7 +35,7 @@ function submit(): void {
 	if (submitting) return;
 	submitting = true;
 
-	os.api('admin/accounts/create', {
+	os.api('admin/users/create', {
 		username,
 		password,
 	}).then(res => {
