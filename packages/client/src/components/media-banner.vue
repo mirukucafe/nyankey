@@ -31,16 +31,6 @@ defineProps<{
 	media: foundkey.entities.DriveFile;
 }>();
 
-const audioEl = $ref<HTMLAudioElement | null>();
-let hide = $ref(true);
-
-function volumechange(): void {
-	if (audioEl) ColdDeviceStorage.set('mediaVolume', audioEl.volume);
-}
-
-onMounted(() => {
-	if (audioEl) audioEl.volume = ColdDeviceStorage.get('mediaVolume');
-});
 </script>
 
 <style lang="scss" scoped>
