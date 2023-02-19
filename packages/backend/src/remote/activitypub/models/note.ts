@@ -185,6 +185,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		};
 
 		const uris = unique([quoteUrl, note._misskey_quote, note.quoteUri].filter((x): x is string => typeof x === 'string'));
+		let temperror = false;
 		// check the urls sequentially and abort early to not do unnecessary HTTP requests
 		// picks the first one that works
 		for (const uri in uris) {
@@ -192,12 +193,13 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 			if (res.status === 'ok') {
 				quote = res.res;
 				break;
+			} else if (res.status === 'temperror) {
+				temperror = true;
 			}
 		}
-		if (!quote) {
-			if (results.some(x => x.status === 'temperror')) {
-				throw new Error('quote resolve failed');
-			}
+		if (!quote && temperror) {
+			// could not resolve quote, try again later
+			throw new Error('quote resolve failed');
 		}
 	}
 
