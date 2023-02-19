@@ -47,6 +47,17 @@ export const FILE_TYPE_BROWSERSAFE = [
 	'audio/vnd.wave',
 ];
 
+export const FILE_TYPE_TRACKER_MODULES = [
+	"audio/mod",
+	"audio/x-mod",
+	"audio/s3m",
+	"audio/x-s3m",
+	"audio/xm",
+	"audio/x-xm",
+	"audio/it",
+	"audio/x-it"
+];
+
 export const FILE_EXT_TRACKER_MODULES = [
 	'mod',
 	's3m',
