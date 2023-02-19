@@ -23,7 +23,7 @@ import XBanner from './media-banner.vue';
 import XImage from './media-image.vue';
 import XVideo from './media-video.vue';
 import XModPlayer from './mod-player.vue';
-import { FILE_TYPE_BROWSERSAFE, FILE_EXT_TRACKER_MODULES } from '@/const';
+import { FILE_TYPE_BROWSERSAFE, FILE_TYPE_TRACKER_MODULES, FILE_EXT_TRACKER_MODULES } from '@/const';
 
 const props = defineProps<{
 	mediaList: foundkey.entities.DriveFile[];
@@ -130,7 +130,7 @@ const previewable = (file: foundkey.entities.DriveFile): boolean => {
 };
 
 const isModule = (file: foundkey.entities.DriveFile): boolean => {
-	return FILE_EXT_TRACKER_MODULES.some((ext) => {
+	return FILE_TYPE_TRACKER_MODULES.includes(file.type) || FILE_EXT_TRACKER_MODULES.some((ext) => {
 		return file.name.toLowerCase().endsWith("." + ext);
 	});
 };
