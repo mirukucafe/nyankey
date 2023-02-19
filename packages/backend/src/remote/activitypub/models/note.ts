@@ -193,7 +193,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 			if (res.status === 'ok') {
 				quote = res.res;
 				break;
-			} else if (res.status === 'temperror) {
+			} else if (res.status === 'temperror') {
 				temperror = true;
 			}
 		}
