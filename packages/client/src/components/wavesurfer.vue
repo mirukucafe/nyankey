@@ -4,7 +4,7 @@
 	<div class="controls">
 		<button class="play" @click="playPause()">
 			<i class="fas fa-pause" v-if="playing"></i>
-			<i class="fas fa-play" v-if="!playing"></i>
+			<i class="fas fa-play" v-else></i>
 		</button>
 		<button class="stop" @click="stop()">
 			<i class="fas fa-stop"></i>
