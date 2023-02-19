@@ -44,7 +44,7 @@ const theme = JSON.parse(localStorage.theme);
 onMounted(() => {
 	player = WaveSurfer.create({
 		container: display,
-		barGab: 1,
+		barGap: 1,
 		barWidth: 2,
 		barRadius: 2,
 		backgroundColor: theme.panel,
