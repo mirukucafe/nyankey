@@ -2,9 +2,9 @@ import { addFile } from '@/services/drive/add-file.js';
 import { DriveFiles } from '@/models/index.js';
 import { DB_MAX_IMAGE_COMMENT_LENGTH } from '@/misc/hard-limits.js';
 import { HOUR } from '@/const.js';
-import define from '../../../define.js';
-import { apiLogger } from '../../../logger.js';
-import { ApiError } from '../../../error.js';
+import define from '@/server/api/define.js';
+import { apiLogger } from '@/server/api/logger.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['drive'],

@@ -2,7 +2,7 @@ import { Users } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
 import { doPostUnsuspend } from '@/services/unsuspend-user.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

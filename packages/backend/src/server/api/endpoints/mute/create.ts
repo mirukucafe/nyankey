@@ -2,9 +2,9 @@ import { genId } from '@/misc/gen-id.js';
 import { Mutings, NoteWatchings } from '@/models/index.js';
 import { Muting } from '@/models/entities/muting.js';
 import { publishUserEvent } from '@/services/stream.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { getUser } from '../../common/getters.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
+import { getUser } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['account'],

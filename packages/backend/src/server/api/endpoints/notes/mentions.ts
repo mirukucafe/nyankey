@@ -2,12 +2,12 @@ import { Brackets } from 'typeorm';
 import { noteVisibilities } from 'foundkey-js';
 import { readNote } from '@/services/note/read.js';
 import { Notes, Followings } from '@/models/index.js';
-import define from '../../define.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
-import { generateMutedNoteThreadQuery } from '../../common/generate-muted-note-thread-query.js';
+import define from '@/server/api/define.js';
+import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
+import { generateMutedNoteThreadQuery } from '@/server/api/common/generate-muted-note-thread-query.js';
 
 export const meta = {
 	tags: ['notes'],

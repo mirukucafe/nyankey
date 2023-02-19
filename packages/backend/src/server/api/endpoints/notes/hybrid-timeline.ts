@@ -2,16 +2,16 @@ import { Brackets } from 'typeorm';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Followings, Notes } from '@/models/index.js';
 import { activeUsersChart } from '@/services/chart/index.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { generateRepliesQuery } from '../../common/generate-replies-query.js';
-import { generateMutedNoteQuery } from '../../common/generate-muted-note-query.js';
-import { generateChannelQuery } from '../../common/generate-channel-query.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
-import { generateMutedRenotesQuery } from '../../common/generated-muted-renote-query.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { generateRepliesQuery } from '@/server/api/common/generate-replies-query.js';
+import { generateMutedNoteQuery } from '@/server/api/common/generate-muted-note-query.js';
+import { generateChannelQuery } from '@/server/api/common/generate-channel-query.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
+import { generateMutedRenotesQuery } from '@/server/api/common/generated-muted-renote-query.js';
 
 export const meta = {
 	tags: ['notes'],

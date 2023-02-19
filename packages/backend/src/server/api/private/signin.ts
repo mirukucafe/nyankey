@@ -9,10 +9,10 @@ import { ILocalUser } from '@/models/entities/user.js';
 import { genId } from '@/misc/gen-id.js';
 import { getIpHash } from '@/misc/get-ip-hash.js';
 import { comparePassword, hashPassword, isOldAlgorithm } from '@/misc/password.js';
-import signin from '../common/signin.js';
-import { verifyLogin, hash } from '../2fa.js';
-import { limiter } from '../limiter.js';
-import { ApiError, errors } from '../error.js';
+import signin from '@/server/api/common/signin.js';
+import { verifyLogin, hash } from '@/server/api/2fa.js';
+import { limiter } from '@/server/api/limiter.js';
+import { ApiError, errors } from '@/server/api/error.js';
 
 export default async (ctx: Koa.Context) => {
 	ctx.set('Access-Control-Allow-Origin', config.url);

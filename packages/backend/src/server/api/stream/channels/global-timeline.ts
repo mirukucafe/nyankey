@@ -4,7 +4,7 @@ import { isInstanceMuted } from '@/misc/is-instance-muted.js';
 import { isUserRelated } from '@/misc/is-user-related.js';
 import { Packed } from '@/misc/schema.js';
 import { Note } from '@/models/entities/note.js';
-import Channel from '../channel.js';
+import Channel from '@/server/api/stream/channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'globalTimeline';

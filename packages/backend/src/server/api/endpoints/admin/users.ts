@@ -1,6 +1,6 @@
 import { DAY } from '@/const.js';
 import { Users } from '@/models/index.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

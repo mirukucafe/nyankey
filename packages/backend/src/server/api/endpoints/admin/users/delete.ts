@@ -1,7 +1,7 @@
 import { Users } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import { deleteAccount } from '@/services/delete-account.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

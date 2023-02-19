@@ -9,7 +9,7 @@ import { UserProfile } from '@/models/entities/user-profile.js';
 import { publishChannelStream, publishGroupMessagingStream, publishMessagingStream } from '@/services/stream.js';
 import { UserGroup } from '@/models/entities/user-group.js';
 import { Packed } from '@/misc/schema.js';
-import { readNotification } from '../common/read-notification.js';
+import { readNotification } from '@/server/api/common/read-notification.js';
 import channels from './channels/index.js';
 import Channel from './channel.js';
 import { StreamEventEmitter, StreamMessages } from './types.js';

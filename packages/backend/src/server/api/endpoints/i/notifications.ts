@@ -2,9 +2,9 @@ import { Brackets } from 'typeorm';
 import { notificationTypes } from 'foundkey-js';
 import { Notifications, Followings, Mutings, Users, UserProfiles } from '@/models/index.js';
 import { readNote } from '@/services/note/read.js';
-import { readNotification } from '../../common/read-notification.js';
-import define from '../../define.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
+import { readNotification } from '@/server/api/common/read-notification.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
 
 export const meta = {
 	tags: ['account', 'notifications'],

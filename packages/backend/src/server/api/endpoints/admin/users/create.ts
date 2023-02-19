@@ -1,8 +1,8 @@
 import { IsNull } from 'typeorm';
 import { Users } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
-import define from '../../../define.js';
-import { signup } from '../../../common/signup.js';
+import define from '@/server/api/define.js';
+import { signup } from '@/server/api/common/signup.js';
 
 export const meta = {
 	tags: ['admin'],

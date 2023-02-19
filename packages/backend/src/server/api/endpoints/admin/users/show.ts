@@ -1,6 +1,6 @@
 import { Signins, UserProfiles, Users } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

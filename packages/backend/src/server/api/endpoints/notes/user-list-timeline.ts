@@ -1,10 +1,10 @@
 import { Brackets } from 'typeorm';
 import { UserLists, UserListJoinings, Notes } from '@/models/index.js';
 import { activeUsersChart } from '@/services/chart/index.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
 
 export const meta = {
 	tags: ['notes', 'lists'],

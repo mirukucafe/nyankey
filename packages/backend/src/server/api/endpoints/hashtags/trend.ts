@@ -4,7 +4,7 @@ import { fetchMeta } from '@/misc/fetch-meta.js';
 import { Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 /*
 トレンドに載るためには「『直近a分間のユニーク投稿数が今からa分前～今からb分前の間のユニーク投稿数のn倍以上』のハッシュタグの上位5位以内に入る」ことが必要

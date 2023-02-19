@@ -3,8 +3,8 @@ import { AuthSessions, AccessTokens, Apps } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { kinds } from '@/misc/api-permissions.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['auth'],

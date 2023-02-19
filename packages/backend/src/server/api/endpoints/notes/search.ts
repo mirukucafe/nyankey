@@ -2,11 +2,11 @@ import { In } from 'typeorm';
 import { Notes } from '@/models/index.js';
 import config from '@/config/index.js';
 import es from '@/db/elasticsearch.js';
-import define from '../../define.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { generateVisibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 
 export const meta = {
 	tags: ['notes'],

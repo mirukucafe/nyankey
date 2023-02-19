@@ -1,4 +1,4 @@
-import Channel from '../channel.js';
+import Channel from '@/server/api/stream/channel.js';
 
 export default class extends Channel {
 	public readonly chName = 'drive';

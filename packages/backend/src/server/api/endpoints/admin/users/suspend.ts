@@ -5,7 +5,7 @@ import { ApiError } from '@/server/api/error.js';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
 import { doPostSuspend } from '@/services/suspend-user.js';
 import { publishUserEvent } from '@/services/stream.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

@@ -1,7 +1,7 @@
 import { UserLists } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { UserList } from '@/models/entities/user-list.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['lists'],

@@ -1,7 +1,7 @@
 import { NoteFavorites, NoteThreadMutings, NoteWatchings } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
-import { getNote } from '../../common/getters.js';
-import define from '../../define.js';
+import { getNote } from '@/server/api/common/getters.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['notes'],

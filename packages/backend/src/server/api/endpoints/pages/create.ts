@@ -2,8 +2,8 @@ import { Pages, DriveFiles } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { Page } from '@/models/entities/page.js';
 import { HOUR } from '@/const.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['pages'],

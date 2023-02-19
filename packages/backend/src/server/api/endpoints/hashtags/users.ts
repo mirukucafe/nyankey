@@ -1,7 +1,7 @@
 import { DAY } from '@/const.js';
 import { Users } from '@/models/index.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	requireCredential: false,

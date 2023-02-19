@@ -8,9 +8,9 @@ import { deliverQuestionUpdate } from '@/services/note/polls/update.js';
 import { PollVotes, NoteWatchings, Users, Polls, Blockings, NoteThreadMutings } from '@/models/index.js';
 import { IRemoteUser } from '@/models/entities/user.js';
 import { genId } from '@/misc/gen-id.js';
-import { getNote } from '../../../common/getters.js';
-import { ApiError } from '../../../error.js';
-import define from '../../../define.js';
+import { getNote } from '@/server/api/common/getters.js';
+import { ApiError } from '@/server/api/error.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['notes'],

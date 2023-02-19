@@ -2,7 +2,7 @@ import { Brackets } from 'typeorm';
 import { MONTH } from '@/const.js';
 import { UserProfiles, Users } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['users'],

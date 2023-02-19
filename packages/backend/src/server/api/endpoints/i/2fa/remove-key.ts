@@ -2,7 +2,7 @@ import { comparePassword } from '@/misc/password.js';
 import { UserProfiles, UserSecurityKeys, Users } from '@/models/index.js';
 import { publishMainStream } from '@/services/stream.js';
 import { ApiError } from '@/server/api/error.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	requireCredential: true,

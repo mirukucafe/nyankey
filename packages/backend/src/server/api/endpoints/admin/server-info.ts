@@ -2,7 +2,7 @@ import * as os from 'node:os';
 import si from 'systeminformation';
 import { db } from '@/db/postgre.js';
 import { redisClient } from '@/db/redis.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	requireCredential: true,
