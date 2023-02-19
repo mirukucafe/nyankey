@@ -130,9 +130,7 @@ const previewable = (file: foundkey.entities.DriveFile): boolean => {
 };
 
 const isModule = (file: foundkey.entities.DriveFile): boolean => {
-	return FILE_TYPE_TRACKER_MODULES.some((type) => {
-		return file.type === type;
-	}) || FILE_EXT_TRACKER_MODULES.some((ext) => {
+	return FILE_TYPE_TRACKER_MODULES.includes(file.type) || FILE_EXT_TRACKER_MODULES.some((ext) => {
 		return file.name.toLowerCase().endsWith("." + ext);
 	});
 };
