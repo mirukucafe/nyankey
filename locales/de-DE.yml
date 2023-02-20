@@ -337,9 +337,9 @@ pinnedUsers: "Angeheftete Benutzer"
 pinnedUsersDescription: "Gib durch Leerzeichen getrennte Benutzer an, die an die \"\
   Erkunden\"-Seite angeheftet werden sollen."
 hcaptchaSiteKey: "Site key"
-hcaptchaSecretKey: "Secret key"
-recaptchaSiteKey: "Site key"
-recaptchaSecretKey: "Secret key"
+hcaptchaSecretKey: "Geheimer Schlüssel"
+recaptchaSiteKey: "Site-Schlüssel"
+recaptchaSecretKey: "Geheimer Schlüssel"
 antennas: "Antennen"
 manageAntennas: "Antennen verwalten"
 name: "Name"
@@ -969,9 +969,9 @@ _wordMute:
     \ trennen."
   muteWordsDescription2: "Umgib Schlüsselworter mit Schrägstrichen, um Reguläre Ausdrücke\
     \ zu verwenden."
-  softDescription: "Notizen, die die angegebenen Konditionen erfüllen, in der Chronik\
+  softDescription: "Notizen, welche die angegebenen Konditionen erfüllen, in der Chronik\
     \ ausblenden."
-  hardDescription: "Verhindern, dass Notizen, die die angegebenen Konditionen erfüllen,\
+  hardDescription: "Verhindern, dass Notizen, welche die angegebenen Konditionen erfüllen,\
     \ der Chronik hinzugefügt werden. Zudem werden diese Notizen auch nicht der Chronik\
     \ hinzugefügt, falls die Konditionen geändert werden."
   soft: "Leicht"
@@ -1278,7 +1278,7 @@ _pages:
   hideTitleWhenPinned: "Seitentitel wenn angeheftet ausblenden"
   font: "Schriftart"
   fontSerif: "Serif"
-  fontSansSerif: "Sans Serif"
+  fontSansSerif: "serifenlos"
   eyeCatchingImageSet: "Vorschaubild festlegen"
   eyeCatchingImageRemove: "Vorschaubild entfernen"
 _relayStatus:
@@ -1355,7 +1355,7 @@ confirmToUnclipAlreadyClippedNote: "Diese Notiz ist bereits im \"{name}\" Clip e
 noEmailServerWarning: "Es ist kein Email-Server konfiguriert."
 thereIsUnresolvedAbuseReportWarning: "Es liegen ungelöste Meldungen vor."
 recommended: "Empfehlung"
-check: "Check"
+check: "Überprüfen"
 maxCustomEmojiPicker: Maximale Anzahl vorgeschlagener benutzerdefinierter Emoji
 maxUnicodeEmojiPicker: Maximale Anzahl vorgeschlagener Unicode-Emoji
 documentation: Dokumentation

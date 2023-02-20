@@ -1243,7 +1243,7 @@ _notification:
     groupInvited: "Pozvánky do skupín"
     app: "Oznámenia z prepojených aplikácií"
   _actions:
-    followBack: "Sledovať späť\n"
+    followBack: "Sledovať späť"
     reply: "Odpovedať"
     renote: "Preposlať"
 _deck:

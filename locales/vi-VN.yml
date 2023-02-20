@@ -528,7 +528,7 @@ large: "Lớn"
 medium: "Vừa"
 small: "Nhỏ"
 generateAccessToken: "Tạo mã truy cập"
-permission: "Cho phép "
+permission: "Cho phép"
 enableAll: "Bật toàn bộ"
 disableAll: "Tắt toàn bộ"
 tokenRequested: "Cấp quyền truy cập vào tài khoản"
@@ -933,7 +933,7 @@ _wordMute:
   mutedNotes: "Những tút đã ẩn"
 _instanceMute:
   instanceMuteDescription: "Thao tác này sẽ ẩn mọi tút/lượt đăng lại từ các máy chủ\
-    \ được liệt kê, bao gồm cả những tút  dạng trả lời từ máy chủ bị ẩn."
+    \ được liệt kê, bao gồm cả những tút dạng trả lời từ máy chủ bị ẩn."
   instanceMuteDescription2: "Tách bằng cách xuống dòng"
   title: "Ẩn tút từ những máy chủ đã liệt kê."
   heading: "Danh sách những máy chủ bị ẩn"

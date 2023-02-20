@@ -66,7 +66,7 @@ driveFileDeleteConfirm: "Vuoi davvero eliminare il file「{name}? Anche gli alle
 unfollowConfirm: "Vuoi davvero smettere di seguire {name}?"
 exportRequested: "Hai richiesto un'esportazione, e potrebbe volerci tempo. Quando\
   \ sarà compiuta, il file verrà aggiunto direttamente al Drive."
-importRequested: "Hai richiesto un'importazione. Può volerci tempo. "
+importRequested: "Hai richiesto un'importazione. Può volerci tempo."
 lists: "Liste"
 note: "Nota"
 notes: "Note"
@@ -78,7 +78,7 @@ manageLists: "Gestisci liste"
 error: "Errore"
 somethingHappened: "Si è verificato un problema"
 retry: "Riprova"
-pageLoadError: "Caricamento pagina non riuscito. "
+pageLoadError: "Caricamento pagina non riuscito."
 pageLoadErrorDescription: "Questo viene normalmente causato dalla rete o dalla cache\
   \ del browser. Si prega di pulire la cache, o di attendere e riprovare più tardi."
 serverIsDead: "Il server non risponde. Si prega di attendere e riprovare più tardi."
@@ -190,7 +190,7 @@ blockedUsers: "Account bloccati"
 noUsers: "Nessun utente trovato"
 editProfile: "Modifica profilo"
 noteDeleteConfirm: "Eliminare questo Nota?"
-pinLimitExceeded: "Non puoi fissare altre note "
+pinLimitExceeded: "Non puoi fissare altre note."
 intro: "L'installazione di FoundKey è finita! Si prega di creare un account amministratore."
 done: "Fine"
 processing: "In elaborazione"
@@ -442,7 +442,7 @@ useObjectStorage: "Utilizza stoccaggio oggetti"
 objectStorageBaseUrl: "Base URL"
 objectStorageBaseUrlDesc: "URL di riferimento. In caso di utilizzo di proxy o CDN\
   \ l'URL è 'https://<bucket>.s3.amazonaws.com' per S3, 'https://storage.googleapis.com/<bucket>'\
-  \ per GCS eccetera. "
+  \ per GCS eccetera."
 objectStorageBucket: "Bucket"
 objectStorageBucketDesc: "Specificare il nome del bucket utilizzato dal provider."
 objectStoragePrefix: "Prefix"
@@ -527,7 +527,7 @@ large: "Grande"
 medium: "Predefinito"
 small: "Piccolo"
 generateAccessToken: "Genera token di accesso"
-permission: "Autorizzazioni "
+permission: "Autorizzazioni"
 enableAll: "Abilita tutto"
 disableAll: "Disabilita tutto"
 tokenRequested: "Autorizza accesso all'account"
@@ -664,7 +664,7 @@ emailNotification: "Eventi per notifiche via mail"
 useReactionPickerForContextMenu: "Cliccare sul tasto destro per aprire il pannello\
   \ di reazioni"
 typingUsers: "{users} sta(nno) scrivendo"
-jumpToSpecifiedDate: "Vai alla data "
+jumpToSpecifiedDate: "Vai alla data"
 clear: "Cancella"
 markAllAsRead: "Segna tutti come già letti"
 goBack: "Indietro"
@@ -898,7 +898,7 @@ _ago:
   secondsAgo: "{n}s fa"
   minutesAgo: "{n}min fa"
   hoursAgo: "{n}h fa"
-  daysAgo: "{1} giorni fa"
+  daysAgo: "{n} giorni fa"
   weeksAgo: "{n} settimane fa"
   monthsAgo: "{n} mesi fa"
   yearsAgo: "{n} anni fa"
@@ -916,22 +916,22 @@ _tutorial:
     \ hai pubblicato alcuna nota ancora."
   step2_1: "Prima di scrivere una nota o di seguire un account, imposta il tuo profilo!"
   step2_2: "Aggiungere qualche informazione su di te aumenterà le tue possibilità\
-    \ di essere seguit@ da altre persone. "
+    \ di essere seguit@ da altre persone."
   step3_1: "Hai finito di impostare il tuo profilo?"
   step3_2: "Ora, puoi pubblicare una nota. Facciamo una prova! Premi il pulsante a\
-    \ forma di penna in cima allo schermo per aprire una finestra di dialogo.  "
+    \ forma di penna in cima allo schermo per aprire una finestra di dialogo."
   step3_3: "Scritto il testo della nota, puoi pubblicarla premendo il pulsante nella\
     \ parte superiore destra della finestra di dialogo."
   step3_4: "Non ti viene niente in mente? Perché non scrivi semplicemente \"Ho appena\
     \ cominciato a usare FoundKey\"?"
   step4_1: "Hai pubblicato qualcosa?"
   step4_2: "Se puoi visualizzare la tua nota sulla timeline, ce l'hai fatta!"
-  step5_1: "Adesso, cerca di seguire altre persone per vivacizzare la tua timeline. "
+  step5_1: "Adesso, cerca di seguire altre persone per vivacizzare la tua timeline."
   step5_2: "La pagina {featured} mostra le note di tendenza su questa istanza, e magari\
     \ ti aiuterà a trovare account che ti piacciono e che vorrai seguire. Oppure,\
     \ potrai trovare utenti popolari usando {explore}."
   step5_3: "Per seguire altrə utenti, clicca sul loro avatar per aprire la pagina\
-    \ di profilo dove puoi premere il pulsante \"Seguire\". "
+    \ di profilo dove puoi premere il pulsante \"Seguire\"."
   step5_4: "Alcunə utenti scelgono di confermare manualmente le richieste di follow\
     \ che ricevono, quindi a seconda delle persone potrebbe volerci un pò prima che\
     \ la tua richiesta sia accolta."
@@ -942,7 +942,7 @@ _tutorial:
   step6_3: "Per inviare una reazione, premi l'icona + della nota e scegli l'emoji\
     \ che vuoi mandare."
   step7_1: "Complimenti! Sei arrivat@ alla fine dell'esercitazione di base su come\
-    \ usare FoundKey. "
+    \ usare FoundKey."
   step7_2: "Se vuoi saperne di più su FoundKey, puoi dare un'occhiata alla sezione\
     \ {help}."
   step7_3: "Da ultimo, buon divertimento su FoundKey! \U0001F680"
@@ -1118,7 +1118,7 @@ _timelines:
 _pages:
   newPage: "Crea pagina"
   editPage: "Modifica pagina"
-  readPage: "Visualizzando fonte "
+  readPage: "Visualizzando fonte"
   created: "Pagina creata!"
   updated: "Pagina aggiornata con successo!"
   deleted: "Pagina eliminata"

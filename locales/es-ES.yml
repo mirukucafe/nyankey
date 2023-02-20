@@ -471,7 +471,7 @@ objectStorageUseSSLDesc: "Desactive esto si no va a usar HTTPS para la conexión
 objectStorageUseProxy: "Conectarse a través de Proxy"
 objectStorageUseProxyDesc: "Desactive esto si no va a usar Proxy para la conexión\
   \ de Almacenamiento de objetos"
-objectStorageSetPublicRead: "Seleccionar \"public-read\" al subir "
+objectStorageSetPublicRead: "Seleccionar \"public-read\" al subir"
 showFixedPostForm: "Mostrar el formulario de las entradas encima de la línea de tiempo"
 newNoteRecived: "Tienes una nota nuevo"
 sounds: "Sonidos"
@@ -785,7 +785,7 @@ _aboutMisskey:
   source: "Código fuente"
 _nsfw:
   respect: "Ocultar medios NSFW"
-  ignore: "No esconder medios NSFW "
+  ignore: "No esconder medios NSFW"
   force: "Ocultar todos los medios"
 _mfm:
   cheatSheet: "Hoja de referencia de MFM"

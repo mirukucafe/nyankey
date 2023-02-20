@@ -495,7 +495,7 @@ ascendingOrder: "Urutkan naik"
 descendingOrder: "Urutkan menurun"
 scratchpad: "Scratchpad"
 scratchpadDescription: "Scratchpad menyediakan lingkungan eksperimen untuk AiScript.\
-  \ Kamu  bisa menulis, mengeksuksi, serta mengecek hasil yang berinteraksi dengan\
+  \ Kamu bisa menulis, mengeksuksi, serta mengecek hasil yang berinteraksi dengan\
   \ FoundKey."
 output: "Keluaran"
 updateRemoteUser: "Perbaharui informasi pengguna luar"
