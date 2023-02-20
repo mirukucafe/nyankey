@@ -11,6 +11,7 @@ import { NoteReaction } from '@/models/entities/note-reaction.js';
 import { User } from '@/models/entities/user.js';
 import { awaitAll } from '@/prelude/await-all.js';
 import { Users, PollVotes, DriveFiles, NoteReactions, Followings, Polls, Channels } from '../index.js';
+import { apiLogger } from '@/server/api/logger.js';
 
 async function populatePoll(note: Note, meId: User['id'] | null) {
 	const poll = await Polls.findOneByOrFail({ noteId: note.id });
@@ -270,6 +271,13 @@ export const NoteRepository = db.getRepository(Note).extend({
 		})));
 
 		// filter out rejected promises, only keep fulfilled values
-		return promises.flatMap(result => result.status === 'fulfilled' ? [result.value] : []);
+		return promises.flatMap((result, i) => {
+			if (result.status === 'fulfilled') {
+				return [result.value];
+			} else {
+				apiLogger.error(`dropping note due to violating visibility restrictions, note ${notes[i].id} user ${meId}`);
+				return [];
+			}
+		});
 	},
 });

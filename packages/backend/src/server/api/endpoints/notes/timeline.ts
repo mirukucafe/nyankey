@@ -10,6 +10,7 @@ import { generateMutedNoteQuery } from '@/server/api/common/generate-muted-note-
 import { generateChannelQuery } from '@/server/api/common/generate-channel-query.js';
 import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 import { generateMutedRenotesQuery } from '@/server/api/common/generated-muted-renote-query.js';
+import { apiLogger } from '@/server/api/logger.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -123,6 +124,10 @@ export default define(meta, paramDef, async (ps, user) => {
 	//#endregion
 
 	const timeline = await visibilityQuery(query, user).take(ps.limit).getMany();
+
+	if (timeline.length < ps.limit) {
+		apiLogger.warn(`notes missing from TL for user ${user.id}?`);
+	}
 
 	process.nextTick(() => {
 		activeUsersChart.read(user);
