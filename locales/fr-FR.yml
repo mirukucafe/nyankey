@@ -71,8 +71,8 @@ importRequested: "Vous avez initié un import. Cela pourrait prendre un peu de t
 lists: "Listes"
 note: "Notes"
 notes: "Notes"
-following: "Abonnements"
-followers: "Abonné·e·s"
+following: "Suivis"
+followers: "Vous suivent"
 followsYou: "Vous suit"
 createList: "Créer une liste"
 manageLists: "Gérer les listes"
@@ -88,15 +88,15 @@ youShouldUpgradeClient: "Si la page ne s'affiche pas correctement, rechargez-la 
   \ mettre votre client à jour."
 enterListName: "Nom de la liste"
 privacy: "Confidentialité"
-makeFollowManuallyApprove: "Accepter manuellement les demandes d’abonnement"
+makeFollowManuallyApprove: "Accepter manuellement les demandes de suivi"
 defaultNoteVisibility: "Visibilité des notes par défaut"
-follow: "S’abonner"
-followRequest: "Demande d’abonnement"
-followRequests: "Demandes d’abonnement"
-unfollow: "Se désabonner"
-followRequestPending: "Demande d'abonnement en attente de confirmation"
+follow: "Suivre"
+followRequest: "Demande de suivi"
+followRequests: "Demandes de suivi"
+unfollow: "Ne plus suivre"
+followRequestPending: "Demande de suivi en attente de confirmation"
 renote: "Renoter"
-unrenote: "Annuler la Renote"
+unrenote: "Retirer la renote"
 quote: "Citer"
 pinnedNote: "Note épinglée"
 you: "Vous"
@@ -1056,33 +1056,34 @@ _2fa:
   step2Url: 'Vous pouvez aussi entrer cette URL si vous utilisez un client lourd sur
     ordinateur :'
 _permissions:
-  "read:account": "Afficher les informations du compte"
+  "read:account": "Lire les informations du compte"
   "write:account": "Mettre à jour les informations du compte"
-  "read:blocks": "Voir les comptes bloqués"
+  "read:blocks": "Lire les utilisateurs bloqués"
   "write:blocks": "Bloquer et Débloquer des comptes"
-  "read:drive": "Parcourir le Drive"
-  "write:drive": "Écrire sur le Drive"
-  "read:favorites": "Afficher les favoris"
-  "write:favorites": "Gérer les favoris"
-  "read:following": "Voir les informations de vos abonnements"
+  "read:drive": "Lister les fichiers et dossiers du drive"
+  "write:drive": "Créer, changer et supprimer des fichiers du drive"
+  "read:favorites": "Lister les notes favorites"
+  "write:favorites": "Gérer les notes favorites"
+  "read:following": "Lister les comptes suivis et les comptes qui vous suivent"
   "write:following": "Abonner et désabonner autres comptes"
-  "read:messaging": "Voir vos discussions"
-  "write:messaging": "Gérer les discussions"
-  "read:mutes": "Voir les comptes masqués"
-  "write:mutes": "Gérer les comptes masqués"
-  "write:notes": "Créer / supprimer des notes"
-  "read:notifications": "Afficher les notifications"
-  "write:notifications": "Gérer vos notifications"
-  "write:reactions": "Gérer vos réactions"
-  "write:votes": "Voter"
-  "read:pages": "Voir vos pages"
+  "read:messaging": "Voir vos discussions et leur historique"
+  "write:messaging": "Créer et supprimer les messages des discussions"
+  "read:mutes": "Lister les comptes desquels vous masquez les notes ou les renotes"
+  "write:mutes": "Masquer et démasquer les notes ou les renotes des comptes"
+  "write:notes": "Gérer les notes"
+  "read:notifications": "Lire vos notifications"
+  "write:notifications": "Gérer vos notifications et en créer"
+  "write:reactions": "Gérer les réactions"
+  "write:votes": "Voter dans les sondages"
+  "read:pages": "Lister et lire les pages"
   "write:pages": "Gérer les pages"
   "read:page-likes": "Voir les mentions « J'aime » des pages"
   "write:page-likes": "Gérer les mentions « J'aime » sur les pages"
   "read:user-groups": "Voir les groupes d'utilisateur·rice·s"
   "write:user-groups": "Éditer les groupes des utilisateur·rice·s"
-  "read:channels": "Lire les canaux"
+  "read:channels": "Lister et lire les canaux suivis et rejoints"
   "write:channels": "Gérer les canaux"
+  "read:reactions": Lister les réactions
 _auth:
   shareAccess: "Autoriser \"{name}\" à accéder à votre compte ?"
   shareAccessAsk: "Voulez-vous vraiment autoriser cette application à accéder à votre\
@@ -1385,3 +1386,15 @@ useDrawerReactionPickerForMobile: Sur mobile afficher un tiroir pour le panneau 
   réaction
 appAuthorization: Authorisation de l'application
 noPermissionsRequested: (Aucune permission demandée.)
+oauthErrorGoBack: Une erreur est survenue pendant l'authentification d'une application
+  tierce. Veuillez réessayer.
+botFollowRequiresApproval: Accepter manuellement les demandes de suivi des comptes
+  marqués « robots »
+unrenoteAllConfirm: Étes-vous certain·e de vouloir retirer toutes les renotes de cette
+  note ?
+unrenoteAll: Retirer toutes les renotes
+deleteAllFiles: Supprimer tous les fichiers
+cannotAttachFileWhenAccountSwitched: Vous ne pouvez pas joindre un fichier à partir
+  d'un autre compte.
+cannotSwitchAccountWhenFileAttached: Vous ne pouvez pas changer de compte tant qu'il
+  y a des pièces jointes.
