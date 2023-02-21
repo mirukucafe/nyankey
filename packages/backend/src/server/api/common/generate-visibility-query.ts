@@ -8,10 +8,10 @@ export function visibilityQuery(q: SelectQueryBuilder<Note>, meId?: User['id'] |
 		.from(() => q, 'note');
 
 	if (meId == null) {
-		superQuery.where('note_visible(note.id, null);');
+		superQuery.where('note_visible(note.id, null)');
 	} else {
 		superQuery.where('note_visible(note.id, :meId)', { meId });
 	}
 
-	return q;
+	return superQuery;
 }
