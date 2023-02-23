@@ -20,7 +20,7 @@ git clone https://akkoma.dev/FoundKeyGang/FoundKey.git
 cd FoundKey
 ```
 
-##Configure
+## Configure
 
 Copy example configuration files with following:
 
@@ -31,6 +31,8 @@ cp ./docker-compose.yml.example ./docker-compose.yml
 ```
 
 Edit `default.yml` and `docker.env` according to the instructions in the files.
+You will need to set the database host to `db` and Redis host to `redis` in order to use the internal container network for these services.
+
 
 Edit `docker-compose.yml` if necessary. (e.g. if you want to change the port).
 
@@ -40,7 +42,7 @@ This will take some time.
 
 ``` shell
 docker compose build
-docker compose run --rm web pnpm run init
+docker compose run --rm web yarn run init
 ```
 
 ## Launch
@@ -49,6 +51,8 @@ You can start FoundKey with the following command:
 ```sh
 docker compose up -d
 ```
+
+In case you are encountering issues, you can run `docker compose logs -f` to get the log output of the running containers.
 
 ## How to update your FoundKey server
 When updating, be sure to check the [release notes](https://akkoma.dev/FoundKeyGang/FoundKey/src/branch/main/CHANGELOG.md) to know in advance the changes and whether or not additional work is required (in most cases, it is not).
