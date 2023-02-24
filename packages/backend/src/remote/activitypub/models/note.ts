@@ -188,7 +188,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		let temperror = false;
 		// check the urls sequentially and abort early to not do unnecessary HTTP requests
 		// picks the first one that works
-		for (const uri in uris) {
+		for (const uri of uris) {
 			const res = await tryResolveNote(uri);
 			if (res.status === 'ok') {
 				quote = res.res;
