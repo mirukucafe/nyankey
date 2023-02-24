@@ -63,7 +63,7 @@ git checkout master
 git pull
 git stash pop
 docker compose build
-docker compose stop && docker compose up -d
+docker compose down && docker compose up -d
 ```
 
 It may take some time depending on the contents of the update and the size of the database.
