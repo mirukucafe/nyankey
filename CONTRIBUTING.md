@@ -34,6 +34,7 @@ For a production environment you might not want to follow the `main` branch dire
 This project follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
 Significant changes should be listed in the changelog (i.e. the file called `CHANGELOG.md`, see also section "Changelog Trailer" below).
 Although Semantic Versioning talks about "the API", changes to the user interface should also be tracked.
+However, changes to translation files are not considered notable enough to be listed in the changelog.
 
 Consider if any of the existing documentation has to be updated because of your contribution.
 
