@@ -27,7 +27,6 @@ Copy example configuration files with following:
 ```sh
 cp .config/docker_example.yml .config/default.yml
 cp .config/docker_example.env .config/docker.env
-cp ./docker-compose.yml.example ./docker-compose.yml
 ```
 
 Edit `default.yml` and `docker.env` according to the instructions in the files.
