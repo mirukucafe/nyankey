@@ -1,10 +1,9 @@
 _lang_: "Polski"
 headlineMisskey: "Sieć połączona wpisami"
-introMisskey: "FoundKey jest serwisem mikroblogowym typu open source.\nFoundKey to\
-  \ opensource'owy serwis mikroblogowy, w którym możesz tworzyć \"notatki\", aby dzielić\
-  \ się tym, co się dzieje i opowiadać wszystkim o sobie.\nMożesz również użyć funkcji\
-  \ \"Reakcje\", aby szybko dodać własne reakcje do notatek innych użytkowników\U0001F44D\
-  .\nOdkrywaj nowy świat\U0001F680!"
+introMisskey: "Witaj! FoundKey jest otwartoźródłowym serwisem mikroblogowym.\nTwórz\
+  \ \"wpisy\", aby dzielić się tym, co się dzieje i opowiadać wszystkim o sobie. \U0001F4E1\
+  \nMożesz również użyć \"reakcji\", aby szybko wyrazić swoje uczucia dotyczące wpisów\
+  \ innych użytkowników. \U0001F44D\nOdkrywaj nowy świat! \U0001F680"
 monthAndDay: "{month}-{day}"
 search: "Szukaj"
 notifications: "Powiadomienia"
@@ -15,7 +14,7 @@ fetchingAsApObject: "Pobieranie z Fediwersum…"
 ok: "OK"
 gotIt: "Rozumiem!"
 cancel: "Anuluj"
-renotedBy: "Udostępniono przez {user}"
+renotedBy: "Podbito przez {user}"
 noNotes: "Brak wpisów"
 noNotifications: "Brak powiadomień"
 instance: "Instancja"
@@ -43,7 +42,7 @@ copyLink: "Skopiuj odnośnik"
 delete: "Usuń"
 deleteAndEdit: "Usuń i edytuj"
 deleteAndEditConfirm: "Czy na pewno chcesz usunąć ten wpis i zedytować go? Utracisz\
-  \ wszystkie reakcje, udostępnienia i odpowiedzi do tego wpisu."
+  \ wszystkie reakcje, podbicia i odpowiedzi do tego wpisu."
 addToList: "Dodaj do listy"
 sendMessage: "Wyślij wiadomość"
 copyUsername: "Kopiuj nazwę użytkownika"
@@ -92,8 +91,8 @@ followRequest: "Poproś o możliwość obserwacji"
 followRequests: "Prośby o możliwość obserwacji"
 unfollow: "Przestań obserwować"
 followRequestPending: "Oczekująca prośba o możliwość obserwacji"
-renote: "Udostępnij"
-unrenote: "Cofnij udostępnienie"
+renote: "Podbij"
+unrenote: "Cofnij podbicie"
 quote: "Cytuj"
 pinnedNote: "Przypięty wpis"
 you: "Ty"
@@ -128,7 +127,7 @@ emojis: "Emoji"
 addEmoji: "Dodaj emoji"
 cacheRemoteFiles: "Przechowuj zdalne pliki w pamięci podręcznej"
 cacheRemoteFilesDescription: "Gdy ta opcja jest wyłączona, zdalne pliki są ładowane\
-  \ bezpośrednio ze zdalnych instancji. Wyłączenie the opcji zmniejszy użycie powierzchni\
+  \ bezpośrednio ze zdalnych instancji. Wyłączenie tej opcji zmniejszy użycie powierzchni\
   \ dyskowej, ale zwiększy transfer, ponieważ miniaturki nie będą generowane."
 flagAsBot: "To konto jest botem"
 flagAsBotDescription: "Jeżeli ten kanał jest kontrolowany przez jakiś program, ustaw\
@@ -579,9 +578,9 @@ manageAccessTokens: "Zarządzaj tokenami dostępu"
 accountInfo: "Informacje o koncie"
 notesCount: "Liczba wpisów"
 repliesCount: "Liczba wysłanych odpowiedzi"
-renotesCount: "Liczba wysłanych udostępnień"
+renotesCount: "Liczba wysłanych podbić"
 repliedCount: "Liczba otrzymanych odpowiedzi"
-renotedCount: "Liczba otrzymanych udostępnień"
+renotedCount: "Liczba otrzymanych podbić"
 followingCount: "Liczba obserwowanych kont"
 followersCount: "Liczba obserwujących"
 sentReactionsCount: "Liczba wysłanych reakcji"
@@ -1046,3 +1045,12 @@ _deck:
     mentions: "Wspomnienia"
     direct: "Bezpośredni"
 _services: {}
+exportAll: Eksportuj wszystko
+exportSelected: Eksportuj wybrane
+showLess: Pokaż mniej
+botFollowRequiresApproval: Prośby o możliwość obserwacji z kont oznaczonych jako boty
+  wymagają zatwierdzenia
+unrenoteAllConfirm: Czy na pewno chcesz cofnąć wszystkie podbicia tego wpisu?
+renoteMute: Ukryj podbicia
+renoteUnmute: Pokaż podbicia
+unrenoteAll: Cofnij wszystkie podbicia
