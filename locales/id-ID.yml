@@ -1225,7 +1225,7 @@ _pages:
   editPage: "Sunting halaman"
   readPage: "Lihat sumber kode aktif"
   created: "Halaman berhasil dibuat"
-  updated: "Halaman berhasil diperbaharui!"
+  updated: "Halaman berhasil diperbaharui"
   deleted: "Halaman telah dihapus"
   pageSetting: "Pengaturan Halaman"
   nameAlreadyExists: "URL Halaman yang ditentukan sudah ada"
