@@ -64,6 +64,13 @@ adduser --disabled-password --disabled-login foundkey
 	- Make sure you set the PostgreSQL and Redis settings correctly.
 	- Use a strong password for the PostgreSQL user and take note of it since it'll be needed later.
 
+### Reverse proxy
+For production use and for HTTPS termination you will have to use a reverse proxy.
+There are instructions for setting up [nginx](./nginx.md) for this purpose.
+
+### Changing the default Reaction
+You can change the default reaction that is used when an ActivityPub "Like" is received from '👍' to '⭐' by changing the boolean value `meta.useStarForReactionFallback` in the databse respectively.
+
 ## Build FoundKey
 
 Build foundkey with the following:
