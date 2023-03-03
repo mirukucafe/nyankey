@@ -25,7 +25,7 @@
 import { computed, ref } from 'vue';
 import * as foundkey from 'foundkey-js';
 import { sum } from '@/scripts/array';
-import { pleaseLogin } from '@/scripts/please-login';
+import { pleaseLoginOrRemote, urlForNote } from '@/scripts/please-login';
 import * as os from '@/os';
 import { i18n } from '@/i18n';
 import { useInterval } from '@/scripts/use-interval';
@@ -68,7 +68,7 @@ if (props.note.poll.expiresAt) {
 }
 
 const vote = async (id) => {
-	pleaseLogin();
+	pleaseLoginOrRemote(urlForNote(props.note));
 
 	if (props.readOnly || closed.value || isVoted.value) return;
 

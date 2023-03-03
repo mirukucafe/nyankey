@@ -115,7 +115,7 @@ import XRenoteButton from './renote-button.vue';
 import MkUrlPreview from '@/components/url-preview.vue';
 import MkInstanceTicker from '@/components/instance-ticker.vue';
 import MkVisibility from '@/components/visibility.vue';
-import { pleaseLogin } from '@/scripts/please-login';
+import { pleaseLoginOrRemote, urlForNote } from '@/scripts/please-login';
 import { focusPrev, focusNext } from '@/scripts/focus';
 import { checkWordMute } from '@/scripts/check-word-mute';
 import { userPage } from '@/filters/user';
@@ -188,7 +188,8 @@ useNoteCapture({
 });
 
 function reply(viaKeyboard = false): void {
-	pleaseLogin();
+	pleaseLoginOrRemote(urlForNote(appearNote));
+
 	os.post({
 		reply: appearNote,
 		animation: !viaKeyboard,
@@ -198,7 +199,8 @@ function reply(viaKeyboard = false): void {
 }
 
 function react(): void {
-	pleaseLogin();
+	pleaseLoginOrRemote(urlForNote(appearNote));
+
 	blur();
 	reactionPicker.show(reactButton.value, reaction => {
 		os.api('notes/reactions/create', {
