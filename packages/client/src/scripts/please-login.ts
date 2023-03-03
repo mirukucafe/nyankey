@@ -3,7 +3,7 @@ import { $i } from '@/account';
 import { i18n } from '@/i18n';
 import { popup } from '@/os';
 
-export function pleaseLogin(path?: string) {
+export function pleaseLoginOrPage(path?: string) {
 	if ($i) return;
 
 	popup(defineAsyncComponent(() => import('@/components/signin-dialog.vue')), {
