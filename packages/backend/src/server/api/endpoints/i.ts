@@ -6,6 +6,8 @@ export const meta = {
 
 	requireCredential: true,
 
+	description: 'Show the representation of the authenticated user.',
+
 	res: {
 		type: 'object',
 		optional: false, nullable: false,
@@ -23,7 +25,7 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user, token) => {
 	const isSecure = token == null;
 
-	// ここで渡ってきている user はキャッシュされていて古い可能性もあるので id だけ渡す
+	// The user passed here may be cached and out of date, so only the id is passed.
 	return await Users.pack<true, true>(user.id, user, {
 		detail: true,
 		includeSecrets: isSecure,

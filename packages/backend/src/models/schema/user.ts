@@ -87,11 +87,13 @@ export const packedUserDetailedNotMeOnlySchema = {
 	type: 'object',
 	properties: {
 		url: {
+			description: 'URL to a presentation form intended for humans, if available',
 			type: 'string',
 			format: 'url',
 			nullable: true, optional: false,
 		},
 		uri: {
+			description: 'ActivityPub `id` of this User',
 			type: 'string',
 			format: 'uri',
 			nullable: true, optional: false,
