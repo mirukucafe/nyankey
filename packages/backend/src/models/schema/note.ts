@@ -163,16 +163,20 @@ export const packedNoteSchema = {
 			optional: false, nullable: false,
 		},
 		uri: {
+			description: 'ActivityPub `id` of this Note',
 			type: 'string',
 			optional: true, nullable: false,
 		},
 		url: {
+			description: 'URL to a presentation form intended for humans, if available',
 			type: 'string',
 			optional: true, nullable: false,
 		},
 
 		myReaction: {
-			type: 'object',
+			description: 'Textual representation of the authenticated users reaction, if they reacted.',
+			example: ':blobfox@.:',
+			type: 'string',
 			optional: true, nullable: true,
 		},
 	},

@@ -114,7 +114,7 @@ export const meta = {
 			},
 			bannerUrl: {
 				type: 'string',
-				optional: false, nullable: false,
+				optional: false, nullable: true,
 			},
 			iconUrl: {
 				type: 'string',

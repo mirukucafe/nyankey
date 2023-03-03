@@ -403,6 +403,24 @@ export const packedMeDetailedOnlySchema = {
 			items: {
 				type: 'object',
 				nullable: false, optional: false,
+				properties: {
+					id: {
+						type: 'string',
+						optional: false,
+						nullable: false,
+					},
+					name: {
+						type: 'string',
+						optional: false,
+						nullable: false,
+					},
+					lastUsed: {
+						type: 'string',
+						optional: false,
+						nullable: false,
+						example: '1970-01-01T00:00:00Z',
+					},
+				},
 			},
 		},
 		//#endregion

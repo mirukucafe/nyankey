@@ -22,6 +22,7 @@ import { packedNoteReactionSchema } from '@/models/schema/note-reaction.js';
 import { packedHashtagSchema } from '@/models/schema/hashtag.js';
 import { packedPageSchema } from '@/models/schema/page.js';
 import { packedUserGroupSchema } from '@/models/schema/user-group.js';
+import { packedUserGroupInvitationSchema } from '@/models/schema/user-group-invitation.js';
 import { packedNoteFavoriteSchema } from '@/models/schema/note-favorite.js';
 import { packedChannelSchema } from '@/models/schema/channel.js';
 import { packedAntennaSchema } from '@/models/schema/antenna.js';
@@ -41,6 +42,7 @@ export const refs = {
 
 	UserList: packedUserListSchema,
 	UserGroup: packedUserGroupSchema,
+	UserGroupInvitation: packedUserGroupInvitationSchema,
 	App: packedAppSchema,
 	MessagingMessage: packedMessagingMessageSchema,
 	Note: packedNoteSchema,
