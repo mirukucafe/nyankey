@@ -79,11 +79,6 @@ export const meta = {
 						optional: false, nullable: false,
 						example: 720,
 					},
-					avgColor: {
-						type: 'string',
-						optional: true, nullable: false,
-						example: 'rgb(40,65,87)',
-					},
 				},
 			},
 			storedInternal: {

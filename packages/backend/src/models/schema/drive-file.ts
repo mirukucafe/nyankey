@@ -60,11 +60,6 @@ export const packedDriveFileSchema = {
 					optional: true, nullable: false,
 					example: 8,
 				},
-				avgColor: {
-					type: 'string',
-					optional: true, nullable: false,
-					example: 'rgb(40,65,87)',
-				},
 			},
 		},
 		url: {

@@ -78,7 +78,7 @@ export class DriveFile {
 		default: {},
 		comment: 'The any properties of the DriveFile. For example, it includes image width/height.',
 	})
-	public properties: { width?: number; height?: number; orientation?: number; avgColor?: string };
+	public properties: { width?: number; height?: number; orientation?: number; };
 
 	@Column('boolean')
 	public storedInternal: boolean;
