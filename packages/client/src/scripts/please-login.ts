@@ -37,3 +37,9 @@ export function urlForNote(note: entities.Note): string {
 		?? note.uri
 		?? `${url}/notes/${note.id}`;
 }
+
+export function urlForUser(user: entities.User): string {
+	return user.url
+		?? user.uri
+		?? `${url}/users/${user.id}`;
+}
