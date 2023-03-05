@@ -22,7 +22,7 @@ export function pleaseLoginOrPage(path?: string) {
 	if (!path) throw new Error('signin required');
 }
 
-export function pleaseLoginOrRemote(url: string) {
+export function pleaseLoginOrRemote(remoteUrl: string) {
 	if ($i) return;
 
 	popup(defineAsyncComponent(() => import('@/components/remote-interact.vue')), {
