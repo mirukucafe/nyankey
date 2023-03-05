@@ -27,6 +27,7 @@ import XModalWindow from '@/components/ui/modal-window.vue';
 import XSigninDialog from '@/components/signin-dialog.vue';
 import { i18n } from '@/i18n';
 import * as os from '@/os';
+import copyToClipboard from '@/scripts/copy-to-clipboard';
 
 const props = defineProps<{
 	remoteUrl: string;
