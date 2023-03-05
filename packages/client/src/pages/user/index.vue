@@ -20,7 +20,6 @@
 import { defineAsyncComponent, computed, watch } from 'vue';
 import * as Acct from 'foundkey-js/built/acct';
 import * as foundkey from 'foundkey-js';
-import { getUserMenu } from '@/scripts/get-user-menu';
 import { acct as getAcct } from '@/filters/user';
 import * as os from '@/os';
 import { useRouter } from '@/router';
@@ -59,10 +58,6 @@ function fetchUser(): void {
 watch(() => props.acct, fetchUser, {
 	immediate: true,
 });
-
-function menu(ev) {
-	os.popupMenu(getUserMenu(user), ev.currentTarget ?? ev.target);
-}
 
 const headerTabs = $computed(() => [{
 	key: 'home',
