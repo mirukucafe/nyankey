@@ -10,13 +10,9 @@
 	<MkSpacer :margin-min="20" :margin-max="32" class="remote-interact" style="padding-top: 0;">
 		<p>{{ i18n.ts._remoteInteract.description }}</p>
 		<section>
-			{{ i18n.ts._remoteInteract.urlInstructions }}
-			<MkKeyValue oneline :copy="remoteUrl" style="margin-top: 1em;">
-				<template #key>{{ i18n.ts._remoteInteract.url }}</template>
-				<template #value>
-					<a :href="remoteUrl">{{ remoteUrl }}</a>
-				</template>
-			</MkKeyValue>
+			<p>{{ i18n.ts._remoteInteract.urlInstructions }}</p>
+			<a :href="remoteUrl">{{ remoteUrl }}</a>
+			<button v-tooltip="i18n.ts.copyUrl" class="_textButton" @click="copyUrl"><i class="far fa-copy"></i></button>
 		</section>
 		<aside>
 			<button class="_button" @click="signin()">{{ i18n.ts.login }}</button>
@@ -29,7 +25,6 @@
 <script lang="ts" setup>
 import XModalWindow from '@/components/ui/modal-window.vue';
 import XSigninDialog from '@/components/signin-dialog.vue';
-import MkKeyValue from '@/components/key-value.vue';
 import { i18n } from '@/i18n';
 import * as os from '@/os';
 
@@ -53,6 +48,11 @@ function signin() {
 		autoSet: true,
 	}, {}, 'closed');
 }
+
+function copyUrl() {
+    copyToClipboard(props.remoteUrl);
+    os.success();
+}
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +61,14 @@ function signin() {
 		padding: var(--radius);
 		border-radius: var(--radius);
 		border: solid .2em var(--accentDarken);
+
+		> p {
+			margin-top: 0;
+		}
+
+		> button {
+			margin-left: .5em;
+		}
 	}
 
 	aside {
