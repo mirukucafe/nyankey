@@ -11,7 +11,7 @@
 		<p>{{ i18n.ts._remoteInteract.description }}</p>
 		<section>
 			<p>{{ i18n.ts._remoteInteract.urlInstructions }}</p>
-			<a :href="remoteUrl">{{ remoteUrl }}</a>
+			<a :href="remoteUrl" class="_link">{{ remoteUrl }}</a>
 			<button v-tooltip="i18n.ts.copyUrl" class="_textButton" @click="copyUrl"><i class="far fa-copy"></i></button>
 		</section>
 		<aside>
