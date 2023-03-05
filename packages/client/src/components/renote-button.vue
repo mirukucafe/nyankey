@@ -17,7 +17,7 @@
 import { computed, ref } from 'vue';
 import { Note } from 'foundkey-js/built/entities';
 import XDetails from '@/components/users-tooltip.vue';
-import { pleaseLogin } from '@/scripts/please-login';
+import { pleaseLoginOrRemote, urlForNote } from '@/scripts/please-login';
 import * as os from '@/os';
 import { $i } from '@/account';
 import { useTooltip } from '@/scripts/use-tooltip';
@@ -51,7 +51,8 @@ useTooltip(buttonRef, async (showing) => {
 });
 
 function renote(viaKeyboard = false): void {
-	pleaseLogin();
+	pleaseLoginOrRemote(urlForNote(props.note));
+
 	os.popupMenu([{
 		text: i18n.ts.renote,
 		icon: 'fas fa-retweet',

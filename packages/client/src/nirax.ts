@@ -2,7 +2,7 @@
 
 import { EventEmitter } from 'eventemitter3';
 import { Component, shallowRef, ShallowRef } from 'vue';
-import { pleaseLogin } from '@/scripts/please-login';
+import { pleaseLoginOrPage } from '@/scripts/please-login';
 import { safeURIDecode } from '@/scripts/safe-uri-decode';
 
 type RouteDef = {
@@ -174,7 +174,7 @@ export class Router extends EventEmitter<{
 		}
 
 		if (res.route.loginRequired) {
-			pleaseLogin('/');
+			pleaseLoginOrPage('/');
 		}
 
 		const isSamePath = beforePath === path;

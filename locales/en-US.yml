@@ -1339,3 +1339,8 @@ _translationService:
   _libreTranslate:
     endpoint: "LibreTranslate API Endpoint"
     authKey: "LibreTranslate Auth Key (optional)"
+_remoteInteract:
+  title: "I'm sorry, I'm afraid I can't do that."
+  description: "You cannot perform this action right now. You probably need to do it on your own instance, or sign in."
+  urlInstructions: "You can copy this URL. If you paste it into the search field on your instance, you should be taken to the right location."
+  url: "URL"
