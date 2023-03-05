@@ -1,7 +1,7 @@
 <template>
 <XModalWindow
 	ref="dialog"
-	:width="700"
+	:width="500"
 	@close="onClose()"
 	@closed="emit('closed')"
 >
