@@ -126,6 +126,7 @@ function help(ev: MouseEvent) {
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+			text-align: center;
 			vertical-align: bottom;
 			height: 100px;
 			border-radius: 10px;
