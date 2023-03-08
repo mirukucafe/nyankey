@@ -79,7 +79,6 @@ export class AccessToken {
 
 	@Column('varchar', {
 		length: 64, array: true,
-		default: '{}',
 	})
 	public permission: string[];
 

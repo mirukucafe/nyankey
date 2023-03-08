@@ -1,7 +1,7 @@
 import { MoreThan } from 'typeorm';
 import { USER_ONLINE_THRESHOLD } from '@/const.js';
 import { Users } from '@/models/index.js';
-import define from '../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['meta'],

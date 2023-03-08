@@ -1,9 +1,9 @@
 import { FindOptionsWhere } from 'typeorm';
 import { NoteReactions } from '@/models/index.js';
 import { NoteReaction } from '@/models/entities/note-reaction.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { getNote } from '../../common/getters.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
+import { getNote } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['notes', 'reactions'],
@@ -25,7 +25,8 @@ export const meta = {
 
 	v2: {
 		method: 'get',
-		alias: 'notes/:noteId/reactions/:type?',
+		alias: 'notes/:noteId/reactions',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],

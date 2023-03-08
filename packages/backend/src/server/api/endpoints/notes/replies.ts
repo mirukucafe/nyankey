@@ -1,11 +1,11 @@
 import { Notes } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
-import define from '../../define.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
-import { getNote } from '../../common/getters.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
+import { getNote } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -25,6 +25,7 @@ export const meta = {
 	v2: {
 		method: 'get',
 		alias: 'notes/:noteId/replies',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],
@@ -62,11 +63,10 @@ export default define(meta, paramDef, async (ps, user) => {
 		.leftJoinAndSelect('renoteUser.avatar', 'renoteUserAvatar')
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner');
 
-	generateVisibilityQuery(query, user);
 	if (user) generateMutedUserQuery(query, user);
 	if (user) generateBlockedUserQuery(query, user);
 
-	const timeline = await query.take(ps.limit).getMany();
+	const timeline = await visibilityQuery(query, user).take(ps.limit).getMany();
 
 	return await Notes.packMany(timeline, user);
 });

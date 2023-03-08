@@ -4,9 +4,9 @@ import config from '@/config/index.js';
 import { getAgentByUrl } from '@/misc/fetch.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { TranslationService } from '@/models/entities/meta.js';
-import { ApiError } from '../../error.js';
-import { getNote } from '../../common/getters.js';
-import define from '../../define.js';
+import { ApiError } from '@/server/api/error.js';
+import { getNote } from '@/server/api/common/getters.js';
+import define from '@/server/api/define.js';
 
 const sourceLangs = [
 	'BG',
@@ -23,8 +23,10 @@ const sourceLangs = [
 	'ID',
 	'IT',
 	'JA',
+	'KO',
 	'LT',
 	'LV',
+	'NB',
 	'NL',
 	'PL',
 	'PT',
@@ -57,7 +59,8 @@ export const meta = {
 
 	v2: {
 		method: 'get',
-		alias: 'notes/:noteId/translate/:targetLang/:sourceLang?',
+		alias: 'notes/:noteId/translate/:targetLang',
+		pathParameters: ['noteId', 'targetLang'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],
@@ -91,8 +94,10 @@ export const paramDef = {
 				'ID',
 				'IT',
 				'JA',
+				'KO',
 				'LT',
 				'LV',
+				'NB',
 				'NL',
 				'PL',
 				'PT',

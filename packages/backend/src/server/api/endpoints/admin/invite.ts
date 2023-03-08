@@ -1,7 +1,7 @@
 import { RegistrationTickets } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { secureRndstrCustom } from '@/misc/secure-rndstr.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

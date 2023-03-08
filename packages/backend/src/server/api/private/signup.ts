@@ -8,7 +8,7 @@ import { sendEmail } from '@/services/send-email.js';
 import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { genId } from '@/misc/gen-id.js';
 import { validateEmailForAccount } from '@/services/validate-email-for-account.js';
-import { signup } from '../common/signup.js';
+import { signup } from '@/server/api/common/signup.js';
 
 export default async (ctx: Koa.Context) => {
 	const body = ctx.request.body;

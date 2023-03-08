@@ -52,7 +52,7 @@ let reporterOrigin = $ref('combined');
 let targetUserOrigin = $ref('combined');
 
 const pagination = {
-	endpoint: 'admin/abuse-user-reports' as const,
+	endpoint: 'admin/reports/list' as const,
 	limit: 10,
 	params: computed(() => ({
 		state,

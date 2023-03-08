@@ -71,8 +71,8 @@ importRequested: "Vous avez initié un import. Cela pourrait prendre un peu de t
 lists: "Listes"
 note: "Notes"
 notes: "Notes"
-following: "Abonnements"
-followers: "Abonné·e·s"
+following: "Suivis"
+followers: "Vous suivent"
 followsYou: "Vous suit"
 createList: "Créer une liste"
 manageLists: "Gérer les listes"
@@ -88,15 +88,15 @@ youShouldUpgradeClient: "Si la page ne s'affiche pas correctement, rechargez-la 
   \ mettre votre client à jour."
 enterListName: "Nom de la liste"
 privacy: "Confidentialité"
-makeFollowManuallyApprove: "Accepter manuellement les demandes d’abonnement"
+makeFollowManuallyApprove: "Accepter manuellement les demandes de suivi"
 defaultNoteVisibility: "Visibilité des notes par défaut"
-follow: "S’abonner"
-followRequest: "Demande d’abonnement"
-followRequests: "Demandes d’abonnement"
-unfollow: "Se désabonner"
-followRequestPending: "Demande d'abonnement en attente de confirmation"
+follow: "Suivre"
+followRequest: "Demande de suivi"
+followRequests: "Demandes de suivi"
+unfollow: "Ne plus suivre"
+followRequestPending: "Demande de suivi en attente de confirmation"
 renote: "Renoter"
-unrenote: "Annuler la Renote"
+unrenote: "Retirer la renote"
 quote: "Citer"
 pinnedNote: "Note épinglée"
 you: "Vous"
@@ -188,7 +188,9 @@ clearCachedFilesConfirm: "Êtes-vous sûr·e de vouloir vider tout le cache de f
   \ distants ?"
 blockedInstances: "Instances bloquées"
 blockedInstancesDescription: "Listez les instances que vous désirez bloquer, une par\
-  \ ligne. Ces instances ne seront plus en capacité d'interagir avec votre instance."
+  \ ligne. Ces instances ne seront plus en capacité d'interagir avec votre instance.\
+  \ Les noms de domaine non-ASCII doivent être encodés en punycode. Les sous-domaines\
+  \ de ces instances seront aussi bloqués."
 muteAndBlock: "Masqué·e·s / Bloqué·e·s"
 mutedUsers: "Utilisateur·rice·s en sourdine"
 blockedUsers: "Utilisateur·rice·s bloqué·e·s"
@@ -683,7 +685,6 @@ editCode: "Modifier le code"
 apply: "Appliquer"
 receiveAnnouncementFromInstance: "Recevoir les messages d'information de l'instance"
 emailNotification: "Notifications par mail"
-publish: "Public"
 useReactionPickerForContextMenu: "Clic-droit pour ouvrir le panneau de réactions"
 typingUsers: "{users} est en train d'écrire..."
 jumpToSpecifiedDate: "Se rendre à la date"
@@ -722,10 +723,7 @@ switch: "Remplacer"
 noMaintainerInformationWarning: "Informations administrateur non configurées."
 noBotProtectionWarning: "La protection contre les bots n'est pas configurée."
 configure: "Configurer"
-postToGallery: "Publier dans la galerie"
-gallery: "Galerie"
 recentPosts: "Les plus récentes"
-popularPosts: "Les plus consultées"
 shareWithNote: "Partager dans une note"
 emailNotConfiguredWarning: "Vous n'avez pas configuré d'adresse e-mail."
 ratio: "Ratio"
@@ -831,11 +829,6 @@ _forgotPassword:
   contactAdmin: "Cette instance ne permettant pas l'utilisation d'adresses e-mail,\
     \ prenez contact avec l'administrateur·rice pour procéder à la réinitialisation\
     \ de votre mot de passe."
-_gallery:
-  my: "Mes publications"
-  liked: "Publications que j'ai aimées"
-  like: "J'aime"
-  unlike: "Je n’aime pas"
 _email:
   _follow:
     title: "Vous suit"
@@ -1063,38 +1056,34 @@ _2fa:
   step2Url: 'Vous pouvez aussi entrer cette URL si vous utilisez un client lourd sur
     ordinateur :'
 _permissions:
-  "read:account": "Afficher les informations du compte"
-  "write:account": "Mettre à jour les informations de votre compte"
-  "read:blocks": "Voir les comptes bloqués"
-  "write:blocks": "Gérer les comptes bloqués"
-  "read:drive": "Parcourir le Drive"
-  "write:drive": "Écrire sur le Drive"
-  "read:favorites": "Afficher les favoris"
-  "write:favorites": "Gérer les favoris"
-  "read:following": "Voir les informations de vos abonnements"
-  "write:following": "Abonnements/Se désabonner"
-  "read:messaging": "Voir vos discussions"
-  "write:messaging": "Gérer les discussions"
-  "read:mutes": "Voir les comptes masqués"
-  "write:mutes": "Gérer les comptes masqués"
-  "write:notes": "Créer / supprimer des notes"
-  "read:notifications": "Afficher les notifications"
-  "write:notifications": "Gérer vos notifications"
-  "read:reactions": "Lire les réactions"
-  "write:reactions": "Gérer vos réactions"
-  "write:votes": "Voter"
-  "read:pages": "Voir vos pages"
+  "read:account": "Lire les informations du compte"
+  "write:account": "Mettre à jour les informations du compte"
+  "read:blocks": "Lire les utilisateurs bloqués"
+  "write:blocks": "Bloquer et Débloquer des comptes"
+  "read:drive": "Lister les fichiers et dossiers du drive"
+  "write:drive": "Créer, changer et supprimer des fichiers du drive"
+  "read:favorites": "Lister les notes favorites"
+  "write:favorites": "Gérer les notes favorites"
+  "read:following": "Lister les comptes suivis et les comptes qui vous suivent"
+  "write:following": "Abonner et désabonner autres comptes"
+  "read:messaging": "Voir vos discussions et leur historique"
+  "write:messaging": "Créer et supprimer les messages des discussions"
+  "read:mutes": "Lister les comptes desquels vous masquez les notes ou les renotes"
+  "write:mutes": "Masquer et démasquer les notes ou les renotes des comptes"
+  "write:notes": "Gérer les notes"
+  "read:notifications": "Lire vos notifications"
+  "write:notifications": "Gérer vos notifications et en créer"
+  "write:reactions": "Gérer les réactions"
+  "write:votes": "Voter dans les sondages"
+  "read:pages": "Lister et lire les pages"
   "write:pages": "Gérer les pages"
   "read:page-likes": "Voir les mentions « J'aime » des pages"
   "write:page-likes": "Gérer les mentions « J'aime » sur les pages"
   "read:user-groups": "Voir les groupes d'utilisateur·rice·s"
   "write:user-groups": "Éditer les groupes des utilisateur·rice·s"
-  "read:channels": "Lire les canaux"
+  "read:channels": "Lister et lire les canaux suivis et rejoints"
   "write:channels": "Gérer les canaux"
-  "read:gallery": "Voir la galerie"
-  "write:gallery": "Éditer la galerie"
-  "read:gallery-likes": "Voir les mentions « J'aime » dans la galerie"
-  "write:gallery-likes": "Gérer les mentions « J'aime » dans la galerie"
+  "read:reactions": Lister les réactions
 _auth:
   shareAccess: "Autoriser \"{name}\" à accéder à votre compte ?"
   shareAccessAsk: "Voulez-vous vraiment autoriser cette application à accéder à votre\
@@ -1393,6 +1382,19 @@ regexpErrorDescription: "Il y a une erreur dans l'expression régulière de la l
   \ {line} de vos mots ignorées {tab} :"
 forwardReportIsAnonymous: Un compte système anonyme sera affiché, à la place de votre
   compte, lors du signalement à l'instance distante.
-attachmentRequired: Un attachement au moins est nécessaire.
 useDrawerReactionPickerForMobile: Sur mobile afficher un tiroir pour le panneau de
   réaction
+appAuthorization: Authorisation de l'application
+noPermissionsRequested: (Aucune permission demandée.)
+oauthErrorGoBack: Une erreur est survenue pendant l'authentification d'une application
+  tierce. Veuillez réessayer.
+botFollowRequiresApproval: Accepter manuellement les demandes de suivi des comptes
+  marqués « robots »
+unrenoteAllConfirm: Étes-vous certain·e de vouloir retirer toutes les renotes de cette
+  note ?
+unrenoteAll: Retirer toutes les renotes
+deleteAllFiles: Supprimer tous les fichiers
+cannotAttachFileWhenAccountSwitched: Vous ne pouvez pas joindre un fichier à partir
+  d'un autre compte.
+cannotSwitchAccountWhenFileAttached: Vous ne pouvez pas changer de compte tant qu'il
+  y a des pièces jointes.

@@ -2,15 +2,15 @@
 <MkStickyContainer>
 	<template #header><MkPageHeader v-model:tab="tab" :actions="headerActions" :tabs="headerTabs"/></template>
 	<MkSpacer :content-max="700">
-		<div v-if="tab === 'featured'" class="rknalgpo">
-			<MkPagination v-slot="{items}" :pagination="featuredPagesPagination">
+		<div v-if="tab === 'my'" class="rknalgpo my">
+			<MkButton class="new" @click="create()"><i class="fas fa-plus"></i></MkButton>
+			<MkPagination v-slot="{items}" :pagination="myPagesPagination">
 				<MkPagePreview v-for="page in items" :key="page.id" class="ckltabjg" :page="page"/>
 			</MkPagination>
 		</div>
 
-		<div v-else-if="tab === 'my'" class="rknalgpo my">
-			<MkButton class="new" @click="create()"><i class="fas fa-plus"></i></MkButton>
-			<MkPagination v-slot="{items}" :pagination="myPagesPagination">
+		<div v-else-if="tab === 'featured'" class="rknalgpo">
+			<MkPagination v-slot="{items}" :pagination="featuredPagesPagination">
 				<MkPagePreview v-for="page in items" :key="page.id" class="ckltabjg" :page="page"/>
 			</MkPagination>
 		</div>
@@ -35,7 +35,7 @@ import { definePageMetadata } from '@/scripts/page-metadata';
 
 const router = useRouter();
 
-let tab = $ref('featured');
+let tab = $ref('my');
 
 const featuredPagesPagination = {
 	endpoint: 'pages/featured' as const,
@@ -61,13 +61,13 @@ const headerActions = $computed(() => [{
 }]);
 
 const headerTabs = $computed(() => [{
-	key: 'featured',
-	title: i18n.ts._pages.featured,
-	icon: 'fas fa-fire-alt',
-}, {
 	key: 'my',
 	title: i18n.ts._pages.my,
 	icon: 'fas fa-edit',
+}, {
+	key: 'featured',
+	title: i18n.ts._pages.featured,
+	icon: 'fas fa-fire-alt',
 }, {
 	key: 'liked',
 	title: i18n.ts._pages.liked,

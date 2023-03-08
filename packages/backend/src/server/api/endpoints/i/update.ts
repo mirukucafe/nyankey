@@ -12,8 +12,8 @@ import { User } from '@/models/entities/user.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
 import { langmap } from '@/misc/langmap.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['account'],

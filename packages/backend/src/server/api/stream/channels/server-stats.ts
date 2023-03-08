@@ -1,5 +1,5 @@
 import Xev from 'xev';
-import Channel from '../channel.js';
+import Channel from '@/server/api/stream/channel.js';
 
 const ev = new Xev();
 

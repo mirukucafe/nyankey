@@ -194,8 +194,8 @@ blockedInstances: "Blockierte Instanzen"
 blockedInstancesDescription: "Gib die Hostnamen der Instanzen, welche blockiert werden\
   \ sollen, durch Zeilenumbrüche getrennt an. Blockierte Instanzen können mit dieser\
   \ Instanz nicht mehr kommunizieren. Hostnamen, die nicht-ASCII-Zeichen enthalten,\
-  \ müssen zuvor in Punycode umgewandelt werden. Ein Asterisk (*) kann als Platzhalter\
-  \ für beliebig viele Zeichen verwendet werden."
+  \ müssen zuvor in Punycode umgewandelt werden. Subdomains der aufgelisteten Hostnamen\
+  \ werden ebenfalls blockiert."
 muteAndBlock: "Stummschaltungen und Blockierungen"
 mutedUsers: "Stummgeschaltete Benutzer"
 blockedUsers: "Blockierte Benutzer"
@@ -337,9 +337,9 @@ pinnedUsers: "Angeheftete Benutzer"
 pinnedUsersDescription: "Gib durch Leerzeichen getrennte Benutzer an, die an die \"\
   Erkunden\"-Seite angeheftet werden sollen."
 hcaptchaSiteKey: "Site key"
-hcaptchaSecretKey: "Secret key"
-recaptchaSiteKey: "Site key"
-recaptchaSecretKey: "Secret key"
+hcaptchaSecretKey: "Geheimer Schlüssel"
+recaptchaSiteKey: "Site-Schlüssel"
+recaptchaSecretKey: "Geheimer Schlüssel"
 antennas: "Antennen"
 manageAntennas: "Antennen verwalten"
 name: "Name"
@@ -693,7 +693,6 @@ editCode: "Code bearbeiten"
 apply: "Anwenden"
 receiveAnnouncementFromInstance: "Benachrichtigungen von dieser Instanz empfangen"
 emailNotification: "Email-Benachrichtigungen"
-publish: "Veröffentlichen"
 useReactionPickerForContextMenu: "Reaktionsauswahl durch Rechtsklick öffnen"
 typingUsers: "{users} ist/sind am schreiben …"
 jumpToSpecifiedDate: "Zu bestimmtem Datum springen"
@@ -732,11 +731,7 @@ switch: "Wechseln"
 noMaintainerInformationWarning: "Betreiberinformationen sind nicht konfiguriert."
 noBotProtectionWarning: "Schutz vor Bots ist nicht konfiguriert."
 configure: "Konfigurieren"
-postToGallery: "Neuen Galeriebeitrag erstellen"
-attachmentRequired: "Mindestens 1 Anhang ist erforderlich."
-gallery: "Galerie"
 recentPosts: "Neue Beiträge"
-popularPosts: "Beliebte Beiträge"
 shareWithNote: "Mit Notiz teilen"
 emailNotConfiguredWarning: "Keine Email-Adresse hinterlegt."
 ratio: "Verhältnis"
@@ -851,11 +846,6 @@ _forgotPassword:
     \ wende dich bitte an den Administrator."
   contactAdmin: "Diese Instanz unterstützt die Verwendung von Email-Adressen nicht.\
     \ Wende dich an den Administrator, um dein Passwort zurückzusetzen."
-_gallery:
-  my: "Meine Galerie"
-  liked: "Mit \"Gefällt mir\" markierte Beiträge"
-  like: "Gefällt mir"
-  unlike: "\"Gefällt mir\" entfernen"
 _email:
   _follow:
     title: "Du hast einen neuen Follower"
@@ -979,9 +969,9 @@ _wordMute:
     \ trennen."
   muteWordsDescription2: "Umgib Schlüsselworter mit Schrägstrichen, um Reguläre Ausdrücke\
     \ zu verwenden."
-  softDescription: "Notizen, die die angegebenen Konditionen erfüllen, in der Chronik\
+  softDescription: "Notizen, welche die angegebenen Konditionen erfüllen, in der Chronik\
     \ ausblenden."
-  hardDescription: "Verhindern, dass Notizen, die die angegebenen Konditionen erfüllen,\
+  hardDescription: "Verhindern, dass Notizen, welche die angegebenen Konditionen erfüllen,\
     \ der Chronik hinzugefügt werden. Zudem werden diese Notizen auch nicht der Chronik\
     \ hinzugefügt, falls die Konditionen geändert werden."
   soft: "Leicht"
@@ -1083,40 +1073,39 @@ _2fa:
     \ deinem Gerät auch Anmeldung mit Hilfe eines FIDO2-kompatiblen Hardware-Sicherheitsschlüssels\
     \ einrichten."
 _permissions:
-  "read:account": "Deine Benutzerkontoinformationen lesen"
-  "write:account": "Deine Benutzerkontoinformationen bearbeiten"
-  "read:blocks": "Die Liste deiner blockierten Benutzer lesen"
-  "write:blocks": "Die Liste deiner blockierten Benutzer bearbeiten"
-  "read:drive": "Deine Drive-Dateien und Ordner lesen"
-  "write:drive": "Deine Drive-Dateien und Ordner bearbeiten oder löschen"
-  "read:favorites": "Deine Favoriten-Liste lesen"
-  "write:favorites": "Deine Favoriten-Liste bearbeiten"
-  "read:following": "Die Liste der Benutzer, denen du folgst, lesen"
+  "read:account": "Benutzerkonto-Informationen lesen"
+  "write:account": "Benutzerkonto-Informationen bearbeiten"
+  "read:blocks": "Liste der blockierten Benutzer lesen"
+  "write:blocks": "Liste der blockierten Benutzer bearbeiten"
+  "read:drive": "Drive-Dateien und -Ordner auflisten"
+  "write:drive": "Drive-Dateien und -Ordner erstellen, bearbeiten oder löschen"
+  "read:favorites": "Favorisierte Notizen auflisten"
+  "write:favorites": "Favorisierung von Notizen hinzufügen oder entfernen"
+  "read:following": "Gefolgte und folgende Benutzer auflisten"
   "write:following": "Anderen Benutzern folgen oder entfolgen"
-  "read:messaging": "Chats lesen"
-  "write:messaging": "Chats bedienen"
-  "read:mutes": "Stummschaltungen lesen"
-  "write:mutes": "Stummschaltungen bearbeiten"
+  "read:messaging": "Chats und Chatverläufe lesen"
+  "write:messaging": "Chatnachrichten erstellen oder löschen"
+  "read:mutes": "Stummschaltungen und Renote-Stummschaltungen auflisten"
+  "write:mutes": "Stummschaltungen und Renote-Stummschaltungen bearbeiten"
   "write:notes": "Notizen schreiben oder löschen"
   "read:notifications": "Benachrichtigungen lesen"
-  "write:notifications": "Benachrichtigungen bedienen"
-  "read:reactions": "Reaktionen lesen"
-  "write:reactions": "Reaktionen bedienen"
-  "write:votes": "Umfragen bedienen"
-  "read:pages": "Deine Seiten lesen"
-  "write:pages": "Deine Seiten bearbeiten oder löschen"
-  "read:page-likes": "Liste der Seiten, die mir gefallen, lesen"
-  "write:page-likes": "Liste der Seiten, die mir gefallen, bearbeiten"
-  "read:user-groups": "Benutzergruppen lesen"
-  "write:user-groups": "Benutzergruppen bearbeiten oder löschen"
-  "read:channels": "Kanäle lesen"
-  "write:channels": "Kanäle bedienen"
-  "read:gallery": "Beiträge deiner Galerie lesen"
-  "write:gallery": "Deine Galerie bearbeiten"
-  "read:gallery-likes": "Liste deiner mit \"Gefällt mir\" markierten Galerie-Beiträge\
-    \ lesen"
-  "write:gallery-likes": "Liste deiner mit \"Gefällt mir\" markierten Galerie-Beiträge\
-    \ bearbeiten"
+  "write:notifications": "Benachrichtigungen als gelesen markieren oder App-Benachrichtigungen\
+    \ erstellen"
+  "write:reactions": "Reaktionen erstellen oder löschen"
+  "write:votes": "In Umfragen abstimmen"
+  "read:pages": "Deine Seiten auflisten und lesen"
+  "write:pages": "Seiten erstellen, bearbeiten oder löschen"
+  "read:page-likes": "Seiten, die mir gefallen, auflisten und auslesen"
+  "write:page-likes": "\"Gefällt mir\"-Markierung von Seiten bearbeiten"
+  "read:user-groups": "beigetretene, erstellte und eingeladene Benutzergruppen auflisten\
+    \ und lesen"
+  "write:user-groups": "Benutzergruppen erstellen, bearbeiten, löschen, übertragen,\
+    \ zu diesen beitreten oder diese verlassen. Andere Benutzer zu diesen Einladen\
+    \ oder Benutzer aus diesen Bannen. Einladungen zu Benutzergruppen annehmen oder\
+    \ ablehnen."
+  "read:channels": "gefolgte und beigetretene Kanäle auflisten und lesen"
+  "write:channels": "Kanäle erstellen, bearbeiten, diesen folgen und entfolgen"
+  "read:reactions": Reaktionen ansehen
 _auth:
   shareAccess: "Möchtest du „{name}“ authorisieren, auf dieses Benutzerkonto zugreifen\
     \ zu können?"
@@ -1289,7 +1278,7 @@ _pages:
   hideTitleWhenPinned: "Seitentitel wenn angeheftet ausblenden"
   font: "Schriftart"
   fontSerif: "Serif"
-  fontSansSerif: "Sans Serif"
+  fontSansSerif: "serifenlos"
   eyeCatchingImageSet: "Vorschaubild festlegen"
   eyeCatchingImageRemove: "Vorschaubild entfernen"
 _relayStatus:
@@ -1366,7 +1355,7 @@ confirmToUnclipAlreadyClippedNote: "Diese Notiz ist bereits im \"{name}\" Clip e
 noEmailServerWarning: "Es ist kein Email-Server konfiguriert."
 thereIsUnresolvedAbuseReportWarning: "Es liegen ungelöste Meldungen vor."
 recommended: "Empfehlung"
-check: "Check"
+check: "Überprüfen"
 maxCustomEmojiPicker: Maximale Anzahl vorgeschlagener benutzerdefinierter Emoji
 maxUnicodeEmojiPicker: Maximale Anzahl vorgeschlagener Unicode-Emoji
 documentation: Dokumentation
@@ -1399,3 +1388,16 @@ selectAll: Alle auswählen
 renoteUnmute: Renotes zeigen
 renoteMute: Renotes verstecken
 externalCssSnippets: Einige CSS-Schnipsel zur Inspiration (nicht durch FoundKey verwaltet)
+botFollowRequiresApproval: Follow-Anfragen von als Bot markierten Accounts benötigen
+  Bestätigung
+unrenoteAll: alle Renotes zurücknehmen
+unrenoteAllConfirm: Bist du sicher, dass du alle Renotes zurücknehmen möchtest?
+deleteAllFiles: Alle Dateien löschen
+cannotAttachFileWhenAccountSwitched: Kann keine Dateien anhängen, während ein anderer
+  Account eingestellt ist.
+cannotSwitchAccountWhenFileAttached: Kann keinen anderen Account einstellen, solange
+  Dateien angehängt sind.
+oauthErrorGoBack: Bei der Authentifizierung einer Drittanbieter-Anwendung ist ein
+  Fehler aufgetreten. Bitte geh zurück und versuche es erneut.
+appAuthorization: Anwendungs-Authorisierung
+noPermissionsRequested: (Keine Berechtigungen angefordert.)

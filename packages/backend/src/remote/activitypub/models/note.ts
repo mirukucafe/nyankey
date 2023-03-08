@@ -24,7 +24,7 @@ import { DbResolver } from '../db-resolver.js';
 import { apLogger } from '../logger.js';
 import { resolvePerson } from './person.js';
 import { resolveImage } from './image.js';
-import { extractApHashtags } from './tag.js';
+import { extractApHashtags, extractQuoteUrl } from './tag.js';
 import { extractPollFromQuestion } from './question.js';
 import { extractApMentions } from './mention.js';
 
@@ -154,10 +154,10 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		})
 		: null;
 
-	// 引用
 	let quote: Note | undefined | null;
+	const quoteUrl = extractQuoteUrl(note.tag);
 
-	if (note._misskey_quote || note.quoteUri) {
+	if (quoteUrl || note._misskey_quote || note.quoteUri) {
 		const tryResolveNote = async (uri: string): Promise<{
 			status: 'ok';
 			res: Note | null;
@@ -184,14 +184,22 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 			}
 		};
 
-		const uris = unique([note._misskey_quote, note.quoteUri].filter((x): x is string => typeof x === 'string'));
-		const results = await Promise.all(uris.map(uri => tryResolveNote(uri)));
-
-		quote = results.filter((x): x is { status: 'ok', res: Note | null } => x.status === 'ok').map(x => x.res).find(x => x);
-		if (!quote) {
-			if (results.some(x => x.status === 'temperror')) {
-				throw new Error('quote resolve failed');
+		const uris = unique([quoteUrl, note._misskey_quote, note.quoteUri].filter((x): x is string => typeof x === 'string'));
+		let temperror = false;
+		// check the urls sequentially and abort early to not do unnecessary HTTP requests
+		// picks the first one that works
+		for (const uri of uris) {
+			const res = await tryResolveNote(uri);
+			if (res.status === 'ok') {
+				quote = res.res;
+				break;
+			} else if (res.status === 'temperror') {
+				temperror = true;
 			}
+		}
+		if (!quote && temperror) {
+			// could not resolve quote, try again later
+			throw new Error('quote resolve failed');
 		}
 	}
 
@@ -201,8 +209,6 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	let text: string | null = null;
 	if (note.source?.mediaType === 'text/x.misskeymarkdown' && typeof note.source.content === 'string') {
 		text = note.source.content;
-	} else if (typeof note._misskey_content !== 'undefined') {
-		text = note._misskey_content;
 	} else if (typeof note.content === 'string') {
 		text = fromHtml(note.content, quote?.uri);
 	}

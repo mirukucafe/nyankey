@@ -164,9 +164,6 @@ self.addEventListener('message', (ev: ServiceWorkerGlobalScopeEventMap['message'
 				case 'initialize':
 					swLang.setLang(ev.data.lang);
 					break;
-				case 'notification':
-					createNotification(ev.data);
-					break;
 			}
 		}
 	})());

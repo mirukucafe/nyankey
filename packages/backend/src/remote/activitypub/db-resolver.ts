@@ -62,9 +62,11 @@ export class DbResolver {
 				id: parsed.id,
 			});
 		} else {
-			return await Notes.findOneBy({
+			return await Notes.findOneBy([{
 				uri: parsed.uri,
-			});
+			}, {
+				url: parsed.uri,
+			}]);
 		}
 	}
 

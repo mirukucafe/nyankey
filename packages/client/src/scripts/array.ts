@@ -16,18 +16,11 @@ export function count<T>(a: T, xs: T[]): number {
 }
 
 /**
- * Concatenate an array of arrays
- */
-export function concat<T>(xss: T[][]): T[] {
-	return ([] as T[]).concat(...xss);
-}
-
-/**
  * Intersperse the element between the elements of the array
  * @param sep The element to be interspersed
  */
 export function intersperse<T>(sep: T, xs: T[]): T[] {
-	return concat(xs.map(x => [sep, x])).slice(1);
+	return xs.map(x => [sep, x]).flat().slice(1);
 }
 
 /**

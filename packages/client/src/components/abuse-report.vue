@@ -61,7 +61,7 @@ const emit = defineEmits<{
 let forward = $ref(props.report.forwarded);
 
 function resolve(): void {
-	os.apiWithDialog('admin/resolve-abuse-user-report', {
+	os.apiWithDialog('admin/reports/resolve', {
 		forward,
 		reportId: props.report.id,
 	}).then(() => {

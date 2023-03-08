@@ -1,10 +1,10 @@
 import { Brackets } from 'typeorm';
 import { MessagingMessages, UserGroups, UserGroupJoinings, Users } from '@/models/index.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { getUser } from '../../common/getters.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { readUserMessagingMessage, readGroupMessagingMessage, deliverReadActivity } from '../../common/read-messaging-message.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
+import { getUser } from '@/server/api/common/getters.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { readUserMessagingMessage, readGroupMessagingMessage, deliverReadActivity } from '@/server/api/common/read-messaging-message.js';
 
 export const meta = {
 	tags: ['messaging'],

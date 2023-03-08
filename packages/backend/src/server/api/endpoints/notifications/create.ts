@@ -1,5 +1,5 @@
 import { createNotification } from '@/services/create-notification.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['notifications'],

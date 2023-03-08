@@ -1,12 +1,11 @@
 import { Brackets } from 'typeorm';
 import { Notes } from '@/models/index.js';
-import { safeForSql } from '@/misc/safe-for-sql.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
-import define from '../../define.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 
 export const meta = {
 	tags: ['notes', 'hashtags'],
@@ -80,21 +79,19 @@ export default define(meta, paramDef, async (ps, me) => {
 		.leftJoinAndSelect('renoteUser.avatar', 'renoteUserAvatar')
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner');
 
-	generateVisibilityQuery(query, me);
 	if (me) generateMutedUserQuery(query, me);
 	if (me) generateBlockedUserQuery(query, me);
 
 	try {
 		if (ps.tag) {
-			if (!safeForSql(ps.tag)) throw new Error('Injection');
-			query.andWhere(`'{"${normalizeForSearch(ps.tag)}"}' <@ note.tags`);
+			query.andWhere(':tag = ANY(note.tags)', { tag: normalizeForSearch(ps.tag) });
 		} else {
+			let i = 0;
 			query.andWhere(new Brackets(qb => {
 				for (const tags of ps.query!) {
 					qb.orWhere(new Brackets(qb => {
 						for (const tag of tags) {
-							if (!safeForSql(tag)) throw new Error('Injection');
-							qb.andWhere(`'{"${normalizeForSearch(tag)}"}' <@ note.tags`);
+							qb.andWhere(`:tag${++i} = ANY(note.tags)`, { ['tag' + i]: normalizeForSearch(tag) });
 						}
 					}));
 				}
@@ -134,7 +131,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	}
 
 	// Search notes
-	const notes = await query.take(ps.limit).getMany();
+	const notes = await visibilityQuery(query, me).take(ps.limit).getMany();
 
 	return await Notes.packMany(notes, me);
 });

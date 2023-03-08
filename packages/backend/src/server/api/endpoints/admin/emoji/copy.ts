@@ -4,8 +4,8 @@ import { DriveFile } from '@/models/entities/drive-file.js';
 import { uploadFromUrl } from '@/services/drive/upload-from-url.js';
 import { publishBroadcastStream } from '@/services/stream.js';
 import { db } from '@/db/postgre.js';
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['admin'],

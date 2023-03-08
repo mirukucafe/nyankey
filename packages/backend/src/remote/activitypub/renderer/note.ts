@@ -111,6 +111,16 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 		...apemojis,
 	];
 
+	if (quote) {
+		tag.push({
+			type: 'Link',
+			mediaType: 'application/ld+json; profile="https://www.w3.org/ns/activitystreams"',
+			href: quote,
+			name: `RE: ${quote}`,
+			rel: 'https://misskey-hub.net/ns#_misskey_quote',
+		});
+	}
+
 	const asPoll = poll ? {
 		type: 'Question',
 		content: await toHtml(text, note.mentions),
@@ -135,7 +145,6 @@ export default async function renderNote(note: Note, dive = true, isTalk = false
 		attributedTo,
 		summary,
 		content,
-		_misskey_content: text,
 		source: {
 			content: text,
 			mediaType: 'text/x.misskeymarkdown',

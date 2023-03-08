@@ -1,8 +1,8 @@
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { TranslationService } from '@/models/entities/meta.js';
-import { translatorAvailable } from '../../common/translator.js';
-import define from '../../define.js';
+import { translatorAvailable } from '@/server/api/common/translator.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['meta'],
@@ -52,7 +52,7 @@ export const meta = {
 			},
 			bannerUrl: {
 				type: 'string',
-				optional: false, nullable: false,
+				optional: false, nullable: true,
 			},
 			iconUrl: {
 				type: 'string',

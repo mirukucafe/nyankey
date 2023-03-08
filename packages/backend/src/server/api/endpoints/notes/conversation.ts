@@ -1,8 +1,8 @@
 import { Note } from '@/models/entities/note.js';
 import { Notes } from '@/models/index.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
-import { getNote } from '../../common/getters.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
+import { getNote } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -22,6 +22,7 @@ export const meta = {
 	v2: {
 		method: 'get',
 		alias: 'notes/:noteId/conversation',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['NO_SUCH_NOTE'],

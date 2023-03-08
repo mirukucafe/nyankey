@@ -1,8 +1,8 @@
 import { publishDriveStream } from '@/services/stream.js';
 import { DriveFolders } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['drive'],

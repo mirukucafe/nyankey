@@ -1,7 +1,7 @@
 import { Hashtags } from '@/models/index.js';
 import { normalizeForSearch } from '@/misc/normalize-for-search.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['hashtags'],

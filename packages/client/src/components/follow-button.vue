@@ -26,6 +26,7 @@ import * as foundkey from 'foundkey-js';
 import * as os from '@/os';
 import { stream } from '@/stream';
 import { i18n } from '@/i18n';
+import { pleaseLoginOrRemote, urlForUser } from '@/scripts/please-login';
 
 const props = withDefaults(defineProps<{
 	user: foundkey.entities.UserDetailed,
@@ -59,6 +60,8 @@ async function onClick() {
 	wait = true;
 
 	try {
+		pleaseLoginOrRemote(urlForUser(props.user));
+
 		if (isFollowing) {
 			const { canceled } = await os.confirm({
 				type: 'warning',

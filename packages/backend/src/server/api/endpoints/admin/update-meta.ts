@@ -1,7 +1,7 @@
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
 import { fetchMeta, setMeta } from '@/misc/fetch-meta.js';
 import { TranslationService } from '@/models/entities/meta.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

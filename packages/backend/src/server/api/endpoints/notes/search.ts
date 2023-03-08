@@ -2,11 +2,11 @@ import { In } from 'typeorm';
 import { Notes } from '@/models/index.js';
 import config from '@/config/index.js';
 import es from '@/db/elasticsearch.js';
-import define from '../../define.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -70,11 +70,10 @@ export default define(meta, paramDef, async (ps, me) => {
 			.leftJoinAndSelect('renoteUser.avatar', 'renoteUserAvatar')
 			.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner');
 
-		generateVisibilityQuery(query, me);
 		if (me) generateMutedUserQuery(query, me);
 		if (me) generateBlockedUserQuery(query, me);
 
-		const notes = await query.take(ps.limit).getMany();
+		const notes = await visibilityQuery(query, me).take(ps.limit).getMany();
 
 		return await Notes.packMany(notes, me);
 	} else {

@@ -11,8 +11,8 @@ import {
 import config from '@/config/index.js';
 import { ApiError } from '@/server/api/error.js';
 import { publishMainStream } from '@/services/stream.js';
-import define from '../../../define.js';
-import { procedures, hash } from '../../../2fa.js';
+import define from '@/server/api/define.js';
+import { procedures, hash } from '@/server/api/2fa.js';
 
 const cborDecodeFirst = promisify(cbor.decodeFirst) as any;
 const rpIdHashReal = hash(Buffer.from(config.hostname, 'utf-8'));

@@ -59,6 +59,7 @@ async function run() {
 				os.inputText({
 					title: q,
 				}).then(({ canceled, result: a }) => {
+					if (canceled) return;
 					ok(a);
 				});
 			});

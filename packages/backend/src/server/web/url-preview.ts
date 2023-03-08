@@ -38,6 +38,14 @@ export const urlPreviewHandler = async (ctx: Koa.Context): Promise<void> => {
 
 		logger.succ(`Got preview of ${url}: ${summary.title}`);
 
+		if (summary.url && !(summary.url.startsWith('http://') || summary.url.startsWith('https://'))) {
+			throw new Error('unsupported schema included');
+		}
+
+		if (summary.player?.url && !(summary.player.url.startsWith('http://') || summary.player.url.startsWith('https://'))) {
+			throw new Error('unsupported schema included');
+		}
+
 		summary.icon = wrap(summary.icon);
 		summary.thumbnail = wrap(summary.thumbnail);
 
@@ -54,12 +62,10 @@ export const urlPreviewHandler = async (ctx: Koa.Context): Promise<void> => {
 };
 
 function wrap(url?: string): string | null {
-	return url != null
-		? url.match(/^https?:\/\//)
-			? `${config.url}/proxy/preview.webp?${query({
-				url,
-				preview: '1',
-			})}`
-			: url
-		: null;
+	if (url == null) return null;
+	if (!['http:', 'https:'].includes(new URL(url).protocol)) return null;
+	return config.url + '/proxy/preview.webp?' + query({
+		url,
+		preview: '1',
+	});
 }

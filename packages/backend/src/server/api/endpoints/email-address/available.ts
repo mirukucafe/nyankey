@@ -1,5 +1,5 @@
 import { validateEmailForAccount } from '@/services/validate-email-for-account.js';
-import define from '../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['users'],

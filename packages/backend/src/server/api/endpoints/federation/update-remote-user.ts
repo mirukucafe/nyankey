@@ -1,7 +1,7 @@
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { updatePerson } from '@/remote/activitypub/models/person.js';
-import define from '../../define.js';
-import { getRemoteUser } from '../../common/getters.js';
+import define from '@/server/api/define.js';
+import { getRemoteUser } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['federation'],

@@ -74,7 +74,7 @@ followers: "Följare"
 followsYou: "Följer dig"
 createList: "Skapa lista"
 manageLists: "Hantera lista"
-error: "Fel!"
+error: "Fel"
 somethingHappened: "Ett fel har uppstått"
 retry: "Försök igen"
 pageLoadError: "Det gick inte att ladda sidan."
@@ -183,15 +183,17 @@ clearQueueConfirmText: "Om någon not är olevererad i kön kommer den inte fede
 clearCachedFiles: "Rensa cache"
 clearCachedFilesConfirm: "Är du säker att du vill radera alla cachade externa filer?"
 blockedInstances: "Blockerade instanser"
-blockedInstancesDescription: "Lista adressnamn av instanser som du vill blockera.\
-  \ Listade instanser kommer inte längre kommunicera med denna instans."
+blockedInstancesDescription: "Skriv de instansernas domäner som du vill blockera.\
+  \ Uppradade instanser kommer inte längre kunna kommunicera med denna instans. Icke\
+  \ ASCII domännamn måste skrivas i punycode. Subdomäner till de uppradade instanserna\
+  \ kommer också blockeras."
 muteAndBlock: "Tystningar och blockeringar"
 mutedUsers: "Tystade användare"
 blockedUsers: "Blockerade användare"
 noUsers: "Det finns inga användare"
 editProfile: "Redigera profil"
 noteDeleteConfirm: "Är du säker på att du vill ta bort denna not?"
-pinLimitExceeded: "Du kan inte fästa fler noter"
+pinLimitExceeded: "Du kan inte fästa fler noter."
 intro: "FoundKey har installerats! Vänligen skapa en adminanvändare."
 done: "Klar"
 processing: "Bearbetar..."
@@ -208,7 +210,7 @@ publishing: "Publiceras"
 notResponding: "Svarar inte"
 changePassword: "Ändra lösenord"
 security: "Säkerhet"
-retypedNotMatch: "Inmatningen matchar inte"
+retypedNotMatch: "Inmatningen matchar inte."
 currentPassword: "Nuvarande lösenord"
 newPassword: "Nytt lösenord"
 newPasswordRetype: "Bekräfta lösenord"
@@ -284,3 +286,35 @@ _deck:
     list: "Listor"
     mentions: "Omnämningar"
 _services: {}
+botFollowRequiresApproval: Följarförfrågningar från botmarkerade konton kräver manuellt
+  godkännande
+home: Hem
+activity: Akitivitet
+images: Bilder
+birthday: Födelsedag
+yearsOld: '{age} år gammal'
+stopActivityDeliveryDescription: Lokala aktiviteter kommer inte skickas till denna
+  instans. Mottagande av aktiviteter fungerar som innan.
+remoteUserCaution: Eftersom användaren är ifrån en fjärran instans så kan informationen
+  vara inkomplett.
+registeredDate: Blev medlem vid
+location: Plats
+theme: Teman
+exportAll: Exportera alla
+exportSelected: Exportera valda
+showLess: Dölj
+keepOriginalUploadingDescription: Sparar den ursprungliga bilden som den är. Om avstängd
+  så kommer en version som visas på webben genereras vid uppladning.
+fromDrive: Från Drive
+fromUrl: Från URL
+uploadFromUrl: Ladda upp via en URL
+uploadFromUrlDescription: URL till filen som du vill ladda upp
+uploadFromUrlRequested: Förfrågade uppladningar
+uploadFromUrlMayTakeTime: Det tar kanske ett tag innan uppladningen är färdig.
+explore: Upptäck
+messageRead: Läs
+noMoreHistory: Det finns ingen mer historik
+startMessaging: Inled en ny chatt
+agreeTo: Jag godkänner användarvillkoren {0}
+tos: Användarevillkoren
+start: Börja

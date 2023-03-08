@@ -8,7 +8,6 @@
 				<XReactions v-else-if="tab === 'reactions'" :user="user"/>
 				<XClips v-else-if="tab === 'clips'" :user="user"/>
 				<XPages v-else-if="tab === 'pages'" :user="user"/>
-				<XGallery v-else-if="tab === 'gallery'" :user="user"/>
 			</div>
 			<MkError v-else-if="error" @retry="fetchUser()"/>
 			<MkLoading v-else/>
@@ -21,7 +20,6 @@
 import { defineAsyncComponent, computed, watch } from 'vue';
 import * as Acct from 'foundkey-js/built/acct';
 import * as foundkey from 'foundkey-js';
-import { getUserMenu } from '@/scripts/get-user-menu';
 import { acct as getAcct } from '@/filters/user';
 import * as os from '@/os';
 import { useRouter } from '@/router';
@@ -33,7 +31,6 @@ const XHome = defineAsyncComponent(() => import('./home.vue'));
 const XReactions = defineAsyncComponent(() => import('./reactions.vue'));
 const XClips = defineAsyncComponent(() => import('./clips.vue'));
 const XPages = defineAsyncComponent(() => import('./pages.vue'));
-const XGallery = defineAsyncComponent(() => import('./gallery.vue'));
 
 const props = withDefaults(defineProps<{
 	acct: string;
@@ -62,10 +59,6 @@ watch(() => props.acct, fetchUser, {
 	immediate: true,
 });
 
-function menu(ev) {
-	os.popupMenu(getUserMenu(user), ev.currentTarget ?? ev.target);
-}
-
 const headerTabs = $computed(() => [{
 	key: 'home',
 	title: i18n.ts.overview,
@@ -82,10 +75,6 @@ const headerTabs = $computed(() => [{
 	key: 'pages',
 	title: i18n.ts.pages,
 	icon: 'fas fa-file-alt',
-}, {
-	key: 'gallery',
-	title: i18n.ts.gallery,
-	icon: 'fas fa-icons',
 }]);
 
 definePageMetadata(computed(() => user ? {

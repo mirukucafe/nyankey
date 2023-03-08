@@ -5,6 +5,7 @@
 	</div>
 	<div class="value">
 		<slot name="value"></slot>
+		<!-- FIXME the button should not be part of the overflow: hidden element to ensure its always visible -->
 		<button v-if="copy" v-tooltip="i18n.ts.copy" class="_textButton" style="margin-left: 0.5em;" @click="copy_"><i class="far fa-copy"></i></button>
 	</div>
 </div>

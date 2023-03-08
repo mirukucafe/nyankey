@@ -4,8 +4,8 @@ import { UserProfiles, AttestationChallenges } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { comparePassword } from '@/misc/password.js';
 import { ApiError } from '@/server/api/error.js';
-import define from '../../../define.js';
-import { hash } from '../../../2fa.js';
+import define from '@/server/api/define.js';
+import { hash } from '@/server/api/2fa.js';
 
 const randomBytes = promisify(crypto.randomBytes);
 

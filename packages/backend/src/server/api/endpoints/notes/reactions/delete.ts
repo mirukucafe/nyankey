@@ -1,8 +1,8 @@
 import { deleteReaction } from '@/services/note/reaction/delete.js';
 import { SECOND, HOUR } from '@/const.js';
-import define from '../../../define.js';
-import { getNote } from '../../../common/getters.js';
-import { ApiError } from '../../../error.js';
+import define from '@/server/api/define.js';
+import { getNote } from '@/server/api/common/getters.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['reactions', 'notes'],
@@ -13,8 +13,9 @@ export const meta = {
 
 	limit: {
 		duration: HOUR,
-		max: 60,
-		minInterval: 3 * SECOND,
+		max: 30,
+		minInterval: 10 * SECOND,
+		key: 'delete',
 	},
 
 	errors: ['NO_SUCH_NOTE', 'NOT_REACTED'],

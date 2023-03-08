@@ -4755,6 +4755,7 @@ __metadata:
     vue: 3.2.45
     vue-prism-editor: 2.0.0-alpha.2
     vuedraggable: 4.0.1
+    wavesurfer.js: 6.0.1
   languageName: unknown
   linkType: soft
 
@@ -16966,11 +16967,11 @@ __metadata:
 
 "typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
   version: 4.9.4
-  resolution: "typescript@patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=d73830"
+  resolution: "typescript@patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=23ec76"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 37f6e2c3c5e2aa5934b85b0fddbf32eeac8b1bacf3a5b51d01946936d03f5377fe86255d4e5a4ae628fd0cd553386355ad362c57f13b4635064400f3e8e05b9d
+  checksum: 3e2ab0772908676d9b9cb83398c70003a3b08e1c6b3b122409df9f4b520f2fdaefa20c3d7d57dce283fed760ac94b3ce94d4a7fa875127b67852904425a1f0dc
   languageName: node
   linkType: hard
 
@@ -17535,6 +17536,13 @@ __metadata:
   dependencies:
     makeerror: 1.0.12
   checksum: ad7a257ea1e662e57ef2e018f97b3c02a7240ad5093c392186ce0bcf1f1a60bbadd520d073b9beb921ed99f64f065efb63dfc8eec689a80e569f93c1c5d5e16c
+  languageName: node
+  linkType: hard
+
+"wavesurfer.js@npm:6.0.1":
+  version: 6.0.1
+  resolution: "wavesurfer.js@npm:6.0.1"
+  checksum: 0760adb48e60418de223fe4b2bfe31a049168d3ad8ac53f66029e96df6dfdb109ab59d2f81ab568940c1a6573aab8bf1686314fb55a4d616a65367a08f7f7666
   languageName: node
   linkType: hard
 

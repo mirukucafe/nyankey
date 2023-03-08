@@ -1,5 +1,5 @@
 import { RegistryItems } from '@/models/index.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	requireCredential: true,
@@ -21,7 +21,6 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	const query = RegistryItems.createQueryBuilder('item')
 		.select('item.key')
-		.where('item.domain IS NULL')
 		.andWhere('item.userId = :userId', { userId: user.id })
 		.andWhere('item.scope = :scope', { scope: ps.scope });
 

@@ -4,7 +4,7 @@ import config from '@/config/index.js';
 import { comparePassword } from '@/misc/password.js';
 import { UserProfiles } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	requireCredential: true,

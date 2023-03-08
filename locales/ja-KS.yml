@@ -74,10 +74,6 @@ somethingHappened: "なんかアカンことが起こったで"
 retry: "もっぺんやる？"
 pageLoadError: "ページの読み込みに失敗してしもうたで…"
 pageLoadErrorDescription: "これは普通、ネットワークかブラウザキャッシュが原因やからね。キャッシュをクリアするか、もうちっとだけ待ってくれへんか？"
-serverIsDead: "The server is not responding. Please wait for a while before trying\
-  \ again."
-youShouldUpgradeClient: "To display this page, please reload and use a new version\
-  \ client. "
 enterListName: "リスト名を入れてや"
 privacy: "プライバシー"
 makeFollowManuallyApprove: "自分が認めた人だけがこのアカウントをフォローできるようにする"
@@ -126,9 +122,6 @@ flagAsBot: "Botやで"
 flagAsBotDescription: "もしこのアカウントがプログラムによって運用されるんやったら、このフラグをオンにしてたのむで。オンにすると、反応の連鎖を防ぐためのフラグとして他の開発者に役立ったり、FoundKeyのシステム上での扱いがBotに合ったもんになるんやで。"
 flagAsCat: "Catやで"
 flagAsCatDescription: "ワレ、猫ちゃんならこのフラグをつけてみ？"
-flagShowTimelineReplies: "It will display the reply to the note in the timeline. "
-flagShowTimelineRepliesDescription: "It will display the reply to notes other than\
-  \ the user notes in the timeline when you turn it on. "
 autoAcceptFollowed: "フォローしとるユーザーからのフォローリクエストを勝手に許可しとく"
 addAccount: "アカウントを追加"
 loginFailed: "ログインに失敗してしもうた…"
@@ -209,9 +202,6 @@ resetAreYouSure: "リセットしてええん？"
 saved: "保存したで！"
 messaging: "チャット"
 upload: "アップロード"
-keepOriginalUploading: "Retain the original image. "
-keepOriginalUploadingDescription: "When uploading the clip, the original version will\
-  \ be retained. Turning it of then uploading will produce images for public use. "
 fromDrive: "ドライブから"
 fromUrl: "URLから"
 uploadFromUrl: "URLアップロード"
@@ -380,7 +370,7 @@ onlyOneFileCanBeAttached: "すまん、メッセージに添付できるファ�
 signinRequired: "ログインしてくれへん？"
 invitationCode: "招待コード"
 checking: "確認しとるで"
-available: "利用できる\n"
+available: "利用できる"
 unavailable: "利用できん"
 usernameInvalidFormat: "a~z、A~Z、0~9、_が使えるで"
 tooShort: "短すぎやろ！"
@@ -561,8 +551,6 @@ administration: "管理"
 hashtags: "ハッシュタグ"
 hide: "隠す"
 indefinitely: "無期限"
-_gallery:
-  unlike: "良くないわ"
 _email:
   _follow:
     title: "フォローされたで"
@@ -656,7 +644,6 @@ _tutorial:
 _2fa:
   alreadyRegistered: "もう設定終わっとるわ。"
 _permissions:
-  "read:reactions": "リアクションを見る"
   "write:votes": "投票する"
   "read:pages": "ページを見る"
   "read:page-likes": "ページのええやんを見る"
@@ -697,7 +684,7 @@ _widgets:
   aiscript: "AiScriptコンソール"
 _cw:
   hide: "隠す"
-  show: "続き見して！"
+  show: "続き見して"
   chars: "{count}文字"
   files: "{count}ファイル"
 _poll:

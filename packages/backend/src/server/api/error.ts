@@ -29,8 +29,16 @@ export class ApiError extends Error {
 	 */
 	public apply(ctx: Koa.Context, endpoint: string): void {
 		ctx.status = this.httpStatusCode;
-		if (ctx.status === 401) {
-			ctx.response.set('WWW-Authenticate', 'Bearer');
+		// set additional headers
+		switch (ctx.status) {
+			case 401:
+				ctx.response.set('WWW-Authenticate', 'Bearer');
+				break;
+			case 429:
+				if (typeof this.info === 'object' && typeof this.info.reset === 'number') {
+					ctx.respose.set('Retry-After', Math.floor(this.info.reset - (Date.now() / 1000)));
+				}
+				break;
 		}
 		ctx.body = {
 			error: {
@@ -73,7 +81,7 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		httpStatusCode: 409,
 	},
 	ALREADY_LIKED: {
-		message: 'You already liked that page or gallery post.',
+		message: 'You already liked that page.',
 		httpStatusCode: 409,
 	},
 	ALREADY_MUTING: {
@@ -292,10 +300,6 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		message: 'No such parent folder.',
 		httpStatusCode: 404,
 	},
-	NO_SUCH_POST: {
-		message: 'No such gallery post.',
-		httpStatusCode: 404,
-	},
 	NO_SUCH_RESET_REQUEST: {
 		message: 'No such password reset request.',
 		httpStatusCode: 404,
@@ -337,7 +341,7 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		httpStatusCode: 409,
 	},
 	NOT_LIKED: {
-		message: 'You have not liked that page or gallery post.',
+		message: 'You have not liked that page.',
 		httpStatusCode: 409,
 	},
 	NOT_MUTING: {

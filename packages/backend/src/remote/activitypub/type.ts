@@ -35,40 +35,76 @@ export function getApIds(value: ApObject | undefined): string[] {
 }
 
 /**
- * Get first ActivityStreams Object id
+ * Get ActivityStreams Object id
  */
-export function getOneApId(value: ApObject): string {
-	const firstOne = Array.isArray(value) ? value[0] : value;
-	return getApId(firstOne);
+export function getApId(value: string | Object): string {
+	let url = null;
+	if (typeof value === 'string') url = value;
+	else if (typeof value.id === 'string') url = value.id;
+
+	if (!url || !['https:', 'http:'].includes(new URL(url).protocol)) {
+		throw new Error('cannot determine id');
+	} else {
+		return url;
+	}
 }
 
 /**
- * Get ActivityStreams Object id
+ * Get first (valid) ActivityStreams Object id
  */
-export function getApId(value: string | IObject): string {
-	if (typeof value === 'string') return value;
-	if (typeof value.id === 'string') return value.id;
-	throw new Error('cannot detemine id');
+export function getOneApId(value: ApObject): string {
+	if (Array.isArray(value)) {
+		// find the first valid ID
+		for (const id of value) {
+			try {
+				return getApId(x);
+			} catch {
+				continue;
+			}
+		}
+		throw new Error('cannot determine id');
+	} else {
+		return getApId(value);
+	}
 }
 
 /**
  * Get ActivityStreams Object type
  */
-export function getApType(value: IObject): string {
+export function getApType(value: Object): string {
 	if (typeof value.type === 'string') return value.type;
 	if (Array.isArray(value.type) && typeof value.type[0] === 'string') return value.type[0];
 	throw new Error('cannot detect type');
 }
 
-export function getOneApHrefNullable(value: ApObject | undefined): string | undefined {
-	const firstOne = Array.isArray(value) ? value[0] : value;
-	return getApHrefNullable(firstOne);
+export function getApHrefNullable(value: string | IObject | undefined): string | undefined {
+	let url = null;
+	if (typeof value === 'string') url = value;
+	else if (typeof value?.href === 'string') url = value.href;
+
+	if (!url || !['https:', 'http:'].includes(new URL(url).protocol)) {
+		return undefined;
+	} else {
+		return url;
+	}
 }
 
-export function getApHrefNullable(value: string | IObject | undefined): string | undefined {
-	if (typeof value === 'string') return value;
-	if (typeof value?.href === 'string') return value.href;
-	return undefined;
+export function getOneApHrefNullable(value: ApObject | undefined): string | undefined {
+	if (!value) {
+		return;
+	} else if (Array.isArray(value)) {
+		// find the first valid href
+		for (const href of value) {
+			try {
+				return getApHrefNullable(href);
+			} catch {
+				continue;
+			}
+		}
+		return undefined;
+	} else {
+		return getApHrefNullable(value);
+	}
 }
 
 export interface IActivity extends IObject {
@@ -135,7 +171,6 @@ export const isQuestion = (object: IObject): object is IQuestion =>
 interface IQuestionChoice {
 	name?: string;
 	replies?: ICollection;
-	_misskey_votes?: number;
 }
 export interface ITombstone extends IObject {
 	type: 'Tombstone';
@@ -196,24 +231,6 @@ export const isPropertyValue = (object: IObject): object is IApPropertyValue =>
 	typeof object.name === 'string' &&
 	typeof (object as any).value === 'string';
 
-export interface IApMention extends IObject {
-	type: 'Mention';
-	href: string;
-}
-
-export const isMention = (object: IObject): object is IApMention =>
-	getApType(object) === 'Mention' &&
-	typeof object.href === 'string';
-
-export interface IApHashtag extends IObject {
-	type: 'Hashtag';
-	name: string;
-}
-
-export const isHashtag = (object: IObject): object is IApHashtag =>
-	getApType(object) === 'Hashtag' &&
-	typeof object.name === 'string';
-
 export interface IApEmoji extends IObject {
 	type: 'Emoji';
 	updated: Date;
@@ -264,7 +281,7 @@ export interface IRemove extends IActivity {
 
 export interface ILike extends IActivity {
 	type: 'Like' | 'EmojiReaction' | 'EmojiReact';
-	_misskey_reaction?: string;
+	content?: string;
 }
 
 export interface IAnnounce extends IActivity {
@@ -293,3 +310,34 @@ export const isLike = (object: IObject): object is ILike => getApType(object) ==
 export const isAnnounce = (object: IObject): object is IAnnounce => getApType(object) === 'Announce';
 export const isBlock = (object: IObject): object is IBlock => getApType(object) === 'Block';
 export const isFlag = (object: IObject): object is IFlag => getApType(object) === 'Flag';
+
+export interface ILink {
+	href: string;
+	rel?: string | string[];
+	mediaType?: string;
+	name?: string;
+}
+
+export interface IApMention extends ILink {
+	type: 'Mention';
+}
+
+export interface IApHashtag extends ILink {
+	type: 'Hashtag';
+	name: string;
+}
+
+export const isLink = (object: Record<string, any>): object is ILink =>
+	typeof object.href === 'string'
+	&& (
+		object.rel == undefined
+		|| typeof object.rel === 'string'
+		|| (Array.isArray(object.rel) && object.rel.every(x => typeof x === 'string'))
+	)
+	&& (object.mediaType == undefined || typeof object.mediaType === 'string');
+export const isMention = (object: Record<string, any>): object is IApMention =>
+	getApType(object) === 'Mention' && isLink(object);
+export const isHashtag = (object: Record<string, any>): object is IApHashtag =>
+	getApType(object) === 'Hashtag'
+	&& isLink(object)
+	&& typeof object.name === 'string';

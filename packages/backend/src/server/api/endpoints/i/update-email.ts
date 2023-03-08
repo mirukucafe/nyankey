@@ -6,8 +6,8 @@ import { Users, UserProfiles } from '@/models/index.js';
 import { sendEmail } from '@/services/send-email.js';
 import { validateEmailForAccount } from '@/services/validate-email-for-account.js';
 import { HOUR } from '@/const.js';
-import define from '../../define.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	requireCredential: true,

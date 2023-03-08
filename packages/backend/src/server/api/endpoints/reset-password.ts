@@ -1,7 +1,7 @@
 import { hashPassword } from '@/misc/password.js';
 import { UserProfiles, PasswordResetRequests } from '@/models/index.js';
 import { DAY, MINUTE } from '@/const.js';
-import define from '../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['reset password'],

@@ -5,7 +5,7 @@
 		<XTimeline class="tl"/>
 		<div class="shape1"></div>
 		<div class="shape2"></div>
-		<img src="/client-assets/misskey.svg" class="misskey"/>
+		<img src="/client-assets/foundkey.svg" class="misskey"/>
 		<div class="emojis">
 			<MkEmoji :normal="true" :no-style="true" emoji="👍"/>
 			<MkEmoji :normal="true" :no-style="true" emoji="❤"/>
@@ -193,7 +193,7 @@ function showMenu(ev) {
 			> .icon {
 				width: 85px;
 				margin-top: -47px;
-				border-radius: 100%;
+				border-radius: 5%;
 				vertical-align: bottom;
 			}
 

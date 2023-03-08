@@ -22,13 +22,13 @@ import { packedNoteReactionSchema } from '@/models/schema/note-reaction.js';
 import { packedHashtagSchema } from '@/models/schema/hashtag.js';
 import { packedPageSchema } from '@/models/schema/page.js';
 import { packedUserGroupSchema } from '@/models/schema/user-group.js';
+import { packedUserGroupInvitationSchema } from '@/models/schema/user-group-invitation.js';
 import { packedNoteFavoriteSchema } from '@/models/schema/note-favorite.js';
 import { packedChannelSchema } from '@/models/schema/channel.js';
 import { packedAntennaSchema } from '@/models/schema/antenna.js';
 import { packedClipSchema } from '@/models/schema/clip.js';
 import { packedFederationInstanceSchema } from '@/models/schema/federation-instance.js';
 import { packedQueueCountSchema } from '@/models/schema/queue.js';
-import { packedGalleryPostSchema } from '@/models/schema/gallery-post.js';
 import { packedEmojiSchema } from '@/models/schema/emoji.js';
 
 export const refs = {
@@ -42,6 +42,7 @@ export const refs = {
 
 	UserList: packedUserListSchema,
 	UserGroup: packedUserGroupSchema,
+	UserGroupInvitation: packedUserGroupInvitationSchema,
 	App: packedAppSchema,
 	MessagingMessage: packedMessagingMessageSchema,
 	Note: packedNoteSchema,
@@ -61,7 +62,6 @@ export const refs = {
 	Antenna: packedAntennaSchema,
 	Clip: packedClipSchema,
 	FederationInstance: packedFederationInstanceSchema,
-	GalleryPost: packedGalleryPostSchema,
 	Emoji: packedEmojiSchema,
 };
 

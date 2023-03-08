@@ -471,7 +471,7 @@ objectStorageUseSSLDesc: "Desactive esto si no va a usar HTTPS para la conexión
 objectStorageUseProxy: "Conectarse a través de Proxy"
 objectStorageUseProxyDesc: "Desactive esto si no va a usar Proxy para la conexión\
   \ de Almacenamiento de objetos"
-objectStorageSetPublicRead: "Seleccionar \"public-read\" al subir "
+objectStorageSetPublicRead: "Seleccionar \"public-read\" al subir"
 showFixedPostForm: "Mostrar el formulario de las entradas encima de la línea de tiempo"
 newNoteRecived: "Tienes una nota nuevo"
 sounds: "Sonidos"
@@ -675,7 +675,6 @@ editCode: "Editar código"
 apply: "Aplicar"
 receiveAnnouncementFromInstance: "Recibir notificaciones de la instancia"
 emailNotification: "Notificaciones por correo electrónico"
-publish: "Publicar"
 useReactionPickerForContextMenu: "Haga clic con el botón derecho para abrir el menu\
   \ de reacciones"
 typingUsers: "{users} está escribiendo"
@@ -713,10 +712,7 @@ switch: "Cambiar"
 noMaintainerInformationWarning: "No se ha establecido la información del administrador"
 noBotProtectionWarning: "La protección contra los bots no está configurada"
 configure: "Configurar"
-postToGallery: "Crear una nueva publicación en la galería"
-gallery: "Galería"
 recentPosts: "Posts recientes"
-popularPosts: "Más vistos"
 shareWithNote: "Compartir con una nota"
 emailNotConfiguredWarning: "No se ha configurado una dirección de correo electrónico."
 ratio: "Proporción"
@@ -768,11 +764,6 @@ _forgotPassword:
   contactAdmin: "Esta instancia no admite el uso de direcciones de correo electrónico,\
     \ póngase en contacto con el administrador de la instancia para restablecer su\
     \ contraseña"
-_gallery:
-  my: "Mi galería"
-  liked: "Publicaciones que me gustan"
-  like: "¡Muy bien!"
-  unlike: "Quitar me gusta"
 _email:
   _follow:
     title: "te ha seguido"
@@ -794,7 +785,7 @@ _aboutMisskey:
   source: "Código fuente"
 _nsfw:
   respect: "Ocultar medios NSFW"
-  ignore: "No esconder medios NSFW "
+  ignore: "No esconder medios NSFW"
   force: "Ocultar todos los medios"
 _mfm:
   cheatSheet: "Hoja de referencia de MFM"
@@ -960,7 +951,6 @@ _permissions:
   "write:notes": "Crear/borrar notas"
   "read:notifications": "Ver notificaciones"
   "write:notifications": "Administrar notificaciones"
-  "read:reactions": "Ver reacciones"
   "write:reactions": "Administrar reacciones"
   "write:votes": "Votar"
   "read:pages": "Ver páginas"

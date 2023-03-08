@@ -2,9 +2,9 @@ import { UserGroups, UserGroupJoinings, UserGroupInvitations } from '@/models/in
 import { genId } from '@/misc/gen-id.js';
 import { UserGroupInvitation } from '@/models/entities/user-group-invitation.js';
 import { createNotification } from '@/services/create-notification.js';
-import { getUser } from '../../../common/getters.js';
-import { ApiError } from '../../../error.js';
-import define from '../../../define.js';
+import { getUser } from '@/server/api/common/getters.js';
+import { ApiError } from '@/server/api/error.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['groups', 'users'],

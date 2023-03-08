@@ -1,9 +1,9 @@
 import deleteNote from '@/services/note/delete.js';
 import { Users } from '@/models/index.js';
 import { SECOND, HOUR } from '@/const.js';
-import define from '../../define.js';
-import { getNote } from '../../common/getters.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { getNote } from '@/server/api/common/getters.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['notes'],
@@ -14,13 +14,15 @@ export const meta = {
 
 	limit: {
 		duration: HOUR,
-		max: 300,
-		minInterval: SECOND,
+		max: 30,
+		minInterval: 10 * SECOND,
+		key: 'delete',
 	},
 
 	v2: {
 		method: 'delete',
 		alias: 'notes/:noteId',
+		pathParameters: ['noteId'],
 	},
 
 	errors: ['ACCESS_DENIED', 'NO_SUCH_NOTE'],

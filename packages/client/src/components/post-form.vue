@@ -7,7 +7,12 @@
 >
 	<header>
 		<button v-if="!fixed" class="cancel _button" @click="cancel"><i class="fas fa-times"></i></button>
-		<button v-tooltip="i18n.ts.switchAccount" class="account _button" @click="openAccountMenu">
+		<button
+			v-tooltip="files.length > 0 ? i18n.ts.cannotSwitchAccountWhenFileAttached : i18n.ts.switchAccount"
+			:disabled="files.length > 0"
+			class="account _button"
+			@click="openAccountMenu"
+		>
 			<MkAvatar :user="postAccount ?? $i" class="avatar"/>
 		</button>
 		<div>
@@ -45,7 +50,14 @@
 		<XPollEditor v-if="poll" v-model="poll" @destroyed="poll = null"/>
 		<XNotePreview v-if="showPreview" class="preview" :text="text"/>
 		<footer>
-			<button v-tooltip="i18n.ts.attachFile" class="_button" @click="chooseFileFrom"><i class="fas fa-photo-video"></i></button>
+			<button
+				v-tooltip="postAccount != null ? i18n.ts.cannotAttachFileWhenAccountSwitched : i18n.ts.attachFile"
+				:disabled="postAccount != null"
+				class="_button"
+				@click="chooseFileFrom"
+			>
+				<i class="fas fa-photo-video"></i>
+			</button>
 			<button v-tooltip="i18n.ts.poll" class="_button" :class="{ active: poll }" @click="togglePoll"><i class="fas fa-poll-h"></i></button>
 			<button v-tooltip="i18n.ts.useCw" class="_button" :class="{ active: useCw }" @click="useCw = !useCw"><i class="fas fa-eye-slash"></i></button>
 			<button v-tooltip="i18n.ts.mention" class="_button" @click="insertMention"><i class="fas fa-at"></i></button>
@@ -207,7 +219,7 @@ const maxTextLength = $computed((): number => {
 
 const canPost = $computed((): boolean => {
 	return !posting &&
-		(1 <= textLength || 1 <= files.length || !!poll || !!props.renote) &&
+		(1 <= textLength || 1 <= files.length || !!poll || !!props.renote || !!quoteId) &&
 		(textLength <= maxTextLength) &&
 		(!poll || poll.choices.length >= 2);
 });
@@ -573,7 +585,7 @@ async function post() {
 		text: text === '' ? undefined : text,
 		fileIds: files.length > 0 ? files.map(f => f.id) : undefined,
 		replyId: props.reply ? props.reply.id : undefined,
-		renoteId: props.renote ? props.renote.id : quoteId ? quoteId : undefined,
+		renoteId: props.renote?.id ?? quoteId ?? undefined,
 		channelId: props.channel ? props.channel.id : undefined,
 		poll,
 		cw: useCw ? cw || '' : undefined,

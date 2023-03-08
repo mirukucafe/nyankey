@@ -1,7 +1,7 @@
 import { Emojis } from '@/models/index.js';
 import { toPuny } from '@/misc/convert-host.js';
-import define from '../../../define.js';
-import { makePaginationQuery } from '../../../common/make-pagination-query.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
 
 export const meta = {
 	tags: ['admin'],

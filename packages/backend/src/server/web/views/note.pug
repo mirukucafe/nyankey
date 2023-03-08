@@ -13,23 +13,18 @@ block desc
 	meta(name='description' content= summary)
 
 block og
-	meta(property='og:type'        content='article')
-	meta(property='og:title'       content= title)
+	meta(property='og:type' content='article')
+	meta(property='og:article:published_time' content=note.createdAt)
+	meta(property='og:article:author:username' content=user.username)
+	meta(property='og:title' content= title)
 	meta(property='og:description' content= summary)
-	meta(property='og:url'         content= url)
-	meta(property='og:image'       content= avatarUrl)
+	meta(property='og:url' content= url)
+	for opengraphTag in filesOpengraph
+		meta(property=opengraphTag[0] content=opengraphTag[1])
 
 block meta
 	if user.host || isRenote || profile.noCrawle
 		meta(name='robots' content='noindex')
-
-	meta(name='misskey:user-username' content=user.username)
-	meta(name='misskey:user-id' content=user.id)
-	meta(name='misskey:note-id' content=note.id)
-	
-	// todo
-	if user.twitter
-		meta(name='twitter:creator' content=`@${user.twitter.screenName}`)
 
 	if note.prev
 		link(rel='prev' href=`${config.url}/notes/${note.prev}`)

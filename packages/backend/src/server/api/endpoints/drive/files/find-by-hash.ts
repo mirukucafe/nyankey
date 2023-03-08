@@ -1,5 +1,5 @@
 import { DriveFiles } from '@/models/index.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['drive'],

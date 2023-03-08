@@ -1,6 +1,6 @@
 import { RegistryItems } from '@/models/index.js';
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	requireCredential: true,
@@ -24,7 +24,6 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
 	const query = RegistryItems.createQueryBuilder('item')
-		.where('item.domain IS NULL')
 		.andWhere('item.userId = :userId', { userId: user.id })
 		.andWhere('item.key = :key', { key: ps.key })
 		.andWhere('item.scope = :scope', { scope: ps.scope });

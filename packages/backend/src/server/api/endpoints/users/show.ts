@@ -2,9 +2,9 @@ import { FindOptionsWhere, In, IsNull } from 'typeorm';
 import { resolveUser } from '@/remote/resolve-user.js';
 import { Users } from '@/models/index.js';
 import { User } from '@/models/entities/user.js';
-import define from '../../define.js';
-import { apiLogger } from '../../logger.js';
-import { ApiError } from '../../error.js';
+import define from '@/server/api/define.js';
+import { apiLogger } from '@/server/api/logger.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['users'],

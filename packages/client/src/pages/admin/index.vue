@@ -61,7 +61,7 @@ let noBotProtection = !instance.disableRegistration && !instance.enableHcaptcha 
 let noEmailServer = !instance.enableEmail;
 let thereIsUnresolvedAbuseReport = $ref(false);
 
-os.api('admin/abuse-user-reports', {
+os.api('admin/reports/list', {
 	state: 'unresolved',
 	limit: 1,
 }).then(reports => {

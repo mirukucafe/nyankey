@@ -1,10 +1,10 @@
 import { ClipNotes, Clips, Notes } from '@/models/index.js';
-import define from '../../define.js';
-import { makePaginationQuery } from '../../common/make-pagination-query.js';
-import { generateVisibilityQuery } from '../../common/generate-visibility-query.js';
-import { generateMutedUserQuery } from '../../common/generate-muted-user-query.js';
-import { ApiError } from '../../error.js';
-import { generateBlockedUserQuery } from '../../common/generate-block-query.js';
+import define from '@/server/api/define.js';
+import { makePaginationQuery } from '@/server/api/common/make-pagination-query.js';
+import { visibilityQuery } from '@/server/api/common/generate-visibility-query.js';
+import { generateMutedUserQuery } from '@/server/api/common/generate-muted-user-query.js';
+import { ApiError } from '@/server/api/error.js';
+import { generateBlockedUserQuery } from '@/server/api/common/generate-block-query.js';
 
 export const meta = {
 	tags: ['account', 'notes', 'clips'],
@@ -65,12 +65,11 @@ export default define(meta, paramDef, async (ps, user) => {
 		.andWhere('clipNote.clipId = :clipId', { clipId: clip.id });
 
 	if (user) {
-		generateVisibilityQuery(query, user);
 		generateMutedUserQuery(query, user);
 		generateBlockedUserQuery(query, user);
 	}
 
-	const notes = await query
+	const notes = await visibilityQuery(query, user)
 		.take(ps.limit)
 		.getMany();
 

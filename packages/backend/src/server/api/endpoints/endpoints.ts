@@ -1,5 +1,5 @@
-import define from '../define.js';
-import endpoints from '../endpoints.js';
+import define from '@/server/api/define.js';
+import endpoints from '@/server/api/endpoints.js';
 
 export const meta = {
 	requireCredential: false,

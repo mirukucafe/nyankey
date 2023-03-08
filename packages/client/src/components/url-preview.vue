@@ -54,6 +54,7 @@ let player = $ref({
 let playerEnabled = $ref(false);
 
 const requestUrl = new URL(props.url);
+if(!['http:', 'https:'].includes(requestUrl.protocol)) throw new Error('invalid url');
 
 if (requestUrl.hostname === 'music.youtube.com' && requestUrl.pathname.match('^/(?:watch|channel)')) {
 	requestUrl.hostname = 'www.youtube.com';
@@ -72,7 +73,9 @@ fetch(`/url?url=${encodeURIComponent(requestUrl.href)}&lang=${requestLang}`).the
 		icon = info.icon;
 		sitename = info.sitename;
 		fetching = false;
-		player = info.player;
+		if (['http:', 'https:'].includes(new URL(info.player.url).protocol)) {
+			player = info.player;
+		}
 	});
 });
 </script>

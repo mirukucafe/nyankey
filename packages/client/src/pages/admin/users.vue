@@ -71,7 +71,7 @@ let origin = $ref('local');
 let searchUsername = $ref('');
 let searchHost = $ref('');
 const pagination = {
-	endpoint: 'admin/show-users' as const,
+	endpoint: 'admin/users' as const,
 	limit: 10,
 	params: computed(() => ({
 		sort,
@@ -101,7 +101,7 @@ async function addUser(): Promise<void> {
 	});
 	if (canceled2) return;
 
-	os.apiWithDialog('admin/accounts/create', {
+	os.apiWithDialog('admin/users/create', {
 		username,
 		password,
 	}).then(() => {

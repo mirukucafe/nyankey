@@ -246,19 +246,20 @@ async function getSiteName(info: NodeInfo | null, doc: DOMWindow['document'] | n
 
 async function getDescription(info: NodeInfo | null, doc: DOMWindow['document'] | null, manifest: Record<string, any> | null): Promise<string | null> {
 	if (info && info.metadata) {
-		if (info.metadata.nodeDescription || info.metadata.description) {
-			return info.metadata.nodeDescription || info.metadata.description;
+		const description = info.metadata.nodeDescription || info.metadata.description;
+		if (description && description.length < 4096) {
+			return description;
 		}
 	}
 
 	if (doc) {
 		const meta = doc.querySelector('meta[name="description"]')?.getAttribute('content');
-		if (meta) {
+		if (meta && meta.length < 4096) {
 			return meta;
 		}
 
 		const og = doc.querySelector('meta[property="og:description"]')?.getAttribute('content');
-		if (og) {
+		if (og && og.length < 4096) {
 			return og;
 		}
 	}

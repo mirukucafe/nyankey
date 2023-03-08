@@ -2,7 +2,7 @@ import { Instances } from '@/models/index.js';
 import { toPuny } from '@/misc/convert-host.js';
 import { ApiError } from '@/server/api/error.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
-import define from '../../../define.js';
+import define from '@/server/api/define.js';
 
 export const meta = {
 	tags: ['admin'],

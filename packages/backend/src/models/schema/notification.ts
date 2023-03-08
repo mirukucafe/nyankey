@@ -48,6 +48,7 @@ export const packedNotificationSchema = {
 		},
 		invitation: {
 			type: 'object',
+			ref: 'UserGroupInvitation',
 			optional: true, nullable: true,
 		},
 		body: {

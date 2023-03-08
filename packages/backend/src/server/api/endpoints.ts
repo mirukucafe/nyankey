@@ -2,14 +2,10 @@ import { Schema } from '@/misc/schema.js';
 import { errors } from './error.js';
 
 import * as ep___admin_meta from './endpoints/admin/meta.js';
-import * as ep___admin_abuseUserReports from './endpoints/admin/abuse-user-reports.js';
-import * as ep___admin_accounts_create from './endpoints/admin/accounts/create.js';
-import * as ep___admin_accounts_delete from './endpoints/admin/accounts/delete.js';
 import * as ep___admin_announcements_create from './endpoints/admin/announcements/create.js';
 import * as ep___admin_announcements_delete from './endpoints/admin/announcements/delete.js';
 import * as ep___admin_announcements_list from './endpoints/admin/announcements/list.js';
 import * as ep___admin_announcements_update from './endpoints/admin/announcements/update.js';
-import * as ep___admin_deleteAllFilesOfAUser from './endpoints/admin/delete-all-files-of-a-user.js';
 import * as ep___admin_drive_cleanRemoteFiles from './endpoints/admin/drive/clean-remote-files.js';
 import * as ep___admin_drive_files from './endpoints/admin/drive/files.js';
 import * as ep___admin_drive_showFile from './endpoints/admin/drive/show-file.js';
@@ -41,17 +37,21 @@ import * as ep___admin_queue_stats from './endpoints/admin/queue/stats.js';
 import * as ep___admin_relays_add from './endpoints/admin/relays/add.js';
 import * as ep___admin_relays_list from './endpoints/admin/relays/list.js';
 import * as ep___admin_relays_remove from './endpoints/admin/relays/remove.js';
-import * as ep___admin_resetPassword from './endpoints/admin/reset-password.js';
-import * as ep___admin_resolveAbuseUserReport from './endpoints/admin/resolve-abuse-user-report.js';
+import * as ep___admin_reports_list from './endpoints/admin/reports/list.js';
+import * as ep___admin_reports_resolve from './endpoints/admin/reports/resolve.js';
 import * as ep___admin_sendEmail from './endpoints/admin/send-email.js';
 import * as ep___admin_serverInfo from './endpoints/admin/server-info.js';
 import * as ep___admin_showModerationLogs from './endpoints/admin/show-moderation-logs.js';
-import * as ep___admin_showUser from './endpoints/admin/show-user.js';
-import * as ep___admin_showUsers from './endpoints/admin/show-users.js';
-import * as ep___admin_silenceUser from './endpoints/admin/silence-user.js';
-import * as ep___admin_suspendUser from './endpoints/admin/suspend-user.js';
-import * as ep___admin_unsilenceUser from './endpoints/admin/unsilence-user.js';
-import * as ep___admin_unsuspendUser from './endpoints/admin/unsuspend-user.js';
+import * as ep___admin_users from './endpoints/admin/users.js';
+import * as ep___admin_users_create from './endpoints/admin/users/create.js';
+import * as ep___admin_users_delete from './endpoints/admin/users/delete.js';
+import * as ep___admin_users_deleteAllFiles from './endpoints/admin/users/delete-all-files.js';
+import * as ep___admin_users_resetPassword from './endpoints/admin/users/reset-password.js';
+import * as ep___admin_users_show from './endpoints/admin/users/show.js';
+import * as ep___admin_users_silence from './endpoints/admin/users/silence.js';
+import * as ep___admin_users_suspend from './endpoints/admin/users/suspend.js';
+import * as ep___admin_users_unsilence from './endpoints/admin/users/unsilence.js';
+import * as ep___admin_users_unsuspend from './endpoints/admin/users/unsuspend.js';
 import * as ep___admin_updateMeta from './endpoints/admin/update-meta.js';
 import * as ep___admin_vacuum from './endpoints/admin/vacuum.js';
 import * as ep___announcements from './endpoints/announcements.js';
@@ -138,15 +138,6 @@ import * as ep___following_requests_accept from './endpoints/following/requests/
 import * as ep___following_requests_cancel from './endpoints/following/requests/cancel.js';
 import * as ep___following_requests_list from './endpoints/following/requests/list.js';
 import * as ep___following_requests_reject from './endpoints/following/requests/reject.js';
-import * as ep___gallery_featured from './endpoints/gallery/featured.js';
-import * as ep___gallery_popular from './endpoints/gallery/popular.js';
-import * as ep___gallery_posts from './endpoints/gallery/posts.js';
-import * as ep___gallery_posts_create from './endpoints/gallery/posts/create.js';
-import * as ep___gallery_posts_delete from './endpoints/gallery/posts/delete.js';
-import * as ep___gallery_posts_like from './endpoints/gallery/posts/like.js';
-import * as ep___gallery_posts_show from './endpoints/gallery/posts/show.js';
-import * as ep___gallery_posts_unlike from './endpoints/gallery/posts/unlike.js';
-import * as ep___gallery_posts_update from './endpoints/gallery/posts/update.js';
 import * as ep___getOnlineUsersCount from './endpoints/get-online-users-count.js';
 import * as ep___hashtags_list from './endpoints/hashtags/list.js';
 import * as ep___hashtags_search from './endpoints/hashtags/search.js';
@@ -171,8 +162,6 @@ import * as ep___i_exportMute from './endpoints/i/export-mute.js';
 import * as ep___i_exportNotes from './endpoints/i/export-notes.js';
 import * as ep___i_exportUserLists from './endpoints/i/export-user-lists.js';
 import * as ep___i_favorites from './endpoints/i/favorites.js';
-import * as ep___i_gallery_likes from './endpoints/i/gallery/likes.js';
-import * as ep___i_gallery_posts from './endpoints/i/gallery/posts.js';
 import * as ep___i_getWordMutedNotesCount from './endpoints/i/get-word-muted-notes-count.js';
 import * as ep___i_importBlocking from './endpoints/i/import-blocking.js';
 import * as ep___i_importFollowing from './endpoints/i/import-following.js';
@@ -276,7 +265,6 @@ import * as ep___users from './endpoints/users.js';
 import * as ep___users_clips from './endpoints/users/clips.js';
 import * as ep___users_followers from './endpoints/users/followers.js';
 import * as ep___users_following from './endpoints/users/following.js';
-import * as ep___users_gallery_posts from './endpoints/users/gallery/posts.js';
 import * as ep___users_groups_create from './endpoints/users/groups/create.js';
 import * as ep___users_groups_delete from './endpoints/users/groups/delete.js';
 import * as ep___users_groups_invitations_accept from './endpoints/users/groups/invitations/accept.js';
@@ -310,14 +298,10 @@ import * as ep___fetchRss from './endpoints/fetch-rss.js';
 
 const eps = [
 	['admin/meta', ep___admin_meta],
-	['admin/abuse-user-reports', ep___admin_abuseUserReports],
-	['admin/accounts/create', ep___admin_accounts_create],
-	['admin/accounts/delete', ep___admin_accounts_delete],
 	['admin/announcements/create', ep___admin_announcements_create],
 	['admin/announcements/delete', ep___admin_announcements_delete],
 	['admin/announcements/list', ep___admin_announcements_list],
 	['admin/announcements/update', ep___admin_announcements_update],
-	['admin/delete-all-files-of-a-user', ep___admin_deleteAllFilesOfAUser],
 	['admin/drive/clean-remote-files', ep___admin_drive_cleanRemoteFiles],
 	['admin/drive/files', ep___admin_drive_files],
 	['admin/drive/show-file', ep___admin_drive_showFile],
@@ -349,17 +333,21 @@ const eps = [
 	['admin/relays/add', ep___admin_relays_add],
 	['admin/relays/list', ep___admin_relays_list],
 	['admin/relays/remove', ep___admin_relays_remove],
-	['admin/reset-password', ep___admin_resetPassword],
-	['admin/resolve-abuse-user-report', ep___admin_resolveAbuseUserReport],
+	['admin/reports/list', ep___admin_reports_list],
+	['admin/reports/resolve', ep___admin_reports_resolve],
 	['admin/send-email', ep___admin_sendEmail],
 	['admin/server-info', ep___admin_serverInfo],
 	['admin/show-moderation-logs', ep___admin_showModerationLogs],
-	['admin/show-user', ep___admin_showUser],
-	['admin/show-users', ep___admin_showUsers],
-	['admin/silence-user', ep___admin_silenceUser],
-	['admin/suspend-user', ep___admin_suspendUser],
-	['admin/unsilence-user', ep___admin_unsilenceUser],
-	['admin/unsuspend-user', ep___admin_unsuspendUser],
+	['admin/users', ep___admin_users],
+	['admin/users/create', ep___admin_users_create],
+	['admin/users/delete', ep___admin_users_delete],
+	['admin/users/delete-all-files', ep___admin_users_deleteAllFiles],
+	['admin/users/reset-password', ep___admin_users_resetPassword],
+	['admin/users/show', ep___admin_users_show],
+	['admin/users/silence', ep___admin_users_silence],
+	['admin/users/suspend', ep___admin_users_suspend],
+	['admin/users/unsilence', ep___admin_users_unsilence],
+	['admin/users/unsuspend', ep___admin_users_unsuspend],
 	['admin/update-meta', ep___admin_updateMeta],
 	['admin/vacuum', ep___admin_vacuum],
 	['announcements', ep___announcements],
@@ -446,15 +434,6 @@ const eps = [
 	['following/requests/cancel', ep___following_requests_cancel],
 	['following/requests/list', ep___following_requests_list],
 	['following/requests/reject', ep___following_requests_reject],
-	['gallery/featured', ep___gallery_featured],
-	['gallery/popular', ep___gallery_popular],
-	['gallery/posts', ep___gallery_posts],
-	['gallery/posts/create', ep___gallery_posts_create],
-	['gallery/posts/delete', ep___gallery_posts_delete],
-	['gallery/posts/like', ep___gallery_posts_like],
-	['gallery/posts/show', ep___gallery_posts_show],
-	['gallery/posts/unlike', ep___gallery_posts_unlike],
-	['gallery/posts/update', ep___gallery_posts_update],
 	['get-online-users-count', ep___getOnlineUsersCount],
 	['hashtags/list', ep___hashtags_list],
 	['hashtags/search', ep___hashtags_search],
@@ -479,8 +458,6 @@ const eps = [
 	['i/export-notes', ep___i_exportNotes],
 	['i/export-user-lists', ep___i_exportUserLists],
 	['i/favorites', ep___i_favorites],
-	['i/gallery/likes', ep___i_gallery_likes],
-	['i/gallery/posts', ep___i_gallery_posts],
 	['i/get-word-muted-notes-count', ep___i_getWordMutedNotesCount],
 	['i/import-blocking', ep___i_importBlocking],
 	['i/import-following', ep___i_importFollowing],
@@ -584,7 +561,6 @@ const eps = [
 	['users/clips', ep___users_clips],
 	['users/followers', ep___users_followers],
 	['users/following', ep___users_following],
-	['users/gallery/posts', ep___users_gallery_posts],
 	['users/groups/create', ep___users_groups_create],
 	['users/groups/delete', ep___users_groups_delete],
 	['users/groups/invitations/accept', ep___users_groups_invitations_accept],
@@ -717,6 +693,14 @@ export interface IEndpointMeta {
 		 * @example (v0) /api/notes/create -> /api/v2/notes
 		 */
 		readonly alias?: string;
+
+		/**
+		 * If any path parameters were used, they have to be listed here.
+		 * Otherwise they will show up as query parameters in the documentation.
+		 *
+		 * Note: Path parameters cannot be optional.
+		 */
+		readonly pathParamers?: string[];
 	};
 }
 

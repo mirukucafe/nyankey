@@ -1,6 +1,6 @@
 import { DriveFiles } from '@/models/index.js';
-import define from '../../../define.js';
-import { ApiError } from '../../../error.js';
+import define from '@/server/api/define.js';
+import { ApiError } from '@/server/api/error.js';
 
 export const meta = {
 	tags: ['admin'],
@@ -78,11 +78,6 @@ export const meta = {
 						type: 'number',
 						optional: false, nullable: false,
 						example: 720,
-					},
-					avgColor: {
-						type: 'string',
-						optional: true, nullable: false,
-						example: 'rgb(40,65,87)',
 					},
 				},
 			},

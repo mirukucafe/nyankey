@@ -1,6 +1,6 @@
 {
 	"name": "foundkey",
-	"version": "13.0.0-preview3",
+	"version": "13.0.0-preview4",
 	"repository": {
 		"type": "git",
 		"url": "https://akkoma.dev/FoundKeyGang/FoundKey.git"
@@ -54,5 +54,5 @@
 		"start-server-and-test": "1.14.0",
 		"typescript": "^4.9.4"
 	},
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.4.1"
 }
