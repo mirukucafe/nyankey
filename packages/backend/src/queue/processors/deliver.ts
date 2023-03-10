@@ -4,7 +4,6 @@ import { request } from '@/remote/activitypub/request.js';
 import { registerOrFetchInstanceDoc } from '@/services/register-or-fetch-instance-doc.js';
 import Logger from '@/services/logger.js';
 import { Instances } from '@/models/index.js';
-import { apRequestChart, federationChart, instanceChart } from '@/services/chart/index.js';
 import { fetchInstanceMetadata } from '@/services/fetch-instance-metadata.js';
 import { toPuny } from '@/misc/convert-host.js';
 import { StatusError } from '@/misc/fetch.js';
@@ -38,10 +37,6 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 			});
 
 			fetchInstanceMetadata(i);
-
-			instanceChart.requestSent(i.host, true);
-			apRequestChart.deliverSucc();
-			federationChart.deliverd(i.host, true);
 		});
 
 		return 'Success';
@@ -53,10 +48,6 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 				latestStatus: res instanceof StatusError ? res.statusCode : null,
 				isNotResponding: true,
 			});
-
-			instanceChart.requestSent(i.host, false);
-			apRequestChart.deliverFail();
-			federationChart.deliverd(i.host, false);
 		});
 
 		if (res instanceof StatusError) {
