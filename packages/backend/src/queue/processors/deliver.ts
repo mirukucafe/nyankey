@@ -12,8 +12,6 @@ import { DeliverJobData } from '@/queue/types.js';
 
 const logger = new Logger('deliver');
 
-let latest: string | null = null;
-
 export default async (job: Bull.Job<DeliverJobData>) => {
 	const { host } = new URL(job.data.to);
 	const puny = toPuny(host);
@@ -21,9 +19,6 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 	if (await shouldSkipInstance(puny)) return 'skip';
 
 	try {
-		if (latest !== (latest = JSON.stringify(job.data.content, null, 2))) {
-			logger.debug(`delivering ${latest}`);
-		}
 
 		await request(job.data.user, job.data.to, job.data.content);
 
@@ -38,8 +33,6 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 
 			fetchInstanceMetadata(i);
 		});
-
-		return 'Success';
 	} catch (res) {
 		// Update stats
 		registerOrFetchInstanceDoc(host).then(i => {
@@ -58,7 +51,7 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 				return `${res.statusCode} ${res.statusMessage}`;
 			}
 
-			// 5xx etc.
+			// 5xx etc., throwing an Error will make Bull retry
 			throw new Error(`${res.statusCode} ${res.statusMessage}`);
 		} else {
 			// DNS error, socket error, timeout ...
