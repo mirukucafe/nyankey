@@ -105,3 +105,21 @@ export async function deliverToRelays(user: { id: User['id']; host: null; }, act
 		deliver(user, signed, relay.inbox);
 	}
 }
+
+export async function deliverMultipleToRelays(user: User, activities: any[]): Promise<void> {
+	if (activities.length === 0) return;
+
+	const relays = await relaysCache.fetch('');
+	if (relays == null || relays.length === 0) return;
+
+	const content = await Promise.all(activities.map(activity => {
+		const copy = structuredClone(activity);
+		if (!copy.to) copy.to = ['https://www.w3.org/ns/activitystreams#Public'];
+
+		return attachLdSignature(copy, user);
+	}));
+
+	for (const relay of relays) {
+		deliver(user, content, relay.inbox);
+	}
+}
