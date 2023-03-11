@@ -1,4 +1,4 @@
-import { deleteNote } from '@/services/note/delete.js';
+import { deleteNotes } from '@/services/note/delete.js';
 import { Notes, Users } from '@/models/index.js';
 import { SECOND, HOUR } from '@/const.js';
 import define from '@/server/api/define.js';
@@ -48,7 +48,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		renoteId: note.id,
 	});
 
-	for (const note of renotes) {
-		deleteNote(await Users.findOneByOrFail({ id: user.id }), note);
-	}
+	if (renotes.length === 0) return;
+
+	await deleteNotes(renotes, user);
 });

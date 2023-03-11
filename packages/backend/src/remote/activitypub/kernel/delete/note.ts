@@ -1,5 +1,5 @@
 import { CacheableRemoteUser } from '@/models/entities/user.js';
-import { deleteNote } from '@/services/note/delete.js';
+import { deleteNotes } from '@/services/note/delete.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { deleteMessage } from '@/services/messages/delete.js';
 import { DbResolver } from '@/remote/activitypub/db-resolver.js';
@@ -29,7 +29,7 @@ export default async function(actor: CacheableRemoteUser, uri: string): Promise<
 				return 'skip: cant delete other actors note';
 			}
 
-			await deleteNote(actor, note);
+			await deleteNotes([note], actor);
 			return 'ok: note deleted';
 		}
 	} finally {
