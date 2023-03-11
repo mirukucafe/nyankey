@@ -19,8 +19,13 @@ export default async (job: Bull.Job<DeliverJobData>) => {
 	if (await shouldSkipInstance(puny)) return 'skip';
 
 	try {
-
-		await request(job.data.user, job.data.to, job.data.content);
+		if (Array.isArray(job.data.content)) {
+			await Promise.all(
+				job.data.content.map(x => request(job.data.user, job.data.to, x))
+			);
+		} else {
+			await request(job.data.user, job.data.to, job.data.content);
+		}
 
 		// Update stats
 		registerOrFetchInstanceDoc(host).then(i => {
