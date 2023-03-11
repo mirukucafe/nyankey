@@ -21,7 +21,7 @@ import { deliverToRelays } from '../relay.js';
  * @param user author
  * @param note note to be deleted
  */
-export default async function(user: { id: User['id']; uri: User['uri']; host: User['host']; }, note: Note, quiet = false): Promise<void> {
+export async function deleteNote(user: { id: User['id']; uri: User['uri']; host: User['host']; }, note: Note, quiet = false): Promise<void> {
 	const deletedAt = new Date();
 
 	// If this is the only renote of this note by this user

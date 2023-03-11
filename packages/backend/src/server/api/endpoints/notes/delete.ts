@@ -1,4 +1,4 @@
-import deleteNote from '@/services/note/delete.js';
+import { deleteNote } from '@/services/note/delete.js';
 import { Users } from '@/models/index.js';
 import { SECOND, HOUR } from '@/const.js';
 import define from '@/server/api/define.js';
@@ -47,6 +47,6 @@ export default define(meta, paramDef, async (ps, user) => {
 		throw new ApiError('ACCESS_DENIED');
 	}
 
-	// この操作を行うのが投稿者とは限らない(例えばモデレーター)ため
+	// Fetch the note owner, since the current user may be an admin or moderator.
 	await deleteNote(await Users.findOneByOrFail({ id: note.userId }), note);
 });

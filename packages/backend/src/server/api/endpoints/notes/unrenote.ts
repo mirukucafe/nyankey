@@ -1,4 +1,4 @@
-import deleteNote from '@/services/note/delete.js';
+import { deleteNote } from '@/services/note/delete.js';
 import { Notes, Users } from '@/models/index.js';
 import { SECOND, HOUR } from '@/const.js';
 import define from '@/server/api/define.js';
