@@ -48,10 +48,6 @@ export const paramDef = {
 		proxyAccountId: { type: 'string', format: 'misskey:id', nullable: true },
 		maintainerName: { type: 'string', nullable: true },
 		maintainerEmail: { type: 'string', nullable: true },
-		pinnedPages: { type: 'array', items: {
-			type: 'string',
-		} },
-		pinnedClipId: { type: 'string', format: 'misskey:id', nullable: true },
 		langs: { type: 'array', items: {
 			type: 'string',
 		} },
@@ -207,14 +203,6 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	if (Array.isArray(ps.langs)) {
 		set.langs = ps.langs.filter(Boolean);
-	}
-
-	if (Array.isArray(ps.pinnedPages)) {
-		set.pinnedPages = ps.pinnedPages.filter(Boolean);
-	}
-
-	if (ps.pinnedClipId !== undefined) {
-		set.pinnedClipId = ps.pinnedClipId;
 	}
 
 	if (ps.summalyProxy !== undefined) {

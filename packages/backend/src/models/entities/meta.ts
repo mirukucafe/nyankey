@@ -83,17 +83,6 @@ export class Meta {
 	public blockedHosts: string[];
 
 	@Column('varchar', {
-		length: 512, array: true, default: '{/featured,/channels,/explore,/pages,/about-foundkey}',
-	})
-	public pinnedPages: string[];
-
-	@Column({
-		...id(),
-		nullable: true,
-	})
-	public pinnedClipId: Clip['id'] | null;
-
-	@Column('varchar', {
 		length: 512,
 		nullable: true,
 	})

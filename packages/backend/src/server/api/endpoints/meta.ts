@@ -305,8 +305,6 @@ export default define(meta, paramDef, async () => {
 
 		translatorAvailable: translatorAvailable(instance),
 
-		pinnedPages: instance.pinnedPages,
-		pinnedClipId: instance.pinnedClipId,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
 		requireSetup: (await Users.countBy({
 			host: IsNull(),

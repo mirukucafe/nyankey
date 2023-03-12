@@ -288,8 +288,6 @@ export default define(meta, paramDef, async () => {
 		defaultLightTheme: instance.defaultLightTheme,
 		defaultDarkTheme: instance.defaultDarkTheme,
 		enableEmail: instance.enableEmail,
-		pinnedPages: instance.pinnedPages,
-		pinnedClipId: instance.pinnedClipId,
 		cacheRemoteFiles: instance.cacheRemoteFiles,
 
 		useStarForReactionFallback: instance.useStarForReactionFallback,
