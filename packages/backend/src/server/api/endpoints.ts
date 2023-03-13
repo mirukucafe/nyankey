@@ -104,6 +104,7 @@ import * as ep___clips_show from './endpoints/clips/show.js';
 import * as ep___clips_update from './endpoints/clips/update.js';
 import * as ep___drive from './endpoints/drive.js';
 import * as ep___drive_files from './endpoints/drive/files.js';
+import * as ep___drive_show from './endpoints/drive/show.js';
 import * as ep___drive_files_attachedNotes from './endpoints/drive/files/attached-notes.js';
 import * as ep___drive_files_checkExistence from './endpoints/drive/files/check-existence.js';
 import * as ep___drive_files_create from './endpoints/drive/files/create.js';
@@ -400,6 +401,7 @@ const eps = [
 	['clips/update', ep___clips_update],
 	['drive', ep___drive],
 	['drive/files', ep___drive_files],
+	['drive/show', ep___drive_show],
 	['drive/files/attached-notes', ep___drive_files_attachedNotes],
 	['drive/files/check-existence', ep___drive_files_checkExistence],
 	['drive/files/create', ep___drive_files_create],

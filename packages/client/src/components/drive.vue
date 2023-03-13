@@ -35,31 +35,37 @@
 		@drop.prevent.stop="onDrop"
 		@contextmenu.stop="onContextmenu"
 	>
-		<div ref="contents" class="contents">
-			<MkPagination
-				ref="foldersPaginationElem"
-				:pagination="foldersPagination"
-				class="folders"
-				@loaded="foldersLoading = false"
-			>
-				<template #empty>
-					<!--
-						Don't display anything here if there are no folders,
-						there is a separate check if both paginations are empty.
-					-->
-					{{ null }}
-				</template>
+		<MkPagination
+			ref="paginationElem"
+			:pagination="pagination"
+			class="contents"
+		>
+			<template #empty>
+				<p v-if="folder == null" class="empty"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
+				<p v-else class="empty">{{ i18n.ts.emptyFolder }}</p>
+			</template>
 
-				<template #default="{ items: folders }">
-					<XFolder
-						v-for="(f, i) in folders"
+			<template #default="{ items }">
+				<template v-for="(f, i) in items">
+					<XFile
+						v-if="'size' in f"
 						:key="f.id"
 						v-anim="i"
-						class="folder"
+						:file="f"
+						:select-mode="select !== 'folder'"
+						:is-selected="selected.some(x => x.id === f.id)"
+						@chosen="choose"
+						@dragstart="isDragSource = true"
+						@dragend="isDragSource = false"
+					/>
+					<XFolder
+						v-else
+						:key="f.id"
+						v-anim="i"
 						:folder="f"
-						:select-mode="select === 'folder'"
-						:is-selected="selectedFolders.some(x => x.id === f.id)"
-						@chosen="chooseFolder"
+						:select-mode="select !== 'file'"
+						:is-selected="selected.some(x => x.id === f.id)"
+						@chosen="choose"
 						@move="move"
 						@upload="upload"
 						@removeFile="removeFile"
@@ -67,46 +73,9 @@
 						@dragstart="isDragSource = true"
 						@dragend="isDragSource = false"
 					/>
-					<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-					<div v-for="(n, i) in 16" :key="i" class="padding"></div>
 				</template>
-			</MkPagination>
-			<MkPagination
-				ref="filesPaginationElem"
-				:pagination="filesPagination"
-				class="files"
-				@loaded="filesLoading = false"
-			>
-				<template #empty>
-					<!--
-						Don't display anything here if there are no files,
-						there is a separate check if both paginations are empty.
-					-->
-					{{ null }}
-				</template>
-
-				<template #default="{ items: files }">
-					<XFile
-						v-for="(file, i) in files"
-						:key="file.id"
-						v-anim="i"
-						class="file"
-						:file="file"
-						:select-mode="select === 'file'"
-						:is-selected="selectedFiles.some(x => x.id === file.id)"
-						@chosen="chooseFile"
-						@dragstart="isDragSource = true"
-						@dragend="isDragSource = false"
-					/>
-					<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-					<div v-for="(n, i) in 16" :key="i" class="padding"></div>
-				</template>
-			</MkPagination>
-			<div v-if="empty" class="empty">
-				<p v-if="folder == null"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
-				<p v-else>{{ i18n.ts.emptyFolder }}</p>
-			</div>
-		</div>
+			</template>
+		</MkPagination>
 	</div>
 	<div v-if="draghover" class="dropzone"></div>
 	<input ref="fileInput" type="file" accept="*/*" multiple tabindex="-1" @change="onChangeFileInput"/>
@@ -129,7 +98,6 @@ import { uploadFile, uploads } from '@/scripts/upload';
 
 const props = withDefaults(defineProps<{
 	initialFolder?: foundkey.entities.DriveFolder;
-	type?: string;
 	multiple?: boolean;
 	select?: 'file' | 'folder' | null;
 }>(), {
@@ -139,19 +107,13 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
 	(ev: 'selected', v: foundkey.entities.DriveFile | foundkey.entities.DriveFolder): void;
-	(ev: 'change-selection', v: foundkey.entities.DriveFile[] | foundkey.entities.DriveFolder[]): void;
+	(ev: 'change-selection', v: Array<foundkey.entities.DriveFile | foundkey.entities.DriveFolder>): void;
 	(ev: 'move-root'): void;
 	(ev: 'cd', v: foundkey.entities.DriveFolder | null): void;
 	(ev: 'open-folder', v: foundkey.entities.DriveFolder): void;
 }>();
 
-let foldersPaginationElem = $ref<InstanceType<typeof MkPagination>>();
-let filesPaginationElem = $ref<InstanceType<typeof MkPagination>>();
-
-let foldersLoading = $ref<boolean>(true);
-let filesLoading = $ref<boolean>(true);
-const empty = $computed(() => !foldersLoading && !filesLoading
-	&& foldersPaginationElem?.items.length === 0 && filesPaginationElem?.items.length === 0);
+let paginationElem = $ref<InstanceType<typeof MkPagination>>();
 
 let fileInput = $ref<HTMLInputElement>();
 
@@ -160,8 +122,7 @@ const connection = stream.useChannel('drive');
 
 let folder = $ref<foundkey.entities.DriveFolder | null>(null);
 let hierarchyFolders = $ref<foundkey.entities.DriveFolder[]>([]);
-let selectedFiles = $ref<foundkey.entities.DriveFile[]>([]);
-let selectedFolders = $ref<foundkey.entities.DriveFolder[]>([]);
+let selected = $ref<Array<foundkey.entities.DriveFile | foundkey.entities.DriveFolder>>([]);
 let keepOriginal = $ref<boolean>(defaultStore.state.keepOriginalUploading);
 
 // ドロップされようとしているか
@@ -171,7 +132,14 @@ let draghover = $ref(false);
 // (自分自身の階層にドロップできないようにするためのフラグ)
 let isDragSource = $ref(false);
 
-watch($$(folder), () => emit('cd', folder));
+watch($$(folder), () => {
+	emit('cd', folder)
+	if (props.select === 'folder') {
+		// convenience: entering a folder selects it
+		selected = [folder];
+		emit('change-selection', selected);
+	}
+});
 
 function onStreamDriveFileCreated(file: foundkey.entities.DriveFile) {
 	addFile(file, true);
@@ -210,9 +178,8 @@ function onStreamDriveFolderDeleted(folderId: string) {
 function onDragover(ev: DragEvent): any {
 	if (!ev.dataTransfer) return;
 
-	// ドラッグ元が自分自身の所有するアイテムだったら
 	if (isDragSource) {
-		// 自分自身にはドロップさせない
+		// We are the drag source, do not allow to drop.
 		ev.dataTransfer.dropEffect = 'none';
 		return;
 	}
@@ -257,17 +224,16 @@ function onDrop(ev: DragEvent): any {
 
 	if (!ev.dataTransfer) return;
 
-	// ドロップされてきたものがファイルだったら
+	const driveFile = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FILE_);
+	const driveFolder = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FOLDER_);
+
 	if (ev.dataTransfer.files.length > 0) {
+		// dropping operating system files
 		for (const file of Array.from(ev.dataTransfer.files)) {
 			upload(file, folder);
 		}
-		return;
-	}
-
-	//#region ドライブのファイル
-	const driveFile = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FILE_);
-	if (driveFile != null && driveFile !== '') {
+	} else if (driveFile != null && driveFile !== '') {
+		// dropping drive files
 		const file = JSON.parse(driveFile);
 
 		// cannot move file within parent folder
@@ -278,18 +244,14 @@ function onDrop(ev: DragEvent): any {
 			fileId: file.id,
 			folderId: folder?.id ?? null,
 		});
-	}
-	//#endregion
-
-	//#region ドライブのフォルダ
-	const driveFolder = ev.dataTransfer.getData(_DATA_TRANSFER_DRIVE_FOLDER_);
-	if (driveFolder != null && driveFolder !== '') {
+	} else if (driveFolder != null && driveFolder !== '') {
+		// dropping drive folders
 		const droppedFolder = JSON.parse(driveFolder);
 
 		// cannot move folder into itself
 		if (droppedFolder.id === folder?.id) return false;
 		// cannot move folder within parent folder
-		if (foldersPaginationElem.items.some(f => f.id === droppedFolder.id)) return false;
+		if (folder.id === droppedFolder.parentId) return false;
 
 		removeFolder(droppedFolder.id);
 		os.api('drive/folders/update', {
@@ -311,7 +273,6 @@ function onDrop(ev: DragEvent): any {
 			}
 		});
 	}
-	//#endregion
 }
 
 function selectLocalFile() {
@@ -346,8 +307,6 @@ function createFolder() {
 		os.api('drive/folders/create', {
 			name,
 			parentId: folder?.id ?? undefined,
-		}).then(createdFolder => {
-			addFolder(createdFolder, true);
 		});
 	});
 }
@@ -404,49 +363,52 @@ function upload(file: File, folderToUpload?: foundkey.entities.DriveFolder | nul
 	uploadFile(file, folderToUpload?.id ?? null, undefined, keepOriginal);
 }
 
-function chooseFile(file: foundkey.entities.DriveFile) {
-	const isAlreadySelected = selectedFiles.some(f => f.id === file.id);
-	if (props.multiple) {
-		if (isAlreadySelected) {
-			selectedFiles = selectedFiles.filter(f => f.id !== file.id);
-		} else {
-			selectedFiles.push(file);
-		}
-		emit('change-selection', selectedFiles);
-	} else {
-		if (isAlreadySelected) {
-			emit('selected', file);
-		} else {
-			selectedFiles = [file];
-			emit('change-selection', [file]);
-		}
-	}
-}
+function choose(choice: foundkey.entities.DriveFile | foundkey.entities.DriveFolder, extendSelection: boolean) {
+	const alreadySelected = selectedFiles.some(f => f.id === file.id);
 
-function chooseFolder(folderToChoose: foundkey.entities.DriveFolder) {
-	const isAlreadySelected = selectedFolders.some(f => f.id === folderToChoose.id);
-	if (props.multiple) {
-		if (isAlreadySelected) {
-			selectedFolders = selectedFolders.filter(f => f.id !== folderToChoose.id);
+	const action = (() => {
+		if (props.select != null) {
+			// file picker mode, extendSelection is disregarded
+			if (props.multiple && alreadySelected) {
+				return 'remove';
+			} else if (props.multiple) {
+				return 'add';
+			} else if (!props.multiple && alreadySelected) {
+				return 'emit';
+			} else {
+				return 'set';
+			}
 		} else {
-			selectedFolders.push(folderToChoose);
+			// explorer mode, props.multiple is disregarded
+			if (extendSelection && alreadySelected) {
+				return 'remove';
+			} else if (extendSelection) {
+				return 'add';
+			} else if (!alreadySelected) {
+				return 'set';
+			}
+			// already selected && ! extend selection is a noop
 		}
-		emit('change-selection', selectedFolders);
-	} else {
-		if (isAlreadySelected) {
-			emit('selected', folderToChoose);
-		} else {
-			selectedFolders = [folderToChoose];
-			emit('change-selection', [folderToChoose]);
-		}
+	})();
+
+	switch (action) {
+		case 'emit':
+			emit('selected', choice);
+			return; // don't emit the change-selection event
+		case 'add':
+			selected.push(choice);
+			break;
+		case 'set':
+			selected = [choice];
+			break;
+		case 'remove':
+			selected = selected.filter(f => f.id !== choice.id);
+			break;
 	}
+	emit('change-selection', selected);
 }
 
 function move(target?: string | foundkey.entities.DriveFolder) {
-	// reset loading state
-	foldersLoading = true;
-	filesLoading = true;
-
 	if (!target) {
 		goRoot();
 		return;
@@ -475,13 +437,13 @@ function addFolder(folderToAdd: foundkey.entities.DriveFolder, unshift = false) 
 	const current = folder?.id ?? null;
 	if (current !== folderToAdd.parentId) return;
 
-	const exist = foldersPaginationElem.items.some(f => f.id === folderToAdd.id);
+	const exist = paginationElem.items.some(f => f.id === folderToAdd.id);
 	if (exist) {
-		foldersPaginationElem.updateItem(folderToAdd.id, () => folderToAdd);
+		paginationElem.updateItem(folderToAdd.id, () => folderToAdd);
 	} else if (unshift) {
-		foldersPaginationElem.prepend(folderToAdd);
+		paginationElem.prepend(folderToAdd);
 	} else {
-		foldersPaginationElem.append(folderToAdd);
+		paginationElem.append(folderToAdd);
 	}
 }
 
@@ -489,24 +451,24 @@ function addFile(fileToAdd: foundkey.entities.DriveFile, unshift = false) {
 	const current = folder?.id ?? null;
 	if (current !== fileToAdd.folderId) return;
 
-	const exist = filesPaginationElem.items.some(f => f.id === fileToAdd.id);
+	const exist = paginationElem.items.some(f => f.id === fileToAdd.id);
 	if (exist) {
-		filesPaginationElem.updateItem(fileToAdd.id, () => fileToAdd);
+		paginationElem.updateItem(fileToAdd.id, () => fileToAdd);
 	} else if (unshift) {
-		filesPaginationElem.prepend(fileToAdd);
+		paginationElem.prepend(fileToAdd);
 	} else {
-		filesPaginationElem.append(fileToAdd);
+		paginationElem.append(fileToAdd);
 	}
 }
 
 function removeFolder(folderToRemove: foundkey.entities.DriveFolder | string): void {
 	const folderIdToRemove = typeof folderToRemove === 'object' ? folderToRemove.id : folderToRemove;
-	foldersPaginationElem.removeItem(item => item.id === folderIdToRemove);
+	paginationElem.removeItem(item => item.id === folderIdToRemove);
 }
 
 function removeFile(fileToRemove: foundkey.entities.DriveFile | string): void {
 	const fileIdToRemove = typeof fileToRemove === 'object' ? fileToRemove.id : fileToRemove;
-	filesPaginationElem.removeItem(item => item.id === fileIdToRemove);
+	paginationElem.removeItem(item => item.id === fileIdToRemove);
 }
 
 function goRoot() {
@@ -518,20 +480,11 @@ function goRoot() {
 	emit('move-root');
 }
 
-const foldersPagination = {
-	endpoint: 'drive/folders' as const,
+const pagination = {
+	endpoint: 'drive/show' as const,
 	limit: 30,
 	params: computed(() => ({
 		folderId: folder?.id ?? null,
-	})),
-};
-
-const filesPagination = {
-	endpoint: 'drive/files' as const,
-	limit: 30,
-	params: computed(() => ({
-		folderId: folder?.id ?? null,
-		type: props.type,
 	})),
 };
 
@@ -678,37 +631,17 @@ onBeforeUnmount(() => {
 		}
 
 		> .contents {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: .5em;
+		}
 
-			> .folders,
-			> .files {
-				display: flex;
-				flex-wrap: wrap;
-
-				> .folder,
-				> .file {
-					flex-grow: 1;
-					width: 128px;
-					margin: 4px;
-					box-sizing: border-box;
-				}
-
-				> .padding {
-					flex-grow: 1;
-					pointer-events: none;
-					width: 128px + 8px;
-				}
-			}
-
-			> .empty {
-				padding: 16px;
-				text-align: center;
-				pointer-events: none;
-				opacity: 0.5;
-
-				> p {
-					margin: 0;
-				}
-			}
+		> .empty {
+			padding: 16px;
+			text-align: center;
+			pointer-events: none;
+			opacity: 0.5;
+			margin: 0;
 		}
 	}
 

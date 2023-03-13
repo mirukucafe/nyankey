@@ -1,10 +1,10 @@
 <template>
 <div
 	class="rghtznwe"
-	:class="{ draghover }"
+	:class="{ draghover, isSelected }"
 	draggable="true"
 	:title="title"
-	@click="onClick"
+	@click="selected"
 	@contextmenu.stop="onContextmenu"
 	@mouseover="onMouseover"
 	@mouseout="onMouseout"
@@ -15,15 +15,16 @@
 	@dragstart="onDragstart"
 	@dragend="onDragend"
 >
+	<div class="thumbnail" @click.stop="emit('move', folder)">
+		<i class="fas fa-folder-open fa-fw hover"></i>
+		<i class="fas fa-folder fa-fw"></i>
+	</div>
 	<p class="name">
-		<template v-if="hover"><i class="fas fa-folder-open fa-fw"></i></template>
-		<template v-if="!hover"><i class="fas fa-folder fa-fw"></i></template>
 		{{ folder.name }}
 	</p>
 	<p v-if="defaultStore.state.uploadFolder == folder.id" class="upload">
 		{{ i18n.ts.uploadFolder }}
 	</p>
-	<button v-if="selectMode" class="checkbox _button" :class="{ checked: isSelected }" @click.prevent.stop="checkboxClicked"></button>
 </div>
 </template>
 
@@ -44,7 +45,7 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-	(ev: 'chosen', v: foundkey.entities.DriveFolder): void;
+	(ev: 'chosen', v: foundkey.entities.DriveFolder, extendSelection: boolean): void;
 	(ev: 'move', v: foundkey.entities.DriveFolder): void;
 	(ev: 'upload', file: File, folder: foundkey.entities.DriveFolder);
 	(ev: 'removeFile', v: foundkey.entities.DriveFile['id']): void;
@@ -59,20 +60,10 @@ const isDragging = ref(false);
 
 const title = computed(() => props.folder.name);
 
-function checkboxClicked() {
-	emit('chosen', props.folder);
-}
-
-function onClick() {
-	emit('move', props.folder);
-}
-
-function onMouseover() {
-	hover.value = true;
-}
-
-function onMouseout() {
-	hover.value = false;
+function selected(ev: MouseEvent) {
+	if (props.selectMode) {
+		emit('chosen', props.folder, ev.ctrlKey);
+	}
 }
 
 function onDragover(ev: DragEvent) {
@@ -260,30 +251,34 @@ function onContextmenu(ev: MouseEvent) {
 .rghtznwe {
 	position: relative;
 	padding: 8px;
-	height: 64px;
-	background: var(--driveFolderBg);
-	border-radius: 4px;
+	min-height: 180px;
+	border-radius: 8px;
 
 	&, * {
 		cursor: pointer;
 	}
 
-	*:not(.checkbox) {
-		pointer-events: none;
-	}
+	> .thumbnail {
+		width: 110px;
+		height: 110px;
+		margin: auto;
 
-	> .checkbox {
-		position: absolute;
-		bottom: 8px;
-		right: 8px;
-		width: 16px;
-		height: 16px;
-		background: #fff;
-		border: solid 1px #000;
+		/* same style as drive-file-thumbnail.vue */
+		position: relative;
+		display: flex;
+		background: var(--panel);
+		border-radius: 8px;
+		overflow: clip;
 
-		&.checked {
-			background: var(--accent);
+		> i {
+			pointer-events: none;
+			margin: auto;
+			font-size: 33px;
+			color: #777;
 		}
+
+		&:not(:hover) > i.hover,
+		&:hover > i:not(.hover) { display: none; }
 	}
 
 	&.draghover {
@@ -300,23 +295,37 @@ function onContextmenu(ev: MouseEvent) {
 		}
 	}
 
-	> .name {
-		margin: 0;
-		font-size: 0.9em;
-		color: var(--desktopDriveFolderFg);
+	&.isSelected {
+		background: var(--accent);
 
-		> i {
-			margin-right: 4px;
-			margin-left: 2px;
-			text-align: left;
+		&:hover {
+			background: var(--accentLighten);
 		}
+
+		> .name {
+			color: #fff;
+		}
+
+		> .thumbnail {
+			color: #fff;
+		}
+	}
+
+	> .name {
+		display: block;
+		margin: 4px 0 0 0;
+		font-size: 0.8em;
+		text-align: center;
+		word-break: break-all;
+		color: var(--fg);
+		overflow: hidden;
 	}
 
 	> .upload {
 		margin: 4px 4px;
 		font-size: 0.8em;
-		text-align: right;
-		color: var(--desktopDriveFolderFg);
+		text-align: center;
+		opacity: 0.7;
 	}
 }
 </style>
