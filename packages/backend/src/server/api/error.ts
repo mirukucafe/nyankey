@@ -340,6 +340,10 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		message: 'You are not following that user.',
 		httpStatusCode: 409,
 	},
+	NOT_FOLLOWED: {
+		message: 'You are not followed by that user.',
+		httpStatusCode: 409,
+	},
 	NOT_LIKED: {
 		message: 'You have not liked that page.',
 		httpStatusCode: 409,

@@ -17,7 +17,7 @@ export const meta = {
 
 	kind: 'write:following',
 
-	errors: ['FOLLOWER_IS_YOURSELF', 'NO_SUCH_USER', 'NOT_FOLLOWING'],
+	errors: ['FOLLOWER_IS_YOURSELF', 'NO_SUCH_USER', 'NOT_FOLLOWED'],
 
 	res: {
 		type: 'object',
@@ -53,7 +53,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		followeeId: followee.id,
 	});
 
-	if (!exist) throw new ApiError('NOT_FOLLOWING');
+	if (!exist) throw new ApiError('NOT_FOLLOWED');
 
 	await deleteFollowing(follower, followee);
 
