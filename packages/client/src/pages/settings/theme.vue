@@ -71,7 +71,7 @@ import FormSelect from '@/components/form/select.vue';
 import FormSection from '@/components/form/section.vue';
 import FormLink from '@/components/form/link.vue';
 import MkButton from '@/components/ui/button.vue';
-import { getBuiltinThemesRef } from '@/scripts/theme';
+import { getBuiltinThemes } from '@/scripts/theme';
 import { selectFile } from '@/scripts/select-file';
 import { isDeviceDarkmode } from '@/scripts/is-device-darkmode';
 import { ColdDeviceStorage , defaultStore } from '@/store';
@@ -81,38 +81,39 @@ import { uniqueBy } from '@/scripts/array';
 import { fetchThemes, getThemes } from '@/theme-store';
 import { definePageMetadata } from '@/scripts/page-metadata';
 
-const installedThemes = ref(getThemes());
-const builtinThemes = getBuiltinThemesRef();
+const [installedThemes, builtinThemes] = await Promise.all([fetchThemes(), getBuiltinThemes()]);
 const instanceThemes = [];
 
 if (instance.defaultLightTheme != null) instanceThemes.push(JSON5.parse(instance.defaultLightTheme));
 if (instance.defaultDarkTheme != null) instanceThemes.push(JSON5.parse(instance.defaultDarkTheme));
 
-const themes = computed(() => uniqueBy([ ...instanceThemes, ...builtinThemes.value, ...installedThemes.value ], theme => theme.id));
-const darkThemes = computed(() => themes.value.filter(t => t.base === 'dark' || t.kind === 'dark'));
-const lightThemes = computed(() => themes.value.filter(t => t.base === 'light' || t.kind === 'light'));
-const darkTheme = ColdDeviceStorage.ref('darkTheme');
+const themes = uniqueBy([ ...instanceThemes, ...builtinThemes, ...installedThemes ], theme => theme.id);
+const darkThemes = themes.filter(t => t.base === 'dark' || t.kind === 'dark');
+const lightThemes = themes.filter(t => t.base === 'light' || t.kind === 'light');
+let darkTheme = $ref(ColdDeviceStorage.get('darkTheme'));
 const darkThemeId = computed({
 	get() {
-		return darkTheme.value.id;
+		return darkTheme.id;
 	},
 	set(id) {
-		ColdDeviceStorage.set('darkTheme', themes.value.find(x => x.id === id));
+		darkTheme = themes.find(x => x.id === id);
+		ColdDeviceStorage.set('darkTheme', darkTheme);
 	},
 });
-const lightTheme = ColdDeviceStorage.ref('lightTheme');
+let lightTheme = $ref(ColdDeviceStorage.get('lightTheme'));
 const lightThemeId = computed({
 	get() {
-		return lightTheme.value.id;
+		return lightTheme.id;
 	},
 	set(id) {
-		ColdDeviceStorage.set('lightTheme', themes.value.find(x => x.id === id));
+		lightTheme = themes.find(x => x.id === id);
+		ColdDeviceStorage.set('lightTheme', lightTheme);
 	},
 });
 const darkMode = computed(defaultStore.makeGetterSetter('darkMode'));
 const syncDeviceDarkMode = computed(ColdDeviceStorage.makeGetterSetter('syncDeviceDarkMode'));
 const wallpaper = ref(localStorage.getItem('wallpaper'));
-const themesCount = installedThemes.value.length;
+const themesCount = installedThemes.length;
 
 watch(syncDeviceDarkMode, () => {
 	if (syncDeviceDarkMode.value) {
@@ -127,16 +128,6 @@ watch(wallpaper, () => {
 		localStorage.setItem('wallpaper', wallpaper.value);
 	}
 	location.reload();
-});
-
-onActivated(() => {
-	fetchThemes().then(() => {
-		installedThemes.value = getThemes();
-	});
-});
-
-fetchThemes().then(() => {
-	installedThemes.value = getThemes();
 });
 
 function setWallpaper(event) {
