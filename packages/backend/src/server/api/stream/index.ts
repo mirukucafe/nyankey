@@ -31,7 +31,8 @@ export class Connection {
 	public token?: AccessToken;
 	private socket: WebSocket;
 	public subscriber: StreamEventEmitter;
-	private channels: Channel[] = [];
+	// Maps IDs to the actual channels.
+	private channels: Record<string, Channel> = {};
 	private subscribingNotes: any = {};
 	private cachedNotes: Packed<'Note'>[] = [];
 
@@ -294,18 +295,23 @@ export class Connection {
 	 * @param pong `true` if a confirmation message should be sent back.
 	 */
 	public connectChannel(id: string, params: any, channel: string, pong = false) {
-		if (channels[channel].requireCredential && this.user == null) {
+		// When it is not possible to connect to a channel, the attempt will be ignored.
+		if (
+			// Such a channel type does not exist.
+			!(channel in channels)
+			// The specified channel ID is already in use.
+			|| (id in this.channels)
+			// Not authenticated, but authentication is required.
+			|| (channels[channel].requireCredential && this.user == null)
+			// The channel is shared and already connected.
+			|| (channels[channel].shouldShare && Object.values(this.channels).some(c => c.chName === channel))
+		) {
+			// TODO: send back some kind of error message?
 			return;
 		}
 
-		// 共有可能チャンネルに接続しようとしていて、かつそのチャンネルに既に接続していたら無意味なので無視
-		if (channels[channel].shouldShare && this.channels.some(c => c.chName === channel)) {
-			return;
-		}
-
-		const ch: Channel = new channels[channel](id, this);
-		this.channels.push(ch);
-		ch.init(params);
+		this.channels[id] = new channels[channel](id, this);
+		this.channels[id].init(params);
 
 		if (pong) {
 			this.sendMessageToWs('connected', { id });
@@ -317,23 +323,16 @@ export class Connection {
 	 * @param id The unique ID of the channel to disconnect.
 	 */
 	public disconnectChannel(id: string) {
-		const channel = this.channels.find(c => c.id === id);
-
-		if (channel) {
-			if (channel.dispose) channel.dispose();
-			this.channels = this.channels.filter(c => c.id !== id);
-		}
+		this.channels[id]?.dispose?.();
+		delete this.channels[id];
 	}
 
 	/**
 	 * Called when a message should be sent to a specific channel.
 	 * @param data The message to be sent.
 	 */
-	private onChannelMessageRequested(data: any) {
-		const channel = this.channels.find(c => c.id === data.id);
-		if (channel != null && channel.onMessage != null) {
-			channel.onMessage(data.type, data.body);
-		}
+	private onChannelMessageRequested(data: Record<string, any>) {
+		this.channels[id]?.onMessage?.(data.type, data.body);
 	}
 
 	private typingOnChannel(channel: ChannelModel['id']) {
@@ -417,8 +416,7 @@ export class Connection {
 	 * Dispose all currently open channels where possible.
 	 */
 	public dispose() {
-		for (const c of this.channels.filter(c => c.dispose)) {
-			if (c.dispose) c.dispose();
-		}
+		Object.values(this.channels)
+			.forEach(c => c.dispose?.());
 	}
 }
