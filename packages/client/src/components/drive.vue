@@ -364,7 +364,7 @@ function upload(file: File, folderToUpload?: foundkey.entities.DriveFolder | nul
 }
 
 function choose(choice: foundkey.entities.DriveFile | foundkey.entities.DriveFolder, extendSelection: boolean) {
-	const alreadySelected = selectedFiles.some(f => f.id === file.id);
+	const alreadySelected = selected.some(f => f.id === file.id);
 
 	const action = (() => {
 		if (props.select != null) {
