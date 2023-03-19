@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onActivated, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import JSON5 from 'json5';
 import FormSwitch from '@/components/form/switch.vue';
 import FormSelect from '@/components/form/select.vue';
