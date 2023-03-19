@@ -10,7 +10,7 @@ import { publishChannelStream, publishGroupMessagingStream, publishMessagingStre
 import { UserGroup } from '@/models/entities/user-group.js';
 import { Packed } from '@/misc/schema.js';
 import { readNotification } from '@/server/api/common/read-notification.js';
-import channels from './channels/index.js';
+import { channels } from './channels/index.js';
 import Channel from './channel.js';
 import { StreamEventEmitter, StreamMessages } from './types.js';
 import Logger from '@/services/logger.js';
@@ -290,16 +290,16 @@ export class Connection {
 	 * チャンネルに接続
 	 */
 	public connectChannel(id: string, params: any, channel: string, pong = false) {
-		if ((channels as any)[channel].requireCredential && this.user == null) {
+		if (channels[channel].requireCredential && this.user == null) {
 			return;
 		}
 
 		// 共有可能チャンネルに接続しようとしていて、かつそのチャンネルに既に接続していたら無意味なので無視
-		if ((channels as any)[channel].shouldShare && this.channels.some(c => c.chName === channel)) {
+		if (channels[channel].shouldShare && this.channels.some(c => c.chName === channel)) {
 			return;
 		}
 
-		const ch: Channel = new (channels as any)[channel](id, this);
+		const ch: Channel = new channels[channel](id, this);
 		this.channels.push(ch);
 		ch.init(params);
 
