@@ -287,7 +287,11 @@ export class Connection {
 	}
 
 	/**
-	 * チャンネルに接続
+	 * Connect to a channel.
+	 * @param id The ID that should be given to this newly created channel.
+	 * @param params The parameters given for initializing this channel.
+	 * @param channel The type of channel to connect to.
+	 * @param pong `true` if a confirmation message should be sent back.
 	 */
 	public connectChannel(id: string, params: any, channel: string, pong = false) {
 		if (channels[channel].requireCredential && this.user == null) {
@@ -309,8 +313,8 @@ export class Connection {
 	}
 
 	/**
-	 * チャンネルから切断
-	 * @param id チャンネルコネクションID
+	 * Disconnect from a channel.
+	 * @param id The unique ID of the channel to disconnect.
 	 */
 	public disconnectChannel(id: string) {
 		const channel = this.channels.find(c => c.id === id);
@@ -322,8 +326,8 @@ export class Connection {
 	}
 
 	/**
-	 * チャンネルへメッセージ送信要求時
-	 * @param data メッセージ
+	 * Called when a message should be sent to a specific channel.
+	 * @param data The message to be sent.
 	 */
 	private onChannelMessageRequested(data: any) {
 		const channel = this.channels.find(c => c.id === data.id);
@@ -410,7 +414,7 @@ export class Connection {
 	}
 
 	/**
-	 * ストリームが切れたとき
+	 * Dispose all currently open channels where possible.
 	 */
 	public dispose() {
 		for (const c of this.channels.filter(c => c.dispose)) {
