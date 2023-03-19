@@ -87,7 +87,7 @@ const instanceThemes = [];
 if (instance.defaultLightTheme != null) instanceThemes.push(JSON5.parse(instance.defaultLightTheme));
 if (instance.defaultDarkTheme != null) instanceThemes.push(JSON5.parse(instance.defaultDarkTheme));
 
-const themes = uniqueBy([ ...instanceThemes, ...builtinThemes, ...installedThemes ], theme => theme.id);
+const themes = uniqueBy([...installedThemes, ...instanceThemes, ...builtinThemes], theme => theme.id);
 const darkThemes = themes.filter(t => t.base === 'dark' || t.kind === 'dark');
 const lightThemes = themes.filter(t => t.base === 'light' || t.kind === 'light');
 let darkTheme = $ref(ColdDeviceStorage.get('darkTheme'));
