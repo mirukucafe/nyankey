@@ -100,10 +100,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		if (ps.userId === user.id) throw new ApiError('RECIPIENT_IS_YOURSELF');
 
 		// Fetch recipient (user)
-		recipientUser = await getUser(ps.userId).catch(e => {
-			if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
-			throw e;
-		});
+		recipientUser = await getUser(ps.userId);
 
 		// Check blocking
 		const block = await Blockings.countBy({
