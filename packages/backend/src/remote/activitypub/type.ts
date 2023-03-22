@@ -55,7 +55,7 @@ export function getApId(value: string | Object): string {
 export function getOneApId(value: ApObject): string {
 	if (Array.isArray(value)) {
 		// find the first valid ID
-		for (const id of value) {
+		for (const x of value) {
 			try {
 				return getApId(x);
 			} catch {
