@@ -58,7 +58,7 @@ When updating, be sure to check the [release notes](https://akkoma.dev/FoundKeyG
 
 ```sh
 git stash
-git checkout master
+git checkout main
 git pull
 git stash pop
 docker compose build
