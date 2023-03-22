@@ -45,8 +45,6 @@ subscriber.on('message', async (_, data) => {
 				localUserByNativeTokenCache.set(body.newToken, user);
 				break;
 			}
-			default:
-				break;
 		}
 	}
 });
