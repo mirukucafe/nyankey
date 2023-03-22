@@ -1,3 +1,4 @@
+import { IsNull, Not } from 'typeorm';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { User } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
@@ -28,8 +29,12 @@ export async function getNote(noteId: Note['id'], me: { id: User['id'] } | null)
 /**
  * Get user for API processing
  */
-export async function getUser(userId: User['id']) {
-	const user = await Users.findOneBy({ id: userId });
+export async function getUser(userId: User['id'], includeSuspended = false) {
+	const user = await Users.findOneBy(
+		id: userId,
+		isDeleted: false,
+		isSuspended: !includeSuspended,
+	});
 
 	if (user == null) {
 		throw new ApiError('NO_SUCH_USER');
@@ -41,10 +46,15 @@ export async function getUser(userId: User['id']) {
 /**
  * Get remote user for API processing
  */
-export async function getRemoteUser(userId: User['id']) {
-	const user = await getUser(userId);
+export async function getRemoteUser(userId: User['id'], includeSuspended = false) {
+	const user = await Users.findOneBy(
+		id: userId,
+		host: Not(IsNull()),
+		isDeleted: false,
+		isSuspended: !includedSuspended,
+	});
 
-	if (!Users.isRemoteUser(user)) {
+	if (user == null) {
 		throw new ApiError('NO_SUCH_USER');
 	}
 
@@ -54,10 +64,15 @@ export async function getRemoteUser(userId: User['id']) {
 /**
  * Get local user for API processing
  */
-export async function getLocalUser(userId: User['id']) {
-	const user = await getUser(userId);
+export async function getLocalUser(userId: User['id'], includeSuspended = false) {
+	const user = await Users.findOneBy(
+		id: userId,
+		host: IsNull(),
+		isDeleted: false,
+		isSuspended: !includeSuspended,
+	});
 
-	if (!Users.isLocalUser(user)) {
+	if (user == null) {
 		throw new ApiError('NO_SUCH_USER');
 	}
 

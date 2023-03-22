@@ -223,6 +223,7 @@ const getFeed = async (acct: string) => {
 		usernameLower: username.toLowerCase(),
 		host: host ?? IsNull(),
 		isSuspended: false,
+		isDeleted: false,
 	});
 
 	return user && await packFeed(user);
@@ -272,6 +273,7 @@ router.get(['/@:user', '/@:user/:sub'], async (ctx, next) => {
 		usernameLower: username.toLowerCase(),
 		host: host ?? IsNull(),
 		isSuspended: false,
+		isDeleted: false,
 	});
 
 	if (user != null) {
@@ -304,6 +306,7 @@ router.get('/users/:user', async ctx => {
 		id: ctx.params.user,
 		host: IsNull(),
 		isSuspended: false,
+		isDeleted: false,
 	});
 
 	if (user == null) {
@@ -419,6 +422,8 @@ router.get('/@:user/pages/:page', async (ctx, next) => {
 	const user = await Users.findOneBy({
 		usernameLower: username.toLowerCase(),
 		host: host ?? IsNull(),
+		isSuspended: false,
+		isDeleted: false,
 	});
 
 	if (user == null) return;

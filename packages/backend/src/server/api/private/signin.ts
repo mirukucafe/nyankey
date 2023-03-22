@@ -47,6 +47,7 @@ export default async (ctx: Koa.Context) => {
 	const user = await Users.findOneBy({
 		usernameLower: username.toLowerCase(),
 		host: IsNull(),
+		isDeleted: false,
 	}) as ILocalUser;
 
 	if (user == null) {
