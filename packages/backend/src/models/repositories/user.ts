@@ -300,6 +300,10 @@ export const UserRepository = db.getRepository(User).extend({
 				}),
 			emojis: populateEmojis(user.emojis, user.host),
 			onlineStatus: this.getOnlineStatus(user),
+			movedTo: !user.movedToId ? undefined : this.pack(user.movedTo ?? user.movedToId, me, {
+				...opts,
+				detail: false,
+			}),
 
 			...(opts.detail ? {
 				url: profile!.url,

@@ -1,4 +1,4 @@
-export const notificationTypes = ['follow', 'mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded', 'receiveFollowRequest', 'followRequestAccepted', 'groupInvited', 'app'] as const;
+export const notificationTypes = ['follow', 'mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded', 'receiveFollowRequest', 'followRequestAccepted', 'groupInvited', 'move', 'app'] as const;
 
 export const noteNotificationTypes = ['mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded'] as const;
 

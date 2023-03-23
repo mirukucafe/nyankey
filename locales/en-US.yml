@@ -829,6 +829,7 @@ oauthErrorGoBack: "An error happened while trying to authenticate a 3rd party ap
     \ Please go back and try again."
 appAuthorization: "App authorization"
 noPermissionsRequested: "(No permissions requested.)"
+movedTo: "This user has moved to {handle}."
 _emailUnavailable:
   used: "This email address is already being used"
   format: "The format of this email address is invalid"
@@ -1306,6 +1307,7 @@ _notification:
     receiveFollowRequest: "Received follow requests"
     followRequestAccepted: "Accepted follow requests"
     groupInvited: "Group invitations"
+    move: "Others moving accounts"
     app: "Notifications from linked apps"
   _actions:
     followBack: "followed you back"

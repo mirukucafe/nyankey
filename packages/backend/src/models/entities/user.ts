@@ -1,4 +1,4 @@
-import { Entity, Column, Index, OneToOne, JoinColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, Index, OneToOne, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
 import { id } from '../id.js';
 import { DriveFile } from './drive-file.js';
 
@@ -229,6 +229,18 @@ export class User {
 		default: true,
 	})
 	public federateBlocks: boolean;
+
+	@Column({
+		...id(),
+		nullable: true,
+	})
+	public movedToId: User['id'] | null;
+
+	@ManyToOne(() => User, {
+		onDelete: 'SET NULL'
+	})
+	@JoinColumn()
+	public movedTo: User | null;
 
 	constructor(data: Partial<User>) {
 		if (data == null) return;

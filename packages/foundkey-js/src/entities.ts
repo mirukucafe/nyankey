@@ -28,6 +28,7 @@ export type UserLite = {
 		faviconUrl: Instance['faviconUrl'];
 		themeColor: Instance['themeColor'];
 	};
+	movedTo?: UserLite;
 };
 
 export type UserDetailed = UserLite & {
@@ -223,6 +224,11 @@ export type Notification = {
 	invitation: UserGroup;
 	user: User;
 	userId: User['id'];
+} | {
+	type: 'move',
+	user: User;
+	userId: User['id'];
+	moveTarget: User;
 } | {
 	type: 'app';
 	header?: string | null;

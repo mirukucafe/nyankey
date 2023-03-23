@@ -44,6 +44,9 @@ export const NotificationRepository = db.getRepository(Notification).extend({
 			...(notification.type === 'groupInvited' ? {
 				invitation: UserGroupInvitations.pack(notification.userGroupInvitationId!),
 			} : {}),
+			...(notification.type === 'move' ? {
+				moveTarget: Users.pack(notification.moveTarget ?? notification.moveTargetId),
+			} : {}),
 			...(notification.type === 'app' ? {
 				body: notification.customBody,
 				header: notification.customHeader || token?.name,
