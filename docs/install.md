@@ -38,22 +38,29 @@ Create a separate non-root user to run FoundKey:
 adduser --disabled-password --disabled-login foundkey
 ```
 
+The following steps will require logging into the `foundkey` user, so do that now.
+```sh
+su - foundkey
+```
+
 ## Install FoundKey
-1. Login to the `foundkey` user
+We recommend using a local branch and merging in upstream releases as they get tagged. This allows for easy local customization of your install.
 
-	`su - foundkey`
+First, clone the FoundKey repo:
+```sh
+git clone https://akkoma.dev/FoundKeyGang/FoundKey
+cd FoundKey
+```
 
-2. Clone the FoundKey repository
+Now create your local branch. In this example, we'll be using `toast.cafe` as the local branch name and release `v13.0.0-preview1` as the tag to track. To create that branch:
+```sh
+git checkout tags/v13.0.0-preview1 -b toast.cafe
+```
 
-	`git clone --recursive https://akkoma.dev/FoundKeyGang/FoundKey foundkey`
-
-3. Navigate to the repository
-
-	`cd foundkey`
-
-4. Install FoundKey's dependencies
-
-	`yarn install`
+Updating will be covered in a later section. For now you'll want to install the dependencies using Yarn:
+```sh
+yarn install
+```
 
 ## Configure FoundKey
 1. Copy `.config/example.yml` to `.config/default.yml`.
@@ -185,14 +192,22 @@ rc-service foundkey start
 You can check if the service is running with `rc-service foundkey status`.
 
 ### Updating FoundKey
-Use git to pull in the latest changes and rerun the build and migration commands:
-
+When a new release comes out, simply fetch and merge in the new tag. If you plan on making additional changes on top of that tag, we suggest using the `--squash` option with `git merge`.
 ```sh
-git pull
-git submodule update --init
+git fetch -t
+git merge tags/v13.0.0-preview2
+# you are now on the "next" release
+```
+
+Now you'll want to update your dependencies and rebuild:
+```sh
 yarn install
 # Use build-parallel if your system has 4GB or more RAM and want faster builds
 NODE_ENV=production yarn build
+```
+
+Next, run the database migrations:
+```sh
 yarn migrate
 ```
 
