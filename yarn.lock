@@ -1428,10 +1428,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/is@npm:^3.0.0":
-  version: 3.1.2
-  resolution: "@sindresorhus/is@npm:3.1.2"
-  checksum: 6b68b2c0bc36beda9442c64e40e2e971999b0814af610a52d5c0bda2213061ff63d158912bd494dc8b8fa5c027ed13ec5947e4902dd9a315b2f2337221dbcb7f
+"@sindresorhus/is@npm:^4.0.0":
+  version: 4.6.0
+  resolution: "@sindresorhus/is@npm:4.6.0"
+  checksum: 83839f13da2c29d55c97abc3bc2c55b250d33a0447554997a85c539e058e57b8da092da396e252b11ec24a0279a0bed1f537fa26302209327060643e327f81d2
   languageName: node
   linkType: hard
 
@@ -3798,7 +3798,7 @@ __metadata:
     strict-event-emitter-types: 2.0.0
     stringz: 2.1.0
     style-loader: 3.3.1
-    summaly: 2.6.0
+    summaly: 2.7.0
     syslog-pro: 1.0.0
     systeminformation: 5.11.22
     tinycolor2: 1.4.2
@@ -4281,7 +4281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacheable-request@npm:^7.0.1, cacheable-request@npm:^7.0.2":
+"cacheable-request@npm:^7.0.2":
   version: 7.0.2
   resolution: "cacheable-request@npm:7.0.2"
   dependencies:
@@ -8364,22 +8364,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:11.5.1":
-  version: 11.5.1
-  resolution: "got@npm:11.5.1"
+"got@npm:11.8.5":
+  version: 11.8.5
+  resolution: "got@npm:11.8.5"
   dependencies:
-    "@sindresorhus/is": ^3.0.0
+    "@sindresorhus/is": ^4.0.0
     "@szmarczak/http-timer": ^4.0.5
     "@types/cacheable-request": ^6.0.1
     "@types/responselike": ^1.0.0
     cacheable-lookup: ^5.0.3
-    cacheable-request: ^7.0.1
+    cacheable-request: ^7.0.2
     decompress-response: ^6.0.0
-    http2-wrapper: ^1.0.0-beta.5.0
+    http2-wrapper: ^1.0.0-beta.5.2
     lowercase-keys: ^2.0.0
     p-cancelable: ^2.0.0
     responselike: ^2.0.0
-  checksum: 3be52e602feb62a810de1337f92a054f49f5e74f8ee27ad4140331b63a99aeaddaeb8ec49b2dae493622f11ad55c7ee4bde5a7808147cc354f93b8c389957828
+  checksum: 2de8a1bbda4e9b6b2b72b2d2100bc055a59adc1740529e631f61feb44a8b9a1f9f8590941ed9da9df0090b6d6d0ed8ffee94cd9ac086ec3409b392b33440f7d2
   languageName: node
   linkType: hard
 
@@ -8874,7 +8874,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http2-wrapper@npm:^1.0.0-beta.5.0":
+"http2-wrapper@npm:^1.0.0-beta.5.2":
   version: 1.0.3
   resolution: "http2-wrapper@npm:1.0.3"
   dependencies:
@@ -16022,14 +16022,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"summaly@npm:2.6.0":
-  version: 2.6.0
-  resolution: "summaly@npm:2.6.0"
+"summaly@npm:2.7.0":
+  version: 2.7.0
+  resolution: "summaly@npm:2.7.0"
   dependencies:
     cheerio: 0.22.0
     debug: 4.3.3
     escape-regexp: 0.0.1
-    got: 11.5.1
+    got: 11.8.5
     html-entities: 2.3.2
     iconv-lite: 0.6.3
     jschardet: 3.0.0
@@ -16037,7 +16037,7 @@ __metadata:
     private-ip: 2.3.3
     require-all: 3.0.0
     trace-redirect: 1.0.6
-  checksum: 5eff928fc66dc9c2845b43f4242e1f5d37666ef829a6c0bd1ac6467ab91ff92e90eb53f4166c67c573c136a6f512310e34ab6a1acb866418dba8c2c6590dd139
+  checksum: f5d5b845328ff80ab74229a08816990062153ac15b6581123c62283ecfa32c03ccfa446c3985285d3cfd3108868ab24f5c2bfc939ed781830148e0a39e03018e
   languageName: node
   linkType: hard
 
