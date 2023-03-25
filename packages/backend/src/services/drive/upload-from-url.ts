@@ -13,7 +13,7 @@ const logger = driveLogger.createSubLogger('downloader');
 type Args = {
 	url: string;
 	user: { id: User['id']; host: User['host'] } | null;
-	folderId?: DriveFolder['id'] | null;
+	parentId?: DriveFolder['id'] | null;
 	uri?: string | null;
 	sensitive?: boolean;
 	force?: boolean;
@@ -24,7 +24,7 @@ type Args = {
 export async function uploadFromUrl({
 	url,
 	user,
-	folderId = null,
+	parentId = null,
 	uri = null,
 	sensitive = false,
 	force = false,
@@ -50,7 +50,7 @@ export async function uploadFromUrl({
 			// If the comment is same as the name, skip comment
 			// (image.name is passed in when receiving attachment)
 			comment: name === comment ? null : comment,
-			folderId,
+			parentId,
 			force,
 			isLink,
 			url,

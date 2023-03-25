@@ -28,7 +28,7 @@ export const DriveFolderRepository = db.getRepository(DriveFolder).extend({
 					parentId: folder.id,
 				}),
 				filesCount: DriveFiles.countBy({
-					folderId: folder.id,
+					parentId: folder.id,
 				}),
 
 				...(folder.parentId ? {

@@ -48,10 +48,10 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	if (ps.folderId) {
 		foldersQuery.andWhere('folder.parentId = :parentId', { parentId: ps.folderId });
-		filesQuery.andWhere('file.folderId = :folderId', { folderId: ps.folderId });
+		filesQuery.andWhere('file.parentId = :parentId', { parentId: ps.folderId });
 	} else {
 		foldersQuery.andWhere('folder.parentId IS NULL');
-		filesQuery.andWhere('file.folderId IS NULL');
+		filesQuery.andWhere('file.parentId IS NULL');
 	}
 
 	const folders = await foldersQuery.take(ps.limit).getMany();

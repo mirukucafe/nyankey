@@ -14,7 +14,7 @@ export class DriveFolder {
 	public createdAt: Date;
 
 	@Column('varchar', {
-		length: 128,
+		length: 256,
 		comment: 'The name of the DriveFolder.',
 	})
 	public name: string;

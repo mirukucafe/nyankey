@@ -54,7 +54,7 @@ export default define(meta, paramDef, async (ps, user) => {
 
 	if (ps.folderId !== undefined) {
 		if (ps.folderId === null) {
-			file.folderId = null;
+			file.parentId = null;
 		} else {
 			const folder = await DriveFolders.findOneBy({
 				id: ps.folderId,
@@ -63,14 +63,14 @@ export default define(meta, paramDef, async (ps, user) => {
 
 			if (folder == null) throw new ApiError('NO_SUCH_FOLDER');
 
-			file.folderId = folder.id;
+			file.parentId = folder.id;
 		}
 	}
 
 	await DriveFiles.update(file.id, {
 		name: file.name,
 		comment: file.comment,
-		folderId: file.folderId,
+		parentId: file.parentId,
 		isSensitive: file.isSensitive,
 	});
 

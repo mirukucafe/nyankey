@@ -322,7 +322,7 @@ type AddFileArgs = {
 	/** Comment */
 	comment?: string | null;
 	/** Folder ID */
-	folderId?: any;
+	parentId?: any;
 	/** If set to true, forcibly upload the file even if there is a file with the same hash. */
 	force?: boolean;
 	/** Do not save file to local */
@@ -344,7 +344,7 @@ export async function addFile({
 	path,
 	name = null,
 	comment = null,
-	folderId = null,
+	parentId = null,
 	force = false,
 	isLink = false,
 	url = null,
@@ -392,12 +392,12 @@ export async function addFile({
 	//#endregion
 
 	const fetchFolder = async (): Promise<DriveFolder | null> => {
-		if (!folderId) {
+		if (!parentId) {
 			return null;
 		}
 
 		const driveFolder = await DriveFolders.findOneBy({
-			id: folderId,
+			id: parentId,
 			userId: user ? user.id : IsNull(),
 		});
 
@@ -429,7 +429,7 @@ export async function addFile({
 	file.createdAt = new Date();
 	file.userId = user ? user.id : null;
 	file.userHost = user ? user.host : null;
-	file.folderId = folder?.id ?? null;
+	file.parentId = folder?.id ?? null;
 	file.comment = comment;
 	file.properties = properties;
 	file.blurhash = info.blurhash || null;

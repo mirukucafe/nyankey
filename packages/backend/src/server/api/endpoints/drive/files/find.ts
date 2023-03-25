@@ -36,7 +36,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	const files = await DriveFiles.findBy({
 		name: ps.name,
 		userId: user.id,
-		folderId: ps.folderId ?? IsNull(),
+		parentId: ps.folderId ?? IsNull(),
 	});
 
 	return await Promise.all(files.map(file => DriveFiles.pack(file, { self: true })));

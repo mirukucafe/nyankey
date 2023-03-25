@@ -34,7 +34,7 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, user) => {
-	uploadFromUrl({ url: ps.url, user, folderId: ps.folderId, sensitive: ps.isSensitive, force: ps.force, comment: ps.comment }).then(file => {
+	uploadFromUrl({ url: ps.url, user, parentId: ps.folderId, sensitive: ps.isSensitive, force: ps.force, comment: ps.comment }).then(file => {
 		DriveFiles.pack(file, { self: true }).then(packedFile => {
 			publishMainStream(user.id, 'urlUploadFinished', {
 				marker: ps.marker,

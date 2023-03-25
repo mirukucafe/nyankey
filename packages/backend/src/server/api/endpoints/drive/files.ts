@@ -38,9 +38,9 @@ export default define(meta, paramDef, async (ps, user) => {
 		.andWhere('file.userId = :userId', { userId: user.id });
 
 	if (ps.folderId) {
-		query.andWhere('file.folderId = :folderId', { folderId: ps.folderId });
+		query.andWhere('file.parentId = :parentId', { parentId: ps.folderId });
 	} else {
-		query.andWhere('file.folderId IS NULL');
+		query.andWhere('file.parentId IS NULL');
 	}
 
 	if (ps.type) {
