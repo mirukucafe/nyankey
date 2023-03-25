@@ -20,6 +20,12 @@ git clone https://akkoma.dev/FoundKeyGang/FoundKey.git
 cd FoundKey
 ```
 
+To make it easier to perform your own changes on top, we suggest making a branch based on the latest tag.
+In this example, we'll use `v13.0.0-preview1` as the tag to check out and `my-branch` as the branch name.
+```sh
+git checkout tags/v13.0.0-preview1 -b my-branch
+```
+
 ## Configure
 
 Copy example configuration files with following:
@@ -56,11 +62,15 @@ In case you are encountering issues, you can run `docker compose logs -f` to get
 ## How to update your FoundKey server
 When updating, be sure to check the [release notes](https://akkoma.dev/FoundKeyGang/FoundKey/src/branch/main/CHANGELOG.md) to know in advance the changes and whether or not additional work is required (in most cases, it is not).
 
+To update your branch to the latest tag (in this example `v13.0.0-preview2`), you can do the following:
 ```sh
-git stash
-git checkout main
-git pull
-git stash pop
+git fetch -t
+
+# Use --squash if you want to merge all of the changes in the tag into a single commit.
+# Useful if you have made additional changes.
+git merge tags/v13.0.0-preview2
+
+# Rebuild and restart the docker container.
 docker compose build
 docker compose down && docker compose up -d
 ```
