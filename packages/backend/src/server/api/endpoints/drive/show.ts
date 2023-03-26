@@ -46,8 +46,8 @@ export const paramDef = {
 		sort: {
 			type: 'string',
 			enum: [
-				'+created',
-				'-created',
+				'+createdAt',
+				'-createdAt',
 				'+name',
 				'-name',
 			],
@@ -58,6 +58,11 @@ export const paramDef = {
 			nullable: true,
 			default: null
 		},
+		name: {
+			description: 'Filters the output for files and folders that contain the given string (case insensitive).',
+			type: 'string',
+			default: '',
+		},
 	},
 	required: [],
 } as const;
@@ -66,10 +71,10 @@ export const paramDef = {
 export default define(meta, paramDef, async (ps, user) => {
 	let orderBy = 'type ASC, id DESC';
 	switch (ps.sort) {
-		case '+created':
+		case '+createdAt':
 			orderBy = '"createdAt" DESC';
 			break;
-		case '-created':
+		case '-createdAt':
 			orderBy = '"createdAt" ASC';
 			break;
 		case '+name':
@@ -84,11 +89,11 @@ export default define(meta, paramDef, async (ps, user) => {
 	const ids = await db.query(
 		'SELECT id FROM (SELECT id, "userId", "parentId", "createdAt", name, 0 AS type FROM drive_folder'
 		+ ' UNION SELECT id, "userId", "parentId", "createdAt", name, 1 AS type FROM drive_file) AS x'
-		+ ' WHERE "userId" = $1 AND "parentId"'
-		+ (ps.folderId ? '= $4' : 'IS NULL')
+		+ ' WHERE "userId" = $1 AND name ILIKE $2 AND "parentId"'
+		+ (ps.folderId ? '= $5' : 'IS NULL')
 		+ ' ORDER BY ' + orderBy
-		+ ' LIMIT $2 OFFSET $3',
-		[user.id, ps.limit, ps.offset, ...(ps.folderId ? [ps.folderId] : [])]
+		+ ' LIMIT $3 OFFSET $4',
+		[user.id, '%' + ps.name + '%', ps.limit, ps.offset, ...(ps.folderId ? [ps.folderId] : [])]
 	).then(items => items.map(({ id }) => id));
 
 	const [folders, files] = await Promise.all([

@@ -35,6 +35,24 @@
 		@drop.prevent.stop="onDrop"
 		@contextmenu.stop="onContextmenu"
 	>
+		<FormFolder>
+			<template #icon><i class="fas fa-search"></i></template>
+			<template #label>{{ i18n.ts.search }}</template>
+
+			<FormInput v-model="searchName" :debounce="true" :spellcheck="false">
+				<template #label>{{ i18n.ts.name }}</template>
+				<template #prefix><i class="fas fa-filter"></i></template>
+			</FormInput>
+			<FormSelect v-model="sort">
+				<template #label>{{ i18n.ts.sort }}</template>
+				<template #prefix><i class="fas fa-arrow-down-wide-short"></i></template>
+				<option :value="undefined">{{ i18n.ts.default }}</option>
+				<option value="+createdAt">{{ i18n.ts.createdAt }} ({{ i18n.ts.descendingOrder }})</option>
+				<option value="-createdAt">{{ i18n.ts.createdAt }} ({{ i18n.ts.ascendingOrder }})</option>
+				<option value="+name">{{ i18n.ts.name }} ({{ i18n.ts.descendingOrder }})</option>
+				<option value="-name">{{ i18n.ts.name }} ({{ i18n.ts.ascendingOrder }})</option>
+			</FormSelect>
+		</FormFolder>
 		<MkPagination
 			ref="paginationElem"
 			:pagination="pagination"
@@ -91,6 +109,9 @@ import XFolder from './drive.folder.vue';
 import XFile from './drive.file.vue';
 import MkButton from './ui/button.vue';
 import MkPagination from './ui/pagination.vue';
+import FormFolder from '@/components/form/folder.vue';
+import FormSelect from '@/components/form/select.vue';
+import FormInput from '@/components/form/input.vue';
 import * as os from '@/os';
 import { stream } from '@/stream';
 import { defaultStore } from '@/store';
@@ -115,7 +136,6 @@ const emit = defineEmits<{
 }>();
 
 let paginationElem = $ref<InstanceType<typeof MkPagination>>();
-
 let fileInput = $ref<HTMLInputElement>();
 
 const uploadings = uploads;
@@ -125,6 +145,8 @@ let folder = $ref<foundkey.entities.DriveFolder | null>(null);
 let hierarchyFolders = $ref<foundkey.entities.DriveFolder[]>([]);
 let selected = $ref<Array<foundkey.entities.DriveFile | foundkey.entities.DriveFolder>>([]);
 let keepOriginal = $ref<boolean>(defaultStore.state.keepOriginalUploading);
+let searchName = $ref<string>('');
+let sort = $ref<undefined | string>(undefined);
 
 // ドロップされようとしているか
 let draghover = $ref(false);
@@ -486,6 +508,8 @@ const pagination = {
 	limit: 30,
 	offsetMode: true,
 	params: computed(() => ({
+		sort,
+		name: searchName,
 		folderId: folder?.id ?? null,
 	})),
 };
