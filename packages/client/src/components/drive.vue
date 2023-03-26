@@ -483,6 +483,7 @@ function goRoot() {
 const pagination = {
 	endpoint: 'drive/show' as const,
 	limit: 30,
+	offsetMode: true,
 	params: computed(() => ({
 		folderId: folder?.id ?? null,
 	})),
