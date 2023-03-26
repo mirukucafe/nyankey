@@ -57,11 +57,6 @@
 			ref="paginationElem"
 			:pagination="pagination"
 		>
-			<template #empty>
-				<p v-if="folder == null" class="empty"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
-				<p v-else class="empty">{{ i18n.ts.emptyFolder }}</p>
-			</template>
-
 			<template #default="{ items }">
 				<div class="contents">
 					<template v-for="(f, i) in items">
