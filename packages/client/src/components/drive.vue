@@ -38,7 +38,6 @@
 		<MkPagination
 			ref="paginationElem"
 			:pagination="pagination"
-			class="contents"
 		>
 			<template #empty>
 				<p v-if="folder == null" class="empty"><strong>{{ i18n.ts.emptyDrive }}</strong></p>
@@ -46,34 +45,36 @@
 			</template>
 
 			<template #default="{ items }">
-				<template v-for="(f, i) in items">
-					<XFile
-						v-if="'size' in f"
-						:key="f.id"
-						v-anim="i"
-						:file="f"
-						:select-mode="select !== 'folder'"
-						:is-selected="selected.some(x => x.id === f.id)"
-						@chosen="choose"
-						@dragstart="isDragSource = true"
-						@dragend="isDragSource = false"
-					/>
-					<XFolder
-						v-else
-						:key="f.id"
-						v-anim="i"
-						:folder="f"
-						:select-mode="select !== 'file'"
-						:is-selected="selected.some(x => x.id === f.id)"
-						@chosen="choose"
-						@move="move"
-						@upload="upload"
-						@removeFile="removeFile"
-						@removeFolder="removeFolder"
-						@dragstart="isDragSource = true"
-						@dragend="isDragSource = false"
-					/>
-				</template>
+				<div class="contents">
+					<template v-for="(f, i) in items">
+						<XFile
+							v-if="'size' in f"
+							:key="f.id"
+							v-anim="i"
+							:file="f"
+							:select-mode="select !== 'folder'"
+							:is-selected="selected.some(x => x.id === f.id)"
+							@chosen="choose"
+							@dragstart="isDragSource = true"
+							@dragend="isDragSource = false"
+						/>
+						<XFolder
+							v-else
+							:key="f.id"
+							v-anim="i"
+							:folder="f"
+							:select-mode="select !== 'file'"
+							:is-selected="selected.some(x => x.id === f.id)"
+							@chosen="choose"
+							@move="move"
+							@upload="upload"
+							@removeFile="removeFile"
+							@removeFolder="removeFolder"
+							@dragstart="isDragSource = true"
+							@dragend="isDragSource = false"
+						/>
+					</template>
+				</div>
 			</template>
 		</MkPagination>
 	</div>
@@ -631,13 +632,13 @@ onBeforeUnmount(() => {
 			height: calc(100% - 38px - 100px);
 		}
 
-		> .contents {
+		.contents {
 			display: grid;
 			grid-template-columns: repeat(5, 1fr);
 			gap: .5em;
 		}
 
-		> .empty {
+		.empty {
 			padding: 16px;
 			text-align: center;
 			pointer-events: none;
