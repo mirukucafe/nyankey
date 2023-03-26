@@ -207,8 +207,8 @@ function deleteFolder() {
 			defaultStore.set('uploadFolder', null);
 		}
 	}).catch(err => {
-		switch (err.id) {
-			case 'b0fc8a17-963c-405d-bfbc-859a487295e1':
+		switch (err.code) {
+			case 'HAS_CHILD_FILES_OR_FOLDERS':
 				os.alert({
 					type: 'error',
 					title: i18n.ts.unableToDelete,

@@ -258,8 +258,8 @@ function onDrop(ev: DragEvent): any {
 			folderId: droppedFolder.id,
 			parentId: folder?.id ?? null,
 		}).catch(err => {
-			switch (err) {
-				case 'detected-circular-definition':
+			switch (err.code) {
+				case 'RECURSIVE_FOLDER':
 					os.alert({
 						title: i18n.ts.unableToProcess,
 						text: i18n.ts.circularReferenceFolder,
@@ -335,8 +335,8 @@ function deleteFolder(folderToDelete: foundkey.entities.DriveFolder) {
 		// 削除時に親フォルダに移動
 		move(folderToDelete.parentId);
 	}).catch(err => {
-		switch (err.id) {
-			case 'b0fc8a17-963c-405d-bfbc-859a487295e1':
+		switch (err.code) {
+			case 'HAS_CHILD_FILES_OR_FOLDERS':
 				os.alert({
 					type: 'error',
 					title: i18n.ts.unableToDelete,

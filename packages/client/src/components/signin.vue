@@ -185,8 +185,8 @@ function onSubmit() {
 }
 
 function loginFailed(err) {
-	switch (err.id) {
-		case '6cc579cc-885d-43d8-95c2-b8c7fc963280': {
+	switch (err.code) {
+		case 'NO_SUCH_USER': {
 			os.alert({
 				type: 'error',
 				title: i18n.ts.loginFailed,
@@ -194,7 +194,7 @@ function loginFailed(err) {
 			});
 			break;
 		}
-		case '932c904e-9460-45b7-9ce6-7ed33be7eb2c': {
+		case 'ACCESS_DENIED': {
 			os.alert({
 				type: 'error',
 				title: i18n.ts.loginFailed,
@@ -202,11 +202,11 @@ function loginFailed(err) {
 			});
 			break;
 		}
-		case 'e03a5f46-d309-4865-9b69-56282d94e1eb': {
+		case 'SUSPENDED': {
 			showSuspendedDialog();
 			break;
 		}
-		case '22d05606-fbcf-421a-a2db-b32610dcfd1b': {
+		case 'RATE_LIMIT_EXCEEDED': {
 			os.alert({
 				type: 'error',
 				title: i18n.ts.loginFailed,
