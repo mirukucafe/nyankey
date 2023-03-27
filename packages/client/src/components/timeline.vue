@@ -10,11 +10,12 @@ import * as sound from '@/scripts/sound';
 import { $i } from '@/account';
 
 const props = defineProps<{
-	src: 'antenna' | 'home' | 'local' | 'social' | 'global' | 'mentions' | 'directs' | 'list' | 'channel';
+	src: 'antenna' | 'home' | 'local' | 'social' | 'global' | 'mentions' | 'directs' | 'list' | 'channel' | 'file';
 	list?: string;
 	antenna?: string;
 	channel?: string;
 	sound?: boolean;
+	fileId?: string;
 }>();
 
 const emit = defineEmits<{
@@ -128,6 +129,12 @@ switch (props.src) {
 			channelId: props.channel,
 		});
 		connection.on('note', prepend);
+		break;
+	case 'file':
+		endpoint = 'drive/files/attached-notes';
+		query = {
+			fileId: props.fileId,
+		};
 		break;
 }
 

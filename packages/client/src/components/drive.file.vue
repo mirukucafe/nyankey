@@ -85,6 +85,11 @@ function getMenu(): MenuItem[] {
 		text: i18n.ts.download,
 		icon: 'fas fa-download',
 		download: props.file.name,
+	}, {
+		type: 'link',
+		href: `/my/drive/file/${props.file.id}/attached`,
+		text: i18n.ts.showAttachedNotes,
+		icon: 'fas fa-paperclip',
 	}, null, {
 		text: i18n.ts.delete,
 		icon: 'fas fa-trash-alt',
