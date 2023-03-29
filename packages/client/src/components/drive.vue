@@ -24,7 +24,8 @@
 			<span v-if="folder != null" class="separator"><i class="fas fa-angle-right"></i></span>
 			<span v-if="folder != null" class="folder current">{{ folder.name }}</span>
 		</div>
-		<button class="menu _button" @click="showMenu"><i class="fas fa-ellipsis-h"></i></button>
+		<button :class="{ menu: true, _button: true, showSearch }" @click="showSearch = !showSearch" v-tooltip="i18n.ts.search"><i class="fas fa-search"></i></button>
+		<button class="_button" @click="showMenu"><i class="fas fa-ellipsis-h"></i></button>
 	</nav>
 	<div
 		ref="main" class="main"
@@ -35,10 +36,7 @@
 		@drop.prevent.stop="onDrop"
 		@contextmenu.stop="onContextmenu"
 	>
-		<FormFolder>
-			<template #icon><i class="fas fa-search"></i></template>
-			<template #label>{{ i18n.ts.search }}</template>
-
+		<div class="search" v-show="showSearch">
 			<FormInput v-model="searchName" :debounce="true" :spellcheck="false">
 				<template #label>{{ i18n.ts.name }}</template>
 				<template #prefix><i class="fas fa-filter"></i></template>
@@ -52,7 +50,7 @@
 				<option value="+name">{{ i18n.ts.name }} ({{ i18n.ts.descendingOrder }})</option>
 				<option value="-name">{{ i18n.ts.name }} ({{ i18n.ts.ascendingOrder }})</option>
 			</FormSelect>
-		</FormFolder>
+		</div>
 		<MkPagination
 			ref="paginationElem"
 			:pagination="pagination"
@@ -142,6 +140,7 @@ let selected = $ref<Array<foundkey.entities.DriveFile | foundkey.entities.DriveF
 let keepOriginal = $ref<boolean>(defaultStore.state.keepOriginalUploading);
 let searchName = $ref<string>('');
 let sort = $ref<undefined | string>(undefined);
+let showSearch = $ref(false);
 
 // ドロップされようとしているか
 let draghover = $ref(false);
@@ -636,6 +635,10 @@ onBeforeUnmount(() => {
 			margin-left: auto;
 			padding: 0 12px;
 		}
+
+		> .showSearch {
+			color: var(--accent);
+		}
 	}
 
 	> .main {
@@ -649,6 +652,10 @@ onBeforeUnmount(() => {
 
 		&.uploading {
 			height: calc(100% - 38px - 100px);
+		}
+
+		.search {
+			margin-bottom: var(--margin);
 		}
 
 		.contents {
