@@ -13,8 +13,10 @@ export default (object: any, note: Note) => {
 	} else if (note.visibility === 'home') {
 		to = [`${attributedTo}/followers`];
 		cc = ['https://www.w3.org/ns/activitystreams#Public'];
+	} else if (note.visibility === 'followers') {
+		to = [`${attributedTo}/followers`];
 	} else {
-		return null;
+		throw new Error('Invalid visibility for pure renote.');
 	}
 
 	return {
