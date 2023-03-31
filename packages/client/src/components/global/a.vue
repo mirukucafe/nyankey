@@ -65,8 +65,11 @@ function onContextmenu(ev) {
 	}], ev);
 }
 
-function nav() {
-	if (props.behavior === 'browser') {
+function nav(evt: MouseEvent) {
+	if (evt.ctrlKey || evt.buttons === 4) {
+		// held Control or clicked with middle mouse button
+		window.open(props.to, '_blank');
+	} else if (props.behavior === 'browser') {
 		location.href = props.to;
 	} else if (props.behavior === 'window') {
 		os.pageWindow(props.to);
