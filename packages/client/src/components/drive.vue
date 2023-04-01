@@ -158,40 +158,6 @@ watch($$(folder), () => {
 	}
 });
 
-function onStreamDriveFileCreated(file: foundkey.entities.DriveFile) {
-	addFile(file, true);
-}
-
-function onStreamDriveFileUpdated(file: foundkey.entities.DriveFile) {
-	const current = folder?.id ?? null;
-	if (current !== file.folderId) {
-		removeFile(file);
-	} else {
-		addFile(file, true);
-	}
-}
-
-function onStreamDriveFileDeleted(fileId: string) {
-	removeFile(fileId);
-}
-
-function onStreamDriveFolderCreated(createdFolder: foundkey.entities.DriveFolder) {
-	addFolder(createdFolder, true);
-}
-
-function onStreamDriveFolderUpdated(updatedFolder: foundkey.entities.DriveFolder) {
-	const current = folder?.id ?? null;
-	if (current !== updatedFolder.parentId) {
-		removeFolder(updatedFolder);
-	} else {
-		addFolder(updatedFolder, true);
-	}
-}
-
-function onStreamDriveFolderDeleted(folderId: string) {
-	removeFolder(folderId);
-}
-
 function onDragover(ev: DragEvent): any {
 	if (!ev.dataTransfer) return;
 
@@ -450,31 +416,16 @@ function move(target?: string | foundkey.entities.DriveFolder) {
 	});
 }
 
-function addFolder(folderToAdd: foundkey.entities.DriveFolder, unshift = false) {
+function addOrUpdate(itemToAdd: foundkey.entities.DriveFolder | foundkey.entities.DriveFile) {
 	const current = folder?.id ?? null;
-	if (current !== folderToAdd.parentId) return;
+	const addInto = 'parentId' in itemToAdd ? itemToAdd.parentId : itemToAdd.folderId;
+	if (current !== addInto) return;
 
-	const exist = paginationElem.items.some(f => f.id === folderToAdd.id);
+	const exist = paginationElem.items.some(f => f.id === itemToAdd.id);
 	if (exist) {
-		paginationElem.updateItem(folderToAdd.id, () => folderToAdd);
-	} else if (unshift) {
-		paginationElem.prepend(folderToAdd);
+		paginationElem.updateItem(itemToAdd.id, () => itemToAdd);
 	} else {
-		paginationElem.append(folderToAdd);
-	}
-}
-
-function addFile(fileToAdd: foundkey.entities.DriveFile, unshift = false) {
-	const current = folder?.id ?? null;
-	if (current !== fileToAdd.folderId) return;
-
-	const exist = paginationElem.items.some(f => f.id === fileToAdd.id);
-	if (exist) {
-		paginationElem.updateItem(fileToAdd.id, () => fileToAdd);
-	} else if (unshift) {
-		paginationElem.prepend(fileToAdd);
-	} else {
-		paginationElem.append(fileToAdd);
+		paginationElem.prepend(itemToAdd);
 	}
 }
 
@@ -551,12 +502,12 @@ function onContextmenu(ev: MouseEvent) {
 }
 
 onMounted(() => {
-	connection.on('fileCreated', onStreamDriveFileCreated);
-	connection.on('fileUpdated', onStreamDriveFileUpdated);
-	connection.on('fileDeleted', onStreamDriveFileDeleted);
-	connection.on('folderCreated', onStreamDriveFolderCreated);
-	connection.on('folderUpdated', onStreamDriveFolderUpdated);
-	connection.on('folderDeleted', onStreamDriveFolderDeleted);
+	connection.on('fileCreated', addOrUpdate);
+	connection.on('fileUpdated', addOrUpdate);
+	connection.on('fileDeleted', removeFile);
+	connection.on('folderCreated', addOrUpdate);
+	connection.on('folderUpdated', addOrUpdate);
+	connection.on('folderDeleted', removeFolder);
 
 	if (props.initialFolder) {
 		move(props.initialFolder);
