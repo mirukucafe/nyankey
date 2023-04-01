@@ -89,7 +89,7 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 			langs: meta.langs,
 			tosUrl: meta.ToSUrl,
 			repositoryUrl: repository,
-			feedbackUrl: 'ircs://irc.akkoma.dev/foundkey',
+			feedbackUrl: 'https://akkoma.dev/FoundKeyGang/FoundKey/issues',
 			disableRegistration: meta.disableRegistration,
 			disableLocalTimeline: meta.disableLocalTimeline,
 			disableGlobalTimeline: meta.disableGlobalTimeline,
