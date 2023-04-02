@@ -259,8 +259,9 @@ function onContextmenu(ev: MouseEvent) {
 	}
 
 	> .thumbnail {
-		width: 110px;
-		height: 110px;
+		/* same style as drive.file.vue */
+		width: 8em;
+		height: 8em;
 		margin: auto;
 
 		/* same style as drive-file-thumbnail.vue */

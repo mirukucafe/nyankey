@@ -318,8 +318,8 @@ async function deleteFile(): Promise<void> {
 	}
 
 	> .thumbnail {
-		width: 110px;
-		height: 110px;
+		width: 8em;
+		height: 8em;
 		margin: auto;
 	}
 

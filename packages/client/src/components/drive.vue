@@ -610,9 +610,13 @@ onBeforeUnmount(() => {
 		}
 
 		.contents {
-			display: grid;
-			grid-template-columns: repeat(5, 1fr);
-			gap: .5em;
+			display: flex;
+			flex: row wrap;
+
+			> * {
+				width: 8em;
+				margin: var(--margin);
+			}
 		}
 
 		.empty {
