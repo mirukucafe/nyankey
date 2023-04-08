@@ -611,7 +611,7 @@ onBeforeUnmount(() => {
 
 		.contents {
 			display: flex;
-			flex: row wrap;
+			flex-flow: row wrap;
 
 			> * {
 				width: 8em;
