@@ -40,6 +40,7 @@ You will need to set the database host to `db` and Redis host to `redis` in orde
 
 
 Edit `docker-compose.yml` if necessary. (e.g. if you want to change the port).
+If you are using SELinux (eg. you're on Fedora or a RHEL derivative), you'll want to add the `Z` mount flag to the volume mounts to allow the containers to access the contents of those volumes.
 
 ## Build and initialize
 The following command will build FoundKey and initialize the database.
