@@ -28,7 +28,7 @@ function inbox(ctx: Router.RouterContext): void {
 	let signature;
 
 	try {
-		signature = httpSignature.parseRequest(ctx.req, { 'headers': [] });
+		signature = httpSignature.parseRequest(ctx.req);
 	} catch (e) {
 		ctx.status = 401;
 		return;
