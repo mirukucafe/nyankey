@@ -1,9 +1,10 @@
 _lang_: "Polski"
 headlineMisskey: "Sieć połączona wpisami"
-introMisskey: "Witaj! FoundKey jest otwartoźródłowym serwisem mikroblogowym.\nTwórz\
-  \ \"wpisy\", aby dzielić się tym, co się dzieje i opowiadać wszystkim o sobie. \U0001F4E1\
-  \nMożesz również użyć \"reakcji\", aby szybko wyrazić swoje uczucia dotyczące wpisów\
-  \ innych użytkowników. \U0001F44D\nOdkrywaj nowy świat! \U0001F680"
+introMisskey: "Witaj! Foundkey jest otwartoźródłowym, zdecentralizowanym serwisem\
+  \ mikroblogowym.\nTwórz \"wpisy\", aby dzielić się tym, co się dzieje i opowiadać\
+  \ wszystkim o sobie. \U0001F4E1\nMożesz również użyć \"reakcji\", aby szybko wyrazić\
+  \ swoje uczucia dotyczące wpisów innych użytkowników. \U0001F44D\nOdkryjmy nowy\
+  \ świat! \U0001F680"
 monthAndDay: "{month}-{day}"
 search: "Szukaj"
 notifications: "Powiadomienia"
@@ -60,12 +61,12 @@ import: "Importuj"
 export: "Eksportuj"
 files: "Pliki"
 download: "Pobierz"
-driveFileDeleteConfirm: "Czy chcesz usunąć plik \"{name}\"? Zniknie również notatka,\
-  \ do której dołączony jest ten plik."
+driveFileDeleteConfirm: "Czy chcesz usunąć plik \"{name}\"? Znikną również wpisy,\
+  \ do których dołączony jest ten plik."
 unfollowConfirm: "Czy na pewno chcesz przestać obserwować {name}?"
-exportRequested: "Zażądałeś eksportu. Może to zająć trochę czasu. Po zakończeniu eksportu\
-  \ zostanie on dodany do Twoich \"dysków\"."
-importRequested: "Zażądano importu. Może to zająć chwilę."
+exportRequested: "Zażądano eksportu. Może to zająć chwilę. Po zakończeniu eksportu\
+  \ zostanie on dodany do Twojego Dysku."
+importRequested: "Zażądano importu. Może to zająć chwilę."
 lists: "Listy"
 note: "Utwórz wpis"
 notes: "Wpisy"
@@ -77,7 +78,7 @@ manageLists: "Zarządzaj listami"
 error: "Błąd"
 somethingHappened: "Coś poszło nie tak"
 retry: "Spróbuj ponownie"
-pageLoadError: "Nie udało się załadować strony"
+pageLoadError: "Nie udało się załadować strony."
 pageLoadErrorDescription: "Zwykle jest to spowodowane problemem z siecią lub cache\
   \ przeglądarki. Spróbuj wyczyścić cache i sprawdź jeszcze raz za chwilę."
 serverIsDead: "Serwer nie odpowiada. Zaczekaj chwilę i spróbuj ponownie."
@@ -101,7 +102,7 @@ sensitive: "NSFW"
 add: "Dodaj"
 reaction: "Reakcja"
 reactionSettingDescription2: "Przeciągnij aby zmienić kolejność, naciśnij aby usunąć,\
-  \ naciśnij „+” aby dodać"
+  \ naciśnij „+” aby dodać."
 attachCancel: "Usuń załącznik"
 markAsSensitive: "Oznacz jako NSFW"
 unmarkAsSensitive: "Cofnij NSFW"
@@ -133,7 +134,7 @@ flagAsBot: "To konto jest botem"
 flagAsBotDescription: "Jeżeli ten kanał jest kontrolowany przez jakiś program, ustaw\
   \ tę opcję. Jeżeli włączona, będzie działać jako flaga informująca innych programistów,\
   \ aby zapobiegać nieskończonej interakcji z różnymi botami i dostosowywać wewnętrzne\
-  \ systemy FoundKey, traktując konto jako bota."
+  \ systemy Foundkey, traktując konto jako bota."
 flagAsCat: "To konto jest kotem"
 flagAsCatDescription: "Przełącz tę opcję, aby konto było oznaczone jako kot."
 autoAcceptFollowed: "Automatycznie przyjmuj prośby o możliwość obserwacji od użytkowników,\
@@ -176,17 +177,19 @@ clearCachedFilesConfirm: "Czy na pewno chcesz usunąć wszystkie zdalne pliki z 
   \ podręcznej?"
 blockedInstances: "Zablokowane instancje"
 blockedInstancesDescription: "Wypisz nazwy hostów instancji, które powinny zostać\
-  \ zablokowane. Wypisane instancje nie będą mogły dłużej komunikować się z tą instancją."
-muteAndBlock: "Wycisz / Zablokuj"
+  \ zablokowane. Wypisane instancje nie będą mogły dłużej komunikować się z tą instancją.\
+  \ Nazwy domen non-ASCII muszą być zakodowane w punycode. Poddomeny wypisanych instancji\
+  \ również będą blokowane."
+muteAndBlock: "Wyciszenia i blokady"
 mutedUsers: "Wyciszeni użytkownicy"
 blockedUsers: "Zablokowani użytkownicy"
 noUsers: "Brak użytkowników"
 editProfile: "Edytuj profil"
 noteDeleteConfirm: "Czy na pewno chcesz usunąć ten wpis?"
 pinLimitExceeded: "Nie możesz przypiąć więcej wpisów."
-intro: "Zakończono instalację FoundKey! Utwórz konto administratora."
+intro: "Zakończono instalację Foundkey! Utwórz konto administratora."
 done: "Gotowe"
-processing: "Przetwarzanie"
+processing: "Przetwarzanie..."
 preview: "Podgląd"
 default: "Domyślne"
 noCustomEmojis: "Brak emoji"
@@ -265,7 +268,7 @@ emptyDrive: "Dysk jest pusty"
 emptyFolder: "Ten katalog jest pusty"
 unableToDelete: "Nie można usunąć"
 inputNewFileName: "Wprowadź nową nazwę pliku"
-inputNewDescription: "Proszę wpisać nowy napis"
+inputNewDescription: "Wpisz nowy opis"
 inputNewFolderName: "Wprowadź nową nazwę katalogu"
 circularReferenceFolder: "Katalog docelowy jest podkatalogiem katalogu, który chcesz\
   \ przenieść."
@@ -276,7 +279,7 @@ avatar: "Awatar"
 banner: "Baner"
 nsfw: "NSFW"
 whenServerDisconnected: "Po utracie połączenia z serwerem"
-disconnectedFromServer: "Utracono połączenie z serwerem."
+disconnectedFromServer: "Utracono połączenie z serwerem"
 reload: "Odśwież"
 doNothing: "Ignoruj"
 reloadConfirm: "Czy chcesz odświeżyć oś czasu?"
@@ -323,7 +326,7 @@ antennaSource: "Źródło Anteny"
 antennaKeywords: "Słowa kluczowe do obserwacji"
 antennaExcludeKeywords: "Wykluczone słowa kluczowe"
 antennaKeywordsDescription: "Oddziel spacjami dla warunku AND, albo wymuś koniec linii\
-  \ dla warunku OR"
+  \ dla warunku OR."
 notifyAntenna: "Powiadamiaj o nowych wpisach"
 withFileAntenna: "Filtruj tylko wpisy z załączonym plikiem"
 antennaUsersDescription: "Wypisz po jednej nazwie użytkownika w linii"
@@ -342,7 +345,7 @@ recentlyRegisteredUsers: "Ostatnio zarejestrowani użytkownicy"
 recentlyDiscoveredUsers: "Ostatnio odkryci użytkownicy"
 popularTags: "Tagi na czasie"
 userList: "Listy"
-aboutMisskey: "O FoundKey"
+aboutMisskey: "O Foundkey"
 administrator: "Admin"
 token: "Token"
 twoStepAuthentication: "Uwierzytelnianie dwuskładnikowe"
@@ -392,10 +395,10 @@ newMessageExists: "Masz nową wiadomość"
 onlyOneFileCanBeAttached: "Możesz załączyć tylko jeden plik do wiadomości"
 signinRequired: "Proszę się zalogować"
 invitationCode: "Kod zaproszenia"
-checking: "Sprawdzam"
+checking: "Sprawdzam..."
 available: "Dostępna"
 unavailable: "Niedostępna"
-usernameInvalidFormat: "może zawierać litery, cyfry i podkreślniki."
+usernameInvalidFormat: "Nazwa użytkownika może zawierać litery, cyfry i podkreślniki."
 tooShort: "Zbyt krótka"
 tooLong: "Zbyt długa"
 weakPassword: "Słabe hasło"
@@ -409,7 +412,7 @@ tapSecurityKey: "Wybierz swój klucz bezpieczeństwa"
 or: "Lub"
 language: "Język"
 uiLanguage: "Język wyświetlania UI"
-groupInvited: "Zaproszony(-a) do grupy"
+groupInvited: "Został*ś zaproszon* do grupy"
 useOsNativeEmojis: "Używaj natywnych Emoji systemu"
 youHaveNoGroups: "Nie masz żadnych grup"
 joinOrCreateGroup: "Uzyskaj zaproszenie do dołączenia do grupy lub utwórz własną grupę."
@@ -460,7 +463,7 @@ popout: "Popout"
 volume: "Głośność"
 masterVolume: "Głośność główna"
 details: "Szczegóły"
-unableToProcess: "Nie udało się dokończyć działania."
+unableToProcess: "Nie udało się dokończyć działania"
 recentUsed: "Ostatnio używane"
 install: "Zainstaluj"
 uninstall: "Odinstaluj"
@@ -474,7 +477,7 @@ ascendingOrder: "Rosnąco"
 descendingOrder: "Malejąco"
 scratchpad: "Brudnopis"
 scratchpadDescription: "Brudnopis zawiera eksperymentalne środowisko dla AiScript.\
-  \ Możesz pisać, wykonywać i sprawdzać wyniki w interakcji z FoundKey."
+  \ Możesz pisać, wykonywać i sprawdzać wyniki w interakcji z Foundkey."
 output: "Wyjście"
 updateRemoteUser: "Aktualizuj zdalne dane o użytkowniku"
 deleteAllFilesConfirm: "Czy na pewno chcesz usunąć wszystkie pliki?"
@@ -496,7 +499,7 @@ enablePlayer: "Otwórz odtwarzacz wideo"
 disablePlayer: "Zamknij odtwarzacz wideo"
 themeEditor: "Edytor motywu"
 description: "Opis"
-describeFile: "dodaj podpis"
+describeFile: "Dodaj opis"
 author: "Autor"
 leaveConfirm: "Są niezapisane zmiany. Czy chcesz je odrzucić?"
 manage: "Zarządzanie"
@@ -531,10 +534,10 @@ smtpUser: "Nazwa użytkownika"
 smtpPass: "Hasło"
 emptyToDisableSmtpAuth: "Pozostaw adres e-mail i hasło puste, aby wyłączyć weryfikację\
   \ SMTP"
-smtpSecureInfo: "Wyłącz, jeżeli używasz STARTTLS"
+smtpSecureInfo: "Wyłącz, jeżeli używasz STARTTLS."
 testEmail: "Przetestuj dostarczanie wiadomości e-mail"
 wordMute: "Wyciszenie słowa"
-userSaysSomething: "{name} powiedział(-a) coś"
+userSaysSomething: "{name} powiedział* coś"
 makeActive: "Aktywuj"
 display: "Wyświetlanie"
 copy: "Kopiuj"
@@ -543,7 +546,7 @@ database: "Baza danych"
 channel: "Kanały"
 create: "Utwórz"
 notificationSetting: "Ustawienia powiadomień"
-notificationSettingDesc: "Wybierz rodzaj powiadomień do wyświetlania"
+notificationSettingDesc: "Wybierz rodzaj powiadomień do wyświetlania."
 useGlobalSetting: "Użyj globalnych ustawień"
 useGlobalSettingDesc: "Jeżeli włączone, zostaną wykorzystane ustawienia powiadomień\
   \ Twojego konta. Jeżeli wyłączone, mogą zostać wykonane oddzielne konfiguracje."
@@ -572,7 +575,7 @@ desktop: "Pulpit"
 createNew: "Utwórz nowy"
 optional: "Nieobowiązkowe"
 public: "Publiczny"
-i18nInfo: "FoundKey jest tłumaczone na wiele języków przez wolontariuszy. Możesz pomóc\
+i18nInfo: "Foundkey jest tłumaczone na wiele języków przez wolontariuszy. Możesz pomóc\
   \ na {link}."
 manageAccessTokens: "Zarządzaj tokenami dostępu"
 accountInfo: "Informacje o koncie"
@@ -594,7 +597,7 @@ driveUsage: "Użycie przestrzeni dyskowej"
 noCrawle: "Odrzuć indeksowanie przez crawlery"
 noCrawleDescription: "Proś wyszukiwarki internetowe, aby nie indeksowały Twojego profilu,\
   \ wpisów, stron itd."
-lockedAccountInfo: "Dopóki nie ustawisz widoczności wpisu na \"Obserwujący\", twoje\
+lockedAccountInfo: "Dopóki nie ustawisz widoczności wpisu na \"Obserwujący\", Twoje\
   \ wpisy będą mogli widzieć wszyscy, nawet jeśli ustawisz manualne zatwierdzanie\
   \ obserwujących."
 alwaysMarkSensitive: "Oznacz domyślnie jako NSFW"
@@ -611,7 +614,7 @@ useSystemFont: "Używaj domyślnej czcionki systemu"
 makeExplorable: "Pokazuj konto na stronie „Eksploruj”"
 makeExplorableDescription: "Jeżeli wyłączysz tę opcję, Twoje konto nie będzie wyświetlać\
   \ się w sekcji „Eksploruj”."
-showGapBetweenNotesInTimeline: "Pokazuj odstęp między wpisami na osi czasu."
+showGapBetweenNotesInTimeline: "Pokazuj odstęp między wpisami na osi czasu"
 duplicate: "Duplikuj"
 left: "Lewo"
 center: "Wyśsrodkuj"
@@ -619,7 +622,7 @@ wide: "Szerokie"
 narrow: "Wąskie"
 reloadToApplySetting: "To ustawienie zostanie zastosowane po odświeżeniu strony. Chcesz\
   \ odświeżyć?"
-needReloadToApply: "To ustawienie zostanie zastosowane po odświeżeniu strony"
+needReloadToApply: "To ustawienie zostanie zastosowane po odświeżeniu strony."
 clearCache: "Wyczyść pamięć podręczną"
 onlineUsersCount: "{n} osób jest online"
 backgroundColor: "Tło"
@@ -638,18 +641,18 @@ editCode: "Edytuj kod"
 apply: "Zastosuj"
 receiveAnnouncementFromInstance: "Otrzymuj powiadomienia e-mail z tej instancji"
 emailNotification: "Powiadomienia e-mail"
-useReactionPickerForContextMenu: "Otwórz wybornik reakcji prawym kliknięciem"
+useReactionPickerForContextMenu: "Otwórz wybierak reakcji prawym kliknięciem"
 typingUsers: "{users} pisze(-ą)..."
 jumpToSpecifiedDate: "Przejdź do określonej daty"
 clear: "Wróć"
 markAllAsRead: "Oznacz wszystkie jako przeczytane"
 goBack: "Wróć"
-unlikeConfirm: "Na pewno chcesz usunąć polubienie?"
+unlikeConfirm: "Na pewno chcesz usunąć polubienie?"
 fullView: "Pełny widok"
 quitFullView: "Opuść pełny widok"
 addDescription: "Dodaj opis"
 userPagePinTip: "Możesz wyświetlać wpisy w tym miejscu po wybraniu \"Przypnij do profilu\"\
-  \ z menu pojedyńczego wpisu"
+  \ z menu pojedynczego wpisu."
 notSpecifiedMentionWarning: "Ten wpis zawiera wzmianki o użytkownikach niezawartych\
   \ jako odbiorcy"
 info: "Informacje"
@@ -657,7 +660,7 @@ userInfo: "Informacje o użykowniku"
 unknown: "Nieznane"
 hideOnlineStatus: "Ukryj status online"
 hideOnlineStatusDescription: "Ukrywanie statusu online ogranicza wygody niektórych\
-  \ funkcji, tj. wyszukiwanie"
+  \ funkcji, takich jak wyszukiwanie."
 online: "Online"
 active: "Aktywny"
 offline: "Offline"
@@ -677,7 +680,7 @@ noBotProtectionWarning: "Zabezpieczenie przed botami nie jest skonfigurowane."
 configure: "Skonfiguruj"
 recentPosts: "Ostatnie wpisy"
 shareWithNote: "Udostępnij z wpisem"
-emailNotConfiguredWarning: "Nie podano adresu e-mail"
+emailNotConfiguredWarning: "Nie podano adresu e-mail."
 ratio: "Stosunek"
 previewNoteText: "Pokaż podgląd"
 customCss: "Własny CSS"
@@ -690,14 +693,18 @@ hide: "Ukryj"
 indefinitely: "Nigdy"
 _ffVisibility:
   public: "Publikuj"
+  followers: Widoczne tylko dla obserwujących
+  private: Prywatna
 _forgotPassword:
   ifNoEmail: "Jeżeli nie podano adresu e-mail podczas rejestracji, skontaktuj się\
-    \ z administratorem zamiast tego."
+    \ z administratorem."
   contactAdmin: "Jeżeli Twoja instancja nie obsługuje adresów e-mail, skontaktuj się\
     \ zamiast tego z administratorem, aby zresetować hasło."
+  enterEmail: Wpisz adres email użyty do rejestracji konta. Zostanie wysłany link
+    który umożliwi zresetowanie hasła.
 _email:
   _follow:
-    title: "Zaobserwował(a) Cię"
+    title: "Masz nowego obserwującego"
   _receiveFollowRequest:
     title: "Otrzymano prośbę o możliwość obserwacji"
 _plugin:
@@ -710,7 +717,7 @@ _registry:
   domain: "Domena"
   createKey: "Utwórz klucz"
 _aboutMisskey:
-  about: "FoundKey jest oprogramowanie open source rozwijanym przez syuilo od 2014."
+  about: "Foundkey jest forkiem Misskey rozwijanym od lipca 2022."
   allContributors: "Wszyscy twórcy"
   source: "Kod źródłowy"
 _nsfw:
@@ -719,8 +726,9 @@ _nsfw:
   force: "Ukrywaj wszystkie media"
 _mfm:
   cheatSheet: "Ściąga MFM"
-  intro: "MFM to język składniowy wyjątkowy dla FoundKey, który może być użyty w wielu\
-    \ miejscach. Tu znajdziesz listę wszystkich możliwych elementów składni MFM."
+  intro: "MFM jest językiem składniowym wyjątkowym dla Foundkey oraz innego oprogramowania\
+    \ *key, który może być użyty w wielu miejscach. Tu znajdziesz listę wszystkich\
+    \ możliwych elementów składni MFM."
   dummy: "FoundKey rozszerza świat Fediwersum"
   mention: "Wspomnij"
   mentionDescription: "Używając znaku @ i nazwy użytkownika, możesz określić danego\
@@ -728,7 +736,7 @@ _mfm:
   hashtag: "Hashtag"
   hashtagDescription: "Używając kratki i tekstu, możesz określić hashtag."
   url: "Adres URL"
-  urlDescription: "Adresy URL mogą być wyświetlane"
+  urlDescription: "Adresy URL mogą być wyświetlane."
   link: "Odnośnik"
   linkDescription: "Określone części tekstu mogą być wyświetlane jako adres URL."
   bold: "Pogrubienie"
@@ -753,11 +761,38 @@ _mfm:
   x3: "Bardzo duże"
   x3Description: "Czyni treść jeszcze większą."
   x4: "Ogromne"
-  x4Description: "Czyni treść jeszcze większą niż jeszcze większa."
+  x4Description: "Czyni treść nawet większą niż jeszcze większa."
   blur: "Rozmycie"
   font: "Czcionka"
   fontDescription: "Wybiera czcionkę do wyświetlania treści."
   rotate: "Obróć"
+  inlineCodeDescription: Wyświetla podświetlanie składni dla kodu (programu) w linii.
+  jump: Animacja (Skok)
+  blockMath: Matematyka (Blok)
+  tada: Animacja (Tada)
+  sparkle: Blask
+  sparkleDescription: Nadaje zawartości efekt iskrzących cząstek.
+  inlineMathDescription: Pokaż formuły matematyczne (KaTeX) w linii.
+  inlineMath: Matematyka (Inline)
+  inlineCode: Kod (inline)
+  smallDescription: Wyświetla zawartość jako małą i cienką.
+  blurDescription: Rozmywa zawartość. Zostanie ona wyraźnie wyświetlona przy najechaniu.
+  bounce: Animacja (Odbijanie)
+  jelly: Animacja (Żelek)
+  spin: Animacja (Wirowanie)
+  twitch: Animacja (Drganie)
+  jellyDescription: Nadaje zawartości galaretowatą animację.
+  tadaDescription: Nadaje zawartości animację w stylu "Tada!".
+  jumpDescription: Nadaje zawartości animację skokową.
+  bounceDescription: Nadaje zawartości sprężystą animację.
+  shakeDescription: Nadaje zawartości animację potrzęsania.
+  twitchDescription: Nadaje zawartości silnie drgającą animację.
+  spinDescription: Nadaje zawartości animację obrotową.
+  rainbow: Tęcza
+  rainbowDescription: Sprawia, że zawartość pojawia się w kolorach tęczy.
+  rotateDescription: Obraca zawartość o podany kąt.
+  blockMathDescription: Pokaż wieloliniowe formuły matematyczne (KaTeX) w bloku.
+  shake: Animacja (Wstrząs)
 _instanceTicker:
   none: "Nigdy nie pokazuj"
   remote: "Pokaż dla zdalnych użytkowników"
@@ -778,12 +813,21 @@ _channel:
   notesCount: "{n} wpisy"
 _menuDisplay:
   hide: "Ukryj"
+  sideFull: Z boku
+  sideIcon: Z boku (tylko ikony)
+  top: U góry
 _wordMute:
   muteWords: "Słowo do wyciszenia"
   muteWordsDescription2: "Otocz słowa kluczowe ukośnikami, aby używać wyrażeń regularnych."
   soft: "Łagodny"
   hard: "Twardy"
   mutedNotes: "Wyciszone wpisy"
+  muteWordsDescription: Rozdzielaj spacją dla kondycji AND, lub przerwaniem wiersza
+    dla kondycji OR.
+  hardDescription: Zapobiega dodawania do osi czasu wpisów, które spełniają podane
+    warunki. Dodatkowo, te wpisy nie zostaną dodane do osi czasu, jeśli warunki się
+    zmienią.
+  softDescription: Ukryj z osi czasu wpisy, które spełniają podane warunki.
 _theme:
   explore: "Przeglądaj motywy"
   install: "Zainstaluj motyw"
@@ -794,7 +838,7 @@ _theme:
   installedThemes: "Zainstalowane motywy"
   builtinThemes: "Wbudowane motywy"
   alreadyInstalled: "Motyw jest już zainstalowany"
-  invalid: "Format motywu jest nieprawidłowy."
+  invalid: "Format motywu jest nieprawidłowy"
   make: "Utwórz motyw"
 _sfx:
   note: "Wpisy"
@@ -803,6 +847,7 @@ _sfx:
   chat: "Wiadomości"
   chatBg: "Rozmowy (tło)"
   channel: "Powiadomienia kanału"
+  antenna: Anteny
 _ago:
   future: "W przyszłości"
   justNow: "Przed chwilą"
@@ -819,14 +864,39 @@ _time:
   hour: "godz."
   day: "dzień"
 _tutorial:
-  title: "Jak korzystać z FoundKey"
+  title: "Jak korzystać z Foundkey"
   step1_1: "Witaj!"
-  step1_3: "Twoja oś czasu jest jeszcze pusta, ponieważ nie opublikowałeś(-aś) jeszcze\
+  step1_3: "Twoja oś czasu jest jeszcze pusta, ponieważ nie opublikował*ś jeszcze\
     \ żadnych wpisów i nie obserwujesz jeszcze nikogo."
   step2_1: "Ukończmy konfigurację profilu zanim utworzymy wpis lub zaczniemy kogoś\
     \ obserwować."
-  step3_1: "Zakończyłeś(-aś) konfigurację profilu?"
-  step3_3: "Wypełnij pole i kliknij przycisk w prawym górnym rogu by wysłać post."
+  step3_1: "Zakończył*ś konfigurację profilu?"
+  step3_3: "Wypełnij pole i kliknij przycisk w prawym górnym rogu by wysłać wpis."
+  step4_1: Skończył*ś publikować swój pierwszy wpis?
+  step6_2: Możesz też dodawać reakcję do wpisów innych ludzi, żeby szybko odpowiedzieć
+    na nie.
+  step4_2: Hura! Teraz Twój wpis powinien być widoczny na Twojej osi czasu.
+  step5_2: '{featured} pokaże CI popularne wpisy z tej instancji. {explore} pozwoli
+    ci znaleźć popularnych użytkowników. Spróbuj tam znaleźć ludzi których chciał*byś
+    zaobserwować!'
+  step7_1: Gratulacje! Właśnie ukończył*ś podstawowy samouczek Foundkey.
+  step6_3: W celu dodania reakcji, kliknij na "+" przy poście innego użytkownika i
+    wybierz jakieś emoji jako reakcję na niego.
+  step6_1: Wpisy innych ludzi powinny już się pojawiać na Twojej osi czasu.
+  step7_2: Jeśli chcesz dowiedzieć się więcej o Foundkey, przejdź do sekcji {help}.
+  step7_3: A teraz, powodzenia i miłej zabawy z Foundkey! 🚀
+  step5_1: Teraz spróbujmy ożywić oś czasu poprzez zaobserwowanie innych ludzi.
+  step1_2: Ta strona jest nazywana "osią czasu". Pokazuje ona chronologicznie ułożone
+    wpisy ludzi których obserwujesz.
+  step5_4: Jeśli inny użytkownik ma kłódkę przy nazwie, ręczne zatwierdzenie Twojej
+    prośby o obserwację przez tego użytkownika może zająć trochę czasu.
+  step3_2: Spróbujmy opublikować wpis. Możesz to zrobić klikając przycisk z ikoną
+    ołówka.
+  step2_2: Dodanie informacji o sobie pomoże innym w decyzji czy chcą widzieć Twoje
+    wpisy, lub Ciebie obserwować.
+  step5_3: By zaobserwować innych użytkowników, kliknij na ich ikonę i wciśnij przycisk
+    "Obserwuj" na ich profilu.
+  step3_4: Nic nie przychodzi na myśl? Spróbuj "Właśnie wrócił*m z kościoła"!
 _2fa:
   registerDevice: "Zarejestruj nowe urządzenie"
   step1: "Najpierw, zainstaluj aplikację uwierzytelniającą (taką jak {a} lub {b})\
@@ -834,32 +904,54 @@ _2fa:
   step2: "Następnie, zeskanuje kod QR z ekranu."
   step3: "Wprowadź token podany w aplikacji, aby ukończyć konfigurację."
   step4: "Od teraz, przy każdej próbie logowania otrzymasz prośbę o token logowania."
+  alreadyRegistered: Już zarejestrował*ś urządzenie do uwierzytelnienia dwuetapowego.
+  step2Url: 'Możesz też wpisać ten URL jeśli używasz programu komputerowego:'
+  registerKey: Zarejestruj klucz sprzętowy
+  securityKeyInfo: Oprócz uwierzytelnienia odciskiem palców lub PIN, możesz również
+    skonfigurować uwierzytelnienie za pomocą kluczy sprzętowych obsługujących FIDO2,
+    w celu dalszego zabezpieczenia Twojego konta.
 _permissions:
   "read:account": "Wyświetl informacje o swoim koncie"
-  "write:account": "Edytuj swoje informacje o koncie"
-  "read:blocks": "Zobacz listę osób, które zablokowałeś(-aś)"
-  "write:blocks": "Edytuj listę osób, które zablokowałeś(-aś)"
-  "read:drive": "Dostęp do plików i katalogów ze Twojego dysku"
-  "write:drive": "Edycja i usuwanie plików i katalogów z Twojego dysku."
-  "read:favorites": "Wyświetlanie Twojej listy ulubionych."
-  "write:favorites": "Edycja Twojej listy ulubionych."
-  "read:following": "Wyświetlanie informacji o obserwowanych"
-  "write:following": "Obserwowanie lub cofanie obserwacji innych kont"
-  "read:mutes": "Wyświetlanie listy osób, które wyciszyłeś(-aś)"
-  "write:mutes": "Edycja listy osób, które wyciszyłeś(-aś)"
+  "write:account": "Edytuj informacje o koncie"
+  "read:blocks": "Wyświetl listę zablokowanych użytkowników"
+  "write:blocks": "Blokuj i odblokowuj użytkowników"
+  "read:drive": "Wyświetl pliki i foldery z twojego Dysku"
+  "write:drive": "Tworzenie, zmienianie i usuwanie plików z Dysku"
+  "read:favorites": "Wyświetlanie listy ulubionych wpisów"
+  "write:favorites": "Edycja listy ulubionych wpisów"
+  "read:following": "Wyświetlanie informacji o obserwowanych i obserwujących"
+  "write:following": "Obserwowanie i cofanie obserwacji innych użytkowników"
+  "read:mutes": "Wyświetlanie użytkowników którzy są wyciszeni, lub których podbicia\
+    \ są wyciszone"
+  "write:mutes": "Wyciszanie i odciszanie użytkowników, lub ich podbić"
   "read:notifications": "Wyświetlanie powiadomień"
-  "write:notifications": "Działanie na powiadomieniach"
-  "write:reactions": "Edycja reakcji"
-  "write:votes": "Głosowanie w ankiecie"
-  "read:pages": "Wyświetlanie Twoich stron"
-  "write:pages": "Edycja lub usuwanie Twoich stron"
+  "write:notifications": "Oznaczanie powiadomień jako przeczytanych, oraz tworzenie\
+    \ niestandardowych powiadomień"
+  "write:reactions": "Tworzenie i usuwanie reakcji"
+  "write:votes": "Głosowanie w ankietach"
+  "read:pages": "Wyświetlanie stron"
+  "write:pages": "Tworzenie, zmienianie i usuwanie stron"
   "read:page-likes": "Wyświetlanie polubień na stronach"
-  "write:page-likes": "Edycja polubień na stronach"
-  "read:user-groups": "Wyświetlanie grup użytkownika"
-  "write:user-groups": "Edycja lub usuwanie grup użytkownika"
+  "write:page-likes": "Dodawanie oraz usuwanie polubień stron"
+  "read:user-groups": "Wyświetlanie grup należących do Ciebie, do których dołączył*ś,\
+    \ lub został*ś zaproszon*"
+  "write:user-groups": "Tworzenie, modyfikowanie, usuwanie, przenoszenie grup, dołączanie\
+    \ i wychodzenie z grup. Zapraszaj i banuj innych z grup. Akceptuj i odrzucaj zaproszenia\
+    \ do grup."
+  "read:reactions": Wyświetlaj reakcje
+  "write:notes": Tworzenie i usuwanie wpisów
+  "write:messaging": Tworzenie i usuwanie wiadomości czatu
+  "write:channels": Tworzenie, modyfikowanie, obserwowanie i od-obserwowanie kanałów
+  "read:messaging": Wyświetlaj wiadomości czatu i jego historię
+  "read:channels": Wyświetlaj obserwowane kanały i te do których dołączył*ś
 _auth:
   shareAccess: "Czy chcesz autoryzować „{name}” do dostępu do tego konta?"
-  permissionAsk: "Ta aplikacja wymaga następujących uprawnień:"
+  permissionAsk: "Ta aplikacja wymaga następujących uprawnień"
+  pleaseGoBack: Wróć do aplikacji
+  shareAccessAsk: Czy na pewno chcesz upoważnić tą aplikację do dostępu do Twojego
+    konta?
+  denied: Odmowa dostępu
+  callback: Wracam do aplikacji
 _weekday:
   sunday: "Niedziela"
   monday: "Poniedziałek"
@@ -881,6 +973,14 @@ _widgets:
   postForm: "Utwórz wpis"
   button: "Przycisk"
   jobQueue: "Kolejka zadań"
+  rssMarquee: Karuzela RSS
+  rss: Czytnik RSS
+  digitalClock: Zegar cyfrowy
+  onlineUsers: Użytkownicy online
+  slideshow: Pokaz slajdów
+  aichan: Ai
+  aiscript: Konsola AiScript
+  serverMetric: Wskaźniki serwera
 _cw:
   hide: "Ukryj"
   show: "Załaduj więcej"
@@ -915,6 +1015,10 @@ _visibility:
   followers: "Obserwujący"
   specified: "Bezpośredni"
   specifiedDescription: "Napisz tylko określonym użytkownikom"
+  localOnly: Lokalnie
+  homeDescription: Wpis będzie publiczny ale nie pojawi się na osi czasu instancji
+  followersDescription: Wpis pojawi się tylko na osiach czasu Twoich obserwujących
+  localOnlyDescription: Wpis będzie widoczny tylko dla użytkowników tej instancji
 _postForm:
   _placeholders:
     a: "Co się dzieje?"
@@ -923,6 +1027,9 @@ _postForm:
     d: "Czy masz coś do powiedzenia?"
     e: "Zacznij coś pisać…"
     f: "Czekamy, aż coś napiszesz."
+  quotePlaceholder: Cytuj ten wpis...
+  replyPlaceholder: Odpowiedz na ten wpis...
+  channelPlaceholder: Wyślij na kanał...
 _profile:
   name: "Nazwa"
   username: "Nazwa użytkownika"
@@ -942,20 +1049,34 @@ _exportOrImport:
   muteList: "Wycisz"
   blockingList: "Zablokuj"
   userLists: "Listy"
+  excludeMutingUsers: Wyklucz wyciszonych użytkowników
+  excludeInactiveUsers: Wyklucz nieaktywnych użytkowników
 _charts:
   federation: "Federacja"
   apRequest: "Żądania"
   usersTotal: "Łącznie # użytkowników"
   activeUsers: "Aktywni użytkownicy"
+  usersIncDec: Różnica w liczbie użytkowników
+  notesIncDec: Różnica w liczbie wpisów
+  localNotesIncDec: Różnica w liczbie lokalnych wpisów
+  notesTotal: Łączna liczba wpisów
+  remoteNotesIncDec: Różnica w liczbie zdalnych wpisów
+  filesIncDec: Różnica w liczbie plików
+  storageUsageTotal: Łączne użycie dysku
+  filesTotal: Łączna liczba plików
+  storageUsageIncDec: Różnica w wykorzystaniu miejsca
 _instanceCharts:
   requests: "Żądania"
   notesTotal: "Łącznie # wpisów"
-  ff: "Różnica w # obserwujących"
+  ff: "Różnica w liczbie obserwowanych / obserwujących użytkowników"
   ffTotal: "Łączna liczba # obserwujących"
   cacheSize: "Różnica w rozmiarze pamięci podręcznej"
   cacheSizeTotal: "Łączny rozmiar pamięci podręcznej"
   files: "Różnica # plików"
   filesTotal: "Łącznie # plików"
+  usersTotal: Łączna liczba użytkowników
+  notes: Różnica w liczbie wpisów
+  users: Różnica w liczbie użytkowników
 _timelines:
   home: "Strona główna"
   local: "Lokalne"
@@ -996,32 +1117,37 @@ _relayStatus:
   accepted: "Zaakceptowano"
   rejected: "Odrzucono"
 _notification:
-  youGotMention: "{name} wspomniał(a) o Tobie"
-  youGotReply: "{name} odpowiedział(a) Tobie"
-  youGotQuote: "{name} zacytował(a) Ciebie"
-  youRenoted: "{name} udostępnił(a) Twój wpis"
-  youGotPoll: "{name} zagłosował(a) w Twojej ankiecie"
-  youGotMessagingMessageFromUser: "{name} wysłał(a) Ci wiadomość"
+  youGotMention: "{name} wspomniał* o Tobie"
+  youGotReply: "{name} odpowiedział* Tobie"
+  youGotQuote: "{name} zacytował* Ciebie"
+  youRenoted: "{name} udostępnił* Twój wpis"
+  youGotPoll: "{name} zagłosował* w Twojej ankiecie"
+  youGotMessagingMessageFromUser: "{name} wysłał* Ci wiadomość"
   youGotMessagingMessageFromGroup: "Została wysłana wiadomość do grupy {name}"
-  youWereFollowed: "Zaobserwował(a) Cię"
-  youReceivedFollowRequest: "Otrzymałeś(-aś) prośbę o możliwość obserwacji"
+  youWereFollowed: "zaobserwował* Cię"
+  youReceivedFollowRequest: "Otrzymał*ś prośbę o możliwość obserwacji"
   yourFollowRequestAccepted: "Twoja prośba o możliwość obserwacji została przyjęta"
-  youWereInvitedToGroup: "Zaproszony(-a) do grupy"
+  youWereInvitedToGroup: "{userName} zaprosił* Ciebie do grupy"
   _types:
     follow: "Obserwowani"
-    mention: "Wspomnij"
+    mention: "Wspomnienia"
     reply: "Odpowiedzi"
-    renote: "Udostępnij"
-    quote: "Cytuj"
-    reaction: "Reakcja"
+    renote: "Podbicia"
+    quote: "Cytaty"
+    reaction: "Reakcje"
     pollVote: "Głosy w ankietach"
-    receiveFollowRequest: "Otrzymano prośbę o możliwość obserwacji"
-    followRequestAccepted: "Przyjęto prośbę o możliwość obserwacji"
-    groupInvited: "Zaproszono do grup"
-    app: "Powiadomienia z aplikacji"
+    receiveFollowRequest: "Otrzymane prośby o możliwość obserwacji"
+    followRequestAccepted: "Przyjęte prośby o możliwość obserwacji"
+    groupInvited: "Zaproszenia do grup"
+    app: "Powiadomienia z powiązanych aplikacji"
+    pollEnded: Zakończone ankiety
+    move: Inni użytkownicy przenoszący konta
   _actions:
     reply: "Odpowiedz"
     renote: "Udostępnij"
+    followBack: również cię zaobserwował*
+  emptyPushNotificationMessage: Powiadomienia push zostały zaktualizowane
+  pollEnded: Są dostępne wyniki ankiety
 _deck:
   alwaysShowMainColumn: "Zawsze pokazuj główną kolumnę"
   columnAlign: "Wyrównaj kolumny"
@@ -1054,3 +1180,196 @@ unrenoteAllConfirm: Czy na pewno chcesz cofnąć wszystkie podbicia tego wpisu?
 renoteMute: Ukryj podbicia
 renoteUnmute: Pokaż podbicia
 unrenoteAll: Cofnij wszystkie podbicia
+menu: Menu
+clips: Klipsy
+lastCommunication: Ostatnie połączenie
+manageAccounts: Zarządzaj kontami
+keepCw: Zostaw ostrzeżenia o zawartości
+itsOff: Wyłączone
+classic: Klasyczny
+controlPanel: Panel sterowania
+instanceDefaultLightTheme: Domyślny jasny motyw instancji
+instanceDefaultThemeDescription: Wpisz kod motywu w formacie obiektowym.
+mutePeriod: Długość wyciszenia
+size: Rozmiar
+recentNDays: Ostatnie {n} dni
+translationSettings: Ustawienia tłumaczeń
+breakFollow: Usuń obserwującego
+filter: Filtruj
+oneDay: Dzień
+oneWeek: Tydzień
+rateLimitExceeded: Przekroczono ratelimit
+_signup:
+  emailAddressInfo: Wpisz swój adres email. Nie zostanie on upubliczniony.
+  almostThere: Jeszcze trochę
+  emailSent: Email potwierdzający został wysłany na Twój adres email {email}. Proszę
+    kliknij załączony link w celu dokończenia procesu tworzenia konta.
+_accountDelete:
+  inProgress: Usuwanie jest w toku
+  started: Usuwanie zostało rozpoczęte.
+  mayTakeTime: Jako że usuwanie konta jest zasobożerną operacją, może zająć ono trochę
+    czasu, w zależności od ilości utworzonych wpisów oraz wysłanych plików.
+  accountDelete: Usuń konto
+  sendEmail: Gdy usuwanie konta będzie ukończone, zostanie wysłany email na adres
+    email przypisany do tego konta.
+  requestAccountDelete: Zażądaj usunięcia konta
+blockThisInstanceDescription: Lokalna aktywność nie będzie wysyłana do tej instancji.
+  Aktywność z tej instancji będzie odrzucana.
+maxCustomEmojiPicker: Maksymalna ilość sugerowanych niestandardowych emoji w wybieraku
+unread: Nieprzeczytane
+resolved: Rozwiązano
+unresolved: Nierozwiązane
+leaveGroup: Wyjdź z grupy
+voteConfirm: Potwierdzasz głos na "{choice}"?
+documentation: Dokumentacja
+file: Plik
+makeReactionsPublic: Włącz historię reakcji jako publiczną
+unclip: Usuń klipsa
+stopActivityDeliveryDescription: Lokalna aktywność nie będzie wysyłana do tej instancji.
+  Otrzymywanie aktywności działa jak dotychczas.
+signinHistoryExpires: Dane dotyczące poprzednich prób logowania są automatycznie usuwane
+  po 60 dniach, w celu zachowania zgodności z przepisami dotyczącymi ochrony prywatności.
+smtpSecure: Użyj implicit SSL/TLS dla połączeń SMTP
+federateBlocks: Sfederuj blokady
+federateBlocksDescription: Jeśli wyłączone, blokady nie będą wysyłane do instancji
+  blokowanego użytkownika.
+failedToFetchAccountInformation: Nie można uzyskać informacji o koncie
+deleteAccountConfirm: To usunie bezpowrotnie konto {handle}. Kontynuować?
+_translationService:
+  _deepl:
+    authKey: Klucz uwierzytelnienia DeepL
+  _libreTranslate:
+    authKey: Klucz uwierzytelnienia LibreTranslate (opcjonalnie)
+    endpoint: Punkt końcowy API LibreTranslate
+itsOn: Włączone
+deleteAllFiles: Usuń wszystkie pliki
+emailRequiredForSignup: Wymagaj adresu email przy rejestracji
+threadMuteNotificationsDesc: Wybierz powiadomienia, które chcesz zobaczyć w tym wątku.
+  Obowiązują również globalne ustawienia powiadomień. Wyłączenie ma pierwszeństwo.
+regexpError: Błąd regularnego wyrażenia
+instanceMute: Wyciszone instancje
+instanceDefaultDarkTheme: Domyślny ciemny motyw instancji
+regexpErrorDescription: 'Wystąpił błąd w regularnym wyrażeniu znajdującym się w linijce
+  {line} Twoich {tab} wyciszeń słownych:'
+reflectMayTakeTime: Może upłynąć trochę czasu, aby zmiany się pojawiły.
+numberOfPageCacheDescription: Zwiększenie tej liczby poprawi wygodę użytkowników,
+  ale spowoduje większe zużycie serwera, jak i pamięci.
+_emailUnavailable:
+  format: Format tego adresu email jest nieprawidłowy
+  used: Ten adres email już został użyty
+  disposable: Jednorazowe adresy email nie mogą być użyte
+  mx: Ten serwer email jest nieprawidłowy
+  smtp: Ten serwer email nie odpowiada
+recommended: Polecane
+_antennaSources:
+  homeTimeline: Wpisy od obserwowanych użytkowników
+  users: Wpisy od konkretnych użytkowników
+  all: Wszystkie wpisy
+  userList: Wpisy od użytkowników z konkretnej listy
+  userGroup: Wpisy od użytkowników z konkretnej grupy
+translationService: Usługa tłumaczeń
+ffVisibilityDescription: Pozwala skonfigurować kto może zobaczyć kogo obserwujesz
+  oraz kto Ciebie obserwuje.
+leaveGroupConfirm: Czy na pewno chcesz opuścić "{name}"?
+overridedDeviceKind: Typ urządzenia
+useDrawerReactionPickerForMobile: Wyświetlaj wybierak reakcji jako szufladę na telefonie
+makeReactionsPublicDescription: Dzięki temu lista wszystkich Twoich dotychczasowych
+  reakcji będzie publicznie widoczna.
+muteThread: Wycisz wątek
+unmuteThread: Odcisz wątek
+ffVisibility: Widoczność obserwowanych/obserwujących
+continueThread: Pokaż resztę wątku
+incorrectPassword: Nieprawidłowe hasło.
+clickToFinishEmailVerification: Kliknij {ok} by dokończyć weryfikację konta email.
+cannotAttachFileWhenAccountSwitched: Nie możesz załączyć pliku będąc przełączonym
+  na inne konto.
+cannotSwitchAccountWhenFileAttached: Nie możesz zmienić konta przy załączonych plikach.
+tenMinutes: 10 minut
+addTag: Dodaj tag
+isSystemAccount: Konto założone i automatycznie zarządzane przez system.
+auto: Auto
+check: Sprawdź
+cropImage: Kadruj zdjęcie
+deleteAccount: Usuń konto
+smartphone: Smartfon
+tablet: Tablet
+themeColor: Kolor znacznika instancji
+oneHour: Godzina
+cropImageAsk: Czy chcesz skadrować to zdjęcie?
+recentNHours: Ostatnie {n} godzin
+typeToConfirm: Wpisz {x} by potwierdzić
+numberOfPageCache: Liczba zbuforowanych stron
+noEmailServerWarning: Serwer email nie jest skonfigurowany.
+thereIsUnresolvedAbuseReportWarning: Istnieją nierozwiązane zgłoszenia.
+unlimited: Nieograniczone
+selectAll: Wybierz wszystko
+setCategory: Ustaw kategorię
+setTag: Ustaw tag
+removeTag: Usuń tag
+externalCssSnippets: Kilka fragmentów CSS dla Twojej inspiracji (nie zarządzane przez
+  Foundkey)
+confirmToUnclipAlreadyClippedNote: Ten wpis jest już częścią klpisa "{name}". Czy
+  chcesz w takim razie usunąć wpis z tego klipsa?
+maxUnicodeEmojiPicker: Maksymalna ilość sugerowanych unicode emoji w wybieraku
+_instanceMute:
+  instanceMuteDescription: Spowoduje to wyciszenie wszystkich wpisów/podbić z podanych
+    instancji, w tym tych od użytkowników odpowiadających na wpisy z wyciszonych instancji.
+  instanceMuteDescription2: Oddzielaj nowymi liniami
+  heading: Lista instancji do wyciszenia
+  title: Ukrywa wpisy z podanych instancji.
+noPermissionsRequested: (Brak oczekiwanych uprawnień.)
+appAuthorization: Autoryzacja aplikacji
+oauthErrorGoBack: Wystąpił błąd podczas uwierzytelniania zewnętrznej aplikacji. Wróć
+  i spróbuj ponownie.
+selectMode: Wybierz wiele
+whatIsNew: Pokaż zmiany
+reporter: Zgłaszający
+translate: Tłumacz
+translatedFrom: Przetłumaczone z {x}
+accountDeletionInProgress: Trwa usuwanie konta.
+forwardReport: Przekaż raport do zdalnej instancji
+clip: Klipsy
+createNewClip: Utwórz nowego klipsa
+forwardReportIsAnonymous: Zamiast Twojego konta, anonimowe konto systemowe zostanie
+  wyświetlone na zdalnej instancji jako zgłaszający.
+usernameInfo: Nazwa która odróżnia Twoje konto od innych z tego serwera. Możesz użyć
+  alfabetu łacińskiego (a-z, A-Z), cyfr (0-9), lub podkreślników (_). Nazwy użytkownika
+  nie mogą zostać później zmienione.
+switchAccount: Przełącz konto
+searchResult: Wyniki wyszukiwania
+troubleshooting: Rozwiązywanie problemów
+useBlurEffect: Używaj efektu rozmycia w interfejsie
+learnMore: Dowiedz się więcej
+misskeyUpdated: Foundkey zostało zaktualizowane!
+flagShowTimelineRepliesDescription: Jeśli włączone, zostaną pokazane odpowiedzi użytkowników
+  do wpisów innych użytkowników.
+flagShowTimelineReplies: Pokazuj odpowiedzi na osi czasu
+proxyAccountDescription: Konto proxy jest kontem które w określonych sytuacjach zachowuje
+  się jak zdalny obserwujący. Na przykład, kiedy użytkownik dodaje zdalnego użytkownika
+  do listy, oraz żaden lokalny użytkownik nie obserwuje tego konta, aktywność owego
+  użytkownika nie zostanie dostarczona na oś czasu. W takim razie, użytkownika zaobserwuje
+  konto proxy.
+keepOriginalUploading: Zostaw oryginalne zdjęcie
+keepOriginalUploadingDescription: Zapisuje oryginalne zdjęcie. Jeśli wyłączone, wersja
+  do wyświetlania w sieci zostanie wygenerowana podczas wysłania.
+disableDrawer: Nie używaj wysuwanych menu
+objectStorageBaseUrlDesc: "URL stosowany jako odniesienie. Podaj URL twojego CDN,\
+  \ albo proxy, jeśli używasz któregokolwiek.\nDla S3 użyj 'https://<bucket>.s3.amazonaws.com',\
+  \ a dla GCS i jego odpowiedników użyj 'https://storage.googleapis.com/<bucket>',\
+  \ itd."
+objectStorageSetPublicRead: Ustaw "public-read" podczas wysyłania
+removeAllFollowing: Przestań obserwować wszystkich obserwowanych użytkowników
+yourAccountSuspendedTitle: To konto jest zawieszone
+yourAccountSuspendedDescription: To konto zostało zawieszone z powodu łamania regulaminu
+  tego serwera. Skontaktuj się z administratorem, jeśli chcesz poznać bardziej dokładny
+  powód. Prosimy o niezakładanie nowych kont.
+numberOfColumn: Liczba kolumn
+_remoteInteract:
+  urlInstructions: Możesz skopiować ten URL. Jeśli wkleisz go w pole wyszukiwania
+    na twojej instancji, najpewniej zostaniesz przekierowan* do właściwego miejsca.
+  title: Przepraszam, ale nie mogę tego zrobić.
+  description: Nie możesz wykonać tej czynności w tej chwili. Musisz najprawdopodobniej
+    zalogować się, albo wykonać ją na swojej instancji.
+movedTo: Ten użytkownik przeniósł się na {handle}.
+attachedToNotes: Wpisy z tym plikiem
+showAttachedNotes: Pokaż wpisy z tym plikiem
