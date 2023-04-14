@@ -9,7 +9,7 @@ notifications: "通知"
 username: "ユーザー名"
 password: "パスワード"
 forgotPassword: "パスワードを忘れた"
-fetchingAsApObject: "連合に照会中"
+fetchingAsApObject: "連合に照会中..."
 ok: "OK"
 gotIt: "わかった"
 cancel: "キャンセル"
@@ -165,7 +165,7 @@ clearQueueConfirmText: "未配達の投稿は配送されなくなります。�
 clearCachedFiles: "キャッシュをクリア"
 clearCachedFilesConfirm: "キャッシュされたリモートファイルをすべて削除しますか？"
 blockedInstances: "ブロックしたインスタンス"
-blockedInstancesDescription: "ブロックしたいインスタンスのホストを改行で区切って設定します。ブロックされたインスタンスは、このインスタンスとやり取りできなくなります。"
+blockedInstancesDescription: "ブロックしたいインスタンスのホストを改行で区切って設定します。ブロックされたインスタンスは、このインスタンスとやり取りできなくなります。非ASCII文字を含むドメイン名はpunycodeでエンコードされている必要があります。設定したインスタンスのサブドメインもブロックされます。"
 muteAndBlock: "ミュートとブロック"
 mutedUsers: "ミュートしたユーザー"
 blockedUsers: "ブロックしたユーザー"
@@ -175,7 +175,7 @@ noteDeleteConfirm: "このノートを削除しますか？"
 pinLimitExceeded: "これ以上ピン留めできません"
 intro: "FoundKeyのインストールが完了しました！管理者アカウントを作成しましょう。"
 done: "完了"
-processing: "処理中"
+processing: "処理中..."
 preview: "プレビュー"
 default: "デフォルト"
 noCustomEmojis: "絵文字はありません"
@@ -378,7 +378,7 @@ newMessageExists: "新しいメッセージがあります"
 onlyOneFileCanBeAttached: "メッセージに添付できるファイルはひとつです"
 signinRequired: "続行する前に、サインアップまたはサインインが必要です"
 invitationCode: "招待コード"
-checking: "確認しています"
+checking: "確認しています..."
 available: "利用できます"
 unavailable: "利用できません"
 usernameInvalidFormat: "a~z、A~Z、0~9、_が使えます"
@@ -610,7 +610,7 @@ onlineUsersCount: "{n}人がオンライン"
 backgroundColor: "背景"
 accentColor: "アクセント"
 textColor: "文字"
-saveAs: "名前を付けて保存"
+saveAs: "名前を付けて保存..."
 createdAt: "作成日時"
 updatedAt: "更新日時"
 deleteConfirm: "削除しますか？"
@@ -624,7 +624,7 @@ apply: "適用"
 receiveAnnouncementFromInstance: "インスタンスからのお知らせを受け取る"
 emailNotification: "メール通知"
 useReactionPickerForContextMenu: "右クリックでリアクションピッカーを開く"
-typingUsers: "{users}が入力中"
+typingUsers: "{users}が入力中..."
 jumpToSpecifiedDate: "特定の日付にジャンプ"
 clear: "クリア"
 markAllAsRead: "全て既読にする"
@@ -701,7 +701,7 @@ threadMuteNotificationsDesc: "このスレッドから表示する通知を選�
 ffVisibility: "つながりの公開範囲"
 ffVisibilityDescription: "自分のフォロー/フォロワー情報の公開範囲を設定できます。"
 continueThread: "さらにスレッドを見る"
-deleteAccountConfirm: "アカウントが削除されます。よろしいですか？"
+deleteAccountConfirm: "アカウント {handle} が不可逆的に削除されます。よろしいですか？"
 incorrectPassword: "パスワードが間違っています。"
 voteConfirm: "「{choice}」に投票しますか？"
 hide: "隠す"
@@ -979,33 +979,34 @@ _2fa:
   securityKeyInfo: "FIDO2をサポートするハードウェアセキュリティキーもしくは端末の指紋認証やPINを使用してログインするように設定できます。"
 
 _permissions:
-  "read:account": "アカウントの情報を見る"
+  "read:account": "アカウントの情報を読み取る"
   "write:account": "アカウントの情報を変更する"
-  "read:blocks": "ブロックを見る"
-  "write:blocks": "ブロックを操作する"
-  "read:drive": "ドライブを見る"
-  "write:drive": "ドライブを操作する"
-  "read:favorites": "お気に入りを見る"
-  "write:favorites": "お気に入りを操作する"
-  "read:following": "フォローの情報を見る"
-  "write:following": "フォロー・フォロー解除する"
-  "read:messaging": "チャットを見る"
-  "write:messaging": "チャットを操作する"
-  "read:mutes": "ミュートを見る"
-  "write:mutes": "ミュートを操作する"
+  "read:blocks": "どのユーザーをブロックしているかを読み取る"
+  "write:blocks": "ユーザーをブロック・ブロック解除する"
+  "read:drive": "ドライブ内のファイルとフォルダをリスト化する"
+  "write:drive": "ドライブ内でファイルを作成・変更・削除する"
+  "read:favorites": "お気に入りにしたノートをリスト化する"
+  "write:favorites": "ノートをお気に入りまたはお気に入り解除する"
+  "read:following": "自分がフォローしているユーザーおよび自分をフォローしているユーザーをリスト化する"
+  "write:following": "ユーザーをフォロー・フォロー解除する"
+  "read:messaging": "チャットの内容と履歴を見る"
+  "write:messaging": "チャットでメッセージを作成・削除する"
+  "read:mutes": "ミュートまたはRenoteをミュートにしたユーザーをリスト化する"
+  "write:mutes": "ユーザーまたはユーザーのRenoteをミュート・ミュート解除する"
   "write:notes": "ノートを作成・削除する"
-  "read:notifications": "通知を見る"
-  "write:notifications": "通知を操作する"
-  "write:reactions": "リアクションを操作する"
+  "read:notifications": "通知を読み取る"
+  "write:notifications": "通知の既読化およびカスタム通知を作成する"
+  "write:reactions": "リアクションを作成・削除する"
   "write:votes": "投票する"
-  "read:pages": "ページを見る"
-  "write:pages": "ページを操作する"
-  "read:page-likes": "ページのいいねを見る"
-  "write:page-likes": "ページのいいねを操作する"
-  "read:user-groups": "ユーザーグループを見る"
-  "write:user-groups": "ユーザーグループを操作する"
-  "read:channels": "チャンネルを見る"
-  "write:channels": "チャンネルを操作する"
+  "read:pages": "ページのリスト化・読み取りをする"
+  "write:pages": "ページを作成・変更・削除する"
+  "read:page-likes": "ページのいいねのリスト化・読み取りをする"
+  "write:page-likes": "ページをいいね・いいね解除する"
+  "read:user-groups": "参加・所有している、および招待されているグループのリスト化・読み取りをする"
+  "write:user-groups": "グループを作成・変更・削除・譲渡・脱退する。グループから他のユーザーを招待・BANする。グループへの招待を許可・拒否する。"
+  "read:channels": "フォローおよび参加しているチャンネルのリスト化・読み取りをする"
+  "write:channels": "チャンネルを作成・変更・フォロー・フォロー解除する"
+  "read:reactions": リアクションを見る
 _auth:
   shareAccess: "「{name}」がアカウントにアクセスすることを許可しますか？"
   shareAccessAsk: "アカウントへのアクセスを許可しますか？"
@@ -1051,6 +1052,7 @@ _widgets:
   aiscript: "AiScriptコンソール"
   aichan: "藍"
 
+  rssMarquee: RSSティッカー
 _cw:
   hide: "隠す"
   show: "もっと見る"
@@ -1064,8 +1066,8 @@ _poll:
   canMultipleVote: "複数回答可"
   expiration: "期限"
   infinite: "無期限"
-  at: "日時指定"
-  after: "経過指定"
+  at: "日時指定..."
+  after: "経過指定..."
   deadlineDate: "期日"
   deadlineTime: "時間"
   duration: "期間"
@@ -1253,3 +1255,40 @@ _deck:
     list: "リスト"
     mentions: "あなた宛て"
     direct: "ダイレクト"
+translationSettings: 翻訳設定
+signinHistoryExpires: プライバシー規則に準拠するため、過去のログイン試行に関するデータは60日後に自動的に削除されます。
+deleteAllFiles: すべてのファイルを削除
+cannotAttachFileWhenAccountSwitched: 別のアカウントに切り替えている間はファイルを添付できません。
+translationService: 翻訳サービス
+cannotSwitchAccountWhenFileAttached: ファイルを添付したままアカウントを切り替えることはできません。
+externalCssSnippets: インスピレーションのためのCSSスニペット群 (FoundKeyによって管理されていません)
+botFollowRequiresApproval: Botとして設定されたアカウントからのフォロー申請は承認を必要にする
+documentation: ドキュメンテーション
+unlimited: 無制限
+exportAll: すべてエクスポート
+oauthErrorGoBack: サードパーティーアプリの認証中にエラーが発生しました。戻ってもう一度やり直してみてください。
+selectMode: 複数選択
+renoteMute: Renoteをミュート
+renoteUnmute: Renoteのミュートを解除
+stopActivityDeliveryDescription: ローカルでのアクティビティはこのインスタンスに対して送信されません。アクティビティの受信はこれまで通り機能します。
+unrenoteAll: すべてのRenoteを取り消す
+unrenoteAllConfirm: このノートのRenoteをすべて取り消します。よろしいですか？
+addTag: タグを追加
+removeTag: タグを削除
+appAuthorization: アプリの承認
+noPermissionsRequested: (必要な権限はありません。)
+setCategory: カテゴリを設定
+selectAll: 全選択
+setTag: タグを設定
+blockThisInstanceDescription: ローカルでのアクティビティはこのインスタンスに対して送信されません。このインスタンスからのアクティビティは破棄されます。
+maxCustomEmojiPicker: ピッカー内で提案するカスタム絵文字の最大数
+maxUnicodeEmojiPicker: ピッカー内で提案するUnicode絵文字の最大数
+exportSelected: 選択をエクスポート
+_translationService:
+  _libreTranslate:
+    authKey: LibreTranslate認証キー (任意)
+    endpoint: LibreTranslate API Endpoint
+  _deepl:
+    authKey: DeepL認証キー
+_remoteInteract:
+  title: 申し訳ありませんが、実行できません。
