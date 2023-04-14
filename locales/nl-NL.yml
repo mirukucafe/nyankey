@@ -76,9 +76,9 @@ followsYou: "Volgt jou"
 createList: "Creëer lijst"
 manageLists: "Beheren lijsten"
 error: "Fout"
-somethingHappened: "Er is iets misgegaan."
+somethingHappened: "Er is iets misgegaan"
 retry: "Probeer opnieuw"
-pageLoadError: "Pagina laden mislukt"
+pageLoadError: "Pagina laden mislukt."
 pageLoadErrorDescription: "Dit wordt normaal gesproken veroorzaakt door netwerkfouten\
   \ of door de cache van de browser. Probeer de cache te wissen en probeer het na\
   \ een tijdje wachten opnieuw."
@@ -356,3 +356,9 @@ selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
 _services: {}
+botFollowRequiresApproval: Volgverzoeken van als robot gemarkeerde gebruikers vereisen
+  goedkeuring
+unrenoteAll: Alle renotes terugnemen
+unrenoteAllConfirm: Weet je zeker dat je alle renotes voor deze note terug wil nemen?
+exportAll: Alles exporteren
+exportSelected: Selectie exporteren
