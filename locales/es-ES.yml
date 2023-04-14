@@ -185,16 +185,17 @@ clearQueueConfirmText: "Las notas aún no entregadas no se federarán. Normalmen
 clearCachedFiles: "Limpiar caché"
 clearCachedFilesConfirm: "¿Desea borrar todos los archivos remotos cacheados?"
 blockedInstances: "Instancias bloqueadas"
-blockedInstancesDescription: "Seleccione los hosts de las instancias que desea bloquear,\
-  \ separadas por una linea nueva. Las instancias bloqueadas no podrán comunicarse\
-  \ con esta instancia."
+blockedInstancesDescription: "Seleccione los hosts de las instancias que desea bloquear.\
+  \ Las instancias listadas no podrán comunicarse con esta instancia. Los nombres\
+  \ de dominios Non-ASCII deben ser codificados con punycode.\nLos sub dominios de\
+  \ la lista de instancias serán bloqueados también."
 muteAndBlock: "Silenciar y bloquear"
 mutedUsers: "Usuarios silenciados"
 blockedUsers: "Usuarios bloqueados"
 noUsers: "No hay usuarios"
 editProfile: "Editar perfil"
 noteDeleteConfirm: "¿Desea borrar esta nota?"
-pinLimitExceeded: "Ya no se pueden fijar más posts"
+pinLimitExceeded: "Ya no se pueden fijar más notas."
 intro: "¡La instalación de FoundKey ha terminado! Crea el usuario administrador."
 done: "Terminado"
 processing: "Procesando"
@@ -558,7 +559,7 @@ smtpPass: "Contraseña"
 emptyToDisableSmtpAuth: "Deje el nombre del usuario y la contraseña en blanco para\
   \ deshabilitar la autenticación SMTP"
 smtpSecure: "Usar SSL/TLS implícito en la conexión SMTP"
-smtpSecureInfo: "Apagar cuando se use STARTTLS"
+smtpSecureInfo: "Apagar cuando se use STARTTLS."
 testEmail: "Prueba de envío"
 wordMute: "Silenciar palabras"
 instanceMute: "Instancias silenciadas"
@@ -599,7 +600,7 @@ openInNewTab: "Abrir en una Nueva Pestaña"
 defaultNavigationBehaviour: "Navegación por defecto"
 instanceTicker: "Información de notas de la instancia"
 system: "Sistema"
-switchUi: "Cambiar interfaz de usuario"
+switchUi: "Cambiar interfaz"
 desktop: "Escritorio"
 clip: "Clip"
 createNew: "Crear"
@@ -691,7 +692,7 @@ notSpecifiedMentionWarning: "Algunas menciones no están incluidas en el destino
 info: "Información"
 userInfo: "Información del usuario"
 unknown: "Desconocido"
-hideOnlineStatus: "mostrarse como desconectado"
+hideOnlineStatus: "Mostrarse como desconectado"
 hideOnlineStatusDescription: "Ocultar su estado en línea puede reducir la eficacia\
   \ de algunas funciones, como la búsqueda"
 online: "En línea"
@@ -730,7 +731,7 @@ misskeyUpdated: "¡FoundKey ha sido actualizado!"
 whatIsNew: "Mostrar cambios"
 translate: "Traducir"
 translatedFrom: "Traducido de {x}"
-accountDeletionInProgress: "La eliminación de la cuenta está en curso"
+accountDeletionInProgress: "La eliminación de la cuenta está en curso."
 usernameInfo: "Un nombre que identifique su cuenta de otras en este servidor.  Puede\
   \ utilizar el alfabeto (a~z, A~Z), dígitos (0~9) o guiones bajos (_). Los nombres\
   \ de usuario no se pueden cambiar posteriormente."
@@ -757,30 +758,43 @@ ffVisibility: "Visibilidad de seguidores y seguidos"
 hide: "Ocultar"
 indefinitely: "Sin límite de tiempo"
 _ffVisibility:
-  public: "Publicar"
+  public: "Público"
+  private: Privado
+  followers: Visible solo a seguidores
 _accountDelete:
   accountDelete: "Eliminar Cuenta"
+  started: La eliminación ha iniciado.
+  sendEmail: Cuando se complete la eliminación de la cuenta, un correo será enviado
+    a la dirección registrada de la cuenta.
+  requestAccountDelete: Solicitar eliminación de cuenta
+  inProgress: Eliminación en progreso
+  mayTakeTime: Como la eliminación de la cuenta es un proceso que consume muchos recursos,
+    puede llevar algún tiempo según la cantidad de contenido que se haya creado y
+    la cantidad de archivos que cargados.
 _forgotPassword:
   contactAdmin: "Esta instancia no admite el uso de direcciones de correo electrónico,\
     \ póngase en contacto con el administrador de la instancia para restablecer su\
-    \ contraseña"
+    \ contraseña."
+  enterEmail: Ingrese el correo que se uso para el registro. Se enviará un link para
+    que resetear la contraseña.
+  ifNoEmail: Si no se utilizó un correo durante el registro, por favor contacte con
+    el administrador de la instancia.
 _email:
   _follow:
-    title: "te ha seguido"
+    title: "Tienes un nuevo seguidor"
   _receiveFollowRequest:
     title: "Has recibido una solicitud de seguimiento"
 _plugin:
   install: "Instalar plugins"
-  installWarn: "Por favor no instale plugins que no son de confianza"
+  installWarn: "Por favor no instale plugins que no son de confianza."
 _registry:
   scope: "Alcance"
   key: "Clave"
-  keys: "Clave"
+  keys: "Claves"
   domain: "Dominio"
   createKey: "Crear una llave"
 _aboutMisskey:
-  about: "FoundKey es un software de código abierto, desarrollado por syuilo desde\
-    \ el 2014"
+  about: "FoundKey es una bifurcación de Misskey desarrollada desde Julio de 2022."
   allContributors: "Todos los colaboradores"
   source: "Código fuente"
 _nsfw:
@@ -791,13 +805,13 @@ _mfm:
   cheatSheet: "Hoja de referencia de MFM"
   intro: "MFM es un lenguaje de marcado dedicado que se puede usar en varios lugares\
     \ dentro de FoundKey. Aquí puede ver una lista de sintaxis disponibles en MFM."
-  dummy: "FoundKey expande el mundo de la Fediverso"
+  dummy: "FoundKey expande el mundo del Fediverso"
   mention: "Menciones"
   mentionDescription: "El signo @ seguido de un nombre de usuario se puede utilizar\
     \ para notificar a un usuario en particular."
-  hashtag: "Hashtag"
+  hashtag: "Hashtag #"
   url: "URL"
-  urlDescription: "Se pueden mostrar las URL"
+  urlDescription: "Se pueden mostrar las URL."
   link: "Vínculo"
   bold: "Negrita"
   center: "Centrar"
@@ -812,6 +826,36 @@ _mfm:
     \ / derecha."
   font: "Fuente"
   rotate: "Rotar"
+  jump: Animación (Salto)
+  jumpDescription: Da al contenido un salto animado.
+  bounce: Animación (Bounce)
+  centerDescription: Muestra el contenido de manera centrada.
+  inlineCode: Código (Inline)
+  blockMath: 'Función matemática (Block)'
+  blockMathDescription: Muestra líneas múltiples de fórmulas matemáticas (KaTeX) en
+    un bloque.
+  inlineCodeDescription: Muestra resaltado de sintaxis en línea para el código (program).
+  quoteDescription: Muestra el contenido en una cita.
+  searchDescription: Muestra un cuadro de búsqueda con texto pre introducido.
+  jellyDescription: Le da al contenido una animación del tipo Jelly.
+  tada: Animación (Tada)
+  shake: Animación (Shake)
+  hashtagDescription: Puedes especificar un hashtag usando un número, signo y texto.
+  linkDescription: Partes especificas del texto pueden ser mostradas como URL.
+  boldDescription: Resalta las letras haciéndolas más gruesas.
+  small: Pequeño
+  smallDescription: Muestra el contenido de manera pequeña y delgada.
+  inlineMathDescription: Muestra fórmulas matemáticas (KaTeX) en linea.
+  tadaDescription: Da al contenido un "Tada!" del tipo animación.
+  bounceDescription: Brinda al contenido una animación de rebote.
+  emojiDescription: Al colocar dos puntos en un emoji personalizado, se puede mostrar
+    un emoji personalizado.
+  jelly: Animación (Jelly)
+  twitchDescription: Da al contenido una animación fuertemente temblorosa.
+  twitch: Animación (Twitch)
+  spin: Animación (Spin)
+  shakeDescription: Brinda al contenido una animación temblorosa.
+  inlineMath: Función matemática (Inline)
 _instanceTicker:
   none: "No mostrar"
   remote: "Mostrar a usuarios remotos"
@@ -1134,7 +1178,7 @@ _notification:
   youWereFollowed: "te ha seguido"
   youReceivedFollowRequest: "Has mandado una solicitud de seguimiento"
   yourFollowRequestAccepted: "Tu solicitud de seguimiento fue aceptada"
-  youWereInvitedToGroup: "Invitado al grupo"
+  youWereInvitedToGroup: "{userName} invitado al grupo"
   _types:
     follow: "Siguiendo"
     mention: "Menciones"
@@ -1169,3 +1213,110 @@ _deck:
     mentions: "Menciones"
     direct: "Mensaje directo"
 _services: {}
+translationService: Servicio de traducción
+translationSettings: Ajustes de traducción
+selectAll: Seleccionar todo
+setCategory: Establecer categoría
+unlimited: Ilimitado
+setTag: Establecer tag
+recentNHours: Últimas {n} horas
+check: Verificar
+unrenoteAll: Quitar todas las renotas
+unclip: Desenganchar
+deleteAllFiles: Borrar todos los archivos.
+voteConfirm: ¿Confirmas tu voto para "{choice}"?
+tenMinutes: 10 minutos
+oneHour: Una hora
+failedToFetchAccountInformation: No se pudo obtener la información de la cuenta
+rateLimitExceeded: Límite de velocidad excedido
+cropImage: Cortar imagen
+recentNDays: Últimos {n} días
+typeToConfirm: Por favor ingrese {x} para confirmar
+cropImageAsk: ¿Desea cortar esta imagen?
+cannotAttachFileWhenAccountSwitched: No puedes adjuntar un archivo mientras cambias
+  de cuenta.
+cannotSwitchAccountWhenFileAttached: No puedes cambiar de cuenta mientras se adjuntan
+  archivos.
+threadMuteNotificationsDesc: Selecciona las notificaciones que deseas ver de este
+  hilo. Los ajustes globales de notificación también se aplicarán. La desactivación
+  tiene prioridad.
+ffVisibilityDescription: Permite configurar quien puede ver a quienes sigues y quienes
+  te siguen.
+deleteAccountConfirm: Esto borrará se manera irreversible tu cuenta {handle}. ¿Quieres
+  proceder?
+incorrectPassword: Contraseña incorrecta.
+leaveGroup: Dejar grupo
+overridedDeviceKind: Tipo de dispositivo
+smartphone: Smartphone
+auto: Automático
+themeColor: Color de teletipo de instancia
+size: Tamaño
+numberOfColumn: Número de columnas
+instanceDefaultLightTheme: Tema claro predeterminado para la instancia
+oneDay: Un día
+oneWeek: Una semana
+numberOfPageCache: Número de páginas en caché
+confirmToUnclipAlreadyClippedNote: Esta nota ya forma parte del clip "{name}". ¿Quieres
+  eliminarlo de este clip en su lugar?
+noEmailServerWarning: Correo del servidor no configurado.
+thereIsUnresolvedAbuseReportWarning: Hay reportes sin resolver.
+recommended: Recomendado
+addTag: Agregar tag
+removeTag: Quitar tag
+_emailUnavailable:
+  used: El correo ya se encuentra en uso
+  format: El formato del correo es invalido
+  disposable: No se puede utilizar direcciones de correo electrónico desechables
+  mx: El servidor del correo es inválido
+  smtp: El servido del correo no responde
+exportAll: Exportar todo
+exportSelected: Exportar seleccionados
+botFollowRequiresApproval: Solicitudes de seguimiento de cuentas marcadas como "bots"
+  necesitan aprobación
+unrenoteAllConfirm: ¿Estas seguro de querer quitar todas las renotas de esta nota?
+signinHistoryExpires: Los datos de los intentos de sesión serán borrados automáticamente
+  luego de 60 días, debido a regulaciones de privacidad.
+tablet: Tableta
+mutePeriod: Duración de mute
+reflectMayTakeTime: Puede tomar cierto tiempo en que se reflejen los cambios.
+isSystemAccount: Una cuenta creada y operada automáticamente por el sistema.
+deleteAccount: Eliminar cuenta
+numberOfPageCacheDescription: Aumentar este número mejorará la comodidad para los
+  usuarios, pero provocará una mayor carga del servidor y más memoria se utilizará.
+externalCssSnippets: Algunos fragmentos de CSS para inspirar (no administrados por
+  FoundKey)
+_signup:
+  emailSent: Se envió un correo de confirmación a ({email}). Por favor haz click en
+    link adjunto para completar la creación de cuenta.
+  almostThere: Ya casi
+  emailAddressInfo: Por favor ingresa tu correo electrónico. No sera público.
+instanceDefaultThemeDescription: Ingrese el código de tema en el formato del objeto
+stopActivityDeliveryDescription: Las actividades locales no serán enviadas a esta
+  instancia. Las actividades recibidas de recepción funcionan como antes.
+documentation: Documentación
+file: Archivo
+federateBlocks: Bloques Federados
+federateBlocksDescription: Si esta deshabilitado, las actividades bloqueadas no serán
+  enviadas.
+useDrawerReactionPickerForMobile: Mostrar selección de reacción como cajón en móvil
+leaveGroupConfirm: ¿Estas seguro de salir "{name}"?
+clickToFinishEmailVerification: Por favor presiona [{ok}] para completar la verificación
+  email.
+oauthErrorGoBack: Ocurrió un error al tratar de autenticar una app de terceros. Por
+  favor regresa e intenta de nuevo.
+appAuthorization: Autorización de app
+noPermissionsRequested: (No hay permisos solicitados).
+selectMode: Selección múltiple
+renoteMute: Ocultar renotas
+renoteUnmute: Mostrar renotas
+blockThisInstanceDescription: Las actividades locales no serán enviadas a esta instancia.
+  Las actividades de esta instancia serán descartadas.
+instanceDefaultDarkTheme: Tema oscuro predeterminado para la instancia
+showLess: Mostrar menos
+regexpError: Error de Expresión Regular
+regexpErrorDescription: 'Hay un error en la expresión regular de la linea {line} de
+  {tab} palabras silenciadas:'
+unlikeConfirm: ¿En verdad quieres remover tu like?
+breakFollow: Quitar seguidor
+reporter: Reportero
+continueThread: Ver la continuación del hilo
