@@ -1401,3 +1401,9 @@ oauthErrorGoBack: Bei der Authentifizierung einer Drittanbieter-Anwendung ist ei
   Fehler aufgetreten. Bitte geh zurück und versuche es erneut.
 appAuthorization: Anwendungs-Authorisierung
 noPermissionsRequested: (Keine Berechtigungen angefordert.)
+_remoteInteract:
+  title: Es tut mir leid, aber das kann ich nicht tun.
+  description: Diese Aktion kann gerade nicht ausgeführt werden. Vermutlich musst
+    du diese Aktion auf deiner eigenen Instanz ausführen, oder dich anmelden.
+  urlInstructions: Kopiere diese URL. Wenn du sie auf deiner Instanz in das Suchfeld
+    einfügst, solltest du zum richtigen Ort gelangen.
