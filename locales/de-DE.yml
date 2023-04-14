@@ -284,7 +284,6 @@ createFolder: "Ordner erstellen"
 renameFolder: "Ordner umbenennen"
 deleteFolder: "Ordner löschen"
 addFile: "Datei hinzufügen"
-emptyFolder: "Dieser Ordner ist leer"
 unableToDelete: "Nicht löschbar"
 inputNewFileName: "Gib einen neuen Dateinamen ein"
 inputNewDescription: "Gib eine neue Beschreibung ein"
@@ -1312,6 +1311,7 @@ _notification:
     followRequestAccepted: "Akzeptierte Follow-Anfragen"
     groupInvited: "Erhaltene Gruppeneinladungen"
     app: "Benachrichtigungen von Apps"
+    move: Account-Umzüge
   _actions:
     followBack: "folgt dir nun auch"
     reply: "Antworten"
@@ -1406,3 +1406,6 @@ _remoteInteract:
     du diese Aktion auf deiner eigenen Instanz ausführen, oder dich anmelden.
   urlInstructions: Kopiere diese URL. Wenn du sie auf deiner Instanz in das Suchfeld
     einfügst, solltest du zum richtigen Ort gelangen.
+movedTo: Diese Person ist umgezogen zu {handle}.
+attachedToNotes: Notizen mit dieser Datei
+showAttachedNotes: Zeige Notizen mit dieser Datei
