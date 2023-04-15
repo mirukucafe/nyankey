@@ -332,7 +332,7 @@ export class Connection {
 	 * @param data The message to be sent.
 	 */
 	private onChannelMessageRequested(data: Record<string, any>) {
-		this.channels[id]?.onMessage?.(data.type, data.body);
+		this.channels[data.id]?.onMessage?.(data.type, data.body);
 	}
 
 	private typingOnChannel(channel: ChannelModel['id']) {
