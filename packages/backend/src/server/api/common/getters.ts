@@ -30,7 +30,7 @@ export async function getNote(noteId: Note['id'], me: { id: User['id'] } | null)
  * Get user for API processing
  */
 export async function getUser(userId: User['id'], includeSuspended = false) {
-	const user = await Users.findOneBy(
+	const user = await Users.findOneBy({
 		id: userId,
 		isDeleted: false,
 		isSuspended: !includeSuspended,
@@ -47,7 +47,7 @@ export async function getUser(userId: User['id'], includeSuspended = false) {
  * Get remote user for API processing
  */
 export async function getRemoteUser(userId: User['id'], includeSuspended = false) {
-	const user = await Users.findOneBy(
+	const user = await Users.findOneBy({
 		id: userId,
 		host: Not(IsNull()),
 		isDeleted: false,
@@ -65,7 +65,7 @@ export async function getRemoteUser(userId: User['id'], includeSuspended = false
  * Get local user for API processing
  */
 export async function getLocalUser(userId: User['id'], includeSuspended = false) {
-	const user = await Users.findOneBy(
+	const user = await Users.findOneBy({
 		id: userId,
 		host: IsNull(),
 		isDeleted: false,
