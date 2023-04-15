@@ -332,6 +332,7 @@ export class Connection {
 	 * @param data The message to be sent.
 	 */
 	private onChannelMessageRequested(data: Record<string, any>) {
+		if (!data.id) return;
 		this.channels[data.id]?.onMessage?.(data.type, data.body);
 	}
 
