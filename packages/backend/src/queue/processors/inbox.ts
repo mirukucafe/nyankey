@@ -136,7 +136,7 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 		federationChart.inbox(i.host);
 	});
 
-	// アクティビティを処理
+	// process the activity
 	await perform(authUser.user, activity, resolver);
 	return 'ok';
 };
