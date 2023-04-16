@@ -150,7 +150,7 @@ async function findCascadingNotes(note: Note): Promise<Note[]> {
 
 		await Promise.all(replies.map(reply => {
 			// only add unique notes
-			if (cascadingNotes.find((x) => x.id === reply.id) != null) return;
+			if (cascadingNotes.some((x) => x.id === reply.id)) return;
 
 			cascadingNotes.push(reply);
 			return recursive(reply.id);
@@ -186,4 +186,3 @@ async function getMentionedRemoteUsers(note: Note): Promise<IRemoteUser[]> {
 		where,
 	}) as IRemoteUser[];
 }
-
