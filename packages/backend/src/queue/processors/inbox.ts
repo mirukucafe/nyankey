@@ -107,9 +107,14 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 		}
 	}
 
+	// Verify that the actor's host is not blocked
+	const signerHost = extractDbHost(authUser.user.uri!);
+	if (await shouldBlockInstance(signerHost)) {
+		return `Blocked request: ${signerHost}`;
+	}
+
 	if (typeof activity.id === 'string') {
 		// Verify that activity and actor are from the same host.
-		const signerHost = extractDbHost(authUser.user.uri!);
 		const activityIdHost = extractDbHost(activity.id);
 		if (signerHost !== activityIdHost) {
 			return `skip: signerHost(${signerHost}) !== activity.id host(${activityIdHost}`;
