@@ -29,16 +29,16 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 	logger.debug(JSON.stringify(info, null, 2));
 	//#endregion
 
-	const host = toPuny(new URL(signature.keyId).hostname);
+	const keyIdLower = signature.keyId.toLowerCase();
+	if (keyIdLower.startsWith('acct:')) {
+		return `Old keyId is no longer supported. ${keyIdLower}`;
+	}
+
+	const host = toPuny(new URL(keyIdLower).hostname);
 
 	// Stop if the host is blocked.
 	if (await shouldBlockInstance(host)) {
 		return `Blocked request: ${host}`;
-	}
-
-	const keyIdLower = signature.keyId.toLowerCase();
-	if (keyIdLower.startsWith('acct:')) {
-		return `Old keyId is no longer supported. ${keyIdLower}`;
 	}
 
 	const resolver = new Resolver();
