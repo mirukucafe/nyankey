@@ -26,6 +26,8 @@ type IsMeAndIsUserDetailed<ExpectsMe extends boolean | null, Detailed extends bo
 
 const ajv = new Ajv();
 
+// It is important that localUsernameSchema does not allow any usernames
+// containing dots because those are used for system actors.
 const localUsernameSchema = { type: 'string', pattern: /^\w{1,20}$/.toString().slice(1, -1) } as const;
 const passwordSchema = { type: 'string', minLength: 1 } as const;
 const nameSchema = { type: 'string', minLength: 1, maxLength: 50 } as const;
