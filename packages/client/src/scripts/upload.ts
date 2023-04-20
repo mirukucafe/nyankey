@@ -83,10 +83,18 @@ export function uploadFile(
 					// TODO: 消すのではなくて再送できるようにしたい
 					uploads.value = uploads.value.filter(x => x.id !== id);
 
+					let text = i18n.ts.uploadFailedDescription;
+					if (xhr.status == 413) {
+						// the file was too large
+						text = i18n.ts.uploadFailedSize;
+					} else if (xhr.response?.error?.message != null) {
+						text = xhr.response?.error?.message;
+					}
+
 					alert({
 						type: 'error',
-						title: 'Failed to upload',
-						text: `${JSON.stringify(ev.target?.response)}, ${JSON.stringify(xhr.response)}`,
+						title: i18n.ts.uploadFailed,
+						text,
 					});
 
 					reject();
