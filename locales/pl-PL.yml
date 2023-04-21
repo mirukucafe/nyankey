@@ -25,7 +25,7 @@ otherSettings: "Pozostałe ustawienia"
 openInWindow: "Otwórz w oknie"
 profile: "Profil"
 timeline: "Oś czasu"
-noAccountDescription: "Ten użytkownik nie napisał jeszcze swojej biografii."
+noAccountDescription: "Ten użytkownik nie napisał jeszcze swojego opisu."
 login: "Zaloguj się"
 loggingIn: "Logowanie"
 logout: "Wyloguj się"
@@ -118,7 +118,7 @@ unblockConfirm: "Czy na pewno chcesz odblokować to konto?"
 suspendConfirm: "Czy na pewno chcesz zawiesić to konto?"
 unsuspendConfirm: "Czy na pewno chcesz cofnąć zawieszenie tego konta?"
 selectList: "Wybierz listę"
-selectAntenna: "Wybierz Antennę"
+selectAntenna: "Wybierz antenę"
 selectWidget: "Wybierz widżet"
 editWidgets: "Edytuj widżet"
 editWidgetsExit: "Gotowe"
@@ -318,9 +318,9 @@ hcaptchaSecretKey: "Tajny klucz"
 recaptchaSiteKey: "Klucz strony"
 recaptchaSecretKey: "Tajny klucz"
 antennas: "Anteny"
-manageAntennas: "Zarządzaj Antenami"
+manageAntennas: "Zarządzaj antenami"
 name: "Nazwa"
-antennaSource: "Źródło Anteny"
+antennaSource: "Źródło anteny"
 antennaKeywords: "Słowa kluczowe do obserwacji"
 antennaExcludeKeywords: "Wykluczone słowa kluczowe"
 antennaKeywordsDescription: "Oddziel spacjami dla warunku AND, albo wymuś koniec linii\
@@ -560,8 +560,8 @@ reportAbuse: "Zgłoś"
 reportAbuseOf: "Zgłoś {name}"
 fillAbuseReportDescription: "Wypełnij szczegóły zgłoszenia."
 abuseReported: "Twoje zgłoszenie zostało wysłane. Dziękujemy."
-reporteeOrigin: "Pochodzenie zgłoszonego"
-reporterOrigin: "Pochodzenie zgłaszającego"
+reporteeOrigin: "Pochodzenie osoby zgłoszonej"
+reporterOrigin: "Pochodzenie osoby zgłaszającej"
 send: "Wyślij"
 abuseMarkAsResolved: "Oznacz zgłoszenie jako rozwiązane"
 openInNewTab: "Otwórz w nowej karcie"
@@ -688,7 +688,7 @@ squareAvatars: "Wyświetlaj kwadratowe awatary"
 hashtags: "Hashtag"
 pubSub: "Konta Pub/Sub"
 hide: "Ukryj"
-indefinitely: "Nigdy"
+indefinitely: "Dożywotnio"
 _ffVisibility:
   public: "Publikuj"
   followers: Widoczne tylko dla obserwujących
@@ -724,9 +724,9 @@ _nsfw:
   force: "Ukrywaj wszystkie media"
 _mfm:
   cheatSheet: "Ściąga MFM"
-  intro: "MFM jest językiem składniowym wyjątkowym dla Foundkey oraz innego oprogramowania\
-    \ *key, który może być użyty w wielu miejscach. Tu znajdziesz listę wszystkich\
-    \ możliwych elementów składni MFM."
+  intro: "MFM jest językiem składniowym używanym przez m.in. Misskey, forki *key (w\
+    \ tym Foundkey), oraz Akkomę, który może być użyty w wielu miejscach. Tu znajdziesz\
+    \ listę wszystkich możliwych elementów składni MFM."
   dummy: "FoundKey rozszerza świat Fediwersum"
   mention: "Wspomnij"
   mentionDescription: "Używając znaku @ i nazwy użytkownika, możesz określić danego\
@@ -1078,7 +1078,7 @@ _instanceCharts:
 _timelines:
   home: "Strona główna"
   local: "Lokalne"
-  social: "Społeczność"
+  social: "Społeczna"
   global: "Globalna"
 _pages:
   newPage: "Utwórz stronę"
@@ -1090,7 +1090,7 @@ _pages:
   pageSetting: "Ustawienia strony"
   nameAlreadyExists: "Określony adres URL strony już istnieje"
   invalidNameTitle: "Podany adres URL strony jest nieprawidłowy"
-  invalidNameText: "Sprawdź, czy nie jest puste"
+  invalidNameText: "Upewnij się, że pole tytułowe strony nie jest puste"
   editThisPage: "Edytuj tę stronę"
   viewSource: "Zobacz źródło"
   viewPage: "Wyświetlanie Twoich stron"
@@ -1127,7 +1127,7 @@ _notification:
   yourFollowRequestAccepted: "Twoja prośba o możliwość obserwacji została przyjęta"
   youWereInvitedToGroup: "{userName} zaprosił* Ciebie do grupy"
   _types:
-    follow: "Obserwowani"
+    follow: "Nowi obserwujący"
     mention: "Wspomnienia"
     reply: "Odpowiedzi"
     renote: "Podbicia"
@@ -1249,7 +1249,7 @@ instanceMute: Wyciszone instancje
 instanceDefaultDarkTheme: Domyślny ciemny motyw instancji
 regexpErrorDescription: 'Wystąpił błąd w regularnym wyrażeniu znajdującym się w linijce
   {line} Twoich {tab} wyciszeń słownych:'
-reflectMayTakeTime: Może upłynąć trochę czasu, aby zmiany się pojawiły.
+reflectMayTakeTime: Może upłynąć trochę czasu, zanim pojawią się zmiany.
 numberOfPageCacheDescription: Zwiększenie tej liczby poprawi wygodę użytkowników,
   ale spowoduje większe zużycie serwera, jak i pamięci.
 _emailUnavailable:
@@ -1321,7 +1321,7 @@ oauthErrorGoBack: Wystąpił błąd podczas uwierzytelniania zewnętrznej aplika
   i spróbuj ponownie.
 selectMode: Wybierz wiele
 whatIsNew: Pokaż zmiany
-reporter: Zgłaszający
+reporter: Osoba zgłaszająca
 translate: Tłumacz
 translatedFrom: Przetłumaczone z {x}
 accountDeletionInProgress: Trwa usuwanie konta.
@@ -1371,3 +1371,6 @@ _remoteInteract:
 movedTo: Ten użytkownik przeniósł się na {handle}.
 attachedToNotes: Wpisy z tym plikiem
 showAttachedNotes: Pokaż wpisy z tym plikiem
+uploadFailedSize: Plik jest za duży do przesłania.
+uploadFailed: Przesyłanie nie powiodło się
+uploadFailedDescription: Plik nie mógł zostać przesłany.
