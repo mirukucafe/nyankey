@@ -1409,3 +1409,6 @@ _remoteInteract:
 movedTo: Diese Person ist umgezogen zu {handle}.
 attachedToNotes: Notizen mit dieser Datei
 showAttachedNotes: Zeige Notizen mit dieser Datei
+uploadFailed: Hochladen fehlgeschlagen
+uploadFailedDescription: Die Datei konnte nicht hochgeladen werden.
+uploadFailedSize: Die Datei ist zu groß.
