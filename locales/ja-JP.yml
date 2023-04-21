@@ -1294,3 +1294,8 @@ _remoteInteract:
   urlInstructions: 以下のURLをコピーするとよいでしょう。あなたのインスタンスの検索フィールドに貼り付けることで、正しい場所に誘導されるでしょう。
   description: 今すぐにこのアクションを実行することはできません。あなたのインスタンス上で、またはログインして行う必要があるかもしれません。
 movedTo: このユーザーは {handle} に引っ越しました。
+uploadFailedDescription: ファイルをアップロードできませんでした。
+uploadFailedSize: このファイルは大きすぎるためアップロードできません。
+uploadFailed: アップロード失敗
+showAttachedNotes: 添付ノートを表示
+attachedToNotes: このファイルが添付されたノート
