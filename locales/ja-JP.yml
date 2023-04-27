@@ -1295,7 +1295,7 @@ _remoteInteract:
   description: 今すぐにこのアクションを実行することはできません。あなたのインスタンス上で、またはログインして行う必要があるかもしれません。
 movedTo: このユーザーは {handle} に引っ越しました。
 uploadFailedDescription: ファイルをアップロードできませんでした。
-uploadFailedSize: このファイルは大きすぎるためアップロードできません。
+uploadFailedSize: ファイルサイズが大きすぎるためアップロードできません。
 uploadFailed: アップロード失敗
 showAttachedNotes: 添付ノートを表示
 attachedToNotes: このファイルが添付されたノート
