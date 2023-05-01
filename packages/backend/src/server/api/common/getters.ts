@@ -32,7 +32,7 @@ export async function getNote(noteId: Note['id'], me: { id: User['id'] } | null)
 export async function getUser(userId: User['id'], includeSuspended = false) {
 	const user = await Users.findOneBy({
 		id: userId,
-		isDeleted: false,
+		isDeleted: IsNull(),
 		...(includeSuspended ? {} : {isSuspended: false}),
 	});
 
@@ -50,7 +50,7 @@ export async function getRemoteUser(userId: User['id'], includeSuspended = false
 	const user = await Users.findOneBy({
 		id: userId,
 		host: Not(IsNull()),
-		isDeleted: false,
+		isDeleted: IsNull(),
 		...(includeSuspended ? {} : {isSuspended: false}),
 	});
 
@@ -68,7 +68,7 @@ export async function getLocalUser(userId: User['id'], includeSuspended = false)
 	const user = await Users.findOneBy({
 		id: userId,
 		host: IsNull(),
-		isDeleted: false,
+		isDeleted: IsNull(),
 		...(includeSuspended ? {} : {isSuspended: false}),
 	});
 

@@ -6,15 +6,15 @@ import { subscriber } from '@/db/redis.js';
 
 export const userByIdCache = new Cache<User>(
 	Infinity,
-	async (id) => await Users.findOneBy({ id, isDeleted: false }) ?? undefined,
+	async (id) => await Users.findOneBy({ id, isDeleted: IsNull() }) ?? undefined,
 );
 export const localUserByNativeTokenCache = new Cache<ILocalUser>(
 	Infinity,
-	async (token) => await Users.findOneBy({ token, host: IsNull(), isDeleted: false }) as ILocalUser | null ?? undefined,
+	async (token) => await Users.findOneBy({ token, host: IsNull(), isDeleted: isNull() }) as ILocalUser | null ?? undefined,
 );
 export const uriPersonCache = new Cache<User>(
 	Infinity,
-	async (uri) => await Users.findOneBy({ uri, isDeleted: false }) ?? undefined,
+	async (uri) => await Users.findOneBy({ uri, isDeleted: IsNull() }) ?? undefined,
 );
 
 subscriber.on('message', async (_, data) => {
