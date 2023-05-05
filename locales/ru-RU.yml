@@ -722,7 +722,7 @@ misskeyUpdated: "FoundKey обновился!"
 whatIsNew: "Что новенького?"
 translate: "Перевод"
 translatedFrom: "Перевод. Язык оригинала — {x}"
-accountDeletionInProgress: "В настоящее время выполняется удаление учетной записи"
+accountDeletionInProgress: "В настоящее время выполняется удаление учетной записи."
 usernameInfo: "Имя, которое отличает вашу учетную запись от других на этом сервере.\
   \ Вы можете использовать алфавит (a~z, A~Z), цифры (0~9) или символы подчеркивания\
   \ (_). Имена пользователей не могут быть изменены позже."
@@ -749,7 +749,7 @@ ffVisibility: "Видимость подписок и подписчиков"
 ffVisibilityDescription: "Здесь можно настроить, кто будет видеть ваши подписки и\
   \ подписчиков."
 continueThread: "Показать следующие ответы"
-deleteAccountConfirm: "Учётная запись будет безвозвратно удалена. Подтверждаете?"
+deleteAccountConfirm: "Учётная запись {handle} будет безвозвратно удалена. Подтверждаете?"
 incorrectPassword: "Пароль неверен."
 voteConfirm: "Отдать голос за «{choice}»?"
 hide: "Спрятать"
@@ -1268,3 +1268,60 @@ _deck:
     mentions: "Упоминания"
     direct: "Личное"
 _services: {}
+botFollowRequiresApproval: Запросы на подписку от аккаунтов помеченных как бот требуют
+  подтверждения
+showLess: Показать меньше
+exportAll: Экспортировать всё
+exportSelected: Экспорт выбран
+cannotAttachFileWhenAccountSwitched: Вы не можете прикрепить файл, перейдя в другую
+  учетную запись.
+cannotSwitchAccountWhenFileAttached: Вы не можете переключать учетные записи, пока
+  файлы прикреплены.
+deleteAccount: Удалить аккаунт
+isSystemAccount: Учетная запись, созданная системой и автоматически управляемая ею.
+oneDay: Один день
+cropImage: Обрезать изображение
+documentation: Документация
+movedTo: Этот пользователь перешел на {handle}.
+typeToConfirm: Пожалуйста введите {x} чтобы подтвердить
+rateLimitExceeded: Лимит превышен
+numberOfPageCache: Количество кэшированных страниц
+numberOfPageCacheDescription: Увеличение этого числа повысит удобство для пользователей,
+  но приведет к увеличению нагрузки на сервер, а также к использованию большего объема
+  памяти.
+file: Файл
+unclip: Удалить из подборки
+translationSettings: Настройки перевода
+translationService: Служба перевода
+threadMuteNotificationsDesc: Выберите уведомления, которые вы хотите просмотреть в
+  этом треде. Также применяются глобальные настройки уведомлений. Отключение имеет
+  приоритет.
+reflectMayTakeTime: Это может занять некоторое время чтобы вступило в силу.
+failedToFetchAccountInformation: Не удалось получить информацию о аккаунте
+instanceDefaultThemeDescription: Введите код темы в формате объекта.
+tenMinutes: 10 минут
+oneHour: Один час
+oneWeek: Одна неделя
+cropImageAsk: Вы хотите обрезать это изображение?
+recentNHours: Последние {n} часов
+recentNDays: Последние {n} дней
+confirmToUnclipAlreadyClippedNote: Эта заметка уже является частью подборки "{name}".
+  Вы хотите вместо этого удалить это из этой подборки?
+noEmailServerWarning: Сервер электронной почты не настроен.
+setTag: Установить метку
+addTag: Добавить метку
+removeTag: Удалить метку
+externalCssSnippets: Несколько фрагментов CSS для вашего вдохновения (не управляются
+  FoundKey)
+oauthErrorGoBack: Произошла ошибка при попытке аутентификации стороннего приложения.
+  Пожалуйста, вернитесь и попробуйте еще раз.
+appAuthorization: Авторизация приложения
+noPermissionsRequested: (Никаких разрешений не требуется.)
+selectMode: Выберите несколько
+selectAll: Выбрать все
+setCategory: Установить категорию
+thereIsUnresolvedAbuseReportWarning: Есть нерасмотренные жалобы.
+recommended: Рекомендовано
+check: Проверка
+unlimited: Неограниченный
+mutePeriod: Длительность глушения
