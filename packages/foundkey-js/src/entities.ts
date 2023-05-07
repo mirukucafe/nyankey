@@ -135,9 +135,9 @@ export type Note = {
 	user: User;
 	userId: User['id'];
 	reply?: Note;
-	replyId: Note['id'];
+	replyId: Note['id'] | null;
 	renote?: Note;
-	renoteId: Note['id'];
+	renoteId: Note['id'] | null;
 	files: DriveFile[];
 	fileIds: DriveFile['id'][];
 	visibility: NoteVisibility;
@@ -475,9 +475,6 @@ export function isPureRenote(note: Note): boolean {
 	return note.renoteId != null
 		&& note.text == null
 		&& note.cw == null
-		&& (
-			note.fileIds == null
-			|| note.fileIds.length === 0
-		)
+		&& note.fileIds.length === 0
 		&& note.poll == null;
 }

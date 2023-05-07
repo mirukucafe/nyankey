@@ -42,13 +42,15 @@ export class APIClient {
 	constructor(opts: {
 		origin: APIClient['origin'];
 		credential?: APIClient['credential'];
-		fetch?: APIClient['fetch'] | null | undefined;
+		fetch?: FetchLike;
 	}) {
 		this.origin = opts.origin;
 		this.credential = opts.credential;
-		// ネイティブ関数をそのまま変数に代入して使おうとするとChromiumではIllegal invocationエラーが発生するため、
-		// 環境で実装されているfetchを使う場合は無名関数でラップして使用する
-		this.fetch = opts.fetch || ((...args) => fetch(...args));
+		// Wrap a native function with an anonymous function when using
+		// environment-implemented fetch, because Chromium generates an
+		// Illegal invocation error if you try to use a native function by
+		// assigning it to a variable as it is.
+		this.fetch = opts.fetch || (((...args) => fetch(...args)) as FetchLike);
 	}
 
 	public request<E extends keyof Endpoints, P extends Endpoints[E]['req']>(
@@ -79,7 +81,7 @@ export class APIClient {
 				cache: 'no-cache',
 			}).then(async (res) => {
 				const body = res.status === 204 ? null : await res.json();
-	
+
 				if (res.status === 200) {
 					resolve(body);
 				} else if (res.status === 204) {
