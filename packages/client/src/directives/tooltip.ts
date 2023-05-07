@@ -10,7 +10,7 @@ class TooltipDirective {
 	public text: string | null;
 	private asMfm: boolean;
 
-	private _close: null | () => void;
+	private _close: null | (() => void);
 	private showTimer: null | ReturnType<typeof window.setTimeout>;
 	private hideTimer: null | ReturnType<typeof window.setTimeout>;
 
@@ -23,7 +23,7 @@ class TooltipDirective {
 		this.hideTimer = null;
 	}
 
-	private close(): void {
+	public close(): void {
 		if (this.hideTimer != null) return; // already closed or closing
 
 		// cancel any pending attempts to show
@@ -96,7 +96,7 @@ export default {
 		const end = isTouchUsing ? 'touchend' : 'mouseleave';
 		el.addEventListener(start, () => self.show(el), { passive: true });
 		el.addEventListener(end, () => self.close(), { passive: true });
-		el.addEventListener('click', self.close());
+		el.addEventListener('click', () => self.close());
 		el.addEventListener('selectstart', ev => ev.preventDefault());
 	},
 

@@ -44,18 +44,19 @@ export default defineComponent({
 
 		const ast = (this.plain ? mfm.parsePlain : mfm.parse)(this.text, { fnNameList: MFM_TAGS });
 
-		const validTime = (t: string | null | undefined) => {
-			if (t == null) return null;
+		const validTime = (t: string | true) => {
+			if (typeof t !== 'string') return null;
+
 			return t.match(/^[0-9.]+s$/) ? t : null;
 		};
 
-		const genEl = (ast: mfm.MfmNode[]) => ast.map((token): VNode[] => {
+		const genEl = (ast: mfm.MfmNode[]) => ast.map((token): VNode | VNode[] => {
 			switch (token.type) {
 				case 'text': {
 					const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
 
 					if (!this.plain) {
-						const res = [];
+						const res: VNode[] = [];
 						for (const t of text.split('\n')) {
 							res.push(h('br'));
 							res.push(t);
@@ -63,16 +64,16 @@ export default defineComponent({
 						res.shift();
 						return res;
 					} else {
-						return [text.replace(/\n/g, ' ')];
+						return text.replace(/\n/g, ' ');
 					}
 				}
 
 				case 'bold': {
-					return [h('b', genEl(token.children))];
+					return h('b', genEl(token.children));
 				}
 
 				case 'strike': {
-					return [h('del', genEl(token.children))];
+					return h('del', genEl(token.children));
 				}
 
 				case 'italic': {
@@ -180,7 +181,7 @@ export default defineComponent({
 							return h(MkSparkle, {}, genEl(token.children));
 						}
 						case 'rotate': {
-							const degrees = parseInt(token.props.args.deg) || '90';
+							const degrees = (typeof token.props.args.deg === 'string' ? parseInt(token.props.args.deg) : null) || '90';
 							style = `transform: rotate(${degrees}deg); transform-origin: center center;`;
 							break;
 						}
@@ -195,116 +196,110 @@ export default defineComponent({
 				}
 
 				case 'small': {
-					return [h('small', {
+					return h('small', {
 						style: 'opacity: 0.7;',
-					}, genEl(token.children))];
+					}, genEl(token.children));
 				}
 
 				case 'center': {
-					return [h('div', {
+					return h('div', {
 						style: 'text-align:center;',
-					}, genEl(token.children))];
+					}, genEl(token.children));
 				}
 
 				case 'url': {
-					return [h(MkUrl, {
+					return h(MkUrl, {
 						key: Math.random(),
 						url: token.props.url,
 						rel: 'nofollow noopener',
-					})];
+					});
 				}
 
 				case 'link': {
-					return [h(MkLink, {
+					return h(MkLink, {
 						key: Math.random(),
 						url: token.props.url,
 						rel: 'nofollow noopener',
-					}, genEl(token.children))];
+					}, genEl(token.children));
 				}
 
 				case 'mention': {
-					return [h(MkMention, {
+					return h(MkMention, {
 						key: Math.random(),
 						host: (token.props.host == null && this.author && this.author.host != null ? this.author.host : token.props.host) || host,
 						username: token.props.username,
-					})];
+					});
 				}
 
 				case 'hashtag': {
-					return [h(MkA, {
+					return h(MkA, {
 						key: Math.random(),
 						to: this.isNote ? `/tags/${encodeURIComponent(token.props.hashtag)}` : `/explore/tags/${encodeURIComponent(token.props.hashtag)}`,
 						style: 'color:var(--hashtag);',
-					}, `#${token.props.hashtag}`)];
+					}, `#${token.props.hashtag}`);
 				}
 
 				case 'blockCode': {
-					return [h(MkCode, {
+					return h(MkCode, {
 						key: Math.random(),
 						code: token.props.code,
 						lang: token.props.lang,
-					})];
+					});
 				}
 
 				case 'inlineCode': {
-					return [h(MkCode, {
+					return h(MkCode, {
 						key: Math.random(),
 						code: token.props.code,
 						inline: true,
-					})];
+					});
 				}
 
 				case 'quote': {
-					if (!this.nowrap) {
-						return [h('div', {
-							class: 'quote',
-						}, genEl(token.children))];
-					} else {
-						return [h('span', {
-							class: 'quote',
-						}, genEl(token.children))];
-					}
+					return h(this.nowrap ? 'span' : 'div', {
+						class: 'quote',
+					}, genEl(token.children));
 				}
 
 				case 'emojiCode': {
-					return [h(MkEmoji, {
+					return h(MkEmoji, {
 						key: Math.random(),
 						emoji: `:${token.props.name}:`,
 						customEmojis: this.customEmojis,
 						normal: this.plain,
-					})];
+					});
 				}
 
 				case 'unicodeEmoji': {
-					return [h(MkEmoji, {
+					return h(MkEmoji, {
 						key: Math.random(),
 						emoji: token.props.emoji,
 						customEmojis: this.customEmojis,
 						normal: this.plain,
-					})];
+					});
 				}
 
 				case 'mathInline': {
-					return [h(MkFormula, {
+					return h(MkFormula, {
 						key: Math.random(),
 						formula: token.props.formula,
 						block: false,
-					})];
+					});
 				}
 
 				case 'mathBlock': {
-					return [h(MkFormula, {
+					return h(MkFormula, {
 						key: Math.random(),
 						formula: token.props.formula,
 						block: true,
-					})];
+					});
 				}
 
 				case 'search': {
-					return [h(MkSearch, {
+					return h(MkSearch, {
 						key: Math.random(),
 						q: token.props.query,
-					})];
+					});
 				}
 
 				default: {

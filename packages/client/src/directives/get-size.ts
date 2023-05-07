@@ -43,7 +43,7 @@ export default {
 		calc(src);
 	},
 
-	unmounted(src) {
+	unmounted(src, binding) {
 		binding.value(0, 0);
 		const info = mountings.get(src);
 		if (!info) return;
