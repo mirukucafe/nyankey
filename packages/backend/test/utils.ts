@@ -31,16 +31,15 @@ export const async = (fn: Function) => (done: Function) => {
 export const api = async (endpoint: string, params: any, me?: any) => {
 	endpoint = endpoint.replace(/^\//, '');
 
-	const auth = me ? {
-		i: me.token
-	} : {};
+	const auth = me ? { authorization: `Bearer ${me.token}` } : {};
 
 	const res = await got<string>(`http://localhost:${port}/api/${endpoint}`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			...auth,
 		},
-		body: JSON.stringify(Object.assign(auth, params)),
+		body: JSON.stringify(params),
 		retry: {
 			limit: 0,
 		},
@@ -65,16 +64,15 @@ export const api = async (endpoint: string, params: any, me?: any) => {
 };
 
 export const request = async (endpoint: string, params: any, me?: any): Promise<{ body: any, status: number }> => {
-	const auth = me ? {
-		i: me.token,
-	} : {};
+	const auth = me ? { authorization: `Bearer ${me.token}` } : {};
 
 	const res = await fetch(`http://localhost:${port}/api${endpoint}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			...auth,
 		},
-		body: JSON.stringify(Object.assign(auth, params)),
+		body: JSON.stringify(params),
 	});
 
 	const status = res.status;
