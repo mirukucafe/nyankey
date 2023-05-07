@@ -158,7 +158,7 @@ describe('Note', () => {
 			replyId: '000000000000000000000000',
 		};
 		const res = await request('/notes/create', post, alice);
-		assert.strictEqual(res.status, 400);
+		assert.strictEqual(res.status, 404);
 	}));
 
 	it('存在しないrenote対象で怒られる', async(async () => {
@@ -166,7 +166,7 @@ describe('Note', () => {
 			renoteId: '000000000000000000000000',
 		};
 		const res = await request('/notes/create', post, alice);
-		assert.strictEqual(res.status, 400);
+		assert.strictEqual(res.status, 404);
 	}));
 
 	it('不正なリプライ先IDで怒られる', async(async () => {
@@ -175,7 +175,7 @@ describe('Note', () => {
 			replyId: 'foo',
 		};
 		const res = await request('/notes/create', post, alice);
-		assert.strictEqual(res.status, 400);
+		assert.strictEqual(res.status, 404);
 	}));
 
 	it('不正なrenote対象IDで怒られる', async(async () => {
@@ -183,7 +183,7 @@ describe('Note', () => {
 			renoteId: 'foo',
 		};
 		const res = await request('/notes/create', post, alice);
-		assert.strictEqual(res.status, 400);
+		assert.strictEqual(res.status, 404);
 	}));
 
 	it('存在しないユーザーにメンションできる', async(async () => {
@@ -286,7 +286,7 @@ describe('Note', () => {
 				choice: 2,
 			}, alice);
 
-			assert.strictEqual(res.status, 400);
+			assert.strictEqual(res.status, 409);
 		}));
 
 		it('許可されている場合は複数投票できる', async(async () => {

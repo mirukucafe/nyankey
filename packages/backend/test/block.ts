@@ -35,7 +35,7 @@ describe('Block', () => {
 		const res = await request('/following/create', { userId: alice.id }, bob);
 
 		assert.strictEqual(res.status, 400);
-		assert.strictEqual(res.body.error.id, 'c4ab57cc-4e41-45e9-bfd9-584f61e35ce0');
+		assert.strictEqual(res.body.error.code, 'BLOCKED');
 	}));
 
 	it('ブロックされているユーザーにリアクションできない', async(async () => {
@@ -44,7 +44,7 @@ describe('Block', () => {
 		const res = await request('/notes/reactions/create', { noteId: note.id, reaction: '👍' }, bob);
 
 		assert.strictEqual(res.status, 400);
-		assert.strictEqual(res.body.error.id, '20ef5475-9f38-4e4c-bd33-de6d979498ec');
+		assert.strictEqual(res.body.error.code, 'BLOCKED');
 	}));
 
 	it('ブロックされているユーザーに返信できない', async(async () => {
@@ -53,7 +53,7 @@ describe('Block', () => {
 		const res = await request('/notes/create', { replyId: note.id, text: 'yo' }, bob);
 
 		assert.strictEqual(res.status, 400);
-		assert.strictEqual(res.body.error.id, 'b390d7e1-8a5e-46ed-b625-06271cafd3d3');
+		assert.strictEqual(res.body.error.code, 'BLOCKED');
 	}));
 
 	it('ブロックされているユーザーのノートをRenoteできない', async(async () => {
@@ -62,7 +62,7 @@ describe('Block', () => {
 		const res = await request('/notes/create', { renoteId: note.id, text: 'yo' }, bob);
 
 		assert.strictEqual(res.status, 400);
-		assert.strictEqual(res.body.error.id, 'b390d7e1-8a5e-46ed-b625-06271cafd3d3');
+		assert.strictEqual(res.body.error.code, 'BLOCKED');
 	}));
 
 	// TODO: ユーザーリストに入れられないテスト
