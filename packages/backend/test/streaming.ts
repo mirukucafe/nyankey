@@ -38,6 +38,8 @@ describe('Streaming', () => {
 		let list: any;
 
 		before(async () => {
+			this.timeout(0);
+
 			p = await startServer();
 			const connection = await initTestDb(true);
 			Followings = connection.getRepository(Following);

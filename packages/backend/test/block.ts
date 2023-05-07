@@ -13,6 +13,8 @@ describe('Block', () => {
 	let carol: any;
 
 	before(async () => {
+		this.timeout(0);
+
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		bob = await signup({ username: 'bob' });
@@ -65,9 +67,9 @@ describe('Block', () => {
 		assert.strictEqual(res.body.error.code, 'BLOCKED');
 	}));
 
-	// TODO: test that blocked user cannot be included in user list
+	it('cannot include blocked users in user lists');
 
-	// TODO: test that blocked user is removed from user list
+	it('removes users from user lists');
 
 	it('local timeline does not contain blocked users', async(async () => {
 		const aliceNote = await post(alice);

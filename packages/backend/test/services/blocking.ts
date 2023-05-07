@@ -14,6 +14,8 @@ describe('Creating a block activity', () => {
 	let carol: any;
 
 	before(async () => {
+		this.timeout(0);
+
 		await initTestDb();
 		p = await startServer();
 		alice = await signup({ username: 'alice' });

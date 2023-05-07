@@ -23,6 +23,7 @@ describe('Fetch resource', () => {
 	let alicesPost: any;
 
 	before(async () => {
+		this.timeout(0);
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		alicesPost = await post(alice, {

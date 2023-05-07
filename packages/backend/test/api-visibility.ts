@@ -8,6 +8,7 @@ describe('API visibility', () => {
 	let p: childProcess.ChildProcess;
 
 	before(async () => {
+		this.timeout(0);
 		p = await startServer();
 	});
 

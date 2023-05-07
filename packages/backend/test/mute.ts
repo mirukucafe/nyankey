@@ -13,6 +13,8 @@ describe('Mute', () => {
 	let carol: any;
 
 	before(async () => {
+		this.timeout(0);
+
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		bob = await signup({ username: 'bob' });

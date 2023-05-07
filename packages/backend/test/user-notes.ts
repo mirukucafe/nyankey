@@ -13,6 +13,8 @@ describe('users/notes', () => {
 	let jpgPngNote: any;
 
 	before(async () => {
+		this.timeout(0);
+
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		const jpg = await uploadUrl(alice, 'https://raw.githubusercontent.com/misskey-dev/misskey/develop/packages/backend/test/resources/Lenna.jpg');

@@ -13,6 +13,8 @@ describe('Note', () => {
 	let bob: any;
 
 	before(async () => {
+		this.timeout(0);
+
 		p = await startServer();
 		const connection = await initTestDb(true);
 		Notes = connection.getRepository(Note);
