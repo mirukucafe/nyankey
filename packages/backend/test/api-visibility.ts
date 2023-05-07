@@ -165,7 +165,7 @@ describe('API visibility', () => {
 		// specified
 		it('[show] specified post can be seen by author', async(async () => {
 			const res = await show(spe.id, alice);
-			assert.strictEqual(res.status, 404);
+			assert.strictEqual(res.body.text, 'x');
 		}));
 
 		it('[show] specified post can be seen by designated user', async(async () => {
@@ -275,11 +275,6 @@ describe('API visibility', () => {
 		}));
 
 		it('[show] specified reply can be seen by replied to user', async(async () => {
-			const res = await show(speR.id, target);
-			assert.strictEqual(res.body.text, 'x');
-		}));
-
-		it('[show] specified-replyをされた人が指定されてなくても見れる', async(async () => {
 			const res = await show(speR.id, target);
 			assert.strictEqual(res.body.text, 'x');
 		}));
