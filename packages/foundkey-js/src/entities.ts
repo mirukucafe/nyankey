@@ -260,7 +260,7 @@ export type CustomEmoji = {
 	aliases: string[];
 };
 
-export type LiteInstanceMetadata = {
+export type InstanceMetadata = {
 	maintainerName: string | null;
 	maintainerEmail: string | null;
 	version: string;
@@ -290,13 +290,8 @@ export type LiteInstanceMetadata = {
 		notFound: string;
 		info: string;
 	};
-};
-
-export type DetailedInstanceMetadata = LiteInstanceMetadata & {
 	features: Record<string, any>;
 };
-
-export type InstanceMetadata = LiteInstanceMetadata | DetailedInstanceMetadata;
 
 export type ServerInfo = {
 	machine: string;
@@ -387,8 +382,6 @@ export type AuthSession = {
 	app: App;
 	token: string;
 };
-
-export type Ad = TODO;
 
 export type Clip = TODO;
 

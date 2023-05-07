@@ -1,6 +1,5 @@
 import {
-	Ad, Announcement, Antenna, App, AuthSession, Blocking, Channel, Clip, DateString, DetailedInstanceMetadata, DriveFile, DriveFolder, Following, FollowingFolloweePopulated, FollowingFollowerPopulated, FollowRequest, Instance, InstanceMetadata,
-	LiteInstanceMetadata,
+	Announcement, Antenna, App, AuthSession, Blocking, Channel, Clip, DateString, InstanceMetadata, DriveFile, DriveFolder, Following, FollowingFolloweePopulated, FollowingFollowerPopulated, FollowRequest, Instance,
 	MeDetailed,
 	Note, NoteFavorite, OriginType, Page, ServerInfo, Stats, User, UserDetailed, UserGroup, UserList, UserSorting, Notification, NoteReaction, Signin, MessagingMessage,
 } from './entities.js';
@@ -380,21 +379,7 @@ export type Endpoints = {
 	'messaging/messages/create': { req: { userId?: User['id']; groupId?: UserGroup['id']; text?: string; fileId?: DriveFile['id']; }; res: MessagingMessage; };
 	'messaging/messages/delete': { req: { messageId: MessagingMessage['id']; }; res: null; };
 	'messaging/messages/read': { req: { messageId: MessagingMessage['id']; }; res: null; };
-	'meta': { req: { detail?: boolean; }; res: {
-		$switch: {
-			$cases: [[
-				{ detail: true; },
-				DetailedInstanceMetadata,
-			], [
-				{ detail: false; },
-				LiteInstanceMetadata,
-			], [
-				{ detail: boolean; },
-				LiteInstanceMetadata | DetailedInstanceMetadata,
-			]];
-			$default: LiteInstanceMetadata;
-		};
-	}; };
+	'meta': { req: { detail?: boolean; }; res: InstanceMetadata; };
 	'miauth/gen-token': { req: TODO; res: TODO; };
 	'mute/create': { req: TODO; res: TODO; };
 	'mute/delete': { req: { userId: User['id'] }; res: null; };
