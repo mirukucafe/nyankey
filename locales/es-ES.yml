@@ -854,6 +854,18 @@ _mfm:
   spin: Animación (Spin)
   shakeDescription: Brinda al contenido una animación temblorosa.
   inlineMath: Función matemática (Inline)
+  rainbow: Arcoíris
+  x4Description: Muestra el contenido de la manera más grandemente posible.
+  blurDescription: Muestra borroso el contenido. Se mostrará con claridad cuando se
+    cubra.
+  spinDescription: Da al contenido una animación de girar.
+  x2: Grande
+  x2Description: Muestra en grande el contenido.
+  x3Description: Muestra más grande el contenido.
+  x4: Increíblemente grande
+  blur: Borroso
+  fontDescription: Agrega la fuente para mostrar contenido.
+  x3: Muy grande
 _instanceTicker:
   none: "No mostrar"
   remote: "Mostrar a usuarios remotos"
@@ -1318,3 +1330,9 @@ unlikeConfirm: ¿En verdad quieres remover tu like?
 breakFollow: Quitar seguidor
 reporter: Reportero
 continueThread: Ver la continuación del hilo
+uploadFailedSize: El archivo es muy grande para subirse.
+uploadFailed: Subida fallida
+uploadFailedDescription: No se pudo subir el archivo.
+movedTo: Este usuario se ha movido a {handle}.
+attachedToNotes: Notas del archivo
+showAttachedNotes: Mostrar notas del archivo
