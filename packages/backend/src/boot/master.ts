@@ -168,6 +168,15 @@ function spawnWorker(mode: 'web' | 'queue'): Promise<void> {
 				case 'ready':
 					res();
 					break;
+				case 'metaUpdate':
+					// forward new instance metadata to all workers
+					for (const otherWorker of Object.values(cluster.workers)) {
+						// don't forward the message to the worker that sent it
+						if (worker.id === otherWorker.id) continue;
+
+						otherWorker.send(message);
+					}
+					break;
 			}
 		});
 	});

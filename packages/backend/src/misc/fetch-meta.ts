@@ -1,3 +1,4 @@
+import process from 'node:process';
 import push from 'web-push';
 import { db } from '@/db/postgre.js';
 import { Meta } from '@/models/entities/meta.js';
@@ -17,8 +18,19 @@ export async function setMeta(meta: Meta): Promise<void> {
 
 	cache = meta;
 
+	/*
+	The meta is not included here because another process may have updated
+	the content before the other process receives it.
+	*/
+	process.send!('metaUpdated');
+
 	unlock();
 }
+
+// the primary will forward this message
+process.on('message', async message => {
+	if (message === 'metaUpdated') await getMeta();
+});
 
 /**
  * Performs the primitive database operation to fetch server configuration.
