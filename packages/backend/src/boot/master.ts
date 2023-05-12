@@ -160,12 +160,15 @@ function spawnWorker(mode: 'web' | 'queue'): Promise<void> {
 	return new Promise(res => {
 		const worker = cluster.fork({ mode });
 		worker.on('message', message => {
-			if (message === 'listenFailed') {
-				bootLogger.error('The server Listen failed due to the previous error.');
-				process.exit(1);
+			switch (message) {
+				case 'listenFailed':
+					bootLogger.error('The server Listen failed due to the previous error.');
+					process.exit(1);
+					break;
+				case 'ready':
+					res();
+					break;
 			}
-			if (message !== 'ready') return;
-			res();
 		});
 	});
 }
