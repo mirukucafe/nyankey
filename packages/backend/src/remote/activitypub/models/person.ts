@@ -6,7 +6,7 @@ import { registerOrFetchInstanceDoc } from '@/services/register-or-fetch-instanc
 import { Note } from '@/models/entities/note.js';
 import { updateUsertags } from '@/services/update-hashtag.js';
 import { Users, Instances, Followings, UserProfiles, UserPublickeys } from '@/models/index.js';
-import { User, IRemoteUser, CacheableUser } from '@/models/entities/user.js';
+import { User, IRemoteUser, User } from '@/models/entities/user.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { UserNotePining } from '@/models/entities/user-note-pining.js';
 import { genId } from '@/misc/gen-id.js';
@@ -121,7 +121,7 @@ async function validateActor(x: IObject, resolver: Resolver): Promise<IActor> {
  *
  * If the target Person is registered in FoundKey, it is returned.
  */
-export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
+export async function fetchPerson(uri: string): Promise<User | null> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	const cached = uriPersonCache.get(uri);
@@ -394,7 +394,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
  * If the target Person is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
  * Fetch the person from the remote server, register it in FoundKey, and return it.
  */
-export async function resolvePerson(uri: string, resolver: Resolver, hint?: IObject): Promise<CacheableUser> {
+export async function resolvePerson(uri: string, resolver: Resolver, hint?: IObject): Promise<User> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	//#region このサーバーに既に登録されていたらそれを返す

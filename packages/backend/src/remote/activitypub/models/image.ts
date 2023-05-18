@@ -1,5 +1,5 @@
 import { uploadFromUrl } from '@/services/drive/upload-from-url.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { DriveFiles } from '@/models/index.js';
@@ -11,7 +11,7 @@ import { apLogger } from '../logger.js';
 /**
  * Imageを作成します。
  */
-export async function createImage(actor: CacheableRemoteUser, value: any, resolver: Resolver): Promise<DriveFile> {
+export async function createImage(actor: IRemoteUser, value: any, resolver: Resolver): Promise<DriveFile> {
 	// 投稿者が凍結されていたらスキップ
 	if (actor.isSuspended) {
 		throw new Error('actor has been suspended');
@@ -58,7 +58,7 @@ export async function createImage(actor: CacheableRemoteUser, value: any, resolv
  * If the target Image is registered in FoundKey, return it; otherwise, fetch it from the remote server and return it.
  * Fetch the image from the remote server, register it in FoundKey and return it.
  */
-export async function resolveImage(actor: CacheableRemoteUser, value: any, resolver: Resolver): Promise<DriveFile> {
+export async function resolveImage(actor: IRemoteUser, value: any, resolver: Resolver): Promise<DriveFile> {
 	// TODO
 
 	// Fetch from remote server and register it.

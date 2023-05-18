@@ -1,4 +1,4 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IUndo, isFollow, isBlock, isLike, isAnnounce, getApType, isAccept } from '@/remote/activitypub/type.js';
@@ -8,7 +8,7 @@ import undoLike from './like.js';
 import undoAccept from './accept.js';
 import { undoAnnounce } from './announce.js';
 
-export default async (actor: CacheableRemoteUser, activity: IUndo, resolver: Resolver): Promise<string> => {
+export default async (actor: IRemoteUser, activity: IUndo, resolver: Resolver): Promise<string> => {
 	if ('actor' in activity && actor.uri !== activity.actor) {
 		throw new Error('invalid actor');
 	}

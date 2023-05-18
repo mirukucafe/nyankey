@@ -1,4 +1,4 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { extractDbHost } from '@/misc/convert-host.js';
 import { StatusError } from '@/misc/fetch.js';
@@ -9,7 +9,7 @@ import { getApId, IObject } from '@/remote/activitypub/type.js';
 /**
  * 投稿作成アクティビティを捌きます
  */
-export default async function(resolver: Resolver, actor: CacheableRemoteUser, note: IObject, silent = false): Promise<string> {
+export default async function(resolver: Resolver, actor: IRemoteUser, note: IObject, silent = false): Promise<string> {
 	const uri = getApId(note);
 
 	if (typeof note === 'object') {

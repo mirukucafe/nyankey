@@ -1,7 +1,7 @@
 import escapeRegexp from 'escape-regexp';
 import config from '@/config/index.js';
 import { Note } from '@/models/entities/note.js';
-import { CacheableUser } from '@/models/entities/user.js';
+import { User } from '@/models/entities/user.js';
 import { MessagingMessage } from '@/models/entities/messaging-message.js';
 import { Notes, MessagingMessages } from '@/models/index.js';
 import { uriPersonCache, userByIdCache } from '@/services/user-cache.js';
@@ -89,7 +89,7 @@ export class DbResolver {
 	/**
 	 * AP Person => FoundKey User in DB
 	 */
-	public async getUserFromApId(value: string | IObject): Promise<CacheableUser | null> {
+	public async getUserFromApId(value: string | IObject): Promise<User | null> {
 		const parsed = parseUri(value);
 
 		if (parsed.local) {

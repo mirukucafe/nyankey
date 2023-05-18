@@ -2,7 +2,7 @@ import promiseLimit from 'promise-limit';
 
 import config from '@/config/index.js';
 import post from '@/services/note/create.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { unique, toArray, toSingle } from '@/prelude/array.js';
 import { vote } from '@/services/note/polls/vote.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
@@ -91,7 +91,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	apLogger.info(`Creating the Note: ${note.id}`);
 
 	// 投稿者をフェッチ
-	const actor = await resolvePerson(getOneApId(note.attributedTo), resolver) as CacheableRemoteUser;
+	const actor = await resolvePerson(getOneApId(note.attributedTo), resolver) as IRemoteUser;
 
 	// 投稿者が凍結されていたらスキップ
 	if (actor.isSuspended) {

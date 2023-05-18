@@ -1,9 +1,9 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { createReaction } from '@/services/note/reaction/create.js';
 import { ILike, getApId } from '../type.js';
 import { fetchNote, extractEmojis } from '../models/note.js';
 
-export default async (actor: CacheableRemoteUser, activity: ILike) => {
+export default async (actor: IRemoteUser, activity: ILike) => {
 	const targetUri = getApId(activity.object);
 
 	const note = await fetchNote(targetUri);

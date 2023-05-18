@@ -1,10 +1,10 @@
 import unblock from '@/services/blocking/delete.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import { IBlock } from '@/remote/activitypub/type.js';
 import { DbResolver } from '@/remote/activitypub/db-resolver.js';
 
-export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<string> => {
+export default async (actor: IRemoteUser, activity: IBlock): Promise<string> => {
 	const dbResolver = new DbResolver();
 	const blockee = await dbResolver.getUserFromApId(activity.object);
 

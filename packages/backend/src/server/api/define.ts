@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 import Ajv from 'ajv';
-import { CacheableLocalUser } from '@/models/entities/user.js';
+import { ILocalUser } from '@/models/entities/user.js';
 import { Schema, SchemaType } from '@/misc/schema.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { IEndpointMeta } from './endpoints.js';
@@ -10,7 +10,7 @@ export type Response = Record<string, any> | void;
 
 // TODO: paramsの型をT['params']のスキーマ定義から推論する
 type executor<T extends IEndpointMeta, Ps extends Schema> =
-	(params: SchemaType<Ps>, user: T['requireCredential'] extends true ? CacheableLocalUser : CacheableLocalUser | null, token: AccessToken | null, file?: any, cleanup?: () => any) =>
+	(params: SchemaType<Ps>, user: T['requireCredential'] extends true ? ILocalUser : ILocalUser | null, token: AccessToken | null, file?: any, cleanup?: () => any) =>
 		Promise<T['res'] extends undefined ? Response : SchemaType<NonNullable<T['res']>>>;
 
 const ajv = new Ajv({
@@ -20,10 +20,10 @@ const ajv = new Ajv({
 ajv.addFormat('misskey:id', /^[a-zA-Z0-9]+$/);
 
 export default function <T extends IEndpointMeta, Ps extends Schema>(meta: T, paramDef: Ps, cb: executor<T, Ps>)
-		: (params: any, user: T['requireCredential'] extends true ? CacheableLocalUser : CacheableLocalUser | null, token: AccessToken | null, file?: any) => Promise<any> {
+		: (params: any, user: T['requireCredential'] extends true ? ILocalUser : ILocalUser | null, token: AccessToken | null, file?: any) => Promise<any> {
 	const validate = ajv.compile(paramDef);
 
-	return (params: any, user: T['requireCredential'] extends true ? CacheableLocalUser : CacheableLocalUser | null, token: AccessToken | null, file?: any) => {
+	return (params: any, user: T['requireCredential'] extends true ? ILocalUser : ILocalUser | null, token: AccessToken | null, file?: any) => {
 		function cleanup() {
 			fs.unlink(file.path, () => {});
 		}

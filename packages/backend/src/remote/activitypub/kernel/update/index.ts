@@ -1,4 +1,4 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { getApId, getApType, IUpdate, isActor } from '@/remote/activitypub/type.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 import { updateQuestion } from '@/remote/activitypub/models/question.js';
@@ -8,7 +8,7 @@ import { updatePerson } from '@/remote/activitypub/models/person.js';
 /**
  * Updateアクティビティを捌きます
  */
-export default async (actor: CacheableRemoteUser, activity: IUpdate, resolver: Resolver): Promise<string> => {
+export default async (actor: IRemoteUser, activity: IUpdate, resolver: Resolver): Promise<string> => {
 	if ('actor' in activity && actor.uri !== activity.actor) {
 		return 'skip: invalid actor';
 	}

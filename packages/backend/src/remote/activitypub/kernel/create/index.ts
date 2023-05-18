@@ -1,11 +1,11 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { toArray, concat, unique } from '@/prelude/array.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { ICreate, getApId, isPost, getApType } from '../../type.js';
 import { apLogger } from '../../logger.js';
 import createNote from './note.js';
 
-export default async (actor: CacheableRemoteUser, activity: ICreate, resolver: Resolver): Promise<void> => {
+export default async (actor: IRemoteUser, activity: ICreate, resolver: Resolver): Promise<void> => {
 	const uri = getApId(activity);
 
 	apLogger.info(`Create: ${uri}`);

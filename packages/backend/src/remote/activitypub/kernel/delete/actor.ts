@@ -1,9 +1,9 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 import { deleteAccount } from '@/services/delete-account.js';
 
-export async function deleteActor(actor: CacheableRemoteUser, uri: string): Promise<string> {
+export async function deleteActor(actor: IRemoteUser, uri: string): Promise<string> {
 	apLogger.info(`Deleting the Actor: ${uri}`);
 
 	if (actor.uri !== uri) {

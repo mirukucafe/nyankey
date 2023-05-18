@@ -1,4 +1,4 @@
-import { CacheableLocalUser } from '@/models/entities/user.js';
+import { ILocalUser } from '@/models/entities/user.js';
 import { Users, AccessTokens } from '@/models/index.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { userByIdCache, localUserByNativeTokenCache } from '@/services/user-cache.js';
@@ -11,7 +11,7 @@ export class AuthenticationError extends Error {
 	}
 }
 
-export default async (authorization: string | null | undefined, bodyToken: string | null | undefined): Promise<[CacheableLocalUser | null | undefined, AccessToken | null | undefined]> => {
+export default async (authorization: string | null | undefined, bodyToken: string | null | undefined): Promise<[ILocalUser | null | undefined, AccessToken | null | undefined]> => {
 	let maybeToken: string | null = null;
 
 	// check if there is an authorization header set

@@ -260,9 +260,3 @@ export interface IRemoteUser extends User {
 	host: string;
 	token: null;
 }
-
-export type CacheableLocalUser = ILocalUser;
-
-export type CacheableRemoteUser = IRemoteUser;
-
-export type CacheableUser = CacheableLocalUser | CacheableRemoteUser;

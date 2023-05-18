@@ -1,12 +1,12 @@
 import { IsNull } from 'typeorm';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { resolvePerson } from '@/remote/activitypub/models/person.js';
 import { Followings, Users } from '@/models/index.js';
 import { createNotification } from '@/services/create-notification.js';
 import Resolver from '../../resolver.js';
 import { IMove, isActor, getApId } from '../../type.js';
 
-export async function move(actor: CacheableRemoteUser, activity: IMove, resolver: Resolver): Promise<void> {
+export async function move(actor: IRemoteUser, activity: IMove, resolver: Resolver): Promise<void> {
 	// actor is not move origin
 	if (activity.object == null || getApId(activity.object) !== actor.uri) return;
 
