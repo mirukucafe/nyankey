@@ -74,13 +74,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 
 	const err = validateNote(object);
 	if (err) {
-		apLogger.error(`${err.message}`, {
-			resolver: {
-				history: resolver.getHistory(),
-			},
-			value,
-			object,
-		});
+		apLogger.error(`${err.message}`);
 		throw new Error('invalid note');
 	}
 

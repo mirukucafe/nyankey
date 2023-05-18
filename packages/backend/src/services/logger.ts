@@ -84,7 +84,7 @@ export default class Logger {
 	 * @param important Whether to highlight this message as especially important.
 	 * @param subDomains Names of sub-loggers to be added.
 	 */
-	private log(level: Level, message: string, data?: Record<string, any> | null, important = false, subDomains: Domain[] = [], _store = true): void {
+	private log(level: Level, message: string, important = false, subDomains: Domain[] = [], _store = true): void {
 		if (envOption.quiet) return;
 		const store = _store && this.store;
 
@@ -94,7 +94,7 @@ export default class Logger {
 		// If this logger has a parent logger, delegate the actual logging to it,
 		// so the parent domain(s) will be logged properly.
 		if (this.parentLogger) {
-			this.parentLogger.log(level, message, data, important, [this.domain].concat(subDomains), store);
+			this.parentLogger.log(level, message, important, [this.domain].concat(subDomains), store);
 			return;
 		}
 
@@ -154,17 +154,15 @@ export default class Logger {
 	 * Log an error message.
 	 * Use in situations where execution cannot be continued.
 	 * @param err Error or string containing an error message
-	 * @param data Data relating to the error
 	 * @param important Whether this error is important
 	 */
-	public error(err: string | Error, data: Record<string, any> = {}, important = false): void {
+	public error(err: string | Error, important = false): void {
 		if (err instanceof Error) {
-			data.e = err;
-			this.log(LEVELS.error, err.toString(), data, important);
+			this.log(LEVELS.error, err.toString(), important);
 		} else if (typeof err === 'object') {
-			this.log(LEVELS.error, `${(err as any).message || (err as any).name || err}`, data, important);
+			this.log(LEVELS.error, `${(err as any).message || (err as any).name || err}`, important);
 		} else {
-			this.log(LEVELS.error, `${err}`, data, important);
+			this.log(LEVELS.error, `${err}`, important);
 		}
 	}
 
@@ -172,21 +170,19 @@ export default class Logger {
 	 * Log a warning message.
 	 * Use in situations where execution can continue but needs to be improved.
 	 * @param message Warning message
-	 * @param data Data relating to the warning
 	 * @param important Whether this warning is important
 	 */
-	public warn(message: string, data?: Record<string, any> | null, important = false): void {
-		this.log(LEVELS.warning, message, data, important);
+	public warn(message: string, important = false): void {
+		this.log(LEVELS.warning, message, important);
 	}
 
 	/**
 	 * Log a success message.
 	 * Use in situations where something has been successfully done.
 	 * @param message Success message
-	 * @param data Data relating to the success
 	 * @param important Whether this success message is important
 	 */
-	public succ(message: string, data?: Record<string, any> | null, important = false): void {
+	public succ(message: string, important = false): void {
 		this.log(LEVELS.success, message, important);
 	}
 
@@ -194,21 +190,19 @@ export default class Logger {
 	 * Log a debug message.
 	 * Use for debugging (information needed by developers but not required by users).
 	 * @param message Debug message
-	 * @param data Data relating to the debug message
 	 * @param important Whether this debug message is important
 	 */
-	public debug(message: string, data?: Record<string, any> | null, important = false): void {
-		this.log(LEVELS.debug, message, data, important);
+	public debug(message: string, important = false): void {
+		this.log(LEVELS.debug, message, important);
 	}
 
 	/**
 	 * Log an informational message.
 	 * Use when something needs to be logged but doesn't fit into other levels.
 	 * @param message Info message
-	 * @param data Data relating to the info message
 	 * @param important Whether this info message is important
 	 */
-	public info(message: string, data?: Record<string, any> | null, important = false): void {
-		this.log(LEVELS.info, message, data, important);
+	public info(message: string, important = false): void {
+		this.log(LEVELS.info, message, important);
 	}
 }

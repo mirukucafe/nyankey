@@ -39,8 +39,8 @@ systemQueue
 	.on('waiting', (jobId) => systemLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => systemLogger.debug(`active id=${job.id}`))
 	.on('completed', (job, result) => systemLogger.debug(`completed(${result}) id=${job.id}`))
-	.on('failed', (job, err) => systemLogger.warn(`failed(${err}) id=${job.id}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => systemLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => systemLogger.warn(`failed(${err}) id=${job.id}`))
+	.on('error', (job: any, err: Error) => systemLogger.error(`error ${err}`))
 	.on('stalled', (job) => systemLogger.warn(`stalled id=${job.id}`));
 
 deliverQueue
@@ -48,31 +48,31 @@ deliverQueue
 	.on('active', (job) => deliverLogger.debug(`active ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('completed', (job, result) => deliverLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('failed', (job, err) => deliverLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`))
-	.on('error', (job: any, err: Error) => deliverLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('error', (job: any, err: Error) => deliverLogger.error(`error ${err}`))
 	.on('stalled', (job) => deliverLogger.warn(`stalled ${getJobInfo(job)} to=${job.data.to}`));
 
 inboxQueue
 	.on('waiting', (jobId) => inboxLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => inboxLogger.debug(`active ${getJobInfo(job, true)}`))
 	.on('completed', (job, result) => inboxLogger.debug(`completed(${result}) ${getJobInfo(job, true)}`))
-	.on('failed', (job, err) => inboxLogger.warn(`failed(${err}) ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => inboxLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => inboxLogger.warn(`failed(${err}) ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`))
+	.on('error', (job: any, err: Error) => inboxLogger.error(`error ${err}`))
 	.on('stalled', (job) => inboxLogger.warn(`stalled ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`));
 
 dbQueue
 	.on('waiting', (jobId) => dbLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => dbLogger.debug(`active id=${job.id}`))
 	.on('completed', (job, result) => dbLogger.debug(`completed(${result}) id=${job.id}`))
-	.on('failed', (job, err) => dbLogger.warn(`failed(${err}) id=${job.id}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => dbLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => dbLogger.warn(`failed(${err}) id=${job.id}`))
+	.on('error', (job: any, err: Error) => dbLogger.error(`error ${err}`))
 	.on('stalled', (job) => dbLogger.warn(`stalled id=${job.id}`));
 
 objectStorageQueue
 	.on('waiting', (jobId) => objectStorageLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => objectStorageLogger.debug(`active id=${job.id}`))
 	.on('completed', (job, result) => objectStorageLogger.debug(`completed(${result}) id=${job.id}`))
-	.on('failed', (job, err) => objectStorageLogger.warn(`failed(${err}) id=${job.id}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => objectStorageLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => objectStorageLogger.warn(`failed(${err}) id=${job.id}`))
+	.on('error', (job: any, err: Error) => objectStorageLogger.error(`error ${err}`))
 	.on('stalled', (job) => objectStorageLogger.warn(`stalled id=${job.id}`));
 
 webhookDeliverQueue
@@ -80,7 +80,7 @@ webhookDeliverQueue
 	.on('active', (job) => webhookLogger.debug(`active ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('completed', (job, result) => webhookLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('failed', (job, err) => webhookLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`))
-	.on('error', (job: any, err: Error) => webhookLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('error', (job: any, err: Error) => webhookLogger.error(`error ${err}`))
 	.on('stalled', (job) => webhookLogger.warn(`stalled ${getJobInfo(job)} to=${job.data.to}`));
 
 export function deliver(user: ThinUser, content: unknown, to: string | null) {

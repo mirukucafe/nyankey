@@ -41,7 +41,7 @@ function greet(): void {
 	}
 
 	bootLogger.info('Welcome to FoundKey!');
-	bootLogger.info(`FoundKey v${meta.version}`, null, true);
+	bootLogger.info(`FoundKey v${meta.version}`, true);
 }
 
 /**
@@ -59,7 +59,7 @@ export async function masterMain(): Promise<void> {
 		config = loadConfigBoot();
 		await connectDb();
 	} catch (e) {
-		bootLogger.error('Fatal error occurred during initialization', {}, true);
+		bootLogger.error('Fatal error occurred during initialization', true);
 		process.exit(1);
 	}
 
@@ -69,7 +69,7 @@ export async function masterMain(): Promise<void> {
 		await spawnWorkers(config.clusterLimits);
 	}
 
-	bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, null, true);
+	bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, true);
 
 	if (!envOption.noDaemons) {
 		import('../daemons/server-stats.js').then(x => x.serverStats());
@@ -84,7 +84,7 @@ function showEnvironment(): void {
 
 	if (env !== 'production') {
 		logger.warn('The environment is not in production mode.');
-		logger.warn('DO NOT USE FOR PRODUCTION PURPOSE!', {}, true);
+		logger.warn('DO NOT USE FOR PRODUCTION PURPOSE!', true);
 	}
 }
 
@@ -109,7 +109,7 @@ function loadConfigBoot(): Config {
 	} catch (exception) {
 		const e = exception as Partial<NodeJS.ErrnoException> | Error;
 		if ('code' in e && e.code === 'ENOENT') {
-			configLogger.error('Configuration file not found', {}, true);
+			configLogger.error('Configuration file not found', true);
 			process.exit(1);
 		} else if (e instanceof Error) {
 			configLogger.error(e.message);
@@ -133,7 +133,7 @@ async function connectDb(): Promise<void> {
 		const v = await db.query('SHOW server_version').then(x => x[0].server_version);
 		dbLogger.succ(`Connected: v${v}`);
 	} catch (e) {
-		dbLogger.error('Cannot connect', {}, true);
+		dbLogger.error('Cannot connect', true);
 		dbLogger.error(e as Error | string);
 		process.exit(1);
 	}

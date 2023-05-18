@@ -82,15 +82,7 @@ export default async (endpoint: string, user: ILocalUser | null | undefined, tok
 		if (e instanceof ApiError) {
 			throw e;
 		} else {
-			apiLogger.error(`Internal error occurred in ${ep.name}: ${e.message}`, {
-				ep: ep.name,
-				ps: data,
-				e: {
-					message: e.message,
-					code: e.name,
-					stack: e.stack,
-				},
-			});
+			apiLogger.error(`Internal error occurred in ${ep.name}: ${e.message}`);
 			throw new ApiError('INTERNAL_ERROR', {
 				e: {
 					message: e.message,
