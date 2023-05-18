@@ -95,9 +95,7 @@ class Publisher {
 	};
 }
 
-const publisher = new Publisher();
-
-export default publisher;
+export const publisher = new Publisher();
 
 export const publishInternalEvent = publisher.publishInternalEvent;
 export const publishUserEvent = publisher.publishUserEvent;

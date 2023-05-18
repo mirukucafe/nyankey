@@ -8,7 +8,7 @@ import chalkTemplate from 'chalk-template';
 import semver from 'semver';
 
 import Logger from '@/services/logger.js';
-import loadConfig from '@/config/load.js';
+import { loadConfig } from '@/config/load.js';
 import { Config } from '@/config/types.js';
 import { showMachineInfo } from '@/misc/show-machine-info.js';
 import { envOption } from '@/env.js';

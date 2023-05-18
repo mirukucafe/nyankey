@@ -26,7 +26,7 @@ import { MINUTE, DAY } from '@/const.js';
 import { genOpenapiSpec } from '../api/openapi/gen-spec.js';
 import { urlPreviewHandler } from './url-preview.js';
 import { manifestHandler } from './manifest.js';
-import packFeed from './feed.js';
+import { packFeed } from './feed.js';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);

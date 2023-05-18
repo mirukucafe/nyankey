@@ -4,7 +4,7 @@ import config from '@/config/index.js';
 import { User } from '@/models/entities/user.js';
 import { Notes, DriveFiles, UserProfiles, Users } from '@/models/index.js';
 
-export default async function(user: User) {
+export async function packFeed(user: User) {
 	const author = {
 		link: `${config.url}/@${user.username}`,
 		name: user.name || user.username,
