@@ -2,7 +2,6 @@ import cluster from 'node:cluster';
 import chalk from 'chalk';
 import convertColor from 'color-convert';
 import { format as dateFormat } from 'date-fns';
-import * as SyslogPro from 'syslog-pro';
 import config from '@/config/index.js';
 import { envOption } from '@/env.js';
 import type { KEYWORD } from 'color-convert/conversions.js';
@@ -22,13 +21,12 @@ export const LEVELS = {
 export type Level = LEVELS[keyof LEVELS];
 
 /**
- * Class that facilitates recording log messages to the console and optionally a syslog server.
+ * Class that facilitates recording log messages to the console.
  */
 export default class Logger {
 	private domain: Domain;
 	private parentLogger: Logger | null = null;
 	private store: boolean;
-	private syslogClient: SyslogPro.RFC5424 | null = null;
 	/**
 	 * Messages below this level will be discarded.
 	 */
@@ -47,20 +45,6 @@ export default class Logger {
 		};
 		this.store = store;
 		this.minLevel = minLevel;
-
-		if (config.syslog) {
-			this.syslogClient = new SyslogPro.RFC5424({
-				applicationName: 'FoundKey',
-				timestamp: true,
-				includeStructuredData: true,
-				color: true,
-				extendedColor: true,
-				server: {
-					target: config.syslog.host,
-					port: config.syslog.port,
-				},
-			});
-		}
 	}
 
 	/**
@@ -139,15 +123,6 @@ export default class Logger {
 		if (envOption.withLogTime) log = chalk.gray(time) + ' ' + log;
 
 		console.log(important ? chalk.bold(log) : log);
-
-		if (store && this.syslogClient) {
-			const send =
-				level === LEVELS.error ? this.syslogClient.error :
-				level === LEVELS.warning ? this.syslogClient.warning :
-				this.syslogClient.info;
-
-			send.bind(this.syslogClient)(message).catch(() => {});
-		}
 	}
 
 	/**

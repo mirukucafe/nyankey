@@ -108,11 +108,6 @@ redis:
 #deliverJobMaxAttempts: 12
 #inboxJobMaxAttempts: 8
 
-# Syslog option
-#syslog:
-#  host: localhost
-#  port: 514
-
 # Proxy for HTTP/HTTPS outgoing connections
 #proxy: http://127.0.0.1:3128
 
