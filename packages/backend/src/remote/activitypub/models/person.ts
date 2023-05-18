@@ -217,7 +217,7 @@ export async function createPerson(value: string | IObject, resolver: Resolver):
 	} catch (e) {
 		// duplicate key error
 		if (isDuplicateKeyValueError(e)) {
-			// /users/@a => /users/:id のように入力がaliasなときにエラーになることがあるのを対応
+			// Fix an error when the input is an alias like /users/@a -> /users/:id
 			const u = await Users.findOneBy({
 				uri: person.id,
 			});
