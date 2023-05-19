@@ -6,7 +6,7 @@ import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import renderOrderedCollection from '@/remote/activitypub/renderer/ordered-collection.js';
 import renderOrderedCollectionPage from '@/remote/activitypub/renderer/ordered-collection-page.js';
 import renderFollowUser from '@/remote/activitypub/renderer/follow-user.js';
-import { Users, Followings, UserProfiles } from '@/models/index.js';
+import { Users, Followings } from '@/models/index.js';
 import { Following } from '@/models/entities/following.js';
 import { setResponseType } from '../activitypub.js';
 
@@ -31,19 +31,12 @@ export default async (ctx: Router.RouterContext) => {
 		return;
 	}
 
-	//#region Check ff visibility
-	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
-
-	if (profile.ffVisibility === 'private') {
-		ctx.status = 403;
-		ctx.set('Cache-Control', 'public, max-age=30');
-		return;
-	} else if (profile.ffVisibility === 'followers') {
+	const ffVisible = await Users.areFollowersVisibleTo(user, null);
+	if (!ffVisible) {
 		ctx.status = 403;
 		ctx.set('Cache-Control', 'public, max-age=30');
 		return;
 	}
-	//#endregion
 
 	const limit = 10;
 	const partOf = `${config.url}/users/${userId}/following`;

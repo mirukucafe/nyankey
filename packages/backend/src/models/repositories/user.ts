@@ -230,6 +230,34 @@ export const UserRepository = db.getRepository(User).extend({
 		return `${config.url}/identicon/${userId}`;
 	},
 
+	/**
+	 * Determines whether the followers/following of user `user` are visibile to user `me`.
+	 */
+	async areFollowersVisibleTo(user: User, me: { id: User['id'] } | null | undefined): Promise<boolean> {
+		const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
+
+		switch (profile.ffVisibility) {
+			case 'public':
+				return true;
+			case 'followers':
+				if (me == null) {
+					return false;
+				} else if (me.id === user.id) {
+					return true;
+				} else {
+					return await Followings.count({
+						where: {
+							followerId: me.id,
+							followeeId: user.id,
+						},
+						take: 1,
+					}).then(n => n > 0);
+				}
+			case 'private':
+				return me?.id === user.id;
+		}
+	}
+
 	async pack<ExpectsMe extends boolean | null = null, D extends boolean = false>(
 		src: User['id'] | User,
 		me?: { id: User['id'] } | null | undefined,
@@ -270,15 +298,13 @@ export const UserRepository = db.getRepository(User).extend({
 			.getMany() : [];
 		const profile = opts.detail ? await UserProfiles.findOneByOrFail({ userId: user.id }) : null;
 
-		const followingCount = profile == null ? null :
-			(profile.ffVisibility === 'public') || isMe ? user.followingCount :
-			(profile.ffVisibility === 'followers') && relation?.isFollowing ? user.followingCount :
-			null;
+		const ffVisible = await this.areFollowersVisibleTo(user, me);
 
-		const followersCount = profile == null ? null :
-			(profile.ffVisibility === 'public') || isMe ? user.followersCount :
-			(profile.ffVisibility === 'followers') && relation?.isFollowing ? user.followersCount :
-			null;
+		const followingCount = opts.detail ? null :
+			ffVisible ? user.followingCount : null;
+
+		const followersCount = opts.detail ? null :
+			ffVisible ? user.followersCount : null;
 
 		const packed = {
 			id: user.id,
