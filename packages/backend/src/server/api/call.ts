@@ -4,7 +4,7 @@ import { ILocalUser } from '@/models/entities/user.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { getIpHash } from '@/misc/get-ip-hash.js';
 import { limiter } from './limiter.js';
-import endpoints, { IEndpointMeta } from './endpoints.js';
+import { endpoints, IEndpointMeta } from './endpoints.js';
 import { ApiError } from './error.js';
 import { apiLogger } from './logger.js';
 

@@ -10,7 +10,7 @@ import cors from '@koa/cors';
 
 import { Instances, AccessTokens, Users } from '@/models/index.js';
 import config from '@/config/index.js';
-import endpoints from './endpoints.js';
+import { endpoints } from './endpoints.js';
 import { handler } from './api-handler.js';
 import signup from './private/signup.js';
 import signin from './private/signin.js';

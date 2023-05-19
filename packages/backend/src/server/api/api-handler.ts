@@ -1,7 +1,7 @@
 import Koa from 'koa';
 
 import { IEndpoint } from './endpoints.js';
-import authenticate, { AuthenticationError } from './authenticate.js';
+import { authenticate, AuthenticationError } from './authenticate.js';
 import call from './call.js';
 import { ApiError } from './error.js';
 

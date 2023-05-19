@@ -713,7 +713,7 @@ export interface IEndpoint {
 	params: Schema;
 }
 
-const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
+export const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
 	return {
 		name,
 		exec: ep.default,
@@ -721,5 +721,3 @@ const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
 		params: ep.paramDef,
 	};
 });
-
-export default endpoints;

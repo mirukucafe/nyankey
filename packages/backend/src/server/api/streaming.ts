@@ -6,7 +6,7 @@ import { SECOND, MINUTE } from '@/const.js';
 import { subscriber as redisClient } from '@/db/redis.js';
 import { Users } from '@/models/index.js';
 import { Connection } from './stream/index.js';
-import authenticate from './authenticate.js';
+import { authenticate } from './authenticate.js';
 
 export const initializeStreamingServer = (server: http.Server): void => {
 	// Init websocket server

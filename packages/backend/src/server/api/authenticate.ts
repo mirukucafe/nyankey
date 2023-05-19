@@ -11,7 +11,7 @@ export class AuthenticationError extends Error {
 	}
 }
 
-export default async (authorization: string | null | undefined, bodyToken: string | null | undefined): Promise<[ILocalUser | null | undefined, AccessToken | null | undefined]> => {
+export async function authenticate(authorization: string | null | undefined, bodyToken: string | null | undefined): Promise<[ILocalUser | null | undefined, AccessToken | null | undefined]> {
 	let maybeToken: string | null = null;
 
 	// check if there is an authorization header set
@@ -66,4 +66,4 @@ export default async (authorization: string | null | undefined, bodyToken: strin
 
 		return [user, accessToken];
 	}
-};
+}
