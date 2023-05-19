@@ -843,6 +843,7 @@ _ffVisibility:
   public: "Public"
   followers: "Visible to followers only"
   private: "Private"
+  nobody: "Nobody (not even you)"
 _signup:
   almostThere: "Almost there"
   emailAddressInfo: "Please enter your email address. It will not be made public."

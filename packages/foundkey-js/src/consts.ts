@@ -4,7 +4,7 @@ export const noteNotificationTypes = ['mention', 'reply', 'renote', 'quote', 're
 
 export const mutedNoteReasons = ['word', 'manual', 'spam', 'other'] as const;
 
-export const ffVisibility = ['public', 'followers', 'private'] as const;
+export const ffVisibility = ['public', 'followers', 'private', 'nobody'] as const;
 
 export const permissions = [
 	'read:account',

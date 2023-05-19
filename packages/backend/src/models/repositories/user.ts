@@ -255,6 +255,8 @@ export const UserRepository = db.getRepository(User).extend({
 				}
 			case 'private':
 				return me?.id === user.id;
+			case 'nobody':
+				return false;
 		}
 	}
 
