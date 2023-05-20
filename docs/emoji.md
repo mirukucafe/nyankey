@@ -18,12 +18,11 @@ Please note that Emoji may be subject to copyright and you are responsible for c
 
 If you have an image file that you would like to turn into a custom emoji you can import the image as an emoji.
 This works just like attaching files to a note:
-You can choose to upload a new file, pick a file from your Misskey drive or upload a file from another URL.
+You can choose to upload a new file, pick a file from your Foundkey drive or upload a file from another URL.
 
-::: danger
+**Warning:**
 When you import emoji from your drive, the file will remain inside your drive.
-Misskey does not make a copy of this file so if you delete it, the emoji will be broken.
-:::
+Foundkey does not make a copy of this file so if you delete it, the emoji will be broken.
 
 The emoji will be added to the instance and you will then be able to edit or delete it as usual.
 
@@ -32,10 +31,9 @@ The emoji will be added to the instance and you will then be able to edit or del
 Emojis can be imported in bulk as packed ZIP files with a special format.
 This ability can be found in the three dots menu in the top right corner of the custom emoji menu.
 
-::: warning
+**Warning:**
 Bulk emoji import may overwrite existing emoji or otherwise mess up your instance.
 Be sure to only import emoji from trusted sources, ideally only ones you exported yourself.
-:::
 
 ### Packed emoji format
 
@@ -89,10 +87,9 @@ The properties of an emoji can be edited by clicking it in the list of local emo
 When you click on a custom emoji, a dialog for editing the properties will open.
 This dialog will also allow you to delete an emoji.
 
-::: danger
+**Warning:**
 When you delete a custom emoji, old notes that contain it will still have the text name of the emoji in it.
 The emoji will no longer be rendered correctly.
-:::
 
 Note that remote emoji can not be edited or deleted.
 
