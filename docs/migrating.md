@@ -20,7 +20,7 @@ cd packages/backend
 LINE_NUM="$(npx typeorm migration:show -d ormconfig.js | grep -n nsfwDetection1655368940105 | cut -d ':' -f 1)"
 NUM_MIGRATIONS="$(npx typeorm migration:show -d ormconfig.js | tail -n+"$LINE_NUM" | grep '\[X\]' | nl)"
 
-for i in $(seq 1 $NUM_MIGRAIONS); do
+for i in $(seq 1 $NUM_MIGRATIONS); do
 	npx typeorm migration:revert -d ormconfig.js
 done
 ```
