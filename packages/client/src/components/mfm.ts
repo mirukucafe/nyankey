@@ -202,6 +202,18 @@ export default defineComponent({
 							scale = scale * Math.max(x, y);
 							break;
 						}
+						case 'fg': {
+							let color = token.props.args.color;
+							if (!/^[0-9a-f]{3,6}$/i.test(color)) color = 'f00';
+							style = `color: #${color};`;
+							break;
+						}
+						case 'bg': {
+							let color = token.props.args.color;
+							if (!/^[0-9a-f]{3,6}$/i.test(color)) color = 'f00';
+							style = `background-color: #${color};`;
+							break;
+						}
 					}
 					if (style == null) {
 						return h('span', {}, ['$[', token.props.name, ' ', ...genEl(token.children, scale), ']']);
