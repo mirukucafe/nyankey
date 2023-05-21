@@ -185,6 +185,12 @@ export default defineComponent({
 							style = `transform: rotate(${degrees}deg); transform-origin: center center;`;
 							break;
 						}
+						case 'position': {
+							const x = parseFloat(token.props.args.x ?? '0');
+							const y = parseFloat(token.props.args.y ?? '0');
+							style = `transform: translateX(${x}em) translateY(${y}em);`;
+							break;
+						}
 					}
 					if (style == null) {
 						return h('span', {}, ['$[', token.props.name, ' ', ...genEl(token.children), ']']);
