@@ -3750,7 +3750,7 @@ __metadata:
     koa-send: 5.0.1
     koa-slow: 2.1.0
     koa-views: 7.0.2
-    mfm-js: 0.22.1
+    mfm-js: 0.23.3
     mime-types: 2.1.35
     mocha: 10.2.0
     multer: 1.4.5-lts.1
@@ -4720,7 +4720,7 @@ __metadata:
     json5: 2.2.1
     katex: 0.16.0
     matter-js: 0.18.0
-    mfm-js: 0.22.1
+    mfm-js: 0.23.3
     photoswipe: 5.2.8
     prismjs: 1.28.0
     punycode: 2.1.1
@@ -11671,12 +11671,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mfm-js@npm:0.22.1":
-  version: 0.22.1
-  resolution: "mfm-js@npm:0.22.1"
+"mfm-js@npm:0.23.3":
+  version: 0.23.3
+  resolution: "mfm-js@npm:0.23.3"
   dependencies:
-    twemoji-parser: 14.0.x
-  checksum: 6d9756c7bd8abf6462fb6403de4656f607a83839eb6b66a05b10eddcd201b5f78f5fe3d0df029936546143fd9cbf112e8369287aed32026e50bb03ce89b4c4f8
+    twemoji-parser: 14.0.0
+  checksum: 7079f80a53a9afc8599333f3256fb18a6bf7c01102a2f8f2be657843726a34835e2af34e26bc5b27e45b217fb2f120c0d3006e9fab2a972c845e9f7361e3cc1b
   languageName: node
   linkType: hard
 
@@ -16723,7 +16723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twemoji-parser@npm:14.0.0, twemoji-parser@npm:14.0.x":
+"twemoji-parser@npm:14.0.0":
   version: 14.0.0
   resolution: "twemoji-parser@npm:14.0.0"
   checksum: 8eede69cf71f94735de7b6fddf5dfbfe3cb2e01baefc3201360984ccc97cfc659f206c8f73bd1405a2282779af3b79a8c9bed3864c672e15e2dc6f8ce4810452

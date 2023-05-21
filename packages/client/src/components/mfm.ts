@@ -10,7 +10,6 @@ import MkSearch from '@/components/mfm-search.vue';
 import MkSparkle from '@/components/sparkle.vue';
 import MkA from '@/components/global/a.vue';
 import { host } from '@/config';
-import { MFM_TAGS } from '@/scripts/mfm-tags';
 
 export default defineComponent({
 	props: {
@@ -46,7 +45,7 @@ export default defineComponent({
 	render() {
 		if (this.text == null || this.text === '') return;
 
-		const ast = (this.plain ? mfm.parsePlain : mfm.parse)(this.text, { fnNameList: MFM_TAGS });
+		const ast = (this.plain ? mfm.parseSimple : mfm.parse)(this.text);
 
 		const validTime = (t: string | true) => {
 			if (typeof t !== 'string') return null;
