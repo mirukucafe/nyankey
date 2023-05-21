@@ -37,6 +37,10 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
+		rootScale: {
+			type: Number,
+			default: 1
+		}
 	},
 
 	render() {
@@ -50,7 +54,7 @@ export default defineComponent({
 			return t.match(/^[0-9.]+s$/) ? t : null;
 		};
 
-		const genEl = (ast: mfm.MfmNode[]) => ast.map((token): VNode | VNode[] => {
+		const genEl = (ast: mfm.MfmNode[], scale: Number) => ast.map((token): VNode | VNode[] => {
 			switch (token.type) {
 				case 'text': {
 					const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
@@ -69,17 +73,17 @@ export default defineComponent({
 				}
 
 				case 'bold': {
-					return h('b', genEl(token.children));
+					return h('b', genEl(token.children, scale));
 				}
 
 				case 'strike': {
-					return h('del', genEl(token.children));
+					return h('del', genEl(token.children, scale));
 				}
 
 				case 'italic': {
 					return h('i', {
 						style: 'font-style: oblique;',
-					}, genEl(token.children));
+					}, genEl(token.children, scale));
 				}
 
 				case 'fn': {
@@ -139,18 +143,18 @@ export default defineComponent({
 						}
 						case 'x2': {
 							return h('span', {
-								class: 'mfm-x2',
-							}, genEl(token.children));
+								class: 'mfm-x2'
+							}, genEl(token.children, scale * 2));
 						}
 						case 'x3': {
 							return h('span', {
-								class: 'mfm-x3',
-							}, genEl(token.children));
+								class: 'mfm-x3'
+							}, genEl(token.children, scale * 3));
 						}
 						case 'x4': {
 							return h('span', {
-								class: 'mfm-x4',
-							}, genEl(token.children));
+								class: 'mfm-x4'
+							}, genEl(token.children, scale * 4));
 						}
 						case 'font': {
 							const family =
@@ -167,7 +171,7 @@ export default defineComponent({
 						case 'blur': {
 							return h('span', {
 								class: '_mfm_blur_',
-							}, genEl(token.children));
+							}, genEl(token.children, scale));
 						}
 						case 'rainbow': {
 							const speed = validTime(token.props.args.speed) || '1s';
@@ -176,9 +180,9 @@ export default defineComponent({
 						}
 						case 'sparkle': {
 							if (!this.$store.state.animatedMfm) {
-								return genEl(token.children);
+								return genEl(token.children, scale);
 							}
-							return h(MkSparkle, {}, genEl(token.children));
+							return h(MkSparkle, {}, genEl(token.children, scale));
 						}
 						case 'rotate': {
 							const degrees = (typeof token.props.args.deg === 'string' ? parseInt(token.props.args.deg) : null) || '90';
@@ -191,26 +195,33 @@ export default defineComponent({
 							style = `transform: translateX(${x}em) translateY(${y}em);`;
 							break;
 						}
+						case 'scale': {
+							const x = Math.min(parseFloat(token.props.args.x ?? '1'), 5);
+							const y = Math.min(parseFloat(token.props.args.y ?? '1'), 5);
+							style = `transform: scale(${x}, ${y});`;
+							scale = scale * Math.max(x, y);
+							break;
+						}
 					}
 					if (style == null) {
-						return h('span', {}, ['$[', token.props.name, ' ', ...genEl(token.children), ']']);
+						return h('span', {}, ['$[', token.props.name, ' ', ...genEl(token.children, scale), ']']);
 					} else {
 						return h('span', {
 							style: 'display: inline-block;' + style,
-						}, genEl(token.children));
+						}, genEl(token.children, scale));
 					}
 				}
 
 				case 'small': {
 					return h('small', {
 						class: '_mfm_small_'
-					}, genEl(token.children));
+					}, genEl(token.children, scale));
 				}
 
 				case 'center': {
 					return h('div', {
 						style: 'text-align:center;',
-					}, genEl(token.children));
+					}, genEl(token.children, scale));
 				}
 
 				case 'url': {
@@ -226,7 +237,7 @@ export default defineComponent({
 						key: Math.random(),
 						url: token.props.url,
 						rel: 'nofollow noopener',
-					}, genEl(token.children));
+					}, genEl(token.children, scale));
 				}
 
 				case 'mention': {
@@ -264,7 +275,7 @@ export default defineComponent({
 				case 'quote': {
 					return h(this.nowrap ? 'span' : 'div', {
 						class: 'quote',
-					}, genEl(token.children));
+					}, genEl(token.children, scale));
 				}
 
 				case 'emojiCode': {
@@ -317,6 +328,6 @@ export default defineComponent({
 		}).flat();
 
 		// Parse ast to DOM
-		return h('span', genEl(ast));
+		return h('span', genEl(ast, this.rootScale ?? 1));
 	},
 });
