@@ -45,7 +45,10 @@ export async function handler(endpoint: IEndpoint, ctx: Koa.Context): Promise<vo
 		if (e instanceof AuthenticationError) {
 			new ApiError('AUTHENTICATION_FAILED', e.message).apply(ctx, endpoint.name);
 		} else {
-			new ApiError().apply(ctx, endpoint.name);
+			new ApiError('INTERNAL_ERROR', {
+				e: e.message,
+				stack: e.stack,
+			}).apply(ctx, endpoint.name);
 		}
 	});
 }
