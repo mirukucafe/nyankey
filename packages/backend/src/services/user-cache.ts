@@ -10,7 +10,7 @@ export const userByIdCache = new Cache<User>(
 );
 export const localUserByNativeTokenCache = new Cache<ILocalUser>(
 	Infinity,
-	async (token) => await Users.findOneBy({ token, host: IsNull(), isDeleted: isNull() }) as ILocalUser | null ?? undefined,
+	async (token) => await Users.findOneBy({ token, host: IsNull(), isDeleted: IsNull() }) as ILocalUser | null ?? undefined,
 );
 export const uriPersonCache = new Cache<User>(
 	Infinity,
