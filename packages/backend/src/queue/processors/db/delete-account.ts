@@ -46,29 +46,17 @@ export async function deleteAccount(job: Bull.Job<DbUserDeleteJobData>): Promise
 	}
 
 	{ // Delete files
-		let cursor: DriveFile['id'] | null = null;
+		const files = await DriveFiles.find({
+			where: {
+				userId: user.id,
+			},
+			order: {
+				id: 1,
+			},
+		}) as DriveFile[];
 
-		while (true) {
-			const files = await DriveFiles.find({
-				where: {
-					userId: user.id,
-					...(cursor ? { id: MoreThan(cursor) } : {}),
-				},
-				take: 10,
-				order: {
-					id: 1,
-				},
-			}) as DriveFile[];
-
-			if (files.length === 0) {
-				break;
-			}
-
-			cursor = files[files.length - 1].id;
-
-			for (const file of files) {
-				await deleteFileSync(file);
-			}
+		for (const file of files) {
+			await deleteFileSync(file);
 		}
 
 		logger.succ('All of files deleted');
