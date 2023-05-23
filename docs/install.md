@@ -78,6 +78,21 @@ There are instructions for setting up [nginx](./nginx.md) for this purpose.
 ### Changing the default Reaction
 You can change the default reaction that is used when an ActivityPub "Like" is received from '👍' to '⭐' by changing the boolean value `meta.useStarForReactionFallback` in the databse respectively.
 
+### Environment variables
+There are some behaviour changes which can be accomplished using environment variables.
+
+|variable name|meaning|
+|---|---|
+|`FK_ONLY_QUEUE`|If set, only the queue processing will be run. The frontend will not be available. Cannot be combined with `FK_ONLY_SERVER` or `FK_DISABLE_CLUSTERING`.|
+|`FK_ONLY_SERVER`|If set, only the frontend will be run. Queues will not be processed. Cannot be combined with `FK_ONLY_QUEUE` or `FK_DISABLE_CLUSTERING`.|
+|`FK_NO_DAEMONS`|If set, the server statistics and queue statistics will not be run.|
+|`FK_DISABLE_CLUSTERING`|If set, all work will be done in a single thread instead of different threads for frontend and queue. (not recommended)|
+|`FK_WITH_LOG_TIME`|If set, a timestamp will be appended to all log messages.|
+|`FK_SLOW`|If set, all requests will be delayed by 3s. (not recommended, useful for testing)|
+|`FK_LOG_LEVEL`|Sets the log level. Messages below the set log level will be suppressed. Available log levels are `quiet` (suppress all), `error`, `warning`, `success`, `info`, `debug`.|
+
+If the `NODE_ENV` environment variable is set to `testing`, then the flags `FK_DISABLE_CLUSTERING` and `FK_NO_DAEMONS` will always be set, and the log level will always be `quiet`.
+
 ## Build FoundKey
 
 Build foundkey with the following:

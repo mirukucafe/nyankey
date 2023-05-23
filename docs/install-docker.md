@@ -38,9 +38,10 @@ cp .config/docker_example.env .config/docker.env
 Edit `default.yml` and `docker.env` according to the instructions in the files.
 You will need to set the database host to `db` and Redis host to `redis` in order to use the internal container network for these services.
 
-
 Edit `docker-compose.yml` if necessary. (e.g. if you want to change the port).
 If you are using SELinux (eg. you're on Fedora or a RHEL derivative), you'll want to add the `Z` mount flag to the volume mounts to allow the containers to access the contents of those volumes.
+
+Also check out the [Configure Foundkey](./install.md#configure-foundkey) section in the ordinary installation instructions.
 
 ## Build and initialize
 The following command will build FoundKey and initialize the database.
