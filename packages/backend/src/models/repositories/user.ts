@@ -258,7 +258,7 @@ export const UserRepository = db.getRepository(User).extend({
 			case 'nobody':
 				return false;
 		}
-	}
+	},
 
 	async pack<ExpectsMe extends boolean | null = null, D extends boolean = false>(
 		src: User['id'] | User,
