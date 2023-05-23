@@ -5,7 +5,6 @@ import config from '@/config/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { Webhook, webhookEventTypes } from '@/models/entities/webhook.js';
 import { IActivity } from '@/remote/activitypub/type.js';
-import { envOption } from '@/env.js';
 import { MINUTE } from '@/const.js';
 
 import processDeliver from './processors/deliver.js';
@@ -289,8 +288,6 @@ export function webhookDeliver(webhook: Webhook, type: typeof webhookEventTypes[
 }
 
 export default function() {
-	if (envOption.onlyServer) return;
-
 	deliverQueue.process(config.deliverJobConcurrency, processDeliver);
 	inboxQueue.process(config.inboxJobConcurrency, processInbox);
 	endedPollNotificationQueue.process(endedPollNotification);
