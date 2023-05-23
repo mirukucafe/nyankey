@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import convertColor from 'color-convert';
 import { format as dateFormat } from 'date-fns';
 import config from '@/config/index.js';
-import { envOption } from '@/env.js';
+import { envOption, LOG_LEVELS } from '@/env.js';
 import type { KEYWORD } from 'color-convert/conversions.js';
 
 type Domain = {
@@ -11,14 +11,7 @@ type Domain = {
 	color?: KEYWORD;
 };
 
-export const LEVELS = {
-	error: 5,
-	warning: 4,
-	success: 3,
-	info: 2,
-	debug: 1,
-};
-export type Level = LEVELS[keyof LEVELS];
+export type Level = LOG_LEVELS[keyof LOG_LEVELS];
 
 /**
  * Class that facilitates recording log messages to the console.
@@ -38,7 +31,7 @@ export default class Logger {
 	 * @param color Log message color
 	 * @param store Whether to store messages
 	 */
-	constructor(domain: string, color?: KEYWORD, store = true, minLevel: Level = LEVELS.info) {
+	constructor(domain: string, color?: KEYWORD, store = true, minLevel: Level = LOG_LEVELS.info) {
 		this.domain = {
 			name: domain,
 			color,
@@ -54,7 +47,7 @@ export default class Logger {
 	 * @param store Whether to store messages
 	 * @returns A Logger instance whose parent logger is this instance.
 	 */
-	public createSubLogger(domain: string, color?: KEYWORD, store = true, minLevel: Level = LEVELS.info): Logger {
+	public createSubLogger(domain: string, color?: KEYWORD, store = true, minLevel: Level = LOG_LEVELS.info): Logger {
 		const logger = new Logger(domain, color, store, minLevel);
 		logger.parentLogger = this;
 		return logger;
@@ -89,7 +82,7 @@ export default class Logger {
 		let levelDisplay;
 		let messageDisplay;
 		switch (level) {
-			case LEVELS.error:
+			case LOG_LEVELS.error:
 				if (important) {
 					levelDisplay = chalk.bgRed.white('ERR ');
 				} else {
@@ -97,11 +90,11 @@ export default class Logger {
 				}
 				messageDisplay = chalk.red(message);
 				break;
-			case LEVELS.warning:
+			case LOG_LEVELS.warning:
 				levelDisplay = chalk.yellow('WARN');
 				messageDisplay = chalk.yellow(message);
 				break;
-			case LEVELS.success:
+			case LOG_LEVELS.success:
 				if (important) {
 					levelDisplay = chalk.bgGreen.white('DONE');
 				} else {
@@ -109,11 +102,11 @@ export default class Logger {
 				}
 				messageDisplay = chalk.green(message);
 				break;
-			case LEVELS.info:
+			case LOG_LEVELS.info:
 				levelDisplay = chalk.blue('INFO');
 				messageDisplay = message;
 				break;
-			case LEVELS.debug: default:
+			case LOG_LEVELS.debug: default:
 				levelDisplay = chalk.gray('VERB');
 				messageDisplay = chalk.gray(message);
 				break;
@@ -133,11 +126,11 @@ export default class Logger {
 	 */
 	public error(err: string | Error, important = false): void {
 		if (err instanceof Error) {
-			this.log(LEVELS.error, err.toString(), important);
+			this.log(LOG_LEVELS.error, err.toString(), important);
 		} else if (typeof err === 'object') {
-			this.log(LEVELS.error, `${(err as any).message || (err as any).name || err}`, important);
+			this.log(LOG_LEVELS.error, `${(err as any).message || (err as any).name || err}`, important);
 		} else {
-			this.log(LEVELS.error, `${err}`, important);
+			this.log(LOG_LEVELS.error, `${err}`, important);
 		}
 	}
 
@@ -148,7 +141,7 @@ export default class Logger {
 	 * @param important Whether this warning is important
 	 */
 	public warn(message: string, important = false): void {
-		this.log(LEVELS.warning, message, important);
+		this.log(LOG_LEVELS.warning, message, important);
 	}
 
 	/**
@@ -158,7 +151,7 @@ export default class Logger {
 	 * @param important Whether this success message is important
 	 */
 	public succ(message: string, important = false): void {
-		this.log(LEVELS.success, message, important);
+		this.log(LOG_LEVELS.success, message, important);
 	}
 
 	/**
@@ -168,7 +161,7 @@ export default class Logger {
 	 * @param important Whether this debug message is important
 	 */
 	public debug(message: string, important = false): void {
-		this.log(LEVELS.debug, message, important);
+		this.log(LOG_LEVELS.debug, message, important);
 	}
 
 	/**
@@ -178,6 +171,6 @@ export default class Logger {
 	 * @param important Whether this info message is important
 	 */
 	public info(message: string, important = false): void {
-		this.log(LEVELS.info, message, important);
+		this.log(LOG_LEVELS.info, message, important);
 	}
 }
