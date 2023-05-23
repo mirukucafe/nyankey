@@ -18,7 +18,7 @@ export const envOption = {
 };
 
 for (const key of Object.keys(envOption) as (keyof typeof envOption)[]) {
-	const value = process.env['MK_' + key.replace(/[A-Z]/g, letter => `_${letter}`).toUpperCase()];
+	const value = process.env['FK_' + key.replace(/[A-Z]/g, letter => `_${letter}`).toUpperCase()];
 	if (value) {
 		if (key === 'logLevel') {
 			if (value.toLowerCase() in LOG_LEVELS) {
