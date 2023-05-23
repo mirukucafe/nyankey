@@ -11,7 +11,7 @@ import Logger from '@/services/logger.js';
 import { loadConfig } from '@/config/load.js';
 import { Config } from '@/config/types.js';
 import { showMachineInfo } from '@/misc/show-machine-info.js';
-import { envOption } from '@/env.js';
+import { envOption, LOG_LEVELS } from '@/env.js';
 import { db, initDb } from '@/db/postgre.js';
 
 const _filename = fileURLToPath(import.meta.url);
@@ -25,7 +25,7 @@ const bootLogger = logger.createSubLogger('boot', 'magenta', false);
 const themeColor = chalk.hex('#86b300');
 
 function greet(): void {
-	if (!envOption.quiet) {
+	if (envOption.logLevel !== LOG_LEVELS.quiet) {
 		//#region FoundKey logo
 		console.log(themeColor('  ___                 _ _  __         '));
 		console.log(themeColor(' | __|__ _  _ _ _  __| | |/ /___ _  _ '));

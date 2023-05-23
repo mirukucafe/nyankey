@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import Xev from 'xev';
 
 import Logger from '@/services/logger.js';
-import { envOption } from '@/env.js';
+import { envOption, LOG_LEVELS } from '@/env.js';
 
 // for typeorm
 import 'reflect-metadata';
@@ -66,7 +66,7 @@ cluster.on('exit', worker => {
 });
 
 // Display detail of unhandled promise rejection
-if (!envOption.quiet) {
+if (envOption.logLevel !== LOG_LEVELS.quiet) {
 	process.on('unhandledRejection', console.dir);
 }
 

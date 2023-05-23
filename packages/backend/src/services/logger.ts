@@ -62,7 +62,6 @@ export default class Logger {
 	 * @param subDomains Names of sub-loggers to be added.
 	 */
 	private log(level: Level, message: string, important = false, subDomains: Domain[] = [], _store = true): void {
-		if (envOption.quiet) return;
 		const store = _store && this.store;
 
 		// Check against the configured log level.

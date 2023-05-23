@@ -1,4 +1,5 @@
 export const LOG_LEVELS = {
+	quiet: 6,
 	error: 5,
 	warning: 4,
 	success: 3,
@@ -11,9 +12,7 @@ export const envOption = {
 	onlyServer: false,
 	noDaemons: false,
 	disableClustering: false,
-	verbose: false,
 	withLogTime: false,
-	quiet: false,
 	slow: false,
 	logLevel: LOG_LEVELS.info,
 };
@@ -32,6 +31,8 @@ for (const key of Object.keys(envOption) as (keyof typeof envOption)[]) {
 	}
 }
 
-if (process.env.NODE_ENV === 'test') envOption.disableClustering = true;
-if (process.env.NODE_ENV === 'test') envOption.quiet = true;
-if (process.env.NODE_ENV === 'test') envOption.noDaemons = true;
+if (process.env.NODE_ENV === 'test') {
+	envOption.disableClustering = true;
+	envOption.logLevel = LOG_LEVELS.quiet;
+	envOption.noDaemons = true;
+}
