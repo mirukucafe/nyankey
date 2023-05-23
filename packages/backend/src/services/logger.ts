@@ -12,11 +12,11 @@ type Domain = {
 };
 
 export const LEVELS = {
-	error: 0,
-	warning: 1,
-	success: 2,
-	info: 3,
-	debug: 4,
+	error: 5,
+	warning: 4,
+	success: 3,
+	info: 2,
+	debug: 1,
 };
 export type Level = LEVELS[keyof LEVELS];
 
