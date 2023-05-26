@@ -1,4 +1,4 @@
-import { DriveFiles, Followings, NoteFavorites, NoteReactions, Notes, PageLikes, PollVotes, Users } from '@/models/index.js';
+import { DriveFiles, Followings, NoteReactions, Notes, PageLikes, PollVotes, Users } from '@/models/index.js';
 import { awaitAll } from '@/prelude/await-all.js';
 import define from '@/server/api/define.js';
 import { ApiError } from '@/server/api/error.js';
@@ -76,10 +76,6 @@ export const meta = {
 				type: 'integer',
 				optional: false, nullable: false,
 			},
-			noteFavoritesCount: {
-				type: 'integer',
-				optional: false, nullable: false,
-			},
 			pageLikesCount: {
 				type: 'integer',
 				optional: false, nullable: false,
@@ -147,9 +143,6 @@ export default define(meta, paramDef, async (ps, me) => {
 		receivedReactionsCount: NoteReactions.createQueryBuilder('reaction')
 			.innerJoin('reaction.note', 'note')
 			.where('note.userId = :userId', { userId: user.id })
-			.getCount(),
-		noteFavoritesCount: NoteFavorites.createQueryBuilder('favorite')
-			.where('favorite.userId = :userId', { userId: user.id })
 			.getCount(),
 		pageLikesCount: PageLikes.createQueryBuilder('like')
 			.where('like.userId = :userId', { userId: user.id })

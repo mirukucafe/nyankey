@@ -33,7 +33,6 @@ import { UserGroup } from '@/models/entities/user-group.js';
 import { UserGroupJoining } from '@/models/entities/user-group-joining.js';
 import { UserGroupInvitation } from '@/models/entities/user-group-invitation.js';
 import { Hashtag } from '@/models/entities/hashtag.js';
-import { NoteFavorite } from '@/models/entities/note-favorite.js';
 import { AbuseUserReport } from '@/models/entities/abuse-user-report.js';
 import { RegistrationTicket } from '@/models/entities/registration-tickets.js';
 import { MessagingMessage } from '@/models/entities/messaging-message.js';
@@ -134,7 +133,6 @@ export const entities = [
 	RenoteMuting,
 	Blocking,
 	Note,
-	NoteFavorite,
 	NoteReaction,
 	NoteWatching,
 	NoteThreadMuting,

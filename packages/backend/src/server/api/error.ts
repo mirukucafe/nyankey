@@ -68,10 +68,6 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		message: 'That note is already added to that clip.',
 		httpStatusCode: 409,
 	},
-	ALREADY_FAVORITED: {
-		message: 'That note is already favorited.',
-		httpStatusCode: 409,
-	},
 	ALREADY_FOLLOWING: {
 		message: 'You are already following that user.',
 		httpStatusCode: 409,
@@ -330,10 +326,6 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 	},
 	NOT_CLIPPED: {
 		message: 'That note is not added to that clip.',
-		httpStatusCode: 409,
-	},
-	NOT_FAVORITED: {
-		message: 'You have not favorited that note.',
 		httpStatusCode: 409,
 	},
 	NOT_FOLLOWING: {
