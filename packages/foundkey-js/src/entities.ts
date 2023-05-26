@@ -385,13 +385,6 @@ export type AuthSession = {
 
 export type Clip = TODO;
 
-export type NoteFavorite = {
-	id: ID;
-	createdAt: DateString;
-	noteId: Note['id'];
-	note: Note;
-};
-
 export type FollowRequest = {
 	id: ID;
 	follower: User;

@@ -1,7 +1,7 @@
 import {
 	Announcement, Antenna, App, AuthSession, Blocking, Channel, Clip, DateString, InstanceMetadata, DriveFile, DriveFolder, Following, FollowingFolloweePopulated, FollowingFollowerPopulated, FollowRequest, Instance,
 	MeDetailed,
-	Note, NoteFavorite, OriginType, Page, ServerInfo, Stats, User, UserDetailed, UserGroup, UserList, UserSorting, Notification, NoteReaction, Signin, MessagingMessage,
+	Note, OriginType, Page, ServerInfo, Stats, User, UserDetailed, UserGroup, UserList, UserSorting, Notification, NoteReaction, Signin, MessagingMessage,
 } from './entities.js';
 
 type TODO = Record<string, any> | null;
@@ -304,7 +304,6 @@ export type Endpoints = {
 	'i/export-mute': { req: TODO; res: TODO; };
 	'i/export-notes': { req: TODO; res: TODO; };
 	'i/export-user-lists': { req: TODO; res: TODO; };
-	'i/favorites': { req: { limit?: number; sinceId?: NoteFavorite['id']; untilId?: NoteFavorite['id']; }; res: NoteFavorite[]; };
 	'i/get-word-muted-notes-count': { req: TODO; res: TODO; };
 	'i/import-blocking': { req: TODO; res: TODO; };
 	'i/import-following': { req: TODO; res: TODO; };
@@ -411,8 +410,6 @@ export type Endpoints = {
 		};
 	}; res: { createdNote: Note }; };
 	'notes/delete': { req: { noteId: Note['id']; }; res: null; };
-	'notes/favorites/create': { req: { noteId: Note['id']; }; res: null; };
-	'notes/favorites/delete': { req: { noteId: Note['id']; }; res: null; };
 	'notes/featured': { req: TODO; res: Note[]; };
 	'notes/global-timeline': { req: { limit?: number; sinceId?: Note['id']; untilId?: Note['id']; sinceDate?: number; untilDate?: number; }; res: Note[]; };
 	'notes/hybrid-timeline': { req: { limit?: number; sinceId?: Note['id']; untilId?: Note['id']; sinceDate?: number; untilDate?: number; }; res: Note[]; };
