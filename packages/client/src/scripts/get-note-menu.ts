@@ -48,12 +48,6 @@ export function getNoteMenu(props: {
 		});
 	}
 
-	function toggleFavorite(favorite: boolean): void {
-		os.apiWithDialog(favorite ? 'notes/favorites/create' : 'notes/favorites/delete', {
-			noteId: appearNote.id,
-		});
-	}
-
 	function toggleWatch(watch: boolean): void {
 		os.apiWithDialog(watch ? 'notes/watching/create' : 'notes/watching/delete', {
 			noteId: appearNote.id,
@@ -244,15 +238,6 @@ export function getNoteMenu(props: {
 				action: translate,
 			} : undefined,
 			null,
-			statePromise.then(state => state.isFavorited ? {
-				icon: 'fas fa-star',
-				text: i18n.ts.unfavorite,
-				action: () => toggleFavorite(false),
-			} : {
-				icon: 'fas fa-star',
-				text: i18n.ts.favorite,
-				action: () => toggleFavorite(true),
-			}),
 			{
 				icon: 'fas fa-paperclip',
 				text: i18n.ts.clip,

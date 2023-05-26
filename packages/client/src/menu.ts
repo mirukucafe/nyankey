@@ -120,12 +120,6 @@ export const menuDef = reactive({
 		indicated: computed(() => $i != null && $i.hasUnreadSpecifiedNotes),
 		to: '/my/notifications#directNotes',
 	},
-	favorites: {
-		title: 'favorites',
-		icon: 'fas fa-star',
-		show: computed(() => $i != null),
-		to: '/my/favorites',
-	},
 	pages: {
 		title: 'pages',
 		icon: 'fas fa-file-alt',
