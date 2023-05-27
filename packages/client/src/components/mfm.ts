@@ -187,7 +187,7 @@ export default defineComponent({
 						case 'position': {
 							const x = parseFloat(token.props.args.x ?? '0');
 							const y = parseFloat(token.props.args.y ?? '0');
-							style = `transform: translateX(${x}em) translateY(${y}em);`;
+							style = `transform: translate(${x}em, ${y}em);`;
 							break;
 						}
 						case 'scale': {
