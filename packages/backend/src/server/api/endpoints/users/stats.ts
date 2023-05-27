@@ -182,6 +182,13 @@ export default define(meta, paramDef, async (ps, me) => {
 
 		result.followingCount = result.localFollowingCount + result.remoteFollowingCount;
 		result.followersCount = result.localFollowersCount + result.remoteFollowersCount;
+
+		// store the updated counts in the user table to potentially fix the cache
+		Users.update(user.id, {
+			followersCount: result.followersCount,
+			followingCount: result.followingCount,
+			notesCount: result.notesCount,
+		});
 	}
 
 	return result;
