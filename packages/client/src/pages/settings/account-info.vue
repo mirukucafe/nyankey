@@ -51,10 +51,6 @@
 			<template #value>{{ number(stats.receivedReactionsCount) }}</template>
 		</MkKeyValue>
 		<MkKeyValue oneline style="margin: 1em 0;">
-			<template #key>{{ i18n.ts.noteFavoritesCount }}</template>
-			<template #value>{{ number(stats.noteFavoritesCount) }}</template>
-		</MkKeyValue>
-		<MkKeyValue oneline style="margin: 1em 0;">
 			<template #key>{{ i18n.ts.followingCount }}</template>
 			<template #value>{{ number(stats.followingCount) }}</template>
 		</MkKeyValue>

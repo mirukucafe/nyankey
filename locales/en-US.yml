@@ -645,7 +645,6 @@ disableShowingAnimatedImages: "Don't play animated images"
 verificationEmailSent: "A verification email has been sent. Please follow the included\
   \ link to complete verification."
 emailVerified: "Email has been verified"
-noteFavoritesCount: "Number of favorite notes"
 pageLikesCount: "Number of liked Pages"
 pageLikedCount: "Number of received Page likes"
 contact: "Contact"
