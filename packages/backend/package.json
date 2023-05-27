@@ -67,7 +67,7 @@
 		"koa-send": "5.0.1",
 		"koa-slow": "2.1.0",
 		"koa-views": "7.0.2",
-		"mfm-js": "0.22.1",
+		"mfm-js": "0.23.3",
 		"mime-types": "2.1.35",
 		"mocha": "10.2.0",
 		"multer": "1.4.5-lts.1",

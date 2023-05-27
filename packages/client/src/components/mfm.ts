@@ -10,7 +10,6 @@ import MkSearch from '@/components/mfm-search.vue';
 import MkSparkle from '@/components/sparkle.vue';
 import MkA from '@/components/global/a.vue';
 import { host } from '@/config';
-import { MFM_TAGS } from '@/scripts/mfm-tags';
 
 export default defineComponent({
 	props: {
@@ -42,7 +41,7 @@ export default defineComponent({
 	render() {
 		if (this.text == null || this.text === '') return;
 
-		const ast = (this.plain ? mfm.parsePlain : mfm.parse)(this.text, { fnNameList: MFM_TAGS });
+		const ast = (this.plain ? mfm.parseSimple : mfm.parse)(this.text);
 
 		const validTime = (t: string | true) => {
 			if (typeof t !== 'string') return null;
@@ -139,17 +138,17 @@ export default defineComponent({
 						}
 						case 'x2': {
 							return h('span', {
-								class: 'mfm-x2',
+								class: 'mfm-x2'
 							}, genEl(token.children));
 						}
 						case 'x3': {
 							return h('span', {
-								class: 'mfm-x3',
+								class: 'mfm-x3'
 							}, genEl(token.children));
 						}
 						case 'x4': {
 							return h('span', {
-								class: 'mfm-x4',
+								class: 'mfm-x4'
 							}, genEl(token.children));
 						}
 						case 'font': {
@@ -183,6 +182,30 @@ export default defineComponent({
 						case 'rotate': {
 							const degrees = (typeof token.props.args.deg === 'string' ? parseInt(token.props.args.deg) : null) || '90';
 							style = `transform: rotate(${degrees}deg); transform-origin: center center;`;
+							break;
+						}
+						case 'position': {
+							const x = parseFloat(token.props.args.x ?? '0');
+							const y = parseFloat(token.props.args.y ?? '0');
+							style = `transform: translate(${x}em, ${y}em);`;
+							break;
+						}
+						case 'scale': {
+							const x = Math.min(parseFloat(token.props.args.x ?? '1'), 5);
+							const y = Math.min(parseFloat(token.props.args.y ?? '1'), 5);
+							style = `transform: scale(${x}, ${y});`;
+							break;
+						}
+						case 'fg': {
+							let color = token.props.args.color ?? 'f00';
+							if (!/^([0-9a-f]{3}){1,2}$/i.test(color)) color = 'f00';
+							style = `color: #${color};`;
+							break;
+						}
+						case 'bg': {
+							let color = token.props.args.color ?? '0f0';
+							if (!/^([0-9a-f]{3}){1,2}$/i.test(color)) color = '0f0';
+							style = `background-color: #${color};`;
 							break;
 						}
 					}
