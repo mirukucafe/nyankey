@@ -6,7 +6,7 @@ export class removeFavourites1685126322423 {
 			WITH "new_clips" AS (
 				INSERT INTO "clip" ("id", "createdAt", "userId", "name")
 				SELECT
-					RIGHT(GEN_RANDOM_UUID()::text, 10),
+					LEFT(MD5(RANDOM()::text), 10),
 					NOW(),
 					"userId",
 					'⭐'
