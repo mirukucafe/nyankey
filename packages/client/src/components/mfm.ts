@@ -36,10 +36,6 @@ export default defineComponent({
 			type: Boolean,
 			default: true,
 		},
-		rootScale: {
-			type: Number,
-			default: 1
-		}
 	},
 
 	render() {
@@ -53,7 +49,7 @@ export default defineComponent({
 			return t.match(/^[0-9.]+s$/) ? t : null;
 		};
 
-		const genEl = (ast: mfm.MfmNode[], scale: Number) => ast.map((token): VNode | VNode[] => {
+		const genEl = (ast: mfm.MfmNode[]) => ast.map((token): VNode | VNode[] => {
 			switch (token.type) {
 				case 'text': {
 					const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
@@ -72,17 +68,17 @@ export default defineComponent({
 				}
 
 				case 'bold': {
-					return h('b', genEl(token.children, scale));
+					return h('b', genEl(token.children));
 				}
 
 				case 'strike': {
-					return h('del', genEl(token.children, scale));
+					return h('del', genEl(token.children));
 				}
 
 				case 'italic': {
 					return h('i', {
 						style: 'font-style: oblique;',
-					}, genEl(token.children, scale));
+					}, genEl(token.children));
 				}
 
 				case 'fn': {
@@ -143,17 +139,17 @@ export default defineComponent({
 						case 'x2': {
 							return h('span', {
 								class: 'mfm-x2'
-							}, genEl(token.children, scale * 2));
+							}, genEl(token.children));
 						}
 						case 'x3': {
 							return h('span', {
 								class: 'mfm-x3'
-							}, genEl(token.children, scale * 3));
+							}, genEl(token.children));
 						}
 						case 'x4': {
 							return h('span', {
 								class: 'mfm-x4'
-							}, genEl(token.children, scale * 4));
+							}, genEl(token.children));
 						}
 						case 'font': {
 							const family =
@@ -170,7 +166,7 @@ export default defineComponent({
 						case 'blur': {
 							return h('span', {
 								class: '_mfm_blur_',
-							}, genEl(token.children, scale));
+							}, genEl(token.children));
 						}
 						case 'rainbow': {
 							const speed = validTime(token.props.args.speed) || '1s';
@@ -179,9 +175,9 @@ export default defineComponent({
 						}
 						case 'sparkle': {
 							if (!this.$store.state.animatedMfm) {
-								return genEl(token.children, scale);
+								return genEl(token.children);
 							}
-							return h(MkSparkle, {}, genEl(token.children, scale));
+							return h(MkSparkle, {}, genEl(token.children));
 						}
 						case 'rotate': {
 							const degrees = (typeof token.props.args.deg === 'string' ? parseInt(token.props.args.deg) : null) || '90';
@@ -198,7 +194,6 @@ export default defineComponent({
 							const x = Math.min(parseFloat(token.props.args.x ?? '1'), 5);
 							const y = Math.min(parseFloat(token.props.args.y ?? '1'), 5);
 							style = `transform: scale(${x}, ${y});`;
-							scale = scale * Math.max(x, y);
 							break;
 						}
 						case 'fg': {
@@ -215,24 +210,24 @@ export default defineComponent({
 						}
 					}
 					if (style == null) {
-						return h('span', {}, ['$[', token.props.name, ' ', ...genEl(token.children, scale), ']']);
+						return h('span', {}, ['$[', token.props.name, ' ', ...genEl(token.children), ']']);
 					} else {
 						return h('span', {
 							style: 'display: inline-block;' + style,
-						}, genEl(token.children, scale));
+						}, genEl(token.children));
 					}
 				}
 
 				case 'small': {
 					return h('small', {
 						class: '_mfm_small_'
-					}, genEl(token.children, scale));
+					}, genEl(token.children));
 				}
 
 				case 'center': {
 					return h('div', {
 						style: 'text-align:center;',
-					}, genEl(token.children, scale));
+					}, genEl(token.children));
 				}
 
 				case 'url': {
@@ -248,7 +243,7 @@ export default defineComponent({
 						key: Math.random(),
 						url: token.props.url,
 						rel: 'nofollow noopener',
-					}, genEl(token.children, scale));
+					}, genEl(token.children));
 				}
 
 				case 'mention': {
@@ -286,7 +281,7 @@ export default defineComponent({
 				case 'quote': {
 					return h(this.nowrap ? 'span' : 'div', {
 						class: 'quote',
-					}, genEl(token.children, scale));
+					}, genEl(token.children));
 				}
 
 				case 'emojiCode': {
@@ -339,6 +334,6 @@ export default defineComponent({
 		}).flat();
 
 		// Parse ast to DOM
-		return h('span', genEl(ast, this.rootScale ?? 1));
+		return h('span', genEl(ast));
 	},
 });
