@@ -302,10 +302,10 @@ export const UserRepository = db.getRepository(User).extend({
 
 		const ffVisible = await this.areFollowersVisibleTo(user, me);
 
-		const followingCount = opts.detail ? null :
+		const followingCount = !opts.detail ? null :
 			ffVisible ? user.followingCount : null;
 
-		const followersCount = opts.detail ? null :
+		const followersCount = !opts.detail ? null :
 			ffVisible ? user.followersCount : null;
 
 		const packed = {
