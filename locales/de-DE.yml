@@ -820,6 +820,7 @@ _ffVisibility:
   public: "Öffentlich"
   followers: "Nur für Follower sichtbar"
   private: "Privat"
+  nobody: Niemand (auch nicht du)
 _signup:
   almostThere: "Fast geschafft"
   emailAddressInfo: "Bitte gib deine Email-Adresse ein. Sie wird nicht öffentlich\
@@ -1381,7 +1382,7 @@ addTag: Schlagwörter hinzufügen
 removeTag: Schlagwörter entfernen
 exportAll: Alle exportieren
 exportSelected: Gewählte exportieren
-federateBlocks: Andere Instanzen mitteilen, wenn ich jemanden blockiere
+federateBlocks: Anderen Instanzen mitteilen, wenn ich jemanden blockiere
 selectMode: Auswählen
 selectAll: Alle auswählen
 renoteUnmute: Renotes zeigen
