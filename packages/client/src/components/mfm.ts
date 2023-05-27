@@ -197,14 +197,14 @@ export default defineComponent({
 							break;
 						}
 						case 'fg': {
-							let color = token.props.args.color;
-							if (!/^[0-9a-f]{3,6}$/i.test(color)) color = 'f00';
+							let color = token.props.args.color ?? 'f00';
+							if (!/^([0-9a-f]{3}){1,2}$/i.test(color)) color = 'f00';
 							style = `color: #${color};`;
 							break;
 						}
 						case 'bg': {
-							let color = token.props.args.color;
-							if (!/^[0-9a-f]{3,6}$/i.test(color)) color = 'f00';
+							let color = token.props.args.color ?? '0f0';
+							if (!/^([0-9a-f]{3}){1,2}$/i.test(color)) color = '0f0';
 							style = `background-color: #${color};`;
 							break;
 						}
