@@ -52,6 +52,9 @@ export function validateNote(object: IObject): Error | null {
 	if (attributedToHost !== expectHost) {
 		return new Error(`invalid Note: attributedTo has different host. expected: ${expectHost}, actual: ${attributedToHost}`);
 	}
+	if (attributedToHost === config.hostname) {
+		return new Error('invalid Note: by local author');
+	}
 
 	return null;
 }
