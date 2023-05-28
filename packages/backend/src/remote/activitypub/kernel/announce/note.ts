@@ -14,10 +14,6 @@ import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 export default async function(resolver: Resolver, actor: IRemoteUser, activity: IAnnounce, targetUri: string): Promise<void> {
 	const uri = getApId(activity);
 
-	if (actor.isSuspended) {
-		return;
-	}
-
 	// Cancel if the announced from host is blocked.
 	if (await shouldBlockInstance(extractDbHost(uri))) return;
 
