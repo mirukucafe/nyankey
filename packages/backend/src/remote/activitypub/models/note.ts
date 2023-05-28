@@ -19,7 +19,7 @@ import { fromHtml } from '@/mfm/from-html.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { parseAudience } from '../audience.js';
-import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
+import { IObject, getOneApId, getApId, getOneApHrefNullable, isPost, IPost, isEmoji, getApType } from '../type.js';
 import { DbResolver } from '../db-resolver.js';
 import { apLogger } from '../logger.js';
 import { resolvePerson } from './person.js';
@@ -33,7 +33,7 @@ export function validateNote(object: IObject): Error | null {
 		return new Error('invalid Note: object is null');
 	}
 
-	if (!validPost.includes(getApType(object))) {
+	if (!isPost(object)) {
 		return new Error(`invalid Note: invalid object type ${getApType(object)}`);
 	}
 
@@ -96,7 +96,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	let visibility = noteAudience.visibility;
 	const visibleUsers = noteAudience.visibleUsers;
 
-	// Audience (to, cc) が指定されてなかった場合
+	// If audience(to,cc) was not specified
 	if (visibility === 'specified' && visibleUsers.length === 0) {
 		if (typeof value === 'string') {	// 入力がstringならばresolverでGETが発生している
 			// こちらから匿名GET出来たものならばpublic
@@ -109,20 +109,19 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	const apMentions = await extractApMentions(note.tag, resolver);
 	const apHashtags = await extractApHashtags(note.tag);
 
-	// 添付ファイル
-	// TODO: attachmentは必ずしもImageではない
-	// TODO: attachmentは必ずしも配列ではない
-	// Noteがsensitiveなら添付もsensitiveにする
+	// Attachments handling
+	// TODO: attachments are not necessarily images
+	// If the note is marked as sensitive, the images should be marked sensitive too.
 	const limit = promiseLimit(2);
 
-	note.attachment = Array.isArray(note.attachment) ? note.attachment : note.attachment ? [note.attachment] : [];
+	note.attachment = toArray(note.attachment);
 	const files = note.attachment
 		.map(attach => attach.sensitive = note.sensitive)
 		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
 			.filter(image => image != null)
 		: [];
 
-	// リプライ
+	// Reply handling
 	const reply: Note | null = note.inReplyTo
 		? await resolveNote(note.inReplyTo, resolver).then(x => {
 			if (x == null) {
@@ -132,7 +131,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 				return x;
 			}
 		}).catch(async e => {
-			// トークだったらinReplyToのエラーは無視
+			// ignore inReplyTo if it is a messaging message
 			const uri = getApId(note.inReplyTo);
 			if (uri.startsWith(config.url + '/')) {
 				const id = uri.split('/').pop();
@@ -218,7 +217,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 				apLogger.info(`vote from AP: actor=${actor.username}@${actor.host}, note=${note.id}, choice=${name}`);
 				await vote(actor, reply, index);
 
-				// リモートフォロワーにUpdate配信
+				// Federate an Update to other servers
 				deliverQuestionUpdate(reply.id);
 			}
 			return null;
@@ -243,26 +242,26 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 			await createMessage(actor, recipient, undefined, text || undefined, (files && files.length > 0) ? files[0] : null, object.id);
 			return null;
 		}
+	} else {
+		return await post(actor, {
+			createdAt: note.published ? new Date(note.published) : null,
+			files,
+			reply,
+			renote: quote,
+			name: note.name,
+			cw,
+			text,
+			localOnly: false,
+			visibility,
+			visibleUsers,
+			apMentions,
+			apHashtags,
+			apEmojis,
+			poll,
+			uri: note.id,
+			url: getOneApHrefNullable(note.url),
+		}, silent);
 	}
-
-	return await post(actor, {
-		createdAt: note.published ? new Date(note.published) : null,
-		files,
-		reply,
-		renote: quote,
-		name: note.name,
-		cw,
-		text,
-		localOnly: false,
-		visibility,
-		visibleUsers,
-		apMentions,
-		apHashtags,
-		apEmojis,
-		poll,
-		uri: note.id,
-		url: getOneApHrefNullable(note.url),
-	}, silent);
 }
 
 /**
