@@ -243,8 +243,8 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	if (isTalk) {
 		for (const recipient of visibleUsers) {
 			await createMessage(actor, recipient, undefined, text || undefined, (files && files.length > 0) ? files[0] : null, object.id);
-			return null;
 		}
+		return null;
 	} else {
 		return await post(actor, {
 			createdAt: note.published ? new Date(note.published) : null,
