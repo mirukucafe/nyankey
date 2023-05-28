@@ -101,10 +101,8 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 
 	// If audience(to,cc) was not specified
 	if (visibility === 'specified' && visibleUsers.length === 0) {
-		if (typeof value === 'string') {	// 入力がstringならばresolverでGETが発生している
-			// こちらから匿名GET出来たものならばpublic
-			visibility = 'public';
-		}
+		// TODO derive audience from context (e.g. whose inbox this was in?)
+		throw new Error('audience not understood');
 	}
 
 	let isTalk = note._misskey_talk && visibility === 'specified';
