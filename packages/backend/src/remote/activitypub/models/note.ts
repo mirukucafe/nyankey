@@ -7,8 +7,8 @@ import { unique, toArray, toSingle } from '@/prelude/array.js';
 import { vote } from '@/services/note/polls/vote.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { deliverQuestionUpdate } from '@/services/note/polls/update.js';
-import { extractDbHost, toPuny } from '@/misc/convert-host.js';
-import { Emojis, Polls, MessagingMessages } from '@/models/index.js';
+import { extractDbHost } from '@/misc/convert-host.js';
+import { Polls, MessagingMessages } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { genId } from '@/misc/gen-id.js';
@@ -19,12 +19,12 @@ import { fromHtml } from '@/mfm/from-html.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { parseAudience } from '../audience.js';
-import { IObject, getOneApId, getApId, getOneApHrefNullable, isPost, IPost, isEmoji, getApType } from '../type.js';
+import { IObject, getOneApId, getApId, getOneApHrefNullable, isPost, IPost, getApType } from '../type.js';
 import { DbResolver } from '../db-resolver.js';
 import { apLogger } from '../logger.js';
 import { resolvePerson } from './person.js';
 import { resolveImage } from './image.js';
-import { extractApHashtags, extractQuoteUrl } from './tag.js';
+import { extractApHashtags, extractQuoteUrl, extractEmojis } from './tag.js';
 import { extractPollFromQuestion } from './question.js';
 import { extractApMentions } from './mention.js';
 
@@ -323,60 +323,4 @@ export async function resolveNote(value: string | IObject, resolver: Resolver): 
 	} finally {
 		unlock();
 	}
-}
-
-export async function extractEmojis(tags: IObject | IObject[], idnHost: string): Promise<Emoji[]> {
-	const host = toPuny(idnHost);
-
-	if (!tags) return [];
-
-	const eomjiTags = toArray(tags).filter(isEmoji);
-
-	return await Promise.all(eomjiTags.map(async tag => {
-		const name = tag.name!.replace(/^:/, '').replace(/:$/, '');
-		tag.icon = toSingle(tag.icon);
-
-		const exists = await Emojis.findOneBy({
-			host,
-			name,
-		});
-
-		if (exists) {
-			if ((tag.updated != null && exists.updatedAt == null)
-				|| (tag.id != null && exists.uri == null)
-				|| (tag.updated != null && exists.updatedAt != null && new Date(tag.updated) > exists.updatedAt)
-				|| (tag.icon!.url !== exists.originalUrl)
-			) {
-				await Emojis.update({
-					host,
-					name,
-				}, {
-					uri: tag.id,
-					originalUrl: tag.icon!.url,
-					publicUrl: tag.icon!.url,
-					updatedAt: new Date(),
-				});
-
-				return await Emojis.findOneBy({
-					host,
-					name,
-				}) as Emoji;
-			}
-
-			return exists;
-		}
-
-		apLogger.info(`register emoji host=${host}, name=${name}`);
-
-		return await Emojis.insert({
-			id: genId(),
-			host,
-			name,
-			uri: tag.id,
-			originalUrl: tag.icon!.url,
-			publicUrl: tag.icon!.url,
-			updatedAt: new Date(),
-			aliases: [],
-		} as Partial<Emoji>).then(x => Emojis.findOneByOrFail(x.identifiers[0]));
-	}));
 }
