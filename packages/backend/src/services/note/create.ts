@@ -1,7 +1,6 @@
 import { ArrayOverlap, Not, In } from 'typeorm';
 import * as mfm from 'mfm-js';
 import { db } from '@/db/postgre.js';
-import es from '@/db/elasticsearch.js';
 import { publishMainStream, publishNotesStream } from '@/services/stream.js';
 import { DeliverManager } from '@/remote/activitypub/deliver-manager.js';
 import renderNote from '@/remote/activitypub/renderer/note.js';
@@ -9,14 +8,13 @@ import renderCreate from '@/remote/activitypub/renderer/create.js';
 import renderAnnounce from '@/remote/activitypub/renderer/announce.js';
 import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import { resolveUser } from '@/remote/resolve-user.js';
-import config from '@/config/index.js';
 import { concat } from '@/prelude/array.js';
 import { insertNoteUnread } from '@/services/note/unread.js';
 import { extractMentions } from '@/misc/extract-mentions.js';
 import { extractCustomEmojisFromMfm } from '@/misc/extract-custom-emojis-from-mfm.js';
 import { extractHashtags } from '@/misc/extract-hashtags.js';
 import { Note } from '@/models/entities/note.js';
-import { Mutings, Users, NoteWatchings, Notes, Instances, UserProfiles, MutedNotes, Channels, ChannelFollowings, NoteThreadMutings } from '@/models/index.js';
+import { Mutings, Users, NoteWatchings, Notes, Instances, MutedNotes, Channels, ChannelFollowings, NoteThreadMutings } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { App } from '@/models/entities/app.js';
 import { User, ILocalUser, IRemoteUser } from '@/models/entities/user.js';
@@ -32,27 +30,16 @@ import { normalizeForSearch } from '@/misc/normalize-for-search.js';
 import { getAntennas } from '@/misc/antenna-cache.js';
 import { endedPollNotificationQueue } from '@/queue/queues.js';
 import { webhookDeliver } from '@/queue/index.js';
-import { Cache } from '@/misc/cache.js';
 import { UserProfile } from '@/models/entities/user-profile.js';
 import { getActiveWebhooks } from '@/misc/webhook-cache.js';
 import { IActivity } from '@/remote/activitypub/type.js';
 import { renderNoteOrRenoteActivity } from '@/remote/activitypub/renderer/note-or-renote.js';
-import { MINUTE } from '@/const.js';
 import { updateHashtags } from '../update-hashtag.js';
 import { registerOrFetchInstanceDoc } from '../register-or-fetch-instance-doc.js';
 import { createNotification } from '../create-notification.js';
 import { addNoteToAntenna } from '../add-note-to-antenna.js';
 import { deliverToRelays } from '../relay.js';
-
-const mutedWordsCache = new Cache<{ userId: UserProfile['userId']; mutedWords: UserProfile['mutedWords']; }[]>(
-	5 * MINUTE,
-	() => UserProfiles.find({
-		where: {
-			enableWordMute: true,
-		},
-		select: ['userId', 'mutedWords'],
-	}),
-);
+import { mutedWordsCache, index } from './index.js';
 
 type NotificationType = 'reply' | 'renote' | 'quote' | 'mention';
 
@@ -574,20 +561,6 @@ async function insertNote(user: { id: User['id']; host: User['host']; }, data: O
 
 		throw e;
 	}
-}
-
-function index(note: Note): void {
-	if (note.text == null || config.elasticsearch == null) return;
-
-	es.index({
-		index: config.elasticsearch.index || 'misskey_note',
-		id: note.id.toString(),
-		body: {
-			text: normalizeForSearch(note.text),
-			userId: note.userId,
-			userHost: note.userHost,
-		},
-	});
 }
 
 async function notifyToWatchersOfRenotee(renote: Note, user: { id: User['id']; }, nm: NotificationManager, type: NotificationType): Promise<void> {
