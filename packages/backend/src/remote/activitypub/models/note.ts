@@ -60,6 +60,56 @@ export function validateNote(object: IObject): Error | null {
 }
 
 /**
+ * Function to process the content of a note, reusable in createNote and updateNote.
+ */
+async function processContent(note: IPost, quoteUri: string | null):
+	Promise<{
+		cw: string | null,
+		files: DriveFile[],
+		text: string | null,
+		apEmoji: Emoji[],
+		apHashtags: string[],
+		url: string,
+		name: string
+	}>
+{
+	// Attachments handling
+	// TODO: attachments are not necessarily images
+	const limit = promiseLimit(2);
+
+	const attachments = toArray(note.attachment);
+	const files = note.attachment
+		// If the note is marked as sensitive, the images should be marked sensitive too.
+		.map(attach => attach.sensitive |= note.sensitive)
+		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
+			.filter(image => image != null)
+		: [];
+
+	// text parsing
+	let text: string | null = null;
+	if (note.source?.mediaType === 'text/x.misskeymarkdown' && typeof note.source.content === 'string') {
+		text = note.source.content;
+	} else if (typeof note.content === 'string') {
+		text = fromHtml(note.content, quoteUri);
+	}
+
+	const emojis = await extractEmojis(note.tag || [], extractDbHost(getApId(note))).catch(e => {
+		apLogger.info(`extractEmojis: ${e}`);
+		return [] as Emoji[];
+	});
+
+	return {
+		cw: note.summary === '' ? null : note.summary,
+		files,
+		text,
+		apEmojis: emojis.map(emoji => emoji.name),
+		apHashtags: await extractApHashtags(note.tag),
+		url: getOneApHrefNullable(note.url),
+		name: note.name,
+	};
+}
+
+/**
  * Fetch Note.
  *
  * Returns the target Note if it is registered in FoundKey.
@@ -108,19 +158,6 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	let isTalk = note._misskey_talk && visibility === 'specified';
 
 	const apMentions = await extractApMentions(note.tag, resolver);
-	const apHashtags = await extractApHashtags(note.tag);
-
-	// Attachments handling
-	// TODO: attachments are not necessarily images
-	// If the note is marked as sensitive, the images should be marked sensitive too.
-	const limit = promiseLimit(2);
-
-	note.attachment = toArray(note.attachment);
-	const files = note.attachment
-		.map(attach => attach.sensitive = note.sensitive)
-		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
-			.filter(image => image != null)
-		: [];
 
 	// Reply handling
 	const reply: Note | null = note.inReplyTo
@@ -197,16 +234,6 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		}
 	}
 
-	const cw = note.summary === '' ? null : note.summary;
-
-	// text parsing
-	let text: string | null = null;
-	if (note.source?.mediaType === 'text/x.misskeymarkdown' && typeof note.source.content === 'string') {
-		text = note.source.content;
-	} else if (typeof note.content === 'string') {
-		text = fromHtml(note.content, quote?.uri);
-	}
-
 	// vote
 	if (reply && reply.hasPoll) {
 		const poll = await Polls.findOneByOrFail({ noteId: reply.id });
@@ -229,38 +256,34 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		}
 	}
 
-	const emojis = await extractEmojis(note.tag || [], actor.host).catch(e => {
-		apLogger.info(`extractEmojis: ${e}`);
-		return [] as Emoji[];
-	});
-
-	const apEmojis = emojis.map(emoji => emoji.name);
-
 	const poll = await extractPollFromQuestion(note, resolver).catch(() => undefined);
+
+	const processedContent = await processContent(note, quote?.uri);
 
 	if (isTalk) {
 		for (const recipient of visibleUsers) {
-			await createMessage(actor, recipient, undefined, text || undefined, (files && files.length > 0) ? files[0] : null, object.id);
+			await createMessage(
+				actor,
+				recipient,
+				undefined,
+				processedContent.text,
+				processedContent.files[0] ?? null,
+				object.id
+			);
 		}
 		return null;
 	} else {
 		return await post(actor, {
+			...processedContent,
 			createdAt: note.published ? new Date(note.published) : null,
-			files,
 			reply,
 			renote: quote,
-			name: note.name,
-			cw,
-			text,
 			localOnly: false,
 			visibility,
 			visibleUsers,
 			apMentions,
-			apHashtags,
-			apEmojis,
 			poll,
 			uri: note.id,
-			url: getOneApHrefNullable(note.url),
 		}, silent);
 	}
 }
