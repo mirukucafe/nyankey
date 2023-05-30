@@ -4,6 +4,7 @@ import { toPuny } from '@/misc/convert-host.js';
 import { Emojis } from '@/models/index.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
+import { genId } from '@/misc/gen-id.js';
 
 export function extractApHashtags(tags: IObject | IObject[] | null | undefined): string[] {
 	if (tags == null) return [];
