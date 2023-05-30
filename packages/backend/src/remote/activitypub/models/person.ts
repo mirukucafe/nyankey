@@ -27,8 +27,8 @@ import { fromHtml } from '@/mfm/from-html.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { apLogger } from '../logger.js';
 import { isCollectionOrOrderedCollection, isCollection, IActor, getApId, getOneApHrefNullable, IObject, isPropertyValue, getApType, isActor } from '../type.js';
-import { extractApHashtags } from './tag.js';
-import { resolveNote, extractEmojis } from './note.js';
+import { extractApHashtags, extractEmojis } from './tag.js';
+import { resolveNote } from './note.js';
 import { resolveImage } from './image.js';
 
 const nameLength = 128;
