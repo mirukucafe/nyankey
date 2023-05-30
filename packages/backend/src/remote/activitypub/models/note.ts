@@ -62,7 +62,7 @@ export function validateNote(object: IObject): Error | null {
 /**
  * Function to process the content of a note, reusable in createNote and updateNote.
  */
-async function processContent(note: IPost, quoteUri: string | null):
+async function processContent(actor: IRemoteUser, note: IPost, quoteUri: string | null):
 	Promise<{
 		cw: string | null,
 		files: DriveFile[],
@@ -258,7 +258,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 
 	const poll = await extractPollFromQuestion(note, resolver).catch(() => undefined);
 
-	const processedContent = await processContent(note, quote?.uri);
+	const processedContent = await processContent(actor, note, quote?.uri);
 
 	if (isTalk) {
 		for (const recipient of visibleUsers) {
