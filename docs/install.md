@@ -144,7 +144,7 @@ Description=FoundKey daemon
 Type=simple
 User=foundkey
 ExecStart=/usr/bin/npm start
-WorkingDirectory=/home/foundkey/foundkey
+WorkingDirectory=/home/foundkey/FoundKey
 Environment="NODE_ENV=production"
 TimeoutSec=60
 StandardOutput=syslog
@@ -178,7 +178,7 @@ command_args="start"
 command_user="foundkey"
 
 supervisor="supervise-daemon"
-supervise_daemon_args=" -d /home/foundkey/foundkey -e NODE_ENV=\"production\""
+supervise_daemon_args=" -d /home/foundkey/FoundKey -e NODE_ENV=\"production\""
 
 pidfile="/run/${RC_SVCNAME}.pid"
 
