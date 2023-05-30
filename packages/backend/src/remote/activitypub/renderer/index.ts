@@ -17,27 +17,56 @@ export const renderActivity = (x: any): IActivity | null => {
 			'https://www.w3.org/ns/activitystreams',
 			'https://w3id.org/security/v1',
 			{
+				xsd: 'http://www.w3.org/2001/XMLSchema#',
 				// as non-standards
-				manuallyApprovesFollowers: 'as:manuallyApprovesFollowers',
-				sensitive: 'as:sensitive',
+				manuallyApprovesFollowers: {
+					'@id': 'as:manuallyApprovesFollowers',
+					'@type': 'xsd:boolean',
+				},
+				sensitive: {
+					'@id': 'as:sensitive',
+					'@type': 'xsd:boolean',
+				},
 				Hashtag: 'as:Hashtag',
 				// Mastodon
 				toot: 'http://joinmastodon.org/ns#',
 				Emoji: 'toot:Emoji',
-				featured: 'toot:featured',
-				discoverable: 'toot:discoverable',
+				featured: {
+					'@id': 'toot:featured',
+					'@type': '@id',
+				},
+				discoverable: {
+					'@id': 'toot:discoverable',
+					'@type': 'xsd:boolean',
+				},
 				// Fedibird
-				fedibird: 'http://fedibird.com/ns#',
-				quoteUri: 'fedibird:quoteUri',
+				quoteUri: {
+					'@id': 'http://fedibird.com/ns#quoteUri',
+					'@type': '@id',
+				},
 				// schema
-				schema: 'http://schema.org#',
-				PropertyValue: 'schema:PropertyValue',
-				value: 'schema:value',
+				schema: 'http://schema.org/',
+				PropertyValue: {
+					'@id': 'schema:PropertyValue',
+					'@context': {
+						'value': 'schema:value',
+						'name': 'schema:name',
+					},
+				},
 				// Misskey
 				misskey: 'https://misskey-hub.net/ns#',
-				'_misskey_quote': 'misskey:_misskey_quote',
-				'_misskey_talk': 'misskey:_misskey_talk',
-				'isCat': 'misskey:isCat',
+				'_misskey_quote': {
+					'@id': 'misskey:_misskey_quote',
+					'@type': '@id',
+				},
+				'_misskey_talk': {
+					'@id': 'misskey:_misskey_talk',
+					'@type': 'xsd:boolean',
+				},
+				'isCat': {
+					'@id': 'misskey:isCat',
+					'@type': 'xsd:boolean',
+				},
 				// vcard
 				vcard: 'http://www.w3.org/2006/vcard/ns#',
 			},
