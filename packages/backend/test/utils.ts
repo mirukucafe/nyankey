@@ -10,7 +10,7 @@ import * as foundkey from 'foundkey-js';
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { DataSource } from 'typeorm';
-import loadConfig from '../src/config/load.js';
+import { loadConfig } from '../src/config/load.js';
 import { entities } from '../src/db/postgre.js';
 import got from 'got';
 
