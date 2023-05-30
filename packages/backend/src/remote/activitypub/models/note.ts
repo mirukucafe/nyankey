@@ -62,7 +62,7 @@ export function validateNote(object: IObject): Error | null {
 /**
  * Function to process the content of a note, reusable in createNote and updateNote.
  */
-async function processContent(actor: IRemoteUser, note: IPost, quoteUri: string | null):
+async function processContent(actor: IRemoteUser, note: IPost, quoteUri: string | null, resolver: Resolver):
 	Promise<{
 		cw: string | null,
 		files: DriveFile[],
@@ -78,10 +78,10 @@ async function processContent(actor: IRemoteUser, note: IPost, quoteUri: string 
 	const limit = promiseLimit(2);
 
 	const attachments = toArray(note.attachment);
-	const files = note.attachment
+	const files = attachments
 		// If the note is marked as sensitive, the images should be marked sensitive too.
 		.map(attach => attach.sensitive |= note.sensitive)
-		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
+		? (await Promise.all(attachments.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
 			.filter(image => image != null)
 		: [];
 
@@ -258,7 +258,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 
 	const poll = await extractPollFromQuestion(note, resolver).catch(() => undefined);
 
-	const processedContent = await processContent(actor, note, quote?.uri);
+	const processedContent = await processContent(actor, note, quote?.uri, resolver);
 
 	if (isTalk) {
 		for (const recipient of visibleUsers) {
