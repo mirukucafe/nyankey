@@ -134,7 +134,7 @@ Run `NODE_ENV=production npm start` to launch FoundKey manually. To stop the ser
 
 ### Launch with systemd
 
-Run `systemctl --edit --full --force foundkey.service`, and paste the following:
+Run `systemctl edit --full --force foundkey.service`, and paste the following:
 
 ```ini
 [Unit]
