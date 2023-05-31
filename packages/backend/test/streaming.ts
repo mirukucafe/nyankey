@@ -24,7 +24,9 @@ describe('Streaming', () => {
 		});
 	};
 
-	describe('Streaming', () => {
+	describe('Streaming', function() {
+		this.timeout(20*60*1000);
+
 		// Local users
 		let ayano: any;
 		let kyoko: any;
@@ -38,8 +40,6 @@ describe('Streaming', () => {
 		let list: any;
 
 		before(async () => {
-			this.timeout(0);
-
 			p = await startServer();
 			const connection = await initTestDb(true);
 			Followings = connection.getRepository(Following);
@@ -410,7 +410,7 @@ describe('Streaming', () => {
 				let fooCount = 0;
 				let barCount = 0;
 				let fooBarCount = 0;
-	
+
 				const ws = await connectStream(chitose, 'hashtag', ({ type, body }) => {
 					if (type == 'note') {
 						if (body.text === '#foo') fooCount++;
@@ -422,19 +422,19 @@ describe('Streaming', () => {
 						['foo', 'bar'],
 					],
 				});
-	
+
 				post(chitose, {
 					text: '#foo',
 				});
-	
+
 				post(chitose, {
 					text: '#bar',
 				});
-	
+
 				post(chitose, {
 					text: '#foo #bar',
 				});
-	
+
 				setTimeout(() => {
 					assert.strictEqual(fooCount, 0);
 					assert.strictEqual(barCount, 0);

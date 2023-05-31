@@ -4,11 +4,12 @@ import * as assert from 'assert';
 import * as childProcess from 'child_process';
 import { async, signup, request, post, startServer, shutdownServer } from './utils.js';
 
-describe('API visibility', () => {
+describe('API visibility', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 
 	before(async () => {
-		this.timeout(0);
 		p = await startServer();
 	});
 

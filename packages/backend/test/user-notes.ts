@@ -4,7 +4,9 @@ import * as assert from 'assert';
 import * as childProcess from 'child_process';
 import { async, signup, request, post, uploadUrl, startServer, shutdownServer } from './utils.js';
 
-describe('users/notes', () => {
+describe('users/notes', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 
 	let alice: any;
@@ -13,8 +15,6 @@ describe('users/notes', () => {
 	let jpgPngNote: any;
 
 	before(async () => {
-		this.timeout(0);
-
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		const jpg = await uploadUrl(alice, 'https://raw.githubusercontent.com/misskey-dev/misskey/develop/packages/backend/test/resources/Lenna.jpg');

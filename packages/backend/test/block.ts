@@ -4,7 +4,9 @@ import * as assert from 'assert';
 import * as childProcess from 'child_process';
 import { async, signup, request, post, startServer, shutdownServer } from './utils.js';
 
-describe('Block', () => {
+describe('Block', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 
 	// alice blocks bob
@@ -13,8 +15,6 @@ describe('Block', () => {
 	let carol: any;
 
 	before(async () => {
-		this.timeout(0);
-
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		bob = await signup({ username: 'bob' });

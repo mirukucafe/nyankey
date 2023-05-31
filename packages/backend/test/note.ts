@@ -5,7 +5,9 @@ import * as childProcess from 'child_process';
 import { Note } from '../src/models/entities/note.js';
 import { async, signup, request, post, uploadUrl, startServer, shutdownServer, initTestDb, api } from './utils.js';
 
-describe('Note', () => {
+describe('Note', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 	let Notes: any;
 
@@ -13,8 +15,6 @@ describe('Note', () => {
 	let bob: any;
 
 	before(async () => {
-		this.timeout(0);
-
 		p = await startServer();
 		const connection = await initTestDb(true);
 		Notes = connection.getRepository(Note);

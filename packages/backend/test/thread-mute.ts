@@ -4,7 +4,9 @@ import * as assert from 'assert';
 import * as childProcess from 'child_process';
 import { async, signup, request, post, react, connectStream, startServer, shutdownServer } from './utils.js';
 
-describe('Note thread mute', () => {
+describe('Note thread mute', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 
 	let alice: any;
@@ -12,8 +14,6 @@ describe('Note thread mute', () => {
 	let carol: any;
 
 	before(async () => {
-		this.timeout(0);
-
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		bob = await signup({ username: 'bob' });

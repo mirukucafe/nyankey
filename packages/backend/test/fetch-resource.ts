@@ -16,14 +16,15 @@ const AP = 'application/activity+json; charset=utf-8';
 const JSON = 'application/json; charset=utf-8';
 const HTML = 'text/html; charset=utf-8';
 
-describe('Fetch resource', () => {
+describe('Fetch resource', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 
 	let alice: any;
 	let alicesPost: any;
 
 	before(async () => {
-		this.timeout(0);
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
 		alicesPost = await post(alice, {

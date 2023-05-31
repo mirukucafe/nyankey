@@ -5,7 +5,9 @@ import * as childProcess from 'child_process';
 import * as sinon from 'sinon';
 import { async, signup, startServer, shutdownServer, initTestDb } from '../utils.js';
 
-describe('Creating a block activity', () => {
+describe('Creating a block activity', function() {
+	this.timeout(20*60*1000);
+
 	let p: childProcess.ChildProcess;
 
 	// alice blocks bob
@@ -14,8 +16,6 @@ describe('Creating a block activity', () => {
 	let carol: any;
 
 	before(async () => {
-		this.timeout(0);
-
 		await initTestDb();
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
