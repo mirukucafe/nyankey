@@ -10,7 +10,7 @@ describe('API', () => {
 	let bob: any;
 	let carol: any;
 
-	before(async function() {
+	before(async () => {
 		this.timeout(0);
 		p = await startServer();
 		alice = await signup({ username: 'alice' });
