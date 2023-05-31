@@ -31,13 +31,13 @@ export default class Logger {
 	 * @param color Log message color
 	 * @param store Whether to store messages
 	 */
-	constructor(domain: string, color?: KEYWORD, store = true, minLevel: Level = LOG_LEVELS.info) {
+	constructor(domain: string, color?: KEYWORD, store = true, minLevel?: Level) {
 		this.domain = {
 			name: domain,
 			color,
 		};
 		this.store = store;
-		this.minLevel = minLevel;
+		this.minLevel = minLevel ?? envOption.logLevel;
 	}
 
 	/**
@@ -47,7 +47,7 @@ export default class Logger {
 	 * @param store Whether to store messages
 	 * @returns A Logger instance whose parent logger is this instance.
 	 */
-	public createSubLogger(domain: string, color?: KEYWORD, store = true, minLevel: Level = LOG_LEVELS.info): Logger {
+	public createSubLogger(domain: string, color?: KEYWORD, store = true, minLevel?: Level): Logger {
 		const logger = new Logger(domain, color, store, minLevel);
 		logger.parentLogger = this;
 		return logger;
