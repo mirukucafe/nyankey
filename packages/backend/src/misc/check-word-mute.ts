@@ -20,10 +20,11 @@ export async function checkWordMute(note: NoteLike, me: UserLike | null | undefi
 		const text = ((note.cw ?? '') + '\n' + (note.text ?? '')).trim();
 
 		if (text === '') return false;
+		const textLower = text.toLowerCase();
 
 		const matched = mutedWords.some(filter => {
 			if (Array.isArray(filter)) {
-				return filter.every(keyword => text.includes(keyword));
+				return filter.every(keyword => textLower.includes(keyword.toLowerCase()));
 			} else {
 				// represents RegExp
 				const regexp = filter.match(/^\/(.+)\/(.*)$/);
