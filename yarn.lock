@@ -3717,7 +3717,6 @@ __metadata:
     cli-highlight: 2.1.11
     color-convert: 2.0.1
     content-disposition: 0.5.4
-    cross-env: 7.0.3
     date-fns: 2.28.0
     deep-email-validator: 0.1.21
     escape-regexp: 0.0.1
