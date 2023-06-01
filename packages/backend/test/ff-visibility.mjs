@@ -2,16 +2,14 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, signup, request, post, react, connectStream, startServer, shutdownServer, simpleGet } from './utils.js';
+import { async, signup, request, post, react, connectStream, startServer, shutdownServer, simpleGet } from './utils.mjs';
 
 describe('FF visibility', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
+	let p;
 
-	let alice: any;
-	let bob: any;
-	let follower: any;
+	let alice, bob, follower;
 
 	before(async () => {
 		p = await startServer();

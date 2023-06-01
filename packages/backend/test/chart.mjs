@@ -2,18 +2,14 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as lolex from '@sinonjs/fake-timers';
-import TestChart from '../src/services/chart/charts/test.js';
-import TestGroupedChart from '../src/services/chart/charts/test-grouped.js';
-import TestUniqueChart from '../src/services/chart/charts/test-unique.js';
-import TestIntersectionChart from '../src/services/chart/charts/test-intersection.js';
-import { initDb } from '../src/db/postgre.js';
+import TestChart from '../built/services/chart/charts/test.js';
+import TestGroupedChart from '../built/services/chart/charts/test-grouped.js';
+import TestUniqueChart from '../built/services/chart/charts/test-unique.js';
+import TestIntersectionChart from '../built/services/chart/charts/test-intersection.js';
+import { initDb } from '../built/db/postgre.js';
 
 describe('Chart', () => {
-	let testChart: TestChart;
-	let testGroupedChart: TestGroupedChart;
-	let testUniqueChart: TestUniqueChart;
-	let testIntersectionChart: TestIntersectionChart;
-	let clock: lolex.InstalledClock;
+	let testChart, testGroupedChart, testUniqueChart, testIntersectionChart, clock;
 
 	beforeEach(async () => {
 		await initDb(true);

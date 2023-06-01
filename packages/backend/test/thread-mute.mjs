@@ -2,16 +2,14 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, signup, request, post, react, connectStream, startServer, shutdownServer } from './utils.js';
+import { async, signup, request, post, react, connectStream, startServer, shutdownServer } from './utils.mjs';
 
 describe('Note thread mute', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
+	let p;
 
-	let alice: any;
-	let bob: any;
-	let carol: any;
+	let alice, bob, carol;
 
 	before(async () => {
 		p = await startServer();
@@ -37,9 +35,9 @@ describe('Note thread mute', function() {
 
 		assert.strictEqual(res.status, 200);
 		assert.strictEqual(Array.isArray(res.body), true);
-		assert.strictEqual(res.body.some((note: any) => note.id === bobNote.id), false);
-		assert.strictEqual(res.body.some((note: any) => note.id === carolReply.id), false);
-		assert.strictEqual(res.body.some((note: any) => note.id === carolReplyWithoutMention.id), false);
+		assert.strictEqual(res.body.some((note) => note.id === bobNote.id), false);
+		assert.strictEqual(res.body.some((note) => note.id === carolReply.id), false);
+		assert.strictEqual(res.body.some((note) => note.id === carolReplyWithoutMention.id), false);
 	}));
 
 	it('ミュートしているスレッドからメンションされても、hasUnreadMentions が true にならない', async(async () => {
@@ -97,8 +95,8 @@ describe('Note thread mute', function() {
 
 		assert.strictEqual(res.status, 200);
 		assert.strictEqual(Array.isArray(res.body), true);
-		assert.strictEqual(res.body.some((notification: any) => notification.note.id === carolReply.id), false);
-		assert.strictEqual(res.body.some((notification: any) => notification.note.id === carolReplyWithoutMention.id), false);
+		assert.strictEqual(res.body.some((notification) => notification.note.id === carolReply.id), false);
+		assert.strictEqual(res.body.some((notification) => notification.note.id === carolReplyWithoutMention.id), false);
 
 		// NOTE: bobの投稿はスレッドミュート前に行われたため通知に含まれていてもよい
 	}));

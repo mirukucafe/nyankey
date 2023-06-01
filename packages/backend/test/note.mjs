@@ -2,17 +2,16 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { Note } from '../src/models/entities/note.js';
-import { async, signup, request, post, uploadUrl, startServer, shutdownServer, initTestDb, api } from './utils.js';
+import { Note } from '../built/models/entities/note.js';
+import { async, signup, request, post, uploadUrl, startServer, shutdownServer, initTestDb, api } from './utils.mjs';
 
 describe('Note', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
-	let Notes: any;
+	let p;
+	let Notes;
 
-	let alice: any;
-	let bob: any;
+	let alice, bob;
 
 	before(async () => {
 		p = await startServer();

@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
 import * as openapi from '@redocly/openapi-core';
-import { async, startServer, signup, post, request, simpleGet, port, shutdownServer } from './utils.js';
+import { async, startServer, signup, post, request, simpleGet, port, shutdownServer } from './utils.mjs';
 
 // Request Accept
 const ONLY_AP = 'application/activity+json';
@@ -19,10 +19,9 @@ const HTML = 'text/html; charset=utf-8';
 describe('Fetch resource', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
+	let p;
 
-	let alice: any;
-	let alicesPost: any;
+	let alice, alicesPost;
 
 	before(async () => {
 		p = await startServer();

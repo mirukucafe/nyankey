@@ -1,11 +1,11 @@
 import * as assert from 'assert';
 
 import { parse } from 'mfm-js';
-import { extractMentions } from '../src/misc/extract-mentions.js';
+import { extractMentions } from '../built/misc/extract-mentions.js';
 
 describe('Extract mentions', () => {
 	it('simple', () => {
-		const ast = parse('@foo @bar @baz')!;
+		const ast = parse('@foo @bar @baz');
 		const mentions = extractMentions(ast);
 		assert.deepStrictEqual(mentions, [{
 			username: 'foo',
@@ -23,7 +23,7 @@ describe('Extract mentions', () => {
 	});
 
 	it('nested', () => {
-		const ast = parse('@foo **@bar** @baz')!;
+		const ast = parse('@foo **@bar** @baz');
 		const mentions = extractMentions(ast);
 		assert.deepStrictEqual(mentions, [{
 			username: 'foo',

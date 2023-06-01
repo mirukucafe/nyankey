@@ -2,12 +2,12 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, signup, request, post, startServer, shutdownServer } from './utils.js';
+import { async, signup, request, post, startServer, shutdownServer } from './utils.mjs';
 
 describe('API visibility', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
+	let p;
 
 	before(async () => {
 		p = await startServer();
@@ -20,48 +20,48 @@ describe('API visibility', function() {
 	describe('Note visibility', async () => {
 		//#region vars
 		/** protagonist */
-		let alice: any;
+		let alice;
 		/** follower */
-		let follower: any;
+		let follower;
 		/** non-follower */
-		let other: any;
+		let other;
 		/** non-follower who has been replied to or mentioned */
-		let target: any;
+		let target;
 		/** actor for which a specified visibility was set */
-		let target2: any;
+		let target2;
 
 		/** public-post */
-		let pub: any;
+		let pub;
 		/** home-post */
-		let home: any;
+		let home;
 		/** followers-post */
-		let fol: any;
+		let fol;
 		/** specified-post */
-		let spe: any;
+		let spe;
 
 		/** public-reply to target's post */
-		let pubR: any;
+		let pubR;
 		/** home-reply to target's post */
-		let homeR: any;
+		let homeR;
 		/** followers-reply to target's post */
-		let folR: any;
+		let folR;
 		/** specified-reply to target's post */
-		let speR: any;
+		let speR;
 
 		/** public-mention to target */
-		let pubM: any;
+		let pubM;
 		/** home-mention to target */
-		let homeM: any;
+		let homeM;
 		/** followers-mention to target */
-		let folM: any;
+		let folM;
 		/** specified-mention to target */
-		let speM: any;
+		let speM;
 
 		/** reply target post */
-		let tgt: any;
+		let tgt;
 		//#endregion
 
-		const show = async (noteId: any, by: any) => {
+		const show = async (noteId, by) => {
 			return await request('/notes/show', {
 				noteId,
 			}, by);
@@ -412,21 +412,21 @@ describe('API visibility', function() {
 		it('[TL] public post on author home TL', async(async () => {
 			const res = await request('/notes/timeline', { limit: 100 }, alice);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == pub.id);
+			const notes = res.body.filter((n) => n.id == pub.id);
 			assert.strictEqual(notes[0].text, 'x');
 		}));
 
 		it('[TL] public post absent from non-follower home TL', async(async () => {
 			const res = await request('/notes/timeline', { limit: 100 }, other);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == pub.id);
+			const notes = res.body.filter((n) => n.id == pub.id);
 			assert.strictEqual(notes.length, 0);
 		}));
 
 		it('[TL] followers post on follower home TL', async(async () => {
 			const res = await request('/notes/timeline', { limit: 100 }, follower);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == fol.id);
+			const notes = res.body.filter((n) => n.id == fol.id);
 			assert.strictEqual(notes[0].text, 'x');
 		}));
 		//#endregion
@@ -435,21 +435,21 @@ describe('API visibility', function() {
 		it('[TL] followers reply on follower reply TL', async(async () => {
 			const res = await request('/notes/replies', { noteId: tgt.id, limit: 100 }, follower);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == folR.id);
+			const notes = res.body.filter((n) => n.id == folR.id);
 			assert.strictEqual(notes[0].text, 'x');
 		}));
 
 		it('[TL] followers reply absent from not replied to non-follower reply TL', async(async () => {
 			const res = await request('/notes/replies', { noteId: tgt.id, limit: 100 }, other);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == folR.id);
+			const notes = res.body.filter((n) => n.id == folR.id);
 			assert.strictEqual(notes.length, 0);
 		}));
 
 		it('[TL] followers reply on replied to actor reply TL', async(async () => {
 			const res = await request('/notes/replies', { noteId: tgt.id, limit: 100 }, target);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == folR.id);
+			const notes = res.body.filter((n) => n.id == folR.id);
 			assert.strictEqual(notes[0].text, 'x');
 		}));
 		//#endregion
@@ -458,14 +458,14 @@ describe('API visibility', function() {
 		it('[TL] followers reply on replied to non-follower mention TL', async(async () => {
 			const res = await request('/notes/mentions', { limit: 100 }, target);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == folR.id);
+			const notes = res.body.filter((n) => n.id == folR.id);
 			assert.strictEqual(notes[0].text, 'x');
 		}));
 
 		it('[TL] followers mention on mentioned non-follower mention TL', async(async () => {
 			const res = await request('/notes/mentions', { limit: 100 }, target);
 			assert.strictEqual(res.status, 200);
-			const notes = res.body.filter((n: any) => n.id == folM.id);
+			const notes = res.body.filter((n) => n.id == folM.id);
 			assert.strictEqual(notes[0].text, '@target x');
 		}));
 		//#endregion

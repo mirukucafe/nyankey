@@ -2,17 +2,14 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, signup, request, post, uploadUrl, startServer, shutdownServer } from './utils.js';
+import { async, signup, request, post, uploadUrl, startServer, shutdownServer } from './utils.mjs';
 
 describe('users/notes', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
+	let p;
 
-	let alice: any;
-	let jpgNote: any;
-	let pngNote: any;
-	let jpgPngNote: any;
+	let alice, jpgNote, pngNote, jpgPngNote;
 
 	before(async () => {
 		p = await startServer();
@@ -43,8 +40,8 @@ describe('users/notes', function() {
 		assert.strictEqual(res.status, 200);
 		assert.strictEqual(Array.isArray(res.body), true);
 		assert.strictEqual(res.body.length, 2);
-		assert.strictEqual(res.body.some((note: any) => note.id === jpgNote.id), true);
-		assert.strictEqual(res.body.some((note: any) => note.id === jpgPngNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === jpgNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === jpgPngNote.id), true);
 	}));
 
 	it('ファイルタイプ指定 (jpg or png)', async(async () => {
@@ -56,8 +53,8 @@ describe('users/notes', function() {
 		assert.strictEqual(res.status, 200);
 		assert.strictEqual(Array.isArray(res.body), true);
 		assert.strictEqual(res.body.length, 3);
-		assert.strictEqual(res.body.some((note: any) => note.id === jpgNote.id), true);
-		assert.strictEqual(res.body.some((note: any) => note.id === pngNote.id), true);
-		assert.strictEqual(res.body.some((note: any) => note.id === jpgPngNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === jpgNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === pngNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === jpgPngNote.id), true);
 	}));
 });

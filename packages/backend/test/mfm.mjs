@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 
-import { toHtml } from '../src/mfm/to-html.js';
-import { fromHtml } from '../src/mfm/from-html.js';
+import { toHtml } from '../built/mfm/to-html.js';
+import { fromHtml } from '../built/mfm/from-html.js';
 
 describe('toHtml', () => {
 	it('br', async () => {

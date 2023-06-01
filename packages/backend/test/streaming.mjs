@@ -2,14 +2,14 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { Following } from '../src/models/entities/following.js';
-import { connectStream, signup, api, post, startServer, shutdownServer, initTestDb, waitFire } from './utils.js';
+import { Following } from '../built/models/entities/following.js';
+import { connectStream, signup, api, post, startServer, shutdownServer, initTestDb, waitFire } from './utils.mjs';
 
 describe('Streaming', () => {
-	let p: childProcess.ChildProcess;
-	let Followings: any;
+	let p;
+	let Followings;
 
-	const follow = async (follower: any, followee: any) => {
+	const follow = async (follower, followee) => {
 		await Followings.save({
 			id: 'a',
 			createdAt: new Date(),
@@ -28,16 +28,12 @@ describe('Streaming', () => {
 		this.timeout(20*60*1000);
 
 		// Local users
-		let ayano: any;
-		let kyoko: any;
-		let chitose: any;
+		let ayano, kyoko, chitose;
 
 		// Remote users
-		let akari: any;
-		let chinatsu: any;
+		let akari, chinatsu;
 
-		let kyokoNote: any;
-		let list: any;
+		let kyokoNote, list;
 
 		before(async () => {
 			p = await startServer();
@@ -388,7 +384,7 @@ describe('Streaming', () => {
 		});
 
 		describe('Hashtag Timeline', () => {
-			it('指定したハッシュタグの投稿が流れる', () => new Promise<void>(async done => {
+			it('指定したハッシュタグの投稿が流れる', () => new Promise(async done => {
 				const ws = await connectStream(chitose, 'hashtag', ({ type, body }) => {
 					if (type == 'note') {
 						assert.deepStrictEqual(body.text, '#foo');
@@ -406,7 +402,7 @@ describe('Streaming', () => {
 				});
 			}));
 
-			it('指定したハッシュタグの投稿が流れる (AND)', () => new Promise<void>(async done => {
+			it('指定したハッシュタグの投稿が流れる (AND)', () => new Promise(async done => {
 				let fooCount = 0;
 				let barCount = 0;
 				let fooBarCount = 0;
@@ -444,7 +440,7 @@ describe('Streaming', () => {
 				}, 3000);
 			}));
 
-			it('指定したハッシュタグの投稿が流れる (OR)', () => new Promise<void>(async done => {
+			it('指定したハッシュタグの投稿が流れる (OR)', () => new Promise(async done => {
 				let fooCount = 0;
 				let barCount = 0;
 				let fooBarCount = 0;
@@ -490,7 +486,7 @@ describe('Streaming', () => {
 				}, 3000);
 			}));
 
-			it('指定したハッシュタグの投稿が流れる (AND + OR)', () => new Promise<void>(async done => {
+			it('指定したハッシュタグの投稿が流れる (AND + OR)', () => new Promise(async done => {
 				let fooCount = 0;
 				let barCount = 0;
 				let fooBarCount = 0;

@@ -3,13 +3,12 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, signup, request, post, react, uploadFile, startServer, shutdownServer } from './utils.js';
+import { async, signup, request, post, react, uploadFile, startServer, shutdownServer } from './utils.mjs';
 
 describe('API: Endpoints', () => {
-	let p: childProcess.ChildProcess;
-	let alice: any;
-	let bob: any;
-	let carol: any;
+	let p;
+
+	let alice, bob, carol;
 
 	before(async () => {
 		p = await startServer();

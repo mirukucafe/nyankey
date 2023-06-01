@@ -2,17 +2,15 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, signup, request, post, startServer, shutdownServer } from './utils.js';
+import { async, signup, request, post, startServer, shutdownServer } from './utils.mjs';
 
 describe('Block', function() {
 	this.timeout(20*60*1000);
 
-	let p: childProcess.ChildProcess;
+	let p;
 
 	// alice blocks bob
-	let alice: any;
-	let bob: any;
-	let carol: any;
+	let alice, bob, carol;
 
 	before(async () => {
 		p = await startServer();
@@ -80,8 +78,8 @@ describe('Block', function() {
 
 		assert.strictEqual(res.status, 200);
 		assert.strictEqual(Array.isArray(res.body), true);
-		assert.strictEqual(res.body.some((note: any) => note.id === aliceNote.id), false);
-		assert.strictEqual(res.body.some((note: any) => note.id === bobNote.id), true);
-		assert.strictEqual(res.body.some((note: any) => note.id === carolNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === aliceNote.id), false);
+		assert.strictEqual(res.body.some((note) => note.id === bobNote.id), true);
+		assert.strictEqual(res.body.some((note) => note.id === carolNote.id), true);
 	}));
 });
