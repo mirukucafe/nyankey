@@ -748,6 +748,7 @@ _ffVisibility:
   followers: "フォロワーだけに公開"
   private: "非公開"
 
+  nobody: 誰にも見せない (あなたにさえも)
 _signup:
   almostThere: "ほとんど完了です"
   emailAddressInfo: "あなたが使っているメールアドレスを入力してください。メールアドレスが公開されることはありません。"
