@@ -33,7 +33,6 @@ export type UserLite = {
 
 export type UserDetailed = UserLite & {
 	bannerBlurhash: string | null;
-	bannerColor: string | null;
 	bannerUrl: string | null;
 	birthday: string | null;
 	createdAt: DateString;
