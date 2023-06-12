@@ -5,11 +5,14 @@ clone:
       depth: 1 # CI does not need commit history
       recursive: true
 
+depends_on:
+  - build
+
 pipeline:
   build:
     when:
-      event:
-        - pull_request
+      branch: main
+      event: push
     image: node:18.6.0
     commands:
       - yarn install
@@ -18,15 +21,15 @@ pipeline:
       - yarn build
   mocha:
     when:
-      event:
-        - pull_request
+      branch: main
+      event: push
     image: node:18.6.0
     commands:
       - yarn mocha
   e2e:
     when:
-      event:
-        - pull_request
+      branch: main
+      event: push
     image: cypress/included:10.3.0
     commands:
       - npm run start:test &

@@ -1,5 +1,5 @@
 import post from '@/services/note/create.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { extractDbHost } from '@/misc/convert-host.js';
 import { getApLock } from '@/misc/app-lock.js';
 import { StatusError } from '@/misc/fetch.js';
@@ -11,12 +11,8 @@ import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IAnnounce, getApId } from '@/remote/activitypub/type.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 
-export default async function(resolver: Resolver, actor: CacheableRemoteUser, activity: IAnnounce, targetUri: string): Promise<void> {
+export default async function(resolver: Resolver, actor: IRemoteUser, activity: IAnnounce, targetUri: string): Promise<void> {
 	const uri = getApId(activity);
-
-	if (actor.isSuspended) {
-		return;
-	}
 
 	// Cancel if the announced from host is blocked.
 	if (await shouldBlockInstance(extractDbHost(uri))) return;

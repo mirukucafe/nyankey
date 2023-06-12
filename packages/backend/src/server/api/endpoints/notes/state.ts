@@ -1,4 +1,4 @@
-import { NoteFavorites, NoteThreadMutings, NoteWatchings } from '@/models/index.js';
+import { NoteThreadMutings, NoteWatchings } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import { getNote } from '@/server/api/common/getters.js';
 import define from '@/server/api/define.js';
@@ -12,10 +12,6 @@ export const meta = {
 		type: 'object',
 		optional: false, nullable: false,
 		properties: {
-			isFavorited: {
-				type: 'boolean',
-				optional: false, nullable: false,
-			},
 			isWatching: {
 				type: 'boolean',
 				optional: false, nullable: false,
@@ -51,14 +47,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		throw err;
 	});
 
-	const [favorite, watching, threadMuting] = await Promise.all([
-		NoteFavorites.count({
-			where: {
-				userId: user.id,
-				noteId: note.id,
-			},
-			take: 1,
-		}),
+	const [watching, threadMuting] = await Promise.all([
 		NoteWatchings.count({
 			where: {
 				userId: user.id,
@@ -76,7 +65,6 @@ export default define(meta, paramDef, async (ps, user) => {
 	]);
 
 	return {
-		isFavorited: favorite !== 0,
 		isWatching: watching !== 0,
 		isMutedThread: threadMuting !== 0,
 	};

@@ -48,12 +48,6 @@ export function getNoteMenu(props: {
 		});
 	}
 
-	function toggleFavorite(favorite: boolean): void {
-		os.apiWithDialog(favorite ? 'notes/favorites/create' : 'notes/favorites/delete', {
-			noteId: appearNote.id,
-		});
-	}
-
 	function toggleWatch(watch: boolean): void {
 		os.apiWithDialog(watch ? 'notes/watching/create' : 'notes/watching/delete', {
 			noteId: appearNote.id,
@@ -104,7 +98,7 @@ export function getNoteMenu(props: {
 		os.apiWithDialog(pin ? 'i/pin' : 'i/unpin', {
 			noteId: appearNote.id,
 		}, undefined, null, res => {
-			if (res.id === '72dab508-c64d-498f-8740-a8eec1ba385a') {
+			if (res.code === 'PIN_LIMIT_EXCEEDED') {
 				os.alert({
 					type: 'error',
 					text: i18n.ts.pinLimitExceeded,
@@ -149,7 +143,7 @@ export function getNoteMenu(props: {
 					os.api('clips/add-note', { clipId: clip.id, noteId: appearNote.id }),
 					null,
 					async (err) => {
-						if (err.id === '734806c4-542c-463a-9311-15c512803965') {
+						if (err.id === 'ALREADY_CLIPPED') {
 							const confirm = await os.confirm({
 								type: 'warning',
 								text: i18n.t('confirmToUnclipAlreadyClippedNote', { name: clip.name }),
@@ -244,15 +238,6 @@ export function getNoteMenu(props: {
 				action: translate,
 			} : undefined,
 			null,
-			statePromise.then(state => state.isFavorited ? {
-				icon: 'fas fa-star',
-				text: i18n.ts.unfavorite,
-				action: () => toggleFavorite(false),
-			} : {
-				icon: 'fas fa-star',
-				text: i18n.ts.favorite,
-				action: () => toggleFavorite(true),
-			}),
 			{
 				icon: 'fas fa-paperclip',
 				text: i18n.ts.clip,

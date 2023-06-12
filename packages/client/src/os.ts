@@ -26,7 +26,7 @@ export const api = ((endpoint: string, data: Record<string, any> = {}, token?: s
 	const authorizationToken = token ?? $i?.token ?? undefined;
 	const authorization = authorizationToken ? `Bearer ${authorizationToken}` : undefined;
 
-	const promise = new Promise((resolve, reject) => {
+	const promise = new Promise<void>((resolve, reject) => {
 		fetch(endpoint.indexOf('://') > -1 ? endpoint : `${apiUrl}/${endpoint}`, {
 			method: 'POST',
 			body: JSON.stringify(data),
@@ -66,7 +66,7 @@ export const apiGet = ((endpoint: string, data: Record<string, any> = {}, token?
 	const authorizationToken = token ?? $i?.token ?? undefined;
 	const authorization = authorizationToken ? `Bearer ${authorizationToken}` : undefined;
 
-	const promise = new Promise((resolve, reject) => {
+	const promise = new Promise<void>((resolve, reject) => {
 		// Send request
 		fetch(`${apiUrl}/${endpoint}?${query}`, {
 			method: 'GET',
@@ -103,7 +103,7 @@ export const apiWithDialog = ((
 	promiseDialog(promise, null, (err) => {
 		alert({
 			type: 'error',
-			text: (err.message + '\n' + (err?.endpoint ?? '') + ' ' + (err?.code ?? '')).trim(),
+			text: (err.message + '\n' + (err.endpoint ?? '') + ' ' + (err.code ?? '')).trim(),
 		});
 	});
 
@@ -293,9 +293,7 @@ export function inputDate(props: {
 	text?: string | null;
 	placeholder?: string | null;
 	default?: Date | null;
-}): Promise<{ canceled: true; result: undefined; } | {
-	canceled: false; result: Date;
-}> {
+}): Promise<{ canceled: true; } | { canceled: false; result: Date; }> {
 	return new Promise((resolve) => {
 		popup(defineAsyncComponent(() => import('@/components/dialog.vue')), {
 			title: props.title,
@@ -351,7 +349,7 @@ export function select<C = any>(props: {
 }
 
 export function success() {
-	return new Promise((resolve) => {
+	return new Promise<void>((resolve) => {
 		const showing = ref(true);
 		window.setTimeout(() => {
 			showing.value = false;
@@ -366,7 +364,7 @@ export function success() {
 }
 
 export function waiting() {
-	return new Promise((resolve) => {
+	return new Promise<void>((resolve) => {
 		const showing = ref(true);
 		popup(defineAsyncComponent(() => import('@/components/waiting-dialog.vue')), {
 			success: false,
@@ -571,17 +569,3 @@ export function post(props: Record<string, any> = {}) {
 }
 
 export const deckGlobalEvents = new EventEmitter();
-
-/*
-export function checkExistence(fileData: ArrayBuffer): Promise<any> {
-	return new Promise((resolve) => {
-		const data = new FormData();
-		data.append('md5', getMD5(fileData));
-
-		os.api('drive/files/find-by-hash', {
-			md5: getMD5(fileData)
-		}).then(resp => {
-			resolve(resp.length > 0 ? resp[0] : null);
-		});
-	});
-}*/

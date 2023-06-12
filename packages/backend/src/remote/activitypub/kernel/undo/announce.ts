@@ -1,9 +1,9 @@
 import { Notes } from '@/models/index.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
-import deleteNote from '@/services/note/delete.js';
+import { IRemoteUser } from '@/models/entities/user.js';
+import { deleteNotes } from '@/services/note/delete.js';
 import { IAnnounce, getApId } from '@/remote/activitypub/type.js';
 
-export const undoAnnounce = async (actor: CacheableRemoteUser, activity: IAnnounce): Promise<string> => {
+export const undoAnnounce = async (actor: IRemoteUser, activity: IAnnounce): Promise<string> => {
 	const uri = getApId(activity);
 
 	const note = await Notes.findOneBy({
@@ -13,6 +13,6 @@ export const undoAnnounce = async (actor: CacheableRemoteUser, activity: IAnnoun
 
 	if (!note) return 'skip: no such Announce';
 
-	await deleteNote(actor, note);
+	await deleteNotes([note], actor);
 	return 'ok: deleted';
 };

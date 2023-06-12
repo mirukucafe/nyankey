@@ -115,7 +115,7 @@ function save() {
 	const options = getSaveOptions();
 
 	const onError = err => {
-		if (err.id === '3d81ceae-475f-4600-b2a8-2bc116157532') {
+		if (err.code === 'INVALID_PARAM') {
 			if (err.info.param === 'name') {
 				os.alert({
 					type: 'error',

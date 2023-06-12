@@ -3,9 +3,9 @@ import * as foundkey from 'foundkey-js';
 import { showSuspendedDialog } from '@/scripts/show-suspended-dialog';
 import { i18n } from '@/i18n';
 import { del, get, set } from '@/scripts/idb-proxy';
-import { apiUrl } from '@/config';
 import { waiting, api, popup, popupMenu, success, alert } from '@/os';
 import { unisonReload, reloadChannel } from '@/scripts/unison-reload';
+import { MenuItem } from '@/types/menu';
 
 // TODO: 他のタブと永続化されたstateを同期
 
@@ -22,7 +22,7 @@ export async function signout() {
 	waiting();
 	localStorage.removeItem('account');
 
-	await removeAccount($i.id);
+	if ($i) await removeAccount($i!.id);
 
 	const accounts = await getAccounts();
 
@@ -78,7 +78,7 @@ function fetchAccount(token: string): Promise<Account> {
 		api('i', {}, token)
 		.then(res => {
 			if (res.error) {
-				if (res.error.id === 'a8c724b3-6e9c-4b46-b1a8-bc3ed6258370') {
+				if (res.error.code === 'SUSPENDED') {
 					showSuspendedDialog().then(() => {
 						signout();
 					});
@@ -99,14 +99,18 @@ function fetchAccount(token: string): Promise<Account> {
 }
 
 export function updateAccount(accountData) {
+	if (!$i) return;
+
 	for (const [key, value] of Object.entries(accountData)) {
-		$i[key] = value;
+		$i![key] = value;
 	}
-	localStorage.setItem('account', JSON.stringify($i));
+	localStorage.setItem('account', JSON.stringify($i!));
 }
 
 export function refreshAccount() {
-	return fetchAccount($i.token).then(updateAccount);
+	if (!$i) return;
+
+	return fetchAccount($i!.token).then(updateAccount);
 }
 
 export async function login(token: Account['token'], redirect?: string) {
@@ -134,7 +138,39 @@ export async function openAccountMenu(opts: {
 	active?: foundkey.entities.UserDetailed['id'];
 	onChoose?: (account: foundkey.entities.UserDetailed) => void;
 }, ev: MouseEvent) {
-	function showSigninDialog() {
+	const storedAccounts = await getAccounts().then(accounts => accounts.filter(x => x.id !== $i?.id));
+	const accountsPromise = api('users/show', { userIds: storedAccounts.map(x => x.id) });
+
+	const switchAccount = async (account: foundkey.entities.UserDetailed) => {
+		const storedAccounts = await getAccounts();
+		const token = storedAccounts.find(x => x.id === account.id)?.token;
+		if (!token) {
+			// TODO error handling?
+		} else {
+			login(token);
+		}
+	};
+	const createItem = (account: foundkey.entities.UserDetailed): MenuItem => ({
+		type: 'user',
+		user: account,
+		active: opts.active != null ? opts.active === account.id : false,
+		action: () => {
+			if (opts.onChoose) {
+				opts.onChoose(account);
+			} else {
+				switchAccount(account);
+			}
+		},
+	});
+	const accountItemPromises: Promise<MenuItem[]> = storedAccounts.map(a => new Promise(res => {
+		accountsPromise.then(accounts => {
+			const account = accounts.find(x => x.id === a.id);
+			if (account == null) return res(null);
+			res(createItem(account));
+		});
+	}));
+
+	const showSigninDialog = () => {
 		popup(defineAsyncComponent(() => import('@/components/signin-dialog.vue')), {}, {
 			done: res => {
 				addAccount(res.id, res.i);
@@ -143,50 +179,14 @@ export async function openAccountMenu(opts: {
 		}, 'closed');
 	}
 
-	function createAccount() {
+	const createAccount = () => {
 		popup(defineAsyncComponent(() => import('@/components/signup-dialog.vue')), {}, {
 			done: res => {
 				addAccount(res.id, res.i);
-				switchAccountWithToken(res.i);
+				login(res.i);
 			},
 		}, 'closed');
-	}
-
-	async function switchAccount(account: foundkey.entities.UserDetailed) {
-		const storedAccounts = await getAccounts();
-		const token = storedAccounts.find(x => x.id === account.id).token;
-		switchAccountWithToken(token);
-	}
-
-	function switchAccountWithToken(token: string) {
-		login(token);
-	}
-
-	const storedAccounts = await getAccounts().then(accounts => accounts.filter(x => x.id !== $i.id));
-	const accountsPromise = api('users/show', { userIds: storedAccounts.map(x => x.id) });
-
-	function createItem(account: foundkey.entities.UserDetailed) {
-		return {
-			type: 'user',
-			user: account,
-			active: opts.active != null ? opts.active === account.id : false,
-			action: () => {
-				if (opts.onChoose) {
-					opts.onChoose(account);
-				} else {
-					switchAccount(account);
-				}
-			},
-		};
-	}
-
-	const accountItemPromises = storedAccounts.map(a => new Promise(res => {
-		accountsPromise.then(accounts => {
-			const account = accounts.find(x => x.id === a.id);
-			if (account == null) return res(null);
-			res(createItem(account));
-		});
-	}));
+	};
 
 	if (opts.withExtraOperation) {
 		popupMenu([...[{
@@ -194,16 +194,16 @@ export async function openAccountMenu(opts: {
 			text: i18n.ts.profile,
 			to: `/@${ $i.username }`,
 			avatar: $i,
-		}, null, ...(opts.includeCurrentAccount ? [createItem($i)] : []), ...accountItemPromises, {
+		}, null, ...(opts.includeCurrentAccount && $i ? [createItem($i)] : []), ...accountItemPromises, {
 			icon: 'fas fa-plus',
 			text: i18n.ts.addAccount,
 			action: () => {
 				popupMenu([{
 					text: i18n.ts.existingAccount,
-					action: () => { showSigninDialog(); },
+					action: showSigninDialog,
 				}, {
 					text: i18n.ts.createAccount,
-					action: () => { createAccount(); },
+					action: createAccount,
 				}], ev.currentTarget ?? ev.target);
 			},
 		}, {
@@ -211,11 +211,11 @@ export async function openAccountMenu(opts: {
 			icon: 'fas fa-users',
 			text: i18n.ts.manageAccounts,
 			to: '/settings/accounts',
-		}]], ev.currentTarget ?? ev.target, {
+		}]], ev.currentTarget ?? ev.target ?? undefined, {
 			align: 'left',
 		});
 	} else {
-		popupMenu([...(opts.includeCurrentAccount ? [createItem($i)] : []), ...accountItemPromises], ev.currentTarget ?? ev.target, {
+		popupMenu([...(opts.includeCurrentAccount && $i ? [createItem($i)] : []), ...accountItemPromises], ev.currentTarget ?? ev.target ?? undefined, {
 			align: 'left',
 		});
 	}

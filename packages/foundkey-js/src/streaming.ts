@@ -32,16 +32,15 @@ export default class Stream extends EventEmitter<StreamEvents> {
 	private nonSharedConnections: NonSharedConnection[] = [];
 	private idCounter = 0;
 
-	constructor(origin: string, user: { token: string; } | null, options?: {
+	constructor(origin: string, user: { token: string; } | null, options: {
 		WebSocket?: any;
-	}) {
+	} = {}) {
 		super();
-		options = options || { };
 
 		const query = urlQuery({
 			i: user?.token,
-			
-			// To prevent cache of an HTML such as error screen
+
+			// cache busting parameter
 			_t: Date.now(),
 		});
 

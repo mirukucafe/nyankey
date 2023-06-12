@@ -21,7 +21,7 @@
 			<button ref="visibilityButton" v-tooltip="i18n.ts.visibility" class="_button visibility" :disabled="channel != null" @click="setVisibility">
 				<span v-if="visibility === 'public'"><i class="fas fa-globe"></i></span>
 				<span v-else-if="visibility === 'home'"><i class="fas fa-home"></i></span>
-				<span v-else-if="visibility === 'followers'"><i class="fas fa-unlock"></i></span>
+				<span v-else-if="visibility === 'followers'"><i class="fas fa-lock"></i></span>
 				<span v-else-if="visibility === 'specified'"><i class="fas fa-envelope"></i></span>
 			</button>
 			<button v-tooltip="i18n.ts.previewNoteText" class="_button preview" :class="{ active: showPreview }" @click="showPreview = !showPreview"><i class="fas fa-file-code"></i></button>

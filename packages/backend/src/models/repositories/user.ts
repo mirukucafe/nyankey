@@ -26,6 +26,8 @@ type IsMeAndIsUserDetailed<ExpectsMe extends boolean | null, Detailed extends bo
 
 const ajv = new Ajv();
 
+// It is important that localUsernameSchema does not allow any usernames
+// containing dots because those are used for system actors.
 const localUsernameSchema = { type: 'string', pattern: /^\w{1,20}$/.toString().slice(1, -1) } as const;
 const passwordSchema = { type: 'string', minLength: 1 } as const;
 const nameSchema = { type: 'string', minLength: 1, maxLength: 50 } as const;
@@ -228,6 +230,36 @@ export const UserRepository = db.getRepository(User).extend({
 		return `${config.url}/identicon/${userId}`;
 	},
 
+	/**
+	 * Determines whether the followers/following of user `user` are visibile to user `me`.
+	 */
+	async areFollowersVisibleTo(user: User, me: { id: User['id'] } | null | undefined): Promise<boolean> {
+		const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
+
+		switch (profile.ffVisibility) {
+			case 'public':
+				return true;
+			case 'followers':
+				if (me == null) {
+					return false;
+				} else if (me.id === user.id) {
+					return true;
+				} else {
+					return await Followings.count({
+						where: {
+							followerId: me.id,
+							followeeId: user.id,
+						},
+						take: 1,
+					}).then(n => n > 0);
+				}
+			case 'private':
+				return me?.id === user.id;
+			case 'nobody':
+				return false;
+		}
+	},
+
 	async pack<ExpectsMe extends boolean | null = null, D extends boolean = false>(
 		src: User['id'] | User,
 		me?: { id: User['id'] } | null | undefined,
@@ -268,15 +300,13 @@ export const UserRepository = db.getRepository(User).extend({
 			.getMany() : [];
 		const profile = opts.detail ? await UserProfiles.findOneByOrFail({ userId: user.id }) : null;
 
-		const followingCount = profile == null ? null :
-			(profile.ffVisibility === 'public') || isMe ? user.followingCount :
-			(profile.ffVisibility === 'followers') && relation?.isFollowing ? user.followingCount :
-			null;
+		const ffVisible = await this.areFollowersVisibleTo(user, me);
 
-		const followersCount = profile == null ? null :
-			(profile.ffVisibility === 'public') || isMe ? user.followersCount :
-			(profile.ffVisibility === 'followers') && relation?.isFollowing ? user.followersCount :
-			null;
+		const followingCount = !opts.detail ? null :
+			ffVisible ? user.followingCount : null;
+
+		const followersCount = !opts.detail ? null :
+			ffVisible ? user.followersCount : null;
 
 		const packed = {
 			id: user.id,
@@ -300,6 +330,10 @@ export const UserRepository = db.getRepository(User).extend({
 				}),
 			emojis: populateEmojis(user.emojis, user.host),
 			onlineStatus: this.getOnlineStatus(user),
+			movedTo: !user.movedToId ? undefined : this.pack(user.movedTo ?? user.movedToId, me, {
+				...opts,
+				detail: false,
+			}),
 
 			...(opts.detail ? {
 				url: profile!.url,
@@ -347,7 +381,7 @@ export const UserRepository = db.getRepository(User).extend({
 				autoAcceptFollowed: profile!.autoAcceptFollowed,
 				noCrawle: profile!.noCrawle,
 				isExplorable: user.isExplorable,
-				isDeleted: user.isDeleted,
+				isDeleted: user.isDeleted != null,
 				hideOnlineStatus: user.hideOnlineStatus,
 				hasUnreadSpecifiedNotes: NoteUnreads.count({
 					where: { userId: user.id, isSpecified: true },

@@ -33,9 +33,6 @@ signup: "Registrieren"
 save: "Speichern"
 users: "Benutzer"
 addUser: "Benutzer hinzufügen"
-favorite: "Zu Favoriten hinzufügen"
-favorites: "Favoriten"
-unfavorite: "Aus Favoriten entfernen"
 pin: "An dein Profil anheften"
 unpin: "Von deinem Profil lösen"
 copyContent: "Inhalt kopieren"
@@ -284,8 +281,6 @@ createFolder: "Ordner erstellen"
 renameFolder: "Ordner umbenennen"
 deleteFolder: "Ordner löschen"
 addFile: "Datei hinzufügen"
-emptyDrive: "Deine Drive ist leer"
-emptyFolder: "Dieser Ordner ist leer"
 unableToDelete: "Nicht löschbar"
 inputNewFileName: "Gib einen neuen Dateinamen ein"
 inputNewDescription: "Gib eine neue Beschreibung ein"
@@ -656,7 +651,6 @@ disableShowingAnimatedImages: "Animierte Bilder nicht abspielen"
 verificationEmailSent: "Eine Bestätigungsmail wurde an deine Email-Adresse versendet.\
   \ Besuche den dort enthaltenen Link, um die Verifizierung abzuschließen."
 emailVerified: "Email-Adresse bestätigt"
-noteFavoritesCount: "Anzahl an als Favorit markierter Notizen"
 pageLikesCount: "Anzahl an als \"Gefällt mir\" markierter Seiten"
 pageLikedCount: "Anzahl erhaltener \"Gefällt mir\" auf Seiten"
 contact: "Kontakt"
@@ -822,6 +816,7 @@ _ffVisibility:
   public: "Öffentlich"
   followers: "Nur für Follower sichtbar"
   private: "Privat"
+  nobody: Niemand (auch nicht du)
 _signup:
   almostThere: "Fast geschafft"
   emailAddressInfo: "Bitte gib deine Email-Adresse ein. Sie wird nicht öffentlich\
@@ -1313,6 +1308,7 @@ _notification:
     followRequestAccepted: "Akzeptierte Follow-Anfragen"
     groupInvited: "Erhaltene Gruppeneinladungen"
     app: "Benachrichtigungen von Apps"
+    move: Account-Umzüge
   _actions:
     followBack: "folgt dir nun auch"
     reply: "Antworten"
@@ -1382,7 +1378,7 @@ addTag: Schlagwörter hinzufügen
 removeTag: Schlagwörter entfernen
 exportAll: Alle exportieren
 exportSelected: Gewählte exportieren
-federateBlocks: Andere Instanzen mitteilen, wenn ich jemanden blockiere
+federateBlocks: Anderen Instanzen mitteilen, wenn ich jemanden blockiere
 selectMode: Auswählen
 selectAll: Alle auswählen
 renoteUnmute: Renotes zeigen
@@ -1401,3 +1397,15 @@ oauthErrorGoBack: Bei der Authentifizierung einer Drittanbieter-Anwendung ist ei
   Fehler aufgetreten. Bitte geh zurück und versuche es erneut.
 appAuthorization: Anwendungs-Authorisierung
 noPermissionsRequested: (Keine Berechtigungen angefordert.)
+_remoteInteract:
+  title: Es tut mir leid, aber das kann ich nicht tun.
+  description: Diese Aktion kann gerade nicht ausgeführt werden. Vermutlich musst
+    du diese Aktion auf deiner eigenen Instanz ausführen, oder dich anmelden.
+  urlInstructions: Kopiere diese URL. Wenn du sie auf deiner Instanz in das Suchfeld
+    einfügst, solltest du zum richtigen Ort gelangen.
+movedTo: Diese Person ist umgezogen zu {handle}.
+attachedToNotes: Notizen mit dieser Datei
+showAttachedNotes: Zeige Notizen mit dieser Datei
+uploadFailed: Hochladen fehlgeschlagen
+uploadFailedDescription: Die Datei konnte nicht hochgeladen werden.
+uploadFailedSize: Die Datei ist zu groß.

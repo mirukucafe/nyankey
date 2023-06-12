@@ -41,10 +41,7 @@ export default define(meta, paramDef, async (ps, me) => {
 	if (userGroup == null) throw new ApiError('NO_SUCH_GROUP');
 
 	// Fetch the user
-	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
-		throw e;
-	});
+	const user = await getUser(ps.userId);
 
 	const joined = await UserGroupJoinings.countBy({
 		userGroupId: userGroup.id,

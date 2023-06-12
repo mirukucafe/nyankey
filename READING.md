@@ -40,15 +40,27 @@ After that the actual endpoint code is run by `call.ts` after checking some more
 
 ActivityPub related code is in `/packages/backend/src/remote/activitypub/`
 
+Both incoming and outgoing ActivityPub request are handled through queues, to e.g. allow for retrying a request when it fails, or spikes of many incoming requests.
+
+#### Incoming Activities
+Remote ActivityPub implementations will HTTP POST to the resource `/user/:userId/inbox` or `/inbox` (the latter is also known as the "shared inbox").
+The behaviour for these routes is exactly the same: They add all the received data into the inbox queue.
+This is defined in `/packages/backend/src/server/activitypub.ts`.
+
+The inbox processor will do some basic things like verify signatures.
+
 Incoming ActivityPub requests are processed by the code in `kernel/`.
+The files/directories are generally named the same as the Activities that they process, which should help with orientation.
 The entry point for processing an activity is `processOneActivity` in the `kernel/index.ts` file in that directory.
 Parts of incoming activities may also be processed by `models/`.
 
-The bodys of outgoing ActivityPub requests are "rendered" using `renderer/`.
+#### Outgoing Activities
+Outgoing activities are usually initiated in the logic of the API endpoints.
+The bodies of outgoing ActivityPub requests are "rendered" using `renderer/`.
 These files define several functions that are meant to be used together, e.g. `renderCreate(await renderNote(note, false), note)`.
 The invocation of these functions is placed either in the API endpoints directly or in the services code.
 
-Both incoming and outgoing ActivityPub request are handled through queues, to e.g. allow for retrying a request when it fails, or spikes of many incoming requests.
+The rendered bodies of the functions and the recipients are put into the deliver queue to be delivered.
 
 ### Services
 

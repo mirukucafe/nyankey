@@ -2,7 +2,7 @@ import config from '@/config/index.js';
 import { kinds } from '@/misc/api-permissions.js';
 import { I18n } from '@/misc/i18n.js';
 import { errors as errorDefinitions } from '@/server/api/error.js';
-import endpoints from '@/server/api/endpoints.js';
+import { endpoints } from '@/server/api/endpoints.js';
 import { schemas, convertSchemaToOpenApiSchema } from './schemas.js';
 import { httpCodes } from './http-codes.js';
 

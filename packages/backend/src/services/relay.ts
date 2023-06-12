@@ -9,7 +9,7 @@ import { genId } from '@/misc/gen-id.js';
 import { Cache } from '@/misc/cache.js';
 import { Relay } from '@/models/entities/relay.js';
 import { MINUTE } from '@/const.js';
-import { createSystemUser } from './create-system-user.js';
+import { getSystemUser } from './system-user.js';
 
 const ACTOR_USERNAME = 'relay.actor' as const;
 
@@ -24,16 +24,8 @@ const relaysCache = new Cache<Relay[]>(
 	}),
 );
 
-export async function getRelayActor(): Promise<ILocalUser> {
-	const user = await Users.findOneBy({
-		host: IsNull(),
-		username: ACTOR_USERNAME,
-	});
-
-	if (user) return user as ILocalUser;
-
-	const created = await createSystemUser(ACTOR_USERNAME);
-	return created as ILocalUser;
+async function getRelayActor(): Promise<ILocalUser> {
+	return await getSystemUser(ACTOR_USERNAME);
 }
 
 export async function addRelay(inbox: string): Promise<Relay> {
@@ -103,5 +95,23 @@ export async function deliverToRelays(user: { id: User['id']; host: null; }, act
 
 	for (const relay of relays) {
 		deliver(user, signed, relay.inbox);
+	}
+}
+
+export async function deliverMultipleToRelays(user: User, activities: any[]): Promise<void> {
+	if (activities.length === 0) return;
+
+	const relays = await relaysCache.fetch('');
+	if (relays == null || relays.length === 0) return;
+
+	const content = await Promise.all(activities.map(activity => {
+		const copy = structuredClone(activity);
+		if (!copy.to) copy.to = ['https://www.w3.org/ns/activitystreams#Public'];
+
+		return attachLdSignature(copy, user);
+	}));
+
+	for (const relay of relays) {
+		deliver(user, content, relay.inbox);
 	}
 }

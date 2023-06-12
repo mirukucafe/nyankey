@@ -1,14 +1,14 @@
 import { performance } from 'perf_hooks';
 import Koa from 'koa';
-import { CacheableLocalUser } from '@/models/entities/user.js';
+import { ILocalUser } from '@/models/entities/user.js';
 import { AccessToken } from '@/models/entities/access-token.js';
 import { getIpHash } from '@/misc/get-ip-hash.js';
 import { limiter } from './limiter.js';
-import endpoints, { IEndpointMeta } from './endpoints.js';
+import { endpoints, IEndpointMeta } from './endpoints.js';
 import { ApiError } from './error.js';
 import { apiLogger } from './logger.js';
 
-export default async (endpoint: string, user: CacheableLocalUser | null | undefined, token: AccessToken | null | undefined, data: any, ctx?: Koa.Context) => {
+export default async (endpoint: string, user: ILocalUser | null | undefined, token: AccessToken | null | undefined, data: any, ctx?: Koa.Context) => {
 	const isSecure = user != null && token == null;
 	const isModerator = user != null && (user.isModerator || user.isAdmin);
 
@@ -82,15 +82,7 @@ export default async (endpoint: string, user: CacheableLocalUser | null | undefi
 		if (e instanceof ApiError) {
 			throw e;
 		} else {
-			apiLogger.error(`Internal error occurred in ${ep.name}: ${e.message}`, {
-				ep: ep.name,
-				ps: data,
-				e: {
-					message: e.message,
-					code: e.name,
-					stack: e.stack,
-				},
-			});
+			apiLogger.error(`Internal error occurred in ${ep.name}: ${e.message}`);
 			throw new ApiError('INTERNAL_ERROR', {
 				e: {
 					message: e.message,

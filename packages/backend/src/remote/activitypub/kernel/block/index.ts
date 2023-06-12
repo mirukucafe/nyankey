@@ -1,11 +1,11 @@
 import block from '@/services/blocking/create.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import { DbResolver } from '@/remote/activitypub/db-resolver.js';
 import { IBlock } from '@/remote/activitypub/type.js';
 
-export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<string> => {
-	// ※ activity.objectにブロック対象があり、それは存在するローカルユーザーのはず
+export default async (actor: IRemoteUser, activity: IBlock): Promise<string> => {
+	// There is a block target in activity.object, which should be a local user that exists.
 
 	const dbResolver = new DbResolver();
 	const blockee = await dbResolver.getUserFromApId(activity.object);
@@ -15,7 +15,7 @@ export default async (actor: CacheableRemoteUser, activity: IBlock): Promise<str
 	}
 
 	if (blockee.host != null) {
-		return 'skip: ブロックしようとしているユーザーはローカルユーザーではありません';
+		return 'skip: blockee is not local';
 	}
 
 	await block(await Users.findOneByOrFail({ id: actor.id }), await Users.findOneByOrFail({ id: blockee.id }));

@@ -5,7 +5,7 @@ import { Resolver } from '@/remote/activitypub/resolver.js';
 import { extractDbHost } from '@/misc/convert-host.js';
 import { Users, Notes } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
-import { CacheableLocalUser, User } from '@/models/entities/user.js';
+import { ILocalUser, User } from '@/models/entities/user.js';
 import { isActor, isPost } from '@/remote/activitypub/type.js';
 import { SchemaType } from '@/misc/schema.js';
 import { HOUR } from '@/const.js';
@@ -85,7 +85,7 @@ export default define(meta, paramDef, async (ps, me) => {
 /***
  * URIからUserかNoteを解決する
  */
-async function fetchAny(uri: string, me: CacheableLocalUser | null | undefined): Promise<SchemaType<typeof meta['res']> | null> {
+async function fetchAny(uri: string, me: ILocalUser | null | undefined): Promise<SchemaType<typeof meta['res']> | null> {
 	// Stop if the host is blocked.
 	const host = extractDbHost(uri);
 	if (await shouldBlockInstance(host)) {
@@ -122,7 +122,7 @@ async function fetchAny(uri: string, me: CacheableLocalUser | null | undefined):
 	);
 }
 
-async function mergePack(me: CacheableLocalUser | null | undefined, user: User | null | undefined, note: Note | null | undefined): Promise<SchemaType<typeof meta.res> | null> {
+async function mergePack(me: ILocalUser | null | undefined, user: User | null | undefined, note: Note | null | undefined): Promise<SchemaType<typeof meta.res> | null> {
 	if (user != null) {
 		return {
 			type: 'User',

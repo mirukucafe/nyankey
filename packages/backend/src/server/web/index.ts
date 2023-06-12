@@ -26,7 +26,7 @@ import { MINUTE, DAY } from '@/const.js';
 import { genOpenapiSpec } from '../api/openapi/gen-spec.js';
 import { urlPreviewHandler } from './url-preview.js';
 import { manifestHandler } from './manifest.js';
-import packFeed from './feed.js';
+import { packFeed } from './feed.js';
 
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = dirname(_filename);
@@ -223,6 +223,7 @@ const getFeed = async (acct: string) => {
 		usernameLower: username.toLowerCase(),
 		host: host ?? IsNull(),
 		isSuspended: false,
+		isDeleted: IsNull(),
 	});
 
 	return user && await packFeed(user);
@@ -272,6 +273,7 @@ router.get(['/@:user', '/@:user/:sub'], async (ctx, next) => {
 		usernameLower: username.toLowerCase(),
 		host: host ?? IsNull(),
 		isSuspended: false,
+		isDeleted: IsNull(),
 	});
 
 	if (user != null) {
@@ -304,6 +306,7 @@ router.get('/users/:user', async ctx => {
 		id: ctx.params.user,
 		host: IsNull(),
 		isSuspended: false,
+		isDeleted: IsNull(),
 	});
 
 	if (user == null) {
@@ -419,6 +422,8 @@ router.get('/@:user/pages/:page', async (ctx, next) => {
 	const user = await Users.findOneBy({
 		usernameLower: username.toLowerCase(),
 		host: host ?? IsNull(),
+		isSuspended: false,
+		isDeleted: IsNull(),
 	});
 
 	if (user == null) return;

@@ -3,6 +3,7 @@ import { secureRndstr } from '@/misc/secure-rndstr.js';
 import { Users, UserProfiles } from '@/models/index.js';
 import { ApiError } from '@/server/api/error.js';
 import define from '@/server/api/define.js';
+import { getLocalUser } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['admin'],
@@ -34,11 +35,7 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps) => {
-	const user = await Users.findOneBy({ id: ps.userId });
-
-	if (user == null) {
-		throw new ApiError('NO_SUCH_USER');
-	}
+	const user = await getLocalUser(ps.userId);
 
 	if (user.isAdmin) {
 		throw new ApiError('IS_ADMIN');

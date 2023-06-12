@@ -4,6 +4,7 @@ import config from '@/config/index.js';
 import { UserProfiles } from '@/models/index.js';
 import { extractMentions } from '@/misc/extract-mentions.js';
 import { intersperse } from '@/prelude/array.js';
+import { toPunyNullable } from '@/misc/convert-host.js';
 
 // Transforms MFM to HTML, given the MFM text and a list of user IDs that are
 // mentioned in the text. If the list of mentions is not given, all mentions
@@ -12,6 +13,19 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 	const nodes = mfm.parse(mfmText);
 	if (nodes.length === 0) {
 		return null;
+	}
+
+	let mentionedUsers = [];
+	const ids = mentions ?? extractMentions(nodes);
+	if (ids.length > 0) {
+		mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
+			.leftJoin('user_profile.user', 'user')
+			.select('user.usernameLower', 'username')
+			.addSelect('user.host', 'host')
+			// links should preferably use user friendly urls, only fall back to AP ids
+			.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
+			.where('"userId" IN (:...ids)', { ids })
+			.getRawMany();
 	}
 
 	const doc = new JSDOM('').window.document;
@@ -103,30 +117,28 @@ export async function toHtml(mfmText: string, mentions?: string[]): Promise<stri
 		},
 
 		async mention(node): Promise<HTMLElement | Text> {
-			const { username, host, acct } = node.props;
-			const ids = mentions ?? extractMentions(nodes);
-			if (ids.length > 0) {
-				const mentionedUsers = await UserProfiles.createQueryBuilder('user_profile')
-					.leftJoin('user_profile.user', 'user')
-					.select('user.username', 'username')
-					.addSelect('user.host', 'host')
-					// links should preferably use user friendly urls, only fall back to AP ids
-					.addSelect('COALESCE(user_profile.url, user.uri)', 'url')
-					.where('"userId" IN (:...ids)', { ids })
-					.getRawMany();
-				const userInfo = mentionedUsers.find(user => user.username === username && user.host === host);
-				if (userInfo != null) {
-					// Mastodon microformat: span.h-card > a.u-url.mention
-					const a = doc.createElement('a');
-					a.href = userInfo.url ?? `${config.url}/${acct}`;
-					a.className = 'u-url mention';
-					a.textContent = acct;
+			let { username, host, acct } = node.props;
+			// normalize username and host for searching the user
+			username = username.toLowerCase();
+			host = toPunyNullable(host);
+			// Discard host if it is the local host. Otherwise mentions of local users where the
+			// hostname is not omitted are not handled correctly.
+			if (host == config.hostname) {
+				host = null;
+			}
+			const userInfo = mentionedUsers.find(user => user.username === username && user.host === host);
+			if (userInfo != null) {
+				// Mastodon microformat: span.h-card > a.u-url.mention
+				const a = doc.createElement('a');
+				// The fallback will only be used for local users, so the host part can be discarded.
+				a.href = userInfo.url ?? `${config.url}/@${username}`;
+				a.className = 'u-url mention';
+				a.textContent = acct;
 
-					const card = doc.createElement('span');
-					card.className = 'h-card';
-					card.appendChild(a);
-					return card;
-				}
+				const card = doc.createElement('span');
+				card.className = 'h-card';
+				card.appendChild(a);
+				return card;
 			}
 			// this user does not actually exist
 			return doc.createTextNode(acct);

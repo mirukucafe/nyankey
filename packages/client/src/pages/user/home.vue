@@ -9,6 +9,16 @@
 			<div class="profile">
 				<MkRemoteCaution v-if="user.host != null" :href="user.url" class="warn"/>
 
+				<MkInfo v-if="user.movedTo" class="moved">
+					<I18n :src="i18n.ts.movedTo" tag="span">
+						<template #handle>
+							<MkA :to="userPage(user.movedTo)" style="color: var(--accent);">
+								<MkAcct :user="user.movedTo"/>
+							</MkA>
+						</template>
+					</I18n>
+				</MkInfo>
+
 				<div :key="user.id" class="_block main">
 					<div class="banner-container" :style="style">
 						<div ref="bannerEl" class="banner" :style="style"></div>
@@ -192,6 +202,10 @@ onUnmounted(() => {
 		}
 
 		> .profile {
+
+			> .moved {
+				margin-bottom: 1em;
+			}
 
 			> .main {
 				position: relative;

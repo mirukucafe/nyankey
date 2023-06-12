@@ -60,14 +60,14 @@ export async function deleteFileSync(file: DriveFile, isExpired = false): Promis
 		await Promise.all(promises);
 	}
 
-	postProcess(file, isExpired);
+	await postProcess(file, isExpired);
 }
 
 async function postProcess(file: DriveFile, isExpired = false): Promise<void> {
 	// Turn into a direct link after expiring a remote file.
 	if (isExpired && file.userHost != null && file.uri != null) {
 		const id = uuid();
-		DriveFiles.update(file.id, {
+		await DriveFiles.update(file.id, {
 			isLink: true,
 			url: file.uri,
 			thumbnailUrl: null,
@@ -78,14 +78,14 @@ async function postProcess(file: DriveFile, isExpired = false): Promise<void> {
 			webpublicAccessKey: 'webpublic-' + id,
 		});
 	} else {
-		DriveFiles.delete(file.id);
+		await DriveFiles.delete(file.id);
 	}
 
 	// update statistics
-	driveChart.update(file, false);
-	perUserDriveChart.update(file, false);
+	await driveChart.update(file, false);
+	await perUserDriveChart.update(file, false);
 	if (file.userHost != null) {
-		instanceChart.updateDrive(file, false);
+		await instanceChart.updateDrive(file, false);
 	}
 }
 

@@ -149,10 +149,6 @@ export const routes = [{
 	hash: 'initialTab',
 	loginRequired: true,
 }, {
-	path: '/my/favorites',
-	component: page(() => import('./pages/favorites.vue')),
-	loginRequired: true,
-}, {
 	name: 'messaging',
 	path: '/my/messaging',
 	component: page(() => import('./pages/messaging/index.vue')),
@@ -176,6 +172,10 @@ export const routes = [{
 }, {
 	path: '/my/drive/folder/:folder',
 	component: page(() => import('./pages/drive.vue')),
+	loginRequired: true,
+}, {
+	path: '/my/drive/file/:fileId/attached',
+	component: page(() => import('./pages/attached-files.vue')),
 	loginRequired: true,
 }, {
 	path: '/my/drive',

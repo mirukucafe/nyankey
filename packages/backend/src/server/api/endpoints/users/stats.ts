@@ -1,4 +1,4 @@
-import { DriveFiles, Followings, NoteFavorites, NoteReactions, Notes, PageLikes, PollVotes, Users } from '@/models/index.js';
+import { DriveFiles, Followings, NoteReactions, Notes, PageLikes, PollVotes, Users } from '@/models/index.js';
 import { awaitAll } from '@/prelude/await-all.js';
 import define from '@/server/api/define.js';
 import { ApiError } from '@/server/api/error.js';
@@ -46,37 +46,33 @@ export const meta = {
 			},
 			localFollowingCount: {
 				type: 'integer',
-				optional: false, nullable: false,
+				optional: true, nullable: false,
 			},
 			remoteFollowingCount: {
 				type: 'integer',
-				optional: false, nullable: false,
+				optional: true, nullable: false,
 			},
 			localFollowersCount: {
 				type: 'integer',
-				optional: false, nullable: false,
+				optional: true, nullable: false,
 			},
 			remoteFollowersCount: {
 				type: 'integer',
-				optional: false, nullable: false,
+				optional: true, nullable: false,
 			},
 			followingCount: {
 				type: 'integer',
-				optional: false, nullable: false,
+				optional: true, nullable: false,
 			},
 			followersCount: {
 				type: 'integer',
-				optional: false, nullable: false,
+				optional: true, nullable: false,
 			},
 			sentReactionsCount: {
 				type: 'integer',
 				optional: false, nullable: false,
 			},
 			receivedReactionsCount: {
-				type: 'integer',
-				optional: false, nullable: false,
-			},
-			noteFavoritesCount: {
 				type: 'integer',
 				optional: false, nullable: false,
 			},
@@ -110,7 +106,7 @@ export const paramDef = {
 } as const;
 
 // eslint-disable-next-line import/no-default-export
-export default define(meta, paramDef, async (ps) => {
+export default define(meta, paramDef, async (ps, me) => {
 	const user = await Users.findOneBy({ id: ps.userId });
 	if (user == null) {
 		throw new ApiError('NO_SUCH_USER');
@@ -141,31 +137,12 @@ export default define(meta, paramDef, async (ps) => {
 			.innerJoin('vote.note', 'note')
 			.where('note.userId = :userId', { userId: user.id })
 			.getCount(),
-		localFollowingCount: Followings.createQueryBuilder('following')
-			.where('following.followerId = :userId', { userId: user.id })
-			.andWhere('following.followeeHost IS NULL')
-			.getCount(),
-		remoteFollowingCount: Followings.createQueryBuilder('following')
-			.where('following.followerId = :userId', { userId: user.id })
-			.andWhere('following.followeeHost IS NOT NULL')
-			.getCount(),
-		localFollowersCount: Followings.createQueryBuilder('following')
-			.where('following.followeeId = :userId', { userId: user.id })
-			.andWhere('following.followerHost IS NULL')
-			.getCount(),
-		remoteFollowersCount: Followings.createQueryBuilder('following')
-			.where('following.followeeId = :userId', { userId: user.id })
-			.andWhere('following.followerHost IS NOT NULL')
-			.getCount(),
 		sentReactionsCount: NoteReactions.createQueryBuilder('reaction')
 			.where('reaction.userId = :userId', { userId: user.id })
 			.getCount(),
 		receivedReactionsCount: NoteReactions.createQueryBuilder('reaction')
 			.innerJoin('reaction.note', 'note')
 			.where('note.userId = :userId', { userId: user.id })
-			.getCount(),
-		noteFavoritesCount: NoteFavorites.createQueryBuilder('favorite')
-			.where('favorite.userId = :userId', { userId: user.id })
 			.getCount(),
 		pageLikesCount: PageLikes.createQueryBuilder('like')
 			.where('like.userId = :userId', { userId: user.id })
@@ -180,8 +157,39 @@ export default define(meta, paramDef, async (ps) => {
 		driveUsage: DriveFiles.calcDriveUsageOf(user.id),
 	});
 
-	result.followingCount = result.localFollowingCount + result.remoteFollowingCount;
-	result.followersCount = result.localFollowersCount + result.remoteFollowersCount;
+	const ffVisible = await Users.areFollowersVisibleTo(user, me);
+	if (ffVisible) {
+		const follows = await awaitAll({
+			localFollowingCount: Followings.createQueryBuilder('following')
+				.where('following.followerId = :userId', { userId: user.id })
+				.andWhere('following.followeeHost IS NULL')
+				.getCount(),
+			remoteFollowingCount: Followings.createQueryBuilder('following')
+				.where('following.followerId = :userId', { userId: user.id })
+				.andWhere('following.followeeHost IS NOT NULL')
+				.getCount(),
+			localFollowersCount: Followings.createQueryBuilder('following')
+				.where('following.followeeId = :userId', { userId: user.id })
+				.andWhere('following.followerHost IS NULL')
+				.getCount(),
+			remoteFollowersCount: Followings.createQueryBuilder('following')
+				.where('following.followeeId = :userId', { userId: user.id })
+				.andWhere('following.followerHost IS NOT NULL')
+				.getCount(),
+		});
+
+		Object.assign(result, follows);
+
+		result.followingCount = result.localFollowingCount + result.remoteFollowingCount;
+		result.followersCount = result.localFollowersCount + result.remoteFollowersCount;
+
+		// store the updated counts in the user table to potentially fix the cache
+		Users.update(user.id, {
+			followersCount: result.followersCount,
+			followingCount: result.followingCount,
+			notesCount: result.notesCount,
+		});
+	}
 
 	return result;
 });

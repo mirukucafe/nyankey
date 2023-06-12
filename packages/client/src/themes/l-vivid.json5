@@ -47,7 +47,6 @@
 		navIndicator: '@accent',
 		accentLighten: ':lighten<10<@accent',
 		buttonHoverBg: 'rgba(0, 0, 0, 0.1)',
-		driveFolderBg: ':alpha<0.3<@accent',
 		fgHighlighted: ':darken<3<@fg',
 		fgTransparent: ':alpha<0.5<@fg',
 		panelHeaderBg: ':lighten<3<@panel',

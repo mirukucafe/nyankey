@@ -32,10 +32,7 @@ export const paramDef = {
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
 	// Lookup user
-	const user = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
-		throw e;
-	});
+	const user = await getUser(ps.userId);
 
 	if (user.id === me.id) throw new ApiError('CANNOT_REPORT_YOURSELF');
 

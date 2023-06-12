@@ -15,6 +15,7 @@
 			<i v-else-if="notification.type === 'quote'" class="fas fa-quote-left"></i>
 			<i v-else-if="notification.type === 'pollVote'" class="fas fa-poll-h"></i>
 			<i v-else-if="notification.type === 'pollEnded'" class="fas fa-poll-h"></i>
+			<i v-else-if="notification.type === 'move'" class="fas fa-suitcase"></i>
 			<!-- notification.reaction が null になることはまずないが、ここでoptional chaining使うと一部ブラウザで刺さるので念の為 -->
 			<MkEmoji
 				v-else-if="notification.type === 'reaction'"
@@ -85,6 +86,14 @@
 				<button class="_textButton" @click="acceptGroupInvitation()">{{ i18n.ts.accept }}</button> |
 				<button class="_textButton" @click="rejectGroupInvitation()">{{ i18n.ts.reject }}</button>
 			</div>
+		</span>
+		<span v-if="notification.type === 'move'" class="text" style="opacity: 0.6;">
+			<I18n :src="i18n.ts.movedTo">
+				<template #handle>
+					<MkAcct :user="notification.moveTarget"/>
+				</template>
+			</I18n>
+			<div v-if="full"><MkFollowButton :user="notification.moveTarget" :full="true"/></div>
 		</span>
 		<span v-if="notification.type === 'app'" class="text">
 			<Mfm :text="notification.body" :nowrap="!full"/>

@@ -8,21 +8,22 @@ export function getThemes(): Theme[] {
 	return JSON.parse(localStorage.getItem(lsCacheKey) || '[]');
 }
 
-export async function fetchThemes(): Promise<void> {
-	if ($i == null) return;
+export async function fetchThemes(): Promise<Theme[]> {
+	if ($i == null) return [];
 
 	try {
 		const themes = await api('i/registry/get', { scope: ['client'], key: 'themes' });
 		localStorage.setItem(lsCacheKey, JSON.stringify(themes));
+		return themes;
 	} catch (err) {
-		if (err.code === 'NO_SUCH_KEY') return;
+		if (err.code === 'NO_SUCH_KEY') return [];
 		throw err;
 	}
 }
 
 export async function addTheme(theme: Theme): Promise<void> {
-	await fetchThemes();
-	const themes = getThemes().concat(theme);
+	const themes = await fetchThemes()
+		.then(themes => themes.concat(theme));
 	await api('i/registry/set', { scope: ['client'], key: 'themes', value: themes });
 	localStorage.setItem(lsCacheKey, JSON.stringify(themes));
 }

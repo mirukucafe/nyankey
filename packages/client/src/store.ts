@@ -1,6 +1,5 @@
 import { markRaw, ref } from 'vue';
 import { Storage } from '@/pizzax';
-import { Theme } from '@/scripts/theme';
 
 export const postFormActions = [];
 export const userActions = [];
@@ -60,7 +59,6 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'deviceAccount',
 		default: [
 			'notifications',
-			'favorites',
 			'drive',
 			'followRequests',
 			'-',
@@ -245,7 +243,7 @@ export class ColdDeviceStorage {
 		plugins: [] as Plugin[],
 		mediaVolume: 0.5,
 		sound_masterVolume: 0.3,
-		sound_note: { type: 'syuilo/down', volume: 1 },
+		sound_note: { type: 'syuilo/down', volume: 0 },
 		sound_noteMy: { type: 'syuilo/up', volume: 1 },
 		sound_notification: { type: 'syuilo/pope2', volume: 1 },
 		sound_chat: { type: 'syuilo/pope1', volume: 1 },

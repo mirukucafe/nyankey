@@ -1,5 +1,5 @@
 import { IsNull } from 'typeorm';
-import { Users, Followings, UserProfiles } from '@/models/index.js';
+import { Users, Followings } from '@/models/index.js';
 import { toPunyNullable } from '@/misc/convert-host.js';
 import define from '@/server/api/define.js';
 import { ApiError } from '@/server/api/error.js';
@@ -61,25 +61,8 @@ export default define(meta, paramDef, async (ps, me) => {
 
 	if (user == null) throw new ApiError('NO_SUCH_USER');
 
-	const profile = await UserProfiles.findOneByOrFail({ userId: user.id });
-
-	if (profile.ffVisibility === 'private') {
-		if (me == null || (me.id !== user.id)) {
-			throw new ApiError('ACCESS_DENIED');
-		}
-	} else if (profile.ffVisibility === 'followers') {
-		if (me == null) {
-			throw new ApiError('ACCESS_DENIED');
-		} else if (me.id !== user.id) {
-			const following = await Followings.countBy({
-				followeeId: user.id,
-				followerId: me.id,
-			});
-			if (!following) {
-				throw new ApiError('ACCESS_DENIED');
-			}
-		}
-	}
+	const ffVisible = await Users.areFollowersVisibleTo(user, me);
+	if (!ffVisible) throw new ApiError('ACCESS_DENIED');
 
 	const query = makePaginationQuery(Followings.createQueryBuilder('following'), ps.sinceId, ps.untilId)
 		.andWhere('following.followeeId = :userId', { userId: user.id })

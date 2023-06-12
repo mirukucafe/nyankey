@@ -1,4 +1,4 @@
-import { Users } from '@/models/index.js';
+import { AccessTokens, Users } from '@/models/index.js';
 import { createDeleteAccountJob } from '@/queue/index.js';
 import { publishUserEvent } from './stream.js';
 import { doPostSuspend } from './suspend-user.js';
@@ -7,9 +7,15 @@ export async function deleteAccount(user: {
 	id: string;
 	host: string | null;
 }): Promise<void> {
-	await Users.update(user.id, {
-		isDeleted: true,
-	});
+	await Promise.all([
+		Users.update(user.id, {
+			isDeleted: -1,
+		}),
+		// revoke all of the users access tokens to block API access
+		AccessTokens.delete({
+			userId: user.id,
+		}),
+	]);
 
 	if (Users.isLocalUser(user)) {
 		// Terminate streaming

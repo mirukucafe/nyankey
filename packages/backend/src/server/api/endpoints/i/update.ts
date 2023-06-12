@@ -1,6 +1,6 @@
 import RE2 from 're2';
 import * as mfm from 'mfm-js';
-import { notificationTypes } from 'foundkey-js';
+import { ffVisibility, notificationTypes } from 'foundkey-js';
 import { publishMainStream, publishUserEvent } from '@/services/stream.js';
 import { acceptAllFollowRequests } from '@/services/following/requests/accept-all.js';
 import { publishToFollowers } from '@/services/i/update.js';
@@ -67,7 +67,7 @@ export const paramDef = {
 		injectFeaturedNote: { type: 'boolean' },
 		receiveAnnouncementEmail: { type: 'boolean' },
 		alwaysMarkNsfw: { type: 'boolean' },
-		ffVisibility: { type: 'string', enum: ['public', 'followers', 'private'] },
+		ffVisibility: { type: 'string', enum: ffVisibility },
 		pinnedPageId: { type: 'array', items: {
 			type: 'string', format: 'misskey:id',
 		} },
@@ -178,7 +178,7 @@ export default define(meta, paramDef, async (ps, _user, token) => {
 	const newDescription = profileUpdates.description === undefined ? profile.description : profileUpdates.description;
 
 	if (newName != null) {
-		const tokens = mfm.parsePlain(newName);
+		const tokens = mfm.parseSimple(newName);
 		emojis = emojis.concat(extractCustomEmojisFromMfm(tokens!));
 	}
 

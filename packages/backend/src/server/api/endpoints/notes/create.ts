@@ -69,15 +69,6 @@ export const paramDef = {
 			maxItems: 16,
 			items: { type: 'string', format: 'misskey:id' },
 		},
-		mediaIds: {
-			deprecated: true,
-			description: 'Use `fileIds` instead. If both are specified, this property is discarded.',
-			type: 'array',
-			uniqueItems: true,
-			minItems: 1,
-			maxItems: 16,
-			items: { type: 'string', format: 'misskey:id' },
-		},
 		replyId: { type: 'string', format: 'misskey:id', nullable: true },
 		renoteId: { type: 'string', format: 'misskey:id', nullable: true },
 		channelId: { type: 'string', format: 'misskey:id', nullable: true },
@@ -112,10 +103,6 @@ export const paramDef = {
 			required: ['fileIds'],
 		},
 		{
-			// (re)note with files, text and poll are optional
-			required: ['mediaIds'],
-		},
-		{
 			// (re)note with poll, text and files are optional
 			properties: {
 				poll: { type: 'object', nullable: false },
@@ -139,7 +126,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	}
 
 	let files: DriveFile[] = [];
-	const fileIds = ps.fileIds != null ? ps.fileIds : ps.mediaIds != null ? ps.mediaIds : null;
+	const fileIds = ps.fileIds != null ? ps.fileIds : null;
 	if (fileIds != null) {
 		files = await DriveFiles.createQueryBuilder('file')
 			.where('file.userId = :userId AND file.id IN (:...fileIds)', {

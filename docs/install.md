@@ -38,22 +38,29 @@ Create a separate non-root user to run FoundKey:
 adduser --disabled-password --disabled-login foundkey
 ```
 
+The following steps will require logging into the `foundkey` user, so do that now.
+```sh
+su - foundkey
+```
+
 ## Install FoundKey
-1. Login to the `foundkey` user
+We recommend using a local branch and merging in upstream releases as they get tagged. This allows for easy local customization of your install.
 
-	`su - foundkey`
+First, clone the FoundKey repo:
+```sh
+git clone https://akkoma.dev/FoundKeyGang/FoundKey
+cd FoundKey
+```
 
-2. Clone the FoundKey repository
+Now create your local branch. In this example, we'll be using `toast.cafe` as the local branch name and release `v13.0.0-preview1` as the tag to track. To create that branch:
+```sh
+git checkout tags/v13.0.0-preview1 -b toast.cafe
+```
 
-	`git clone --recursive https://akkoma.dev/FoundKeyGang/FoundKey foundkey`
-
-3. Navigate to the repository
-
-	`cd foundkey`
-
-4. Install FoundKey's dependencies
-
-	`yarn install`
+Updating will be covered in a later section. For now you'll want to install the dependencies using Yarn:
+```sh
+yarn install
+```
 
 ## Configure FoundKey
 1. Copy `.config/example.yml` to `.config/default.yml`.
@@ -70,6 +77,21 @@ There are instructions for setting up [nginx](./nginx.md) for this purpose.
 
 ### Changing the default Reaction
 You can change the default reaction that is used when an ActivityPub "Like" is received from '👍' to '⭐' by changing the boolean value `meta.useStarForReactionFallback` in the databse respectively.
+
+### Environment variables
+There are some behaviour changes which can be accomplished using environment variables.
+
+|variable name|meaning|
+|---|---|
+|`FK_ONLY_QUEUE`|If set, only the queue processing will be run. The frontend will not be available. Cannot be combined with `FK_ONLY_SERVER` or `FK_DISABLE_CLUSTERING`.|
+|`FK_ONLY_SERVER`|If set, only the frontend will be run. Queues will not be processed. Cannot be combined with `FK_ONLY_QUEUE` or `FK_DISABLE_CLUSTERING`.|
+|`FK_NO_DAEMONS`|If set, the server statistics and queue statistics will not be run.|
+|`FK_DISABLE_CLUSTERING`|If set, all work will be done in a single thread instead of different threads for frontend and queue. (not recommended)|
+|`FK_WITH_LOG_TIME`|If set, a timestamp will be appended to all log messages.|
+|`FK_SLOW`|If set, all requests will be delayed by 3s. (not recommended, useful for testing)|
+|`FK_LOG_LEVEL`|Sets the log level. Messages below the set log level will be suppressed. Available log levels are `quiet` (suppress all), `error`, `warning`, `success`, `info`, `debug`.|
+
+If the `NODE_ENV` environment variable is set to `testing`, then the flags `FK_DISABLE_CLUSTERING` and `FK_NO_DAEMONS` will always be set, and the log level will always be `quiet`.
 
 ## Build FoundKey
 
@@ -112,7 +134,7 @@ Run `NODE_ENV=production npm start` to launch FoundKey manually. To stop the ser
 
 ### Launch with systemd
 
-Run `systemctl --edit --full --force foundkey.service`, and paste the following:
+Run `systemctl edit --full --force foundkey.service`, and paste the following:
 
 ```ini
 [Unit]
@@ -122,7 +144,7 @@ Description=FoundKey daemon
 Type=simple
 User=foundkey
 ExecStart=/usr/bin/npm start
-WorkingDirectory=/home/foundkey/foundkey
+WorkingDirectory=/home/foundkey/FoundKey
 Environment="NODE_ENV=production"
 TimeoutSec=60
 StandardOutput=syslog
@@ -156,7 +178,7 @@ command_args="start"
 command_user="foundkey"
 
 supervisor="supervise-daemon"
-supervise_daemon_args=" -d /home/foundkey/foundkey -e NODE_ENV=\"production\""
+supervise_daemon_args=" -d /home/foundkey/FoundKey -e NODE_ENV=\"production\""
 
 pidfile="/run/${RC_SVCNAME}.pid"
 
@@ -185,14 +207,22 @@ rc-service foundkey start
 You can check if the service is running with `rc-service foundkey status`.
 
 ### Updating FoundKey
-Use git to pull in the latest changes and rerun the build and migration commands:
-
+When a new release comes out, simply fetch and merge in the new tag. If you plan on making additional changes on top of that tag, we suggest using the `--squash` option with `git merge`.
 ```sh
-git pull
-git submodule update --init
+git fetch -t
+git merge tags/v13.0.0-preview2
+# you are now on the "next" release
+```
+
+Now you'll want to update your dependencies and rebuild:
+```sh
 yarn install
 # Use build-parallel if your system has 4GB or more RAM and want faster builds
 NODE_ENV=production yarn build
+```
+
+Next, run the database migrations:
+```sh
 yarn migrate
 ```
 

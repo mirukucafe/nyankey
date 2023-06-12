@@ -6,6 +6,7 @@ export function checkWordMute(note: Record<string, any>, me: Record<string, any>
 		const text = ((note.cw ?? '') + '\n' + (note.text ?? '')).trim();
 
 		if (text === '') return false;
+		const textLower = text.toLowerCase();
 
 		const matched = mutedWords.some(filter => {
 			if (Array.isArray(filter)) {
@@ -13,7 +14,7 @@ export function checkWordMute(note: Record<string, any>, me: Record<string, any>
 				const filteredFilter = filter.filter(keyword => keyword !== '');
 				if (filteredFilter.length === 0) return false;
 
-				return filteredFilter.every(keyword => text.includes(keyword));
+				return filteredFilter.every(keyword => textLower.includes(keyword.toLowerCase()));
 			} else {
 				// represents RegExp
 				const regexp = filter.match(/^\/(.+)\/(.*)$/);

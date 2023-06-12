@@ -96,6 +96,9 @@ self.addEventListener('notificationclick', <K extends keyof pushNotificationData
 							case 'groupInvited':
 								await swos.api('users/groups/invitations/accept', id, { invitationId: data.body.invitation.id });
 								break;
+							case 'move':
+								await swos.api('following/create', id, { userId: data.body.moveTarget.id });
+								break;
 						}
 						break;
 					case 'reject':

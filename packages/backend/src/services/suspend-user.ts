@@ -6,6 +6,9 @@ import { User } from '@/models/entities/user.js';
 import { Users } from '@/models/index.js';
 import { publishInternalEvent } from '@/services/stream.js';
 
+/**
+ * Sends an internal event and for local users queues the delete activites.
+ */
 export async function doPostSuspend(user: { id: User['id']; host: User['host'] }): Promise<void> {
 	publishInternalEvent('userChangeSuspendedState', { id: user.id, isSuspended: true });
 
@@ -15,6 +18,6 @@ export async function doPostSuspend(user: { id: User['id']; host: User['host'] }
 		// deliver to all of known network
 		const dm = new DeliverManager(user, content);
 		dm.addEveryone();
-		await dm.execute();
+		await dm.execute(user.id);
 	}
 }

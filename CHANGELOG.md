@@ -11,6 +11,72 @@ Unreleased changes should not be listed in this file.
 Instead, run `git shortlog --format='%h %s' --group=trailer:changelog <last tag>..` to see unreleased changes; replace `<last tag>` with the tag you wish to compare from.
 If you are a contributor, please read [CONTRIBUTING.md, section "Changelog Trailer"](./CONTRIBUTING.md#changelog-trailer) on what to do instead.
 
+## 13.0.0-preview5 - 2023-05-23
+This release contains 6 breaking changes and 1 security update.
+
+### Security
+- client: check input for aiscript
+- server: validate filenames and emoji names on emoji import
+- server: check URL schema of ActivityPub URIs
+- server: check schema for URL previews
+- server: update summaly dependency
+
+### Added
+- client: impolement filtering and sorting in drive
+- client: add "nobody" follower/following visibility
+- client: re-add flag to require approval for bot follows
+- client: show waveform on audio player
+- client: add new deepl languages
+- client: add instructions on remote interaction (when signed out)
+- client: show follow button when not logged in
+- server: show worker mode in process names
+- server: drive endpoint to fetch files and folders combined
+- activitypub: implement receiving account moves
+
+### Changed
+- **BREAKING** server: restructure endpoints related to user administration
+- **BREAKING** server: refactor streaming API data structures
+- **BREAKING** server: rename configuration environment variables
+  The environment variables that could be used for configuration which were previously prefixed with `MK_`
+  are now prefixed with `FK_` instead.
+- server: improve error message for invalidating follows
+- server: add pagination to file attachment timeline
+
+### Fixed
+- **BREAKING** server: properly respect follower/following visibility setting on statistics endpoint
+  This affects the endpoint `/api/users/stats`.
+- improve documentation for `fetch-rss` endpoint
+- client: fix authentication error in RSS widget
+- client: fix attached files and account switcher combination in new note form
+- client: improved module tracker file detection
+- client: fix follow requests pagination
+- client: Theme creator breaks after creating a theme
+- client: replace error UUIDs with error codes
+- client: allow opening links in new tab
+  The usual 3rd button click (usually mouse wheel) or Ctrl+Click should now work to open a link in a new tab.
+- client: fix drive item updates inserting duplicate entries
+- client: improve error messages for failed uploads
+- client: stop unnecessary network congestion by websocket ping mechanism
+- server: don't fail if a system user was already created
+- server: better matching for MFM mentions
+- server: fix rate limit for adding reactions
+- server: check instance description length limit
+- server: dont error on generating RSS feeds for profiles without public posts
+- server: group delivering `Delete` activities to improve performance
+- server: fix drive quota for remote users
+- server: user deletion race condition (again)
+
+### Removed
+- **BREAKING** server: remove unused API parameters `sinceId` and `untilId` from `/api/notes/reactions`.
+- **BREAKING** server: remove syslog integration
+  If you used syslog before, the syslog protocoll will no longer be connected to.
+  The configuration entries for `syslog` will be ignored, you should remove them if they are set.
+- client: remove `driveFolderBg` theme colour
+- activitypub: remove `_misskey_content` attribute
+- activitypub: remove `_misskey_reaction` attribute
+- activitypub: remove `_misskey_votes` attribute
+- foundkey-js: remove unused definitions for Ads and detailed instance metadata
+
 ## 13.0.0-preview4 - 2023-02-05
 This release contains 6 breaking changes, including changes to the configuration file format.
 

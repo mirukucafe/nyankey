@@ -14,20 +14,20 @@ import hashtag from './hashtag.js';
 import channel from './channel.js';
 import admin from './admin.js';
 
-export default {
-	main,
-	homeTimeline,
-	localTimeline,
-	hybridTimeline,
-	globalTimeline,
-	serverStats,
-	queueStats,
-	userList,
-	antenna,
-	messaging,
-	messagingIndex,
-	drive,
-	hashtag,
-	channel,
-	admin,
+export const channels: Record<string, Channel> = {
+	'main': main,
+	'homeTimeline': homeTimeline,
+	'localTimeline': localTimeline,
+	'hybridTimeline': hybridTimeline,
+	'globalTimeline': globalTimeline,
+	'serverStats': serverStats,
+	'queueStats': queueStats,
+	'userList': userList,
+	'antenna': antenna,
+	'messaging': messaging,
+	'messagingIndex': messagingIndex,
+	'drive': drive,
+	'hashtag': hashtag,
+	'channel': channel,
+	'admin': admin,
 };

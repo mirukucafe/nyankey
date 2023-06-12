@@ -59,11 +59,6 @@ export type Source = {
 	deliverJobMaxAttempts?: number;
 	inboxJobMaxAttempts?: number;
 
-	syslog?: {
-		host: string;
-		port: number;
-	};
-
 	mediaProxy?: string;
 	proxyRemoteFiles?: boolean;
 	internalStoragePath?: string;

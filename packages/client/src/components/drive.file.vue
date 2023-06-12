@@ -52,7 +52,7 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-	(ev: 'chosen', r: foundkey.entities.DriveFile): void;
+	(ev: 'chosen', r: foundkey.entities.DriveFile, extendSelection: boolean): void;
 	(ev: 'dragstart'): void;
 	(ev: 'dragend'): void;
 }>();
@@ -85,6 +85,11 @@ function getMenu(): MenuItem[] {
 		text: i18n.ts.download,
 		icon: 'fas fa-download',
 		download: props.file.name,
+	}, {
+		type: 'link',
+		to: `/my/drive/file/${props.file.id}/attached`,
+		text: i18n.ts.showAttachedNotes,
+		icon: 'fas fa-paperclip',
 	}, null, {
 		text: i18n.ts.delete,
 		icon: 'fas fa-trash-alt',
@@ -95,9 +100,7 @@ function getMenu(): MenuItem[] {
 
 function onClick(ev: MouseEvent): void {
 	if (props.selectMode) {
-		emit('chosen', props.file);
-	} else {
-		os.popupMenu(getMenu(), (ev.currentTarget ?? ev.target ?? undefined) as HTMLElement | undefined);
+		emit('chosen', props.file, ev.ctrlKey);
 	}
 }
 
@@ -315,8 +318,8 @@ async function deleteFile(): Promise<void> {
 	}
 
 	> .thumbnail {
-		width: 110px;
-		height: 110px;
+		width: 8em;
+		height: 8em;
 		margin: auto;
 	}
 
@@ -330,7 +333,7 @@ async function deleteFile(): Promise<void> {
 		overflow: hidden;
 
 		> .ext {
-			opacity: 0.5;
+			opacity: 0.7;
 		}
 	}
 }

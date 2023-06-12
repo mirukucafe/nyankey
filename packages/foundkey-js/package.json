@@ -1,6 +1,6 @@
 {
 	"name": "foundkey-js",
-	"version": "13.0.0-preview4",
+	"version": "13.0.0-preview5",
 	"description": "Fork of misskey-js for Foundkey",
 	"type": "module",
 	"main": "./built/index.js",

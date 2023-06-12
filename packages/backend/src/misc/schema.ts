@@ -23,7 +23,6 @@ import { packedHashtagSchema } from '@/models/schema/hashtag.js';
 import { packedPageSchema } from '@/models/schema/page.js';
 import { packedUserGroupSchema } from '@/models/schema/user-group.js';
 import { packedUserGroupInvitationSchema } from '@/models/schema/user-group-invitation.js';
-import { packedNoteFavoriteSchema } from '@/models/schema/note-favorite.js';
 import { packedChannelSchema } from '@/models/schema/channel.js';
 import { packedAntennaSchema } from '@/models/schema/antenna.js';
 import { packedClipSchema } from '@/models/schema/clip.js';
@@ -47,7 +46,6 @@ export const refs = {
 	MessagingMessage: packedMessagingMessageSchema,
 	Note: packedNoteSchema,
 	NoteReaction: packedNoteReactionSchema,
-	NoteFavorite: packedNoteFavoriteSchema,
 	Notification: packedNotificationSchema,
 	DriveFile: packedDriveFileSchema,
 	DriveFolder: packedDriveFolderSchema,

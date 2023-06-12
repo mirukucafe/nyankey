@@ -1,3 +1,3 @@
-import load from './load.js';
+import { loadConfig } from './load.js';
 
-export default load();
+export default loadConfig();

@@ -52,19 +52,20 @@ export class Notification {
 	public notifier: User | null;
 
 	/**
-	 * 通知の種類。
-	 * follow - フォローされた
-	 * mention - 投稿で自分が言及された
-	 * reply - (自分または自分がWatchしている)投稿が返信された
-	 * renote - (自分または自分がWatchしている)投稿がRenoteされた
-	 * quote - (自分または自分がWatchしている)投稿が引用Renoteされた
-	 * reaction - (自分または自分がWatchしている)投稿にリアクションされた
-	 * pollVote - (自分または自分がWatchしている)投稿のアンケートに投票された
-	 * pollEnded - 自分のアンケートもしくは自分が投票したアンケートが終了した
-	 * receiveFollowRequest - フォローリクエストされた
-	 * followRequestAccepted - 自分の送ったフォローリクエストが承認された
-	 * groupInvited - グループに招待された
-	 * app - アプリ通知
+	 * Type of notification.
+	 * follow - notifier followed notifiee
+	 * mention - notifiee was mentioned
+	 * reply - notifiee (author or watching) was replied to
+	 * renote - notifiee (author or watching) was renoted
+	 * quote - notifiee (author or watching) was quoted
+	 * reaction - notifiee (author or watching) had a reaction added to the note
+	 * pollVote - new vote in a poll notifiee authored or watched
+	 * pollEnded - notifiee's poll ended
+	 * receiveFollowRequest - notifiee received a new follow request
+	 * followRequestAccepted - notifier accepted notifees follow request
+	 * groupInvited - notifiee was invited into a group
+	 * move - notifier moved
+	 * app - custom application notification
 	 */
 	@Index()
 	@Column('enum', {
@@ -128,6 +129,19 @@ export class Notification {
 		nullable: true,
 	})
 	public choice: number | null;
+
+	@Column({
+		...id(),
+		nullable: true,
+		comment: 'The ID of the moved to account.',
+	})
+	public moveTargetId: User['id'] | null;
+
+	@ManyToOne(() => User, {
+		onDelete: 'CASCADE',
+	})
+	@JoinColumn()
+	public moveTarget: User | null;
 
 	/**
 	 * アプリ通知のbody

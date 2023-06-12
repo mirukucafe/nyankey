@@ -1,4 +1,4 @@
-import { Entity, Column, Index, OneToOne, JoinColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, Index, OneToOne, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
 import { id } from '../id.js';
 import { DriveFile } from './drive-file.js';
 
@@ -163,11 +163,11 @@ export class User {
 	// Indicates the user was deleted by an admin.
 	// The users' data is not deleted from the database to keep them from reappearing.
 	// A hard delete of the record may follow if we receive a matching Delete activity.
-	@Column('boolean', {
-		default: false,
-		comment: 'Whether the User is deleted.',
+	@Column('integer', {
+		nullable: true,
+		comment: 'How many delivery jobs are outstanding before the deletion is completed.',
 	})
-	public isDeleted: boolean;
+	public isDeleted: number | null;
 
 	@Column('varchar', {
 		length: 128, array: true, default: '{}',
@@ -230,6 +230,18 @@ export class User {
 	})
 	public federateBlocks: boolean;
 
+	@Column({
+		...id(),
+		nullable: true,
+	})
+	public movedToId: User['id'] | null;
+
+	@ManyToOne(() => User, {
+		onDelete: 'SET NULL'
+	})
+	@JoinColumn()
+	public movedTo: User | null;
+
 	constructor(data: Partial<User>) {
 		if (data == null) return;
 
@@ -248,9 +260,3 @@ export interface IRemoteUser extends User {
 	host: string;
 	token: null;
 }
-
-export type CacheableLocalUser = ILocalUser;
-
-export type CacheableRemoteUser = IRemoteUser;
-
-export type CacheableUser = CacheableLocalUser | CacheableRemoteUser;

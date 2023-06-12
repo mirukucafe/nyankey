@@ -62,7 +62,7 @@ export default define(meta, paramDef, async (ps, user, _, file, cleanup) => {
 
 	try {
 		// Create file
-		const driveFile = await addFile({ user, path: file.path, name, comment: ps.comment, folderId: ps.folderId, force: ps.force, sensitive: ps.isSensitive });
+		const driveFile = await addFile({ user, path: file.path, name, comment: ps.comment, parentId: ps.folderId, force: ps.force, sensitive: ps.isSensitive });
 		return await DriveFiles.pack(driveFile, { self: true });
 	} catch (e) {
 		if (e instanceof Error || typeof e === 'string') {

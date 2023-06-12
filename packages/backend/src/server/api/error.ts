@@ -36,7 +36,7 @@ export class ApiError extends Error {
 				break;
 			case 429:
 				if (typeof this.info === 'object' && typeof this.info.reset === 'number') {
-					ctx.respose.set('Retry-After', Math.floor(this.info.reset - (Date.now() / 1000)));
+					ctx.response.set('Retry-After', Math.floor(this.info.reset - (Date.now() / 1000)));
 				}
 				break;
 		}
@@ -66,10 +66,6 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 	},
 	ALREADY_CLIPPED: {
 		message: 'That note is already added to that clip.',
-		httpStatusCode: 409,
-	},
-	ALREADY_FAVORITED: {
-		message: 'That note is already favorited.',
 		httpStatusCode: 409,
 	},
 	ALREADY_FOLLOWING: {
@@ -332,12 +328,12 @@ export const errors: Record<string, { message: string, httpStatusCode: number }>
 		message: 'That note is not added to that clip.',
 		httpStatusCode: 409,
 	},
-	NOT_FAVORITED: {
-		message: 'You have not favorited that note.',
-		httpStatusCode: 409,
-	},
 	NOT_FOLLOWING: {
 		message: 'You are not following that user.',
+		httpStatusCode: 409,
+	},
+	NOT_FOLLOWED: {
+		message: 'You are not followed by that user.',
 		httpStatusCode: 409,
 	},
 	NOT_LIKED: {

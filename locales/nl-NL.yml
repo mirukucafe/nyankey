@@ -32,9 +32,6 @@ signup: "Registreren"
 save: "Opslaan"
 users: "Gebruikers"
 addUser: "Toevoegen gebruiker"
-favorite: "Favorieten"
-favorites: "Toevoegen aan favorieten"
-unfavorite: "Verwijderen uit favorieten"
 pin: "Vastmaken aan profielpagina"
 unpin: "Losmaken van profielpagina"
 copyContent: "Kopiëren inhoud"
@@ -76,9 +73,9 @@ followsYou: "Volgt jou"
 createList: "Creëer lijst"
 manageLists: "Beheren lijsten"
 error: "Fout"
-somethingHappened: "Er is iets misgegaan."
+somethingHappened: "Er is iets misgegaan"
 retry: "Probeer opnieuw"
-pageLoadError: "Pagina laden mislukt"
+pageLoadError: "Pagina laden mislukt."
 pageLoadErrorDescription: "Dit wordt normaal gesproken veroorzaakt door netwerkfouten\
   \ of door de cache van de browser. Probeer de cache te wissen en probeer het na\
   \ een tijdje wachten opnieuw."
@@ -217,7 +214,7 @@ resetAreYouSure: "Resetten?"
 saved: "Opgeslagen"
 messaging: "Chat"
 upload: "Uploaden"
-keepOriginalUploading: "Origineel beeld behouden."
+keepOriginalUploading: "Origineel beeld behouden"
 keepOriginalUploadingDescription: "Bewaar de originele versie bij het uploaden van\
   \ afbeeldingen. Indien uitgeschakeld, wordt bij het uploaden een alternatieve versie\
   \ voor webpublicatie genereert."
@@ -263,8 +260,6 @@ createFolder: "Map aanmaken"
 renameFolder: "Map hernoemen"
 deleteFolder: "Map verwijderen"
 addFile: "Bestand toevoegen"
-emptyDrive: "Jouw Drive is leeg."
-emptyFolder: "Deze map is leeg"
 unableToDelete: "Kan niet worden verwijderd"
 inputNewFileName: "Voer een nieuwe naam in"
 copyUrl: "URL kopiëren"
@@ -358,3 +353,12 @@ selectWidget: Kies een widget
 editWidgets: Widgets wijzigen
 editWidgetsExit: Klaar
 _services: {}
+botFollowRequiresApproval: Volgverzoeken van als robot gemarkeerde gebruikers vereisen
+  goedkeuring
+unrenoteAll: Alle renotes terugnemen
+unrenoteAllConfirm: Weet je zeker dat je alle renotes voor deze note terug wil nemen?
+exportAll: Alles exporteren
+exportSelected: Selectie exporteren
+uploadFailed: Uploaden mislukt
+uploadFailedDescription: Het bestand kon niet worden geupload.
+uploadFailedSize: Het bestand is te groot om te uploaden.

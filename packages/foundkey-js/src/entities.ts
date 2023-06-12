@@ -28,16 +28,16 @@ export type UserLite = {
 		faviconUrl: Instance['faviconUrl'];
 		themeColor: Instance['themeColor'];
 	};
+	movedTo?: UserLite;
 };
 
 export type UserDetailed = UserLite & {
 	bannerBlurhash: string | null;
-	bannerColor: string | null;
 	bannerUrl: string | null;
 	birthday: string | null;
 	createdAt: DateString;
 	description: string | null;
-	ffVisibility: 'public' | 'followers' | 'private';
+	ffVisibility: 'public' | 'followers' | 'private' | 'nobody';
 	fields: {name: string; value: string}[];
 	followersCount: number;
 	followingCount: number;
@@ -134,9 +134,9 @@ export type Note = {
 	user: User;
 	userId: User['id'];
 	reply?: Note;
-	replyId: Note['id'];
+	replyId: Note['id'] | null;
 	renote?: Note;
-	renoteId: Note['id'];
+	renoteId: Note['id'] | null;
 	files: DriveFile[];
 	fileIds: DriveFile['id'][];
 	visibility: NoteVisibility;
@@ -224,6 +224,11 @@ export type Notification = {
 	user: User;
 	userId: User['id'];
 } | {
+	type: 'move',
+	user: User;
+	userId: User['id'];
+	moveTarget: User;
+} | {
 	type: 'app';
 	header?: string | null;
 	body: string;
@@ -254,7 +259,7 @@ export type CustomEmoji = {
 	aliases: string[];
 };
 
-export type LiteInstanceMetadata = {
+export type InstanceMetadata = {
 	maintainerName: string | null;
 	maintainerEmail: string | null;
 	version: string;
@@ -284,13 +289,8 @@ export type LiteInstanceMetadata = {
 		notFound: string;
 		info: string;
 	};
-};
-
-export type DetailedInstanceMetadata = LiteInstanceMetadata & {
 	features: Record<string, any>;
 };
-
-export type InstanceMetadata = LiteInstanceMetadata | DetailedInstanceMetadata;
 
 export type ServerInfo = {
 	machine: string;
@@ -382,16 +382,7 @@ export type AuthSession = {
 	token: string;
 };
 
-export type Ad = TODO;
-
 export type Clip = TODO;
-
-export type NoteFavorite = {
-	id: ID;
-	createdAt: DateString;
-	noteId: Note['id'];
-	note: Note;
-};
 
 export type FollowRequest = {
 	id: ID;
@@ -476,9 +467,6 @@ export function isPureRenote(note: Note): boolean {
 	return note.renoteId != null
 		&& note.text == null
 		&& note.cw == null
-		&& (
-			note.fileIds == null
-			|| note.fileIds.length === 0
-		)
+		&& note.fileIds.length === 0
 		&& note.poll == null;
 }

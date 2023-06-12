@@ -27,8 +27,7 @@ const commonReadableHandlerGenerator = (ctx: Koa.Context) => (e: Error): void =>
 	ctx.set('Cache-Control', 'max-age=300');
 };
 
-// eslint-disable-next-line import/no-default-export
-export default async function(ctx: Koa.Context) {
+export async function sendDriveFile(ctx: Koa.Context) {
 	const key = ctx.params.key;
 
 	// Fetch drive file
@@ -49,7 +48,7 @@ export default async function(ctx: Koa.Context) {
 	const isWebpublic = file.webpublicAccessKey === key;
 
 	if (!file.storedInternal) {
-		if (file.isLink && file.uri) {	// 期限切れリモートファイル
+		if (file.isLink && file.uri) {	// expired remote file
 			const [path, cleanup] = await createTemp();
 
 			try {

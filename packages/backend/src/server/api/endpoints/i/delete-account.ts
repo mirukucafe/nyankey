@@ -27,7 +27,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		Users.findOneByOrFail({ id: user.id }),
 	]);
 
-	if (userDetailed.isDeleted) {
+	if (userDetailed.isDeleted != null) {
 		return;
 	}
 

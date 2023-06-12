@@ -2,7 +2,7 @@ import Router from '@koa/router';
 import { IsNull, MoreThan } from 'typeorm';
 import config from '@/config/index.js';
 import { fetchMeta } from '@/misc/fetch-meta.js';
-import { Users, Notes } from '@/models/index.js';
+import { Users, Notes, Webhooks } from '@/models/index.js';
 import { MONTH, DAY } from '@/const.js';
 
 const router = new Router();
@@ -52,12 +52,14 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 		activeHalfyear,
 		activeMonth,
 		localPosts,
+		activeWebhooks,
 	] = await Promise.all([
 		fetchMeta(true),
 		Users.count({ where: { host: IsNull() } }),
 		Users.count({ where: { host: IsNull(), lastActiveDate: MoreThan(new Date(now - 180 * DAY)) } }),
 		Users.count({ where: { host: IsNull(), lastActiveDate: MoreThan(new Date(now - MONTH)) } }),
 		Notes.count({ where: { userHost: IsNull() } }),
+		Webhooks.countBy({ active: true }),
 	]);
 
 	const proxyAccount = meta.proxyAccountId ? await Users.pack(meta.proxyAccountId).catch(() => null) : null;
@@ -89,7 +91,7 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 			langs: meta.langs,
 			tosUrl: meta.ToSUrl,
 			repositoryUrl: repository,
-			feedbackUrl: 'ircs://irc.akkoma.dev/foundkey',
+			feedbackUrl: 'https://akkoma.dev/FoundKeyGang/FoundKey/issues',
 			disableRegistration: meta.disableRegistration,
 			disableLocalTimeline: meta.disableLocalTimeline,
 			disableGlobalTimeline: meta.disableGlobalTimeline,
@@ -100,6 +102,7 @@ const nodeinfo2 = async (): Promise<NodeInfo2Base> => {
 			enableEmail: meta.enableEmail,
 			proxyAccountName: proxyAccount?.username ?? null,
 			themeColor: meta.themeColor || '#86b300',
+			activeWebhooks,
 		},
 	};
 };

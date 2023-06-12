@@ -2,13 +2,13 @@ import promiseLimit from 'promise-limit';
 
 import config from '@/config/index.js';
 import post from '@/services/note/create.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { unique, toArray, toSingle } from '@/prelude/array.js';
 import { vote } from '@/services/note/polls/vote.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { deliverQuestionUpdate } from '@/services/note/polls/update.js';
-import { extractDbHost, toPuny } from '@/misc/convert-host.js';
-import { Emojis, Polls, MessagingMessages } from '@/models/index.js';
+import { extractDbHost } from '@/misc/convert-host.js';
+import { Polls, MessagingMessages } from '@/models/index.js';
 import { Note } from '@/models/entities/note.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { genId } from '@/misc/gen-id.js';
@@ -19,12 +19,12 @@ import { fromHtml } from '@/mfm/from-html.js';
 import { shouldBlockInstance } from '@/misc/should-block-instance.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { parseAudience } from '../audience.js';
-import { IObject, getOneApId, getApId, getOneApHrefNullable, validPost, IPost, isEmoji, getApType } from '../type.js';
+import { IObject, getOneApId, getApId, getOneApHrefNullable, isPost, IPost, getApType } from '../type.js';
 import { DbResolver } from '../db-resolver.js';
 import { apLogger } from '../logger.js';
 import { resolvePerson } from './person.js';
 import { resolveImage } from './image.js';
-import { extractApHashtags, extractQuoteUrl } from './tag.js';
+import { extractApHashtags, extractQuoteUrl, extractEmojis } from './tag.js';
 import { extractPollFromQuestion } from './question.js';
 import { extractApMentions } from './mention.js';
 
@@ -33,7 +33,7 @@ export function validateNote(object: IObject): Error | null {
 		return new Error('invalid Note: object is null');
 	}
 
-	if (!validPost.includes(getApType(object))) {
+	if (!isPost(object)) {
 		return new Error(`invalid Note: invalid object type ${getApType(object)}`);
 	}
 
@@ -52,8 +52,61 @@ export function validateNote(object: IObject): Error | null {
 	if (attributedToHost !== expectHost) {
 		return new Error(`invalid Note: attributedTo has different host. expected: ${expectHost}, actual: ${attributedToHost}`);
 	}
+	if (attributedToHost === config.hostname) {
+		return new Error('invalid Note: by local author');
+	}
 
 	return null;
+}
+
+/**
+ * Function to process the content of a note, reusable in createNote and updateNote.
+ */
+async function processContent(actor: IRemoteUser, note: IPost, quoteUri: string | null, resolver: Resolver):
+	Promise<{
+		cw: string | null,
+		files: DriveFile[],
+		text: string | null,
+		apEmoji: Emoji[],
+		apHashtags: string[],
+		url: string,
+		name: string
+	}>
+{
+	// Attachments handling
+	// TODO: attachments are not necessarily images
+	const limit = promiseLimit(2);
+
+	const attachments = toArray(note.attachment);
+	const files = attachments
+		// If the note is marked as sensitive, the images should be marked sensitive too.
+		.map(attach => attach.sensitive |= note.sensitive)
+		? (await Promise.all(attachments.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
+			.filter(image => image != null)
+		: [];
+
+	// text parsing
+	let text: string | null = null;
+	if (note.source?.mediaType === 'text/x.misskeymarkdown' && typeof note.source.content === 'string') {
+		text = note.source.content;
+	} else if (typeof note.content === 'string') {
+		text = fromHtml(note.content, quoteUri);
+	}
+
+	const emojis = await extractEmojis(note.tag || [], extractDbHost(getApId(note))).catch(e => {
+		apLogger.info(`extractEmojis: ${e}`);
+		return [] as Emoji[];
+	});
+
+	return {
+		cw: note.summary === '' ? null : note.summary,
+		files,
+		text,
+		apEmojis: emojis.map(emoji => emoji.name),
+		apHashtags: await extractApHashtags(note.tag),
+		url: getOneApHrefNullable(note.url),
+		name: note.name,
+	};
 }
 
 /**
@@ -74,13 +127,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 
 	const err = validateNote(object);
 	if (err) {
-		apLogger.error(`${err.message}`, {
-			resolver: {
-				history: resolver.getHistory(),
-			},
-			value,
-			object,
-		});
+		apLogger.error(`${err.message}`);
 		throw new Error('invalid note');
 	}
 
@@ -91,7 +138,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	apLogger.info(`Creating the Note: ${note.id}`);
 
 	// 投稿者をフェッチ
-	const actor = await resolvePerson(getOneApId(note.attributedTo), resolver) as CacheableRemoteUser;
+	const actor = await resolvePerson(getOneApId(note.attributedTo), resolver) as IRemoteUser;
 
 	// 投稿者が凍結されていたらスキップ
 	if (actor.isSuspended) {
@@ -102,33 +149,17 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 	let visibility = noteAudience.visibility;
 	const visibleUsers = noteAudience.visibleUsers;
 
-	// Audience (to, cc) が指定されてなかった場合
+	// If audience(to,cc) was not specified
 	if (visibility === 'specified' && visibleUsers.length === 0) {
-		if (typeof value === 'string') {	// 入力がstringならばresolverでGETが発生している
-			// こちらから匿名GET出来たものならばpublic
-			visibility = 'public';
-		}
+		// TODO derive audience from context (e.g. whose inbox this was in?)
+		throw new Error('audience not understood');
 	}
 
 	let isTalk = note._misskey_talk && visibility === 'specified';
 
 	const apMentions = await extractApMentions(note.tag, resolver);
-	const apHashtags = await extractApHashtags(note.tag);
 
-	// 添付ファイル
-	// TODO: attachmentは必ずしもImageではない
-	// TODO: attachmentは必ずしも配列ではない
-	// Noteがsensitiveなら添付もsensitiveにする
-	const limit = promiseLimit(2);
-
-	note.attachment = Array.isArray(note.attachment) ? note.attachment : note.attachment ? [note.attachment] : [];
-	const files = note.attachment
-		.map(attach => attach.sensitive = note.sensitive)
-		? (await Promise.all(note.attachment.map(x => limit(() => resolveImage(actor, x, resolver)) as Promise<DriveFile>)))
-			.filter(image => image != null)
-		: [];
-
-	// リプライ
+	// Reply handling
 	const reply: Note | null = note.inReplyTo
 		? await resolveNote(note.inReplyTo, resolver).then(x => {
 			if (x == null) {
@@ -138,7 +169,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 				return x;
 			}
 		}).catch(async e => {
-			// トークだったらinReplyToのエラーは無視
+			// ignore inReplyTo if it is a messaging message
 			const uri = getApId(note.inReplyTo);
 			if (uri.startsWith(config.url + '/')) {
 				const id = uri.split('/').pop();
@@ -203,16 +234,6 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		}
 	}
 
-	const cw = note.summary === '' ? null : note.summary;
-
-	// text parsing
-	let text: string | null = null;
-	if (note.source?.mediaType === 'text/x.misskeymarkdown' && typeof note.source.content === 'string') {
-		text = note.source.content;
-	} else if (typeof note.content === 'string') {
-		text = fromHtml(note.content, quote?.uri);
-	}
-
 	// vote
 	if (reply && reply.hasPoll) {
 		const poll = await Polls.findOneByOrFail({ noteId: reply.id });
@@ -224,7 +245,7 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 				apLogger.info(`vote from AP: actor=${actor.username}@${actor.host}, note=${note.id}, choice=${name}`);
 				await vote(actor, reply, index);
 
-				// リモートフォロワーにUpdate配信
+				// Federate an Update to other servers
 				deliverQuestionUpdate(reply.id);
 			}
 			return null;
@@ -235,40 +256,36 @@ export async function createNote(value: string | IObject, resolver: Resolver, si
 		}
 	}
 
-	const emojis = await extractEmojis(note.tag || [], actor.host).catch(e => {
-		apLogger.info(`extractEmojis: ${e}`);
-		return [] as Emoji[];
-	});
-
-	const apEmojis = emojis.map(emoji => emoji.name);
-
 	const poll = await extractPollFromQuestion(note, resolver).catch(() => undefined);
+
+	const processedContent = await processContent(actor, note, quote?.uri, resolver);
 
 	if (isTalk) {
 		for (const recipient of visibleUsers) {
-			await createMessage(actor, recipient, undefined, text || undefined, (files && files.length > 0) ? files[0] : null, object.id);
-			return null;
+			await createMessage(
+				actor,
+				recipient,
+				undefined,
+				processedContent.text,
+				processedContent.files[0] ?? null,
+				object.id
+			);
 		}
+		return null;
+	} else {
+		return await post(actor, {
+			...processedContent,
+			createdAt: note.published ? new Date(note.published) : null,
+			reply,
+			renote: quote,
+			localOnly: false,
+			visibility,
+			visibleUsers,
+			apMentions,
+			poll,
+			uri: note.id,
+		}, silent);
 	}
-
-	return await post(actor, {
-		createdAt: note.published ? new Date(note.published) : null,
-		files,
-		reply,
-		renote: quote,
-		name: note.name,
-		cw,
-		text,
-		localOnly: false,
-		visibility,
-		visibleUsers,
-		apMentions,
-		apHashtags,
-		apEmojis,
-		poll,
-		uri: note.id,
-		url: getOneApHrefNullable(note.url),
-	}, silent);
 }
 
 /**
@@ -306,60 +323,4 @@ export async function resolveNote(value: string | IObject, resolver: Resolver): 
 	} finally {
 		unlock();
 	}
-}
-
-export async function extractEmojis(tags: IObject | IObject[], idnHost: string): Promise<Emoji[]> {
-	const host = toPuny(idnHost);
-
-	if (!tags) return [];
-
-	const eomjiTags = toArray(tags).filter(isEmoji);
-
-	return await Promise.all(eomjiTags.map(async tag => {
-		const name = tag.name!.replace(/^:/, '').replace(/:$/, '');
-		tag.icon = toSingle(tag.icon);
-
-		const exists = await Emojis.findOneBy({
-			host,
-			name,
-		});
-
-		if (exists) {
-			if ((tag.updated != null && exists.updatedAt == null)
-				|| (tag.id != null && exists.uri == null)
-				|| (tag.updated != null && exists.updatedAt != null && new Date(tag.updated) > exists.updatedAt)
-				|| (tag.icon!.url !== exists.originalUrl)
-			) {
-				await Emojis.update({
-					host,
-					name,
-				}, {
-					uri: tag.id,
-					originalUrl: tag.icon!.url,
-					publicUrl: tag.icon!.url,
-					updatedAt: new Date(),
-				});
-
-				return await Emojis.findOneBy({
-					host,
-					name,
-				}) as Emoji;
-			}
-
-			return exists;
-		}
-
-		apLogger.info(`register emoji host=${host}, name=${name}`);
-
-		return await Emojis.insert({
-			id: genId(),
-			host,
-			name,
-			uri: tag.id,
-			originalUrl: tag.icon!.url,
-			publicUrl: tag.icon!.url,
-			updatedAt: new Date(),
-			aliases: [],
-		} as Partial<Emoji>).then(x => Emojis.findOneByOrFail(x.identifiers[0]));
-	}));
 }

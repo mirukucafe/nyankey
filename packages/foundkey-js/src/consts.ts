@@ -1,10 +1,10 @@
-export const notificationTypes = ['follow', 'mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded', 'receiveFollowRequest', 'followRequestAccepted', 'groupInvited', 'app'] as const;
+export const notificationTypes = ['follow', 'mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded', 'receiveFollowRequest', 'followRequestAccepted', 'groupInvited', 'move', 'app'] as const;
 
 export const noteNotificationTypes = ['mention', 'reply', 'renote', 'quote', 'reaction', 'pollVote', 'pollEnded'] as const;
 
 export const mutedNoteReasons = ['word', 'manual', 'spam', 'other'] as const;
 
-export const ffVisibility = ['public', 'followers', 'private'] as const;
+export const ffVisibility = ['public', 'followers', 'private', 'nobody'] as const;
 
 export const permissions = [
 	'read:account',
@@ -13,8 +13,6 @@ export const permissions = [
 	'write:blocks',
 	'read:drive',
 	'write:drive',
-	'read:favorites',
-	'write:favorites',
 	'read:following',
 	'write:following',
 	'read:messaging',

@@ -3,6 +3,7 @@ import { ApiError } from '@/server/api/error.js';
 import { insertModerationLog } from '@/services/insert-moderation-log.js';
 import { publishInternalEvent } from '@/services/stream.js';
 import define from '@/server/api/define.js';
+import { getUser } from '@/server/api/common/getters.js';
 
 export const meta = {
 	tags: ['admin'],
@@ -23,11 +24,7 @@ export const paramDef = {
 
 // eslint-disable-next-line import/no-default-export
 export default define(meta, paramDef, async (ps, me) => {
-	const user = await Users.findOneBy({ id: ps.userId });
-
-	if (user == null) {
-		throw new ApiError('NO_SUCH_USER');
-	}
+	const user = await getUser(ps.userId);
 
 	if (user.isAdmin) {
 		throw new ApiError('IS_ADMIN');

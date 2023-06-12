@@ -17,7 +17,7 @@ export const meta = {
 
 	kind: 'write:following',
 
-	errors: ['FOLLOWER_IS_YOURSELF', 'NO_SUCH_USER', 'NOT_FOLLOWING'],
+	errors: ['FOLLOWER_IS_YOURSELF', 'NO_SUCH_USER', 'NOT_FOLLOWED'],
 
 	res: {
 		type: 'object',
@@ -42,10 +42,7 @@ export default define(meta, paramDef, async (ps, user) => {
 	if (user.id === ps.userId) throw new ApiError('FOLLOWER_IS_YOURSELF');
 
 	// Get follower
-	const follower = await getUser(ps.userId).catch(e => {
-		if (e.id === '15348ddd-432d-49c2-8a5a-8069753becff') throw new ApiError('NO_SUCH_USER');
-		throw e;
-	});
+	const follower = await getUser(ps.userId);
 
 	// Check not following
 	const exist = await Followings.countBy({
@@ -53,7 +50,7 @@ export default define(meta, paramDef, async (ps, user) => {
 		followeeId: followee.id,
 	});
 
-	if (!exist) throw new ApiError('NOT_FOLLOWING');
+	if (!exist) throw new ApiError('NOT_FOLLOWED');
 
 	await deleteFollowing(follower, followee);
 

@@ -1,12 +1,12 @@
 import { Cache } from '@/misc/cache.js';
 import { UserPublickeys } from '@/models/index.js';
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { UserPublickey } from '@/models/entities/user-publickey.js';
 import { uriPersonCache, userByIdCache } from '@/services/user-cache.js';
 import { createPerson } from '@/remote/activitypub/models/person.js';
 
 export type AuthUser = {
-	user: CacheableRemoteUser;
+	user: IRemoteUser;
 	key: UserPublickey;
 };
 

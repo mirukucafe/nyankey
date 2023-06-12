@@ -2,13 +2,13 @@ import { renderActivity } from '@/remote/activitypub/renderer/index.js';
 import { renderBlock } from '@/remote/activitypub/renderer/block.js';
 import renderUndo from '@/remote/activitypub/renderer/undo.js';
 import { deliver } from '@/queue/index.js';
-import { CacheableUser } from '@/models/entities/user.js';
+import { User } from '@/models/entities/user.js';
 import { Blockings, Users } from '@/models/index.js';
 import Logger from '../logger.js';
 
 const logger = new Logger('blocking/delete');
 
-export default async function(blocker: CacheableUser, blockee: CacheableUser) {
+export default async function(blocker: User, blockee: User) {
 	const blocking = await Blockings.findOneBy({
 		blockerId: blocker.id,
 		blockeeId: blockee.id,

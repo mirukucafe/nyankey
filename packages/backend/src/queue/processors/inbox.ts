@@ -29,16 +29,16 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 	logger.debug(JSON.stringify(info, null, 2));
 	//#endregion
 
-	const host = toPuny(new URL(signature.keyId).hostname);
+	const keyIdLower = signature.keyId.toLowerCase();
+	if (keyIdLower.startsWith('acct:')) {
+		return `Old keyId is no longer supported. ${keyIdLower}`;
+	}
+
+	const host = toPuny(new URL(keyIdLower).hostname);
 
 	// Stop if the host is blocked.
 	if (await shouldBlockInstance(host)) {
 		return `Blocked request: ${host}`;
-	}
-
-	const keyIdLower = signature.keyId.toLowerCase();
-	if (keyIdLower.startsWith('acct:')) {
-		return `Old keyId is no longer supported. ${keyIdLower}`;
 	}
 
 	const resolver = new Resolver();
@@ -107,9 +107,14 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 		}
 	}
 
+	// Verify that the actor's host is not blocked
+	const signerHost = extractDbHost(authUser.user.uri!);
+	if (await shouldBlockInstance(signerHost)) {
+		return `Blocked request: ${signerHost}`;
+	}
+
 	if (typeof activity.id === 'string') {
 		// Verify that activity and actor are from the same host.
-		const signerHost = extractDbHost(authUser.user.uri!);
 		const activityIdHost = extractDbHost(activity.id);
 		if (signerHost !== activityIdHost) {
 			return `skip: signerHost(${signerHost}) !== activity.id host(${activityIdHost}`;
@@ -136,7 +141,7 @@ export default async (job: Bull.Job<InboxJobData>): Promise<string> => {
 		federationChart.inbox(i.host);
 	});
 
-	// アクティビティを処理
+	// process the activity
 	await perform(authUser.user, activity, resolver);
 	return 'ok';
 };

@@ -1,11 +1,12 @@
 import httpSignature from '@peertube/http-signature';
 import { v4 as uuid } from 'uuid';
+import Bull from 'bull';
 
 import config from '@/config/index.js';
+import { Users } from '@/models/index.js';
 import { DriveFile } from '@/models/entities/drive-file.js';
 import { Webhook, webhookEventTypes } from '@/models/entities/webhook.js';
 import { IActivity } from '@/remote/activitypub/type.js';
-import { envOption } from '@/env.js';
 import { MINUTE } from '@/const.js';
 
 import processDeliver from './processors/deliver.js';
@@ -18,7 +19,7 @@ import { endedPollNotification } from './processors/ended-poll-notification.js';
 import { queueLogger } from './logger.js';
 import { getJobInfo } from './get-job-info.js';
 import { systemQueue, dbQueue, deliverQueue, inboxQueue, objectStorageQueue, endedPollNotificationQueue, webhookDeliverQueue } from './queues.js';
-import { ThinUser } from './types.js';
+import { DeliverJobData, ThinUser } from './types.js';
 
 function renderError(e: Error): any {
 	return {
@@ -35,44 +36,56 @@ const inboxLogger = queueLogger.createSubLogger('inbox');
 const dbLogger = queueLogger.createSubLogger('db');
 const objectStorageLogger = queueLogger.createSubLogger('objectStorage');
 
+async function deletionRefCount(job: Bull.Job<DeliverJobData>): Promise<void> {
+	if (job.data.deletingUserId) {
+		await Users.decrement({ id: job.data.deletingUserId }, 'isDeleted', 1);
+	}
+}
+
 systemQueue
 	.on('waiting', (jobId) => systemLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => systemLogger.debug(`active id=${job.id}`))
 	.on('completed', (job, result) => systemLogger.debug(`completed(${result}) id=${job.id}`))
-	.on('failed', (job, err) => systemLogger.warn(`failed(${err}) id=${job.id}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => systemLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => systemLogger.warn(`failed(${err}) id=${job.id}`))
+	.on('error', (job: any, err: Error) => systemLogger.error(`error ${err}`))
 	.on('stalled', (job) => systemLogger.warn(`stalled id=${job.id}`));
 
 deliverQueue
 	.on('waiting', (jobId) => deliverLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => deliverLogger.debug(`active ${getJobInfo(job, true)} to=${job.data.to}`))
-	.on('completed', (job, result) => deliverLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`))
-	.on('failed', (job, err) => deliverLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`))
-	.on('error', (job: any, err: Error) => deliverLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('completed', async (job, result) => {
+		deliverLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`);
+		await deletionRefCount(job);
+	})
+	.on('failed', async (job, err) => {
+		deliverLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`);
+		await deletionRefCount(job);
+	})
+	.on('error', (job: any, err: Error) => deliverLogger.error(`error ${err}`))
 	.on('stalled', (job) => deliverLogger.warn(`stalled ${getJobInfo(job)} to=${job.data.to}`));
 
 inboxQueue
 	.on('waiting', (jobId) => inboxLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => inboxLogger.debug(`active ${getJobInfo(job, true)}`))
 	.on('completed', (job, result) => inboxLogger.debug(`completed(${result}) ${getJobInfo(job, true)}`))
-	.on('failed', (job, err) => inboxLogger.warn(`failed(${err}) ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => inboxLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => inboxLogger.warn(`failed(${err}) ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`))
+	.on('error', (job: any, err: Error) => inboxLogger.error(`error ${err}`))
 	.on('stalled', (job) => inboxLogger.warn(`stalled ${getJobInfo(job)} activity=${job.data.activity ? job.data.activity.id : 'none'}`));
 
 dbQueue
 	.on('waiting', (jobId) => dbLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => dbLogger.debug(`active id=${job.id}`))
 	.on('completed', (job, result) => dbLogger.debug(`completed(${result}) id=${job.id}`))
-	.on('failed', (job, err) => dbLogger.warn(`failed(${err}) id=${job.id}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => dbLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => dbLogger.warn(`failed(${err}) id=${job.id}`))
+	.on('error', (job: any, err: Error) => dbLogger.error(`error ${err}`))
 	.on('stalled', (job) => dbLogger.warn(`stalled id=${job.id}`));
 
 objectStorageQueue
 	.on('waiting', (jobId) => objectStorageLogger.debug(`waiting id=${jobId}`))
 	.on('active', (job) => objectStorageLogger.debug(`active id=${job.id}`))
 	.on('completed', (job, result) => objectStorageLogger.debug(`completed(${result}) id=${job.id}`))
-	.on('failed', (job, err) => objectStorageLogger.warn(`failed(${err}) id=${job.id}`, { job, e: renderError(err) }))
-	.on('error', (job: any, err: Error) => objectStorageLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('failed', (job, err) => objectStorageLogger.warn(`failed(${err}) id=${job.id}`))
+	.on('error', (job: any, err: Error) => objectStorageLogger.error(`error ${err}`))
 	.on('stalled', (job) => objectStorageLogger.warn(`stalled id=${job.id}`));
 
 webhookDeliverQueue
@@ -80,10 +93,10 @@ webhookDeliverQueue
 	.on('active', (job) => webhookLogger.debug(`active ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('completed', (job, result) => webhookLogger.debug(`completed(${result}) ${getJobInfo(job, true)} to=${job.data.to}`))
 	.on('failed', (job, err) => webhookLogger.warn(`failed(${err}) ${getJobInfo(job)} to=${job.data.to}`))
-	.on('error', (job: any, err: Error) => webhookLogger.error(`error ${err}`, { job, e: renderError(err) }))
+	.on('error', (job: any, err: Error) => webhookLogger.error(`error ${err}`))
 	.on('stalled', (job) => webhookLogger.warn(`stalled ${getJobInfo(job)} to=${job.data.to}`));
 
-export function deliver(user: ThinUser, content: unknown, to: string | null) {
+export function deliver(user: ThinUser, content: unknown, to: string | null, deletingUserId?: string) {
 	if (content == null) return null;
 	if (to == null) return null;
 
@@ -93,6 +106,7 @@ export function deliver(user: ThinUser, content: unknown, to: string | null) {
 		},
 		content,
 		to,
+		deletingUserId,
 	};
 
 	return deliverQueue.add(data, {
@@ -289,8 +303,6 @@ export function webhookDeliver(webhook: Webhook, type: typeof webhookEventTypes[
 }
 
 export default function() {
-	if (envOption.onlyServer) return;
-
 	deliverQueue.process(config.deliverJobConcurrency, processDeliver);
 	inboxQueue.process(config.inboxJobConcurrency, processInbox);
 	endedPollNotificationQueue.process(endedPollNotification);
@@ -326,8 +338,9 @@ export default function() {
 }
 
 export function destroy() {
-	deliverQueue.once('cleaned', (jobs, status) => {
+	deliverQueue.once('cleaned', async (jobs, status) => {
 		deliverLogger.succ(`Cleaned ${jobs.length} ${status} jobs`);
+		await Promise.all(jobs.map(job => deletionRefCount(job)));
 	});
 	deliverQueue.clean(0, 'delayed');
 

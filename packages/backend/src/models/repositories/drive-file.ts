@@ -105,8 +105,8 @@ export const DriveFileRepository = db.getRepository(DriveFile).extend({
 			url: opts.self ? file.url : this.getPublicUrl(file, false),
 			thumbnailUrl: this.getPublicUrl(file, true),
 			comment: file.comment,
-			folderId: file.folderId,
-			folder: opts.detail && file.folderId ? DriveFolders.pack(file.folderId, {
+			folderId: file.parentId,
+			folder: opts.detail && file.parentId ? DriveFolders.pack(file.parentId, {
 				detail: true,
 			}) : undefined,
 			userId: file.userId,

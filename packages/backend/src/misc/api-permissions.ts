@@ -5,8 +5,6 @@ export const kinds = [
 	'write:blocks',
 	'read:drive',
 	'write:drive',
-	'read:favorites',
-	'write:favorites',
 	'read:following',
 	'write:following',
 	'read:messaging',

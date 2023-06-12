@@ -4,7 +4,7 @@ import { User } from './user.js';
 import { DriveFolder } from './drive-folder.js';
 
 @Entity()
-@Index(['userId', 'folderId', 'id'])
+@Index(['userId', 'parentId', 'id'])
 export class DriveFile {
 	@PrimaryColumn(id())
 	public id: string;
@@ -142,13 +142,13 @@ export class DriveFile {
 		nullable: true,
 		comment: 'The parent folder ID. If null, it means the DriveFile is located in root.',
 	})
-	public folderId: DriveFolder['id'] | null;
+	public parentId: DriveFolder['id'] | null;
 
 	@ManyToOne(() => DriveFolder, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn()
-	public folder: DriveFolder | null;
+	public parent: DriveFolder | null;
 
 	@Index()
 	@Column('boolean', {

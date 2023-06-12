@@ -217,6 +217,20 @@ async function composeNotification<K extends keyof pushNotificationDataMap>(data
 						],
 					}];
 
+				case 'move':
+					return [t('_notification.moved', { name: getUserName(data.body.user) }), {
+						body: getUserName(data.body.moveTarget),
+						icon: data.body.moveTarget.avatarUrl,
+						badge: iconUrl('suitcase'),
+						data,
+						action: [
+							{
+								action: 'accept',
+								title: t('follow'),
+							},
+						],
+					}];
+
 				case 'app':
 						return [data.body.header || data.body.body, {
 							body: data.body.header && data.body.body,

@@ -1,5 +1,5 @@
 import promiseLimit from 'promise-limit';
-import { CacheableRemoteUser, CacheableUser } from '@/models/entities/user.js';
+import { IRemoteUser, User } from '@/models/entities/user.js';
 import { unique, concat } from '@/prelude/array.js';
 import { resolvePerson } from './models/person.js';
 import { Resolver } from './resolver.js';
@@ -9,20 +9,20 @@ type Visibility = 'public' | 'home' | 'followers' | 'specified';
 
 type AudienceInfo = {
 	visibility: Visibility,
-	mentionedUsers: CacheableUser[],
-	visibleUsers: CacheableUser[],
+	mentionedUsers: User[],
+	visibleUsers: User[],
 };
 
-export async function parseAudience(actor: CacheableRemoteUser, to?: ApObject, cc?: ApObject, resolver?: Resolver): Promise<AudienceInfo> {
+export async function parseAudience(actor: IRemoteUser, to?: ApObject, cc?: ApObject, resolver?: Resolver): Promise<AudienceInfo> {
 	const toGroups = groupingAudience(getApIds(to), actor);
 	const ccGroups = groupingAudience(getApIds(cc), actor);
 
 	const others = unique(concat([toGroups.other, ccGroups.other]));
 
-	const limit = promiseLimit<CacheableUser | null>(2);
+	const limit = promiseLimit<User | null>(2);
 	const mentionedUsers = (await Promise.all(
 		others.map(id => limit(() => resolvePerson(id, resolver).catch(() => null))),
-	)).filter((x): x is CacheableUser => x != null);
+	)).filter((x): x is User => x != null);
 
 	if (toGroups.public.length > 0) {
 		return {
@@ -55,7 +55,7 @@ export async function parseAudience(actor: CacheableRemoteUser, to?: ApObject, c
 	};
 }
 
-function groupingAudience(ids: string[], actor: CacheableRemoteUser) {
+function groupingAudience(ids: string[], actor: IRemoteUser) {
 	const groups = {
 		public: [] as string[],
 		followers: [] as string[],
@@ -85,7 +85,7 @@ function isPublic(id: string) {
 	].includes(id);
 }
 
-function isFollowers(id: string, actor: CacheableRemoteUser) {
+function isFollowers(id: string, actor: IRemoteUser) {
 	return (
 		id === (actor.followersUri || `${actor.uri}/followers`)
 	);

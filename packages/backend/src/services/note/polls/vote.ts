@@ -1,12 +1,12 @@
 import { ArrayOverlap, Not } from 'typeorm';
 import { publishNoteStream } from '@/services/stream.js';
-import { CacheableUser } from '@/models/entities/user.js';
+import { User } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { PollVotes, NoteWatchings, Polls, Blockings, NoteThreadMutings } from '@/models/index.js';
 import { genId } from '@/misc/gen-id.js';
 import { createNotification } from '@/services/create-notification.js';
 
-export async function vote(user: CacheableUser, note: Note, choice: number): Promise<void> {
+export async function vote(user: User, note: Note, choice: number): Promise<void> {
 	const poll = await Polls.findOneBy({ noteId: note.id });
 
 	if (poll == null) throw new Error('poll not found');

@@ -8,10 +8,10 @@ import chalkTemplate from 'chalk-template';
 import semver from 'semver';
 
 import Logger from '@/services/logger.js';
-import loadConfig from '@/config/load.js';
+import { loadConfig } from '@/config/load.js';
 import { Config } from '@/config/types.js';
 import { showMachineInfo } from '@/misc/show-machine-info.js';
-import { envOption } from '@/env.js';
+import { envOption, LOG_LEVELS } from '@/env.js';
 import { db, initDb } from '@/db/postgre.js';
 
 const _filename = fileURLToPath(import.meta.url);
@@ -25,7 +25,7 @@ const bootLogger = logger.createSubLogger('boot', 'magenta', false);
 const themeColor = chalk.hex('#86b300');
 
 function greet(): void {
-	if (!envOption.quiet) {
+	if (envOption.logLevel !== LOG_LEVELS.quiet) {
 		//#region FoundKey logo
 		console.log(themeColor('  ___                 _ _  __         '));
 		console.log(themeColor(' | __|__ _  _ _ _  __| | |/ /___ _  _ '));
@@ -41,7 +41,7 @@ function greet(): void {
 	}
 
 	bootLogger.info('Welcome to FoundKey!');
-	bootLogger.info(`FoundKey v${meta.version}`, null, true);
+	bootLogger.info(`FoundKey v${meta.version}`, true);
 }
 
 /**
@@ -59,7 +59,7 @@ export async function masterMain(): Promise<void> {
 		config = loadConfigBoot();
 		await connectDb();
 	} catch (e) {
-		bootLogger.error('Fatal error occurred during initialization', {}, true);
+		bootLogger.error('Fatal error occurred during initialization', true);
 		process.exit(1);
 	}
 
@@ -69,7 +69,7 @@ export async function masterMain(): Promise<void> {
 		await spawnWorkers(config.clusterLimits);
 	}
 
-	bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, null, true);
+	bootLogger.succ(`Now listening on port ${config.port} on ${config.url}`, true);
 
 	if (!envOption.noDaemons) {
 		import('../daemons/server-stats.js').then(x => x.serverStats());
@@ -84,7 +84,7 @@ function showEnvironment(): void {
 
 	if (env !== 'production') {
 		logger.warn('The environment is not in production mode.');
-		logger.warn('DO NOT USE FOR PRODUCTION PURPOSE!', {}, true);
+		logger.warn('DO NOT USE FOR PRODUCTION PURPOSE!', true);
 	}
 }
 
@@ -109,7 +109,7 @@ function loadConfigBoot(): Config {
 	} catch (exception) {
 		const e = exception as Partial<NodeJS.ErrnoException> | Error;
 		if ('code' in e && e.code === 'ENOENT') {
-			configLogger.error('Configuration file not found', {}, true);
+			configLogger.error('Configuration file not found', true);
 			process.exit(1);
 		} else if (e instanceof Error) {
 			configLogger.error(e.message);
@@ -133,7 +133,7 @@ async function connectDb(): Promise<void> {
 		const v = await db.query('SHOW server_version').then(x => x[0].server_version);
 		dbLogger.succ(`Connected: v${v}`);
 	} catch (e) {
-		dbLogger.error('Cannot connect', {}, true);
+		dbLogger.error('Cannot connect', true);
 		dbLogger.error(e as Error | string);
 		process.exit(1);
 	}
@@ -141,15 +141,24 @@ async function connectDb(): Promise<void> {
 
 async function spawnWorkers(clusterLimits: Required<Config['clusterLimits']>): Promise<void> {
 	const modes = ['web' as const, 'queue' as const];
+
+	const clusters = structuredClone(clusterLimits);
+
+	if (envOption.onlyQueue) {
+		clusters.web = 0;
+	} else if (envOption.onlyServer) {
+		clusters.queue = 0;
+	}
+
 	const cpus = os.cpus().length;
-	for (const mode of modes.filter(mode => clusterLimits[mode] > cpus)) {
+	for (const mode of modes.filter(mode => clusters[mode] > cpus)) {
 		bootLogger.warn(`configuration warning: cluster limit for ${mode} exceeds number of cores (${cpus})`);
 	}
 
-	const total = modes.reduce((acc, mode) => acc + clusterLimits[mode], 0);
+	const total = modes.reduce((acc, mode) => acc + clusters[mode], 0);
 	const workers = new Array(total);
-	workers.fill('web', 0, clusterLimits.web);
-	workers.fill('queue', clusterLimits.web);
+	workers.fill('web', 0, clusters.web);
+	workers.fill('queue', clusters.web);
 
 	bootLogger.info(`Starting ${total} workers...`);
 	await Promise.all(workers.map(mode => spawnWorker(mode)));
@@ -160,12 +169,24 @@ function spawnWorker(mode: 'web' | 'queue'): Promise<void> {
 	return new Promise(res => {
 		const worker = cluster.fork({ mode });
 		worker.on('message', message => {
-			if (message === 'listenFailed') {
-				bootLogger.error('The server Listen failed due to the previous error.');
-				process.exit(1);
+			switch (message) {
+				case 'listenFailed':
+					bootLogger.error('The server Listen failed due to the previous error.');
+					process.exit(1);
+					break;
+				case 'ready':
+					res();
+					break;
+				case 'metaUpdate':
+					// forward new instance metadata to all workers
+					for (const otherWorker of Object.values(cluster.workers)) {
+						// don't forward the message to the worker that sent it
+						if (worker.id === otherWorker.id) continue;
+
+						otherWorker.send(message);
+					}
+					break;
 			}
-			if (message !== 'ready') return;
-			res();
 		});
 	});
 }

@@ -159,12 +159,14 @@ definePageMetadata(computed(() => ({
 		top: calc(var(--stickyTop, 0px) + 16px);
 		z-index: 1000;
 		width: 100%;
+		pointer-events: none;
 
 		> button {
 			display: block;
 			margin: var(--margin) auto 0 auto;
 			padding: 8px 16px;
 			border-radius: 32px;
+			pointer-events: initial;
 		}
 	}
 

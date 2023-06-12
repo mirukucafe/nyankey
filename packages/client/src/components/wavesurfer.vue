@@ -14,7 +14,7 @@
 			{{ formatTime(duration) }}
 		</span>
 		<input class="volume" type="range" min="0" max="1" step="0.1" v-model="volume" @input="player.setVolume(volume)" />
-		<a class="download" :href="src" target="_blank">
+		<a class="download" :href="src.url" target="_blank">
 			<i class="fas fa-download"></i>
 		</a>
 	</div>

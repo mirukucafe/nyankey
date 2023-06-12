@@ -1,10 +1,10 @@
-import { CacheableRemoteUser } from '@/models/entities/user.js';
+import { IRemoteUser } from '@/models/entities/user.js';
 import { apLogger } from '@/remote/activitypub/logger.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { IAccept, isFollow, getApType } from '@/remote/activitypub/type.js';
 import acceptFollow from './follow.js';
 
-export default async (actor: CacheableRemoteUser, activity: IAccept, resolver: Resolver): Promise<string> => {
+export default async (actor: IRemoteUser, activity: IAccept, resolver: Resolver): Promise<string> => {
 	const uri = activity.id || activity;
 
 	apLogger.info(`Accept: ${uri}`);

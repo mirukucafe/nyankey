@@ -104,6 +104,7 @@ import * as ep___clips_show from './endpoints/clips/show.js';
 import * as ep___clips_update from './endpoints/clips/update.js';
 import * as ep___drive from './endpoints/drive.js';
 import * as ep___drive_files from './endpoints/drive/files.js';
+import * as ep___drive_show from './endpoints/drive/show.js';
 import * as ep___drive_files_attachedNotes from './endpoints/drive/files/attached-notes.js';
 import * as ep___drive_files_checkExistence from './endpoints/drive/files/check-existence.js';
 import * as ep___drive_files_create from './endpoints/drive/files/create.js';
@@ -161,7 +162,6 @@ import * as ep___i_exportFollowing from './endpoints/i/export-following.js';
 import * as ep___i_exportMute from './endpoints/i/export-mute.js';
 import * as ep___i_exportNotes from './endpoints/i/export-notes.js';
 import * as ep___i_exportUserLists from './endpoints/i/export-user-lists.js';
-import * as ep___i_favorites from './endpoints/i/favorites.js';
 import * as ep___i_getWordMutedNotesCount from './endpoints/i/get-word-muted-notes-count.js';
 import * as ep___i_importBlocking from './endpoints/i/import-blocking.js';
 import * as ep___i_importFollowing from './endpoints/i/import-following.js';
@@ -214,8 +214,6 @@ import * as ep___notes_clips from './endpoints/notes/clips.js';
 import * as ep___notes_conversation from './endpoints/notes/conversation.js';
 import * as ep___notes_create from './endpoints/notes/create.js';
 import * as ep___notes_delete from './endpoints/notes/delete.js';
-import * as ep___notes_favorites_create from './endpoints/notes/favorites/create.js';
-import * as ep___notes_favorites_delete from './endpoints/notes/favorites/delete.js';
 import * as ep___notes_featured from './endpoints/notes/featured.js';
 import * as ep___notes_globalTimeline from './endpoints/notes/global-timeline.js';
 import * as ep___notes_hybridTimeline from './endpoints/notes/hybrid-timeline.js';
@@ -400,6 +398,7 @@ const eps = [
 	['clips/update', ep___clips_update],
 	['drive', ep___drive],
 	['drive/files', ep___drive_files],
+	['drive/show', ep___drive_show],
 	['drive/files/attached-notes', ep___drive_files_attachedNotes],
 	['drive/files/check-existence', ep___drive_files_checkExistence],
 	['drive/files/create', ep___drive_files_create],
@@ -457,7 +456,6 @@ const eps = [
 	['i/export-mute', ep___i_exportMute],
 	['i/export-notes', ep___i_exportNotes],
 	['i/export-user-lists', ep___i_exportUserLists],
-	['i/favorites', ep___i_favorites],
 	['i/get-word-muted-notes-count', ep___i_getWordMutedNotesCount],
 	['i/import-blocking', ep___i_importBlocking],
 	['i/import-following', ep___i_importFollowing],
@@ -510,8 +508,6 @@ const eps = [
 	['notes/conversation', ep___notes_conversation],
 	['notes/create', ep___notes_create],
 	['notes/delete', ep___notes_delete],
-	['notes/favorites/create', ep___notes_favorites_create],
-	['notes/favorites/delete', ep___notes_favorites_delete],
 	['notes/featured', ep___notes_featured],
 	['notes/global-timeline', ep___notes_globalTimeline],
 	['notes/hybrid-timeline', ep___notes_hybridTimeline],
@@ -711,7 +707,7 @@ export interface IEndpoint {
 	params: Schema;
 }
 
-const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
+export const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
 	return {
 		name,
 		exec: ep.default,
@@ -719,5 +715,3 @@ const endpoints: IEndpoint[] = eps.map(([name, ep]) => {
 		params: ep.paramDef,
 	};
 });
-
-export default endpoints;

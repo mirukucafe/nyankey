@@ -6,7 +6,7 @@ import { registerOrFetchInstanceDoc } from '@/services/register-or-fetch-instanc
 import { Note } from '@/models/entities/note.js';
 import { updateUsertags } from '@/services/update-hashtag.js';
 import { Users, Instances, Followings, UserProfiles, UserPublickeys } from '@/models/index.js';
-import { User, IRemoteUser, CacheableUser } from '@/models/entities/user.js';
+import { User, IRemoteUser, User } from '@/models/entities/user.js';
 import { Emoji } from '@/models/entities/emoji.js';
 import { UserNotePining } from '@/models/entities/user-note-pining.js';
 import { genId } from '@/misc/gen-id.js';
@@ -27,8 +27,8 @@ import { fromHtml } from '@/mfm/from-html.js';
 import { Resolver } from '@/remote/activitypub/resolver.js';
 import { apLogger } from '../logger.js';
 import { isCollectionOrOrderedCollection, isCollection, IActor, getApId, getOneApHrefNullable, IObject, isPropertyValue, getApType, isActor } from '../type.js';
-import { extractApHashtags } from './tag.js';
-import { resolveNote, extractEmojis } from './note.js';
+import { extractApHashtags, extractEmojis } from './tag.js';
+import { resolveNote } from './note.js';
 import { resolveImage } from './image.js';
 
 const nameLength = 128;
@@ -39,7 +39,7 @@ const summaryLength = 2048;
  * @param x Fetched object
  * @param uri Fetch target URI
  */
-function validateActor(x: IObject): IActor {
+async function validateActor(x: IObject, resolver: Resolver): Promise<IActor> {
 	if (x == null) {
 		throw new Error('invalid Actor: object is null');
 	}
@@ -59,6 +59,22 @@ function validateActor(x: IObject): IActor {
 	// Without this check, an entry could be inserted into UserPublickey for a local user.
 	if (extractDbHost(uri) === extractDbHost(config.url)) {
 		throw new StatusError('cannot resolve local user', 400, 'cannot resolve local user');
+	}
+
+	if (x.movedTo !== undefined) {
+		if (!(typeof x.movedTo === 'string' && x.movedTo.length > 0)) {
+			throw new Error('invalid Actor: wrong movedTo');
+		}
+		if (x.movedTo === uri) {
+			throw new Error('invalid Actor: moved to self');
+		}
+		// This may throw an exception if we cannot resolve the move target.
+		// If we are processing an incoming activity, this is desired behaviour
+		// because that will cause the activity to be retried.
+		await resolvePerson(x.movedTo, resolver)
+			.then(moveTarget => {
+				x.movedTo = moveTarget.id
+			});
 	}
 
 	if (!(typeof x.inbox === 'string' && x.inbox.length > 0)) {
@@ -105,7 +121,7 @@ function validateActor(x: IObject): IActor {
  *
  * If the target Person is registered in FoundKey, it is returned.
  */
-export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
+export async function fetchPerson(uri: string): Promise<User | null> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	const cached = uriPersonCache.get(uri);
@@ -137,7 +153,7 @@ export async function fetchPerson(uri: string): Promise<CacheableUser | null> {
 export async function createPerson(value: string | IObject, resolver: Resolver): Promise<User> {
 	const object = await resolver.resolve(value) as any;
 
-	const person = validateActor(object);
+	const person = await validateActor(object, resolver);
 
 	apLogger.info(`Creating the Person: ${person.id}`);
 
@@ -177,6 +193,7 @@ export async function createPerson(value: string | IObject, resolver: Resolver):
 				isBot,
 				isCat: (person as any).isCat === true,
 				showTimelineReplies: false,
+				movedToId: person.movedTo,
 			})) as IRemoteUser;
 
 			await transactionalEntityManager.save(new UserProfile({
@@ -200,7 +217,7 @@ export async function createPerson(value: string | IObject, resolver: Resolver):
 	} catch (e) {
 		// duplicate key error
 		if (isDuplicateKeyValueError(e)) {
-			// /users/@a => /users/:id のように入力がaliasなときにエラーになることがあるのを対応
+			// Fix an error when the input is an alias like /users/@a -> /users/:id
 			const u = await Users.findOneBy({
 				uri: person.id,
 			});
@@ -287,7 +304,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 
 	const object = await resolver.resolve(value);
 
-	const person = validateActor(object);
+	const person = await validateActor(object, resolver);
 
 	apLogger.info(`Updating the Person: ${person.id}`);
 
@@ -328,6 +345,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
 		isCat: (person as any).isCat === true,
 		isLocked: !!person.manuallyApprovesFollowers,
 		isExplorable: !!person.discoverable,
+		movedToId: person.movedTo,
 	} as Partial<User>;
 
 	if (avatar) {
@@ -376,7 +394,7 @@ export async function updatePerson(value: IObject | string, resolver: Resolver):
  * If the target Person is registered in FoundKey, return it; otherwise, fetch it from a remote server and return it.
  * Fetch the person from the remote server, register it in FoundKey, and return it.
  */
-export async function resolvePerson(uri: string, resolver: Resolver): Promise<CacheableUser> {
+export async function resolvePerson(uri: string, resolver: Resolver, hint?: IObject): Promise<User> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
 
 	//#region このサーバーに既に登録されていたらそれを返す
@@ -388,7 +406,7 @@ export async function resolvePerson(uri: string, resolver: Resolver): Promise<Ca
 	//#endregion
 
 	// リモートサーバーからフェッチしてきて登録
-	return await createPerson(uri, resolver);
+	return await createPerson(hint ?? uri, resolver);
 }
 
 export function analyzeAttachments(attachments: IObject | IObject[] | undefined) {

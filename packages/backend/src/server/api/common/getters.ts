@@ -1,9 +1,11 @@
+import { IsNull, Not } from 'typeorm';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
 import { User } from '@/models/entities/user.js';
 import { Note } from '@/models/entities/note.js';
 import { Notes, Users } from '@/models/index.js';
 import { apiLogger } from '@/server/api/logger.js';
 import { visibilityQuery } from './generate-visibility-query.js';
+import { ApiError } from '@/server/api/error.js';
 
 /**
  * Get note for API processing, taking into account visibility.
@@ -27,11 +29,15 @@ export async function getNote(noteId: Note['id'], me: { id: User['id'] } | null)
 /**
  * Get user for API processing
  */
-export async function getUser(userId: User['id']) {
-	const user = await Users.findOneBy({ id: userId });
+export async function getUser(userId: User['id'], includeSuspended = false) {
+	const user = await Users.findOneBy({
+		id: userId,
+		isDeleted: IsNull(),
+		...(includeSuspended ? {} : {isSuspended: false}),
+	});
 
 	if (user == null) {
-		throw new IdentifiableError('15348ddd-432d-49c2-8a5a-8069753becff', 'No such user.');
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	return user;
@@ -40,11 +46,16 @@ export async function getUser(userId: User['id']) {
 /**
  * Get remote user for API processing
  */
-export async function getRemoteUser(userId: User['id']) {
-	const user = await getUser(userId);
+export async function getRemoteUser(userId: User['id'], includeSuspended = false) {
+	const user = await Users.findOneBy({
+		id: userId,
+		host: Not(IsNull()),
+		isDeleted: IsNull(),
+		...(includeSuspended ? {} : {isSuspended: false}),
+	});
 
-	if (!Users.isRemoteUser(user)) {
-		throw new Error('user is not a remote user');
+	if (user == null) {
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	return user;
@@ -53,11 +64,16 @@ export async function getRemoteUser(userId: User['id']) {
 /**
  * Get local user for API processing
  */
-export async function getLocalUser(userId: User['id']) {
-	const user = await getUser(userId);
+export async function getLocalUser(userId: User['id'], includeSuspended = false) {
+	const user = await Users.findOneBy({
+		id: userId,
+		host: IsNull(),
+		isDeleted: IsNull(),
+		...(includeSuspended ? {} : {isSuspended: false}),
+	});
 
-	if (!Users.isLocalUser(user)) {
-		throw new Error('user is not a local user');
+	if (user == null) {
+		throw new ApiError('NO_SUCH_USER');
 	}
 
 	return user;

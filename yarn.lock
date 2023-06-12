@@ -1428,10 +1428,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/is@npm:^3.0.0":
-  version: 3.1.2
-  resolution: "@sindresorhus/is@npm:3.1.2"
-  checksum: 6b68b2c0bc36beda9442c64e40e2e971999b0814af610a52d5c0bda2213061ff63d158912bd494dc8b8fa5c027ed13ec5947e4902dd9a315b2f2337221dbcb7f
+"@sindresorhus/is@npm:^4.0.0":
+  version: 4.6.0
+  resolution: "@sindresorhus/is@npm:4.6.0"
+  checksum: 83839f13da2c29d55c97abc3bc2c55b250d33a0447554997a85c539e058e57b8da092da396e252b11ec24a0279a0bed1f537fa26302209327060643e327f81d2
   languageName: node
   linkType: hard
 
@@ -2443,13 +2443,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/syslog-pro@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@types/syslog-pro@npm:1.0.0"
-  checksum: d0dcd87efad8a629bba449f86a617605a3fbffa5c18a8b309c82e7b85036ac21cfd34711fd522f50528dd0f0d07bdb66261a6f9ef20f2a9133e847b2e717c1bc
-  languageName: node
-  linkType: hard
-
 "@types/throttle-debounce@npm:5.0.0":
   version: 5.0.0
   resolution: "@types/throttle-debounce@npm:5.0.0"
@@ -2682,13 +2675,6 @@ __metadata:
     "@typescript-eslint/types": 5.46.1
     eslint-visitor-keys: ^3.3.0
   checksum: 952cf20e29a040e0820e52d6815097abf042ea8e1fd5d013c0a319284ea0e2e29e0ca9ef244717450a6eb9d32ebf7fa9ed91185675a27adc35c9ad070d561b7c
-  languageName: node
-  linkType: hard
-
-"@ungap/promise-all-settled@npm:1.1.2":
-  version: 1.1.2
-  resolution: "@ungap/promise-all-settled@npm:1.1.2"
-  checksum: 08d37fdfa23a6fe8139f1305313562ebad973f3fac01bcce2773b2bda5bcb0146dfdcf3cb6a722cf0a5f2ca0bc56a827eac8f1e7b3beddc548f654addf1fc34c
   languageName: node
   linkType: hard
 
@@ -3709,7 +3695,6 @@ __metadata:
     "@types/sinon": ^10.0.13
     "@types/sinonjs__fake-timers": 8.1.2
     "@types/speakeasy": 2.0.7
-    "@types/syslog-pro": ^1.0.0
     "@types/tinycolor2": 1.4.3
     "@types/tmp": 0.2.3
     "@types/uuid": 8.3.4
@@ -3732,7 +3717,6 @@ __metadata:
     cli-highlight: 2.1.11
     color-convert: 2.0.1
     content-disposition: 0.5.4
-    cross-env: 7.0.3
     date-fns: 2.28.0
     deep-email-validator: 0.1.21
     escape-regexp: 0.0.1
@@ -3765,9 +3749,9 @@ __metadata:
     koa-send: 5.0.1
     koa-slow: 2.1.0
     koa-views: 7.0.2
-    mfm-js: 0.22.1
+    mfm-js: 0.23.3
     mime-types: 2.1.35
-    mocha: 10.0.0
+    mocha: 10.2.0
     multer: 1.4.5-lts.1
     nested-property: 4.0.0
     node-fetch: 3.2.6
@@ -3798,8 +3782,7 @@ __metadata:
     strict-event-emitter-types: 2.0.0
     stringz: 2.1.0
     style-loader: 3.3.1
-    summaly: 2.6.0
-    syslog-pro: 1.0.0
+    summaly: 2.7.0
     systeminformation: 5.11.22
     tinycolor2: 1.4.2
     tmp: 0.2.1
@@ -4281,7 +4264,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacheable-request@npm:^7.0.1, cacheable-request@npm:^7.0.2":
+"cacheable-request@npm:^7.0.2":
   version: 7.0.2
   resolution: "cacheable-request@npm:7.0.2"
   dependencies:
@@ -4736,7 +4719,7 @@ __metadata:
     json5: 2.2.1
     katex: 0.16.0
     matter-js: 0.18.0
-    mfm-js: 0.22.1
+    mfm-js: 0.23.3
     photoswipe: 5.2.8
     prismjs: 1.28.0
     punycode: 2.1.1
@@ -8364,22 +8347,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:11.5.1":
-  version: 11.5.1
-  resolution: "got@npm:11.5.1"
+"got@npm:11.8.5":
+  version: 11.8.5
+  resolution: "got@npm:11.8.5"
   dependencies:
-    "@sindresorhus/is": ^3.0.0
+    "@sindresorhus/is": ^4.0.0
     "@szmarczak/http-timer": ^4.0.5
     "@types/cacheable-request": ^6.0.1
     "@types/responselike": ^1.0.0
     cacheable-lookup: ^5.0.3
-    cacheable-request: ^7.0.1
+    cacheable-request: ^7.0.2
     decompress-response: ^6.0.0
-    http2-wrapper: ^1.0.0-beta.5.0
+    http2-wrapper: ^1.0.0-beta.5.2
     lowercase-keys: ^2.0.0
     p-cancelable: ^2.0.0
     responselike: ^2.0.0
-  checksum: 3be52e602feb62a810de1337f92a054f49f5e74f8ee27ad4140331b63a99aeaddaeb8ec49b2dae493622f11ad55c7ee4bde5a7808147cc354f93b8c389957828
+  checksum: 2de8a1bbda4e9b6b2b72b2d2100bc055a59adc1740529e631f61feb44a8b9a1f9f8590941ed9da9df0090b6d6d0ed8ffee94cd9ac086ec3409b392b33440f7d2
   languageName: node
   linkType: hard
 
@@ -8874,7 +8857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http2-wrapper@npm:^1.0.0-beta.5.0":
+"http2-wrapper@npm:^1.0.0-beta.5.2":
   version: 1.0.3
   resolution: "http2-wrapper@npm:1.0.3"
   dependencies:
@@ -11687,12 +11670,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mfm-js@npm:0.22.1":
-  version: 0.22.1
-  resolution: "mfm-js@npm:0.22.1"
+"mfm-js@npm:0.23.3":
+  version: 0.23.3
+  resolution: "mfm-js@npm:0.23.3"
   dependencies:
-    twemoji-parser: 14.0.x
-  checksum: 6d9756c7bd8abf6462fb6403de4656f607a83839eb6b66a05b10eddcd201b5f78f5fe3d0df029936546143fd9cbf112e8369287aed32026e50bb03ce89b4c4f8
+    twemoji-parser: 14.0.0
+  checksum: 7079f80a53a9afc8599333f3256fb18a6bf7c01102a2f8f2be657843726a34835e2af34e26bc5b27e45b217fb2f120c0d3006e9fab2a972c845e9f7361e3cc1b
   languageName: node
   linkType: hard
 
@@ -12012,11 +11995,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:10.0.0":
-  version: 10.0.0
-  resolution: "mocha@npm:10.0.0"
+"mocha@npm:10.2.0":
+  version: 10.2.0
+  resolution: "mocha@npm:10.2.0"
   dependencies:
-    "@ungap/promise-all-settled": 1.1.2
     ansi-colors: 4.1.1
     browser-stdout: 1.3.1
     chokidar: 3.5.3
@@ -12041,7 +12023,7 @@ __metadata:
   bin:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
-  checksum: ba49ddcf8015a467e744b06c396aab361b1281302e38e7c1269af25ba51ff9ab681a9c36e9046bb7491e751cd7d5ce85e276a00ce7e204f96b2c418e4595edfe
+  checksum: 406c45eab122ffd6ea2003c2f108b2bc35ba036225eee78e0c784b6fa2c7f34e2b13f1dbacef55a4fdf523255d76e4f22d1b5aacda2394bd11666febec17c719
   languageName: node
   linkType: hard
 
@@ -12049,13 +12031,6 @@ __metadata:
   version: 9.1.5
   resolution: "mock-socket@npm:9.1.5"
   checksum: a01586bc2850eb5809eda6de0c7ab19255c1e0eb217a805f86ba662bb4aab00b919032d67e7c826c6c12bcfb2fbe19cecbacf0ab6184936487edc4ba37d3ba53
-  languageName: node
-  linkType: hard
-
-"moment@npm:^2.22.2":
-  version: 2.29.4
-  resolution: "moment@npm:2.29.4"
-  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
   languageName: node
   linkType: hard
 
@@ -16022,14 +15997,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"summaly@npm:2.6.0":
-  version: 2.6.0
-  resolution: "summaly@npm:2.6.0"
+"summaly@npm:2.7.0":
+  version: 2.7.0
+  resolution: "summaly@npm:2.7.0"
   dependencies:
     cheerio: 0.22.0
     debug: 4.3.3
     escape-regexp: 0.0.1
-    got: 11.5.1
+    got: 11.8.5
     html-entities: 2.3.2
     iconv-lite: 0.6.3
     jschardet: 3.0.0
@@ -16037,7 +16012,7 @@ __metadata:
     private-ip: 2.3.3
     require-all: 3.0.0
     trace-redirect: 1.0.6
-  checksum: 5eff928fc66dc9c2845b43f4242e1f5d37666ef829a6c0bd1ac6467ab91ff92e90eb53f4166c67c573c136a6f512310e34ab6a1acb866418dba8c2c6590dd139
+  checksum: f5d5b845328ff80ab74229a08816990062153ac15b6581123c62283ecfa32c03ccfa446c3985285d3cfd3108868ab24f5c2bfc939ed781830148e0a39e03018e
   languageName: node
   linkType: hard
 
@@ -16146,15 +16121,6 @@ __metadata:
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
   checksum: 6e8fc7e1486b8b54bea91199d9535bb72f10842e40c79e882fc94fb7b14b89866adf2fd79efa5ebb5b658bc07fb459ccce5ac0e99ef3d72f474e74aaf284029d
-  languageName: node
-  linkType: hard
-
-"syslog-pro@npm:1.0.0":
-  version: 1.0.0
-  resolution: "syslog-pro@npm:1.0.0"
-  dependencies:
-    moment: ^2.22.2
-  checksum: 7d6399e4ca3a9305758f77b3e720469b39c156b5a8219ed4ce27b4ad8f960f8e395aebb0ccc84e4438b50a6b2cda2e20251e278307833ed7ac1045ae9516a33c
   languageName: node
   linkType: hard
 
@@ -16756,7 +16722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twemoji-parser@npm:14.0.0, twemoji-parser@npm:14.0.x":
+"twemoji-parser@npm:14.0.0":
   version: 14.0.0
   resolution: "twemoji-parser@npm:14.0.0"
   checksum: 8eede69cf71f94735de7b6fddf5dfbfe3cb2e01baefc3201360984ccc97cfc659f206c8f73bd1405a2282779af3b79a8c9bed3864c672e15e2dc6f8ce4810452
